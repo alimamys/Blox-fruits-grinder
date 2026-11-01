@@ -321,6 +321,34 @@
   "tick_motif": {
    "file": "audio/sfx_temp/tick_motif.wav",
    "temp": true
+  },
+  "whoosh": {
+   "file": "audio/sfx_temp/whoosh.wav",
+   "temp": true
+  },
+  "riser": {
+   "file": "audio/sfx_temp/riser.wav",
+   "temp": true
+  },
+  "title_hit": {
+   "file": "audio/sfx_temp/title_hit.wav",
+   "temp": true
+  },
+  "glint": {
+   "file": "audio/sfx_temp/glint.wav",
+   "temp": true
+  },
+  "bus_rumble": {
+   "file": "audio/sfx_temp/bus_rumble.wav",
+   "temp": true
+  },
+  "room_tone": {
+   "file": "audio/sfx_temp/room_tone.wav",
+   "temp": true
+  },
+  "monitor_hum": {
+   "file": "audio/sfx_temp/monitor_hum.wav",
+   "temp": true
   }
  }
 }

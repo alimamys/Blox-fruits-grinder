@@ -4,7 +4,7 @@ import scriptJson from '../data/script.json';
 import registryJson from '../data/assets.json';
 import sourcesJson from '../data/sources.json';
 
-export type AudioKind = 'final' | 'scratch' | 'missing';
+export type AudioKind = 'final' | 'tts' | 'scratch' | 'missing';
 
 export type Cue = {
 	id: string;
@@ -104,7 +104,8 @@ export const PREVIEW_FRAMES = (() => {
 	return running ? running.endFrame + 8 : PREVIEW_TARGET_FRAMES;
 })();
 
-export const narrationIsTemp = (from: number, to: number) =>
-	ALL_CUES.some((c) => c.startFrame < to && c.endFrame > from && c.audioKind !== 'final');
+/** Which non-final narration kinds are audible in a frame range. */
+export const narrationTempKinds = (from: number, to: number) =>
+	new Set(ALL_CUES.filter((c) => c.startFrame < to && c.endFrame > from && c.audioKind !== 'final').map((c) => c.audioKind));
 
 export const assetIsPlaceholder = (id: string) => !media.assets[id]?.file;

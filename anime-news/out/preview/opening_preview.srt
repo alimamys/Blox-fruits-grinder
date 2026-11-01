@@ -1,31 +1,31 @@
 1
-00:00:00,583 --> 00:00:02,250
+00:00:00,583 --> 00:00:02,208
 Talks without a deal.
 
 2
-00:00:02,417 --> 00:00:04,667
+00:00:02,292 --> 00:00:04,625
 An election without a majority.
 
 3
-00:00:04,833 --> 00:00:07,500
+00:00:04,708 --> 00:00:07,917
 Families escaping through a temporary ceasefire.
 
 4
-00:00:07,667 --> 00:00:11,042
+00:00:08,000 --> 00:00:11,167
 And an AI boom facing an expensive question:
 
 5
-00:00:11,042 --> 00:00:13,000
+00:00:11,167 --> 00:00:13,333
 when does the spending pay off?
 
 6
-00:00:13,250 --> 00:00:15,708
+00:00:13,500 --> 00:00:16,250
 Five stories. One turbulent week.
 
 7
-00:00:15,792 --> 00:00:17,750
+00:00:16,250 --> 00:00:18,542
 This is the world in anime.
 
 8
-00:00:19,167 --> 00:00:24,792
+00:00:19,792 --> 00:00:25,000
 We start in the Gulf, where diplomacy continued under the threat of renewed strikes.

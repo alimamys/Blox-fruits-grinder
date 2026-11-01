@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Img, random, staticFile, useCurrentFrame} from 'remotion';
-import {ALL_CUES, media, narrationIsTemp} from '../lib/timeline';
+import {ALL_CUES, media, narrationTempKinds} from '../lib/timeline';
 import {ramp} from '../lib/motion';
 import {C, FONT, SAFE, SUB_BAND_H} from '../lib/theme';
 
@@ -92,7 +92,10 @@ export const TempFlag: React.FC<{from: number; to: number; assetIds: string[]}> 
 	const items: string[] = [];
 	const missing = assetIds.filter((id) => !media.assets[id]?.file);
 	if (missing.length) items.push(`PLACEHOLDER ART (${missing.join(' ')})`);
-	if (narrationIsTemp(from, to)) items.push('SCRATCH TTS VOICE');
+	const kinds = narrationTempKinds(from, to);
+	if (kinds.has('tts')) items.push('AI NARRATION (Kokoro TTS)');
+	if (kinds.has('scratch')) items.push('SCRATCH TTS VOICE');
+	if (kinds.has('missing')) items.push('NARRATION MISSING');
 	if (Object.values(media.sfx).some((s) => s.temp)) items.push('PROCEDURAL TEMP SFX');
 	if (!items.length || f < from) return null;
 	return (

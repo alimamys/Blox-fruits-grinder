@@ -11,16 +11,16 @@ Remotion + React + TypeScript project for the weekly anime-style news recap, wee
 | Project, data model, timing engine, caption/SRT export | done |
 | **Opening preview** (`OpeningPreview`, S01 cold open + S02 opening shot) | built; rendered to `out/preview/opening_preview.mp4` + `.srt` |
 | Rest of S02 and S03–S07 (`Main`) | timed **animatic** only: correct narration/caption timing, planned plate per storyboard cue, cue text on screen; factual overlays not built yet |
-| Artwork | **TEMPORARY placeholders** (code blockouts), see `ASSETS.md` |
-| Narration | **TEMPORARY scratch TTS** (offline SVOX Pico), see `ASSETS.md` |
-| SFX / music | **TEMPORARY procedural** sounds generated in code, see `ASSETS.md` |
+| Artwork | **TEMPORARY animated placeholders**: code-drawn plates with rigged characters (blink, glance, breathing, hands), moving water/smoke/crowds, handheld camera and atmosphere FX; see `ASSETS.md` |
+| Narration | **AI voice** — Kokoro-82M neural TTS (open weights, offline), voice `bm_george`; replace with a human or premium voice for the final |
+| SFX / music | **TEMPORARY procedural** score and SFX generated in code (tension pad, accents, whooshes, riser, title hit, ambiences) |
 | Cutdown (70 s) | not started |
 
 Every render shows a red **ANIMATIC · TEMPORARY** flag listing what is still temporary; each placeholder plate is labelled with its asset ID and the exact file it is waiting for. The flag disappears once everything is final.
 
 ### About the preview length
 
-The brief's opening is 20 s, but with real narration timing the cold open ends at 18.9 s and the narrator is mid-sentence at 20 s ("We start in the Gulf, where diplomacy continued under the threat of renewed strikes."). The brief also requires that no clip truncates narration, so `OpeningPreview` runs to the end of that sentence (24.9 s with the scratch voice). The length re-computes automatically from the final recording.
+The brief's opening is 20 s, but with real narration timing the cold open ends at 19.5 s and the narrator is mid-sentence at 20 s ("We start in the Gulf, where diplomacy continued under the threat of renewed strikes."). The brief also requires that no clip truncates narration, so `OpeningPreview` runs to the end of that sentence (25.1 s with the current voice). The length re-computes automatically from the final recording.
 
 ## Quick start
 
@@ -33,7 +33,21 @@ npm run assets:check      # what is supplied vs placeholder
 npm run checklist         # regenerate ASSETS.md
 ```
 
-Regenerating the temporary media (only needed if you delete it): `npm run audio:scratch` (needs `pico2wave` or `espeak-ng`), `npm run audio:sfx` and `npm run textures` (Python 3 + numpy + Pillow).
+Regenerating the temporary media (only needed if you delete it): `npm run audio:sfx` and `npm run textures` (Python 3 + numpy + Pillow).
+
+## Narration voice (AI, offline)
+
+The narration is generated with **Kokoro-82M v0.19** (Apache-2.0 open weights) through sherpa-onnx, entirely offline:
+
+```bash
+bash scripts/fetch_voice_model.sh                                   # once: model + runtime into .voice-model/
+.voice-model/venv/bin/python scripts/make_narration_kokoro.py --force           # all 63 lines
+.voice-model/venv/bin/python scripts/make_narration_kokoro.py --reel            # out/voice_samples.mp3
+.voice-model/venv/bin/python scripts/make_narration_kokoro.py --voice bm_lewis --force   # switch voice
+npm run render:preview
+```
+
+Voices: `bm_george` (default, British male, most expressive), `bm_lewis` (deeper), `am_michael`, `am_adam`, `af_sarah`, `af_bella` (plus `af`, `af_nicole`, `af_sky`, `bf_emma`, `bf_isabella`). Speed per chapter and the default voice live in `src/data/script.json` → `narrator`. A recording in `public/audio/narration/` always overrides the AI voice for that line. The older robotic SVOX Pico generator (`npm run audio:scratch`) is kept only as a last-resort fallback.
 
 ## Replacing placeholders
 
@@ -57,13 +71,14 @@ src/lib/timeline.ts         typed scenes (id, startFrame, durationFrames, narrat
                             assetPaths, captionCues, visualCues, soundCues)
 src/components/Plate.tsx    one illustration seen through a virtual camera; real art (layered or flat)
                             or a labelled placeholder; restrained parallax, water shimmer, variants
-src/components/placeholders.tsx   TEMP code-drawn blockouts (no likenesses of real people)
+src/components/placeholders.tsx   TEMP animated code-drawn plates and character rigs (no likenesses of real people)
+src/components/fx.tsx       handheld camera, dust/embers, haze, light sweeps, speed lines, flashes, blink/breath curves
 src/components/Overlays.tsx subtitles, ANIMATED ILLUSTRATION mark, TEMP flag, labels, film grain
 src/components/Sound.tsx    narration + beds/hits, beds ducked under speech
 src/scenes/S01ColdOpen.tsx  cold open; all cuts derived from narration cue timings
 src/scenes/S02Gulf.tsx      S02 visual cue 1 (wide Gulf), then animatic
 src/scenes/AnimaticScene.tsx  timed animatic for chapters not yet built
-scripts/                    timeline builder, SRT export, checklist, take splitter, TEMP audio/texture generators
+scripts/                    timeline builder, SRT export, checklist, take splitter, Kokoro narration, TEMP audio/texture generators
 ```
 
 Timing model: each scene = lead-in + Σ(line audio + pause after line) + tail. Lines, pauses, lead-ins and tails live in `script.json`; storyboard triggers ("On 'Five stories'…") are expressed as cue IDs so they move with the audio.
@@ -89,4 +104,4 @@ Visual reference R01 (PsyopAnime, "Trump Declares War") informed only the genera
 
 ## Licensing of what is in this repo
 
-Placeholder art, procedural SFX and grain textures are generated by code in this project. Fonts are Oswald, Noto Sans and JetBrains Mono (SIL OFL, via @fontsource). The scratch voice is SVOX Pico output (Apache-2.0 engine) and is for internal timing only.
+Placeholder art, procedural score/SFX and grain textures are generated by code in this project. Fonts are Oswald, Noto Sans and JetBrains Mono (SIL OFL, via @fontsource). Narration is generated with Kokoro-82M (Apache-2.0 weights; obtained via the npm package `n8n-nodes-ttsbro@0.1.6`, which vendors sherpa-onnx's `kokoro-int8-en-v0_19` bundle, because Hugging Face is blocked here). Check your publishing platform's AI-voice disclosure rules before release.

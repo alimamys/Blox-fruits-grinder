@@ -3,3 +3,5 @@ out/main/
 out/stills/
 .remotion/
 *.log
+.voice-model/
+out/voice_samples/

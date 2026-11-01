@@ -119,6 +119,13 @@ const WaterShimmer: React.FC<{file: string; horizon: number; frame: number; id: 
 	);
 };
 
+/** Screen-space placeholder label; renders nothing once the real file is supplied. */
+export const TempTag: React.FC<{id: string}> = ({id}) => {
+	if (media.assets[id]?.file) return null;
+	const reg = registry.assets.find((a) => a.id === id)!;
+	return <PlaceholderTag id={id} file={reg.file} compact={false} />;
+};
+
 const PlaceholderTag: React.FC<{id: string; file: string; compact: boolean}> = ({id, file, compact}) =>
 	compact ? (
 		<div style={{position: 'absolute', left: 10, top: 10, ...tagBox, fontSize: 14, padding: '3px 7px'}}>{id} TEMP</div>
@@ -131,9 +138,9 @@ const PlaceholderTag: React.FC<{id: string; file: string; compact: boolean}> = (
 const tagBox: React.CSSProperties = {
 	fontFamily: FONT.mono,
 	fontWeight: 500,
-	fontSize: 17,
-	color: '#fff',
-	background: 'rgba(0,0,0,0.62)',
+	fontSize: 15,
+	color: 'rgba(255,255,255,0.88)',
+	background: 'rgba(0,0,0,0.5)',
 	borderLeft: `4px solid ${C.tempFlag}`,
 	padding: '6px 12px',
 	letterSpacing: '0.02em',

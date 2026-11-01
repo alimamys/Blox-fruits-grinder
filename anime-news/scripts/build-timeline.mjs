@@ -20,7 +20,7 @@ const script = JSON.parse(readFileSync(join(ROOT, 'src/data/script.json'), 'utf8
 const registry = JSON.parse(readFileSync(join(ROOT, 'src/data/assets.json'), 'utf8'));
 const FPS = script.fps;
 const NARRATION_EXTS = ['wav', 'mp3', 'm4a', 'flac'];
-export const SFX_NAMES = ['radio_click', 'synth_pulse_bed', 'bass_accent', 'water_distant', 'tick_motif'];
+export const SFX_NAMES = ['radio_click', 'synth_pulse_bed', 'bass_accent', 'water_distant', 'tick_motif', 'whoosh', 'riser', 'title_hit', 'glint', 'bus_rumble', 'room_tone', 'monitor_hum'];
 
 function ffprobeBin() {
   try {
@@ -52,14 +52,19 @@ function findAudio(dir, id) {
 // ---------- narration timeline ----------
 const scenes = [];
 let frame = 0;
-const counts = { final: 0, scratch: 0, missing: 0 };
+const counts = { final: 0, tts: 0, scratch: 0, missing: 0 };
 for (const sc of script.scenes) {
   const sceneStart = frame;
   let t = sc.leadInFrames ?? 0;
   const cues = [];
   for (const c of sc.cues) {
+    // priority: your recording > Kokoro neural TTS > old Pico scratch > estimate
     let audio = findAudio('narration', c.id);
     let kind = 'final';
+    if (!audio) {
+      audio = findAudio('narration_tts', c.id);
+      kind = 'tts';
+    }
     if (!audio) {
       audio = findAudio('narration_scratch', c.id);
       kind = audio ? 'scratch' : 'missing';
@@ -135,7 +140,7 @@ for (const s of scenes) {
     `  ${s.id} ${fmt(s.startFrame)} +${(s.durationFrames / FPS).toFixed(2)}s (plan ${s.planDurationSec}s, ${delta >= 0 ? '+' : ''}${delta.toFixed(2)}s)  ${s.chapter}`,
   );
 }
-console.log(`Narration cues: ${counts.final} final, ${counts.scratch} TEMP scratch TTS, ${counts.missing} missing (estimated)`);
+console.log(`Narration cues: ${counts.final} final, ${counts.tts} AI voice (Kokoro, TEMP), ${counts.scratch} scratch TTS, ${counts.missing} missing (estimated)`);
 const missingArt = registry.assets.filter((a) => !assets[a.id].file);
 console.log(`Artwork: ${registry.assets.length - missingArt.length}/${registry.assets.length} supplied; PLACEHOLDER for ${missingArt.map((a) => a.id).join(', ') || 'none'}`);
 console.log(`SFX: ${Object.entries(sfx).map(([k, v]) => `${k}=${v.file ? (v.temp ? 'TEMP' : 'final') : 'missing'}`).join(', ')}`);
