@@ -1,0 +1,251 @@
+1
+00:00:00,583 --> 00:00:02,208
+Talks without a deal.
+
+2
+00:00:02,292 --> 00:00:04,625
+An election without a majority.
+
+3
+00:00:04,708 --> 00:00:07,917
+Families escaping through a temporary ceasefire.
+
+4
+00:00:08,000 --> 00:00:11,167
+And an AI boom facing an expensive question:
+
+5
+00:00:11,167 --> 00:00:13,333
+when does the spending pay off?
+
+6
+00:00:13,500 --> 00:00:16,250
+Five stories. One turbulent week.
+
+7
+00:00:16,250 --> 00:00:18,542
+This is the world in anime.
+
+8
+00:00:19,792 --> 00:00:25,000
+We start in the Gulf, where diplomacy continued under the threat of renewed strikes.
+
+9
+00:00:25,083 --> 00:00:30,583
+On Sunday, Iranian negotiators were in Doha for talks with Qatari mediators,
+
+10
+00:00:30,583 --> 00:00:35,583
+seeking a way to end the war involving Iran, the United States and Israel.
+
+11
+00:00:35,667 --> 00:00:40,833
+Iran’s foreign minister described a proposal that could reopen the Strait of Hormuz
+
+12
+00:00:40,833 --> 00:00:44,792
+within two days of a possible agreement with Washington.
+
+13
+00:00:45,042 --> 00:00:48,333
+But he said no final agreement had been reached.
+
+14
+00:00:48,583 --> 00:00:52,250
+The shipping route remains central to the negotiations.
+
+15
+00:00:52,333 --> 00:00:57,583
+For now, the diplomatic breakthrough is still a possibility—not an announced outcome.
+
+16
+00:00:58,833 --> 00:01:03,708
+In Israel, the votes are counted. Forming a government is the next battle.
+
+17
+00:01:03,792 --> 00:01:08,833
+Results released on Friday gave Benjamin Netanyahu’s bloc fifty-three seats.
+
+18
+00:01:09,000 --> 00:01:11,833
+The main opposition bloc took forty-eight.
+
+19
+00:01:12,000 --> 00:01:14,542
+Arab-led parties held nineteen.
+
+20
+00:01:14,792 --> 00:01:18,542
+For an outright majority, the target is sixty-one seats
+
+21
+00:01:18,542 --> 00:01:21,500
+in the one-hundred-and-twenty-seat parliament.
+
+22
+00:01:22,000 --> 00:01:26,667
+Netanyahu remains prime minister while parties try to build a coalition.
+
+23
+00:01:26,750 --> 00:01:31,583
+Those nineteen seats do not automatically belong to either main bloc.
+
+24
+00:01:31,667 --> 00:01:33,708
+The election is over.
+
+25
+00:01:33,792 --> 00:01:38,167
+The struggle to turn votes into a governing majority continues.
+
+26
+00:01:39,500 --> 00:01:43,917
+Now to Ukraine, where this week brought a narrow opening for civilians.
+
+27
+00:01:44,000 --> 00:01:50,042
+On Saturday, evacuees from Russian-occupied Oleshky reached Ukrainian-held territory
+
+28
+00:01:50,042 --> 00:01:52,292
+and reunited with relatives.
+
+29
+00:01:52,375 --> 00:01:55,417
+Their route ran through Russia and Belarus,
+
+30
+00:01:55,417 --> 00:01:59,750
+under a local ceasefire that also allowed humanitarian aid.
+
+31
+00:01:59,833 --> 00:02:04,375
+That pause began on Tuesday and was scheduled to end on Sunday evening.
+
+32
+00:02:04,458 --> 00:02:06,542
+It covered a limited area.
+
+33
+00:02:06,625 --> 00:02:11,375
+Fighting continued elsewhere in Ukraine. The wider war went on.
+
+34
+00:02:11,792 --> 00:02:16,042
+But for families arriving at the border, the week brought something immediate:
+
+35
+00:02:16,125 --> 00:02:19,125
+getting out, reaching safety, finding each other.
+
+36
+00:02:22,125 --> 00:02:25,167
+In France, the pressure moved onto the streets.
+
+37
+00:02:25,250 --> 00:02:29,583
+Saturday brought a third consecutive weekend of demonstrations
+
+38
+00:02:29,583 --> 00:02:32,500
+over living costs and education.
+
+39
+00:02:32,583 --> 00:02:38,167
+Authorities estimated three-hundred-and-twenty-thousand participants across the country.
+
+40
+00:02:38,250 --> 00:02:40,750
+Organizers put the number higher.
+
+41
+00:02:40,917 --> 00:02:43,083
+Most people marched peacefully.
+
+42
+00:02:43,417 --> 00:02:48,417
+Later clashes involving smaller groups broke out in Paris and other cities.
+
+43
+00:02:48,500 --> 00:02:53,708
+The movement’s demands have broadened to include civil liberties and the right to protest.
+
+44
+00:02:53,792 --> 00:02:56,042
+The crowds filled the streets.
+
+45
+00:02:56,125 --> 00:03:00,292
+The political questions behind the protests remained unresolved.
+
+46
+00:03:01,542 --> 00:03:06,208
+Across the Atlantic, confidence came under pressure on the trading screens.
+
+47
+00:03:06,292 --> 00:03:10,875
+On Friday, the S and P five hundred fell one-point-eight percent.
+
+48
+00:03:11,125 --> 00:03:14,583
+The Nasdaq Composite dropped two-point-nine percent.
+
+49
+00:03:14,833 --> 00:03:18,792
+Technology shares led the sell-off as disappointing earnings
+
+50
+00:03:18,792 --> 00:03:23,542
+and concerns about huge AI investments unsettled investors.
+
+51
+00:03:23,625 --> 00:03:26,542
+The question is becoming harder to dodge:
+
+52
+00:03:26,542 --> 00:03:30,333
+how much of that spending will turn into financial returns?
+
+53
+00:03:30,583 --> 00:03:34,167
+The AI race carries enormous expectations.
+
+54
+00:03:34,250 --> 00:03:37,208
+This week, Wall Street delivered a reminder
+
+55
+00:03:37,208 --> 00:03:41,333
+that expectations still have to survive an earnings report.
+
+56
+00:03:42,833 --> 00:03:45,375
+And one more countdown is running.
+
+57
+00:03:45,542 --> 00:03:50,250
+On Tuesday, November third, Americans vote in the midterm elections,
+
+58
+00:03:50,250 --> 00:03:52,750
+with control of Congress at stake.
+
+59
+00:03:52,833 --> 00:03:55,083
+That result is still ahead.
+
+60
+00:03:55,333 --> 00:03:59,250
+Talks continue. Coalitions remain unresolved.
+
+61
+00:03:59,333 --> 00:04:01,750
+Another major vote approaches.
+
+62
+00:04:02,000 --> 00:04:06,042
+This was the week ending November first, twenty twenty-six.
+
+63
+00:04:06,292 --> 00:04:08,833
+The next chapter is still open.

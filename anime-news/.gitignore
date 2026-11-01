@@ -1,5 +1,6 @@
 node_modules/
-out/main/
+out/main/*_master.mp4
+out/main/test_*
 out/stills/
 .remotion/
 *.log

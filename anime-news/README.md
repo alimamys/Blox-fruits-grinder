@@ -9,7 +9,7 @@ Remotion + React + TypeScript project for the weekly anime-style news recap, wee
 | Part | State |
 |---|---|
 | Project, data model, timing engine, caption/SRT export | done |
-| **Full edition** (`Main`, all 7 chapters, ~4:12) | built shot by shot from the storyboard; rendered to `out/main/` (MP4 + SRT) |
+| **Full edition** (`Main`, all 7 chapters, 4:12) | built shot by shot from the storyboard; `out/main/week_in_anime_2026-11-01.mp4` (1080p24 H.264/AAC share copy, 57 MB) + `.srt`; the CRF-20 master (~400 MB) is re-rendered with `npm run render:main` |
 | **Opening preview** (`OpeningPreview`, first ~25 s) | `out/preview/opening_preview.mp4` + `.srt` |
 | Factual graphics | rendered in code: Hormuz map + Ukraine inset (Natural Earth), condition card, 53/48/19 seats vs 61 / 120, truce date card, schematic route, ~320,000 estimate, S&P 500 −1.8% / Nasdaq Composite −2.9%, calendar, blank result board, labels and source tags |
 | Artwork | **TEMPORARY anime-style placeholders**, drawn in code (`src/components/placeholders.tsx`, `plates2.tsx`, `anime/`): painted backgrounds and character rigs that blink, glance, breathe and move; real public figures only as silhouettes. Real commissioned/generated art replaces them, see `ASSETS.md` |
