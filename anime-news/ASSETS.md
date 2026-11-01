@@ -407,5 +407,13 @@ Procedural placeholders exist for all of these. To replace one, put a designed/l
 | [ ] | `public/audio/sfx/glint.wav` | Metallic glint, ~1.5 s. Light running across the title letters. | TEMP procedural |
 | [ ] | `public/audio/sfx/water_distant.wav` | Distant water ambience, seamless loop. S02 Gulf. | TEMP procedural |
 | [ ] | `public/audio/sfx/tick_motif.wav` | Restrained ticking / light percussion motif, seamless loop. S02 Gulf, low tension, no impacts. | TEMP procedural |
+| [ ] | `public/audio/sfx/paper_rustle.wav` | Paper movement, ~1 s. S03 Israel. | TEMP procedural |
+| [ ] | `public/audio/sfx/number_click.wav` | Subdued number-reveal click, ~0.4 s. S03 seat tiles, S06 market figures. | TEMP procedural |
+| [ ] | `public/audio/sfx/crowd_murmur.wav` | Low, peaceful crowd ambience, seamless loop. S05 France. | TEMP procedural |
+| [ ] | `public/audio/sfx/distant_unrest.wav` | Distant, brief, muffled unrest (no sirens, no gunfire), ~4 s. S05 later-clashes cutaway only. | TEMP procedural |
+| [ ] | `public/audio/sfx/arrival_ambience.wav` | Cold-morning arrival point: air, quiet voices, idling bus, seamless loop. S04 Ukraine. | TEMP procedural |
+| [ ] | `public/audio/sfx/electronic_pulse.wav` | Restrained electronic pulse, seamless loop. S06 Markets. | TEMP procedural |
+| [ ] | `public/audio/sfx/calendar_flip.wav` | Calendar page turn, ~0.8 s. S07. | TEMP procedural |
+| [ ] | `public/audio/sfx/final_tone.wav` | Quiet resolving final tone, ~5 s, then silence. S07 end. | TEMP procedural |
 
-Later chapters will also need: soft room tone + paper movement and three subdued number clicks (S03); bus hum and quiet arrival ambience (S04); low crowd ambience and a distant, brief clash bed (S05); restrained electronic pulse with monitor/keyboard accents (S06); calendar-turn sound and a quiet final tone (S07). Filenames will be added here as those chapters are built.
+All chapters are covered by the files above.

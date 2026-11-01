@@ -14,6 +14,7 @@ import {random} from 'remotion';
 import {Analyst, CrowdPerson, Evacuee} from './anime/characters';
 import {Cumulus, GodRays, LensFlare, Sparkle, WaterGlints, range} from './anime/paint';
 import {breathe} from './fx';
+import {arrival, capitol, corridor, knesset, policeLights, polling, servers} from './plates2';
 import {C} from '../lib/theme';
 
 export type LayerSpec = {depth: number; node: (frame: number) => React.ReactNode};
@@ -581,6 +582,12 @@ const march: LayerSpec[] = [
 							</g>
 						);
 					})}
+					{/* pedestrian crossing signal, showing red (match-cut light into the markets chapter) */}
+					<rect x="1800" y="400" width="18" height="700" fill="#2a2e3a" stroke={LINE} strokeWidth="2" />
+					<rect x="1764" y="290" width="92" height="140" rx="10" fill="#1a1c24" stroke={LINE} strokeWidth="3" />
+					<circle cx="1810" cy="330" r="42" fill="#ff2a2a" opacity={0.25 + 0.1 * Math.sin(f * 0.2)} />
+					<path d="M1810,306 a7,7 0 1,0 0.1,0 Z M1798,318 L1822,318 L1824,346 L1816,346 L1816,366 L1804,366 L1804,346 L1796,346 Z" fill="#ff4a3a" />
+					<rect x="1776" y="384" width="68" height="34" rx="4" fill="#0e1016" />
 				</Svg>
 			);
 		},
@@ -709,4 +716,11 @@ export const PLACEHOLDERS: Record<string, LayerSpec[]> = {
 	A08: march,
 	A11: analyst,
 	A15: chamber,
+	A02: corridor,
+	A04: knesset,
+	A07: arrival,
+	A09: policeLights,
+	A10: servers,
+	A12: capitol,
+	A13: polling,
 };

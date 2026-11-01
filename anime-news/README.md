@@ -9,11 +9,12 @@ Remotion + React + TypeScript project for the weekly anime-style news recap, wee
 | Part | State |
 |---|---|
 | Project, data model, timing engine, caption/SRT export | done |
-| **Opening preview** (`OpeningPreview`, S01 cold open + S02 opening shot) | built; rendered to `out/preview/opening_preview.mp4` + `.srt` |
-| Rest of S02 and S03–S07 (`Main`) | timed **animatic** only: correct narration/caption timing, planned plate per storyboard cue, cue text on screen; factual overlays not built yet |
-| Artwork | **TEMPORARY anime-style placeholders**, drawn in code: painted anime backgrounds (dusk sea with sculpted cumulus and water sparkles, sunny Paris street, god-rayed chamber) and anime character rigs (layered eyes, hair clumps with shine, cel shading) that blink, glance, breathe and move; handheld camera and atmosphere FX. Real commissioned/generated art still replaces them, see `ASSETS.md` |
+| **Full edition** (`Main`, all 7 chapters, ~4:12) | built shot by shot from the storyboard; rendered to `out/main/` (MP4 + SRT) |
+| **Opening preview** (`OpeningPreview`, first ~25 s) | `out/preview/opening_preview.mp4` + `.srt` |
+| Factual graphics | rendered in code: Hormuz map + Ukraine inset (Natural Earth), condition card, 53/48/19 seats vs 61 / 120, truce date card, schematic route, ~320,000 estimate, S&P 500 −1.8% / Nasdaq Composite −2.9%, calendar, blank result board, labels and source tags |
+| Artwork | **TEMPORARY anime-style placeholders**, drawn in code (`src/components/placeholders.tsx`, `plates2.tsx`, `anime/`): painted backgrounds and character rigs that blink, glance, breathe and move; real public figures only as silhouettes. Real commissioned/generated art replaces them, see `ASSETS.md` |
 | Narration | **AI voice** — Kokoro-82M neural TTS (open weights, offline), voice `bm_george`; replace with a human or premium voice for the final |
-| SFX / music | **TEMPORARY procedural** score and SFX generated in code (tension pad, accents, whooshes, riser, title hit, ambiences) |
+| SFX / music | **TEMPORARY procedural** score and SFX for every chapter, generated in code |
 | Cutdown (70 s) | not started |
 
 Every render shows a red **ANIMATIC · TEMPORARY** flag listing what is still temporary; each placeholder plate is labelled with its asset ID and the exact file it is waiting for. The flag disappears once everything is final.
@@ -28,7 +29,7 @@ The brief's opening is 20 s, but with real narration timing the cold open ends a
 npm install
 npm run studio            # interactive preview in the browser
 npm run render:preview    # out/preview/opening_preview.mp4 + .srt
-npm run render:main       # full-length animatic + .srt (slow)
+npm run render:main       # full edition + .srt (~30 min on 4 cores)
 npm run assets:check      # what is supplied vs placeholder
 npm run checklist         # regenerate ASSETS.md
 node scripts/stills.mjs PlateTest out/stills 30 --props '{"assetId":"A06","x":0.42,"y":0.36,"z":2.6}'   # review one plate up close
@@ -78,8 +79,10 @@ src/components/fx.tsx       handheld camera, dust/embers, haze, light sweeps, sp
 src/components/Overlays.tsx subtitles, ANIMATED ILLUSTRATION mark, TEMP flag, labels, film grain
 src/components/Sound.tsx    narration + beds/hits, beds ducked under speech
 src/scenes/S01ColdOpen.tsx  cold open; all cuts derived from narration cue timings
-src/scenes/S02Gulf.tsx      S02 visual cue 1 (wide Gulf), then animatic
-src/scenes/AnimaticScene.tsx  timed animatic for chapters not yet built
+src/scenes/Chapters.tsx     S02–S07, shot by shot (cuts keyed to narration cues)
+src/components/graphics.tsx factual overlays and maps (all numbers in code)
+src/data/geo.json           Natural Earth geometry (scripts/build-geo.mjs; Crimea shown within Ukraine's internationally recognised borders)
+src/scenes/AnimaticScene.tsx  fallback animatic for any chapter without a built component
 scripts/                    timeline builder, SRT export, checklist, take splitter, Kokoro narration, TEMP audio/texture generators
 ```
 

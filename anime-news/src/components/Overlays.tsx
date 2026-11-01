@@ -91,12 +91,12 @@ export const TempFlag: React.FC<{from: number; to: number; assetIds: string[]}> 
 	const f = useCurrentFrame();
 	const items: string[] = [];
 	const missing = assetIds.filter((id) => !media.assets[id]?.file);
-	if (missing.length) items.push(`PLACEHOLDER ART (${missing.join(' ')})`);
+	if (missing.length) items.push('placeholder art');
 	const kinds = narrationTempKinds(from, to);
-	if (kinds.has('tts')) items.push('AI NARRATION (Kokoro TTS)');
-	if (kinds.has('scratch')) items.push('SCRATCH TTS VOICE');
-	if (kinds.has('missing')) items.push('NARRATION MISSING');
-	if (Object.values(media.sfx).some((s) => s.temp)) items.push('PROCEDURAL TEMP SFX');
+	if (kinds.has('tts')) items.push('AI narration');
+	if (kinds.has('scratch')) items.push('scratch voice');
+	if (kinds.has('missing')) items.push('narration missing');
+	if (Object.values(media.sfx).some((s) => s.temp)) items.push('procedural SFX');
 	if (!items.length || f < from) return null;
 	return (
 		<div
@@ -115,9 +115,7 @@ export const TempFlag: React.FC<{from: number; to: number; assetIds: string[]}> 
 			}}
 		>
 			<div style={{fontWeight: 500, letterSpacing: '0.12em'}}>ANIMATIC · TEMPORARY</div>
-			{items.map((t) => (
-				<div key={t}>{t}</div>
-			))}
+			<div>{items.join(' · ')}</div>
 		</div>
 	);
 };

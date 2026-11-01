@@ -282,6 +282,124 @@ def tick_motif(sec=20.0, bpm=96):
     write("tick_motif.wav", x, np.roll(x, 240))
 
 
+def paper_rustle():
+    rng = np.random.default_rng(31)
+    t = t_axis(1.2)
+    n = fft_band(rng.standard_normal(len(t)), 1500, 9000)
+    env = np.zeros_like(t)
+    for c in rng.uniform(0.05, 1.0, 14):
+        env += np.exp(-((t - c) / 0.03) ** 2) * rng.uniform(0.3, 1.0)
+    env *= np.exp(-t / 0.8)
+    l, r = reverb(n * env, 0.8, 0.2, wet=0.2, seed=9)
+    write("paper_rustle.wav", l, r)
+
+
+def number_click():
+    t = t_axis(0.5)
+    x = np.sin(2 * np.pi * 1600 * t) * np.exp(-t / 0.012) + 0.6 * np.sin(2 * np.pi * 120 * t) * np.exp(-t / 0.05)
+    l, r = reverb(x, 0.8, 0.25, wet=0.3, seed=10)
+    write("number_click.wav", l, r)
+
+
+def _voices(rng, t, n_voices, lo=250, hi=2400):
+    out = np.zeros_like(t)
+    base = fft_band(rng.standard_normal(len(t)), lo, hi)
+    for v in range(n_voices):
+        rate = rng.uniform(3.5, 6.5)
+        ph = rng.uniform(0, 2 * np.pi)
+        syll = np.clip(np.sin(2 * np.pi * rate * t + ph + 1.5 * np.sin(2 * np.pi * 0.3 * t + v)), 0, 1) ** 2
+        talk = (np.sin(2 * np.pi * rng.uniform(0.05, 0.15) * t + ph) > -0.2).astype(float)
+        out += np.roll(base, rng.integers(0, len(t))) * syll * talk
+    return out / n_voices
+
+
+def crowd_murmur(loop=14.0):
+    rng = np.random.default_rng(37)
+    t = t_axis(loop + 1.5)
+    x = _voices(rng, t, 40)
+    steps = np.zeros_like(t)
+    for s0 in rng.integers(0, len(t) - SR // 4, 120):
+        n = int(0.06 * SR)
+        steps[s0:s0 + n] += fft_band(rng.standard_normal(n * 4), 80, 600)[:n] * np.exp(-np.arange(n) / SR / 0.02)
+    l, r = reverb(x + steps * 0.4, 1.6, 0.5, wet=0.35, seed=11)
+    write("crowd_murmur.wav", seamless(l, loop), seamless(r, loop))
+
+
+def distant_unrest():
+    rng = np.random.default_rng(41)
+    t = t_axis(4.5)
+    roar = fft_band(_voices(rng, t, 60, 200, 1500), 120, 800)
+    roar *= np.sin(np.pi * np.clip(t / 4.5, 0, 1)) ** 1.5
+    thuds = np.zeros_like(t)
+    for c in (1.3, 2.6):
+        s0 = int(c * SR)
+        n = int(0.5 * SR)
+        tt = np.arange(n) / SR
+        thuds[s0:s0 + n] += np.sin(2 * np.pi * 50 * tt) * np.exp(-tt / 0.15) * 0.5
+    l, r = reverb(roar + thuds, 2.5, 0.8, wet=0.55, seed=12, hi=2500)
+    write("distant_unrest.wav", l, r)
+
+
+def arrival_ambience(loop=14.0):
+    rng = np.random.default_rng(43)
+    t = t_axis(loop + 1.5)
+    wind = fft_band(rng.standard_normal(len(t)), 60, 500) * (0.6 + 0.4 * np.sin(2 * np.pi * t / 6.5))
+    wind /= np.max(np.abs(wind))
+    murmur = fft_band(_voices(rng, t, 10), 200, 1800)
+    idle = 0.15 * np.sin(2 * np.pi * 38 * t) * (0.7 + 0.3 * np.sin(2 * np.pi * 0.7 * t))
+    birds = np.zeros_like(t)
+    for c in rng.uniform(0.5, loop, 6):
+        s0 = int(c * SR)
+        n = int(0.18 * SR)
+        tt = np.arange(n) / SR
+        birds[s0:s0 + n] += np.sin(2 * np.pi * (3200 + 1400 * np.sin(2 * np.pi * 9 * tt)) * tt) * np.sin(np.pi * tt / tt[-1]) * 0.08
+    l, r = reverb(wind * 0.5 + murmur * 0.8 + idle + birds, 2.0, 0.6, wet=0.35, seed=13)
+    write("arrival_ambience.wav", seamless(l, loop), seamless(r, loop))
+
+
+def electronic_pulse(sec=16.0, bpm=120):
+    beat = 60 / bpm
+    sec = round(sec / beat) * beat
+    loop = sec
+    t = t_axis(sec + 1.5)
+    x = np.zeros_like(t)
+    n = int(0.12 * SR)
+    tt = np.arange(n) / SR
+    blip = np.sin(2 * np.pi * 880 * tt) * np.exp(-tt / 0.03)
+    sub = np.sin(2 * np.pi * 55 * tt) * np.exp(-tt / 0.08)
+    i = 0
+    while i * beat / 2 < sec + 1.4:
+        s0 = int(i * beat / 2 * SR)
+        m = min(n, len(t) - s0)
+        if m > 0:
+            x[s0:s0 + m] += blip[:m] * (0.5 if i % 2 else 0.25) * (1.0 if i % 8 == 0 else 0.7)
+            if i % 2 == 0:
+                x[s0:s0 + m] += sub[:m] * 0.8
+        i += 1
+    pad = fft_band(saw(110, t, 0, 1500) + saw(110, t, 7, 1500), 60, 900) * 0.05
+    l, r = reverb(x + pad, 1.6, 0.4, wet=0.35, seed=14)
+    write("electronic_pulse.wav", seamless(l, loop), seamless(r, loop))
+
+
+def calendar_flip():
+    rng = np.random.default_rng(47)
+    t = t_axis(0.9)
+    nb = len(t) // 1024 + 2
+    swish = sweep_band(rng.standard_normal(len(t)), np.geomspace(2000, 6500, nb), 1.2) * np.exp(-((t - 0.25) / 0.1) ** 2)
+    slap = fft_band(rng.standard_normal(len(t)), 300, 3000) * np.exp(-np.maximum(t - 0.42, 0) / 0.02) * (t > 0.42) * 0.6
+    l, r = reverb(swish + slap, 0.8, 0.2, wet=0.2, seed=15)
+    write("calendar_flip.wav", l, r)
+
+
+def final_tone():
+    t = t_axis(6.0)
+    chord = [146.83, 220.0, 293.66, 440.0, 659.25]
+    x = sum(np.sin(2 * np.pi * fr * t + i) * (0.9 if fr < 300 else 0.45) for i, fr in enumerate(chord))
+    x *= (1 - np.exp(-t / 0.6)) * np.exp(-t / 1.8)
+    l, r = reverb(x, 3.5, 1.2, wet=0.5, seed=16)
+    write("final_tone.wav", l, r)
+
+
 if __name__ == "__main__":
     radio_click()
     synth_pulse()
@@ -295,4 +413,12 @@ if __name__ == "__main__":
     bus_rumble()
     room_tone()
     monitor_hum()
+    paper_rustle()
+    number_click()
+    crowd_murmur()
+    distant_unrest()
+    arrival_ambience()
+    electronic_pulse()
+    calendar_flip()
+    final_tone()
     print("Procedural PLACEHOLDER SFX written to public/audio/sfx_temp/")

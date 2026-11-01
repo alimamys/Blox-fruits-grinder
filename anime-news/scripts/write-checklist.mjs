@@ -118,6 +118,14 @@ const SFX = {
 	glint: 'Metallic glint, ~1.5 s. Light running across the title letters.',
 	water_distant: 'Distant water ambience, seamless loop. S02 Gulf.',
 	tick_motif: 'Restrained ticking / light percussion motif, seamless loop. S02 Gulf, low tension, no impacts.',
+	paper_rustle: 'Paper movement, ~1 s. S03 Israel.',
+	number_click: 'Subdued number-reveal click, ~0.4 s. S03 seat tiles, S06 market figures.',
+	crowd_murmur: 'Low, peaceful crowd ambience, seamless loop. S05 France.',
+	distant_unrest: 'Distant, brief, muffled unrest (no sirens, no gunfire), ~4 s. S05 later-clashes cutaway only.',
+	arrival_ambience: 'Cold-morning arrival point: air, quiet voices, idling bus, seamless loop. S04 Ukraine.',
+	electronic_pulse: 'Restrained electronic pulse, seamless loop. S06 Markets.',
+	calendar_flip: 'Calendar page turn, ~0.8 s. S07.',
+	final_tone: 'Quiet resolving final tone, ~5 s, then silence. S07 end.',
 };
 L.push('| | File | Purpose | Current |');
 L.push('|---|---|---|---|');
@@ -126,7 +134,7 @@ for (const [k, d] of Object.entries(SFX)) {
 	L.push(`| ${box(st && !st.temp)} | \`public/audio/sfx/${k}.wav\` | ${d} | ${st?.temp ? 'TEMP procedural' : 'final'} |`);
 }
 L.push('');
-L.push('Later chapters will also need: soft room tone + paper movement and three subdued number clicks (S03); bus hum and quiet arrival ambience (S04); low crowd ambience and a distant, brief clash bed (S05); restrained electronic pulse with monitor/keyboard accents (S06); calendar-turn sound and a quiet final tone (S07). Filenames will be added here as those chapters are built.');
+L.push('All chapters are covered by the files above.');
 L.push('');
 writeFileSync(join(ROOT, 'ASSETS.md'), L.join('\n'));
 console.log('ASSETS.md written');

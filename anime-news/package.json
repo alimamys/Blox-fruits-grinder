@@ -2,7 +2,7 @@
   "name": "week-in-anime-2026-11-01",
   "version": "0.1.0",
   "private": true,
-  "description": "THE WEEK IN ANIME: POWER UNDER PRESSURE \u2014 week ending 1 Nov 2026 (Remotion project)",
+  "description": "THE WEEK IN ANIME: POWER UNDER PRESSURE — week ending 1 Nov 2026 (Remotion project)",
   "scripts": {
     "audio:scratch": "python3 scripts/make_scratch_narration.py",
     "audio:sfx": "python3 scripts/make_sfx.py",
@@ -27,6 +27,8 @@
   },
   "devDependencies": {
     "@types/react": "19.2.2",
-    "typescript": "5.9.3"
+    "topojson-client": "3.1.0",
+    "typescript": "5.9.3",
+    "world-atlas": "2.0.2"
   }
 }

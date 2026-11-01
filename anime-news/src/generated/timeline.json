@@ -2,7 +2,7 @@
  "fps": 24,
  "width": 1920,
  "height": 1080,
- "totalFrames": 6038,
+ "totalFrames": 6058,
  "narration": {
   "final": 0,
   "tts": 63,
@@ -1053,7 +1053,7 @@
    "id": "S07",
    "chapter": "Next week: the vote ahead",
    "startFrame": 5342,
-   "durationFrames": 696,
+   "durationFrames": 716,
    "planStartSec": 217,
    "planDurationSec": 23,
    "sourceIds": [

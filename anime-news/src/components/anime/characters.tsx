@@ -183,13 +183,15 @@ export const Evacuee: React.FC<{f: number}> = ({f}) => {
 				{/* sleeve */}
 				<path d="M640,560 C664,610 652,670 626,716 L552,712 C574,662 584,612 570,566 Z" fill={COAT} stroke={LINE} strokeWidth="3" />
 				<path d="M570,566 C584,612 574,662 552,712 L578,714 C598,664 604,612 594,566 Z" fill={COAT_SH} />
-				{/* hand gripping the strap */}
-				<path d="M548,706 C546,690 566,684 590,686 C612,688 628,698 630,716 C632,736 622,752 604,758 C584,764 560,756 552,740 C548,730 548,718 548,706 Z" fill={SKIN} stroke={LINE} strokeWidth="2.8" />
-				<path d="M548,706 C546,720 550,740 566,752 C556,736 556,720 560,706 Z" fill={SKIN_SH} />
-				{[0, 1, 2].map((i) => (
-					<path key={i} d={`M${572 + i * 15},${724 - grip * 4} C${574 + i * 15},${736 + grip * 3} ${570 + i * 15},${746} ${566 + i * 15},${752}`} stroke={LINE} strokeWidth="2" fill="none" strokeLinecap="round" />
+				{/* hand gripping the handle: back of the hand, thumb over the front, four curled fingers */}
+				<path d="M556,706 C562,698 604,696 622,704 C628,720 626,738 620,750 L560,752 C553,740 551,722 556,706 Z" fill={SKIN} stroke={LINE} strokeWidth="2.6" strokeLinejoin="round" />
+				<path d="M556,706 C552,722 553,740 560,752 L572,752 C566,736 566,718 570,704 Z" fill={SKIN_SH} />
+				{[0, 1, 2, 3].map((i) => (
+					<rect key={i} x={560 + i * 15} y={742 + grip * 2} width={15} height={22 - grip * 2} rx={7} fill={i === 0 ? SKIN_SH : SKIN} stroke={LINE} strokeWidth="2.2" />
 				))}
-				<path d="M596,690 C610,692 622,700 626,712" stroke="#fff4ea" strokeWidth="2" fill="none" opacity="0.6" />
+				<path d="M560,716 C547,726 547,746 557,758 C563,763 572,758 570,749 C566,739 568,729 575,722 Z" fill={SKIN} stroke={LINE} strokeWidth="2.4" strokeLinejoin="round" />
+				<path d="M566,744 Q591,739 618,744" stroke="#fff4ea" strokeWidth="1.6" fill="none" opacity="0.55" />
+				<path d="M600,700 C612,702 620,708 622,716" stroke="#d6e6ff" strokeWidth="2.2" fill="none" opacity="0.7" />
 			</g>
 		</g>
 	);
@@ -208,7 +210,6 @@ export const Analyst: React.FC<{f: number}> = ({f}) => {
 	const br = breathe(f, 2, 120);
 	const scan = Math.sin(f * 0.045) * 2.5;
 	const furrow = 0.5 + 0.5 * Math.sin(f * 0.02);
-	const tap = Math.max(0, Math.sin(f * 0.35)) ** 4;
 	const glow = 0.8 + 0.2 * Math.sin(f * 1.3) * Math.sin(f * 0.21);
 	const glint = (f % 96) / 96; // periodic lens glint sweep
 	const g0 = -20 + glint * 260;
@@ -277,15 +278,6 @@ export const Analyst: React.FC<{f: number}> = ({f}) => {
 				/>
 				<path d="M-40,-118 Q0,-134 40,-126 L34,-118 L24,-124 L14,-114 L2,-124 L-10,-112 L-22,-122 L-34,-110 Z" fill={HAIR_HI} />
 				<path d="M58,-128 L78,-108 L74,-82" stroke={RED} strokeWidth="2.4" fill="none" opacity={0.7 * glow} />
-			</g>
-			{/* hand at the chin, fingers tapping */}
-			<g transform={`translate(-6,${br * 1.2 - 62})`}>
-				<path d="M290,1200 C330,1000 380,800 440,720 L500,740 C470,820 440,1000 430,1200 Z" fill="#c9ccd6" stroke={LINE} strokeWidth="3" />
-				<path d="M290,1200 C330,1000 380,800 440,720 L456,726 C410,820 380,1000 370,1200 Z" fill="#8c90a0" />
-				<path d="M440,720 C450,690 480,660 512,646 C536,636 556,640 560,652 C564,664 552,678 532,690 C514,712 500,730 492,746 Z" fill={SKIN} stroke={LINE} strokeWidth="2.6" />
-				<path d={`M520,654 C${536 + tap * 3},${624 - tap * 10} ${556 + tap * 3},${616 - tap * 10} ${566 + tap * 2},${628 - tap * 8} C${570},${640 - tap * 4} 560,652 548,660`} fill={SKIN} stroke={LINE} strokeWidth="2.4" />
-				<path d="M512,646 C536,636 556,640 560,652" stroke={RED} strokeWidth="3" fill="none" opacity={0.7 * glow} />
-				<path d="M470,700 C490,692 506,684 520,676 M478,716 C494,708 506,702 518,694" stroke={SKIN_SH} strokeWidth="2.2" fill="none" />
 			</g>
 		</g>
 	);

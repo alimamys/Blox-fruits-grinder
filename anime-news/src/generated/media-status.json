@@ -135,16 +135,24 @@
    "variants": {},
    "anchors": {
     "embrace": [
-     0.44,
-     0.55
+     0.46,
+     0.5
     ],
     "tea": [
-     0.75,
-     0.6
+     0.69,
+     0.55
     ],
     "wide": [
      0.5,
      0.5
+    ],
+    "boxes": [
+     0.85,
+     0.68
+    ],
+    "buses": [
+     0.82,
+     0.42
     ]
    }
   },
@@ -165,6 +173,10 @@
     "wide": [
      0.5,
      0.5
+    ],
+    "signal": [
+     0.943,
+     0.31
     ]
    }
   },
@@ -175,8 +187,8 @@
    "variants": {},
    "anchors": {
     "lights": [
-     0.6,
-     0.5
+     0.5,
+     0.57
     ],
     "wide": [
      0.5,
@@ -232,7 +244,7 @@
    "anchors": {
     "dome": [
      0.5,
-     0.42
+     0.3
     ],
     "wide": [
      0.5,
@@ -348,6 +360,38 @@
   },
   "monitor_hum": {
    "file": "audio/sfx_temp/monitor_hum.wav",
+   "temp": true
+  },
+  "paper_rustle": {
+   "file": "audio/sfx_temp/paper_rustle.wav",
+   "temp": true
+  },
+  "number_click": {
+   "file": "audio/sfx_temp/number_click.wav",
+   "temp": true
+  },
+  "crowd_murmur": {
+   "file": "audio/sfx_temp/crowd_murmur.wav",
+   "temp": true
+  },
+  "distant_unrest": {
+   "file": "audio/sfx_temp/distant_unrest.wav",
+   "temp": true
+  },
+  "arrival_ambience": {
+   "file": "audio/sfx_temp/arrival_ambience.wav",
+   "temp": true
+  },
+  "electronic_pulse": {
+   "file": "audio/sfx_temp/electronic_pulse.wav",
+   "temp": true
+  },
+  "calendar_flip": {
+   "file": "audio/sfx_temp/calendar_flip.wav",
+   "temp": true
+  },
+  "final_tone": {
+   "file": "audio/sfx_temp/final_tone.wav",
    "temp": true
   }
  }

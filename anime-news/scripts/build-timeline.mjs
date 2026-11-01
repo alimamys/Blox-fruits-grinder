@@ -20,7 +20,7 @@ const script = JSON.parse(readFileSync(join(ROOT, 'src/data/script.json'), 'utf8
 const registry = JSON.parse(readFileSync(join(ROOT, 'src/data/assets.json'), 'utf8'));
 const FPS = script.fps;
 const NARRATION_EXTS = ['wav', 'mp3', 'm4a', 'flac'];
-export const SFX_NAMES = ['radio_click', 'synth_pulse_bed', 'bass_accent', 'water_distant', 'tick_motif', 'whoosh', 'riser', 'title_hit', 'glint', 'bus_rumble', 'room_tone', 'monitor_hum'];
+export const SFX_NAMES = ['radio_click', 'synth_pulse_bed', 'bass_accent', 'water_distant', 'tick_motif', 'whoosh', 'riser', 'title_hit', 'glint', 'bus_rumble', 'room_tone', 'monitor_hum', 'paper_rustle', 'number_click', 'crowd_murmur', 'distant_unrest', 'arrival_ambience', 'electronic_pulse', 'calendar_flip', 'final_tone'];
 
 function ffprobeBin() {
   try {

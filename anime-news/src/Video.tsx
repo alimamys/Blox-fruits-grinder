@@ -7,11 +7,11 @@ import {C} from './lib/theme';
 import {registry, SCENES} from './lib/timeline';
 import {AnimaticScene} from './scenes/AnimaticScene';
 import {S01ColdOpen, s01Cuts} from './scenes/S01ColdOpen';
-import {S02Gulf} from './scenes/S02Gulf';
+import {BUILT_CHAPTERS} from './scenes/Chapters';
 
 ensureFonts();
 
-const BUILT: Record<string, React.FC> = {S01: S01ColdOpen, S02: S02Gulf};
+const BUILT: Record<string, React.FC> = {S01: S01ColdOpen, ...BUILT_CHAPTERS};
 
 export type VideoProps = {mode: 'preview' | 'main'; durationInFrames: number};
 
