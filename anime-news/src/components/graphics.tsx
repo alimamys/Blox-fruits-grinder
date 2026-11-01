@@ -7,6 +7,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, interpolate, useCurrentFrame} from 'remotion';
 import geo from '../data/geo.json';
 import {ramp, easeOut} from '../lib/motion';
+import {Embers} from './fx';
 import {C, FONT, SAFE, SUB_BAND_H} from '../lib/theme';
 
 const pop = Easing.out(Easing.back(1.6));
@@ -192,8 +193,11 @@ export const SeatGraphic: React.FC<{reveal: [number, number, number]; barsAt: nu
 	const hl = f >= highlightFrom && f < highlightTo ? ramp(f, highlightFrom, highlightFrom + 8, 0, 1) * ramp(f, highlightTo - 8, highlightTo, 1, 0) : 0;
 	const BAR_X = 470;
 	const PER = 7.2; // px per seat (120 seats = 864 px)
+	const float = Math.sin(f * 0.06) * 4;
+	const sheen = ((f * 1.6) % 260) - 80; // % across, loops
 	return (
-		<AbsoluteFill style={{opacity: out}}>
+		<AbsoluteFill style={{opacity: out, transform: `translateY(${float}px)`}}>
+			<AbsoluteFill style={{background: `linear-gradient(105deg, rgba(255,230,180,0) ${sheen - 10}%, rgba(255,230,180,0.07) ${sheen}%, rgba(255,230,180,0) ${sheen + 10}%)`, pointerEvents: 'none'}} />
 			{/* phase 1: tiles */}
 			{bars < 1 ? (
 				<div style={{position: 'absolute', left: 0, right: 0, top: 250, display: 'flex', justifyContent: 'center', gap: 50, opacity: 1 - bars, transform: `translateY(${-bars * 40}px)`}}>
@@ -451,12 +455,16 @@ export const FinalCard: React.FC<{from: number}> = ({from}) => {
 	const f = useCurrentFrame();
 	if (f < from) return null;
 	const o = appear(f, from, 14);
+	const push = 1 + (f - from) * 0.0006;
 	return (
 		<AbsoluteFill style={{background: '#000', opacity: o, alignItems: 'center', justifyContent: 'center', paddingBottom: 60}}>
+			<Embers count={34} seed="fc" opacity={0.55} />
+			<AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', paddingBottom: 60, transform: `scale(${push})`}}>
 			<div style={{fontFamily: FONT.display, fontWeight: 700, fontSize: 104, letterSpacing: '0.04em', color: C.paper}}>THE WEEK IN ANIME</div>
 			<div style={{width: 420 * o, height: 7, background: C.red, margin: '16px 0 20px'}} />
 			<div style={{fontFamily: FONT.display, fontWeight: 600, fontSize: 40, letterSpacing: '0.22em', color: C.amberSoft}}>WEEK ENDING 1 NOV 2026</div>
 			<div style={{fontFamily: FONT.body, fontWeight: 600, fontSize: 28, color: 'rgba(237,230,214,0.8)', marginTop: 26, opacity: appear(f, from + 12)}}>Reporting sources in description</div>
+			</AbsoluteFill>
 		</AbsoluteFill>
 	);
 };

@@ -195,7 +195,11 @@ export const S03Israel: React.FC = () => {
 				<PlateShot id="A05" dur={c['02'].s - portraitAt} a={A('A05', 'face', 1.2)} b={A('A05', 'face', 1.35)} amp={0.35} />
 			</Shot>
 			<Shot name="V2-V5 chamber + seats" from={c['02'].s} to={c['07'].s}>
-				<PlateShot id="A15" dur={c['07'].s - c['02'].s} a={{x: 0.5, y: 0.45, z: 1.08}} b={{x: 0.5, y: 0.47, z: 1.16}} amp={0.25} dim={0.5} blur={4} />
+				<PlateShot id="A15" dur={c['07'].s - c['02'].s} a={{x: 0.42, y: 0.4, z: 1.15}} b={{x: 0.58, y: 0.46, z: 1.35}} amp={0.5} dim={0.38} blur={2} linear>
+					<GroupLights stagger={false} />
+					<LightSweep period={70} strength={0.14} />
+					<Motes count={90} seed="sg3" drift={[0.25, -0.45]} size={3} color="#ffd59a" opacity={0.8} />
+				</PlateShot>
 			</Shot>
 			<Shot name="V6 portrait + coalition label" from={c['07'].s} to={c['08'].s}>
 				<PlateShot id="A05" dur={c['08'].s - c['07'].s} a={A('A05', 'face', 1.1)} b={A('A05', 'face', 1.3)} amp={0.3}>
@@ -203,7 +207,10 @@ export const S03Israel: React.FC = () => {
 				</PlateShot>
 			</Shot>
 			<Shot name="19 seats, separate" from={c['08'].s} to={c['09'].s}>
-				<PlateShot id="A15" dur={c['09'].s - c['08'].s} a={{x: 0.5, y: 0.46, z: 1.12}} b={{x: 0.5, y: 0.46, z: 1.18}} amp={0.25} dim={0.5} blur={4} />
+				<PlateShot id="A15" dur={c['09'].s - c['08'].s} a={{x: 0.6, y: 0.42, z: 1.3}} b={{x: 0.44, y: 0.44, z: 1.18}} amp={0.5} dim={0.38} blur={2} linear>
+					<LightSweep period={60} strength={0.14} />
+					<Motes count={90} seed="sg4" drift={[-0.25, -0.45]} size={3} color="#ffd59a" opacity={0.8} />
+				</PlateShot>
 			</Shot>
 			<Shot name="V7 three separate groups" from={c['09'].s} to={end}>
 				<PlateShot id="A15" dur={end - c['09'].s} a={{x: 0.5, y: 0.3, z: 1.4}} b={{x: 0.5, y: 0.34, z: 1.2}} amp={0.3}>
@@ -376,7 +383,9 @@ export const S07Ahead: React.FC = () => {
 				<PlateShot id="A13" dur={c['04'].s - pollAt} a={{x: 0.45, y: 0.55, z: 1.15}} b={{x: 0.5, y: 0.55, z: 1.2}} amp={0.35} />
 			</Shot>
 			<Shot name="V3 blank result board" from={c['04'].s} to={c['05'].s}>
-				<PlateShot id="A12" dur={c['05'].s - c['04'].s} a={{x: 0.5, y: 0.45, z: 1.1}} b={{x: 0.5, y: 0.45, z: 1.15}} amp={0.3} dim={0.55} blur={5} />
+				<PlateShot id="A12" dur={c['05'].s - c['04'].s} a={{x: 0.44, y: 0.42, z: 1.12}} b={{x: 0.56, y: 0.46, z: 1.25}} amp={0.45} dim={0.45} blur={3} linear>
+					<Motes count={60} seed="rb" drift={[0.2, -0.3]} size={2.6} color="#e8ecff" opacity={0.7} />
+				</PlateShot>
 			</Shot>
 			<Shot name="V4 callback: unsigned folder" from={c['05'].s} to={groupsAt}>
 				<PlateShot id="A02" dur={groupsAt - c['05'].s} a={A('A02', 'folder', 2.0)} b={A('A02', 'folder', 2.15)} amp={0.3} />
