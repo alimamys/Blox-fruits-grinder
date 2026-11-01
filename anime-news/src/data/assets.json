@@ -1,0 +1,236 @@
+{
+  "folder": "public/assets",
+  "canvas": "2560x1440 PNG (16:9) or larger, same aspect ratio. Layer files must use the same canvas size and alignment as the flattened file.",
+  "masterStylePrompt": "Original cinematic retro 1980s/1990s political-thriller anime illustration; angular anatomy; strong ink contours; precise hard cel-shadow shapes; painterly location background; muted navy and charcoal base; rust-orange and amber rim light; subtle film texture; dramatic but restrained facial expression; clear visual hierarchy; 16:9 composition; generous crop room; no baked-in text, captions, numbers, channel logos, signatures or watermarks. Keep the same proportions, palette and line weight across shots. Illustrative editorial staging, not photographic evidence.",
+  "assets": [
+    {
+      "id": "A01",
+      "key": "gulf_shipping",
+      "file": "gulf_shipping.png",
+      "scenes": ["S01", "S02"],
+      "inPreview": true,
+      "prompt": "A distant commercial cargo ship in a Gulf waterway at dusk, red navigation light in foreground, dark teal sea, rust-orange horizon, restrained tension, empty upper-left space for location label. Separate ship, foreground water and sky layers.",
+      "composition": "Red navigation light on a foreground channel-marker buoy, lower-left (about 24% from left, 64% down), with its red reflection streaking down the water below it. Cargo ship sits on the horizon mid-right (about 64% from left, 48% down). Horizon line about 52% down. Upper-left sky left empty.",
+      "anchors": { "navLight": [0.24, 0.64], "navReflection": [0.24, 0.8], "ship": [0.64, 0.48], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "gulf_shipping.sky.png", "depth": 0, "note": "sky + distant shore, opaque" },
+        { "file": "gulf_shipping.ship.png", "depth": 0.35, "note": "ship only, transparent background" },
+        { "file": "gulf_shipping.water.png", "depth": 0.6, "note": "mid-distance water, transparent above the horizon" },
+        { "file": "gulf_shipping.foreground.png", "depth": 1, "note": "foreground water + buoy + red light, transparent elsewhere" }
+      ]
+    },
+    {
+      "id": "A02",
+      "key": "diplomacy_corridor_table",
+      "file": "diplomacy_corridor_table.png",
+      "scenes": ["S02", "S07"],
+      "inPreview": false,
+      "prompt": "An austere diplomatic corridor and adjacent negotiation-table composition, warm amber desk light, closed blank folder, chairs unoccupied, no insignia, no writing. Separate lamp glow, folder and room layers. A symbolic scene.",
+      "composition": "Corridor receding on the left half; table on the right half with the closed folder at about 66% from left, 66% down; amber desk lamp at about 78% from left, 44% down.",
+      "anchors": { "corridor": [0.28, 0.45], "folder": [0.66, 0.66], "lamp": [0.78, 0.44], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "diplomacy_corridor_table.room.png", "depth": 0, "note": "room, opaque" },
+        { "file": "diplomacy_corridor_table.folder.png", "depth": 0.7, "note": "folder only, transparent" },
+        { "file": "diplomacy_corridor_table.glow.png", "depth": 0.9, "note": "lamp glow only, transparent (screen blend)" }
+      ]
+    },
+    {
+      "id": "A03",
+      "key": "araghchi_portrait",
+      "file": "araghchi_portrait.png",
+      "scenes": ["S02"],
+      "inPreview": false,
+      "realPerson": true,
+      "prompt": "Recognizable editorial anime portrait of Iranian foreign minister Abbas Araghchi, dark suit and glasses, reserved expression, three-quarter view, deep cel shadows and warm rim light; plain background; neutral public-facing portrait, no invented action or speech.",
+      "composition": "Head and shoulders, three-quarter view, eyes about 58% from left and 34% down; plain dark background with room on the left for the name/role label.",
+      "anchors": { "face": [0.58, 0.38], "eyes": [0.58, 0.34], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "araghchi_portrait.character.png", "depth": 1, "note": "figure only, transparent" },
+        { "file": "araghchi_portrait.bg.png", "depth": 0, "note": "plain background, opaque" }
+      ],
+      "variants": [
+        { "file": "araghchi_portrait.concerned.png", "note": "same framing, concerned expression" },
+        { "file": "araghchi_portrait.down.png", "note": "same framing, downward gaze" },
+        { "file": "araghchi_portrait.blink.png", "note": "same framing, eyes closed (used for a 3-frame blink)" }
+      ]
+    },
+    {
+      "id": "A04",
+      "key": "knesset_exterior",
+      "file": "knesset_exterior.png",
+      "scenes": ["S03"],
+      "inPreview": false,
+      "prompt": "Editorial anime establishing shot of the Knesset building in Jerusalem using an accurate visual reference, late afternoon, restrained sky, strong perspective. Leave space for a code-rendered location label.",
+      "composition": "Building centred slightly right; upper-left sky clear for the label.",
+      "anchors": { "building": [0.56, 0.52], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "knesset_exterior.sky.png", "depth": 0, "note": "sky, opaque" },
+        { "file": "knesset_exterior.building.png", "depth": 0.6, "note": "building + ground, transparent sky" }
+      ]
+    },
+    {
+      "id": "A05",
+      "key": "netanyahu_portrait",
+      "file": "netanyahu_portrait.png",
+      "scenes": ["S01", "S03"],
+      "inPreview": true,
+      "realPerson": true,
+      "prompt": "Recognizable editorial anime portrait of Benjamin Netanyahu, dark suit, tense but neutral expression, angular facial drawing, heavy ink contours, warm highlights; separate character and plain background; no speech bubble.",
+      "composition": "Head and shoulders, three-quarter view, eyes about 58% from left and 32% down so the cold-open close crop lands on the eyes; shoulders run off the bottom edge; plain dark background.",
+      "anchors": { "face": [0.58, 0.38], "eyes": [0.58, 0.32], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "netanyahu_portrait.character.png", "depth": 1, "note": "figure only, transparent" },
+        { "file": "netanyahu_portrait.bg.png", "depth": 0, "note": "plain background, opaque" }
+      ],
+      "variants": [
+        { "file": "netanyahu_portrait.concerned.png", "note": "same framing, concerned expression" },
+        { "file": "netanyahu_portrait.down.png", "note": "same framing, downward gaze" },
+        { "file": "netanyahu_portrait.blink.png", "note": "same framing, eyes closed (used for a 3-frame blink)" }
+      ]
+    },
+    {
+      "id": "A06",
+      "key": "evacuation_bus",
+      "file": "evacuation_bus.png",
+      "scenes": ["S01", "S04"],
+      "inPreview": true,
+      "prompt": "Anonymous civilian inside an evacuation bus, blue-gray dawn, hand holding a small travel bag, bus window catching warm interior light, thoughtful restrained expression. Original illustrative person, no claim to depict a particular survivor.",
+      "composition": "Civilian seated left of centre, face about 40% from left and 34% down, looking right toward the window; hand gripping the travel bag strap lower-left (about 30% from left, 74% down); bus window fills the right half (centre about 68% from left, 38% down) showing an empty road at dawn.",
+      "anchors": { "handBag": [0.3, 0.74], "window": [0.68, 0.38], "face": [0.4, 0.34], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "evacuation_bus.outside.png", "depth": 0, "note": "view through the window, opaque" },
+        { "file": "evacuation_bus.interior.png", "depth": 0.6, "note": "bus interior + window frame, transparent window glass" },
+        { "file": "evacuation_bus.character.png", "depth": 1, "note": "civilian + bag, transparent" }
+      ],
+      "variants": [
+        { "file": "evacuation_bus.blink.png", "note": "same framing, eyes closed (3-frame blink)" }
+      ]
+    },
+    {
+      "id": "A07",
+      "key": "family_reunion",
+      "file": "family_reunion.png",
+      "scenes": ["S04"],
+      "inPreview": false,
+      "prompt": "Anonymous adults meeting at a civilian arrival point beside buses, quiet embrace, volunteers and tea table in soft background, muted winter palette with gentle amber light, dignified wide composition. Original illustrative people.",
+      "composition": "Embrace centred slightly left (about 44% from left, 55% down); buses right; volunteers and tea table soft in the background.",
+      "anchors": { "embrace": [0.44, 0.55], "tea": [0.75, 0.6], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "family_reunion.bg.png", "depth": 0, "note": "buses, volunteers, sky; opaque" },
+        { "file": "family_reunion.characters.png", "depth": 0.8, "note": "embracing group, transparent" }
+      ]
+    },
+    {
+      "id": "A08",
+      "key": "france_peaceful_march",
+      "file": "france_peaceful_march.png",
+      "scenes": ["S01", "S05"],
+      "inPreview": true,
+      "prompt": "Large peaceful student-and-worker demonstration on a broad Paris street, varied ordinary adults, some plain unlettered placards, open daylight, painterly architecture, respectful wide framing. Original illustration.",
+      "composition": "Street recedes to a vanishing point near the centre; crowd fills the lower half; plain placards held above heads around 45–60% down.",
+      "anchors": { "crowd": [0.5, 0.62], "placards": [0.45, 0.5], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "france_peaceful_march.bg.png", "depth": 0, "note": "street + buildings + sky, opaque" },
+        { "file": "france_peaceful_march.crowd.png", "depth": 0.8, "note": "crowd, transparent" }
+      ]
+    },
+    {
+      "id": "A09",
+      "key": "france_distant_police_lights",
+      "file": "france_distant_police_lights.png",
+      "scenes": ["S05"],
+      "inPreview": false,
+      "prompt": "A separate Paris street at dusk, distant police lights and thin atmospheric smoke, a few small anonymous silhouettes, no visible injury, no dramatic fire or invented specific confrontation. Designed for a short contextual cutaway.",
+      "composition": "Police lights small and distant near the centre-right; smoke drifting across the middle band.",
+      "anchors": { "lights": [0.6, 0.5], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "france_distant_police_lights.bg.png", "depth": 0, "note": "street, opaque" },
+        { "file": "france_distant_police_lights.smoke.png", "depth": 0.7, "note": "smoke only, transparent" }
+      ]
+    },
+    {
+      "id": "A10",
+      "key": "ai_data_centre",
+      "file": "ai_data_centre.png",
+      "scenes": ["S06"],
+      "inPreview": false,
+      "prompt": "Long server corridor, cold blue light, repeated rack perspective, amber status lamps, empty screens with no numbers or logos, deep shadows, original painted anime environment.",
+      "composition": "One-point perspective; vanishing point at the centre.",
+      "anchors": { "vanish": [0.5, 0.48], "wide": [0.5, 0.5] },
+      "layers": []
+    },
+    {
+      "id": "A11",
+      "key": "market_analyst",
+      "file": "market_analyst.png",
+      "scenes": ["S01", "S06"],
+      "inPreview": true,
+      "prompt": "Fictional adult financial analyst in a dark office, tired concentrated face reflected in a blank monitor, red and amber screen glow, severe cel shading, separate face/monitor/background layers.",
+      "composition": "Blank monitor fills the centre-right; the analyst's reflected face sits in the monitor at about 60% from left, 40% down; the real analyst in left-foreground profile (about 22% from left). Monitor surface must stay blank so figures can be composited in code.",
+      "anchors": { "reflection": [0.6, 0.4], "analyst": [0.22, 0.45], "monitor": [0.6, 0.45], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "market_analyst.bg.png", "depth": 0, "note": "office, opaque" },
+        { "file": "market_analyst.monitor.png", "depth": 0.5, "note": "monitor with reflection, transparent around it" },
+        { "file": "market_analyst.face.png", "depth": 1, "note": "foreground analyst, transparent" }
+      ],
+      "variants": [
+        { "file": "market_analyst.blink.png", "note": "same framing, eyes closed (3-frame blink)" }
+      ]
+    },
+    {
+      "id": "A12",
+      "key": "us_capitol",
+      "file": "us_capitol.png",
+      "scenes": ["S07"],
+      "inPreview": false,
+      "prompt": "US Capitol at dusk with accurate architectural reference, solemn wide composition, deep navy sky and warm windows, no crowd, no winner banners, no imaginary security incident.",
+      "composition": "Dome centred; sky in the upper third clear for a label.",
+      "anchors": { "dome": [0.5, 0.42], "wide": [0.5, 0.5] },
+      "layers": []
+    },
+    {
+      "id": "A13",
+      "key": "polling_place",
+      "file": "polling_place.png",
+      "scenes": ["S07"],
+      "inPreview": false,
+      "prompt": "Neutral American polling-place interior, closed door or empty ballot box in foreground, warm hallway light, ordinary civic atmosphere, no party endorsement, no legible signage baked into image.",
+      "composition": "Closed door centred (about 50% from left, 45% down) so the final slow push lands on it; ballot box foreground left.",
+      "anchors": { "door": [0.5, 0.45], "ballotBox": [0.25, 0.7], "wide": [0.5, 0.5] },
+      "layers": []
+    },
+    {
+      "id": "A14",
+      "key": "editorial_objects",
+      "file": "editorial_objects.png",
+      "scenes": ["S02", "S04", "S05", "S06", "S07"],
+      "inPreview": false,
+      "prompt": "Separate object cutouts: blank calendar page, unmarked travel bag, closed blank folder, student notebook, shopping receipt without numbers, blank voting slip. Consistent line weight and cel shading; transparent backgrounds.",
+      "composition": "Supply each object as its own transparent PNG (files below); the combined sheet is optional.",
+      "anchors": { "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "objects/calendar_page.png", "depth": 1, "note": "blank calendar page, transparent" },
+        { "file": "objects/travel_bag.png", "depth": 1, "note": "unmarked travel bag, transparent" },
+        { "file": "objects/folder_closed.png", "depth": 1, "note": "closed blank folder, transparent" },
+        { "file": "objects/student_notebook.png", "depth": 1, "note": "student notebook, transparent" },
+        { "file": "objects/receipt_blank.png", "depth": 1, "note": "shopping receipt, no numbers, transparent" },
+        { "file": "objects/voting_slip_blank.png", "depth": 1, "note": "blank voting slip, transparent" }
+      ]
+    },
+    {
+      "id": "A15",
+      "key": "parliament_chamber",
+      "file": "parliament_chamber.png",
+      "scenes": ["S01", "S03", "S07"],
+      "inPreview": true,
+      "supplementary": true,
+      "prompt": "Empty parliamentary chamber interior in hard amber evening light, curved rows of desks and leather chairs, one empty chair in the foreground under a pool of light, three separate groups of desks clearly divided by aisles, no flags, no insignia, no people, no legible writing. Symbolic editorial scene.",
+      "composition": "Empty foreground chair centred low (about 50% from left, 62% down) under the brightest light; three desk groups separated by aisles across the background (left / centre / right) so S03 can light them separately.",
+      "anchors": { "emptyChair": [0.5, 0.62], "groupLeft": [0.2, 0.42], "groupCentre": [0.5, 0.38], "groupRight": [0.8, 0.42], "wide": [0.5, 0.5] },
+      "layers": [
+        { "file": "parliament_chamber.room.png", "depth": 0, "note": "chamber, opaque" },
+        { "file": "parliament_chamber.chair.png", "depth": 0.9, "note": "foreground chair, transparent" }
+      ]
+    }
+  ]
+}

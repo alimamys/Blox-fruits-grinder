@@ -1,0 +1,255 @@
+{
+  "title": "THE WEEK IN ANIME: POWER UNDER PRESSURE",
+  "edition": "Week ending Sunday 1 November 2026",
+  "coverage": "26 OCT–1 NOV 2026",
+  "fps": 24,
+  "width": 1920,
+  "height": 1080,
+  "defaults": {
+    "pauseAfterFrames": 8,
+    "captionTailFrames": 6
+  },
+  "scenes": [
+    {
+      "id": "S01",
+      "chapter": "Cold open",
+      "planStartSec": 0,
+      "planDurationSec": 18,
+      "sourceIds": [],
+      "assetIds": ["A01", "A05", "A15", "A06", "A08", "A11"],
+      "leadInFrames": 14,
+      "tailFrames": 34,
+      "narration": "Talks without a deal. An election without a majority. Families escaping through a temporary ceasefire. And an AI boom facing an expensive question: when does the spending pay off? Five stories. One turbulent week. This is the world in anime.",
+      "cues": [
+        { "id": "S01_01", "text": "Talks without a deal.", "pauseAfter": 10 },
+        { "id": "S01_02", "text": "An election without a majority.", "pauseAfter": 10 },
+        { "id": "S01_03", "text": "Families escaping through a temporary ceasefire.", "pauseAfter": 10 },
+        { "id": "S01_04", "text": "And an AI boom facing an expensive question:", "pauseAfter": 5 },
+        { "id": "S01_05", "text": "when does the spending pay off?", "pauseAfter": 12 },
+        { "id": "S01_06", "text": "Five stories. One turbulent week.", "pauseAfter": 8 },
+        { "id": "S01_07", "text": "This is the world in anime.", "pauseAfter": 0 }
+      ],
+      "visualCues": [
+        { "n": 1, "trigger": { "cue": "S01_01" }, "text": "Hard cut from black to a red navigation light reflected on dark water; reveal a cargo ship in an original Gulf illustration." },
+        { "n": 2, "trigger": { "cue": "S01_02" }, "text": "Close crop of the Netanyahu portrait; cut to an empty parliamentary chair." },
+        { "n": 3, "trigger": { "cue": "S01_03" }, "text": "An anonymous evacuee's hand holding a travel bag, then a bus window." },
+        { "n": 4, "trigger": { "cue": "S01_04" }, "text": "An analyst's face reflected in a dark screen. No financial figures in this teaser." },
+        { "n": 5, "trigger": { "cue": "S01_06" }, "text": "Five narrow picture panels align. Brief title reveal: THE WEEK IN ANIME / POWER UNDER PRESSURE." },
+        { "n": 6, "trigger": { "cue": "S01_07" }, "text": "Show 26 OCT–1 NOV 2026 and \"Animated illustrations of reported events\". Reuse later artwork for this montage." }
+      ],
+      "soundCues": [
+        { "trigger": { "cue": "S01_01", "at": "sceneStart" }, "text": "Single radio click, low synth pulse." },
+        { "trigger": { "cue": "S01_02" }, "text": "Brief bass accents at cuts; no loud impact under the first words." }
+      ]
+    },
+    {
+      "id": "S02",
+      "chapter": "The Gulf: a proposal, not a deal",
+      "planStartSec": 18,
+      "planDurationSec": 44,
+      "sourceIds": ["F01"],
+      "assetIds": ["A01", "A03", "A02", "A14"],
+      "leadInFrames": 6,
+      "tailFrames": 30,
+      "narration": "We start in the Gulf, where diplomacy continued under the threat of renewed strikes. On Sunday, Iranian negotiators were in Doha for talks with Qatari mediators, seeking a way to end the war involving Iran, the United States and Israel. Iran’s foreign minister described a proposal that could reopen the Strait of Hormuz within two days of a possible agreement with Washington. But he said no final agreement had been reached. The shipping route remains central to the negotiations. For now, the diplomatic breakthrough is still a possibility—not an announced outcome.",
+      "cues": [
+        { "id": "S02_01", "text": "We start in the Gulf, where diplomacy continued under the threat of renewed strikes." },
+        { "id": "S02_02", "text": "On Sunday, Iranian negotiators were in Doha for talks with Qatari mediators,", "pauseAfter": 4 },
+        { "id": "S02_03", "text": "seeking a way to end the war involving Iran, the United States and Israel." },
+        { "id": "S02_04", "text": "Iran’s foreign minister described a proposal that could reopen the Strait of Hormuz", "pauseAfter": 4 },
+        { "id": "S02_05", "text": "within two days of a possible agreement with Washington.", "pauseAfter": 12 },
+        { "id": "S02_06", "text": "But he said no final agreement had been reached.", "pauseAfter": 12 },
+        { "id": "S02_07", "text": "The shipping route remains central to the negotiations." },
+        { "id": "S02_08", "text": "For now, the diplomatic breakthrough is still a possibility—not an announced outcome.", "pauseAfter": 0 }
+      ],
+      "visualCues": [
+        { "n": 1, "trigger": { "cue": "S02_01" }, "text": "Wide sea-and-shipping illustration; slow lateral camera move and two layers of water motion." },
+        { "n": 2, "trigger": { "cue": "S02_02" }, "text": "Label DOHA • 1 NOV 2026. Cut to cel-shaded portrait of Abbas Araghchi, labelled with name and role." },
+        { "n": 3, "trigger": { "cue": "S02_03" }, "text": "Illustrative diplomatic corridor and a table with a folder. Symbolic staging, not a reconstruction." },
+        { "n": 4, "trigger": { "cue": "S02_04", "at": "end" }, "text": "Accurate code-rendered map inset of the Strait of Hormuz. No shipping shown returning to normal." },
+        { "n": 5, "trigger": { "cue": "S02_05" }, "text": "POSSIBLE AGREEMENT → PROPOSED REOPENING WITHIN 2 DAYS. Condition revealed before the number." },
+        { "n": 6, "trigger": { "cue": "S02_06" }, "text": "Return to the folder, still unopened. Show TALKS CONTINUING. No signatures, no handshake." },
+        { "n": 7, "trigger": { "cue": "S02_08" }, "text": "End on an amber desk light; match-cut into the next scene's chamber light. Source tag: Reuters / AP • 1 NOV." }
+      ],
+      "soundCues": [
+        { "trigger": { "cue": "S02_01", "at": "sceneStart" }, "text": "Distant water and a restrained ticking/percussion motif. Low tension; no missile or explosion sounds." }
+      ]
+    },
+    {
+      "id": "S03",
+      "chapter": "Israel: the arithmetic of power",
+      "planStartSec": 62,
+      "planDurationSec": 41,
+      "sourceIds": ["F02"],
+      "assetIds": ["A04", "A05", "A15"],
+      "leadInFrames": 6,
+      "tailFrames": 30,
+      "narration": "In Israel, the votes are counted. Forming a government is the next battle. Results released on Friday gave Benjamin Netanyahu’s bloc fifty-three seats. The main opposition bloc took forty-eight. Arab-led parties held nineteen. For an outright majority, the target is sixty-one seats in the one-hundred-and-twenty-seat parliament. Netanyahu remains prime minister while parties try to build a coalition. Those nineteen seats do not automatically belong to either main bloc. The election is over. The struggle to turn votes into a governing majority continues.",
+      "cues": [
+        { "id": "S03_01", "text": "In Israel, the votes are counted. Forming a government is the next battle." },
+        { "id": "S03_02", "text": "Results released on Friday gave Benjamin Netanyahu’s bloc fifty-three seats.", "pauseAfter": 10 },
+        { "id": "S03_03", "text": "The main opposition bloc took forty-eight.", "pauseAfter": 10 },
+        { "id": "S03_04", "text": "Arab-led parties held nineteen.", "pauseAfter": 12 },
+        { "id": "S03_05", "text": "For an outright majority, the target is sixty-one seats", "pauseAfter": 4 },
+        { "id": "S03_06", "text": "in the one-hundred-and-twenty-seat parliament.", "pauseAfter": 18 },
+        { "id": "S03_07", "text": "Netanyahu remains prime minister while parties try to build a coalition." },
+        { "id": "S03_08", "text": "Those nineteen seats do not automatically belong to either main bloc." },
+        { "id": "S03_09", "text": "The election is over." },
+        { "id": "S03_10", "text": "The struggle to turn votes into a governing majority continues.", "pauseAfter": 0 }
+      ],
+      "visualCues": [
+        { "n": 1, "trigger": { "cue": "S03_01" }, "text": "Knesset exterior in hard late-afternoon light, then a silent Netanyahu portrait. Label ISRAEL • RESULTS RELEASED 30 OCT." },
+        { "n": 2, "trigger": { "cue": "S03_02", "at": "end" }, "text": "Reveal a clearly labelled 53 tile for Netanyahu bloc." },
+        { "n": 3, "trigger": { "cue": "S03_03", "at": "end" }, "text": "Reveal a separate 48 tile for main opposition bloc." },
+        { "n": 4, "trigger": { "cue": "S03_04", "at": "end" }, "text": "Reveal a separate 19 tile for Arab-led parties. Keep all three groups visually separate." },
+        { "n": 5, "trigger": { "cue": "S03_05" }, "text": "Show 61 FOR AN OUTRIGHT MAJORITY and TOTAL SEATS: 120. All numbers composited in code." },
+        { "n": 6, "trigger": { "cue": "S03_07" }, "text": "Hold the portrait with the caption COALITION NEGOTIATIONS." },
+        { "n": 7, "trigger": { "cue": "S03_09" }, "text": "Three separate illuminated groups of desks; no invented coalition merger. Source tag: AP / The Times of Israel." }
+      ],
+      "soundCues": [
+        { "trigger": { "cue": "S03_01", "at": "sceneStart" }, "text": "Soft room tone, paper movement." },
+        { "trigger": { "cue": "S03_02", "at": "end" }, "text": "Three subdued number-reveal clicks. A short pause makes 61 readable." }
+      ]
+    },
+    {
+      "id": "S04",
+      "chapter": "Ukraine: a narrow opening",
+      "planStartSec": 103,
+      "planDurationSec": 40,
+      "sourceIds": ["F03"],
+      "assetIds": ["A06", "A07", "A14"],
+      "leadInFrames": 8,
+      "tailFrames": 72,
+      "narration": "Now to Ukraine, where this week brought a narrow opening for civilians. On Saturday, evacuees from Russian-occupied Oleshky reached Ukrainian-held territory and reunited with relatives. Their route ran through Russia and Belarus, under a local ceasefire that also allowed humanitarian aid. That pause began on Tuesday and was scheduled to end on Sunday evening. It covered a limited area. Fighting continued elsewhere in Ukraine. The wider war went on. But for families arriving at the border, the week brought something immediate: getting out, reaching safety, finding each other.",
+      "cues": [
+        { "id": "S04_01", "text": "Now to Ukraine, where this week brought a narrow opening for civilians." },
+        { "id": "S04_02", "text": "On Saturday, evacuees from Russian-occupied Oleshky reached Ukrainian-held territory", "tts": "On Saturday, evacuees from Russian-occupied Oh-lesh-kee reached Ukrainian-held territory", "pauseAfter": 4 },
+        { "id": "S04_03", "text": "and reunited with relatives." },
+        { "id": "S04_04", "text": "Their route ran through Russia and Belarus,", "pauseAfter": 4 },
+        { "id": "S04_05", "text": "under a local ceasefire that also allowed humanitarian aid." },
+        { "id": "S04_06", "text": "That pause began on Tuesday and was scheduled to end on Sunday evening." },
+        { "id": "S04_07", "text": "It covered a limited area." },
+        { "id": "S04_08", "text": "Fighting continued elsewhere in Ukraine. The wider war went on.", "pauseAfter": 16 },
+        { "id": "S04_09", "text": "But for families arriving at the border, the week brought something immediate:", "pauseAfter": 8 },
+        { "id": "S04_10", "text": "getting out, reaching safety, finding each other.", "pauseAfter": 0 }
+      ],
+      "visualCues": [
+        { "n": 1, "trigger": { "cue": "S04_01" }, "text": "Colder blue-gray morning light. An anonymous civilian watches the road through a bus window." },
+        { "n": 2, "trigger": { "cue": "S04_02" }, "text": "Label OLESHKY EVACUEES • ARRIVALS 31 OCT. Buses reach an arrival area, then volunteers offering tea." },
+        { "n": 3, "trigger": { "cue": "S04_04" }, "text": "Schematic journey: Oleshky → Russia → Belarus → Ukrainian-held territory. Label SCHEMATIC ROUTE." },
+        { "n": 4, "trigger": { "cue": "S04_05", "at": "end" }, "text": "Close-up of unbranded food and medical-supply boxes; no relief-agency logos." },
+        { "n": 5, "trigger": { "cue": "S04_06" }, "text": "Date card: LOCAL TRUCE • BEGAN 27 OCT • SCHEDULED END 1 NOV EVENING. No countdown." },
+        { "n": 6, "trigger": { "cue": "S04_07" }, "text": "Clearly marked inset showing the local nature of the truce; no whole-country peace graphic." },
+        { "n": 7, "trigger": { "cue": "S04_09" }, "text": "Hold an explicitly illustrative family reunion for 7–8 seconds. Source tag: Reuters / AP • 31 OCT." }
+      ],
+      "soundCues": [
+        { "trigger": { "cue": "S04_01", "at": "sceneStart" }, "text": "Lower the score; bus hum and quiet arrival ambience." },
+        { "trigger": { "cue": "S04_09" }, "text": "Hold the reunion gently; no comic or triumphal effects." }
+      ]
+    },
+    {
+      "id": "S05",
+      "chapter": "France: pressure in the streets",
+      "planStartSec": 143,
+      "planDurationSec": 37,
+      "sourceIds": ["F04"],
+      "assetIds": ["A08", "A09", "A14"],
+      "leadInFrames": 6,
+      "tailFrames": 30,
+      "narration": "In France, the pressure moved onto the streets. Saturday brought a third consecutive weekend of demonstrations over living costs and education. Authorities estimated three-hundred-and-twenty-thousand participants across the country. Organizers put the number higher. Most people marched peacefully. Later clashes involving smaller groups broke out in Paris and other cities. The movement’s demands have broadened to include civil liberties and the right to protest. The crowds filled the streets. The political questions behind the protests remained unresolved.",
+      "cues": [
+        { "id": "S05_01", "text": "In France, the pressure moved onto the streets." },
+        { "id": "S05_02", "text": "Saturday brought a third consecutive weekend of demonstrations", "pauseAfter": 4 },
+        { "id": "S05_03", "text": "over living costs and education." },
+        { "id": "S05_04", "text": "Authorities estimated three-hundred-and-twenty-thousand participants across the country.", "tts": "Authorities estimated three hundred and twenty thousand participants across the country." },
+        { "id": "S05_05", "text": "Organizers put the number higher.", "pauseAfter": 10 },
+        { "id": "S05_06", "text": "Most people marched peacefully.", "pauseAfter": 14 },
+        { "id": "S05_07", "text": "Later clashes involving smaller groups broke out in Paris and other cities." },
+        { "id": "S05_08", "text": "The movement’s demands have broadened to include civil liberties and the right to protest." },
+        { "id": "S05_09", "text": "The crowds filled the streets." },
+        { "id": "S05_10", "text": "The political questions behind the protests remained unresolved.", "pauseAfter": 0 }
+      ],
+      "visualCues": [
+        { "n": 1, "trigger": { "cue": "S05_01" }, "text": "Wide view of a peaceful march along a broad Paris street. Most screen time belongs to ordinary demonstrators." },
+        { "n": 2, "trigger": { "cue": "S05_03" }, "text": "Close-ups of a shopping receipt and a student's notebook, then back to the march. No prices or placard quotes." },
+        { "n": 3, "trigger": { "cue": "S05_04" }, "text": "~320,000 • GOVERNMENT ESTIMATE • 31 OCT, smaller line: Organizers estimated more." },
+        { "n": 4, "trigger": { "cue": "S05_06" }, "text": "Hold a wide, calm crowd view." },
+        { "n": 5, "trigger": { "cue": "S05_07" }, "text": "Different scene: distant police lights and smoke. Keep it short; crowd not portrayed as rioters." },
+        { "n": 6, "trigger": { "cue": "S05_08" }, "text": "Return to a peaceful group and a broad street view. Source tag: AFP / AP • 31 OCT." },
+        { "n": 7, "trigger": { "cue": "S05_10" }, "text": "End on a red crossing signal; match its red light to the next chapter's trading display." }
+      ],
+      "soundCues": [
+        { "trigger": { "cue": "S05_01", "at": "sceneStart" }, "text": "Low crowd ambience." },
+        { "trigger": { "cue": "S05_07" }, "text": "Clash sound distant and brief; return to neutral street sound with the peaceful crowd." }
+      ]
+    },
+    {
+      "id": "S06",
+      "chapter": "Markets: the cost of the AI race",
+      "planStartSec": 180,
+      "planDurationSec": 37,
+      "sourceIds": ["F05"],
+      "assetIds": ["A11", "A10", "A14"],
+      "leadInFrames": 6,
+      "tailFrames": 36,
+      "narration": "Across the Atlantic, confidence came under pressure on the trading screens. On Friday, the S and P five hundred fell one-point-eight percent. The Nasdaq Composite dropped two-point-nine percent. Technology shares led the sell-off as disappointing earnings and concerns about huge AI investments unsettled investors. The question is becoming harder to dodge: how much of that spending will turn into financial returns? The AI race carries enormous expectations. This week, Wall Street delivered a reminder that expectations still have to survive an earnings report.",
+      "cues": [
+        { "id": "S06_01", "text": "Across the Atlantic, confidence came under pressure on the trading screens." },
+        { "id": "S06_02", "text": "On Friday, the S and P five hundred fell one-point-eight percent.", "tts": "On Friday, the S and P five hundred fell one point eight percent.", "pauseAfter": 12 },
+        { "id": "S06_03", "text": "The Nasdaq Composite dropped two-point-nine percent.", "tts": "The Nasdaq Composite dropped two point nine percent.", "pauseAfter": 12 },
+        { "id": "S06_04", "text": "Technology shares led the sell-off as disappointing earnings", "pauseAfter": 4 },
+        { "id": "S06_05", "text": "and concerns about huge AI investments unsettled investors." },
+        { "id": "S06_06", "text": "The question is becoming harder to dodge:", "pauseAfter": 5 },
+        { "id": "S06_07", "text": "how much of that spending will turn into financial returns?", "pauseAfter": 12 },
+        { "id": "S06_08", "text": "The AI race carries enormous expectations." },
+        { "id": "S06_09", "text": "This week, Wall Street delivered a reminder", "pauseAfter": 4 },
+        { "id": "S06_10", "text": "that expectations still have to survive an earnings report.", "pauseAfter": 0 }
+      ],
+      "visualCues": [
+        { "n": 1, "trigger": { "cue": "S06_01" }, "text": "Fictional analyst in a dark office. Monitors start blank; all factual content added in code." },
+        { "n": 2, "trigger": { "cue": "S06_02" }, "text": "Label US MARKETS • 30 OCT 2026 • DAILY CHANGE." },
+        { "n": 3, "trigger": { "cue": "S06_02", "at": "end" }, "text": "Reveal S&P 500 −1.8%." },
+        { "n": 4, "trigger": { "cue": "S06_03", "at": "end" }, "text": "Reveal NASDAQ COMPOSITE −2.9%." },
+        { "n": 5, "trigger": { "cue": "S06_05" }, "text": "Blue-lit server corridor, then a close-up of an expense ledger with no fabricated totals." },
+        { "n": 6, "trigger": { "cue": "S06_07" }, "text": "Slow push toward the analyst's reflection. No made-up intraday chart." },
+        { "n": 7, "trigger": { "cue": "S06_09" }, "text": "Hold the two accurate daily figures for readability. Source tag: Reuters / AP • 30 OCT." }
+      ],
+      "soundCues": [
+        { "trigger": { "cue": "S06_01", "at": "sceneStart" }, "text": "Restrained electronic pulse, quiet monitor and keyboard accents. No alarm." }
+      ]
+    },
+    {
+      "id": "S07",
+      "chapter": "Next week: the vote ahead",
+      "planStartSec": 217,
+      "planDurationSec": 23,
+      "sourceIds": ["F06"],
+      "assetIds": ["A12", "A13", "A14", "A02", "A15"],
+      "leadInFrames": 6,
+      "tailFrames": 72,
+      "narration": "And one more countdown is running. On Tuesday, November third, Americans vote in the midterm elections, with control of Congress at stake. That result is still ahead. Talks continue. Coalitions remain unresolved. Another major vote approaches. This was the week ending November first, twenty twenty-six. The next chapter is still open.",
+      "cues": [
+        { "id": "S07_01", "text": "And one more countdown is running.", "pauseAfter": 10 },
+        { "id": "S07_02", "text": "On Tuesday, November third, Americans vote in the midterm elections,", "pauseAfter": 4 },
+        { "id": "S07_03", "text": "with control of Congress at stake." },
+        { "id": "S07_04", "text": "That result is still ahead.", "pauseAfter": 12 },
+        { "id": "S07_05", "text": "Talks continue. Coalitions remain unresolved." },
+        { "id": "S07_06", "text": "Another major vote approaches.", "pauseAfter": 12 },
+        { "id": "S07_07", "text": "This was the week ending November first, twenty twenty-six.", "pauseAfter": 12 },
+        { "id": "S07_08", "text": "The next chapter is still open.", "pauseAfter": 0 }
+      ],
+      "visualCues": [
+        { "n": 1, "trigger": { "cue": "S07_01" }, "text": "Calendar page turns from 1 NOV to 3 NOV. Label LOOKING AHEAD." },
+        { "n": 2, "trigger": { "cue": "S07_02" }, "text": "Wide US Capitol, then neutral polling-place illustration. Label 3 NOV 2026 • CONTROL OF CONGRESS." },
+        { "n": 3, "trigger": { "cue": "S07_04" }, "text": "Blank result board. No projected winner, no pre-filled map." },
+        { "n": 4, "trigger": { "cue": "S07_05" }, "text": "Brief callbacks to the unsigned folder and the separate parliamentary groups." },
+        { "n": 5, "trigger": { "cue": "S07_08" }, "text": "Slow move toward an unopened polling-place door; cut to black, let the last sound decay." },
+        { "n": 6, "trigger": { "cue": "S07_08", "at": "end" }, "text": "Final card: THE WEEK IN ANIME • WEEK ENDING 1 NOV 2026 / Reporting sources in description. ~3 s hold." }
+      ],
+      "soundCues": [
+        { "trigger": { "cue": "S07_01", "at": "sceneStart" }, "text": "Soft calendar-turn sound and one returning pulse." },
+        { "trigger": { "cue": "S07_08", "at": "end" }, "text": "Resolve to a quiet final tone, then silence." }
+      ]
+    }
+  ]
+}

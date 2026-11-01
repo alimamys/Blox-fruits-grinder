@@ -1,0 +1,32 @@
+{
+  "name": "week-in-anime-2026-11-01",
+  "version": "0.1.0",
+  "private": true,
+  "description": "THE WEEK IN ANIME: POWER UNDER PRESSURE \u2014 week ending 1 Nov 2026 (Remotion project)",
+  "scripts": {
+    "audio:scratch": "python3 scripts/make_scratch_narration.py",
+    "audio:sfx": "python3 scripts/make_sfx.py",
+    "textures": "python3 scripts/make_textures.py",
+    "timeline": "node scripts/build-timeline.mjs",
+    "assets:check": "node scripts/build-timeline.mjs --report",
+    "checklist": "node scripts/write-checklist.mjs",
+    "studio": "npm run timeline && remotion studio",
+    "render:preview": "npm run timeline && remotion render OpeningPreview out/preview/opening_preview.mp4 --codec=h264 --audio-codec=aac --crf=20 && node scripts/export-srt.mjs OpeningPreview out/preview/opening_preview.srt",
+    "render:main": "npm run timeline && remotion render Main out/main/week_in_anime_2026-11-01.mp4 --codec=h264 --audio-codec=aac --crf=20 && node scripts/export-srt.mjs Main out/main/week_in_anime_2026-11-01.srt",
+    "srt": "node scripts/export-srt.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "@fontsource/noto-sans": "5.2.10",
+    "@fontsource/oswald": "5.2.8",
+    "@remotion/cli": "4.0.535",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}

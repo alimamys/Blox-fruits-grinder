@@ -1,0 +1,67 @@
+{
+  "accessed": "2026-11-01",
+  "window": "Monday 26 October – Sunday 1 November 2026 (Sunday-evening Dubai research cutoff)",
+  "sources": [
+    {
+      "id": "F01",
+      "topic": "Gulf mediation",
+      "slug": "Reuters / AP • 1 NOV",
+      "notes": "Iranian negotiators in Doha; Qatari mediation; no final conclusion; reopening proposal conditional on a potential agreement. Script says Sunday talks in Doha (mediators were in Tehran Friday, Doha Saturday).",
+      "links": [
+        "https://www.al-monitor.com/originals/2026/11/iran-qatari-mediators-hold-third-day-talks-end-us-iran-war",
+        "https://apnews.com/article/b918f44d8f212d7daf7f2f9a98c91a0b"
+      ]
+    },
+    {
+      "id": "F02",
+      "topic": "Israeli election",
+      "slug": "AP / The Times of Israel",
+      "notes": "Voting 27 Oct; final results 30 Oct. Blocs 53 / 48 / 19; total 120; outright-majority threshold 61. Netanyahu remained prime minister. Formal submission 4 Nov.",
+      "links": [
+        "https://www.timesofisrael.com/liveblog_entry/central-elections-committee-publishes-final-election-results-knesset-to-be-sworn-in-nov-10/",
+        "https://apnews.com/article/3a793c0d07fdfe515390524b849d8674",
+        "https://api.afn.net/ap/israel-anti-semitism/difficult-negotiations-lie-ahead-in-israel-after-no-clear-election-winner/"
+      ]
+    },
+    {
+      "id": "F03",
+      "topic": "Oleshky evacuation",
+      "slug": "Reuters / AP • 31 OCT",
+      "notes": "Local truce began 27 Oct; arrivals 31 Oct; scheduled end 1 Nov evening. Route through Russia and Belarus; fighting continued elsewhere. No evacuee total used.",
+      "links": [
+        "https://www.investing.com/news/world-news/starved-residents-of-russianoccupied-oleshky-return-to-ukraine-during-a-rare-local-ceasefire-4989296",
+        "https://abcnews.com/International/wireStory/evacuees-reunite-family-ukrainian-belarusian-border-after-fleeing-137730820"
+      ]
+    },
+    {
+      "id": "F04",
+      "topic": "France protests",
+      "slug": "AFP / AP • 31 OCT",
+      "notes": "Demonstrations 31 Oct. Government estimate ~320,000; organizer estimates higher. Most marched peacefully; later clashes separate. Demands broadened to civil liberties.",
+      "links": [
+        "https://www.afp.com/en/clashes-break-out-hundreds-thousands-protest-france",
+        "https://apnews.com/article/362a7cb69871ab21bd894290dad639f5"
+      ]
+    },
+    {
+      "id": "F05",
+      "topic": "Technology-led US market sell-off",
+      "slug": "Reuters / AP • 30 OCT",
+      "notes": "Friday 30 Oct close. S&P 500 ≈ −1.8%; Nasdaq Composite ≈ −2.9%. Daily, not weekly. Do not label Nasdaq 100 as Nasdaq Composite.",
+      "links": [
+        "https://www.thestar.com.my/tech/tech-news/2026/10/31/midterm-us-elections-earnings-jobs-data-loom-for-ai-wary-stock-market",
+        "https://apnews.com/article/16c266731fdf64178f38070af2b42497"
+      ]
+    },
+    {
+      "id": "F06",
+      "topic": "US midterms look ahead",
+      "slug": "FEC / AP",
+      "notes": "Election Day Tuesday 3 Nov 2026. Control of Congress unresolved at the reporting cutoff.",
+      "links": [
+        "https://www.fec.gov/updates/last-minute-disclosure-periods-reminder/",
+        "https://arkansasadvocate.com/2026/11/01/a-midterm-crossroads-for-both-parties-eyeing-the-beginning-of-the-end-of-the-trump-era/"
+      ]
+    }
+  ]
+}

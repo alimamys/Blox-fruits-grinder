@@ -1,0 +1,326 @@
+{
+ "assets": {
+  "A01": {
+   "key": "gulf_shipping",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "navLight": [
+     0.24,
+     0.64
+    ],
+    "navReflection": [
+     0.24,
+     0.8
+    ],
+    "ship": [
+     0.64,
+     0.48
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A02": {
+   "key": "diplomacy_corridor_table",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "corridor": [
+     0.28,
+     0.45
+    ],
+    "folder": [
+     0.66,
+     0.66
+    ],
+    "lamp": [
+     0.78,
+     0.44
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A03": {
+   "key": "araghchi_portrait",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "face": [
+     0.58,
+     0.38
+    ],
+    "eyes": [
+     0.58,
+     0.34
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A04": {
+   "key": "knesset_exterior",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "building": [
+     0.56,
+     0.52
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A05": {
+   "key": "netanyahu_portrait",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "face": [
+     0.58,
+     0.38
+    ],
+    "eyes": [
+     0.58,
+     0.32
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A06": {
+   "key": "evacuation_bus",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "handBag": [
+     0.3,
+     0.74
+    ],
+    "window": [
+     0.68,
+     0.38
+    ],
+    "face": [
+     0.4,
+     0.34
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A07": {
+   "key": "family_reunion",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "embrace": [
+     0.44,
+     0.55
+    ],
+    "tea": [
+     0.75,
+     0.6
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A08": {
+   "key": "france_peaceful_march",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "crowd": [
+     0.5,
+     0.62
+    ],
+    "placards": [
+     0.45,
+     0.5
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A09": {
+   "key": "france_distant_police_lights",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "lights": [
+     0.6,
+     0.5
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A10": {
+   "key": "ai_data_centre",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "vanish": [
+     0.5,
+     0.48
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A11": {
+   "key": "market_analyst",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "reflection": [
+     0.6,
+     0.4
+    ],
+    "analyst": [
+     0.22,
+     0.45
+    ],
+    "monitor": [
+     0.6,
+     0.45
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A12": {
+   "key": "us_capitol",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "dome": [
+     0.5,
+     0.42
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A13": {
+   "key": "polling_place",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "door": [
+     0.5,
+     0.45
+    ],
+    "ballotBox": [
+     0.25,
+     0.7
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A14": {
+   "key": "editorial_objects",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  },
+  "A15": {
+   "key": "parliament_chamber",
+   "file": null,
+   "layers": [],
+   "variants": {},
+   "anchors": {
+    "emptyChair": [
+     0.5,
+     0.62
+    ],
+    "groupLeft": [
+     0.2,
+     0.42
+    ],
+    "groupCentre": [
+     0.5,
+     0.38
+    ],
+    "groupRight": [
+     0.8,
+     0.42
+    ],
+    "wide": [
+     0.5,
+     0.5
+    ]
+   }
+  }
+ },
+ "sfx": {
+  "radio_click": {
+   "file": "audio/sfx_temp/radio_click.wav",
+   "temp": true
+  },
+  "synth_pulse_bed": {
+   "file": "audio/sfx_temp/synth_pulse_bed.wav",
+   "temp": true
+  },
+  "bass_accent": {
+   "file": "audio/sfx_temp/bass_accent.wav",
+   "temp": true
+  },
+  "water_distant": {
+   "file": "audio/sfx_temp/water_distant.wav",
+   "temp": true
+  },
+  "tick_motif": {
+   "file": "audio/sfx_temp/tick_motif.wav",
+   "temp": true
+  }
+ }
+}
