@@ -8,7 +8,7 @@ Drop files into the paths below (same names). Then run `npm run timeline` (or `n
 
 No image-generation tool is connected to this environment (no MCP tool, no API key) and Hugging Face / GitHub-release downloads are blocked by the network policy. So the preview uses:
 
-- **TEMPORARY placeholder art** — animated, code-drawn plates in `src/components/placeholders.tsx`, labelled `PLACEHOLDER ART · Axx` on screen. They are stand-ins for timing and motion, not the finished anime artwork.
+- **TEMPORARY placeholder art** — anime-style animated plates drawn in code (`src/components/placeholders.tsx`, `src/components/anime/`), labelled `PLACEHOLDER ART · Axx` on screen. They set the look, timing and motion, but are stand-ins for the finished illustrations.
 - **AI narration (Kokoro-82M, open weights)** — neural TTS generated offline in `public/audio/narration_tts/` (voice `bm_george`; switch with `--voice`). Far more natural than the first scratch voice, but still synthetic: replace with a human narrator or a premium voice service for the final.
 - **TEMPORARY procedural score and SFX** — synthesised in code by `scripts/make_sfx.py` into `public/audio/sfx_temp/` (tension pad, accents, whooshes, riser, title hit, ambiences). Original, but meant to be replaced by designed/licensed sound.
 

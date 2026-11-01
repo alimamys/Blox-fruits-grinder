@@ -11,7 +11,7 @@ Remotion + React + TypeScript project for the weekly anime-style news recap, wee
 | Project, data model, timing engine, caption/SRT export | done |
 | **Opening preview** (`OpeningPreview`, S01 cold open + S02 opening shot) | built; rendered to `out/preview/opening_preview.mp4` + `.srt` |
 | Rest of S02 and S03–S07 (`Main`) | timed **animatic** only: correct narration/caption timing, planned plate per storyboard cue, cue text on screen; factual overlays not built yet |
-| Artwork | **TEMPORARY animated placeholders**: code-drawn plates with rigged characters (blink, glance, breathing, hands), moving water/smoke/crowds, handheld camera and atmosphere FX; see `ASSETS.md` |
+| Artwork | **TEMPORARY anime-style placeholders**, drawn in code: painted anime backgrounds (dusk sea with sculpted cumulus and water sparkles, sunny Paris street, god-rayed chamber) and anime character rigs (layered eyes, hair clumps with shine, cel shading) that blink, glance, breathe and move; handheld camera and atmosphere FX. Real commissioned/generated art still replaces them, see `ASSETS.md` |
 | Narration | **AI voice** — Kokoro-82M neural TTS (open weights, offline), voice `bm_george`; replace with a human or premium voice for the final |
 | SFX / music | **TEMPORARY procedural** score and SFX generated in code (tension pad, accents, whooshes, riser, title hit, ambiences) |
 | Cutdown (70 s) | not started |
@@ -31,6 +31,7 @@ npm run render:preview    # out/preview/opening_preview.mp4 + .srt
 npm run render:main       # full-length animatic + .srt (slow)
 npm run assets:check      # what is supplied vs placeholder
 npm run checklist         # regenerate ASSETS.md
+node scripts/stills.mjs PlateTest out/stills 30 --props '{"assetId":"A06","x":0.42,"y":0.36,"z":2.6}'   # review one plate up close
 ```
 
 Regenerating the temporary media (only needed if you delete it): `npm run audio:sfx` and `npm run textures` (Python 3 + numpy + Pillow).
@@ -71,7 +72,8 @@ src/lib/timeline.ts         typed scenes (id, startFrame, durationFrames, narrat
                             assetPaths, captionCues, visualCues, soundCues)
 src/components/Plate.tsx    one illustration seen through a virtual camera; real art (layered or flat)
                             or a labelled placeholder; restrained parallax, water shimmer, variants
-src/components/placeholders.tsx   TEMP animated code-drawn plates and character rigs (no likenesses of real people)
+src/components/placeholders.tsx   TEMP anime-style plates (no likenesses of real people)
+src/components/anime/       anime painting kit (cumulus, sparkles, god rays, lens flare) and character rigs
 src/components/fx.tsx       handheld camera, dust/embers, haze, light sweeps, speed lines, flashes, blink/breath curves
 src/components/Overlays.tsx subtitles, ANIMATED ILLUSTRATION mark, TEMP flag, labels, film grain
 src/components/Sound.tsx    narration + beds/hits, beds ducked under speech
