@@ -90,19 +90,21 @@ const knocks = (id: string, volume = 0.9, dur = 2.0): Beat =>
 // HOLD_BEATS keep their authored `dur` as a minimum – those are the suspense
 // pauses. Beats without a clip use their authored `dur` unchanged.
 export const VOICE_GAP: Record<Speaker, number> = {
-	narrator: 0, // clips already carry ~0.1 s of natural lead-in/out
-	radio: 0.22,
-	neighbor: 0.18,
-	adam: 0.18,
-	seller: 0.22,
-	victor: 0.25,
+	narrator: 0.28,
+	radio: 0.5,
+	neighbor: 0.45,
+	adam: 0.45,
+	seller: 0.5,
+	victor: 0.6,
 	sfx: 0,
 	silence: 0,
 };
 /** Extra pause after lines that trail off ("Three seconds later..."). */
-export const ELLIPSIS_GAP = 0.25;
+export const ELLIPSIS_GAP = 0.5;
 /** No voiced beat is shorter than this (seconds) – avoids flash cuts. */
-export const MIN_VOICED_BEAT = 0.5;
+export const MIN_VOICED_BEAT = 0.8;
+/** Extra breath after the last spoken line of each chapter. */
+export const CHAPTER_END_GAP = 0.8;
 
 /** Suspense beats that keep their authored duration even when the voice clip is shorter. */
 export const HOLD_BEATS: Partial<Record<Chapter['id'], string[]>> = {
@@ -131,7 +133,7 @@ export const CHAPTERS: Chapter[] = [
 	{
 		id: 'disclaimer',
 		title: 'Disclaimer',
-		beats: [pause('disclaimer', 4.4)],
+		beats: [pause('disclaimer', 4.6)],
 	},
 
 	// 0:05 ------------------------------------------------------------------
@@ -205,8 +207,8 @@ export const CHAPTERS: Chapter[] = [
 		id: 'titleCard',
 		title: 'Title card',
 		beats: [
-			pause('title', 3.6, {
-				sfx: [sfx('radio_static', {volume: 0.4, dur: 3.6, fadeIn: 0.1, fadeOut: 1.0}), sfx('three_beeps', {volume: 0.35, at: 0.3})],
+			pause('title', 4.2, {
+				sfx: [sfx('radio_static', {volume: 0.4, dur: 4.2, fadeIn: 0.1, fadeOut: 1.2}), sfx('three_beeps', {volume: 0.35, at: 0.3})],
 			}),
 		],
 	},
@@ -514,7 +516,11 @@ export const CHAPTERS: Chapter[] = [
 		id: 'aftermath',
 		title: 'Aftermath / CCTV',
 		label: 'PART 6 — AFTERMATH',
-		ambience: [{sfx: 'low_ambient_hum', volume: 0.2, fadeIn: 1, until: 'noOne', fadeOut: 0.5}],
+		ambience: [
+			{sfx: 'low_ambient_hum', volume: 0.2, fadeIn: 1, until: 'noOne', fadeOut: 0.5},
+			// faint fluorescent hum under the CCTV, so the 11-second wait is quiet but not dead
+			{sfx: 'electrical_buzz', volume: 0.07, from: 'adamRan', until: 'cutStatic', fadeIn: 0.5, fadeOut: 0.2},
+		],
 		beats: [
 			n('policeFound', 'Police found the motel room empty.', 1.5),
 			n('overturned', 'The bed had been overturned.', 1.25),
@@ -579,9 +585,9 @@ export const CHAPTERS: Chapter[] = [
 		id: 'endCard',
 		title: 'Cut to black / end card',
 		beats: [
-			pause('black', 1.2),
-			pause('title', 3.6, {sfx: [sfx('radio_static', {volume: 0.25, dur: 3.6, fadeIn: 0.5, fadeOut: 1.4})]}),
-			pause('out', 0.8),
+			pause('black', 1.6),
+			pause('title', 4.0, {sfx: [sfx('radio_static', {volume: 0.25, dur: 4, fadeIn: 0.5, fadeOut: 1.5})]}),
+			pause('out', 1.2),
 		],
 	},
 ];

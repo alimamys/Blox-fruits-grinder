@@ -1,11 +1,11 @@
 # The Radio Station That Knew His Name
 
-A complete ~7¾-minute narrated YouTube horror video built with **React + Remotion + TypeScript**.
+A complete ~10-minute narrated YouTube horror video built with **React + Remotion + TypeScript**.
 
 It is drawn on purpose in a crude, beginner MS Paint style: stick figures, flat colours and thick wobbly outlines that "boil" from frame to frame. Realistic-looking fictional evidence is cut in between: an old newspaper, police photographs, a scanned notebook, an archive search UI, a signal analyser and grainy motel CCTV.
 
 - 1920×1080, 16:9, 30 fps, H.264 MP4
-- Composition: **`RadioStationHorror`**, 14,062 frames (**7:49**), with a full voice-over
+- Composition: **`RadioStationHorror`**, 18,691 frames (**10:23**), with a full voice-over at an unhurried pace
 - All artwork is procedural SVG, canvas or CSS. No image assets are needed.
 - Placeholder sound effects are synthesised automatically, so the video has sound design before you add any real audio.
 
@@ -54,7 +54,7 @@ Remotion downloads its own headless Chrome the first time you render. If you are
 BROWSER_EXECUTABLE=/path/to/chrome npm run render
 ```
 
-On a 4-core machine a half-resolution draft renders at roughly 20 fps, so the full video takes about 10 minutes. A full-resolution render takes roughly 2–3× longer. Use `--concurrency=N` to tune it.
+On a 4-core machine a full 1080p render takes about 40–50 minutes with `--concurrency=4`; a half-resolution draft takes about a third of that.
 
 ---
 
@@ -90,6 +90,19 @@ radio-station-horror/
 
 | Start | Chapter |
 |---|---|
+| 0:00 | Disclaimer (4.6 s) |
+| 0:05 | Cold open: "Adam." / knocking / the repeating neighbour / "Good." |
+| 1:35 | Title card |
+| 1:40 | Part 1: The radio returns (unplugged, red train) |
+| 2:59 | Part 2: It starts protecting him (6th-floor scratch, elevator) |
+| 4:11 | Part 3: The bed |
+| 5:12 | Part 4: Victor Hale (market, newspaper, police photos, notebook) |
+| 6:31 | Part 5: The motel (TV reflection, SUBJECT LOCATED, the bed lifts) |
+| 8:45 | Part 6: Aftermath (motel CCTV) |
+| 9:27 | Daniel, then cut to black |
+| 10:16 | End card (total 10:23) |
+
+---|---|
 | 0:00 | Disclaimer (4.4 s) |
 | 0:04 | Cold open: "Adam." / knocking / the repeating neighbour / "Good." |
 | 1:14 | Title card |
@@ -171,14 +184,14 @@ A real file at `public/audio/<name>.wav` always wins. Without one, the procedura
 
 | Speaker | Voice | Treatment |
 |---|---|---|
-| Narrator | `am_michael` | light compression |
-| Radio station (also via TV and alarm clock) | `bf_emma`, slowed | band-limited 300 Hz–3.4 kHz "broadcast", short echo |
+| Narrator | `am_michael`, speed 1.08 (unhurried) | light compression |
+| Radio station (also via TV and alarm clock) | `bf_emma`, speed 0.88 | band-limited 300 Hz–3.4 kHz "broadcast", short echo |
 | Neighbor | `am_puck` | muffled through the door in the cold open. The three "Adam, please." clips are **byte-identical** |
 | Adam | `am_fenrir` | — |
 | Seller | `bm_george` | — |
 | Victor | `bm_fable`, slowed | thin, breathy, trembling |
 
-The timeline fits itself to the clips. `src/data/voice-durations.json` lists each clip's length, and every beat becomes `max(authored dur, clip + gap)`, so lines never overlap. Gaps are set in `VOICE_GAP` in `src/data/script.ts`.
+The timeline fits itself to the clips. `src/data/voice-durations.json` lists each clip's length, and every voiced beat lasts `clip + gap`, so lines never overlap. The pauses between lines (`VOICE_GAP`, `ELLIPSIS_GAP`, `CHAPTER_END_GAP`) and the suspense beats that keep a longer authored pause (`HOLD_BEATS`) are all in `src/data/script.ts`. To change the speaking speed, edit `VOICES` in `scripts/tts/generate_voices.py` and regenerate.
 
 **To use your own voice actor**, replace any clip with a recording of the same name (`.wav` / `.mp3` / `.ogg` / `.m4a`). Then update its length in `voice-durations.json`, or regenerate the whole file with the TTS script below.
 
@@ -198,7 +211,7 @@ Alternative voice layouts are still supported:
 
 | Location | Plays |
 |---|---|
-| `public/audio/narrator.wav` | One continuous narration track from the start of the cold open (0:04.4). |
+| `public/audio/narrator.wav` | One continuous narration track from the start of the cold open (0:04.6). |
 | `public/audio/narration/<chapterId>.wav` | One file per chapter. |
 
 If you use one of these, delete `public/audio/voice/` and empty `voice-durations.json` (`{}`) so the lines don't double up.

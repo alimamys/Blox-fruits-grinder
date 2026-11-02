@@ -34,12 +34,12 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 # speaker -> (kokoro voice, language, speed)
 VOICES = {
-    'narrator': ('am_michael', 'en-us', 1.3),  # brisk YouTube-horror pace (keeps the video under 8 min)
-    'radio': ('bf_emma', 'en-gb', 1.0),  # calm, even, never afraid
-    'neighbor': ('am_puck', 'en-us', 1.05),
-    'adam': ('am_fenrir', 'en-us', 1.05),
-    'seller': ('bm_george', 'en-gb', 1.0),
-    'victor': ('bm_fable', 'en-gb', 0.9),
+    'narrator': ('am_michael', 'en-us', 1.08),  # unhurried storyteller pace
+    'radio': ('bf_emma', 'en-gb', 0.88),  # slow, calm, even, never afraid
+    'neighbor': ('am_puck', 'en-us', 0.95),
+    'adam': ('am_fenrir', 'en-us', 0.95),
+    'seller': ('bm_george', 'en-gb', 0.9),
+    'victor': ('bm_fable', 'en-gb', 0.8),
 }
 
 # Lines that must be byte-identical (the neighbour's voice repeating "like a recording").

@@ -1,7 +1,7 @@
 // Converts the seconds-based script into frame-accurate timings.
 // Nothing in here needs editing – change src/data/script.ts instead.
 import {FPS} from '../config';
-import {CHAPTERS, ELLIPSIS_GAP, FIXED_TOTALS, HOLD_BEATS, MIN_VOICED_BEAT, VOICE_GAP} from './script';
+import {CHAPTER_END_GAP, CHAPTERS, ELLIPSIS_GAP, FIXED_TOTALS, HOLD_BEATS, MIN_VOICED_BEAT, VOICE_GAP} from './script';
 import type {Beat, Chapter, ChapterId} from './types';
 import voiceDurations from './voice-durations.json';
 
@@ -20,6 +20,11 @@ const fittedDur = (chapter: ChapterId, b: Beat): number => {
 
 const fittedChapter = (ch: Chapter): Beat[] => {
 	const beats = ch.beats.map((b) => ({...b, dur: fittedDur(ch.id, b)}));
+	// a breath after the chapter's last voiced line
+	const lastVoiced = [...beats].reverse().find((b) => CLIPS[`${ch.id}/${b.id}`]);
+	if (lastVoiced) {
+		lastVoiced.dur += CHAPTER_END_GAP;
+	}
 	for (const group of FIXED_TOTALS.filter((g) => g.chapter === ch.id)) {
 		const members = group.beats.map((id) => beats.find((b) => b.id === id)).filter((b): b is Beat => Boolean(b));
 		const last = members[members.length - 1];
