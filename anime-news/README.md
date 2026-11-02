@@ -1,4 +1,4 @@
-# THE WEEK IN ANIME: POWER UNDER PRESSURE
+# WORLD NEWS WEEKLY: POWER UNDER PRESSURE
 
 Remotion + React + TypeScript project for the weekly anime-style news recap, week ending Sunday 1 November 2026 (coverage 26 Oct–1 Nov 2026), built from `anime_news_2026-11-01_production_script.txt`.
 
@@ -12,12 +12,12 @@ Remotion + React + TypeScript project for the weekly anime-style news recap, wee
 | **Full edition** (`Main`, all 7 chapters, 4:12) | built shot by shot from the storyboard; `out/main/week_in_anime_2026-11-01.mp4` (1080p24 H.264/AAC share copy, 57 MB) + `.srt`; the CRF-20 master (~400 MB) is re-rendered with `npm run render:main` |
 | **Opening preview** (`OpeningPreview`, first ~25 s) | `out/preview/opening_preview.mp4` + `.srt` |
 | Factual graphics | rendered in code: Hormuz map + Ukraine inset (Natural Earth), condition card, 53/48/19 seats vs 61 / 120, truce date card, schematic route, ~320,000 estimate, S&P 500 −1.8% / Nasdaq Composite −2.9%, calendar, blank result board, labels and source tags |
-| Artwork | **TEMPORARY anime-style placeholders**, drawn in code (`src/components/placeholders.tsx`, `plates2.tsx`, `anime/`): painted backgrounds and character rigs that blink, glance, breathe and move; real public figures only as silhouettes. Real commissioned/generated art replaces them, see `ASSETS.md` |
+| Artwork | **TEMPORARY anime-style placeholders**, drawn in code (`src/components/placeholders.tsx`, `plates2.tsx`, `anime/`): painted backgrounds, animated character rigs, and neutral editorial portraits of the two named public figures (`anime/portraits.tsx`). Real commissioned/generated art replaces them, see `ASSETS.md` |
 | Narration | **AI voice** — Kokoro-82M neural TTS (open weights, offline), voice `bm_george`; replace with a human or premium voice for the final |
-| SFX / music | **TEMPORARY procedural** score and SFX for every chapter, generated in code |
+| SFX / music | **TEMPORARY procedural** score and SFX, generated in code. Mixed low: a soft sustained pad (no rhythmic pulse, nothing below ~140 Hz) and light ambiences, ≥20 dB under the narration |
 | Cutdown (70 s) | not started |
 
-Every render shows a red **ANIMATIC · TEMPORARY** flag listing what is still temporary; each placeholder plate is labelled with its asset ID and the exact file it is waiting for. The flag disappears once everything is final.
+On-screen production labels (the per-shot `PLACEHOLDER ART` tags and the red **ANIMATIC · TEMPORARY** flag) are **off** for delivery. Set `"productionMarks": true` in `src/data/script.json` to show them again for internal reviews. The small **ANIMATED ILLUSTRATION** mark always stays on screen (brief requirement).
 
 ### About the preview length
 
@@ -92,7 +92,7 @@ Timing model: each scene = lead-in + Σ(line audio + pause after line) + tail. L
 
 - Narration text in `script.json` is checked to match the brief verbatim (511 words), and the caption cues join back to it exactly.
 - All dates, labels and (later) numbers are rendered in code, never baked into artwork; placeholder prompts forbid text in images.
-- Public figures stay silent; placeholder portraits are generic silhouettes, not likenesses.
+- Public figures appear only as neutral editorial anime portraits (Netanyahu, Araghchi): silent, no caricature, no invented action, always with a name/role tag.
 - The cold open shows no financial figures, signatures, handshakes, projected winners or invented outcomes.
 - "ANIMATED ILLUSTRATION" mark on every picture frame; title card states "Animated illustrations of reported events".
 

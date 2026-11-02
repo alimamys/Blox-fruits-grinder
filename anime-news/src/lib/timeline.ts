@@ -109,3 +109,6 @@ export const narrationTempKinds = (from: number, to: number) =>
 	new Set(ALL_CUES.filter((c) => c.startFrame < to && c.endFrame > from && c.audioKind !== 'final').map((c) => c.audioKind));
 
 export const assetIsPlaceholder = (id: string) => !media.assets[id]?.file;
+
+/** On-screen production labels (placeholder tags, TEMP flag). Off for delivery. */
+export const SHOW_PRODUCTION_MARKS = Boolean((scriptJson as {productionMarks?: boolean}).productionMarks);

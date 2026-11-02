@@ -220,6 +220,7 @@ export const S03Israel: React.FC = () => {
 				</PlateShot>
 			</Shot>
 			<Tag text="ISRAEL • RESULTS RELEASED 30 OCT" from={c['01'].s} to={c['05'].s} />
+			<NameTag name="BENJAMIN NETANYAHU" role="Israel’s prime minister" from={portraitAt + 4} to={c['02'].s} />
 			<SeatGraphic reveal={[c['02'].e, c['03'].e, c['04'].e]} barsAt={c['05'].s} totalAt={c['06'].s + 10} to={c['07'].s} />
 			<StatusLabel text="COALITION NEGOTIATIONS" from={c['07'].s + 8} to={c['08'].s} />
 			<SeatGraphic reveal={[c['08'].s, c['08'].s, c['08'].s]} barsAt={c['08'].s - 14} totalAt={c['08'].s - 14} highlightFrom={c['08'].s + 10} highlightTo={c['09'].s} to={c['09'].s} />

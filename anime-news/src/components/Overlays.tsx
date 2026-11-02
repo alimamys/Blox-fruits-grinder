@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Img, random, staticFile, useCurrentFrame} from 'remotion';
-import {ALL_CUES, media, narrationTempKinds} from '../lib/timeline';
+import {ALL_CUES, media, narrationTempKinds, SHOW_PRODUCTION_MARKS} from '../lib/timeline';
 import {ramp} from '../lib/motion';
 import {C, FONT, SAFE, SUB_BAND_H} from '../lib/theme';
 
@@ -89,6 +89,7 @@ export const IllustrationMark: React.FC<{from: number}> = ({from}) => {
 /** Production flag listing what is still temporary in this render. Disappears once everything is final. */
 export const TempFlag: React.FC<{from: number; to: number; assetIds: string[]}> = ({from, to, assetIds}) => {
 	const f = useCurrentFrame();
+	if (!SHOW_PRODUCTION_MARKS) return null;
 	const items: string[] = [];
 	const missing = assetIds.filter((id) => !media.assets[id]?.file);
 	if (missing.length) items.push('placeholder art');

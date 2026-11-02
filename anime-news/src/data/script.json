@@ -1,5 +1,7 @@
 {
-  "title": "THE WEEK IN ANIME: POWER UNDER PRESSURE",
+  "title": "WORLD NEWS WEEKLY: POWER UNDER PRESSURE",
+  "showName": "WORLD NEWS WEEKLY",
+  "productionMarks": false,
   "edition": "Week ending Sunday 1 November 2026",
   "coverage": "26 OCT–1 NOV 2026",
   "fps": 24,
@@ -42,7 +44,7 @@
       ],
       "leadInFrames": 14,
       "tailFrames": 30,
-      "narration": "Talks without a deal. An election without a majority. Families escaping through a temporary ceasefire. And an AI boom facing an expensive question: when does the spending pay off? Five stories. One turbulent week. This is the world in anime.",
+      "narration": "Talks without a deal. An election without a majority. Families escaping through a temporary ceasefire. And an AI boom facing an expensive question: when does the spending pay off? Five stories. One turbulent week. This is World News Weekly.",
       "cues": [
         {
           "id": "S01_01",
@@ -76,7 +78,7 @@
         },
         {
           "id": "S01_07",
-          "text": "This is the world in anime.",
+          "text": "This is World News Weekly.",
           "pauseAfter": 0
         }
       ],
@@ -114,7 +116,7 @@
           "trigger": {
             "cue": "S01_06"
           },
-          "text": "Five narrow picture panels align. Brief title reveal: THE WEEK IN ANIME / POWER UNDER PRESSURE."
+          "text": "Five narrow picture panels align. Brief title reveal: WORLD NEWS WEEKLY / POWER UNDER PRESSURE."
         },
         {
           "n": 6,
@@ -885,7 +887,7 @@
             "cue": "S07_08",
             "at": "end"
           },
-          "text": "Final card: THE WEEK IN ANIME • WEEK ENDING 1 NOV 2026 / Reporting sources in description. ~3 s hold."
+          "text": "Final card: WORLD NEWS WEEKLY • WEEK ENDING 1 NOV 2026 / Reporting sources in description. ~3 s hold."
         }
       ],
       "soundCues": [

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Img, staticFile, useCurrentFrame} from 'remotion';
 import {clamp, Cam} from '../lib/motion';
-import {media, registry} from '../lib/timeline';
+import {media, registry, SHOW_PRODUCTION_MARKS} from '../lib/timeline';
 import {C, FONT, SAFE} from '../lib/theme';
 import {genericPlate, PLACEHOLDERS} from './placeholders';
 
@@ -93,7 +93,7 @@ export const Plate: React.FC<Props> = ({assetId, cam, width = 1920, height = 108
 					<WaterShimmer file={status.file!} horizon={waterHorizon} frame={frame} id={`${assetId}-${width}`} />
 				) : null}
 			</div>
-			{isPlaceholder && tag !== 'none' ? <PlaceholderTag id={assetId} file={reg.file} compact={tag === 'compact'} /> : null}
+			{SHOW_PRODUCTION_MARKS && isPlaceholder && tag !== 'none' ? <PlaceholderTag id={assetId} file={reg.file} compact={tag === 'compact'} /> : null}
 		</div>
 	);
 };
@@ -121,7 +121,7 @@ const WaterShimmer: React.FC<{file: string; horizon: number; frame: number; id: 
 
 /** Screen-space placeholder label; renders nothing once the real file is supplied. */
 export const TempTag: React.FC<{id: string}> = ({id}) => {
-	if (media.assets[id]?.file) return null;
+	if (!SHOW_PRODUCTION_MARKS || media.assets[id]?.file) return null;
 	const reg = registry.assets.find((a) => a.id === id)!;
 	return <PlaceholderTag id={id} file={reg.file} compact={false} />;
 };

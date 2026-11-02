@@ -13,9 +13,10 @@ ensureFonts();
 
 const BUILT: Record<string, React.FC> = {S01: S01ColdOpen, ...BUILT_CHAPTERS};
 
-export type VideoProps = {mode: 'preview' | 'main'; durationInFrames: number};
+/** stem: render only narration ('vo') or only music/SFX ('bed') for mix checks. */
+export type VideoProps = {mode: 'preview' | 'main'; durationInFrames: number; stem?: 'all' | 'vo' | 'bed'};
 
-export const Video: React.FC<VideoProps> = ({mode, durationInFrames}) => {
+export const Video: React.FC<VideoProps> = ({mode, durationInFrames, stem = 'all'}) => {
 	const firstPicture = s01Cuts().c1.s;
 	const assetIds = registry.assets.filter((a) => mode === 'main' || a.inPreview).map((a) => a.id);
 	return (
@@ -32,8 +33,8 @@ export const Video: React.FC<VideoProps> = ({mode, durationInFrames}) => {
 			<IllustrationMark from={firstPicture} />
 			<TempFlag from={firstPicture} to={durationInFrames} assetIds={assetIds} />
 			<Subtitles />
-			<Narration />
-			<SoundDesign totalFrames={durationInFrames} />
+			{stem !== 'bed' ? <Narration /> : null}
+			{stem !== 'vo' ? <SoundDesign totalFrames={durationInFrames} /> : null}
 		</AbsoluteFill>
 	);
 };

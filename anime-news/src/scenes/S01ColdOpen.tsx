@@ -13,6 +13,7 @@ import {anchorOf, Plate, TempTag} from '../components/Plate';
 import {Embers, Flash, Handheld, Haze, LightSweep, Motes, SpeedLines, handheld} from '../components/fx';
 import {at, camLerp, drift, easeOut, ramp} from '../lib/motion';
 import {localCue, scene} from '../lib/timeline';
+import scriptJson from '../data/script.json';
 import {C, FONT} from '../lib/theme';
 
 export const s01Cuts = () => {
@@ -229,7 +230,7 @@ const FivePanels: React.FC<{titleAt: number; sweepAt: number}> = ({titleAt, swee
 	);
 };
 
-const TITLE = 'THE WEEK IN ANIME';
+const TITLE = scriptJson.showName;
 
 const TitleReveal: React.FC<{f: number}> = ({f}) => {
 	const bar = ramp(f, 6, 15, 0, 560, easeOut);

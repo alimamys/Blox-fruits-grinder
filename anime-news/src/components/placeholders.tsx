@@ -7,14 +7,15 @@
  * thin lineart, layered eyes, clumped hair with shine and two-tone cel shading.
  * Each plate keeps the composition/anchors/layer split from src/data/assets.json
  * so camera moves keep working when the real illustration is dropped in.
- * The real public figure (A03/A05) is only a backlit silhouette — no likeness.
+ * The two public figures (A03/A05) are neutral editorial anime portraits
+ * (src/components/anime/portraits.tsx): silent, no caricature, no invented action.
  */
 import React from 'react';
 import {random} from 'remotion';
 import {Analyst, CrowdPerson, Evacuee} from './anime/characters';
 import {Cumulus, GodRays, LensFlare, Sparkle, WaterGlints, range} from './anime/paint';
-import {breathe} from './fx';
 import {arrival, capitol, corridor, knesset, policeLights, polling, servers} from './plates2';
+import {araghchiPortrait, netanyahuPortrait} from './anime/portraits';
 import {C} from '../lib/theme';
 
 export type LayerSpec = {depth: number; node: (frame: number) => React.ReactNode};
@@ -236,57 +237,6 @@ const gulf: LayerSpec[] = [
 						);
 					})}
 					{flash > 0.9 ? <LensFlare x={460} y={690} frame={f} strength={(flash - 0.9) * 2.5} /> : null}
-				</Svg>
-			);
-		},
-	},
-];
-
-// =================================== backlit silhouette portrait (A03 / A05)
-const silhouette = (glow: string, key: string): LayerSpec[] => [
-	{
-		depth: 0,
-		node: (f) => (
-			<Svg>
-				<defs>
-					<radialGradient id={`bl${key}`} cx="1180" cy="330" r="780" gradientUnits="userSpaceOnUse">
-						<stop offset="0" stopColor="#fff2cf" />
-						<stop offset="0.16" stopColor="#ffc06a" />
-						<stop offset="0.42" stopColor={glow} />
-						<stop offset="0.75" stopColor="#3a1c2a" />
-						<stop offset="1" stopColor="#120a14" />
-					</radialGradient>
-				</defs>
-				<rect width="1920" height="1080" fill={`url(#bl${key})`} />
-				<GodRays id={`sr${key}`} x={1180} y={330} angle={0} spread={Math.PI * 2} length={1500} count={18} color="#fff0c8" opacity={0.35} frame={f} />
-				{range(16).map((i) => (
-					<Sparkle key={i} x={random(`ps${key}${i}`) * 1920} y={random(`py${key}${i}`) * 1080} r={4 + random(`pr${i}`) * 7} phase={f * 0.1 + i * 1.7} color="#fff3d0" />
-				))}
-			</Svg>
-		),
-	},
-	{
-		depth: 1,
-		node: (f) => {
-			const br = breathe(f, 0, 110) * 3;
-			const turn = Math.sin(f * 0.018) * 1.6;
-			const rim = 0.85 + 0.15 * Math.sin(f * 0.23) * Math.sin(f * 0.07);
-			return (
-				<Svg>
-					<g transform={`translate(0,${br})`}>
-						<path d="M600,1080 C620,940 660,860 760,790 C820,750 880,712 960,700 L1110,690 L1260,700 C1340,712 1400,750 1460,790 C1560,860 1600,940 1620,1080 Z" fill="#0e0a12" stroke={LINE} strokeWidth="3" />
-						{/* lapels / tie read only as rim-lit edges */}
-						<path d="M1050,700 L1110,860 L1170,700" stroke="#3a2a32" strokeWidth="6" fill="none" />
-						<path d="M1260,700 C1340,712 1400,750 1460,790 C1560,860 1600,940 1620,1080" stroke={C.amber} strokeWidth={8} fill="none" opacity={rim} />
-						<path d="M1270,704 C1340,716 1396,752 1450,792" stroke="#fff3d6" strokeWidth={3} fill="none" opacity={0.7 * rim} />
-					</g>
-					<g transform={`rotate(${turn},1110,650)`}>
-						<path d="M1046,560 L1172,560 L1182,700 L1038,700 Z" fill="#0e0a12" />
-						<path d="M985,250 C1010,190 1070,170 1130,172 C1200,176 1250,214 1262,300 C1270,370 1252,450 1214,520 C1186,570 1150,600 1110,602 C1070,598 1030,560 1000,480 C976,410 966,320 985,250 Z" fill="#0e0a12" stroke={LINE} strokeWidth="3" />
-						<path d="M970,290 C980,190 1060,140 1140,140 C1220,142 1280,190 1286,262 C1270,232 1240,200 1190,190 C1120,180 1040,200 994,300 Z" fill="#08060a" />
-						<path d="M1140,140 C1220,142 1280,190 1286,262 C1290,330 1270,420 1246,480 C1228,520 1210,550 1180,574" stroke={C.amber} strokeWidth={9} fill="none" strokeLinecap="round" opacity={rim} />
-						<path d="M1190,150 C1240,166 1276,204 1284,250" stroke="#fff6dc" strokeWidth={3.5} fill="none" strokeLinecap="round" opacity={0.85 * rim} />
-					</g>
 				</Svg>
 			);
 		},
@@ -710,8 +660,8 @@ export const genericPlate = (id: string, key: string): LayerSpec[] => [
 
 export const PLACEHOLDERS: Record<string, LayerSpec[]> = {
 	A01: gulf,
-	A03: silhouette('#a8784a', 'a03'),
-	A05: silhouette('#d2603a', 'a05'),
+	A03: araghchiPortrait,
+	A05: netanyahuPortrait,
 	A06: bus,
 	A08: march,
 	A11: analyst,

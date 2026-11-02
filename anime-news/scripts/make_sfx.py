@@ -108,46 +108,33 @@ def radio_click():
 
 
 def synth_pulse(sec=20.0, bpm=72):
-    """Cinematic tension bed: D-minor(add9) string-synth pad in a hall, a low
-    72 bpm pulse and a soft heartbeat drum. Whole number of beats so it loops."""
+    """Soft, sustained score pad (D minor add9, voiced above 140 Hz).
+    No rhythmic pulse, no drums, no sub-bass: it sits quietly under the voice."""
     beat = 60 / bpm
     sec = round(sec / beat) * beat
     loop = sec
     sec += 1.5
     t = t_axis(sec)
-    chord = [73.42, 110.0, 146.83, 174.61, 220.0, 329.63]  # D2 A2 D3 F3 A3 E4
+    chord = [146.83, 220.0, 293.66, 349.23, 440.0, 659.25]  # D3 A3 D4 F4 A4 E5
     pad = np.zeros_like(t)
-    for i, fr in enumerate(chord):
-        for c in (-7, 0, 6):
-            pad += saw(fr, t, c, fmax=2600) * (0.9 if fr < 150 else 0.55)
-    pad = fft_band(pad, 40, 1400)
-    pad *= 0.7 + 0.3 * np.sin(2 * np.pi * t / (beat * 8) - 1.2)  # slow swell
+    for fr in chord:
+        for c in (-6, 0, 5):
+            pad += saw(fr, t, c, fmax=2400) * (0.6 if fr < 300 else 0.4)
+    pad = fft_band(pad, 140, 1800)
+    pad *= 0.75 + 0.25 * np.sin(2 * np.pi * t / (beat * 16) - 1.2)
     pad /= np.max(np.abs(pad))
-    phase = (t % beat) / beat
-    pulse = np.sin(2 * np.pi * 55 * t) + 0.4 * np.sin(2 * np.pi * 110.2 * t)
-    pulse *= np.exp(-phase * 4.0) * (1 - np.exp(-phase * 90))
-    hb = np.zeros_like(t)
-    for b in range(int(sec / beat) + 1):
-        if b % 2 == 0:
-            s0 = int(b * beat * SR)
-            n = min(int(0.35 * SR), len(t) - s0)
-            if n <= 0:
-                continue
-            tt = np.arange(n) / SR
-            hb[s0:s0 + n] += np.sin(2 * np.pi * (62 + 30 * np.exp(-tt / 0.03)) * tt) * np.exp(-tt / 0.11) * (1.0 if b % 4 == 0 else 0.6)
-    dry = pad * 0.55 + pulse * 0.35 + hb * 0.45
-    left, right = reverb(dry, 3.0, 0.7, wet=0.45, seed=1)
+    left, right = reverb(pad, 3.0, 0.9, wet=0.5, seed=1, lo=140)
     write("synth_pulse_bed.wav", seamless(left, loop), seamless(right, loop))
 
 
 def bass_accent():
-    """Brief taiko-like accent with a hall tail (used on cuts)."""
+    """Brief, soft low-tom accent on cuts (no sub-bass boom)."""
     rng = np.random.default_rng(5)
-    t = t_axis(1.8)
-    f = 48 + 36 * np.exp(-t / 0.06)
-    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.3) * (1 - np.exp(-t * 600))
-    skin = fft_band(rng.standard_normal(len(t)), 180, 1400) * np.exp(-t / 0.025) * 0.5
-    left, right = reverb(body + skin, 1.8, 0.45, wet=0.35, seed=2)
+    t = t_axis(1.4)
+    f = 100 + 45 * np.exp(-t / 0.05)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.22) * (1 - np.exp(-t * 600))
+    skin = fft_band(rng.standard_normal(len(t)), 250, 2500) * np.exp(-t / 0.02) * 0.4
+    left, right = reverb(fft_band(body + skin, 80, 6000), 1.4, 0.35, wet=0.3, seed=2)
     write("bass_accent.wav", left, right)
 
 
@@ -181,14 +168,12 @@ def riser():
 
 
 def title_hit():
-    """Restrained cinematic impact for the title: deep boom + drum + shimmer."""
+    """Restrained title impact: soft drum, airy shimmer, no deep boom."""
     rng = np.random.default_rng(17)
-    t = t_axis(3.4)
-    f = 34 + 30 * np.exp(-t / 0.09)
-    boom = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.9) * (1 - np.exp(-t * 500))
-    drum = np.sin(2 * np.pi * np.cumsum(70 + 40 * np.exp(-t / 0.04)) / SR) * np.exp(-t / 0.18)
-    shimmer = fft_band(rng.standard_normal(len(t)), 3500, 11000) * np.exp(-t / 0.6) * (1 - np.exp(-t * 30)) * 0.12
-    l, r = reverb(boom + drum * 0.6 + shimmer, 3.0, 0.8, wet=0.4, seed=5)
+    t = t_axis(3.0)
+    drum = np.sin(2 * np.pi * np.cumsum(90 + 50 * np.exp(-t / 0.04)) / SR) * np.exp(-t / 0.25)
+    shimmer = fft_band(rng.standard_normal(len(t)), 3500, 11000) * np.exp(-t / 0.7) * (1 - np.exp(-t * 30)) * 0.15
+    l, r = reverb(fft_band(drum, 70, 8000) + shimmer, 2.6, 0.7, wet=0.45, seed=5)
     write("title_hit.wav", l, r)
 
 
@@ -203,64 +188,48 @@ def glint():
 
 
 def bus_rumble(loop=12.0):
-    """Interior bus rumble: engine harmonics with RPM wobble, road noise, bumps."""
+    """(Kept for compatibility, not used in the mix.) Light road hiss only."""
     rng = np.random.default_rng(19)
     t = t_axis(loop + 1.5)
-    rpm = 41 + 2.5 * np.sin(2 * np.pi * t / 6.0) + 0.8 * np.sin(2 * np.pi * t / 1.7)
-    ph = 2 * np.pi * np.cumsum(rpm) / SR
-    engine = np.sin(ph) + 0.5 * np.sin(2 * ph) + 0.25 * np.sin(3 * ph)
-    road = fft_band(rng.standard_normal(len(t)), 40, 380)
-    road /= np.max(np.abs(road))
-    bumps = np.zeros_like(t)
-    for s0 in rng.integers(0, len(t) - SR, 9):
-        n = int(0.25 * SR)
-        tt = np.arange(n) / SR
-        bumps[s0:s0 + n] += np.sin(2 * np.pi * 55 * tt) * np.exp(-tt / 0.06)
-    x = engine * 0.35 + road * 0.8 + bumps * 0.5
+    x = fft_band(rng.standard_normal(len(t)), 250, 1600) * 0.3
     write("bus_rumble.wav", seamless(x, loop), seamless(np.roll(x, 400), loop))
 
 
 def room_tone(loop=12.0):
-    """Large empty chamber: soft air and a faint electrical hum."""
+    """Very soft room air (no hum, no low end)."""
     rng = np.random.default_rng(23)
     t = t_axis(loop + 1.5)
-    air = fft_band(rng.standard_normal(len(t)), 70, 1600)
-    air /= np.max(np.abs(air))
-    hum = 0.05 * np.sin(2 * np.pi * 50 * t) + 0.02 * np.sin(2 * np.pi * 100 * t)
-    l, r = reverb(air * 0.6 + hum, 2.5, 0.8, wet=0.5, seed=7)
+    air = fft_band(rng.standard_normal(len(t)), 400, 3500)
+    l, r = reverb(air, 2.0, 0.6, wet=0.5, seed=7, lo=300)
     write("room_tone.wav", seamless(l, loop), seamless(r, loop))
 
 
 def monitor_hum(loop=12.0):
-    """Office at night: monitor hum, faint coil whine, occasional soft key taps."""
+    """Night office: occasional soft key taps over faint air (no electrical hum)."""
     rng = np.random.default_rng(29)
     t = t_axis(loop + 1.5)
-    hum = 0.5 * np.sin(2 * np.pi * 60 * t) + 0.25 * np.sin(2 * np.pi * 120 * t) + 0.12 * np.sin(2 * np.pi * 180 * t)
-    whine = 0.03 * np.sin(2 * np.pi * 9400 * t)
     keys = np.zeros_like(t)
     for s0 in np.sort(rng.integers(0, len(t) - SR, 14)):
         n = int(0.03 * SR)
-        keys[s0:s0 + n] += fft_band(rng.standard_normal(n * 4), 1500, 6000)[:n] * np.exp(-np.arange(n) / SR / 0.006) * 0.8
-    air = fft_band(rng.standard_normal(len(t)), 100, 900) * 0.15
-    l, r = reverb(hum * 0.4 + whine + keys + air, 0.8, 0.2, wet=0.2, seed=8)
+        keys[s0:s0 + n] += fft_band(rng.standard_normal(n * 4), 1500, 6000)[:n] * np.exp(-np.arange(n) / SR / 0.006)
+    air = fft_band(rng.standard_normal(len(t)), 600, 4000) * 0.05
+    l, r = reverb(keys + air, 0.8, 0.2, wet=0.2, seed=8, lo=400)
     write("monitor_hum.wav", seamless(l, loop), seamless(r, loop))
 
 
 def water_distant(sec=25.5):
+    """Gentle lapping water (no low rumble)."""
     rng = np.random.default_rng(7)
     t = t_axis(sec)
-    def bed(seed_shift):
-        n = rng.standard_normal(len(t))
-        brown = np.cumsum(n)
-        brown -= np.convolve(brown, np.ones(4801) / 4801, mode="same")  # remove drift
-        brown = fft_band(brown, 40, 650)
-        swell = 0.55 + 0.45 * np.sin(2 * np.pi * t / 7.3 + seed_shift) * np.sin(2 * np.pi * t / 3.1 + 1.3 * seed_shift)
-        lap = fft_band(rng.standard_normal(len(t)), 300, 1400) * np.clip(np.sin(2 * np.pi * t / 5.2 + seed_shift), 0, 1) ** 6 * 0.4
-        return brown / np.max(np.abs(brown)) * swell + lap
+    def bed(k):
+        lap = fft_band(rng.standard_normal(len(t)), 300, 2200) * (np.clip(np.sin(2 * np.pi * t / 5.2 + k), 0, 1) ** 4 * 0.8 + 0.12)
+        fizz = fft_band(rng.standard_normal(len(t)), 2500, 7000) * (0.5 + 0.5 * np.sin(2 * np.pi * t / 7.3 + k)) * 0.08
+        return lap + fizz
     write("water_distant.wav", seamless(bed(0.0), 24.0), seamless(bed(1.7), 24.0))
 
 
 def tick_motif(sec=20.0, bpm=96):
+    """Light ticking only (no low drum)."""
     rng = np.random.default_rng(3)
     t = t_axis(sec)
     x = np.zeros_like(t)
@@ -268,16 +237,10 @@ def tick_motif(sec=20.0, bpm=96):
     tick_len = int(0.03 * SR)
     tick_t = np.arange(tick_len) / SR
     base_tick = fft_band(rng.standard_normal(tick_len * 4), 2200, 5200)[:tick_len] * np.exp(-tick_t / 0.006)
-    tom_len = int(0.4 * SR)
-    tom_t = np.arange(tom_len) / SR
-    tom = np.sin(2 * np.pi * (90 + 40 * np.exp(-tom_t / 0.05)) * tom_t) * np.exp(-tom_t / 0.12)
     i = 0
     while i * beat < sec - 1e-6:
         s = int(i * beat * SR)
-        acc = 1.0 if i % 4 == 0 else 0.55
-        x[s:s + tick_len] += base_tick * acc
-        if i % 8 == 4:
-            x[s:s + tom_len] += tom * 0.5
+        x[s:s + tick_len] += base_tick * (1.0 if i % 4 == 0 else 0.55)
         i += 1
     write("tick_motif.wav", x, np.roll(x, 240))
 
@@ -296,7 +259,7 @@ def paper_rustle():
 
 def number_click():
     t = t_axis(0.5)
-    x = np.sin(2 * np.pi * 1600 * t) * np.exp(-t / 0.012) + 0.6 * np.sin(2 * np.pi * 120 * t) * np.exp(-t / 0.05)
+    x = np.sin(2 * np.pi * 1600 * t) * np.exp(-t / 0.012) + 0.4 * np.sin(2 * np.pi * 420 * t) * np.exp(-t / 0.03)
     l, r = reverb(x, 0.8, 0.25, wet=0.3, seed=10)
     write("number_click.wav", l, r)
 
@@ -316,48 +279,39 @@ def _voices(rng, t, n_voices, lo=250, hi=2400):
 def crowd_murmur(loop=14.0):
     rng = np.random.default_rng(37)
     t = t_axis(loop + 1.5)
-    x = _voices(rng, t, 40)
-    steps = np.zeros_like(t)
-    for s0 in rng.integers(0, len(t) - SR // 4, 120):
-        n = int(0.06 * SR)
-        steps[s0:s0 + n] += fft_band(rng.standard_normal(n * 4), 80, 600)[:n] * np.exp(-np.arange(n) / SR / 0.02)
-    l, r = reverb(x + steps * 0.4, 1.6, 0.5, wet=0.35, seed=11)
+    x = _voices(rng, t, 40, 300, 2600)
+    l, r = reverb(x, 1.6, 0.5, wet=0.35, seed=11, lo=250)
     write("crowd_murmur.wav", seamless(l, loop), seamless(r, loop))
 
 
 def distant_unrest():
+    """Distant, brief, muffled crowd swell (no thuds, sirens or gunfire)."""
     rng = np.random.default_rng(41)
     t = t_axis(4.5)
-    roar = fft_band(_voices(rng, t, 60, 200, 1500), 120, 800)
+    roar = fft_band(_voices(rng, t, 60, 250, 1500), 250, 900)
     roar *= np.sin(np.pi * np.clip(t / 4.5, 0, 1)) ** 1.5
-    thuds = np.zeros_like(t)
-    for c in (1.3, 2.6):
-        s0 = int(c * SR)
-        n = int(0.5 * SR)
-        tt = np.arange(n) / SR
-        thuds[s0:s0 + n] += np.sin(2 * np.pi * 50 * tt) * np.exp(-tt / 0.15) * 0.5
-    l, r = reverb(roar + thuds, 2.5, 0.8, wet=0.55, seed=12, hi=2500)
+    l, r = reverb(roar, 2.5, 0.8, wet=0.55, seed=12, lo=200, hi=2500)
     write("distant_unrest.wav", l, r)
 
 
 def arrival_ambience(loop=14.0):
+    """Cold-morning arrival point: light air, quiet voices, a few birds (no engine)."""
     rng = np.random.default_rng(43)
     t = t_axis(loop + 1.5)
-    wind = fft_band(rng.standard_normal(len(t)), 60, 500) * (0.6 + 0.4 * np.sin(2 * np.pi * t / 6.5))
-    wind /= np.max(np.abs(wind))
-    murmur = fft_band(_voices(rng, t, 10), 200, 1800)
-    idle = 0.15 * np.sin(2 * np.pi * 38 * t) * (0.7 + 0.3 * np.sin(2 * np.pi * 0.7 * t))
+    air = fft_band(rng.standard_normal(len(t)), 400, 2500) * (0.6 + 0.4 * np.sin(2 * np.pi * t / 6.5)) * 0.2
+    murmur = fft_band(_voices(rng, t, 10), 300, 2000)
     birds = np.zeros_like(t)
     for c in rng.uniform(0.5, loop, 6):
         s0 = int(c * SR)
         n = int(0.18 * SR)
         tt = np.arange(n) / SR
         birds[s0:s0 + n] += np.sin(2 * np.pi * (3200 + 1400 * np.sin(2 * np.pi * 9 * tt)) * tt) * np.sin(np.pi * tt / tt[-1]) * 0.08
-    l, r = reverb(wind * 0.5 + murmur * 0.8 + idle + birds, 2.0, 0.6, wet=0.35, seed=13)
+    l, r = reverb(air + murmur * 0.8 + birds, 2.0, 0.6, wet=0.35, seed=13, lo=300)
     write("arrival_ambience.wav", seamless(l, loop), seamless(r, loop))
 
 
 def electronic_pulse(sec=16.0, bpm=120):
+    """Restrained electronic texture: soft high blips, light pad, no sub-bass."""
     beat = 60 / bpm
     sec = round(sec / beat) * beat
     loop = sec
@@ -366,18 +320,15 @@ def electronic_pulse(sec=16.0, bpm=120):
     n = int(0.12 * SR)
     tt = np.arange(n) / SR
     blip = np.sin(2 * np.pi * 880 * tt) * np.exp(-tt / 0.03)
-    sub = np.sin(2 * np.pi * 55 * tt) * np.exp(-tt / 0.08)
     i = 0
-    while i * beat / 2 < sec + 1.4:
-        s0 = int(i * beat / 2 * SR)
+    while i * beat < sec + 1.4:
+        s0 = int(i * beat * SR)
         m = min(n, len(t) - s0)
         if m > 0:
-            x[s0:s0 + m] += blip[:m] * (0.5 if i % 2 else 0.25) * (1.0 if i % 8 == 0 else 0.7)
-            if i % 2 == 0:
-                x[s0:s0 + m] += sub[:m] * 0.8
+            x[s0:s0 + m] += blip[:m] * (0.5 if i % 4 == 0 else 0.25)
         i += 1
-    pad = fft_band(saw(110, t, 0, 1500) + saw(110, t, 7, 1500), 60, 900) * 0.05
-    l, r = reverb(x + pad, 1.6, 0.4, wet=0.35, seed=14)
+    pad = fft_band(saw(220, t, 0, 1800) + saw(220, t, 7, 1800), 200, 1500) * 0.06
+    l, r = reverb(x + pad, 1.6, 0.4, wet=0.35, seed=14, lo=200)
     write("electronic_pulse.wav", seamless(l, loop), seamless(r, loop))
 
 

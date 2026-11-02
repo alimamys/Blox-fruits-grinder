@@ -2,7 +2,7 @@
  "fps": 24,
  "width": 1920,
  "height": 1080,
- "totalFrames": 6058,
+ "totalFrames": 6051,
  "narration": {
   "final": 0,
   "tts": 63,
@@ -14,7 +14,7 @@
    "id": "S01",
    "chapter": "Cold open",
    "startFrame": 0,
-   "durationFrames": 469,
+   "durationFrames": 462,
    "planStartSec": 0,
    "planDurationSec": 18,
    "sourceIds": [],
@@ -45,7 +45,7 @@
      "startFrame": 55,
      "durationFrames": 50,
      "endFrame": 105,
-     "seconds": 2.065,
+     "seconds": 2.061,
      "audio": "audio/narration_tts/S01_02.wav",
      "audioKind": "tts",
      "captionStart": 55,
@@ -57,7 +57,7 @@
      "startFrame": 113,
      "durationFrames": 71,
      "endFrame": 184,
-     "seconds": 2.918,
+     "seconds": 2.919,
      "audio": "audio/narration_tts/S01_03.wav",
      "audioKind": "tts",
      "captionStart": 113,
@@ -69,7 +69,7 @@
      "startFrame": 192,
      "durationFrames": 72,
      "endFrame": 264,
-     "seconds": 2.992,
+     "seconds": 2.994,
      "audio": "audio/narration_tts/S01_04.wav",
      "audioKind": "tts",
      "captionStart": 192,
@@ -81,7 +81,7 @@
      "startFrame": 268,
      "durationFrames": 46,
      "endFrame": 314,
-     "seconds": 1.9,
+     "seconds": 1.898,
      "audio": "audio/narration_tts/S01_05.wav",
      "audioKind": "tts",
      "captionStart": 268,
@@ -93,7 +93,7 @@
      "startFrame": 324,
      "durationFrames": 60,
      "endFrame": 384,
-     "seconds": 2.485,
+     "seconds": 2.488,
      "audio": "audio/narration_tts/S01_06.wav",
      "audioKind": "tts",
      "captionStart": 324,
@@ -101,15 +101,15 @@
     },
     {
      "id": "S01_07",
-     "text": "This is the world in anime.",
+     "text": "This is World News Weekly.",
      "startFrame": 390,
-     "durationFrames": 49,
-     "endFrame": 439,
-     "seconds": 2.019,
+     "durationFrames": 42,
+     "endFrame": 432,
+     "seconds": 1.717,
      "audio": "audio/narration_tts/S01_07.wav",
      "audioKind": "tts",
      "captionStart": 390,
-     "captionEnd": 445
+     "captionEnd": 438
     }
    ],
    "visualCues": [
@@ -136,7 +136,7 @@
     {
      "n": 5,
      "frame": 324,
-     "text": "Five narrow picture panels align. Brief title reveal: THE WEEK IN ANIME / POWER UNDER PRESSURE."
+     "text": "Five narrow picture panels align. Brief title reveal: WORLD NEWS WEEKLY / POWER UNDER PRESSURE."
     },
     {
      "n": 6,
@@ -158,7 +158,7 @@
   {
    "id": "S02",
    "chapter": "The Gulf: a proposal, not a deal",
-   "startFrame": 469,
+   "startFrame": 462,
    "durationFrames": 937,
    "planStartSec": 18,
    "planDurationSec": 44,
@@ -175,140 +175,140 @@
     {
      "id": "S02_01",
      "text": "We start in the Gulf, where diplomacy continued under the threat of renewed strikes.",
-     "startFrame": 475,
+     "startFrame": 468,
      "durationFrames": 119,
-     "endFrame": 594,
+     "endFrame": 587,
      "seconds": 4.921,
      "audio": "audio/narration_tts/S02_01.wav",
      "audioKind": "tts",
-     "captionStart": 475,
-     "captionEnd": 600
+     "captionStart": 468,
+     "captionEnd": 593
     },
     {
      "id": "S02_02",
      "text": "On Sunday, Iranian negotiators were in Doha for talks with Qatari mediators,",
-     "startFrame": 602,
+     "startFrame": 595,
      "durationFrames": 128,
-     "endFrame": 730,
+     "endFrame": 723,
      "seconds": 5.331,
      "audio": "audio/narration_tts/S02_02.wav",
      "audioKind": "tts",
-     "captionStart": 602,
-     "captionEnd": 734
+     "captionStart": 595,
+     "captionEnd": 727
     },
     {
      "id": "S02_03",
      "text": "seeking a way to end the war involving Iran, the United States and Israel.",
-     "startFrame": 734,
+     "startFrame": 727,
      "durationFrames": 114,
-     "endFrame": 848,
+     "endFrame": 841,
      "seconds": 4.736,
      "audio": "audio/narration_tts/S02_03.wav",
      "audioKind": "tts",
-     "captionStart": 734,
-     "captionEnd": 854
+     "captionStart": 727,
+     "captionEnd": 847
     },
     {
      "id": "S02_04",
      "text": "Iran’s foreign minister described a proposal that could reopen the Strait of Hormuz",
-     "startFrame": 856,
+     "startFrame": 849,
      "durationFrames": 120,
-     "endFrame": 976,
+     "endFrame": 969,
      "seconds": 4.992,
      "audio": "audio/narration_tts/S02_04.wav",
      "audioKind": "tts",
-     "captionStart": 856,
-     "captionEnd": 980
+     "captionStart": 849,
+     "captionEnd": 973
     },
     {
      "id": "S02_05",
      "text": "within two days of a possible agreement with Washington.",
-     "startFrame": 980,
+     "startFrame": 973,
      "durationFrames": 89,
-     "endFrame": 1069,
+     "endFrame": 1062,
      "seconds": 3.679,
      "audio": "audio/narration_tts/S02_05.wav",
      "audioKind": "tts",
-     "captionStart": 980,
-     "captionEnd": 1075
+     "captionStart": 973,
+     "captionEnd": 1068
     },
     {
      "id": "S02_06",
      "text": "But he said no final agreement had been reached.",
-     "startFrame": 1081,
+     "startFrame": 1074,
      "durationFrames": 73,
-     "endFrame": 1154,
+     "endFrame": 1147,
      "seconds": 3.012,
      "audio": "audio/narration_tts/S02_06.wav",
      "audioKind": "tts",
-     "captionStart": 1081,
-     "captionEnd": 1160
+     "captionStart": 1074,
+     "captionEnd": 1153
     },
     {
      "id": "S02_07",
      "text": "The shipping route remains central to the negotiations.",
-     "startFrame": 1166,
+     "startFrame": 1159,
      "durationFrames": 82,
-     "endFrame": 1248,
+     "endFrame": 1241,
      "seconds": 3.385,
      "audio": "audio/narration_tts/S02_07.wav",
      "audioKind": "tts",
-     "captionStart": 1166,
-     "captionEnd": 1254
+     "captionStart": 1159,
+     "captionEnd": 1247
     },
     {
      "id": "S02_08",
      "text": "For now, the diplomatic breakthrough is still a possibility—not an announced outcome.",
-     "startFrame": 1256,
+     "startFrame": 1249,
      "durationFrames": 120,
-     "endFrame": 1376,
+     "endFrame": 1369,
      "seconds": 4.96,
      "audio": "audio/narration_tts/S02_08.wav",
      "audioKind": "tts",
-     "captionStart": 1256,
-     "captionEnd": 1382
+     "captionStart": 1249,
+     "captionEnd": 1375
     }
    ],
    "visualCues": [
     {
      "n": 1,
-     "frame": 475,
+     "frame": 468,
      "text": "Wide sea-and-shipping illustration; slow lateral camera move and two layers of water motion."
     },
     {
      "n": 2,
-     "frame": 602,
+     "frame": 595,
      "text": "Label DOHA • 1 NOV 2026. Cut to cel-shaded portrait of Abbas Araghchi, labelled with name and role."
     },
     {
      "n": 3,
-     "frame": 734,
+     "frame": 727,
      "text": "Illustrative diplomatic corridor and a table with a folder. Symbolic staging, not a reconstruction."
     },
     {
      "n": 4,
-     "frame": 976,
+     "frame": 969,
      "text": "Accurate code-rendered map inset of the Strait of Hormuz. No shipping shown returning to normal."
     },
     {
      "n": 5,
-     "frame": 980,
+     "frame": 973,
      "text": "POSSIBLE AGREEMENT → PROPOSED REOPENING WITHIN 2 DAYS. Condition revealed before the number."
     },
     {
      "n": 6,
-     "frame": 1081,
+     "frame": 1074,
      "text": "Return to the folder, still unopened. Show TALKS CONTINUING. No signatures, no handshake."
     },
     {
      "n": 7,
-     "frame": 1256,
+     "frame": 1249,
      "text": "End on an amber desk light; match-cut into the next scene's chamber light. Source tag: Reuters / AP • 1 NOV."
     }
    ],
    "soundCues": [
     {
-     "frame": 469,
+     "frame": 462,
      "text": "Distant water and a restrained ticking/percussion motif. Low tension; no missile or explosion sounds."
     }
    ]
@@ -316,7 +316,7 @@
   {
    "id": "S03",
    "chapter": "Israel: the arithmetic of power",
-   "startFrame": 1406,
+   "startFrame": 1399,
    "durationFrames": 974,
    "planStartSec": 62,
    "planDurationSec": 41,
@@ -332,168 +332,168 @@
     {
      "id": "S03_01",
      "text": "In Israel, the votes are counted. Forming a government is the next battle.",
-     "startFrame": 1412,
+     "startFrame": 1405,
      "durationFrames": 111,
-     "endFrame": 1523,
+     "endFrame": 1516,
      "seconds": 4.609,
      "audio": "audio/narration_tts/S03_01.wav",
      "audioKind": "tts",
-     "captionStart": 1412,
-     "captionEnd": 1529
+     "captionStart": 1405,
+     "captionEnd": 1522
     },
     {
      "id": "S03_02",
      "text": "Results released on Friday gave Benjamin Netanyahu’s bloc fifty-three seats.",
-     "startFrame": 1531,
+     "startFrame": 1524,
      "durationFrames": 115,
-     "endFrame": 1646,
+     "endFrame": 1639,
      "seconds": 4.771,
      "audio": "audio/narration_tts/S03_02.wav",
      "audioKind": "tts",
-     "captionStart": 1531,
-     "captionEnd": 1652
+     "captionStart": 1524,
+     "captionEnd": 1645
     },
     {
      "id": "S03_03",
      "text": "The main opposition bloc took forty-eight.",
-     "startFrame": 1656,
+     "startFrame": 1649,
      "durationFrames": 62,
-     "endFrame": 1718,
+     "endFrame": 1711,
      "seconds": 2.572,
      "audio": "audio/narration_tts/S03_03.wav",
      "audioKind": "tts",
-     "captionStart": 1656,
-     "captionEnd": 1724
+     "captionStart": 1649,
+     "captionEnd": 1717
     },
     {
      "id": "S03_04",
      "text": "Arab-led parties held nineteen.",
-     "startFrame": 1728,
+     "startFrame": 1721,
      "durationFrames": 55,
-     "endFrame": 1783,
+     "endFrame": 1776,
      "seconds": 2.251,
      "audio": "audio/narration_tts/S03_04.wav",
      "audioKind": "tts",
-     "captionStart": 1728,
-     "captionEnd": 1789
+     "captionStart": 1721,
+     "captionEnd": 1782
     },
     {
      "id": "S03_05",
      "text": "For an outright majority, the target is sixty-one seats",
-     "startFrame": 1795,
+     "startFrame": 1788,
      "durationFrames": 86,
-     "endFrame": 1881,
+     "endFrame": 1874,
      "seconds": 3.571,
      "audio": "audio/narration_tts/S03_05.wav",
      "audioKind": "tts",
-     "captionStart": 1795,
-     "captionEnd": 1885
+     "captionStart": 1788,
+     "captionEnd": 1878
     },
     {
      "id": "S03_06",
      "text": "in the one-hundred-and-twenty-seat parliament.",
-     "startFrame": 1885,
+     "startFrame": 1878,
      "durationFrames": 65,
-     "endFrame": 1950,
+     "endFrame": 1943,
      "seconds": 2.681,
      "audio": "audio/narration_tts/S03_06.wav",
      "audioKind": "tts",
-     "captionStart": 1885,
-     "captionEnd": 1956
+     "captionStart": 1878,
+     "captionEnd": 1949
     },
     {
      "id": "S03_07",
      "text": "Netanyahu remains prime minister while parties try to build a coalition.",
-     "startFrame": 1968,
+     "startFrame": 1961,
      "durationFrames": 106,
-     "endFrame": 2074,
+     "endFrame": 2067,
      "seconds": 4.411,
      "audio": "audio/narration_tts/S03_07.wav",
      "audioKind": "tts",
-     "captionStart": 1968,
-     "captionEnd": 2080
+     "captionStart": 1961,
+     "captionEnd": 2073
     },
     {
      "id": "S03_08",
      "text": "Those nineteen seats do not automatically belong to either main bloc.",
-     "startFrame": 2082,
+     "startFrame": 2075,
      "durationFrames": 110,
-     "endFrame": 2192,
+     "endFrame": 2185,
      "seconds": 4.579,
      "audio": "audio/narration_tts/S03_08.wav",
      "audioKind": "tts",
-     "captionStart": 2082,
-     "captionEnd": 2198
+     "captionStart": 2075,
+     "captionEnd": 2191
     },
     {
      "id": "S03_09",
      "text": "The election is over.",
-     "startFrame": 2200,
+     "startFrame": 2193,
      "durationFrames": 43,
-     "endFrame": 2243,
+     "endFrame": 2236,
      "seconds": 1.792,
      "audio": "audio/narration_tts/S03_09.wav",
      "audioKind": "tts",
-     "captionStart": 2200,
-     "captionEnd": 2249
+     "captionStart": 2193,
+     "captionEnd": 2242
     },
     {
      "id": "S03_10",
      "text": "The struggle to turn votes into a governing majority continues.",
-     "startFrame": 2251,
+     "startFrame": 2244,
      "durationFrames": 99,
-     "endFrame": 2350,
+     "endFrame": 2343,
      "seconds": 4.11,
      "audio": "audio/narration_tts/S03_10.wav",
      "audioKind": "tts",
-     "captionStart": 2251,
-     "captionEnd": 2356
+     "captionStart": 2244,
+     "captionEnd": 2349
     }
    ],
    "visualCues": [
     {
      "n": 1,
-     "frame": 1412,
+     "frame": 1405,
      "text": "Knesset exterior in hard late-afternoon light, then a silent Netanyahu portrait. Label ISRAEL • RESULTS RELEASED 30 OCT."
     },
     {
      "n": 2,
-     "frame": 1646,
+     "frame": 1639,
      "text": "Reveal a clearly labelled 53 tile for Netanyahu bloc."
     },
     {
      "n": 3,
-     "frame": 1718,
+     "frame": 1711,
      "text": "Reveal a separate 48 tile for main opposition bloc."
     },
     {
      "n": 4,
-     "frame": 1783,
+     "frame": 1776,
      "text": "Reveal a separate 19 tile for Arab-led parties. Keep all three groups visually separate."
     },
     {
      "n": 5,
-     "frame": 1795,
+     "frame": 1788,
      "text": "Show 61 FOR AN OUTRIGHT MAJORITY and TOTAL SEATS: 120. All numbers composited in code."
     },
     {
      "n": 6,
-     "frame": 1968,
+     "frame": 1961,
      "text": "Hold the portrait with the caption COALITION NEGOTIATIONS."
     },
     {
      "n": 7,
-     "frame": 2200,
+     "frame": 2193,
      "text": "Three separate illuminated groups of desks; no invented coalition merger. Source tag: AP / The Times of Israel."
     }
    ],
    "soundCues": [
     {
-     "frame": 1406,
+     "frame": 1399,
      "text": "Soft room tone, paper movement."
     },
     {
-     "frame": 1646,
+     "frame": 1639,
      "text": "Three subdued number-reveal clicks. A short pause makes 61 readable."
     }
    ]
@@ -501,7 +501,7 @@
   {
    "id": "S04",
    "chapter": "Ukraine: a narrow opening",
-   "startFrame": 2380,
+   "startFrame": 2373,
    "durationFrames": 1025,
    "planStartSec": 103,
    "planDurationSec": 40,
@@ -517,168 +517,168 @@
     {
      "id": "S04_01",
      "text": "Now to Ukraine, where this week brought a narrow opening for civilians.",
-     "startFrame": 2388,
+     "startFrame": 2381,
      "durationFrames": 100,
-     "endFrame": 2488,
+     "endFrame": 2481,
      "seconds": 4.154,
      "audio": "audio/narration_tts/S04_01.wav",
      "audioKind": "tts",
-     "captionStart": 2388,
-     "captionEnd": 2494
+     "captionStart": 2381,
+     "captionEnd": 2487
     },
     {
      "id": "S04_02",
      "text": "On Saturday, evacuees from Russian-occupied Oleshky reached Ukrainian-held territory",
-     "startFrame": 2496,
+     "startFrame": 2489,
      "durationFrames": 141,
-     "endFrame": 2637,
+     "endFrame": 2630,
      "seconds": 5.842,
      "audio": "audio/narration_tts/S04_02.wav",
      "audioKind": "tts",
-     "captionStart": 2496,
-     "captionEnd": 2641
+     "captionStart": 2489,
+     "captionEnd": 2634
     },
     {
      "id": "S04_03",
      "text": "and reunited with relatives.",
-     "startFrame": 2641,
+     "startFrame": 2634,
      "durationFrames": 48,
-     "endFrame": 2689,
+     "endFrame": 2682,
      "seconds": 1.988,
      "audio": "audio/narration_tts/S04_03.wav",
      "audioKind": "tts",
-     "captionStart": 2641,
-     "captionEnd": 2695
+     "captionStart": 2634,
+     "captionEnd": 2688
     },
     {
      "id": "S04_04",
      "text": "Their route ran through Russia and Belarus,",
-     "startFrame": 2697,
+     "startFrame": 2690,
      "durationFrames": 69,
-     "endFrame": 2766,
+     "endFrame": 2759,
      "seconds": 2.839,
      "audio": "audio/narration_tts/S04_04.wav",
      "audioKind": "tts",
-     "captionStart": 2697,
-     "captionEnd": 2770
+     "captionStart": 2690,
+     "captionEnd": 2763
     },
     {
      "id": "S04_05",
      "text": "under a local ceasefire that also allowed humanitarian aid.",
-     "startFrame": 2770,
+     "startFrame": 2763,
      "durationFrames": 98,
-     "endFrame": 2868,
+     "endFrame": 2861,
      "seconds": 4.06,
      "audio": "audio/narration_tts/S04_05.wav",
      "audioKind": "tts",
-     "captionStart": 2770,
-     "captionEnd": 2874
+     "captionStart": 2763,
+     "captionEnd": 2867
     },
     {
      "id": "S04_06",
      "text": "That pause began on Tuesday and was scheduled to end on Sunday evening.",
-     "startFrame": 2876,
+     "startFrame": 2869,
      "durationFrames": 103,
-     "endFrame": 2979,
+     "endFrame": 2972,
      "seconds": 4.289,
      "audio": "audio/narration_tts/S04_06.wav",
      "audioKind": "tts",
-     "captionStart": 2876,
-     "captionEnd": 2985
+     "captionStart": 2869,
+     "captionEnd": 2978
     },
     {
      "id": "S04_07",
      "text": "It covered a limited area.",
-     "startFrame": 2987,
+     "startFrame": 2980,
      "durationFrames": 44,
-     "endFrame": 3031,
+     "endFrame": 3024,
      "seconds": 1.819,
      "audio": "audio/narration_tts/S04_07.wav",
      "audioKind": "tts",
-     "captionStart": 2987,
-     "captionEnd": 3037
+     "captionStart": 2980,
+     "captionEnd": 3030
     },
     {
      "id": "S04_08",
      "text": "Fighting continued elsewhere in Ukraine. The wider war went on.",
-     "startFrame": 3039,
+     "startFrame": 3032,
      "durationFrames": 108,
-     "endFrame": 3147,
+     "endFrame": 3140,
      "seconds": 4.477,
      "audio": "audio/narration_tts/S04_08.wav",
      "audioKind": "tts",
-     "captionStart": 3039,
-     "captionEnd": 3153
+     "captionStart": 3032,
+     "captionEnd": 3146
     },
     {
      "id": "S04_09",
      "text": "But for families arriving at the border, the week brought something immediate:",
-     "startFrame": 3163,
+     "startFrame": 3156,
      "durationFrames": 96,
-     "endFrame": 3259,
+     "endFrame": 3252,
      "seconds": 3.995,
      "audio": "audio/narration_tts/S04_09.wav",
      "audioKind": "tts",
-     "captionStart": 3163,
-     "captionEnd": 3265
+     "captionStart": 3156,
+     "captionEnd": 3258
     },
     {
      "id": "S04_10",
      "text": "getting out, reaching safety, finding each other.",
-     "startFrame": 3267,
+     "startFrame": 3260,
      "durationFrames": 66,
-     "endFrame": 3333,
+     "endFrame": 3326,
      "seconds": 2.732,
      "audio": "audio/narration_tts/S04_10.wav",
      "audioKind": "tts",
-     "captionStart": 3267,
-     "captionEnd": 3339
+     "captionStart": 3260,
+     "captionEnd": 3332
     }
    ],
    "visualCues": [
     {
      "n": 1,
-     "frame": 2388,
+     "frame": 2381,
      "text": "Colder blue-gray morning light. An anonymous civilian watches the road through a bus window."
     },
     {
      "n": 2,
-     "frame": 2496,
+     "frame": 2489,
      "text": "Label OLESHKY EVACUEES • ARRIVALS 31 OCT. Buses reach an arrival area, then volunteers offering tea."
     },
     {
      "n": 3,
-     "frame": 2697,
+     "frame": 2690,
      "text": "Schematic journey: Oleshky → Russia → Belarus → Ukrainian-held territory. Label SCHEMATIC ROUTE."
     },
     {
      "n": 4,
-     "frame": 2868,
+     "frame": 2861,
      "text": "Close-up of unbranded food and medical-supply boxes; no relief-agency logos."
     },
     {
      "n": 5,
-     "frame": 2876,
+     "frame": 2869,
      "text": "Date card: LOCAL TRUCE • BEGAN 27 OCT • SCHEDULED END 1 NOV EVENING. No countdown."
     },
     {
      "n": 6,
-     "frame": 2987,
+     "frame": 2980,
      "text": "Clearly marked inset showing the local nature of the truce; no whole-country peace graphic."
     },
     {
      "n": 7,
-     "frame": 3163,
+     "frame": 3156,
      "text": "Hold an explicitly illustrative family reunion for 7–8 seconds. Source tag: Reuters / AP • 31 OCT."
     }
    ],
    "soundCues": [
     {
-     "frame": 2380,
+     "frame": 2373,
      "text": "Lower the score; bus hum and quiet arrival ambience."
     },
     {
-     "frame": 3163,
+     "frame": 3156,
      "text": "Hold the reunion gently; no comic or triumphal effects."
     }
    ]
@@ -686,7 +686,7 @@
   {
    "id": "S05",
    "chapter": "France: pressure in the streets",
-   "startFrame": 3405,
+   "startFrame": 3398,
    "durationFrames": 946,
    "planStartSec": 143,
    "planDurationSec": 37,
@@ -702,168 +702,168 @@
     {
      "id": "S05_01",
      "text": "In France, the pressure moved onto the streets.",
-     "startFrame": 3411,
+     "startFrame": 3404,
      "durationFrames": 67,
-     "endFrame": 3478,
+     "endFrame": 3471,
      "seconds": 2.785,
      "audio": "audio/narration_tts/S05_01.wav",
      "audioKind": "tts",
-     "captionStart": 3411,
-     "captionEnd": 3484
+     "captionStart": 3404,
+     "captionEnd": 3477
     },
     {
      "id": "S05_02",
      "text": "Saturday brought a third consecutive weekend of demonstrations",
-     "startFrame": 3486,
+     "startFrame": 3479,
      "durationFrames": 100,
-     "endFrame": 3586,
+     "endFrame": 3579,
      "seconds": 4.15,
      "audio": "audio/narration_tts/S05_02.wav",
      "audioKind": "tts",
-     "captionStart": 3486,
-     "captionEnd": 3590
+     "captionStart": 3479,
+     "captionEnd": 3583
     },
     {
      "id": "S05_03",
      "text": "over living costs and education.",
-     "startFrame": 3590,
+     "startFrame": 3583,
      "durationFrames": 64,
-     "endFrame": 3654,
+     "endFrame": 3647,
      "seconds": 2.627,
      "audio": "audio/narration_tts/S05_03.wav",
      "audioKind": "tts",
-     "captionStart": 3590,
-     "captionEnd": 3660
+     "captionStart": 3583,
+     "captionEnd": 3653
     },
     {
      "id": "S05_04",
      "text": "Authorities estimated three-hundred-and-twenty-thousand participants across the country.",
-     "startFrame": 3662,
+     "startFrame": 3655,
      "durationFrames": 128,
-     "endFrame": 3790,
+     "endFrame": 3783,
      "seconds": 5.294,
      "audio": "audio/narration_tts/S05_04.wav",
      "audioKind": "tts",
-     "captionStart": 3662,
-     "captionEnd": 3796
+     "captionStart": 3655,
+     "captionEnd": 3789
     },
     {
      "id": "S05_05",
      "text": "Organizers put the number higher.",
-     "startFrame": 3798,
+     "startFrame": 3791,
      "durationFrames": 54,
-     "endFrame": 3852,
+     "endFrame": 3845,
      "seconds": 2.233,
      "audio": "audio/narration_tts/S05_05.wav",
      "audioKind": "tts",
-     "captionStart": 3798,
-     "captionEnd": 3858
+     "captionStart": 3791,
+     "captionEnd": 3851
     },
     {
      "id": "S05_06",
      "text": "Most people marched peacefully.",
-     "startFrame": 3862,
+     "startFrame": 3855,
      "durationFrames": 46,
-     "endFrame": 3908,
+     "endFrame": 3901,
      "seconds": 1.909,
      "audio": "audio/narration_tts/S05_06.wav",
      "audioKind": "tts",
-     "captionStart": 3862,
-     "captionEnd": 3914
+     "captionStart": 3855,
+     "captionEnd": 3907
     },
     {
      "id": "S05_07",
      "text": "Later clashes involving smaller groups broke out in Paris and other cities.",
-     "startFrame": 3922,
+     "startFrame": 3915,
      "durationFrames": 114,
-     "endFrame": 4036,
+     "endFrame": 4029,
      "seconds": 4.73,
      "audio": "audio/narration_tts/S05_07.wav",
      "audioKind": "tts",
-     "captionStart": 3922,
-     "captionEnd": 4042
+     "captionStart": 3915,
+     "captionEnd": 4035
     },
     {
      "id": "S05_08",
      "text": "The movement’s demands have broadened to include civil liberties and the right to protest.",
-     "startFrame": 4044,
+     "startFrame": 4037,
      "durationFrames": 119,
-     "endFrame": 4163,
+     "endFrame": 4156,
      "seconds": 4.924,
      "audio": "audio/narration_tts/S05_08.wav",
      "audioKind": "tts",
-     "captionStart": 4044,
-     "captionEnd": 4169
+     "captionStart": 4037,
+     "captionEnd": 4162
     },
     {
      "id": "S05_09",
      "text": "The crowds filled the streets.",
-     "startFrame": 4171,
+     "startFrame": 4164,
      "durationFrames": 48,
-     "endFrame": 4219,
+     "endFrame": 4212,
      "seconds": 1.974,
      "audio": "audio/narration_tts/S05_09.wav",
      "audioKind": "tts",
-     "captionStart": 4171,
-     "captionEnd": 4225
+     "captionStart": 4164,
+     "captionEnd": 4218
     },
     {
      "id": "S05_10",
      "text": "The political questions behind the protests remained unresolved.",
-     "startFrame": 4227,
+     "startFrame": 4220,
      "durationFrames": 94,
-     "endFrame": 4321,
+     "endFrame": 4314,
      "seconds": 3.913,
      "audio": "audio/narration_tts/S05_10.wav",
      "audioKind": "tts",
-     "captionStart": 4227,
-     "captionEnd": 4327
+     "captionStart": 4220,
+     "captionEnd": 4320
     }
    ],
    "visualCues": [
     {
      "n": 1,
-     "frame": 3411,
+     "frame": 3404,
      "text": "Wide view of a peaceful march along a broad Paris street. Most screen time belongs to ordinary demonstrators."
     },
     {
      "n": 2,
-     "frame": 3590,
+     "frame": 3583,
      "text": "Close-ups of a shopping receipt and a student's notebook, then back to the march. No prices or placard quotes."
     },
     {
      "n": 3,
-     "frame": 3662,
+     "frame": 3655,
      "text": "~320,000 • GOVERNMENT ESTIMATE • 31 OCT, smaller line: Organizers estimated more."
     },
     {
      "n": 4,
-     "frame": 3862,
+     "frame": 3855,
      "text": "Hold a wide, calm crowd view."
     },
     {
      "n": 5,
-     "frame": 3922,
+     "frame": 3915,
      "text": "Different scene: distant police lights and smoke. Keep it short; crowd not portrayed as rioters."
     },
     {
      "n": 6,
-     "frame": 4044,
+     "frame": 4037,
      "text": "Return to a peaceful group and a broad street view. Source tag: AFP / AP • 31 OCT."
     },
     {
      "n": 7,
-     "frame": 4227,
+     "frame": 4220,
      "text": "End on a red crossing signal; match its red light to the next chapter's trading display."
     }
    ],
    "soundCues": [
     {
-     "frame": 3405,
+     "frame": 3398,
      "text": "Low crowd ambience."
     },
     {
-     "frame": 3922,
+     "frame": 3915,
      "text": "Clash sound distant and brief; return to neutral street sound with the peaceful crowd."
     }
    ]
@@ -871,7 +871,7 @@
   {
    "id": "S06",
    "chapter": "Markets: the cost of the AI race",
-   "startFrame": 4351,
+   "startFrame": 4344,
    "durationFrames": 991,
    "planStartSec": 180,
    "planDurationSec": 37,
@@ -887,164 +887,164 @@
     {
      "id": "S06_01",
      "text": "Across the Atlantic, confidence came under pressure on the trading screens.",
-     "startFrame": 4357,
+     "startFrame": 4350,
      "durationFrames": 106,
-     "endFrame": 4463,
+     "endFrame": 4456,
      "seconds": 4.409,
      "audio": "audio/narration_tts/S06_01.wav",
      "audioKind": "tts",
-     "captionStart": 4357,
-     "captionEnd": 4469
+     "captionStart": 4350,
+     "captionEnd": 4462
     },
     {
      "id": "S06_02",
      "text": "On Friday, the S and P five hundred fell one-point-eight percent.",
-     "startFrame": 4471,
+     "startFrame": 4464,
      "durationFrames": 104,
-     "endFrame": 4575,
+     "endFrame": 4568,
      "seconds": 4.316,
      "audio": "audio/narration_tts/S06_02.wav",
      "audioKind": "tts",
-     "captionStart": 4471,
-     "captionEnd": 4581
+     "captionStart": 4464,
+     "captionEnd": 4574
     },
     {
      "id": "S06_03",
      "text": "The Nasdaq Composite dropped two-point-nine percent.",
-     "startFrame": 4587,
+     "startFrame": 4580,
      "durationFrames": 77,
-     "endFrame": 4664,
+     "endFrame": 4657,
      "seconds": 3.199,
      "audio": "audio/narration_tts/S06_03.wav",
      "audioKind": "tts",
-     "captionStart": 4587,
-     "captionEnd": 4670
+     "captionStart": 4580,
+     "captionEnd": 4663
     },
     {
      "id": "S06_04",
      "text": "Technology shares led the sell-off as disappointing earnings",
-     "startFrame": 4676,
+     "startFrame": 4669,
      "durationFrames": 91,
-     "endFrame": 4767,
+     "endFrame": 4760,
      "seconds": 3.761,
      "audio": "audio/narration_tts/S06_04.wav",
      "audioKind": "tts",
-     "captionStart": 4676,
-     "captionEnd": 4771
+     "captionStart": 4669,
+     "captionEnd": 4764
     },
     {
      "id": "S06_05",
      "text": "and concerns about huge AI investments unsettled investors.",
-     "startFrame": 4771,
+     "startFrame": 4764,
      "durationFrames": 108,
-     "endFrame": 4879,
+     "endFrame": 4872,
      "seconds": 4.469,
      "audio": "audio/narration_tts/S06_05.wav",
      "audioKind": "tts",
-     "captionStart": 4771,
-     "captionEnd": 4885
+     "captionStart": 4764,
+     "captionEnd": 4878
     },
     {
      "id": "S06_06",
      "text": "The question is becoming harder to dodge:",
-     "startFrame": 4887,
+     "startFrame": 4880,
      "durationFrames": 65,
-     "endFrame": 4952,
+     "endFrame": 4945,
      "seconds": 2.669,
      "audio": "audio/narration_tts/S06_06.wav",
      "audioKind": "tts",
-     "captionStart": 4887,
-     "captionEnd": 4957
+     "captionStart": 4880,
+     "captionEnd": 4950
     },
     {
      "id": "S06_07",
      "text": "how much of that spending will turn into financial returns?",
-     "startFrame": 4957,
+     "startFrame": 4950,
      "durationFrames": 85,
-     "endFrame": 5042,
+     "endFrame": 5035,
      "seconds": 3.528,
      "audio": "audio/narration_tts/S06_07.wav",
      "audioKind": "tts",
-     "captionStart": 4957,
-     "captionEnd": 5048
+     "captionStart": 4950,
+     "captionEnd": 5041
     },
     {
      "id": "S06_08",
      "text": "The AI race carries enormous expectations.",
-     "startFrame": 5054,
+     "startFrame": 5047,
      "durationFrames": 80,
-     "endFrame": 5134,
+     "endFrame": 5127,
      "seconds": 3.295,
      "audio": "audio/narration_tts/S06_08.wav",
      "audioKind": "tts",
-     "captionStart": 5054,
-     "captionEnd": 5140
+     "captionStart": 5047,
+     "captionEnd": 5133
     },
     {
      "id": "S06_09",
      "text": "This week, Wall Street delivered a reminder",
-     "startFrame": 5142,
+     "startFrame": 5135,
      "durationFrames": 67,
-     "endFrame": 5209,
+     "endFrame": 5202,
      "seconds": 2.789,
      "audio": "audio/narration_tts/S06_09.wav",
      "audioKind": "tts",
-     "captionStart": 5142,
-     "captionEnd": 5213
+     "captionStart": 5135,
+     "captionEnd": 5206
     },
     {
      "id": "S06_10",
      "text": "that expectations still have to survive an earnings report.",
-     "startFrame": 5213,
+     "startFrame": 5206,
      "durationFrames": 93,
-     "endFrame": 5306,
+     "endFrame": 5299,
      "seconds": 3.841,
      "audio": "audio/narration_tts/S06_10.wav",
      "audioKind": "tts",
-     "captionStart": 5213,
-     "captionEnd": 5312
+     "captionStart": 5206,
+     "captionEnd": 5305
     }
    ],
    "visualCues": [
     {
      "n": 1,
-     "frame": 4357,
+     "frame": 4350,
      "text": "Fictional analyst in a dark office. Monitors start blank; all factual content added in code."
     },
     {
      "n": 2,
-     "frame": 4471,
+     "frame": 4464,
      "text": "Label US MARKETS • 30 OCT 2026 • DAILY CHANGE."
     },
     {
      "n": 3,
-     "frame": 4575,
+     "frame": 4568,
      "text": "Reveal S&P 500 −1.8%."
     },
     {
      "n": 4,
-     "frame": 4664,
+     "frame": 4657,
      "text": "Reveal NASDAQ COMPOSITE −2.9%."
     },
     {
      "n": 5,
-     "frame": 4771,
+     "frame": 4764,
      "text": "Blue-lit server corridor, then a close-up of an expense ledger with no fabricated totals."
     },
     {
      "n": 6,
-     "frame": 4957,
+     "frame": 4950,
      "text": "Slow push toward the analyst's reflection. No made-up intraday chart."
     },
     {
      "n": 7,
-     "frame": 5142,
+     "frame": 5135,
      "text": "Hold the two accurate daily figures for readability. Source tag: Reuters / AP • 30 OCT."
     }
    ],
    "soundCues": [
     {
-     "frame": 4351,
+     "frame": 4344,
      "text": "Restrained electronic pulse, quiet monitor and keyboard accents. No alarm."
     }
    ]
@@ -1052,7 +1052,7 @@
   {
    "id": "S07",
    "chapter": "Next week: the vote ahead",
-   "startFrame": 5342,
+   "startFrame": 5335,
    "durationFrames": 716,
    "planStartSec": 217,
    "planDurationSec": 23,
@@ -1070,139 +1070,139 @@
     {
      "id": "S07_01",
      "text": "And one more countdown is running.",
-     "startFrame": 5348,
+     "startFrame": 5341,
      "durationFrames": 55,
-     "endFrame": 5403,
+     "endFrame": 5396,
      "seconds": 2.272,
      "audio": "audio/narration_tts/S07_01.wav",
      "audioKind": "tts",
-     "captionStart": 5348,
-     "captionEnd": 5409
+     "captionStart": 5341,
+     "captionEnd": 5402
     },
     {
      "id": "S07_02",
      "text": "On Tuesday, November third, Americans vote in the midterm elections,",
-     "startFrame": 5413,
+     "startFrame": 5406,
      "durationFrames": 109,
-     "endFrame": 5522,
+     "endFrame": 5515,
      "seconds": 4.509,
      "audio": "audio/narration_tts/S07_02.wav",
      "audioKind": "tts",
-     "captionStart": 5413,
-     "captionEnd": 5526
+     "captionStart": 5406,
+     "captionEnd": 5519
     },
     {
      "id": "S07_03",
      "text": "with control of Congress at stake.",
-     "startFrame": 5526,
+     "startFrame": 5519,
      "durationFrames": 54,
-     "endFrame": 5580,
+     "endFrame": 5573,
      "seconds": 2.241,
      "audio": "audio/narration_tts/S07_03.wav",
      "audioKind": "tts",
-     "captionStart": 5526,
-     "captionEnd": 5586
+     "captionStart": 5519,
+     "captionEnd": 5579
     },
     {
      "id": "S07_04",
      "text": "That result is still ahead.",
-     "startFrame": 5588,
+     "startFrame": 5581,
      "durationFrames": 48,
-     "endFrame": 5636,
+     "endFrame": 5629,
      "seconds": 1.979,
      "audio": "audio/narration_tts/S07_04.wav",
      "audioKind": "tts",
-     "captionStart": 5588,
-     "captionEnd": 5642
+     "captionStart": 5581,
+     "captionEnd": 5635
     },
     {
      "id": "S07_05",
      "text": "Talks continue. Coalitions remain unresolved.",
-     "startFrame": 5648,
+     "startFrame": 5641,
      "durationFrames": 88,
-     "endFrame": 5736,
+     "endFrame": 5729,
      "seconds": 3.655,
      "audio": "audio/narration_tts/S07_05.wav",
      "audioKind": "tts",
-     "captionStart": 5648,
-     "captionEnd": 5742
+     "captionStart": 5641,
+     "captionEnd": 5735
     },
     {
      "id": "S07_06",
      "text": "Another major vote approaches.",
-     "startFrame": 5744,
+     "startFrame": 5737,
      "durationFrames": 52,
-     "endFrame": 5796,
+     "endFrame": 5789,
      "seconds": 2.154,
      "audio": "audio/narration_tts/S07_06.wav",
      "audioKind": "tts",
-     "captionStart": 5744,
-     "captionEnd": 5802
+     "captionStart": 5737,
+     "captionEnd": 5795
     },
     {
      "id": "S07_07",
      "text": "This was the week ending November first, twenty twenty-six.",
-     "startFrame": 5808,
+     "startFrame": 5801,
      "durationFrames": 91,
-     "endFrame": 5899,
+     "endFrame": 5892,
      "seconds": 3.753,
      "audio": "audio/narration_tts/S07_07.wav",
      "audioKind": "tts",
-     "captionStart": 5808,
-     "captionEnd": 5905
+     "captionStart": 5801,
+     "captionEnd": 5898
     },
     {
      "id": "S07_08",
      "text": "The next chapter is still open.",
-     "startFrame": 5911,
+     "startFrame": 5904,
      "durationFrames": 55,
-     "endFrame": 5966,
+     "endFrame": 5959,
      "seconds": 2.266,
      "audio": "audio/narration_tts/S07_08.wav",
      "audioKind": "tts",
-     "captionStart": 5911,
-     "captionEnd": 5972
+     "captionStart": 5904,
+     "captionEnd": 5965
     }
    ],
    "visualCues": [
     {
      "n": 1,
-     "frame": 5348,
+     "frame": 5341,
      "text": "Calendar page turns from 1 NOV to 3 NOV. Label LOOKING AHEAD."
     },
     {
      "n": 2,
-     "frame": 5413,
+     "frame": 5406,
      "text": "Wide US Capitol, then neutral polling-place illustration. Label 3 NOV 2026 • CONTROL OF CONGRESS."
     },
     {
      "n": 3,
-     "frame": 5588,
+     "frame": 5581,
      "text": "Blank result board. No projected winner, no pre-filled map."
     },
     {
      "n": 4,
-     "frame": 5648,
+     "frame": 5641,
      "text": "Brief callbacks to the unsigned folder and the separate parliamentary groups."
     },
     {
      "n": 5,
-     "frame": 5911,
+     "frame": 5904,
      "text": "Slow move toward an unopened polling-place door; cut to black, let the last sound decay."
     },
     {
      "n": 6,
-     "frame": 5966,
-     "text": "Final card: THE WEEK IN ANIME • WEEK ENDING 1 NOV 2026 / Reporting sources in description. ~3 s hold."
+     "frame": 5959,
+     "text": "Final card: WORLD NEWS WEEKLY • WEEK ENDING 1 NOV 2026 / Reporting sources in description. ~3 s hold."
     }
    ],
    "soundCues": [
     {
-     "frame": 5342,
+     "frame": 5335,
      "text": "Soft calendar-turn sound and one returning pulse."
     },
     {
-     "frame": 5966,
+     "frame": 5959,
      "text": "Resolve to a quiet final tone, then silence."
     }
    ]

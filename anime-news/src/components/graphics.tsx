@@ -6,6 +6,7 @@
 import React from 'react';
 import {AbsoluteFill, Easing, interpolate, useCurrentFrame} from 'remotion';
 import geo from '../data/geo.json';
+import scriptJson from '../data/script.json';
 import {ramp, easeOut} from '../lib/motion';
 import {Embers} from './fx';
 import {C, FONT, SAFE, SUB_BAND_H} from '../lib/theme';
@@ -460,7 +461,7 @@ export const FinalCard: React.FC<{from: number}> = ({from}) => {
 		<AbsoluteFill style={{background: '#000', opacity: o, alignItems: 'center', justifyContent: 'center', paddingBottom: 60}}>
 			<Embers count={34} seed="fc" opacity={0.55} />
 			<AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', paddingBottom: 60, transform: `scale(${push})`}}>
-			<div style={{fontFamily: FONT.display, fontWeight: 700, fontSize: 104, letterSpacing: '0.04em', color: C.paper}}>THE WEEK IN ANIME</div>
+			<div style={{fontFamily: FONT.display, fontWeight: 700, fontSize: 104, letterSpacing: '0.04em', color: C.paper}}>{scriptJson.showName}</div>
 			<div style={{width: 420 * o, height: 7, background: C.red, margin: '16px 0 20px'}} />
 			<div style={{fontFamily: FONT.display, fontWeight: 600, fontSize: 40, letterSpacing: '0.22em', color: C.amberSoft}}>WEEK ENDING 1 NOV 2026</div>
 			<div style={{fontFamily: FONT.body, fontWeight: 600, fontSize: 28, color: 'rgba(237,230,214,0.8)', marginTop: 26, opacity: appear(f, from + 12)}}>Reporting sources in description</div>

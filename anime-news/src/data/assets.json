@@ -115,12 +115,12 @@
       "composition": "Head and shoulders, three-quarter view, eyes about 58% from left and 34% down; plain dark background with room on the left for the name/role label.",
       "anchors": {
         "face": [
-          0.58,
-          0.38
+          0.575,
+          0.42
         ],
         "eyes": [
-          0.58,
-          0.34
+          0.575,
+          0.375
         ],
         "wide": [
           0.5,
@@ -201,12 +201,12 @@
       "composition": "Head and shoulders, three-quarter view, eyes about 58% from left and 32% down so the cold-open close crop lands on the eyes; shoulders run off the bottom edge; plain dark background.",
       "anchors": {
         "face": [
-          0.58,
-          0.38
+          0.575,
+          0.42
         ],
         "eyes": [
-          0.58,
-          0.32
+          0.575,
+          0.375
         ],
         "wide": [
           0.5,
