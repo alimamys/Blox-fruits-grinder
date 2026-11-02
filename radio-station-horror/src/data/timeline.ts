@@ -1,7 +1,7 @@
 // Converts the seconds-based script into frame-accurate timings.
 // Nothing in here needs editing – change src/data/script.ts instead.
 import {FPS} from '../config';
-import {CHAPTERS, ELLIPSIS_GAP, FIXED_TOTALS, VOICE_GAP} from './script';
+import {CHAPTERS, ELLIPSIS_GAP, FIXED_TOTALS, HOLD_BEATS, MIN_VOICED_BEAT, VOICE_GAP} from './script';
 import type {Beat, Chapter, ChapterId} from './types';
 import voiceDurations from './voice-durations.json';
 
@@ -14,7 +14,8 @@ const fittedDur = (chapter: ChapterId, b: Beat): number => {
 		return b.dur;
 	}
 	const gap = VOICE_GAP[b.speaker] + (b.text.trim().endsWith('...') ? ELLIPSIS_GAP : 0);
-	return Math.max(b.dur, clip + gap);
+	const hold = HOLD_BEATS[chapter]?.includes(b.id) ? b.dur : MIN_VOICED_BEAT;
+	return Math.max(hold, clip + gap);
 };
 
 const fittedChapter = (ch: Chapter): Beat[] => {

@@ -85,21 +85,36 @@ const knocks = (id: string, volume = 0.9, dur = 2.0): Beat =>
 // Voice-over fitting
 //
 // When a voice clip exists for a beat (public/audio/voice/<chapter>/<beat>.*, its
-// length listed in src/data/voice-durations.json), the beat is stretched to
-// max(dur, clip length + gap) so lines never overlap. The authored `dur` stays
-// the minimum, which keeps dramatic pauses.
+// length listed in src/data/voice-durations.json), the beat lasts exactly
+// clip length + gap, so the video follows the voice-over. Beats listed in
+// HOLD_BEATS keep their authored `dur` as a minimum – those are the suspense
+// pauses. Beats without a clip use their authored `dur` unchanged.
 export const VOICE_GAP: Record<Speaker, number> = {
-	narrator: 0.12,
-	radio: 0.35,
-	neighbor: 0.25,
-	adam: 0.25,
-	seller: 0.3,
-	victor: 0.35,
+	narrator: 0, // clips already carry ~0.1 s of natural lead-in/out
+	radio: 0.22,
+	neighbor: 0.18,
+	adam: 0.18,
+	seller: 0.22,
+	victor: 0.25,
 	sfx: 0,
 	silence: 0,
 };
 /** Extra pause after lines that trail off ("Three seconds later..."). */
-export const ELLIPSIS_GAP = 0.3;
+export const ELLIPSIS_GAP = 0.25;
+/** No voiced beat is shorter than this (seconds) – avoids flash cuts. */
+export const MIN_VOICED_BEAT = 0.5;
+
+/** Suspense beats that keep their authored duration even when the voice clip is shorter. */
+export const HOLD_BEATS: Partial<Record<Chapter['id'], string[]>> = {
+	coldOpen: ['adam', 'clockTime', 'threeSeconds', 'silent', 'good', 'switchedOff'],
+	radioReturns: ['at117', 'staredScreen'],
+	protecting: ['fiveMin', 'sixthFloor', 'mistake'],
+	theBed: ['dontLook', 'underneath', 'breathed', 'nothingElse'],
+	victorHale: ['year', 'exceptHim', 'stoppedBreathing', 'adamRahman', 'tomorrow'],
+	motel: ['nothing', 'sittingOnIt', 'wasAMan', 'victorHale', 'located', 'didntStop'],
+	aftermath: ['smiled', 'neverFound'],
+	daniel: ['again', 'because', 'breathing'],
+};
 
 /**
  * Beats whose combined length must not change, whatever the voice clips do.
@@ -116,7 +131,7 @@ export const CHAPTERS: Chapter[] = [
 	{
 		id: 'disclaimer',
 		title: 'Disclaimer',
-		beats: [pause('disclaimer', 4.6)],
+		beats: [pause('disclaimer', 4.4)],
 	},
 
 	// 0:05 ------------------------------------------------------------------
@@ -190,8 +205,8 @@ export const CHAPTERS: Chapter[] = [
 		id: 'titleCard',
 		title: 'Title card',
 		beats: [
-			pause('title', 4.2, {
-				sfx: [sfx('radio_static', {volume: 0.4, dur: 4.2, fadeIn: 0.1, fadeOut: 1.2}), sfx('three_beeps', {volume: 0.35, at: 0.3})],
+			pause('title', 3.6, {
+				sfx: [sfx('radio_static', {volume: 0.4, dur: 3.6, fadeIn: 0.1, fadeOut: 1.0}), sfx('three_beeps', {volume: 0.35, at: 0.3})],
 			}),
 		],
 	},
@@ -564,9 +579,9 @@ export const CHAPTERS: Chapter[] = [
 		id: 'endCard',
 		title: 'Cut to black / end card',
 		beats: [
-			pause('black', 1.6),
-			pause('title', 4.0, {sfx: [sfx('radio_static', {volume: 0.25, dur: 4, fadeIn: 0.5, fadeOut: 1.5})]}),
-			pause('out', 1.2),
+			pause('black', 1.2),
+			pause('title', 3.6, {sfx: [sfx('radio_static', {volume: 0.25, dur: 3.6, fadeIn: 0.5, fadeOut: 1.4})]}),
+			pause('out', 0.8),
 		],
 	},
 ];

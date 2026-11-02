@@ -1,11 +1,11 @@
 # The Radio Station That Knew His Name
 
-A complete ~7¾-minute YouTube horror video built with **React + Remotion + TypeScript**.
+A complete ~7¾-minute narrated YouTube horror video built with **React + Remotion + TypeScript**.
 
 It is drawn on purpose in a crude, beginner MS Paint style: stick figures, flat colours and thick wobbly outlines that "boil" from frame to frame. Realistic-looking fictional evidence is cut in between: an old newspaper, police photographs, a scanned notebook, an archive search UI, a signal analyser and grainy motel CCTV.
 
 - 1920×1080, 16:9, 30 fps, H.264 MP4
-- Composition: **`RadioStationHorror`**, 13,938 frames (**7:44**)
+- Composition: **`RadioStationHorror`**, 14,062 frames (**7:49**), with a full voice-over
 - All artwork is procedural SVG, canvas or CSS. No image assets are needed.
 - Placeholder sound effects are synthesised automatically, so the video has sound design before you add any real audio.
 
@@ -90,6 +90,19 @@ radio-station-horror/
 
 | Start | Chapter |
 |---|---|
+| 0:00 | Disclaimer (4.4 s) |
+| 0:04 | Cold open: "Adam." / knocking / the repeating neighbour / "Good." |
+| 1:14 | Title card |
+| 1:17 | Part 1: The radio returns (unplugged, red train) |
+| 2:15 | Part 2: It starts protecting him (6th-floor scratch, elevator) |
+| 3:09 | Part 3: The bed |
+| 3:55 | Part 4: Victor Hale (market, newspaper, police photos, notebook) |
+| 4:52 | Part 5: The motel (TV reflection, SUBJECT LOCATED, the bed lifts) |
+| 6:30 | Part 6: Aftermath (motel CCTV) |
+| 7:05 | Daniel, then cut to black |
+| 7:43 | End card (total 7:49) |
+
+---|---|
 | 0:00 | Disclaimer (4.6 s) |
 | 0:05 | Cold open: "Adam." / knocking / the repeating neighbour / "Good." |
 | 1:19 | Title card |
@@ -185,7 +198,7 @@ Alternative voice layouts are still supported:
 
 | Location | Plays |
 |---|---|
-| `public/audio/narrator.wav` | One continuous narration track from the start of the cold open (0:04.6). |
+| `public/audio/narrator.wav` | One continuous narration track from the start of the cold open (0:04.4). |
 | `public/audio/narration/<chapterId>.wav` | One file per chapter. |
 
 If you use one of these, delete `public/audio/voice/` and empty `voice-durations.json` (`{}`) so the lines don't double up.
