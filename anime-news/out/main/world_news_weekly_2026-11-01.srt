@@ -23,229 +23,229 @@ when does the spending pay off?
 Five stories. One turbulent week.
 
 7
-00:00:16,250 --> 00:00:18,542
-This is the world in anime.
+00:00:16,250 --> 00:00:18,250
+This is World News Weekly.
 
 8
-00:00:19,792 --> 00:00:25,000
+00:00:19,500 --> 00:00:24,708
 We start in the Gulf, where diplomacy continued under the threat of renewed strikes.
 
 9
-00:00:25,083 --> 00:00:30,583
+00:00:24,792 --> 00:00:30,292
 On Sunday, Iranian negotiators were in Doha for talks with Qatari mediators,
 
 10
-00:00:30,583 --> 00:00:35,583
+00:00:30,292 --> 00:00:35,292
 seeking a way to end the war involving Iran, the United States and Israel.
 
 11
-00:00:35,667 --> 00:00:40,833
+00:00:35,375 --> 00:00:40,542
 Iran’s foreign minister described a proposal that could reopen the Strait of Hormuz
 
 12
-00:00:40,833 --> 00:00:44,792
+00:00:40,542 --> 00:00:44,500
 within two days of a possible agreement with Washington.
 
 13
-00:00:45,042 --> 00:00:48,333
+00:00:44,750 --> 00:00:48,042
 But he said no final agreement had been reached.
 
 14
-00:00:48,583 --> 00:00:52,250
+00:00:48,292 --> 00:00:51,958
 The shipping route remains central to the negotiations.
 
 15
-00:00:52,333 --> 00:00:57,583
+00:00:52,042 --> 00:00:57,292
 For now, the diplomatic breakthrough is still a possibility—not an announced outcome.
 
 16
-00:00:58,833 --> 00:01:03,708
+00:00:58,542 --> 00:01:03,417
 In Israel, the votes are counted. Forming a government is the next battle.
 
 17
-00:01:03,792 --> 00:01:08,833
+00:01:03,500 --> 00:01:08,542
 Results released on Friday gave Benjamin Netanyahu’s bloc fifty-three seats.
 
 18
-00:01:09,000 --> 00:01:11,833
+00:01:08,708 --> 00:01:11,542
 The main opposition bloc took forty-eight.
 
 19
-00:01:12,000 --> 00:01:14,542
+00:01:11,708 --> 00:01:14,250
 Arab-led parties held nineteen.
 
 20
-00:01:14,792 --> 00:01:18,542
+00:01:14,500 --> 00:01:18,250
 For an outright majority, the target is sixty-one seats
 
 21
-00:01:18,542 --> 00:01:21,500
+00:01:18,250 --> 00:01:21,208
 in the one-hundred-and-twenty-seat parliament.
 
 22
-00:01:22,000 --> 00:01:26,667
+00:01:21,708 --> 00:01:26,375
 Netanyahu remains prime minister while parties try to build a coalition.
 
 23
-00:01:26,750 --> 00:01:31,583
+00:01:26,458 --> 00:01:31,292
 Those nineteen seats do not automatically belong to either main bloc.
 
 24
-00:01:31,667 --> 00:01:33,708
+00:01:31,375 --> 00:01:33,417
 The election is over.
 
 25
-00:01:33,792 --> 00:01:38,167
+00:01:33,500 --> 00:01:37,875
 The struggle to turn votes into a governing majority continues.
 
 26
-00:01:39,500 --> 00:01:43,917
+00:01:39,208 --> 00:01:43,625
 Now to Ukraine, where this week brought a narrow opening for civilians.
 
 27
-00:01:44,000 --> 00:01:50,042
+00:01:43,708 --> 00:01:49,750
 On Saturday, evacuees from Russian-occupied Oleshky reached Ukrainian-held territory
 
 28
-00:01:50,042 --> 00:01:52,292
+00:01:49,750 --> 00:01:52,000
 and reunited with relatives.
 
 29
-00:01:52,375 --> 00:01:55,417
+00:01:52,083 --> 00:01:55,125
 Their route ran through Russia and Belarus,
 
 30
-00:01:55,417 --> 00:01:59,750
+00:01:55,125 --> 00:01:59,458
 under a local ceasefire that also allowed humanitarian aid.
 
 31
-00:01:59,833 --> 00:02:04,375
+00:01:59,542 --> 00:02:04,083
 That pause began on Tuesday and was scheduled to end on Sunday evening.
 
 32
-00:02:04,458 --> 00:02:06,542
+00:02:04,167 --> 00:02:06,250
 It covered a limited area.
 
 33
-00:02:06,625 --> 00:02:11,375
+00:02:06,333 --> 00:02:11,083
 Fighting continued elsewhere in Ukraine. The wider war went on.
 
 34
-00:02:11,792 --> 00:02:16,042
+00:02:11,500 --> 00:02:15,750
 But for families arriving at the border, the week brought something immediate:
 
 35
-00:02:16,125 --> 00:02:19,125
+00:02:15,833 --> 00:02:18,833
 getting out, reaching safety, finding each other.
 
 36
-00:02:22,125 --> 00:02:25,167
+00:02:21,833 --> 00:02:24,875
 In France, the pressure moved onto the streets.
 
 37
-00:02:25,250 --> 00:02:29,583
+00:02:24,958 --> 00:02:29,292
 Saturday brought a third consecutive weekend of demonstrations
 
 38
-00:02:29,583 --> 00:02:32,500
+00:02:29,292 --> 00:02:32,208
 over living costs and education.
 
 39
-00:02:32,583 --> 00:02:38,167
+00:02:32,292 --> 00:02:37,875
 Authorities estimated three-hundred-and-twenty-thousand participants across the country.
 
 40
-00:02:38,250 --> 00:02:40,750
+00:02:37,958 --> 00:02:40,458
 Organizers put the number higher.
 
 41
-00:02:40,917 --> 00:02:43,083
+00:02:40,625 --> 00:02:42,792
 Most people marched peacefully.
 
 42
-00:02:43,417 --> 00:02:48,417
+00:02:43,125 --> 00:02:48,125
 Later clashes involving smaller groups broke out in Paris and other cities.
 
 43
-00:02:48,500 --> 00:02:53,708
+00:02:48,208 --> 00:02:53,417
 The movement’s demands have broadened to include civil liberties and the right to protest.
 
 44
-00:02:53,792 --> 00:02:56,042
+00:02:53,500 --> 00:02:55,750
 The crowds filled the streets.
 
 45
-00:02:56,125 --> 00:03:00,292
+00:02:55,833 --> 00:03:00,000
 The political questions behind the protests remained unresolved.
 
 46
-00:03:01,542 --> 00:03:06,208
+00:03:01,250 --> 00:03:05,917
 Across the Atlantic, confidence came under pressure on the trading screens.
 
 47
-00:03:06,292 --> 00:03:10,875
+00:03:06,000 --> 00:03:10,583
 On Friday, the S and P five hundred fell one-point-eight percent.
 
 48
-00:03:11,125 --> 00:03:14,583
+00:03:10,833 --> 00:03:14,292
 The Nasdaq Composite dropped two-point-nine percent.
 
 49
-00:03:14,833 --> 00:03:18,792
+00:03:14,542 --> 00:03:18,500
 Technology shares led the sell-off as disappointing earnings
 
 50
-00:03:18,792 --> 00:03:23,542
+00:03:18,500 --> 00:03:23,250
 and concerns about huge AI investments unsettled investors.
 
 51
-00:03:23,625 --> 00:03:26,542
+00:03:23,333 --> 00:03:26,250
 The question is becoming harder to dodge:
 
 52
-00:03:26,542 --> 00:03:30,333
+00:03:26,250 --> 00:03:30,042
 how much of that spending will turn into financial returns?
 
 53
-00:03:30,583 --> 00:03:34,167
+00:03:30,292 --> 00:03:33,875
 The AI race carries enormous expectations.
 
 54
-00:03:34,250 --> 00:03:37,208
+00:03:33,958 --> 00:03:36,917
 This week, Wall Street delivered a reminder
 
 55
-00:03:37,208 --> 00:03:41,333
+00:03:36,917 --> 00:03:41,042
 that expectations still have to survive an earnings report.
 
 56
-00:03:42,833 --> 00:03:45,375
+00:03:42,542 --> 00:03:45,083
 And one more countdown is running.
 
 57
-00:03:45,542 --> 00:03:50,250
+00:03:45,250 --> 00:03:49,958
 On Tuesday, November third, Americans vote in the midterm elections,
 
 58
-00:03:50,250 --> 00:03:52,750
+00:03:49,958 --> 00:03:52,458
 with control of Congress at stake.
 
 59
-00:03:52,833 --> 00:03:55,083
+00:03:52,542 --> 00:03:54,792
 That result is still ahead.
 
 60
-00:03:55,333 --> 00:03:59,250
+00:03:55,042 --> 00:03:58,958
 Talks continue. Coalitions remain unresolved.
 
 61
-00:03:59,333 --> 00:04:01,750
+00:03:59,042 --> 00:04:01,458
 Another major vote approaches.
 
 62
-00:04:02,000 --> 00:04:06,042
+00:04:01,708 --> 00:04:05,750
 This was the week ending November first, twenty twenty-six.
 
 63
-00:04:06,292 --> 00:04:08,833
+00:04:06,000 --> 00:04:08,542
 The next chapter is still open.

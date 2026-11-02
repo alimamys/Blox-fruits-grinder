@@ -23,9 +23,9 @@ when does the spending pay off?
 Five stories. One turbulent week.
 
 7
-00:00:16,250 --> 00:00:18,542
-This is the world in anime.
+00:00:16,250 --> 00:00:18,250
+This is World News Weekly.
 
 8
-00:00:19,792 --> 00:00:25,000
+00:00:19,500 --> 00:00:24,708
 We start in the Gulf, where diplomacy continued under the threat of renewed strikes.
