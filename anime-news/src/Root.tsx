@@ -3,6 +3,7 @@ import {Composition} from 'remotion';
 import {FPS, HEIGHT, PREVIEW_FRAMES, TOTAL_FRAMES, WIDTH} from './lib/timeline';
 import {Video} from './Video';
 import {PlateTest} from './PlateTest';
+import {Thumbnail} from './Thumbnail';
 
 export const RemotionRoot: React.FC = () => (
 	<>
@@ -26,6 +27,8 @@ export const RemotionRoot: React.FC = () => (
 			height={HEIGHT}
 			defaultProps={{mode: 'main' as const, durationInFrames: TOTAL_FRAMES}}
 		/>
+		{/* Thumbnail (render one frame, then export 1280x720) */}
+		<Composition id="Thumbnail" component={Thumbnail} durationInFrames={60} fps={FPS} width={WIDTH} height={HEIGHT} />
 		{/* Dev: art review of a single plate */}
 		<Composition
 			id="PlateTest"

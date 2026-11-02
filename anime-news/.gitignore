@@ -6,3 +6,4 @@ out/stills/
 *.log
 .voice-model/
 out/voice_samples/
+out/thumbnail/*.png
