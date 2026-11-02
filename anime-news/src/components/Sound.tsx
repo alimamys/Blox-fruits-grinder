@@ -144,7 +144,7 @@ export const SoundDesign: React.FC<{totalFrames: number}> = ({totalFrames}) => {
 			<Hit name="calendar_flip" at={cue('S07', '01').e + 2} volume={0.25} label="calendar turn" />
 			<Hit name="bass_accent" at={cue('S07', '02').s - 9} volume={0.12} label="returning pulse" />
 			<Amb name="room_tone" from={cue('S07', '06').s - 20} to={finalAt} vol={0.05} fade={20} />
-			<Hit name="final_tone" at={finalAt - 6} volume={0.28} label="final tone" dur={150} />
+			<Hit name="final_tone" at={finalAt - 6} volume={0.18} label="final tone" dur={150} />
 		</>
 	);
 };
