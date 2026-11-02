@@ -7,3 +7,4 @@ build/
 public/audio/placeholders/
 narration-script.md
 captions.srt
+beats.json

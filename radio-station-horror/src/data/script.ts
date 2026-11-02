@@ -82,6 +82,35 @@ const knocks = (id: string, volume = 0.9, dur = 2.0): Beat =>
 	make('sfx', id, 'KNOCK. KNOCK. KNOCK.', dur, {sfx: [sfx('knocking', {volume})]});
 
 // ---------------------------------------------------------------------------
+// Voice-over fitting
+//
+// When a voice clip exists for a beat (public/audio/voice/<chapter>/<beat>.*, its
+// length listed in src/data/voice-durations.json), the beat is stretched to
+// max(dur, clip length + gap) so lines never overlap. The authored `dur` stays
+// the minimum, which keeps dramatic pauses.
+export const VOICE_GAP: Record<Speaker, number> = {
+	narrator: 0.12,
+	radio: 0.35,
+	neighbor: 0.25,
+	adam: 0.25,
+	seller: 0.3,
+	victor: 0.35,
+	sfx: 0,
+	silence: 0,
+};
+/** Extra pause after lines that trail off ("Three seconds later..."). */
+export const ELLIPSIS_GAP = 0.3;
+
+/**
+ * Beats whose combined length must not change, whatever the voice clips do.
+ * The last beat of each group absorbs the difference.
+ */
+export const FIXED_TOTALS: Array<{chapter: Chapter['id']; beats: string[]; total: number}> = [
+	// CCTV: Victor walks out exactly 11 s after Adam (see scenes/Aftermath.tsx)
+	{chapter: 'aftermath', beats: ['adamRan', 'elevenLater'], total: 11.7},
+];
+
+// ---------------------------------------------------------------------------
 
 export const CHAPTERS: Chapter[] = [
 	{

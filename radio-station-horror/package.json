@@ -2,7 +2,7 @@
   "name": "radio-station-horror",
   "version": "1.0.0",
   "private": true,
-  "description": "The Radio Station That Knew His Name — a stick-figure analog-horror YouTube video built with Remotion.",
+  "description": "The Radio Station That Knew His Name \u2014 a stick-figure analog-horror YouTube video built with Remotion.",
   "scripts": {
     "prepare-assets": "node scripts/prepare-assets.mjs",
     "prestart": "node scripts/prepare-assets.mjs",
@@ -10,8 +10,10 @@
     "prerender": "node scripts/prepare-assets.mjs",
     "render": "remotion render src/index.ts RadioStationHorror out/radio-station-horror.mp4 --codec=h264 --crf=18",
     "render:fast": "remotion render src/index.ts RadioStationHorror out/radio-station-horror-draft.mp4 --codec=h264 --scale=0.5 --crf=26",
+    "master": "remotion ffmpeg -hide_banner -y -i out/radio-station-horror.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/radio-station-horror-master.mp4",
     "still": "remotion still src/index.ts RadioStationHorror out/still.png",
     "script:export": "tsx scripts/export-script.ts",
+    "voices:beats": "tsx scripts/export-beats.ts > beats.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src scripts && tsc --noEmit"
   },

@@ -1,8 +1,36 @@
 // Converts the seconds-based script into frame-accurate timings.
 // Nothing in here needs editing – change src/data/script.ts instead.
 import {FPS} from '../config';
-import {CHAPTERS} from './script';
+import {CHAPTERS, ELLIPSIS_GAP, FIXED_TOTALS, VOICE_GAP} from './script';
 import type {Beat, Chapter, ChapterId} from './types';
+import voiceDurations from './voice-durations.json';
+
+const CLIPS = voiceDurations as Record<string, number>;
+
+/** Beat length after fitting the voice clip (if any). */
+const fittedDur = (chapter: ChapterId, b: Beat): number => {
+	const clip = CLIPS[`${chapter}/${b.id}`];
+	if (!clip) {
+		return b.dur;
+	}
+	const gap = VOICE_GAP[b.speaker] + (b.text.trim().endsWith('...') ? ELLIPSIS_GAP : 0);
+	return Math.max(b.dur, clip + gap);
+};
+
+const fittedChapter = (ch: Chapter): Beat[] => {
+	const beats = ch.beats.map((b) => ({...b, dur: fittedDur(ch.id, b)}));
+	for (const group of FIXED_TOTALS.filter((g) => g.chapter === ch.id)) {
+		const members = group.beats.map((id) => beats.find((b) => b.id === id)).filter((b): b is Beat => Boolean(b));
+		const last = members[members.length - 1];
+		if (!last) {
+			continue;
+		}
+		const others = members.slice(0, -1).reduce((sum, b) => sum + b.dur, 0);
+		const lastClip = CLIPS[`${ch.id}/${last.id}`] ?? 0;
+		last.dur = Math.max(lastClip + VOICE_GAP[last.speaker], group.total - others);
+	}
+	return beats;
+};
 
 export type BeatTiming = Beat & {
 	/** Start frame relative to the chapter start. */
@@ -29,7 +57,7 @@ const build = (): {chapters: ChapterTiming[]; total: number} => {
 		const chStartSec = cursorSec;
 		const chStart = Math.round(chStartSec * FPS);
 		const beats: BeatTiming[] = [];
-		for (const b of ch.beats) {
+		for (const b of fittedChapter(ch)) {
 			const absStart = Math.round(cursorSec * FPS);
 			cursorSec += b.dur;
 			const absEnd = Math.round(cursorSec * FPS);

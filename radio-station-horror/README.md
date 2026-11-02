@@ -42,6 +42,7 @@ Other useful commands:
 | Command | What it does |
 |---|---|
 | `npm run render:fast` | Half-resolution draft (`out/radio-station-horror-draft.mp4`) |
+| `npm run master` | Loudness-normalises the render to YouTube level (−14 LUFS) → `out/radio-station-horror-master.mp4`, using Remotion's bundled ffmpeg |
 | `npm run still -- --frame=2000` | Single PNG of any frame |
 | `npm run script:export` | Writes `narration-script.md` (timecoded recording script) and `captions.srt` (YouTube subtitles) |
 | `npm run lint` | ESLint + TypeScript type-check |
@@ -151,15 +152,43 @@ Extra optional hooks: `scratching.wav`, `creak.wav`, `whisper.wav`, `phone_buzz.
 
 A real file at `public/audio/<name>.wav` always wins. Without one, the procedural placeholder in `public/audio/placeholders/` is used. Regenerate the placeholders with `node scripts/prepare-assets.mjs --force`, or disable them with `NO_PLACEHOLDER_AUDIO=1`.
 
-### Narration and voices (use whichever fits your workflow)
+### Narration and voices
+
+**A complete voice-over is included.** All 312 spoken lines are in `public/audio/voice/<chapterId>/<beatId>.mp3`. They were generated with the open-weight [Kokoro](https://github.com/thewh1teagle/kokoro-onnx) TTS model:
+
+| Speaker | Voice | Treatment |
+|---|---|---|
+| Narrator | `am_michael` | light compression |
+| Radio station (also via TV and alarm clock) | `bf_emma`, slowed | band-limited 300 Hz–3.4 kHz "broadcast", short echo |
+| Neighbor | `am_puck` | muffled through the door in the cold open. The three "Adam, please." clips are **byte-identical** |
+| Adam | `am_fenrir` | — |
+| Seller | `bm_george` | — |
+| Victor | `bm_fable`, slowed | thin, breathy, trembling |
+
+The timeline fits itself to the clips. `src/data/voice-durations.json` lists each clip's length, and every beat becomes `max(authored dur, clip + gap)`, so lines never overlap. Gaps are set in `VOICE_GAP` in `src/data/script.ts`.
+
+**To use your own voice actor**, replace any clip with a recording of the same name (`.wav` / `.mp3` / `.ogg` / `.m4a`). Then update its length in `voice-durations.json`, or regenerate the whole file with the TTS script below.
+
+**To regenerate the TTS** (e.g. with different voices or speeds, set in `VOICES` in the script):
+
+```bash
+python3 -m venv .tts && .tts/bin/pip install kokoro-onnx soundfile
+# download kokoro-v1.0.onnx + voices-v1.0.bin from
+# https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0
+npm run voices:beats
+.tts/bin/python scripts/tts/generate_voices.py --beats beats.json --model kokoro-v1.0.onnx --voices voices-v1.0.bin
+```
+
+This needs `ffmpeg` on your PATH. If espeak-ng complains about a missing `phontab`, copy the `espeakng_loader/espeak-ng-data` folder to a short path and pass `--espeak-data <that path>`.
+
+Alternative voice layouts are still supported:
 
 | Location | Plays |
 |---|---|
-| `public/audio/narrator.wav` | One continuous narration track, starting at the **cold open** (after the disclaimer, 0:04.6). Change `NARRATOR_START_CHAPTER` in `src/audio/audioFiles.ts` if needed. |
-| `public/audio/narration/<chapterId>.wav` | One file per chapter, starting at that chapter (e.g. `narration/motel.wav`). |
-| `public/audio/voice/<chapterId>/<beatId>.wav` | One file per line (narrator, radio voice, neighbour, Victor…), starting exactly at that beat (e.g. `voice/coldOpen/adam.wav`). Best for TTS or line-by-line recording. |
+| `public/audio/narrator.wav` | One continuous narration track from the start of the cold open (0:04.6). |
+| `public/audio/narration/<chapterId>.wav` | One file per chapter. |
 
-Chapter ids: `coldOpen`, `titleCard`, `radioReturns`, `protecting`, `theBed`, `victorHale`, `motel`, `aftermath`, `daniel`, `endCard`.
+If you use one of these, delete `public/audio/voice/` and empty `voice-durations.json` (`{}`) so the lines don't double up.
 
 **The radio voice** should sound female, calm, even and emotionally neutral. It should be unsettling because it never sounds afraid. Light band-pass filtering (300 Hz–3.4 kHz) plus a little static sells the "broadcast".
 
