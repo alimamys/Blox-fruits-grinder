@@ -12,7 +12,7 @@
     "checklist": "node scripts/write-checklist.mjs",
     "studio": "npm run timeline && remotion studio",
     "render:preview": "npm run timeline && remotion render OpeningPreview out/preview/opening_preview.mp4 --codec=h264 --audio-codec=aac --crf=20 && node scripts/export-srt.mjs OpeningPreview out/preview/opening_preview.srt",
-    "render:main": "npm run timeline && remotion render Main out/main/week_in_anime_2026-11-01.mp4 --codec=h264 --audio-codec=aac --crf=20 && node scripts/export-srt.mjs Main out/main/week_in_anime_2026-11-01.srt",
+    "render:main": "npm run timeline && remotion render Main out/main/world_news_weekly_2026-11-01_master.mp4 --codec=h264 --audio-codec=aac --crf=20 && node scripts/export-srt.mjs Main out/main/world_news_weekly_2026-11-01.srt",
     "srt": "node scripts/export-srt.mjs",
     "typecheck": "tsc --noEmit"
   },

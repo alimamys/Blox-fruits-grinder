@@ -80,7 +80,7 @@ export const SoundDesign: React.FC<{totalFrames: number}> = ({totalFrames}) => {
 	// score level per chapter (the brief: lower under Ukraine and the reunion; silence at the end)
 	const scoreLevel = (a: number) => {
 		const xf = (at: number, from: number, to: number) => ramp(a, at - 12, at + 12, from, to);
-		let v = xf(s2.a, 0.22, 0.09);
+		let v = xf(s2.a, 0.12, 0.09);
 		if (a > s3.a - 12) v = xf(s3.a, 0.09, 0.08);
 		if (a > s4.a - 12) v = xf(s4.a, 0.08, 0.05);
 		if (a > reunion - 24) v = ramp(a, reunion - 24, reunion + 24, 0.05, 0.04);
@@ -93,20 +93,20 @@ export const SoundDesign: React.FC<{totalFrames: number}> = ({totalFrames}) => {
 	return (
 		<>
 			{/* ---------- S01: radio click on black, tension bed, accents at cuts (none under the first words) */}
-			<Hit name="radio_click" at={2} volume={0.4} label="radio click" />
+			<Hit name="radio_click" at={2} volume={0.3} label="radio click" />
 			<Bed name="synth_pulse_bed" from={0} dur={Math.min(totalFrames, finalAt)} volume={(a) => ramp(a, 0, 20, 0, 1) * scoreLevel(a) * (1 - 0.65 * speech(a))} />
 			{[
-				{at: k.c2.s, v: 0.28},
-				{at: k.c3.s, v: 0.25},
-				{at: k.c4.s, v: 0.28},
+				{at: k.c2.s, v: 0.16},
+				{at: k.c3.s, v: 0.14},
+				{at: k.c4.s, v: 0.16},
 			].map((h) => (
 				<Hit key={h.at} name="bass_accent" at={o + h.at} volume={h.v} label="bass accent" />
 			))}
-			<Amb name="monitor_hum" from={o + k.c4.s} to={o + k.c6.s} vol={0.15} />
-			<Hit name="whoosh" at={o + k.c6.s - 8} volume={0.3} label="whoosh into panels" />
-			<Hit name="riser" at={o + k.c7.s - 62} volume={0.18} label="riser" />
-			<Hit name="title_hit" at={o + k.c7.s} volume={0.3} label="title hit" />
-			<Hit name="glint" at={o + k.c7.s + 14} volume={0.18} label="title glint" />
+			<Amb name="monitor_hum" from={o + k.c4.s} to={o + k.c6.s} vol={0.1} />
+			<Hit name="whoosh" at={o + k.c6.s - 8} volume={0.18} label="whoosh into panels" />
+			<Hit name="riser" at={o + k.c7.s - 62} volume={0.1} label="riser" />
+			<Hit name="title_hit" at={o + k.c7.s} volume={0.2} label="title hit" />
+			<Hit name="glint" at={o + k.c7.s + 14} volume={0.12} label="title glint" />
 
 			{/* chapter transitions */}
 			{S.map((c) => (

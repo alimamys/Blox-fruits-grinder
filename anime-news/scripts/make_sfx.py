@@ -131,10 +131,10 @@ def bass_accent():
     """Brief, soft low-tom accent on cuts (no sub-bass boom)."""
     rng = np.random.default_rng(5)
     t = t_axis(1.4)
-    f = 100 + 45 * np.exp(-t / 0.05)
+    f = 150 + 50 * np.exp(-t / 0.05)
     body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.22) * (1 - np.exp(-t * 600))
     skin = fft_band(rng.standard_normal(len(t)), 250, 2500) * np.exp(-t / 0.02) * 0.4
-    left, right = reverb(fft_band(body + skin, 80, 6000), 1.4, 0.35, wet=0.3, seed=2)
+    left, right = reverb(fft_band(body + skin, 120, 6000), 1.4, 0.35, wet=0.3, seed=2)
     write("bass_accent.wav", left, right)
 
 
@@ -171,9 +171,9 @@ def title_hit():
     """Restrained title impact: soft drum, airy shimmer, no deep boom."""
     rng = np.random.default_rng(17)
     t = t_axis(3.0)
-    drum = np.sin(2 * np.pi * np.cumsum(90 + 50 * np.exp(-t / 0.04)) / SR) * np.exp(-t / 0.25)
+    drum = np.sin(2 * np.pi * np.cumsum(140 + 50 * np.exp(-t / 0.04)) / SR) * np.exp(-t / 0.25)
     shimmer = fft_band(rng.standard_normal(len(t)), 3500, 11000) * np.exp(-t / 0.7) * (1 - np.exp(-t * 30)) * 0.15
-    l, r = reverb(fft_band(drum, 70, 8000) + shimmer, 2.6, 0.7, wet=0.45, seed=5)
+    l, r = reverb(fft_band(drum, 120, 8000) + shimmer, 2.6, 0.7, wet=0.45, seed=5)
     write("title_hit.wav", l, r)
 
 
