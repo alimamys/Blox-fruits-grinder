@@ -1,0 +1,42 @@
+{
+  "name": "radio-station-horror",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Radio Station That Knew His Name — a stick-figure analog-horror YouTube video built with Remotion.",
+  "scripts": {
+    "prepare-assets": "node scripts/prepare-assets.mjs",
+    "prestart": "node scripts/prepare-assets.mjs",
+    "start": "remotion studio src/index.ts",
+    "prerender": "node scripts/prepare-assets.mjs",
+    "render": "remotion render src/index.ts RadioStationHorror out/radio-station-horror.mp4 --codec=h264 --crf=18",
+    "render:fast": "remotion render src/index.ts RadioStationHorror out/radio-station-horror-draft.mp4 --codec=h264 --scale=0.5 --crf=26",
+    "still": "remotion still src/index.ts RadioStationHorror out/still.png",
+    "script:export": "tsx scripts/export-script.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src scripts && tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/caveat": "5.2.8",
+    "@fontsource/comic-neue": "5.2.7",
+    "@fontsource/inter": "5.2.8",
+    "@fontsource/old-standard-tt": "5.2.8",
+    "@fontsource/oswald": "5.2.8",
+    "@fontsource/permanent-marker": "5.2.7",
+    "@fontsource/reenie-beanie": "5.2.8",
+    "@fontsource/share-tech-mono": "5.2.7",
+    "@fontsource/special-elite": "5.2.8",
+    "@fontsource/unifrakturmaguntia": "5.2.8",
+    "@fontsource/vt323": "5.2.7",
+    "@remotion/cli": "4.0.535",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.535",
+    "@types/react": "19.1.12",
+    "eslint": "9.35.0",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2"
+  }
+}
