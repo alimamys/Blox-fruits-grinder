@@ -1,11 +1,12 @@
 import React from 'react';
-import {Composition, Folder} from 'remotion';
+import {Composition, Folder, Still} from 'remotion';
 import {COMPOSITION_ID, DEFAULT_PROPS, FPS, HEIGHT, WIDTH} from './config';
 import {TOTAL_FRAMES} from './data/timeline';
 import type {ContactSheetProps} from './dev/ContactSheet';
 import {ContactSheet} from './dev/ContactSheet';
 import {Gallery, GALLERY_FRAMES} from './dev/Gallery';
 import {RadioStationHorror} from './RadioStationHorror';
+import {Thumbnail} from './Thumbnail';
 
 export const RemotionRoot: React.FC = () => {
 	return (
@@ -19,6 +20,7 @@ export const RemotionRoot: React.FC = () => {
 				height={HEIGHT}
 				defaultProps={DEFAULT_PROPS}
 			/>
+			<Still id="Thumbnail" component={Thumbnail} width={WIDTH} height={HEIGHT} />
 			<Folder name="Dev">
 				{/* One frame per reusable set / evidence component – handy when editing artwork. */}
 				<Composition id="Gallery" component={Gallery} durationInFrames={GALLERY_FRAMES} fps={FPS} width={WIDTH} height={HEIGHT} />

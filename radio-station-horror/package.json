@@ -12,6 +12,7 @@
     "render:fast": "remotion render src/index.ts RadioStationHorror out/radio-station-horror-draft.mp4 --codec=h264 --scale=0.5 --crf=26",
     "master": "remotion ffmpeg -hide_banner -y -i out/radio-station-horror.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/radio-station-horror-master.mp4",
     "still": "remotion still src/index.ts RadioStationHorror out/still.png",
+    "thumbnail": "remotion still src/index.ts Thumbnail out/thumbnail.png --scale=0.6667",
     "script:export": "tsx scripts/export-script.ts",
     "voices:beats": "tsx scripts/export-beats.ts > beats.json",
     "typecheck": "tsc --noEmit",
