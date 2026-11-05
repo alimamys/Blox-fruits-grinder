@@ -225,9 +225,9 @@
   "seconds": 1.403
  },
  "emma/emma_012_scream.wav": {
-  "hash": "1bfc22447b17f7d7205f28d255443577",
-  "provider": "kokoro",
-  "seconds": 0.984
+  "hash": "b7bc1c369d390af66fe8d5b31a74249c",
+  "provider": "chatterbox",
+  "seconds": 1.13
  },
  "emma/emma_013_daniel_2.wav": {
   "hash": "2c7d0391c0cab22f23cc4083a89009e2",
@@ -310,9 +310,9 @@
   "seconds": 1.92
  },
  "narrator/narrator_009_someone.wav": {
-  "hash": "fe0e480db5e3b210c64063429efe5132",
-  "provider": "kokoro",
-  "seconds": 3.266
+  "hash": "1dc428f2c983a7abbfbfebe9f6308aee",
+  "provider": "chatterbox",
+  "seconds": 2.903
  },
  "narrator/narrator_010_found_her.wav": {
   "hash": "707d81a40836ae20901cabd1138c4dd5",
@@ -1560,9 +1560,9 @@
   "seconds": 1.637
  },
  "old-woman/oldwoman_002_waiting.wav": {
-  "hash": "5fdfb65ea1b83655491bf6c73b566c9a",
-  "provider": "kokoro",
-  "seconds": 2.022
+  "hash": "7cc2b0dd2b6447f09b9a1c159846efa9",
+  "provider": "chatterbox",
+  "seconds": 2.42
  },
  "old-woman/oldwoman_003_passenger37.wav": {
   "hash": "b84b6ab9458e57ab1d07b7bc3cd79b99",
