@@ -39,7 +39,10 @@ Or render and master the loudness to about −15 LUFS integrated / −1.5 dBTP:
 npm run render
 ```
 
-That writes `out/passenger63.mp4`. On a 4‑core machine a full render took about 55 minutes. The per‑frame film grain makes the file large: about 2.5 GB at CRF 18, and the script now uses CRF 20. Pass `-- --crf=23` for a smaller file, or set `grain:false`. Use `npm run render -- --tight` for the shorter edit, and `npm run audio-preview` for a mastered WAV of the soundtrack alone.
+That writes `out/passenger63.mp4`. On a 4‑core machine a full render takes about 55–60 minutes.
+
+**Disk space and segments.** Remotion mixes all of the roughly 660 voice, SFX and bed files itself. For each 10 files, its mixdown writes a temporary WAV as long as the whole render. For the entire 16‑minute film in one pass, that is over 12 GB of temp files. `npm run render` therefore renders 6 consecutive segments (H.264 plus uncompressed PCM in `out/.parts-*`) and then joins them. The video stream is copied untouched, and the PCM audio joins with no gap or click. The same ffmpeg pass masters the loudness, so it needs only about 6 GB of free space. If a run is interrupted, the next `npm run render` resumes from the last finished segment, as long as nothing in `src/` or `public/` changed. Use `-- --segments=12` on a tight disk, or `-- --segments=1` for a single pass.
+ The per‑frame film grain makes the file large: about 2.5 GB at CRF 18, and the script now uses CRF 20. Pass `-- --crf=23` for a smaller file, or set `grain:false`. Use `npm run render -- --tight` for the shorter edit, and `npm run audio-preview` for a mastered WAV of the soundtrack alone.
 
 Offline machines: rendering needs no internet. All fonts, textures, voices and SFX are local. If Remotion cannot download its headless Chrome, point it at any local Chrome or Chromium:
 
