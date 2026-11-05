@@ -4,7 +4,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Crew1, Crew2, Daniel, Emma, OldWoman, Passenger} from '../components/characters/Cast';
-import {walkPhase} from '../components/characters/StickPerson';
+import {walkPhase, armTween} from '../components/characters/StickPerson';
 import {FerryExterior, Harbor, OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, FerryWindow, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {DeparturesBoard, GateCounter, WeatherPanel} from '../components/evidence/Documents';
@@ -211,8 +211,8 @@ export const Departure: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
 						<PassengerCabin f={f} facing="aft" />
-						<Crew1 x={600} y={1160} s={1.2} frame={f} arms={f < d * 0.4 ? 'wave' : 'relaxed'} look={[1, 0]} />
-						<Crew2 x={lerpF(f, 0, d * 0.6, 1500, 1200)} y={1160} s={1.2} frame={f} pose={f < d * 0.6 ? 'walk' : 'stand'} turn={f < d * 0.6 ? -0.9 : 0} phase={walkPhase(lerpF(f, 0, d * 0.6, 1500, 1200), 1.2)} arms={f > d * 0.6 ? 'point' : 'relaxed'} />
+						<Crew1 x={600} y={1160} s={1.2} frame={f} arms={armTween(f, [[0, 'wave'], [d * 0.4, 'relaxed']], 7)} look={[1, 0]} />
+						<Crew2 x={lerpF(f, 0, d * 0.6, 1500, 1200)} y={1160} s={1.2} frame={f} pose={f < d * 0.6 ? 'walk' : 'stand'} turn={f < d * 0.6 ? -0.9 : 0} phase={walkPhase(lerpF(f, 0, d * 0.6, 1500, 1200), 1.2)} arms={armTween(f, [[0, 'relaxed'], [d * 0.6, 'point']], 7)} />
 					</Stage>
 				),
 			},

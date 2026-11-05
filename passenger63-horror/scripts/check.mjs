@@ -20,7 +20,7 @@ for (const f of ['types', 'voiceConfig', 'voiceLines', 'edit', 'timeline']) {
 fs.copyFileSync(path.join(root, 'src/data/generated/audioManifest.json'), path.join(out, 'generated/audioManifest.json'));
 
 const require = createRequire(import.meta.url);
-const {TIMELINE, SCENES, FPS} = require(path.join(out, 'timeline.cjs'));
+const {TIMELINE, TIMELINE_FULL, SCENES, FPS} = require(path.join(out, 'timeline.cjs'));
 const {VOICE_LINES} = require(path.join(out, 'voiceLines.cjs'));
 
 const fmt = (s) => `${Math.floor(s / 60)}:${(s % 60).toFixed(1).padStart(4, '0')}`;
@@ -33,8 +33,10 @@ for (const s of TIMELINE.scenes) {
 }
 console.log(`\nTOTAL ${fmt(TIMELINE.totalSeconds)}  (${TIMELINE.totalFrames} frames @ ${FPS} fps)`);
 
-const used = new Set(TIMELINE.lines.map((l) => l.line.id));
+const used = new Set([...TIMELINE.lines, ...TIMELINE_FULL.lines].map((l) => l.line.id));
 const unused = VOICE_LINES.filter((l) => !used.has(l.id));
+const cutCount = TIMELINE_FULL.lines.filter((l) => !l.overlay).length - TIMELINE.lines.filter((l) => !l.overlay).length;
+console.log(`Short edit: ${cutCount} lines cut from the full story (${fmt(TIMELINE_FULL.totalSeconds)} -> ${fmt(TIMELINE.totalSeconds)}).`);
 if (unused.length) {
 	warnings++;
 	console.log(`\n! ${unused.length} voice line(s) not placed in the timeline: ${unused.map((l) => l.id).join(', ')}`);

@@ -2,6 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, Daniel, Emma, Passenger} from '../components/characters/Cast';
+import {armTween} from '../components/characters/StickPerson';
 import {FerryExterior, OceanNight, Underwater} from '../components/environments/Outdoor';
 import {CabinRow, CeilingSpeaker, PassengerCabin} from '../components/environments/Interior';
 import {MarineRadio, RadarScreen} from '../components/evidence/Navigation';
@@ -339,7 +340,7 @@ export const Hull: React.FC = () => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
 						<CabinRow f={f}>
 							<Daniel x={lerpF(f, 0, d * 0.5, 1180, 1000)} y={1010} s={1.25} frame={f} eyes="wide" brows="worried" mouth="wobbly" shiver={2} pale={0.6} />
-							<Emma x={lerpF(f, 0, d * 0.5, 760, 850)} y={1010} s={1.25} frame={f} arms={f > d * 0.4 ? 'hug' : 'relaxed'} brows="worried" look={[1, 0]} />
+							<Emma x={lerpF(f, 0, d * 0.5, 760, 850)} y={1010} s={1.25} frame={f} arms={armTween(f, [[0, 'relaxed'], [d * 0.4, 'hug']], 7)} brows="worried" look={[1, 0]} />
 						</CabinRow>
 					</Stage>
 				),

@@ -2,6 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Daniel, Emma, OldWoman, Passenger} from '../components/characters/Cast';
+import {armTween} from '../components/characters/StickPerson';
 import {OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {GrandmaKidPhoto, PhotoEvidence} from '../components/evidence/Photos';
@@ -40,7 +41,7 @@ export const GrandmotherCalls: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
 						<CabinRow f={f}>
-							<Emma x={860} y={1010} s={1.25} frame={f} arms={f > d * 0.6 ? 'grabRight' : 'relaxed'} brows="worried" look={[1, 0]} />
+							<Emma x={860} y={1010} s={1.25} frame={f} arms={armTween(f, [[0, 'relaxed'], [d * 0.6, 'grabRight']], 7)} brows="worried" look={[1, 0]} />
 							<Daniel x={1120} y={1010} s={1.25} frame={f} back={f > d * 0.25} look={[1, 0]} />
 						</CabinRow>
 					</Stage>
@@ -77,7 +78,7 @@ export const GrandmotherCalls: React.FC = () => (
 			{at: 'emma_011_shes_dead', off: -0.1, render: ({f, d, sf, api}) => <EmmaC f={f} d={d} props={{brows: 'angry', look: [1, 0], ...speak(api, sf, 'emma_011_shes_dead'), arms: 'grabRight'}} />},
 			{at: 'daniel_008_i_know', off: -0.1, render: ({f, d, sf, api}) => <DanielC f={f} d={d} push={0.05} props={{tears: 1, brows: 'sad', tilt: Math.sin(f / 5) * 5, look: [-0.6, 0.3], ...speak(api, sf, 'daniel_008_i_know')}} />},
 			{at: 'oldwoman_006_daniel_2', off: -0.2, render: ({f, d}) => <RearDoors f={f} d={d} z={[2.5, 2.8]} warm={0.2} />},
-			{at: 'narrator_165_covered', render: ({f, d}) => <DanielC f={f} d={d} push={0.06} props={{arms: f > 6 ? 'coverEars' : 'relaxed', eyes: 'closed', tears: 1, brows: 'sad', mouth: 'wobbly'}} />},
+			{at: 'narrator_165_covered', render: ({f, d}) => <DanielC f={f} d={d} push={0.06} props={{arms: armTween(f, [[0, 'relaxed'], [6, 'coverEars']], 7), eyes: 'closed', tears: 1, brows: 'sad', mouth: 'wobbly'}} />},
 			// The voice changed. Younger. Kinder.
 			{at: 'narrator_166_changed', render: ({f, d}) => <RearDoors f={f} d={d} z={[2.6, 3.4]} warm={clamp(f / (d * 0.8))} />},
 			// "Come here, sweetheart." - a memory flash, warm, not sepia
@@ -108,7 +109,7 @@ export const GrandmotherCalls: React.FC = () => (
 						<AbsoluteFill>
 							<Stage f={f} d={d} from={{z: 1.3, cy: 660}} to={{z: 1.34, cy: 660}} shakeAt={[hit]} shakeAmp={22} bg="#7f8b9c">
 								<Room />
-								<Emma x={720} y={1080} s={1.5} frame={f} arms={f > hit - 6 && f < hit + 8 ? 'slap' : 'relaxed'} brows="angry" mouth="frown" look={[1, 0]} />
+								<Emma x={720} y={1080} s={1.5} frame={f} arms={armTween(f, [[0, 'relaxed'], [hit - 6, 'slap'], [hit + 8, 'relaxed']], 4)} brows="angry" mouth="frown" look={[1, 0]} />
 								<Daniel x={1160} y={1080} s={1.5} frame={f} tilt={after ? lerpF(f, hit, hit + 4, 0, 18) - lerpF(f, hit + 10, hit + 30, 0, 12) : 0} eyes={after ? 'wide' : 'closed'} tears={1} brows={after ? 'raised' : 'sad'} blush={after} />
 							</Stage>
 							<Flash f={f} at={hit} dur={2} />

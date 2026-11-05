@@ -2,6 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, HarborOperator, Purser} from '../components/characters/Cast';
+import {armTween} from '../components/characters/StickPerson';
 import {FerryExterior, OceanNight} from '../components/environments/Outdoor';
 import {Bridge, FerryCorridor} from '../components/environments/Interior';
 import {CCTVOverlay} from '../components/evidence/CCTV';
@@ -138,7 +139,7 @@ export const Navigation: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.1, cy: 520}} to={{z: 1.2}}>
 						<Bridge f={f} calm={0.2} />
-						<Captain x={760} y={1120} s={1.5} frame={f} arms={f > d * 0.4 ? 'phoneEar' : 'relaxed'} prop={f > d * 0.4 ? 'handset' : 'none'} look={[0.5, 0]} />
+						<Captain x={760} y={1120} s={1.5} frame={f} arms={armTween(f, [[0, 'relaxed'], [d * 0.4, 'phoneEar']], 7)} prop={f > d * 0.4 ? 'handset' : 'none'} look={[0.5, 0]} />
 						<Crew1 x={1300} y={1140} s={1.4} frame={f} look={[-1, 0]} brows="worried" />
 					</Stage>
 				),

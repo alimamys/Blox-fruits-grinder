@@ -165,4 +165,6 @@ export interface SceneDef {
 	bedAutomation?: BedAutomation[];
 	/** How long (s) the beds take to move to this scene's levels. */
 	bedFade?: number;
+	/** Transition sound played as the scene starts (e.g. a whoosh). */
+	enter?: {sound: string; volume?: number; offset?: number};
 }

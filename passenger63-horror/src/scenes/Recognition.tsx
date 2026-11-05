@@ -2,7 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Crew1, Daniel, Emma, OldWoman} from '../components/characters/Cast';
-import {walkPhase} from '../components/characters/StickPerson';
+import {walkPhase, armTween} from '../components/characters/StickPerson';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {PassengerManifest} from '../components/evidence/Manifest';
 import {BroochCloseup, GrandmaKidPhoto, GrandmaPortrait, PhotoEvidence} from '../components/evidence/Photos';
@@ -136,7 +136,7 @@ export const Recognition: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.04}} rock={0.5}>
 						<CabinRow f={f}>
-							<Emma x={860} y={900} s={1.15} frame={f} pose="sit" arms={f > d * 0.5 ? 'grabRight' : 'relaxed'} look={[1, -0.8]} brows="worried" />
+							<Emma x={860} y={900} s={1.15} frame={f} pose="sit" arms={armTween(f, [[0, 'relaxed'], [d * 0.5, 'grabRight']], 7)} look={[1, -0.8]} brows="worried" />
 							{f < d * 0.3 ? (
 								<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" eyes="wide" look={[1, 0]} />
 							) : (

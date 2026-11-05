@@ -2,6 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, Crew2, Daniel, Emma, Purser} from '../components/characters/Cast';
+import {armTween} from '../components/characters/StickPerson';
 import {CabinRow, EngineRoomDoor, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {DeckPlan, DriverLicense} from '../components/evidence/Documents';
 import {PassengerManifest} from '../components/evidence/Manifest';
@@ -201,8 +202,8 @@ export const Erasure: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.15, cy: 470}} to={{z: 1.2}} rock={0.4}>
 						<Room />
-						<Captain x={700} y={1080} s={1.45} frame={f} arms={f > d * 0.5 ? 'point' : 'relaxed'} look={[1, 0]} />
-						<Daniel x={1240} y={1080} s={1.45} frame={f} look={[-1, 0]} brows="worried" arms={f > d * 0.9 ? 'grabLeft' : 'relaxed'} />
+						<Captain x={700} y={1080} s={1.45} frame={f} arms={armTween(f, [[0, 'relaxed'], [d * 0.5, 'point']], 7)} look={[1, 0]} />
+						<Daniel x={1240} y={1080} s={1.45} frame={f} look={[-1, 0]} brows="worried" arms={armTween(f, [[0, 'relaxed'], [d * 0.9, 'grabLeft']], 7)} />
 					</Stage>
 				),
 			},
@@ -211,8 +212,8 @@ export const Erasure: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.4, cy: 520}} to={{z: 1.5}} rock={0.4}>
 						<Room />
-						<Captain x={780} y={1080} s={1.45} frame={f} arms={f > d * 0.5 ? 'holdOne' : 'relaxed'} prop={f > d * 0.5 ? 'card' : 'none'} look={[1, 0.3]} />
-						<Daniel x={1180} y={1080} s={1.45} frame={f} look={[-1, 0.3]} brows="worried" flip arms={f < d * 0.5 ? 'grabRight' : 'relaxed'} prop={f < d * 0.5 ? 'card' : 'none'} />
+						<Captain x={780} y={1080} s={1.45} frame={f} arms={armTween(f, [[0, 'relaxed'], [d * 0.5, 'holdOne']], 7)} prop={f > d * 0.5 ? 'card' : 'none'} look={[1, 0.3]} />
+						<Daniel x={1180} y={1080} s={1.45} frame={f} look={[-1, 0.3]} brows="worried" flip arms={armTween(f, [[0, 'grabRight'], [d * 0.5, 'relaxed']], 7)} prop={f < d * 0.5 ? 'card' : 'none'} />
 					</Stage>
 				),
 			},

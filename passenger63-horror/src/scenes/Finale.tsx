@@ -3,6 +3,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Emma} from '../components/characters/Cast';
+import {armTween} from '../components/characters/StickPerson';
 import {BigNumberScreen, IncomingCall, MessageThread, PhoneScreen, PowerOff} from '../components/evidence/Phone';
 import {DAYLIGHT_SPOTS, DaylightPhoto, PhotoLook} from '../components/evidence/Photos';
 import {BigText} from '../components/fx/Fx';
@@ -78,7 +79,7 @@ export const Finale: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.1, cx: 900, cy: 480}}>
 						<Apartment />
-						<Emma x={760} y={1060} s={1.4} frame={f} pose="sit" arms={f > d * 0.6 ? 'hold' : 'relaxed'} prop={f > d * 0.6 ? 'phone' : 'none'} propGlow="#cfe1ff" look={[0.3, 0.8]} />
+						<Emma x={760} y={1060} s={1.4} frame={f} pose="sit" arms={armTween(f, [[0, 'relaxed'], [d * 0.6, 'hold']], 7)} prop={f > d * 0.6 ? 'phone' : 'none'} propGlow="#cfe1ff" look={[0.3, 0.8]} />
 					</Stage>
 				),
 			},

@@ -2,6 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Emma, PoliceOfficer} from '../components/characters/Cast';
+import {armTween} from '../components/characters/StickPerson';
 import {FerryExterior, Harbor, OceanNight} from '../components/environments/Outdoor';
 import {CivilRecord, DatabaseSearch, PoliceCaseFile} from '../components/evidence/Documents';
 import {PhoneScreen} from '../components/evidence/Phone';
@@ -148,7 +149,7 @@ export const Police: React.FC = () => (
 			{
 				at: 'narrator_219_ring',
 				render: ({f, d}) => (
-					<Closeup who="emma" f={f} d={d} s={2.6} cy={360} color="#0b0f18" bg={<Quay f={f} />} push={0.08} props={{arms: f > d * 0.5 ? 'holdOne' : 'relaxed', prop: f > d * 0.5 ? 'ring' : 'none', tears: 1, brows: 'sad', look: [0.4, 0.8]}} />
+					<Closeup who="emma" f={f} d={d} s={2.6} cy={360} color="#0b0f18" bg={<Quay f={f} />} push={0.08} props={{arms: armTween(f, [[0, 'relaxed'], [d * 0.5, 'holdOne']], 7), prop: f > d * 0.5 ? 'ring' : 'none', tears: 1, brows: 'sad', look: [0.4, 0.8]}} />
 				),
 			},
 			{at: 'narrator_220_uncomfortable', render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} s={3.2} cy={450} color="#0b0f18" bg={<Quay f={f} />} props={{palette: {skin: '#e3b894', shirt: '#1b2233', pants: '#151a26', hair: '#3a2a1f', shoes: '#0d0d0d'}, hat: 'police', vest: '#c9e23d', vestText: 'POLICE', stripe: undefined, brows: 'worried', look: [-0.8, 0.4], ...speak(api, sf, 'police_001_whose')}} />},

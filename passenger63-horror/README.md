@@ -1,9 +1,9 @@
 # The 63rd Passenger
 
 A complete stick‑figure maritime horror documentary built with **Remotion + React + TypeScript**.
-It mixes deliberately crude MS‑Paint‑style animation with realistic‑looking (fictional) evidence inserts and a full voice cast.
+It mixes hand‑drawn stick‑figure animation with realistic‑looking (fictional) evidence inserts, a full voice cast, lip sync and word‑timed subtitles.
 
-- **Composition:** `Passenger63Horror`, 1920×1080, 16:9, 30 fps (plus `Passenger63HorrorTight`, a shorter alternative edit)
+- **Composition:** `Passenger63Horror`, 1920×1080, 16:9, 30 fps — the ~10‑minute YouTube cut (plus `Passenger63HorrorFull`, the complete 16‑minute story)
 - **Story:** every beat from the disclaimer to the final *"Sixty‑four."* and the cut to black
 - **Voices:** 331 performed lines (narrator, Daniel, Emma, the old woman, captain, two crew, harbor control, PA, police, 15 passenger fragments), generated locally and already included
 - **Sound:** 60+ procedurally synthesised effects and ambience beds, including the three hull THUDs, the knocking, scratching, PA static, marine‑radio squelch, phones and alarms
@@ -42,7 +42,7 @@ npm run render
 That writes `out/passenger63.mp4`. On a 4‑core machine a full render takes about 55–60 minutes.
 
 **Disk space and segments.** Remotion mixes all of the roughly 660 voice, SFX and bed files itself. For each 10 files, its mixdown writes a temporary WAV as long as the whole render. For the entire 16‑minute film in one pass, that is over 12 GB of temp files. `npm run render` therefore renders 6 consecutive segments (H.264 plus uncompressed PCM in `out/.parts-*`) and then joins them. The video stream is copied untouched, and the PCM audio joins with no gap or click. The same ffmpeg pass masters the loudness, so it needs only about 6 GB of free space. If a run is interrupted, the next `npm run render` resumes from the last finished segment, as long as nothing in `src/` or `public/` changed. Use `-- --segments=12` on a tight disk, or `-- --segments=1` for a single pass.
- The per‑frame film grain makes the file large: about 2.5 GB at CRF 18, and the script now uses CRF 20. Pass `-- --crf=23` for a smaller file, or set `grain:false`. Use `npm run render -- --tight` for the shorter edit, and `npm run audio-preview` for a mastered WAV of the soundtrack alone.
+ The per‑frame film grain makes the file large: about 2.5 GB at CRF 18, and the script now uses CRF 20. Pass `-- --crf=23` for a smaller file, or set `grain:false`. Use `npm run render -- --full` for the complete 16‑minute story, and `npm run audio-preview` for a mastered WAV of the soundtrack alone.
 
 Offline machines: rendering needs no internet. All fonts, textures, voices and SFX are local. If Remotion cannot download its headless Chrome, point it at any local Chrome or Chromium:
 
@@ -57,7 +57,7 @@ You can also pass `--browser-executable=...` to `npx remotion render`, or uncomm
 | script | what it does |
 | --- | --- |
 | `npm run start` | Remotion Studio preview |
-| `npm run render` | render + loudness‑master → `out/passenger63.mp4` (`-- --tight` for the short edit) |
+| `npm run render` | render + loudness‑master → `out/passenger63.mp4` (`-- --full` for the complete story) |
 | `npm run audio-preview` | mastered soundtrack only → `out/passenger63_audio_preview.wav` |
 | `npm run generate-voices` | (re)generate voice lines, then retime |
 | `npm run retime` | re‑measure every WAV and update the timeline |
@@ -71,14 +71,12 @@ You can also pass `--browser-executable=...` to `npx remotion render`, or uncomm
 
 | edit | length | composition |
 | --- | --- | --- |
-| Full story, exactly as written | **16:18** | `Passenger63Horror` |
-| Tight edit | **14:42** | `Passenger63HorrorTight` |
+| YouTube cut (default) | **10:17** | `Passenger63Horror` |
+| Full story, exactly as written | **16:13** | `Passenger63HorrorFull` |
 
-The brief targets 7–9 minutes, but the story itself is about 1,800 words. At the requested 130–155 words per minute, that is 12–14 minutes of speech before any pauses or suspense holds. The narrator here averages 148 wpm while speaking.
+The default is a **fast ~10‑minute cut**. It keeps every story beat, reveal and line of dialogue that matters, and drops recaps, filler descriptions and slow back‑and‑forth (99 narration lines, listed in `CUT_IN_SHORT` in `src/data/edit.ts`). Pauses are capped at 0.25 s except for deliberate dramatic holds (`DRAMATIC_PAUSE`), and silent beats are shortened (`SHORT_BEAT_HOLD`). Shots that were cut on a removed line are dropped automatically and the previous shot runs on.
 
-The default is therefore the **complete, unabridged story**, voiced at natural pace. The tight edit drops 31 narration lines whose information the picture already carries (listed in `src/data/edit.ts`). No dialogue, reveal or story beat is removed.
-
-To get closer to 9 minutes you would need to abridge the script. To do that, add more line ids to `TRIM_IN_TIGHT_EDIT`, or remove steps from scenes in `src/data/timeline.ts`. Everything retimes automatically.
+The complete, unabridged story at its original pacing is the `Passenger63HorrorFull` composition (`npm run render -- --full`). To change the cut, add or remove ids in `CUT_IN_SHORT`; everything retimes automatically.
 
 ---
 
@@ -93,9 +91,11 @@ src/
     voiceLines.ts             every line: id, character, text, emotion, intensity, pace, volume,
                               pauseBefore/After, audioEffect, pan, breath, fear level, direction, filename
     voiceConfig.ts            casting: one voice per character for every provider
-    edit.ts                   full / tight edit
-    settings.tsx              render switches (evidence, CCTV chrome, grain, audio)
+    edit.ts                   short (default) / full edit: cut list, pause caps, beat lengths
+    speech.ts                 word timings + mouth envelopes (lip sync, subtitles)
+    settings.tsx              render switches (evidence, CCTV chrome, grain, audio, subtitles)
     generated/audioManifest.json   real WAV durations (written by `npm run retime`)
+    generated/speechTiming.json    word timestamps + per-frame mouth openness (scripts/voice/speech_timing.py)
   scenes/                     one module per sequence (Hook, Departure, Recognition, Erasure, Hull,
                               Navigation, OtherFerry, GrandmotherCalls + PeopleInWater, Vanish, Police,
                               Cctv, Finale/End)
@@ -108,7 +108,7 @@ src/
                               <NavScreen/>, <Compass/>, <HarborControl/>, <CCTVOverlay/>, <PoliceCaseFile/>,
                               <DatabaseSearch/>, <CivilRecord/>, <DriverLicense/>, <PhotoEvidence/>,
                               <HarborPhoto/>, <DaylightPhoto/>, <WeddingRing/>
-    fx/                       <PassengerCounter/>, <PAOverlay/>, <EmergencyLights/>, grain, glitch, labels
+    fx/                       <Subtitles/>, <PassengerCounter/>, <PAOverlay/>, <EmergencyLights/>, grain, glitch, labels
   audio/AudioLayer.tsx        voices, SFX and ambience beds (ducked under speech)
   utils/                      wobbly "MS Paint" line generator, camera, shot system, fonts
 public/
@@ -386,7 +386,8 @@ These are Remotion input props, set in the Studio *Props* panel or with `--props
 | `cctvOverlay` | `true` | `false` removes the CCTV chrome (noise, blocks, scanlines, labels) and keeps a plain timestamp |
 | `grain` | `true` | film grain + vignette |
 | `audio` | `true` | mute everything (fast visual checks) |
-| `edit` | `'full'` | `'tight'` for the shorter edit |
+| `edit` | `'short'` | `'full'` for the complete story |
+| `subtitles` | `true` | burned‑in, word‑timed subtitles |
 
 ```bash
 npx remotion render Passenger63Horror out/no-evidence.mp4 --props='{"evidenceInserts":false,"cctvOverlay":false}'
@@ -413,7 +414,6 @@ To use real images or footage, put the file in `public/` and render it with Remo
   - Her silver brooch reads `37`.
   - Two of the passengers in the harbor photo are semi‑transparent.
   - One of the people in the water has Daniel's blue jacket.
-  - A tiny black‑coated woman stands in the background of the wedding, honeymoon and Christmas photos.
   - The CCTV frame before the one frame shows two faint hands on the empty seat.
   - When the phone goes black, something faint stands behind Emma in its reflection.
   - The old woman's outline is the only thing in the film that never "boils".

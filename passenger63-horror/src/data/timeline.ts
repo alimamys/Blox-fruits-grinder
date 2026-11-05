@@ -796,6 +796,99 @@ export const SCENES: SceneDef[] = [
 ];
 
 // ---------------------------------------------------------------------------
+// CINEMATIC HITS - whooshes into each chapter, booms / stingers / risers on the
+// reveals. Kept separate from the scene sound design above so the intensity can be
+// tuned in one place. Cues on lines cut from an edit are skipped automatically.
+// ---------------------------------------------------------------------------
+const ENTER: Record<string, {sound: string; volume?: number; offset?: number}> = {
+	departure: {sound: 'whoosh_1', volume: 0.55},
+	recognition: {sound: 'whoosh_2', volume: 0.5},
+	erasure: {sound: 'whoosh_3', volume: 0.5},
+	navigation: {sound: 'whoosh_1', volume: 0.5},
+	otherFerry: {sound: 'whoosh_2', volume: 0.45},
+	grandmotherCalls: {sound: 'whoosh_3', volume: 0.45},
+	police: {sound: 'whoosh_1', volume: 0.5},
+	cctv: {sound: 'whoosh_2', volume: 0.45},
+	finale: {sound: 'whoosh_3', volume: 0.4},
+};
+
+const hit = (sound: string, at: string, offset = 0, volume = 0.4, extra: Partial<SfxCue> = {}): SfxCue => ({sound, at, offset, volume, ...extra});
+
+const HITS: Record<string, SfxCue[]> = {
+	hook: [
+		hit('stinger', 'narrator_009_someone', 1.9, 0.35),
+		hit('sub_drop', 'oldwoman_001_not_passenger', -0.25, 0.35),
+		hit('boom_hit', 'oldwoman_003_passenger37', -0.05, 0.45),
+		hit('stinger', 'narrator_021_daniel_clarke', 0.9, 0.3),
+		hit('riser_short', 'oldwoman_004_shouldnt', -2.0, 0.3),
+	],
+	departure: [
+		hit('boom_hit', 'crew2_001_count', 2.1, 0.4),
+		hit('riser_short', 'narrator_044_bench', -2.0, 0.35),
+		hit('stinger', 'narrator_044_bench', 0.0, 0.3),
+	],
+	recognition: [
+		hit('stinger', 'narrator_053_saw_her', 0.0, 0.45),
+		hit('sub_drop', 'daniel_004_died', 0.1, 0.35),
+		hit('boom_hit', 'narrator_065_only_difference', 2.4, 0.35),
+		hit('riser_short', 'narrator_069_flickered', -1.0, 0.3),
+		hit('boom_hit', 'narrator_074_bench_empty', 0.0, 0.45),
+	],
+	erasure: [
+		hit('riser_short', 'narrator_084_sixty_one', -1.6, 0.35),
+		hit('boom_hit', 'narrator_084_sixty_one', 1.0, 0.45),
+		hit('sub_drop', 'narrator_092_one_passenger', 0.0, 0.35),
+		hit('stinger', 'narrator_099_unknown', -0.05, 0.4),
+	],
+	hull: [
+		hit('stinger', 'pa_001_passenger37', 0.0, 0.35),
+		hit('riser_long', 'narrator_121_cable', 0.0, 0.3),
+		hit('boom_hit', 'pa_008_daniel_4', 0.0, 0.4),
+		hit('boom_hit', 'phone_message', 0.0, 0.35),
+	],
+	navigation: [
+		hit('riser_short', 'harbor_004_docked', -2.0, 0.35),
+		hit('boom_hit', 'harbor_004_docked', 1.15, 0.45),
+		hit('sub_drop', 'harbor_005_looking', 0.6, 0.4),
+	],
+	otherFerry: [
+		hit('stinger', 'narrator_152_alone', 0.9, 0.4),
+		hit('boom_hit', 'narrator_155_end_gangway', 2.1, 0.45),
+	],
+	grandmotherCalls: [
+		hit('sub_drop', 'oldwoman_005_daniel', -0.2, 0.3),
+		hit('boom_hit', 'narrator_170_screamed', 1.5, 0.35),
+	],
+	peopleInWater: [
+		hit('boom_hit', 'people_reveal', 0.0, 0.4),
+		hit('stinger', 'all_arms', 0.0, 0.4),
+		hit('sub_drop', 'oldwoman_009_everyone', 0.0, 0.35),
+	],
+	vanish: [
+		hit('boom_hit', 'narrator_194_gone', 0.0, 0.5),
+		hit('stinger', 'narrator_199_gone_too', 0.3, 0.3),
+	],
+	police: [
+		hit('stinger', 'narrator_212_every', 0.6, 0.35),
+		hit('boom_hit', 'narrator_218_record', 2.0, 0.4),
+		hit('riser_short', 'narrator_224_37', -2.0, 0.35),
+		hit('boom_hit', 'narrator_224_37', -0.05, 0.55),
+	],
+	cctv: [
+		hit('boom_hit', 'narrator_230_appeared', 0.0, 0.45),
+		hit('stinger', 'narrator_231_behind', 1.0, 0.35),
+		hit('sub_drop', 'narrator_232_next_frame', 1.0, 0.3),
+	],
+	finale: [
+		hit('riser_short', 'narrator_243_beside', -1.4, 0.3),
+		hit('boom_hit', 'narrator_243_beside', 0.6, 0.45),
+		hit('stinger', 'message_hold', 0.0, 0.4),
+		hit('sub_drop', 'narrator_255_turned_on', 0.9, 0.3),
+		hit('boom_hit', 'sixty_three', 0.0, 0.5),
+	],
+};
+
+// ---------------------------------------------------------------------------
 // TIMING COMPUTATION
 // ---------------------------------------------------------------------------
 type ManifestEntry = {duration: number; peak?: number; provider?: string};
@@ -966,7 +1059,12 @@ export const buildTimeline = (mode: EditMode = 'short'): Timeline => {
 		}
 
 		const sfx: TimedSfx[] = [];
-		for (const cue of def.sfx as SfxCue[]) {
+		const enter = def.enter ?? ENTER[def.id];
+		if (enter && audioExists(`sfx/${enter.sound}.wav`)) {
+			const at = Math.max(0, sceneStart + (enter.offset ?? -0.12));
+			sfx.push({sound: enter.sound, start: at, end: at + 3, volume: enter.volume ?? 0.5});
+		}
+		for (const cue of [...(def.sfx as SfxCue[]), ...(HITS[def.id] ?? [])]) {
 			const at = resolve(cue.at, cue.offset, cue.fromEnd);
 			if (at === null) continue;
 			sfx.push({sound: cue.sound, start: Math.max(0, at), end: at + (cue.maxDuration ?? 12), volume: cue.volume ?? 1, maxDuration: cue.maxDuration});
