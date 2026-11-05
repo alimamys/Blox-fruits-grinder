@@ -41,7 +41,7 @@ export interface CharacterVoice {
 		/** Chatterbox (free, open-source, runs locally): clones the timbre of a short reference
 		 *  clip and performs the line with emotion "exaggeration". Replace the reference WAV with
 		 *  a real recording (10-20 s, clean, one speaker) to change the voice. */
-		chatterbox: {reference: string; exaggeration: number};
+		chatterbox: {reference: string; exaggeration: number; model?: 'standard' | 'turbo'};
 		elevenlabs: {voiceName: string; voiceId?: string; model: string};
 		openai: {voice: string; model: string};
 		azure: {voice: string};
@@ -66,7 +66,8 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: -0.4, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_michael', 0.8], ['bm_george', 0.2]], lang: 'en-us'},
-			chatterbox: {reference: 'voice-references/narrator.wav', exaggeration: 0.45},
+			// the narrator stays restrained, so the ~4x faster Turbo model (no emotion knob) is used
+			chatterbox: {reference: 'voice-references/narrator.wav', exaggeration: 0.45, model: 'turbo'},
 			elevenlabs: {voiceName: 'George', model: ELEVEN_MODEL},
 			openai: {voice: 'onyx', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-RyanNeural'},

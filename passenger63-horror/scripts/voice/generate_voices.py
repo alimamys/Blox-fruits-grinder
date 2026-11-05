@@ -152,6 +152,8 @@ def job_hash(job: dict, provider: str) -> str:
         'voice': job['providers'][provider] if provider != 'kokoro' else job['kokoro'],
         'post': POST_VERSION,
     }
+    if job.get('retake'):
+        key['retake'] = job['retake']  # only present for re-rolled lines, so other hashes stay valid
     return hashlib.md5(json.dumps(key, sort_keys=True).encode()).hexdigest()
 
 
@@ -252,6 +254,7 @@ def main() -> int:
     ap.add_argument('--scripts-only', action='store_true', help='write performance script + SSML, no audio')
     ap.add_argument('--skip-crowd-bed', action='store_true')
     ap.add_argument('--models-dir', default=str(ROOT / '.voice-models'))
+    ap.add_argument('--retake', help='comma separated line ids to re-roll with a new random take (remembered in voice-scripts/retakes.json)')
     ap.add_argument('--estimate', action='store_true', help='print how many characters would be sent to the provider, then exit')
     ap.add_argument('--max-chars', type=int, default=0, help='stop before sending more than this many characters (quota guard)')
     args = ap.parse_args()
@@ -263,9 +266,24 @@ def main() -> int:
     data = json.loads(DATA.read_text())
     provider_name = args.provider or data['DEFAULT_PROVIDER']
 
+    retakes_path = SCRIPTS_OUT / 'retakes.json'
+    retakes = json.loads(retakes_path.read_text()) if retakes_path.exists() else {}
+    if args.retake:
+        for rid in [s.strip() for s in args.retake.split(',') if s.strip()]:
+            retakes[rid] = retakes.get(rid, 0) + 1
+        SCRIPTS_OUT.mkdir(parents=True, exist_ok=True)
+        retakes_path.write_text(json.dumps(retakes, indent=1, sort_keys=True))
+        if not args.only:
+            args.only = args.retake
+
     lines = data['VOICE_LINES']
     crowd_ix = {l['id']: i for i, l in enumerate([l for l in lines if l['character'] == 'crowd'])}
     jobs = [build_job(l, data, crowd_ix.get(l['id'], 0), provider_name) for l in lines]
+    for j in jobs:
+        n = retakes.get(j['line']['id'], 0)
+        if n:
+            j['seed'] += 7919 * n
+            j['retake'] = n
     # story context for providers that use it (ElevenLabs previous_text / next_text)
     story = [j for j in jobs if j['line']['character'] != 'crowd']
     for i, j in enumerate(story):
@@ -310,6 +328,10 @@ def main() -> int:
         q = provider.quota()
         if q:
             print(f'[voice] {provider_name} quota: {q[0]:,} of {q[1]:,} characters used this period ({q[1] - q[0]:,} left)')
+
+    if provider_name == 'chatterbox':
+        # group by speaker so each reference clip is conditioned once; dialogue before narration
+        jobs = sorted(jobs, key=lambda j: (j['line']['character'] == 'narrator', j['providers']['chatterbox']['reference']))
 
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
     done = skipped = 0

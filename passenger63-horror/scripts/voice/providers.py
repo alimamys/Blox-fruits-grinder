@@ -127,14 +127,17 @@ CHATTERBOX_EXAGGERATION = {
 
 class ChatterboxProvider:
     """Zero-shot voice cloning TTS with emotion control. Each character's timbre comes
-    from its reference clip (voice-references/*.wav); the delivery comes from the model."""
+    from its reference clip (voice-references/*.wav); the delivery comes from the model.
+
+    model 'standard' (default): expressive, with the `exaggeration` emotion control.
+    model 'turbo': ~4x faster on CPU, no emotion control - used for the restrained narrator."""
 
     name = 'chatterbox'
 
     def __init__(self, models_dir: Path):
         try:
             import torch  # type: ignore
-            from chatterbox.tts import ChatterboxTTS  # type: ignore
+            import chatterbox  # type: ignore  # noqa: F401
         except ImportError as e:
             raise ProviderUnavailable(
                 'chatterbox-tts is not installed. Create its own venv:\n'
@@ -142,21 +145,35 @@ class ChatterboxProvider:
             ) from e
         self.torch = torch
         torch.set_num_threads(max(1, os.cpu_count() or 1))
-        device = 'cuda' if torch.cuda.is_available() else 'mps' if getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available() else 'cpu'
-        local = models_dir / 'chatterbox'
+        self.device = 'cuda' if torch.cuda.is_available() else 'mps' if getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available() else 'cpu'
+        self.models_dir = models_dir
+        self.models: dict = {}
+        self.last_ref: dict = {}
+        self._load('standard')  # fail early if the model can't be loaded
+
+    def _load(self, kind: str):
+        if kind in self.models:
+            return self.models[kind]
         try:
-            if all((local / f).exists() for f in CHATTERBOX_FILES):
-                self.model = ChatterboxTTS.from_local(str(local), device)
+            if kind == 'turbo':
+                from chatterbox.tts_turbo import ChatterboxTurboTTS  # type: ignore
+
+                local = self.models_dir / 'chatterbox-turbo'
+                m = ChatterboxTurboTTS.from_local(str(local), self.device) if (local / 't3_turbo_v1.safetensors').exists() else ChatterboxTurboTTS.from_pretrained(self.device)
             else:
-                self.model = ChatterboxTTS.from_pretrained(device)
+                from chatterbox.tts import ChatterboxTTS  # type: ignore
+
+                local = self.models_dir / 'chatterbox'
+                m = ChatterboxTTS.from_local(str(local), self.device) if all((local / f).exists() for f in CHATTERBOX_FILES) else ChatterboxTTS.from_pretrained(self.device)
         except Exception as e:  # network / download problems
             raise ProviderUnavailable(
-                f'Could not load the Chatterbox model ({type(e).__name__}: {str(e)[:200]}).\n'
-                '  It downloads once from huggingface.co (allow huggingface.co, cdn-lfs.huggingface.co and\n'
-                '  cas-bridge.xethub.hf.co), or place the model files in .voice-models/chatterbox/.'
+                f'Could not load the Chatterbox {kind} model ({type(e).__name__}: {str(e)[:200]}).\n'
+                '  It downloads once from Hugging Face (allow huggingface.co and *.hf.co), or place the\n'
+                '  model files in .voice-models/chatterbox/ (and .voice-models/chatterbox-turbo/).'
             ) from e
-        self.device = device
-        print(f'[voice] Chatterbox loaded on {device}')
+        print(f'[voice] Chatterbox {kind} loaded on {self.device}')
+        self.models[kind] = m
+        return m
 
     def synthesize(self, job: dict):
         line = job['line']
@@ -165,25 +182,33 @@ class ChatterboxProvider:
         ref = root / cfg['reference']
         if not ref.exists():
             raise ProviderUnavailable(f'Reference clip {cfg["reference"]} is missing - run scripts/voice/make_references.py')
-        base = float(cfg.get('exaggeration', 0.5))
-        emo = CHATTERBOX_EXAGGERATION.get(line['emotion'])
-        if line['character'] == 'narrator':
-            # a documentary narrator stays restrained; only lean in slightly on unease
-            exaggeration = base + (0.08 if line['emotion'] == 'uneasy' else 0.0)
-        elif emo is not None:
-            exaggeration = (emo + base) / 2 + 0.25 * (float(line['intensity']) - 0.4)
-        else:
-            exaggeration = base + 0.3 * (float(line['intensity']) - 0.4)
-        exaggeration = float(np.clip(exaggeration, 0.25, 1.3))
-        # lower cfg weight = slower, more deliberate delivery (and better with high exaggeration)
-        pace = float(line['pace'])
-        cfg_weight = 0.3 if pace <= 0.92 else 0.6 if pace >= 1.05 else 0.5
-        if exaggeration > 0.8:
-            cfg_weight = min(cfg_weight, 0.35)
+        kind = cfg.get('model') or 'standard'
+        model = self._load(kind)
+        # re-condition only when the speaker changes (saves seconds per line)
+        prompt = str(ref) if self.last_ref.get(kind) != str(ref) else None
+        self.last_ref[kind] = str(ref)
         self.torch.manual_seed(job['seed'] % (2**31))
-        wav = self.model.generate(_speak_text(line), audio_prompt_path=str(ref), exaggeration=exaggeration, cfg_weight=cfg_weight, temperature=0.8)
+        text = _speak_text(line)
+        if kind == 'turbo':
+            wav = model.generate(text, audio_prompt_path=prompt, norm_loudness=False)
+        else:
+            base = float(cfg.get('exaggeration', 0.5))
+            emo = CHATTERBOX_EXAGGERATION.get(line['emotion'])
+            if line['character'] == 'narrator':
+                exaggeration = base + (0.08 if line['emotion'] == 'uneasy' else 0.0)
+            elif emo is not None:
+                exaggeration = (emo + base) / 2 + 0.25 * (float(line['intensity']) - 0.4)
+            else:
+                exaggeration = base + 0.3 * (float(line['intensity']) - 0.4)
+            exaggeration = float(np.clip(exaggeration, 0.25, 1.3))
+            # lower cfg weight = slower, more deliberate delivery (and steadier at high exaggeration)
+            pace = float(line['pace'])
+            cfg_weight = 0.3 if pace <= 0.92 else 0.6 if pace >= 1.05 else 0.5
+            if exaggeration > 0.8:
+                cfg_weight = min(cfg_weight, 0.35)
+            wav = model.generate(text, audio_prompt_path=prompt, exaggeration=exaggeration, cfg_weight=cfg_weight, temperature=0.8)
         x = wav.squeeze(0).detach().cpu().numpy().astype(np.float64)
-        return x, self.model.sr
+        return x, model.sr
 
 
 # ----------------------------------------------------------------------------
