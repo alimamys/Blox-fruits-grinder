@@ -195,9 +195,9 @@
   "seconds": 1.227
  },
  "emma/emma_006_not_funny.wav": {
-  "hash": "4b040a762cda97bbacc26e8def5bdc7d",
-  "provider": "chatterbox",
-  "seconds": 1.765
+  "hash": "ce7622221aedf2b71978aa136eb2e402",
+  "provider": "fish",
+  "seconds": 1.374
  },
  "emma/emma_007_no.wav": {
   "hash": "9eae08fef58aad9fd8157054528dcd7e",
@@ -770,89 +770,89 @@
   "seconds": 2.709
  },
  "narrator/narrator_101_shouting.wav": {
-  "hash": "29844ada72d28975ddff4c79cfda73d1",
-  "provider": "chatterbox",
-  "seconds": 1.348
+  "hash": "27e108e85c248f1b044623a60bebce39",
+  "provider": "fish",
+  "seconds": 1.39
  },
  "narrator/narrator_102_nobody_laughing.wav": {
-  "hash": "cbe558ac08f72f59259fc3f0a759e786",
-  "provider": "chatterbox",
-  "seconds": 1.694
+  "hash": "f192a7633a4a2212668ee142ff5d3a99",
+  "provider": "fish",
+  "seconds": 1.469
  },
  "narrator/narrator_103_hit.wav": {
-  "hash": "5341d08fe48b51491a683d3275c94164",
-  "provider": "chatterbox",
-  "seconds": 2.818
+  "hash": "abb33da9c81cec78bebcd86ee3f9baf3",
+  "provider": "fish",
+  "seconds": 3.126
  },
  "narrator/narrator_104_stopped.wav": {
-  "hash": "e16c5232f8bf126dcb9a2ccf35095cc2",
-  "provider": "chatterbox",
-  "seconds": 1.146
+  "hash": "c7ff10ff05fc46e5c1b56371af26e217",
+  "provider": "fish",
+  "seconds": 1.315
  },
  "narrator/narrator_105_another.wav": {
-  "hash": "49b4641b3b160debec4aa98dc0836dc0",
-  "provider": "chatterbox",
-  "seconds": 1.122
+  "hash": "4f71406cbeb05a45fe921d907c4af38c",
+  "provider": "fish",
+  "seconds": 1.315
  },
  "narrator/narrator_106_then_another.wav": {
-  "hash": "1dbe7033a30faf7f100c122bfbde9ff9",
-  "provider": "chatterbox",
-  "seconds": 0.788
+  "hash": "9ac56453d8f1f09d34ec76e2dc491d27",
+  "provider": "fish",
+  "seconds": 0.99
  },
  "narrator/narrator_107_beneath.wav": {
-  "hash": "1693148ea7feeab83312691bb9390074",
-  "provider": "chatterbox",
-  "seconds": 1.152
- },
- "narrator/narrator_108_captain_crew.wav": {
-  "hash": "f64218d65d00499b1eba9040ba33eb9f",
-  "provider": "chatterbox",
-  "seconds": 2.158
- },
- "narrator/narrator_109_radar.wav": {
-  "hash": "1627be9281711a3c29d8ce17a239210d",
-  "provider": "chatterbox",
-  "seconds": 5.372
- },
- "narrator/narrator_110_knocking.wav": {
-  "hash": "dab74d5fdca9ca7e84fab8c342ff7544",
-  "provider": "chatterbox",
-  "seconds": 1.535
- },
- "narrator/narrator_111_not_one.wav": {
-  "hash": "dd04acfedfa5920caeb43f11ac025d10",
-  "provider": "chatterbox",
-  "seconds": 2.902
- },
- "narrator/narrator_112_moved_away.wav": {
-  "hash": "e702fb1fe4b8c335bc93e1288e3e1df5",
-  "provider": "chatterbox",
-  "seconds": 2.194
- },
- "narrator/narrator_113_screamed.wav": {
-  "hash": "a27051467213030be2e339431f6894b3",
-  "provider": "chatterbox",
+  "hash": "30f303430832c826badd263c8d2ab92d",
+  "provider": "fish",
   "seconds": 1.158
  },
+ "narrator/narrator_108_captain_crew.wav": {
+  "hash": "f3d472a20d2635eedb65e6046900dc30",
+  "provider": "fish",
+  "seconds": 1.982
+ },
+ "narrator/narrator_109_radar.wav": {
+  "hash": "f1acba90489ee30f72285fe0cc9e53c5",
+  "provider": "fish",
+  "seconds": 6.192
+ },
+ "narrator/narrator_110_knocking.wav": {
+  "hash": "4bf904e350bf01172e6f3861bf4f190f",
+  "provider": "fish",
+  "seconds": 1.999
+ },
+ "narrator/narrator_111_not_one.wav": {
+  "hash": "cb37f39d2508af41076901b15de4cdf8",
+  "provider": "fish",
+  "seconds": 3.823
+ },
+ "narrator/narrator_112_moved_away.wav": {
+  "hash": "504381a70f73dd302d7e4e012f7d4da7",
+  "provider": "fish",
+  "seconds": 2.244
+ },
+ "narrator/narrator_113_screamed.wav": {
+  "hash": "124d05df1e5b86392d1ef963738f2c58",
+  "provider": "fish",
+  "seconds": 1.315
+ },
  "narrator/narrator_114_pa_on.wav": {
-  "hash": "06f3dcae2d26556acff0fb8938cdd12e",
-  "provider": "chatterbox",
-  "seconds": 2.515
+  "hash": "ea19c7ee153d4a082e36c6cd51f4dffd",
+  "provider": "fish",
+  "seconds": 2.31
  },
  "narrator/narrator_115_womans_voice.wav": {
-  "hash": "39f4ac36d03a6dba1946b18438347aca",
-  "provider": "chatterbox",
-  "seconds": 2.158
+  "hash": "ea1452d6466a456f14a46fa28b733df8",
+  "provider": "fish",
+  "seconds": 2.198
  },
  "narrator/narrator_116_pale.wav": {
-  "hash": "4f051bb69414ad5d1905a12354adf6d3",
-  "provider": "chatterbox",
-  "seconds": 1.218
+  "hash": "efb8e2b4d0b3d8ae20c3bd5f96301613",
+  "provider": "fish",
+  "seconds": 1.362
  },
  "narrator/narrator_117_grabbed.wav": {
-  "hash": "8fb4ba0477407ea780c2484c0cc47e1d",
-  "provider": "chatterbox",
-  "seconds": 1.086
+  "hash": "1aca05af319e1db751fc614dadde9a30",
+  "provider": "fish",
+  "seconds": 1.072
  },
  "narrator/narrator_118_voice_changed.wav": {
   "hash": "42c7b5352f474f2a583af210f7bfeee6",
@@ -1620,14 +1620,14 @@
   "seconds": 1.398
  },
  "pa/pa_001_passenger37.wav": {
-  "hash": "639205a9cce1161a363e77a2604b85a0",
-  "provider": "chatterbox",
-  "seconds": 1.984
+  "hash": "d132f276667b985182cf15373c049a40",
+  "provider": "fish",
+  "seconds": 2.319
  },
  "pa/pa_002_proceed.wav": {
-  "hash": "8ab538c1c92982470af1df5549a6f1a2",
-  "provider": "chatterbox",
-  "seconds": 2.464
+  "hash": "b120fecf21c3e9096a166712e01c4246",
+  "provider": "fish",
+  "seconds": 2.806
  },
  "pa/pa_003_passenger37_soft.wav": {
   "hash": "14e5361e271457da185ef53cc4c50702",
