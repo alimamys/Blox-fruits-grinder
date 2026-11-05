@@ -62,7 +62,7 @@
    "id": "hull",
    "name": "Something under the ferry",
    "start": 206.933,
-   "duration": 68.3,
+   "duration": 68.433,
    "narrationText": "Then something hit the underside of the ferry. Everyone stopped. Another impact. Then another. From beneath them. Then the knocking started. Not one knock. Many. All along the hull. Passengers moved away from the windows. Somebody screamed. A woman's voice filled the ferry. Emma grabbed him. The captain turned the PA system off. The voice continued. The captain pulled the power cable. Still: Now the voice was coming from every speaker. Every radio. Every passenger's phone. One by one, phone screens lit up. Daniel backed away. Emma held him.",
    "dialogueIds": [
     "pa_001_passenger37",
@@ -79,7 +79,7 @@
   {
    "id": "navigation",
    "name": "Navigation failure and marine radio",
-   "start": 275.233,
+   "start": 275.367,
    "duration": 56.533,
    "narrationText": "Then the ferry's engines slowed. The navigation screen had gone blank. GPS lost. Compass spinning. Radar empty. No coastline. No lights. Nothing. They should have been ten minutes from port. Instead... there was black ocean in every direction.",
    "dialogueIds": [
@@ -97,7 +97,7 @@
   {
    "id": "otherFerry",
    "name": "The other ferry",
-   "start": 331.767,
+   "start": 331.9,
    "duration": 33.533,
    "narrationText": "Then harbor control sent a photograph through the marine system. The North Star. Docked at Port Mason. Passengers walking off. Timestamp: 12:26 AM. The current time was 12:49. There he was. Walking down the gangway. Same uniform. Same face. Emma was in the photograph. Alone. Daniel was missing. At the very end of the gangway... stood the old woman. Black coat. Watching the camera.",
    "dialogueIds": []
@@ -105,8 +105,8 @@
   {
    "id": "grandmotherCalls",
    "name": "The grandmother calls",
-   "start": 365.3,
-   "duration": 43.733,
+   "start": 365.433,
+   "duration": 43.633,
    "narrationText": "Daniel suddenly turned toward the rear of the ferry. Emma grabbed him. He didn't answer. He could hear something. Quiet. Coming from outside. He began walking. Emma pulled harder. He looked at her. Tears in his eyes. He covered his ears. Emma slapped him. Hard. He blinked. For a second... the voice stopped. Then someone screamed from the rear deck.",
    "dialogueIds": [
     "emma_008_where",
@@ -124,7 +124,7 @@
   {
    "id": "peopleInWater",
    "name": "People in the water",
-   "start": 409.033,
+   "start": 409.067,
    "duration": 31.067,
    "narrationText": "The old woman was back. Standing beside the railing. This time... she wasn't alone. There were people in the water. Dozens of them. Floating upright. Not swimming. Just standing in the black ocean. One of them raised an arm. Then another. Then all of them. The old woman smiled.",
    "dialogueIds": [
@@ -135,8 +135,8 @@
   {
    "id": "vanish",
    "name": "Daniel disappears",
-   "start": 440.1,
-   "duration": 54.2,
+   "start": 440.133,
+   "duration": 54.167,
    "narrationText": "The ferry lights died. Total darkness. Passengers screamed. Emma held Daniel's arm with both hands. Something struck the side of the ferry. Hard. Then another impact. Then something began climbing. Against the metal hull. From below. All around them. People ran. Emergency lights switched on. Red. Daniel was gone. Emma looked down. Her hands were empty. No answer. She ran to the railing. The old woman was gone too. The ocean was empty. No floating people. No splash. No Daniel. Nothing. Then the engines suddenly roared back to life. Five minutes later... they saw the harbor lights.",
    "dialogueIds": [
     "emma_012_scream",

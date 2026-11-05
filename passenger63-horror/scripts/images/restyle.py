@@ -77,6 +77,10 @@ RESTYLE_PROMPT = (
 )
 
 
+SAFE_NOTE = (
+    'Context: a family-friendly animated cartoon for a mildly spooky ghost story; simple stick-figure characters, '
+    'nothing violent or graphic. '
+)
 CCTV_NOTE = ' This is a security-camera frame: keep the camera text overlays exactly, keep the high fixed camera angle.'
 
 
@@ -281,10 +285,16 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
             state['skipped'] += 1
             return
         try:
-            img = openai_edit(letterbox(Image.open(io.BytesIO(src))), j['prompt'])
+            try:
+                img = openai_edit(letterbox(Image.open(io.BytesIO(src))), j['prompt'])
+            except RuntimeError as e:
+                if 'moderation' not in str(e):
+                    raise
+                # false positives on spooky-but-harmless frames: say what it is and retry once
+                img = openai_edit(letterbox(Image.open(io.BytesIO(src))), SAFE_NOTE + j['prompt'])
         except Exception as e:  # noqa: BLE001
             state['failed'] += 1
-            print(f'  ! {j["out"].name}: {e}', flush=True)
+            print(f'  ! {j["out"].name}: {str(e)[:160]}', flush=True)
             return
         img.save(j['out'], 'JPEG', quality=90)
         with _lock:

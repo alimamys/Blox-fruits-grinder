@@ -1,6 +1,11 @@
 import React, {createContext, useContext} from 'react';
 import {AbsoluteFill, getInputProps, Sequence, useCurrentFrame} from 'remotion';
 import {FPS, type SceneTiming} from '../data/timeline';
+import restyleManifest from '../data/generated/restyle.json';
+
+const RESTYLED_RANGES = ((restyleManifest as {shots?: Array<{from: number; to: number}>}).shots ?? []).map((s) => [s.from, s.to] as const);
+const restyleOn = () => (getInputProps() as {restyled?: boolean}).restyled !== false;
+const isRestyled = (g: number) => restyleOn() && RESTYLED_RANGES.some(([a, b]) => g >= a && g < b);
 import {clamp, easeInOut, rocking, shake as shakeFn} from './anim';
 
 const SceneCtx = createContext<SceneTiming | null>(null);
@@ -73,6 +78,8 @@ export interface ShotSpec {
 
 const ShotBody: React.FC<{render: ShotSpec['render']; d: number; from: number; api: SceneApi}> = ({render, d, from, api}) => {
 	const f = useCurrentFrame();
+	// a redrawn image covers this frame (src/components/fx/Restyled.tsx) - don't draw the code version underneath
+	if (isRestyled(api.scene.startFrame + from + f)) return null;
 	return <AbsoluteFill>{render({f, d, sf: f + from, from, api})}</AbsoluteFill>;
 };
 

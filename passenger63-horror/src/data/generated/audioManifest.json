@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-05T19:54:34.020Z",
+ "generatedAt": "2026-11-05T20:21:26.255Z",
  "files": {
   "captain/captain_001_radio_call.wav": {
    "duration": 5.69,
@@ -44,7 +44,7 @@
    "provider": "fish"
   },
   "crew/crew_002_maam.wav": {
-   "duration": 0.753,
+   "duration": 0.75,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -632,7 +632,7 @@
    "provider": "fish"
   },
   "narrator/narrator_052_laughed.wav": {
-   "duration": 1.001,
+   "duration": 1,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1016,13 +1016,13 @@
    "provider": "fish"
   },
   "narrator/narrator_116_pale.wav": {
-   "duration": 1.147,
+   "duration": 1.166,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_117_grabbed.wav": {
-   "duration": 0.999,
+   "duration": 1.064,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1406,7 +1406,7 @@
    "provider": "fish"
   },
   "narrator/narrator_181_stared.wav": {
-   "duration": 0.996,
+   "duration": 1.104,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1436,7 +1436,7 @@
    "provider": "fish"
   },
   "narrator/narrator_186_screamed.wav": {
-   "duration": 1.308,
+   "duration": 1.273,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1562,7 +1562,7 @@
    "provider": "fish"
   },
   "narrator/narrator_207_told.wav": {
-   "duration": 1.451,
+   "duration": 1.322,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1616,7 +1616,7 @@
    "provider": "fish"
   },
   "narrator/narrator_216_emma_screamed.wav": {
-   "duration": 0.998,
+   "duration": 1.023,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1826,7 +1826,7 @@
    "provider": "fish"
   },
   "narrator/narrator_251_again.wav": {
-   "duration": 1.035,
+   "duration": 1.107,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1892,7 +1892,7 @@
    "provider": "fish"
   },
   "old-woman/oldwoman_005_daniel.wav": {
-   "duration": 1.649,
+   "duration": 1.539,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1940,7 +1940,7 @@
    "provider": "fish"
   },
   "old-woman/pa_008_daniel_4.wav": {
-   "duration": 1.31,
+   "duration": 1.362,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
