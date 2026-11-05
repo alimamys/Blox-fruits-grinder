@@ -125,6 +125,9 @@ export const CUT_IN_SHORT = new Set<string>([
 	'ring_2',
 ]);
 
+/** Scenes left out of the short edit (the disclaimer runs as a caption over the first shot instead). */
+export const SCENES_CUT_IN_SHORT = new Set<string>(['disclaimer']);
+
 /** Silent beats held for a shorter time in the short edit (seconds). */
 export const SHORT_BEAT_HOLD: Record<string, number> = {
 	disclaimer_hold: 3.0,

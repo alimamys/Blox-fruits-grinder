@@ -12,7 +12,7 @@
 //   - Re-voice a line:       regenerate it, then `npm run retime`
 // Visuals read the computed markers, so every cut follows the voices automatically.
 import manifest from './generated/audioManifest.json';
-import {CUT_IN_SHORT, SHORT_BEAT_HOLD, shortPause, shortTail, type EditMode} from './edit';
+import {CUT_IN_SHORT, SCENES_CUT_IN_SHORT, SHORT_BEAT_HOLD, shortPause, shortTail, type EditMode} from './edit';
 import type {BedAutomation, BedName, Beat, SceneDef, SfxCue, Step, VoiceLine} from './types';
 import {LINE_BY_ID} from './voiceLines';
 import {VOICES} from './voiceConfig';
@@ -1023,7 +1023,7 @@ export const buildTimeline = (mode: EditMode = 'short'): Timeline => {
 		}
 	};
 
-	SCENES.forEach((def, index) => {
+	SCENES.filter((def) => !(short && SCENES_CUT_IN_SHORT.has(def.id))).forEach((def, index) => {
 		// Scenes start on whole frames so Sequence boundaries are exact.
 		const sceneStart = toFrame(cursor) / FPS;
 		let t = sceneStart;

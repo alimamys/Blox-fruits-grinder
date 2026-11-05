@@ -3,12 +3,13 @@ import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, Crew2, Daniel, Emma, Purser} from '../components/characters/Cast';
 import {armTween} from '../components/characters/StickPerson';
-import {CabinRow, EngineRoomDoor, PassengerCabin, RearDeck} from '../components/environments/Interior';
+import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
+import {FlashlightBeam, StorageRoom, Washroom} from '../components/environments/Rooms';
 import {DeckPlan, DriverLicense} from '../components/evidence/Documents';
 import {PassengerManifest} from '../components/evidence/Manifest';
 import {BoardingPass, EmailInbox, PhoneScreen, Reservation} from '../components/evidence/Phone';
 import {BigText, CrudeLabel, Evidence, PassengerCounter} from '../components/fx/Fx';
-import {clamp, easeInOut, lerpF} from '../utils/anim';
+import {clamp, easeInOut, easeOut, lerpF} from '../utils/anim';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, speak, talkOf} from './common';
 
@@ -27,18 +28,55 @@ const PhoneShot: React.FC<{f: number; d: number; children: React.ReactNode; serv
 export const Erasure: React.FC = () => (
 	<Shots
 		shots={[
-			// Crew checked the rear deck. Nothing.
+			// Crew checked the rear deck. Nothing. (empty bench, flashlight sweeping)
 			{
 				at: 0,
-				render: ({f, d}) => (
-					<Stage f={f} d={d} from={{z: 1.1}} to={{z: 1.15, cx: 900}} rock={0.3}>
-						<RearDeck f={f} view="behind" fog={0.2} />
-						<Crew1 x={lerpF(f, 0, d, 400, 620)} y={1020} s={0.95} frame={f} prop="flashlight" arms="point" pose="walk" phase={f * 0.3} />
-					</Stage>
-				),
+				render: ({f, d}) => {
+					const s = 0.95;
+					const cx = lerpF(f, 0, d, 380, 640);
+					const hand: [number, number] = [cx + 134 * s, 1020 - 213 * s];
+					return (
+						<Stage f={f} d={d} from={{z: 1.1, cy: 600}} to={{z: 1.18, cx: 900, cy: 640}} rock={0.3}>
+							<RearDeck f={f} view="behind" fog={0.25} />
+							<FlashlightBeam from={hand} to={[960 + Math.sin(f / 9) * 70, 812]} spread={150} />
+							<Crew1 x={cx} y={1020} s={s} frame={f} prop="flashlight" arms="point" pose="walk" phase={f * 0.3} />
+						</Stage>
+					);
+				},
 			},
-			{at: 'narrator_077_bathrooms', render: ({f, d}) => <Stage f={f} d={d}><EngineRoomDoor f={f} label="WC" sub="PASSENGERS" open={clamp(f / 10)} beam /></Stage>},
-			{at: 'narrator_078_storage', render: ({f, d}) => <Stage f={f} d={d}><EngineRoomDoor f={f} label="STORAGE" sub="CREW ONLY" open={clamp(f / 10)} beam /></Stage>},
+			// Bathrooms. Nothing. (a stall door is pushed open: empty)
+			{
+				at: 'narrator_077_bathrooms',
+				render: ({f, d}) => {
+					const open = f < 8 ? easeOut(clamp(f / 8)) : 1 - 0.1 * Math.exp(-(f - 8) / 7) * Math.cos((f - 8) * 0.55);
+					const s = 1.05;
+					const x = 1190;
+					const y = 1040;
+					const hand: [number, number] = [x - 134 * s, y - 213 * s];
+					return (
+						<Stage f={f} d={d} from={{z: 1.0, cx: 900}} to={{z: 1.07, cx: 860}} rock={0.25}>
+							<Washroom f={f} openDoor={0} open={open} beam={{from: hand, to: [lerpF(f, 0, d, 500, 450), lerpF(f, 0, d, 560, 620)], spread: 140}} />
+							<Crew1 x={x} y={y} s={s} frame={f} flip prop="flashlight" arms="point" brows="worried" />
+						</Stage>
+					);
+				},
+			},
+			// Storage rooms. Nothing. (shelves, a swinging bulb)
+			{
+				at: 'narrator_078_storage',
+				render: ({f, d}) => {
+					const s = 1.05;
+					const x = lerpF(f, 0, d, 660, 720);
+					const y = 1040;
+					const hand: [number, number] = [x + 134 * s, y - 213 * s];
+					return (
+						<Stage f={f} d={d} from={{z: 1.0, cx: 980}} to={{z: 1.08, cx: 1020}} rock={0.25}>
+							<StorageRoom f={f} beam={{from: hand, to: [lerpF(f, 0, d, 1170, 1300), lerpF(f, 0, d, 650, 590)], spread: 120}} />
+							<Crew1 x={x} y={y} s={s} frame={f} prop="flashlight" arms="point" pose={f < d * 0.6 ? 'walk' : 'stand'} phase={f * 0.3} brows="worried" />
+						</Stage>
+					);
+				},
+			},
 			{at: 'narrator_079_searched', render: ({f, d}) => <Evidence f={f} title="SEARCH" lines={['ALL CLEAR']}><DeckPlan f={f} progress={clamp(f / (d * 0.8))} /></Evidence>},
 			// The captain ordered another passenger count.
 			{

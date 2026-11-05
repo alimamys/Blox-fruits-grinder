@@ -61,13 +61,19 @@ export const Hook: React.FC = () => (
 			// SMASH CUT: the ferry alone in the black sea, 12:17 AM
 			{
 				at: 0,
-				render: ({f, d}) => (
+				render: ({f, d, api}) => (
 					<AbsoluteFill>
 						<Stage f={f} d={d} from={{z: 1.25, cx: 960, cy: 520}} to={{z: 1.05}}>
 							<OceanNight f={f} horizon={520} />
 							<FerryExterior f={f} x={980} y={600} s={0.62} tinyWoman />
 						</Stage>
 						<div style={{position: 'absolute', left: 70, top: 60, fontFamily: FONT.mono, fontSize: 46, color: '#e9eef5', opacity: clamp(f / 6)}}>12:17 AM</div>
+						{/* short edit: no separate disclaimer card - it rides over the first shot */}
+						{api.scene.start === 0 ? (
+							<div style={{position: 'absolute', top: 64, left: 0, right: 0, textAlign: 'center', fontFamily: FONT.ui, fontSize: 24, letterSpacing: 1, color: 'rgba(235,240,248,0.82)', textShadow: '0 2px 6px #000', opacity: clamp((f - 4) / 8) * clamp((100 - f) / 12)}}>
+								A work of fiction. All characters, events, documents and footage are fictional or dramatized.
+							</div>
+						) : null}
 					</AbsoluteFill>
 				),
 			},

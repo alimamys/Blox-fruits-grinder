@@ -30,11 +30,11 @@ import {
 	tone,
 	toward,
 	useUid,
+	LinGrad,
+	box3Faces,
 	type Cam3,
-	type Ink,
 	type Lights,
 	type Pt,
-	type Shades,
 } from './kit';
 import {OceanNight} from './Outdoor';
 
@@ -61,6 +61,9 @@ const PANTS = ['#2a2a30', '#3b4a6b', '#2f3338', '#4a3f35'];
 
 /* =================================================================== crowd */
 
+/** Circle as path data (so several dots can share one <path>). */
+const dot = (cx: number, cy: number, r: number) => `M${(cx - r).toFixed(1)},${cy.toFixed(1)}a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0`;
+
 /** Cheap passenger: head + shoulders. Used in grouped crowds.
  *  Idle life (on by default): slow breathing, occasional small head turns/tilts
  *  and blinks, all seeded by `id` - never any sideways sliding. */
@@ -81,7 +84,9 @@ export const CrowdHead: React.FC<{
 	eyes?: 'dot' | 'wide';
 	/** breathing / head motion / blinks (default true) */
 	idle?: boolean;
-}> = ({x, y, s = 1, id, back = false, look = 0, mouth = 'flat', phone = false, f, skin, shirt, hair, dim = 0, eyes = 'dot', idle = true}) => {
+	/** skip the small shading touches (far-away crowds) */
+	lite?: boolean;
+}> = ({x, y, s = 1, id, back = false, look = 0, mouth = 'flat', phone = false, f, skin, shirt, hair, dim = 0, eyes = 'dot', idle = true, lite = false}) => {
 	const ink = makeInk(f, id * 17 + 3);
 	const sk = skin ?? SKINS[(id * 3) % SKINS.length];
 	const sh = shirt ?? SHIRTS[(id * 7) % SHIRTS.length];
@@ -109,12 +114,12 @@ export const CrowdHead: React.FC<{
 			) : null}
 			<g transform={`translate(0,${-rise * 0.55})`}>
 				<path d={ink.ellipse(0, 22, 52, 34, 2, 1.4, 10)} fill={sh} stroke={INK} strokeWidth={5} />
-				<path d={ink.ellipse(0, 36, 42, 14, 12, 1, 8)} fill="#000" opacity={0.16} />
-				<ellipse cx={0} cy={-3} rx={20} ry={7} fill="#000" opacity={0.22} />
+				{lite ? null : <path d={ink.ellipse(0, 36, 42, 14, 12, 1, 8)} fill="#000" fillOpacity={0.16} />}
+				{lite ? null : <ellipse cx={0} cy={-3} rx={20} ry={7} fill="#000" fillOpacity={0.22} />}
 			</g>
 			<g transform={headT}>
 				<path d={ink.ellipse(0, -30, r, r, 3, 1, 10)} fill={back ? hr : sk} stroke={INK} strokeWidth={5} />
-				{back ? <path d="M-15,-50 Q0,-58 15,-50" stroke="#fff" strokeWidth={4} fill="none" opacity={0.18} strokeLinecap="round" /> : null}
+				{back && !lite ? <path d="M-15,-50 Q0,-58 15,-50" stroke="#fff" strokeWidth={4} fill="none" strokeOpacity={0.18} strokeLinecap="round" /> : null}
 				{!back ? (
 					<>
 						<path
@@ -127,16 +132,11 @@ export const CrowdHead: React.FC<{
 							<path d={`M${-15 + lk * 5},-30 L${-5 + lk * 5},-30 M${5 + lk * 5},-30 L${15 + lk * 5},-30`} stroke={INK} strokeWidth={3} strokeLinecap="round" />
 						) : eyes === 'wide' ? (
 							<>
-								<circle cx={-10 + lk * 4} cy={-30} r={7} fill="#fff" stroke={INK} strokeWidth={2.5} />
-								<circle cx={10 + lk * 4} cy={-30} r={7} fill="#fff" stroke={INK} strokeWidth={2.5} />
-								<circle cx={-10 + lk * 6} cy={-30} r={3} fill={INK} />
-								<circle cx={10 + lk * 6} cy={-30} r={3} fill={INK} />
+								<path d={`${dot(-10 + lk * 4, -30, 7)}${dot(10 + lk * 4, -30, 7)}`} fill="#fff" stroke={INK} strokeWidth={2.5} />
+								<path d={`${dot(-10 + lk * 6, -30, 3)}${dot(10 + lk * 6, -30, 3)}`} fill={INK} />
 							</>
 						) : (
-							<>
-								<circle cx={-10 + lk * 5} cy={-31} r={4} fill={INK} />
-								<circle cx={10 + lk * 5} cy={-31} r={4} fill={INK} />
-							</>
+							<path d={`${dot(-10 + lk * 5, -31, 4)}${dot(10 + lk * 5, -31, 4)}`} fill={INK} />
 						)}
 						{mouth === 'o' ? <ellipse cx={lk * 4} cy={-14} rx={5} ry={6} fill="#3a1414" stroke={INK} strokeWidth={2.5} /> : null}
 						{mouth === 'scream' ? <ellipse cx={lk * 4} cy={-12} rx={8} ry={11} fill="#2a0d0d" stroke={INK} strokeWidth={3} /> : null}
@@ -145,10 +145,10 @@ export const CrowdHead: React.FC<{
 					</>
 				) : null}
 			</g>
-			{dim > 0 ? <ellipse cx={0} cy={-10} rx={72} ry={82} fill="#000" opacity={phone ? dim * 0.35 : dim} /> : null}
+			{dim > 0 ? <ellipse cx={0} cy={-10} rx={72} ry={82} fill="#000" fillOpacity={phone ? dim * 0.35 : dim} /> : null}
 			{phone ? (
 				<g>
-					<ellipse cx={0} cy={-20} rx={80} ry={70} fill="#bfe0ff" opacity={0.28} />
+					<ellipse cx={0} cy={-20} rx={80} ry={70} fill="#bfe0ff" fillOpacity={0.28} />
 					<path d={ink.rect(-12, 0, 24, 36, 6, 0.6)} fill="#dff0ff" stroke={INK} strokeWidth={3} />
 				</g>
 			) : null}
@@ -174,7 +174,9 @@ export const SeatedCrowd: React.FC<{
 	dim?: number;
 	lights?: Lights;
 	legs?: boolean;
-}> = ({x, y, s, id, f, back = false, lean = 0, look = 0, mouth = 'flat', phone = false, eyes = 'dot', dim = 0, lights = 'on', legs = true}) => {
+	/** draw the lap block (skip when a seat back in front always hides it) */
+	lap?: boolean;
+}> = ({x, y, s, id, f, back = false, lean = 0, look = 0, mouth = 'flat', phone = false, eyes = 'dot', dim = 0, lights = 'on', legs = true, lap = true}) => {
 	const ink = makeInk(f, id * 29 + 7);
 	const L = lights === 'off' ? 'on' : lights;
 	const sh = tone(SHIRTS[(id * 7) % SHIRTS.length], L);
@@ -191,9 +193,9 @@ export const SeatedCrowd: React.FC<{
 					<path d={`M-19,-62 L-21,-4 M19,-62 L21,-4`} stroke={pa} strokeWidth={13} strokeLinecap="round" fill="none" />
 				</g>
 			) : null}
-			{!back ? <path d={ink.rect(-36, -86, 72, 26, 1, 1)} fill={pa} stroke={INK} strokeWidth={4.5} strokeLinejoin="round" /> : null}
+			{!back && lap ? <path d={ink.rect(-36, -86, 72, 26, 1, 1)} fill={pa} stroke={INK} strokeWidth={4.5} strokeLinejoin="round" /> : null}
 			<path d={ink.poly([[-33 + ln, -165], [33 + ln, -165], [31, -76], [-31, -76]], 2, 1.2)} fill={sh} stroke={INK} strokeWidth={5} strokeLinejoin="round" />
-			<path d={qd([[-31 + ln * 0.5, -120], [31 + ln * 0.5, -120], [31, -76], [-31, -76]])} fill="#000" opacity={0.14} />
+			{s > 0.6 && !back ? <path d={qd([[-31 + ln * 0.5, -120], [31 + ln * 0.5, -120], [31, -76], [-31, -76]])} fill="#000" fillOpacity={0.14} /> : null}
 			{!back ? (
 				<g>
 					<path d={`M${-36 + ln},-150 Q${-42 + ln * 0.5},-110 -22,-82 M${36 + ln},-150 Q${42 + ln * 0.5},-110 22,-82`} stroke={INK} strokeWidth={16} fill="none" strokeLinecap="round" />
@@ -201,8 +203,8 @@ export const SeatedCrowd: React.FC<{
 					<path d={`${ink.ellipse(-18, -80, 9, 7, 3, 0.6, 7)}${ink.ellipse(18, -80, 9, 7, 4, 0.6, 7)}`} fill={sk} stroke={INK} strokeWidth={3} />
 				</g>
 			) : null}
-			<CrowdHead x={ln} y={-177.5} s={1.05} id={id} f={f} back={back} look={look} mouth={mouth} phone={phone} eyes={eyes} dim={0} skin={sk} shirt={sh} hair={hr} />
-			{dim > 0 ? <path d={qd([[-60, -260], [60, -260], [50, 0], [-50, 0]])} fill="#000" opacity={phone ? dim * 0.35 : dim} /> : null}
+			<CrowdHead x={ln} y={-177.5} s={1.05} id={id} f={f} back={back} look={look} mouth={mouth} phone={phone} eyes={eyes} dim={0} skin={sk} shirt={sh} hair={hr} lite={s < 0.45} />
+			{dim > 0 ? <path d={qd([[-60, -260], [60, -260], [50, 0], [-50, 0]])} fill="#000" fillOpacity={phone ? dim * 0.35 : dim} /> : null}
 		</g>
 	);
 };
@@ -315,22 +317,27 @@ export const PassengerCabin: React.FC<{
 
 	/* ---------- room shell */
 	const shell: React.ReactNode[] = [];
-	// ceiling
-	shell.push(<path key="ceil" d={qd([p(-W, Hc, Zn), p(W, Hc, Zn), p(W, Hc, Zb), p(-W, Hc, Zb)])} fill={ceilC} />);
-	shell.push(<path key="ceilS" d={qd([p(-W, Hc, Zn), p(W, Hc, Zn), p(W, Hc, Zb), p(-W, Hc, Zb)])} fill={S.up} opacity={0.5} />);
-	// floor
-	shell.push(<path key="floor" d={qd([p(-W, 0, Zn), p(W, 0, Zn), p(W, 0, Zb), p(-W, 0, Zb)])} fill={floorC} />);
-	shell.push(<path key="aisle" d={qd([p(-88, 0, Zn), p(88, 0, Zn), p(88, 0, Zb), p(-88, 0, Zb)])} fill={aisleC} />);
-	shell.push(<path key="floorS" d={qd([p(-W, 0, Zn), p(W, 0, Zn), p(W, 0, Zb), p(-W, 0, Zb)])} fill={S.dn} opacity={0.7} />);
+	shell.push(
+		<defs key="g">
+			<LinGrad id={`${uid}c`} stops={[[0, shade(ceilC, -0.3)], [1, ceilC]]} />
+			<LinGrad id={`${uid}f`} stops={[[0, floorC], [1, shade(floorC, -0.5)]]} />
+			<LinGrad id={`${uid}a`} stops={[[0, aisleC], [1, shade(aisleC, -0.5)]]} />
+			<LinGrad id={`${uid}wl`} x2={1} y2={0} stops={[[0, shade(wallC, -0.25)], [1, wallC]]} />
+			<LinGrad id={`${uid}wr`} x2={1} y2={0} stops={[[0, wallC], [1, shade(wallC, -0.25)]]} />
+		</defs>,
+	);
+	// ceiling + floor
+	shell.push(<path key="ceil" d={qd([p(-W, Hc, Zn), p(W, Hc, Zn), p(W, Hc, Zb), p(-W, Hc, Zb)])} fill={`url(#${uid}c)`} />);
+	shell.push(<path key="floor" d={qd([p(-W, 0, Zn), p(W, 0, Zn), p(W, 0, Zb), p(-W, 0, Zb)])} fill={`url(#${uid}f)`} />);
+	shell.push(<path key="aisle" d={qd([p(-88, 0, Zn), p(88, 0, Zn), p(88, 0, Zb), p(-88, 0, Zb)])} fill={`url(#${uid}a)`} />);
 	// side walls
 	for (const sd of [-1, 1]) {
 		const X = sd * W;
-		shell.push(<path key={`w${sd}`} d={qd([p(X, Hc, Zn), p(X, Hc, Zb), p(X, 0, Zb), p(X, 0, Zn)])} fill={wallC} />);
-		shell.push(<path key={`wl${sd}`} d={qd([p(X, 300, Zn), p(X, 300, Zb), p(X, 0, Zb), p(X, 0, Zn)])} fill={wallLow} />);
-		shell.push(<path key={`ws${sd}`} d={qd([p(X, Hc, Zn), p(X, Hc, Zb), p(X, 0, Zb), p(X, 0, Zn)])} fill={sd < 0 ? S.rt : S.lt} opacity={0.35} />);
+		shell.push(<path key={`w${sd}`} d={qd([p(X, Hc, Zn), p(X, Hc, Zb), p(X, 0, Zb), p(X, 0, Zn)])} fill={`url(#${uid}${sd < 0 ? 'wl' : 'wr'})`} />);
+		shell.push(<path key={`wl${sd}`} d={qd([p(X, 300, Zn), p(X, 300, Zb), p(X, 0, Zb), p(X, 0, Zn)])} fill={wallLow} fillOpacity={0.75} />);
 		// ceiling seam AO + floor seam AO
-		shell.push(<path key={`ao${sd}`} d={qd([p(X, Hc, Zn), p(X, Hc, Zb), p(X, Hc - 70, Zb), p(X, Hc - 70, Zn)])} fill="#000" opacity={0.16} />);
-		shell.push(<path key={`fa${sd}`} d={qd([p(X, 0, Zn), p(X, 0, Zb), p(X - sd * 90, 0, Zb), p(X - sd * 90, 0, Zn)])} fill="#000" opacity={0.22} />);
+		shell.push(<path key={`ao${sd}`} d={qd([p(X, Hc, Zn), p(X, Hc, Zb), p(X, Hc - 70, Zb), p(X, Hc - 70, Zn)])} fill="#000" fillOpacity={0.16} />);
+		shell.push(<path key={`fa${sd}`} d={qd([p(X, 0, Zn), p(X, 0, Zb), p(X - sd * 90, 0, Zb), p(X - sd * 90, 0, Zn)])} fill="#000" fillOpacity={0.22} />);
 		// windows: one per row, recessed 34 units
 		for (let i = 0; i < 10; i++) {
 			const z0 = rowZ(i) + 70;
@@ -342,7 +349,7 @@ export const PassengerCabin: React.FC<{
 			const glass = [p(Xg, hi, z0), p(Xg, hi, z1), p(Xg, lo, z1), p(Xg, lo, z0)];
 			const o = Math.max(1.2, 4 * (1000 / z0));
 			shell.push(<path key={`g${sd}${i}`} d={ink.poly(glass, 40 + i * 2 + sd, 0.8)} fill={T('#08111f')} stroke={INK} strokeWidth={o} />);
-			shell.push(<path key={`gh${sd}${i}`} d={qd([p(Xg, 470, z0), p(Xg, 470, z1), p(Xg, 466, z1), p(Xg, 466, z0)])} fill="#2a3f5c" opacity={0.6} />);
+			shell.push(<path key={`gh${sd}${i}`} d={qd([p(Xg, 470, z0), p(Xg, 470, z1), p(Xg, 466, z1), p(Xg, 466, z0)])} fill="#2a3f5c" fillOpacity={0.6} />);
 			shell.push(<path key={`gs${sd}${i}`} d={qd(glass)} fill={S.sp} />);
 			// far jamb (faces the camera) + sill top
 			shell.push(<path key={`j${sd}${i}`} d={qd([p(X, hi, z1), p(Xg, hi, z1), p(Xg, lo, z1), p(X, lo, z1)])} fill={shade(wallC, -0.18)} stroke={INK} strokeWidth={o * 0.7} />);
@@ -360,7 +367,7 @@ export const PassengerCabin: React.FC<{
 				b={{X0: sd < 0 ? -W : W - 120, X1: sd < 0 ? -W + 120 : W, H0: 880, H1: 940, Z0: Zn, Z1: Zb - 10, fill: T('#b9c0ca'), open: true, sw: 4}}
 			/>,
 		);
-		shell.push(<path key={`rl${sd}`} d={qd([p(sd * (W - 120), 880, Zn), p(sd * (W - 120), 880, Zb), p(sd * (W - 100), 880, Zb), p(sd * (W - 100), 880, Zn)])} fill={lamp} opacity={L === 'off' ? 0.15 : 0.85} />);
+		shell.push(<path key={`rl${sd}`} d={qd([p(sd * (W - 120), 880, Zn), p(sd * (W - 120), 880, Zb), p(sd * (W - 100), 880, Zb), p(sd * (W - 100), 880, Zn)])} fill={lamp} fillOpacity={L === 'off' ? 0.15 : 0.85} />);
 	}
 	// ceiling light strips + ribs
 	const ribs: string[] = [];
@@ -371,11 +378,11 @@ export const PassengerCabin: React.FC<{
 		const b = p(W, Hc, Z);
 		ribs.push(`M${a[0].toFixed(1)},${a[1].toFixed(1)}L${b[0].toFixed(1)},${b[1].toFixed(1)}`);
 	}
-	shell.push(<path key="ribs" d={ribs.join('')} stroke="#000" strokeWidth={2} opacity={0.18} fill="none" />);
+	shell.push(<path key="ribs" d={ribs.join('')} stroke="#000" strokeWidth={2} strokeOpacity={0.18} fill="none" />);
 	for (const sd of [-1, 1]) {
 		const xa = sd * 300;
 		const xb = sd * 360;
-		shell.push(<path key={`lsg${sd}`} d={qd([p(sd * 210, Hc, Zn), p(sd * 450, Hc, Zn), p(sd * 450, Hc, Zb), p(sd * 210, Hc, Zb)])} fill={lamp} opacity={L === 'on' ? 0.16 : 0.07} />);
+		shell.push(<path key={`lsg${sd}`} d={qd([p(sd * 210, Hc, Zn), p(sd * 450, Hc, Zn), p(sd * 450, Hc, Zb), p(sd * 210, Hc, Zb)])} fill={lamp} fillOpacity={L === 'on' ? 0.16 : 0.07} />);
 		shell.push(<path key={`ls${sd}`} d={ink.poly([p(xa, Hc, Zn), p(xb, Hc, Zn), p(xb, Hc, Zb), p(xa, Hc, Zb)], 80 + sd, 1)} fill={L === 'off' ? '#222' : lamp} stroke={INK} strokeWidth={3} />);
 	}
 
@@ -384,7 +391,7 @@ export const PassengerCabin: React.FC<{
 	const bw1 = p(W, 0, Zb);
 	const endWall: React.ReactNode[] = [
 		<path key="bw" d={ink.rect(bw0[0], bw0[1], bw1[0] - bw0[0], bw1[1] - bw0[1], 9, 1)} fill={T(aft ? '#9aa4b2' : '#8d97a6')} stroke={INK} strokeWidth={3} />,
-		<path key="bws" d={qd([bw0, [bw1[0], bw0[1]], bw1, [bw0[0], bw1[1]]])} fill={S.dn} opacity={0.45} />,
+		<path key="bws" d={qd([bw0, [bw1[0], bw0[1]], bw1, [bw0[0], bw1[1]]])} fill={S.dn} fillOpacity={0.45} />,
 	];
 	if (aft) {
 		// rear double doors, recessed, with glass onto the dark deck
@@ -427,7 +434,7 @@ export const PassengerCabin: React.FC<{
 			endWall.push(<path key={`dh${sd}`} d={qd([[gw0[0], gw0[1]], [gw1[0], gw0[1]], [gw1[0], gw1[1]], [gw0[0], gw1[1]]])} fill={S.sp} />);
 		}
 		// EXIT sign (lit box) + label
-		endWall.push(<ellipse key="exg" cx={960} cy={p(0, 560, Zb)[1]} rx={60} ry={26} fill="#2bd06a" opacity={L === 'off' ? 0.25 : 0.18} />);
+		endWall.push(<ellipse key="exg" cx={960} cy={p(0, 560, Zb)[1]} rx={60} ry={26} fill="#2bd06a" fillOpacity={L === 'off' ? 0.25 : 0.18} />);
 		endWall.push(<Box3 key="ex" ink={ink} k0={90} c={c} b={{X0: -120, X1: 120, H0: 525, H1: 600, Z0: Zb - 40, Z1: Zb, fill: L === 'red' ? '#2b4a2b' : '#1f9a4b', sw: 2.5}} />);
 		const ex = p(0, 545, Zb - 40);
 		endWall.push(
@@ -474,9 +481,10 @@ export const PassengerCabin: React.FC<{
 		}
 	}
 
-	/* ---------- seats + passengers */
+	/* ---------- seats + passengers (seat faces batched per row: few <path>s) */
 	const rowEls: React.ReactNode[] = [];
 	const seatW = 73;
+	type Bucket = {d: string[]; fill: string; ov?: string; ovd?: string[]; w: number};
 	for (let row = rows - 1; row >= 0; row--) {
 		const Zf = rowZ(row);
 		const sc = 1000 / Zf;
@@ -484,8 +492,24 @@ export const PassengerCabin: React.FC<{
 		const col = (cc: string) => (hzk > 0 ? mix(cc, haze, hzk) : cc);
 		const sw = Math.max(1.3, 4.2 * sc);
 		const near = row <= 3;
-		const structs: React.ReactNode[] = [];
-		const backs: React.ReactNode[] = [];
+		const mk = (fill: string, w = sw, ov?: string): Bucket => ({d: [], fill, w, ov, ovd: ov ? [] : undefined});
+		const B = {
+			backSide: mk(shade(col(seatC), -0.28)),
+			backTop: mk(shade(col(seatC), 0.16)),
+			backNear: mk(col(seatC), sw, near ? S.hl : undefined),
+			hrTop: mk(shade(col(coverC), 0.05), sw * 0.8),
+			hrNear: mk(col(coverC), sw * 0.8),
+			baseNear: mk(col(baseC), sw * 0.8),
+			cuSide: mk(shade(col(seatC), -0.4)),
+			cuTop: mk(col(shade(seatC, 0.14))),
+			cuNear: mk(col(shade(seatC, -0.12)), sw, near ? S.dn : undefined),
+		};
+		const add = (bk: Bucket, d?: string, q?: string) => {
+			if (!d) return;
+			bk.d.push(d);
+			if (bk.ovd && q) bk.ovd.push(q);
+		};
+		const labels: React.ReactNode[] = [];
 		const people: React.ReactNode[] = [];
 		for (const side of [-1, 1] as const) {
 			for (const cIdx of [2, 1, 0]) {
@@ -494,56 +518,29 @@ export const PassengerCabin: React.FC<{
 				const id = row * 6 + (side > 0 ? 3 : 0) + cIdx;
 				const k0 = 1000 + id * 20;
 				const zc = aft ? 1 : -1; // seat depth direction relative to the feet
-				const cz0 = Zf + zc * 6;
-				const cz1 = Zf + zc * 66;
-				const bz0 = Zf + zc * 66;
-				const bz1 = Zf + zc * 80;
-				const cushion = (
-					<Box3
-						key={`cu${key}`}
-						ink={ink}
-						k0={k0}
-						c={c}
-						b={{X0: Xc - seatW, X1: Xc + seatW, H0: 46, H1: 72, Z0: Math.min(cz0, cz1), Z1: Math.max(cz0, cz1), fill: col(shade(seatC, -0.12)), top: col(shade(seatC, 0.14)), sw, amp: 0.8, nearShade: near ? S.dn : undefined}}
-					/>
-				);
-				const base = aft ? (
-					<Box3 key={`ba${key}`} ink={ink} k0={k0 + 6} c={c} b={{X0: Xc - seatW + 14, X1: Xc + seatW - 14, H0: 0, H1: 46, Z0: Zf + 26, Z1: Zf + 66, fill: col(baseC), sw: sw * 0.8, amp: 0.6}} />
-				) : null;
-				const backTop = aft ? SEAT.back + 40 : SEAT.back;
-				const seatBack = (
-					<g key={`sb${key}`}>
-						<Box3
-							ink={ink}
-							k0={k0 + 8}
-							c={c}
-							b={{X0: Xc - seatW, X1: Xc + seatW, H0: 64, H1: backTop, Z0: Math.min(bz0, bz1), Z1: Math.max(bz0, bz1), fill: col(seatC), sw, amp: 0.8, nearShade: near ? S.hl : undefined}}
-						/>
-						{aft ? (
-							<Box3
-								ink={ink}
-								k0={k0 + 12}
-								c={c}
-								b={{X0: Xc - 48, X1: Xc + 48, H0: 160, H1: backTop + 6, Z0: bz0 - 4, Z1: bz0 + 2, fill: col(coverC), sw: sw * 0.8, amp: 0.6}}
-							/>
-						) : null}
-						{seatLabels && !aft && row < 6
-							? (() => {
-									const lp = p(Xc, 120, bz1 > bz0 ? bz0 : bz1);
-									return (
-										<text x={lp[0]} y={lp[1]} textAnchor="middle" fontFamily="Patrick Hand" fontSize={26 * sc} fill="#fff">
-											{`${14 + (5 - row)}${side < 0 ? 'ABC'[cIdx] : 'DEF'[cIdx]}`}
-										</text>
-									);
-								})()
-							: null}
-					</g>
-				);
+				const cz = [Zf + zc * 6, Zf + zc * 66];
+				const bz = [Zf + zc * 66, Zf + zc * 80];
+				const cu = box3Faces(ink, k0, c, {X0: Xc - seatW, X1: Xc + seatW, H0: 46, H1: 72, Z0: Math.min(...cz), Z1: Math.max(...cz), amp: 0.8, sides: cIdx === 0});
+				add(B.cuSide, cu.side);
+				add(B.cuTop, cu.top);
+				add(B.cuNear, cu.near, cu.nearQ);
+				const bk = box3Faces(ink, k0 + 8, c, {X0: Xc - seatW, X1: Xc + seatW, H0: 64, H1: SEAT.back, Z0: Math.min(...bz), Z1: Math.max(...bz), amp: 0.8, sides: cIdx === 0});
+				add(B.backSide, bk.side);
+				add(B.backTop, bk.top);
+				add(B.backNear, bk.near, bk.nearQ);
 				if (aft) {
-					structs.push(base, seatBack, cushion);
-				} else {
-					structs.push(cushion);
-					backs.push(seatBack);
+					const hr = box3Faces(ink, k0 + 12, c, {X0: Xc - 48, X1: Xc + 48, H0: 158, H1: SEAT.headrest, Z0: bz[0] - 4, Z1: bz[0] + 2, amp: 0.6, sides: false});
+					add(B.hrTop, hr.top);
+					add(B.hrNear, hr.near);
+					if (row <= 1) add(B.baseNear, box3Faces(ink, k0 + 6, c, {X0: Xc - seatW + 14, X1: Xc + seatW - 14, H0: 0, H1: 46, Z0: Zf + 26, Z1: Zf + 66, amp: 0.6, sides: false}).near);
+				}
+				if (seatLabels && !aft && row < 6) {
+					const lp = p(Xc, 120, Math.min(...bz));
+					labels.push(
+						<text key={`lb${key}`} x={lp[0]} y={lp[1]} textAnchor="middle" fontFamily="Patrick Hand" fontSize={26 * sc} fill="#fff">
+							{`${14 + (5 - row)}${side < 0 ? 'ABC'[cIdx] : 'DEF'[cIdx]}`}
+						</text>,
+					);
 				}
 				// occupant
 				const sp = specialMap.get(key);
@@ -570,20 +567,31 @@ export const PassengerCabin: React.FC<{
 							eyes={crowdEyes}
 							dim={L === 'off' ? 0.7 : hzk * 0.5}
 							lights={L}
-							legs={aft}
+							legs={aft && row <= 1}
+							lap={!aft || row <= 2}
 						/>,
 					);
 				}
 			}
 		}
-		// shadow under the row
+		const draw = (k: string, bk: Bucket) =>
+			bk.d.length ? (
+				<g key={k}>
+					<path d={bk.d.join('')} fill={bk.fill} stroke={INK} strokeWidth={bk.w} strokeLinejoin="round" />
+					{bk.ov && bk.ovd && bk.ovd.length ? <path d={bk.ovd.join('')} fill={bk.ov} /> : null}
+				</g>
+			) : null;
+		const backEls = [draw('bs', B.backSide), draw('bt', B.backTop), draw('bn', B.backNear), draw('ht', B.hrTop), draw('hn', B.hrNear)];
+		const seatEls = [draw('ba', B.baseNear), draw('cs', B.cuSide), draw('ct', B.cuTop), draw('cn', B.cuNear)];
 		if (aft) {
 			for (const side of [-1, 1]) {
 				const sp0 = p(side * 320, 0, Zf + 50);
 				rowEls.push(<ellipse key={`sh${row}${side}`} cx={sp0[0]} cy={sp0[1]} rx={260 * sc} ry={26 * sc} fill={S.sh} />);
 			}
+			rowEls.push(<g key={`r${row}`}>{backEls}{seatEls}</g>, <g key={`pp${row}`}>{people}</g>);
+		} else {
+			rowEls.push(<g key={`r${row}`}>{seatEls}</g>, <g key={`pp${row}`}>{people}</g>, <g key={`rb${row}`}>{backEls}{labels}</g>);
 		}
-		rowEls.push(<g key={`r${row}`}>{structs}</g>, <g key={`pp${row}`}>{people}</g>, <g key={`rb${row}`}>{backs}</g>);
 	}
 
 	return (
@@ -603,6 +611,7 @@ export const PassengerCabin: React.FC<{
  *  cushion top = 817, seat backs up to ~710, headrests 682-716 behind the heads.
  *  The seats form one continuous row (armrests only at the two ends) so a
  *  passenger can lean on her neighbour. */
+const EXP: string = (process.env.REMOTION_EXP as string) || '';
 export const CabinRow: React.FC<{
 	f: number;
 	lights?: Lights;
@@ -613,6 +622,7 @@ export const CabinRow: React.FC<{
 	calm?: number;
 }> = ({f, lights = 'on', labels = ['18A', '18B'], children, reflection, horizon = 470, calm = 0}) => {
 	const uid = useUid('crow');
+	if (EXP.includes('Z')) return <g>{children}</g>;
 	const S = shadeUrls(uid);
 	const ink = makeInk(f, 700);
 	const L = lights;
@@ -667,20 +677,23 @@ export const CabinRow: React.FC<{
 				<clipPath id={`${uid}g`}>
 					<rect x={g0[0]} y={g0[1]} width={g1[0] - g0[0]} height={g1[1] - g0[1]} rx={18} />
 				</clipPath>
+				<LinGrad id={`${uid}wl`} stops={[[0, shade(wallC, 0.12)], [0.35, wallC], [1, shade(wallC, -0.38)]]} />
+				<LinGrad id={`${uid}fl`} stops={[[0, T('#3b4252')], [1, shade(T('#3b4252'), -0.55)]]} />
 				<linearGradient id={`${uid}rf`} x1="0" y1="0" x2="0" y2="1">
 					<stop offset="0.45" stopColor={lamp} stopOpacity={0} />
 					<stop offset="1" stopColor={lamp} stopOpacity={L === 'off' ? 0.02 : 0.1} />
 				</linearGradient>
 			</defs>
+			{!EXP.includes('A') && (<g>
 			{/* wall */}
-			<rect x={-200} y={-200} width={2320} height={seamY + 200} fill={wallC} />
-			<rect x={-200} y={100} width={2320} height={seamY - 100} fill={S.dn} opacity={0.6} />
-			<ellipse cx={960} cy={120} rx={1400} ry={360} fill={S.gl} opacity={L === 'off' ? 0.1 : 0.55} />
+			<rect x={-200} y={30} width={2320} height={seamY - 30} fill={`url(#${uid}wl)`} />
 			{/* ceiling + luggage rack with a cove light */}
-			<rect x={-200} y={-200} width={2320} height={240} fill={T('#5d6571')} />
+			<rect x={-200} y={-200} width={2320} height={236} fill={T('#5d6571')} />
 			<Box ink={ink} k0={10} b={{x0: -200, y0: 36, x1: 2120, y1: 78, k: rW / 0.985, vp, fill: T('#c3c9d1'), sw: 5, frontShade: S.dn}} />
-			<path d={qd([[-200, 98], [2120, 98], [2120, 106], [-200, 106]])} fill={lamp} opacity={L === 'off' ? 0.2 : 0.95} />
-			<rect x={-200} y={106} width={2320} height={240} fill={S.cone} opacity={L === 'off' ? 0.1 : 0.55} />
+			<path d={qd([[-200, 98], [2120, 98], [2120, 106], [-200, 106]])} fill={lamp} fillOpacity={L === 'off' ? 0.2 : 0.95} />
+			<rect x={-200} y={106} width={2320} height={240} fill={S.cone} fillOpacity={L === 'off' ? 0.1 : 0.55} />
+			</g>)}
+			{!EXP.includes('W') && (<g>
 			{/* window trim, glass + sea, reveals */}
 			<path
 				d={ink.poly([[wx0 - 22, wy0 - 4], [wx0 - 4, wy0 - 22], [wx1 + 4, wy0 - 22], [wx1 + 22, wy0 - 4], [wx1 + 22, wy1 + 4], [wx1 + 4, wy1 + 22], [wx0 - 4, wy1 + 22], [wx0 - 22, wy1 + 4]], 20, 1.2)}
@@ -696,20 +709,22 @@ export const CabinRow: React.FC<{
 				<rect x={g0[0]} y={g0[1]} width={g1[0] - g0[0]} height={g1[1] - g0[1]} fill={`url(#${uid}rf)`} />
 				<rect x={g0[0]} y={g0[1]} width={g1[0] - g0[0]} height={g1[1] - g0[1]} fill={S.sp} />
 			</g>
-			<path d={ink.poly([[wx0, wy0], [wx1, wy0], g1[0] !== undefined ? [g1[0], g0[1]] : [0, 0], g0], 21, 0.8)} fill={T('#7d8590')} stroke={INK} strokeWidth={3} />
+			<path d={ink.poly([[wx0, wy0], [wx1, wy0], [g1[0], g0[1]], g0], 21, 0.8)} fill={T('#7d8590')} stroke={INK} strokeWidth={3} />
 			<path d={ink.poly([[wx0, wy1], [wx1, wy1], g1, [g0[0], g1[1]]], 22, 0.8)} fill={T('#dfe3e8')} stroke={INK} strokeWidth={3} />
 			<path d={ink.poly([[wx0, wy0], g0, [g0[0], g1[1]], [wx0, wy1]], 23, 0.8)} fill={T('#a3abb6')} stroke={INK} strokeWidth={3} />
 			<path d={ink.poly([[wx1, wy0], [g1[0], g0[1]], g1, [wx1, wy1]], 24, 0.8)} fill={T('#a3abb6')} stroke={INK} strokeWidth={3} />
 			<path d={ink.rect(951, g0[1], 18, g1[1] - g0[1], 25, 0.8)} fill={T('#aeb5bf')} stroke={INK} strokeWidth={4} />
 			<rect x={951} y={g0[1]} width={18} height={g1[1] - g0[1]} fill={S.pole} />
+			</g>)}
+			{!EXP.includes('R') && (<g>
 			{/* chrome handrail with its shadow on the wall */}
-			<path d={ink.line(200, 640, 1720, 640, 30, 1, 6)} stroke="#000" strokeWidth={10} opacity={0.18} fill="none" />
+			<path d={ink.line(200, 640, 1720, 640, 30, 1, 6)} stroke="#000" strokeWidth={10} strokeOpacity={0.18} fill="none" />
 			{[300, 760, 1160, 1620].map((bx, i) => (
 				<path key={`br${i}`} d={ink.rect(bx - 5, 626, 10, 14, 31 + i, 0.5)} fill={T('#8a929c')} stroke={INK} strokeWidth={2.5} />
 			))}
 			<path d={ink.line(200, 626, 1720, 626, 32, 1, 6)} stroke={INK} strokeWidth={17} fill="none" strokeLinecap="round" />
 			<path d={ink.line(200, 626, 1720, 626, 32, 1, 6)} stroke={T('#c0c6ce')} strokeWidth={10} fill="none" strokeLinecap="round" />
-			<path d={ink.line(206, 623, 1714, 623, 32, 1, 6)} stroke="#fff" strokeWidth={2.5} opacity={L === 'off' ? 0.15 : 0.7} fill="none" />
+			<path d={ink.line(206, 623, 1714, 623, 32, 1, 6)} stroke="#fff" strokeWidth={2.5} strokeOpacity={L === 'off' ? 0.15 : 0.7} fill="none" />
 			{/* seat labels on the sill */}
 			{labels.map((l, i) => {
 				const cx = [860, 1040][i];
@@ -722,40 +737,56 @@ export const CabinRow: React.FC<{
 					</g>
 				);
 			})}
+			</g>)}
+			{!EXP.includes('F') && (<g>
 			{/* carpet floor */}
-			<rect x={-200} y={seamY} width={2320} height={1400 - seamY} fill={T('#3b4252')} />
-			<path d={carpet.join('')} stroke="#000" strokeWidth={2} opacity={0.16} fill="none" />
-			<rect x={-200} y={seamY} width={2320} height={1400 - seamY} fill={S.dn} opacity={0.75} />
+			<rect x={-200} y={seamY} width={2320} height={1400 - seamY} fill={`url(#${uid}fl)`} />
+			<path d={carpet.join('')} stroke="#000" strokeWidth={2} strokeOpacity={0.16} fill="none" />
 			<rect x={-200} y={seamY - 34} width={2320} height={34} fill={S.dn} />
-			<rect x={-200} y={seamY} width={2320} height={22} fill={S.up} opacity={0.9} />
+			<rect x={-200} y={seamY} width={2320} height={22} fill={S.up} fillOpacity={0.9} />
 			<path d={ink.line(-200, seamY, 2120, seamY, 33, 1, 8)} stroke={INK} strokeWidth={4} fill="none" />
 			{/* soft shadow of the whole row */}
 			<ellipse cx={955} cy={floorY(0.99)} rx={470} ry={34} fill={S.sh} />
-			<ellipse cx={955} cy={floorY(0.985)} rx={400} ry={14} fill="#000" opacity={0.35} />
-			{/* seat backs (behind the occupants) */}
-			{centres.map((cx, i) => {
-				const x0 = X(cx - half + 1, rB);
-				const x1 = X(cx + half - 1, rB);
-				const tk = 0.955;
-				const face: Pt[] = [[x0, yB], [x0, backTop + 12], [x0 + 12, backTop], [x1 - 12, backTop], [x1, backTop + 12], [x1, yB]];
-				const topF: Pt[] = [[x0 + 12, backTop], [x1 - 12, backTop], toward([x1 - 12, backTop], vp, tk), toward([x0 + 12, backTop], vp, tk)];
-				const hx0 = X(cx - 56, rB * 1.004);
-				const hx1 = X(cx + 56, rB * 1.004);
-				const hb = backTop + 8;
-				const hface: Pt[] = [[hx0, hb], [hx0, hrTop + 9], [hx0 + 9, hrTop], [hx1 - 9, hrTop], [hx1, hrTop + 9], [hx1, hb]];
+			<ellipse cx={955} cy={floorY(0.985)} rx={400} ry={14} fill="#000" fillOpacity={0.35} />
+			</g>)}
+			{!EXP.includes('S') && (<g>
+			{/* seat backs + headrests (behind the occupants), batched */}
+			{(() => {
+				const tops: string[] = [];
+				const faces: string[] = [];
+				const faceQ: string[] = [];
+				const seams: string[] = [];
+				const hTops: string[] = [];
+				const hFaces: string[] = [];
+				const hQ: string[] = [];
+				centres.forEach((cx, i) => {
+					const x0 = X(cx - half + 1, rB);
+					const x1 = X(cx + half - 1, rB);
+					const face: Pt[] = [[x0, yB], [x0, backTop + 12], [x0 + 12, backTop], [x1 - 12, backTop], [x1, backTop + 12], [x1, yB]];
+					tops.push(ink.poly([[x0 + 12, backTop], [x1 - 12, backTop], toward([x1 - 12, backTop], vp, 0.955), toward([x0 + 12, backTop], vp, 0.955)], 50 + i, 0.8));
+					faces.push(ink.poly(face, 55 + i, 0.9));
+					faceQ.push(qd(face));
+					seams.push(ink.line(X(cx, rB), backTop + 40, X(cx, rB), yB - 10, 60 + i, 0.6, 2));
+					const hx0 = X(cx - 56, rB * 1.004);
+					const hx1 = X(cx + 56, rB * 1.004);
+					const hb = backTop + 8;
+					const hface: Pt[] = [[hx0, hb], [hx0, hrTop + 9], [hx0 + 9, hrTop], [hx1 - 9, hrTop], [hx1, hrTop + 9], [hx1, hb]];
+					hTops.push(ink.poly([[hx0 + 9, hrTop], [hx1 - 9, hrTop], toward([hx1 - 9, hrTop], vp, 0.96), toward([hx0 + 9, hrTop], vp, 0.96)], 65 + i, 0.6));
+					hFaces.push(ink.poly(hface, 70 + i, 0.7));
+					hQ.push(qd(hface));
+				});
 				return (
-					<g key={`sb${i}`}>
-						<path d={ink.poly(topF, 50 + i, 0.8)} fill={shade(seatC, 0.18)} stroke={INK} strokeWidth={4} strokeLinejoin="round" />
-						<path d={ink.poly(face, 55 + i, 0.9)} fill={seatC} stroke={INK} strokeWidth={5} strokeLinejoin="round" />
-						<path d={qd(face)} fill={S.hl} />
-						<path d={qd(face)} fill={S.dn} opacity={0.5} />
-						<path d={ink.line(cx * 1 - 0, backTop + 40, cx, yB - 10, 60 + i, 0.6, 2)} stroke="#000" strokeWidth={2} opacity={0.18} fill="none" transform={`translate(${X(cx, rB) - cx},0)`} />
-						<path d={ink.poly([[hx0 + 9, hrTop], [hx1 - 9, hrTop], toward([hx1 - 9, hrTop], vp, 0.96), toward([hx0 + 9, hrTop], vp, 0.96)], 65 + i, 0.6)} fill={shade(coverC, 0.05)} stroke={INK} strokeWidth={3} />
-						<path d={ink.poly(hface, 70 + i, 0.7)} fill={coverC} stroke={INK} strokeWidth={3.5} strokeLinejoin="round" />
-						<path d={qd(hface)} fill={S.dn} opacity={0.35} />
+					<g>
+						<path d={tops.join('')} fill={shade(seatC, 0.18)} stroke={INK} strokeWidth={4} strokeLinejoin="round" />
+						<path d={faces.join('')} fill={seatC} stroke={INK} strokeWidth={5} strokeLinejoin="round" />
+						<path d={faceQ.join('')} fill={S.hl} />
+						<path d={seams.join('')} stroke="#000" strokeWidth={2} strokeOpacity={0.18} fill="none" />
+						<path d={hTops.join('')} fill={shade(coverC, 0.05)} stroke={INK} strokeWidth={3} />
+						<path d={hFaces.join('')} fill={coverC} stroke={INK} strokeWidth={3.5} strokeLinejoin="round" />
+						<path d={hQ.join('')} fill={S.dn} fillOpacity={0.35} />
 					</g>
 				);
-			})}
+			})()}
 			{/* shared base under the cushions */}
 			<path d={ink.rect(X(604, 0.975), yFB - 4, X(1296, 0.975) - X(604, 0.975), floorY(0.975) - yFB + 4, 80, 0.8)} fill={T('#171b24')} stroke={INK} strokeWidth={4} />
 			<rect x={X(604, 0.975)} y={yFB} width={X(1296, 0.975) - X(604, 0.975)} height={floorY(0.975) - yFB} fill={S.up} />
@@ -763,22 +794,34 @@ export const CabinRow: React.FC<{
 				const lx = X(604 + u * 692, 0.975);
 				return <path key={`lg${i}`} d={ink.rect(lx - 7, floorY(0.975) - 6, 14, 10, 81 + i, 0.5)} fill={T('#9aa2ad')} stroke={INK} strokeWidth={2.5} />;
 			})}
-			{/* cushions: top face + front face (the occupant sits ON these) */}
-			{centres.map((cx, i) => {
-				const x0 = cx - half + 1;
-				const x1 = cx + half - 1;
-				const top: Pt[] = [[x0 + 6, yF], [x1 - 6, yF], [X(x1, rB), yB], [X(x0, rB), yB]];
-				const front: Pt[] = [[x0, yF + 5], [x0 + 6, yF], [x1 - 6, yF], [x1, yF + 5], [x1 - 1, yFB], [x0 + 1, yFB]];
+			{/* cushions: top face + front face (the occupant sits ON these), batched */}
+			{(() => {
+				const tops: string[] = [];
+				const topQ: string[] = [];
+				const fronts: string[] = [];
+				const frontQ: string[] = [];
+				const lips: string[] = [];
+				centres.forEach((cx, i) => {
+					const x0 = cx - half + 1;
+					const x1 = cx + half - 1;
+					const top: Pt[] = [[x0 + 6, yF], [x1 - 6, yF], [X(x1, rB), yB], [X(x0, rB), yB]];
+					const front: Pt[] = [[x0, yF + 5], [x0 + 6, yF], [x1 - 6, yF], [x1, yF + 5], [x1 - 1, yFB], [x0 + 1, yFB]];
+					tops.push(ink.poly(top, 90 + i, 0.8));
+					topQ.push(qd(top));
+					fronts.push(ink.poly(front, 95 + i, 0.8));
+					frontQ.push(qd(front));
+					lips.push(ink.line(x0 + 10, yF + 3, x1 - 10, yF + 3, 99 + i, 0.4, 2));
+				});
 				return (
-					<g key={`cu${i}`}>
-						<path d={ink.poly(top, 90 + i, 0.8)} fill={shade(seatC, 0.2)} stroke={INK} strokeWidth={4} strokeLinejoin="round" />
-						<path d={qd(top)} fill={S.up} opacity={0.4} />
-						<path d={ink.poly(front, 95 + i, 0.8)} fill={shade(seatC, -0.12)} stroke={INK} strokeWidth={5} strokeLinejoin="round" />
-						<path d={qd(front)} fill={S.dn} opacity={0.7} />
-						<path d={ink.line(x0 + 10, yF + 3, x1 - 10, yF + 3, 99 + i, 0.4, 2)} stroke="#fff" strokeWidth={2} opacity={L === 'off' ? 0.05 : 0.25} fill="none" />
+					<g>
+						<path d={tops.join('')} fill={shade(seatC, 0.2)} stroke={INK} strokeWidth={4} strokeLinejoin="round" />
+						<path d={topQ.join('')} fill={S.up} fillOpacity={0.4} />
+						<path d={fronts.join('')} fill={shade(seatC, -0.12)} stroke={INK} strokeWidth={5} strokeLinejoin="round" />
+						<path d={frontQ.join('')} fill={S.dn} fillOpacity={0.7} />
+						<path d={lips.join('')} stroke="#fff" strokeWidth={2} strokeOpacity={L === 'off' ? 0.05 : 0.25} fill="none" />
 					</g>
 				);
-			})}
+			})()}
 			{/* low end armrests */}
 			{[-1, 1].map((sd) => {
 				const ax0 = sd < 0 ? 556 : 1306;
@@ -790,6 +833,7 @@ export const CabinRow: React.FC<{
 					</g>
 				);
 			})}
+			</g>)}
 			{children}
 		</g>
 	);
@@ -837,12 +881,10 @@ const DeckBehind: React.FC<DeckProps> = ({f, lights = 'on', calm = 0, fog = 0.15
 	const planks: string[] = [];
 	const alt: string[] = [];
 	const ext = (x: number) => 960 + (x - 960) * ((1160 - vy) / (edge - vy));
-	let prev = -1600;
-	for (let x = -1600; x <= 3520; x += 46) {
+	for (let i = 0, x = -1600; x <= 3520; x += 46, i++) {
 		const xb = ext(x);
 		planks.push(`M${x},${edge}L${xb.toFixed(1)},1160`);
-		if ((x / 46) % 2 === 0 && x > -1600) alt.push(`M${prev},${edge}L${x},${edge}L${xb.toFixed(1)},1160L${ext(prev).toFixed(1)},1160Z`);
-		prev = x;
+		if (i % 2 === 1) alt.push(`M${x - 46},${edge}L${x},${edge}L${xb.toFixed(1)},1160L${ext(x - 46).toFixed(1)},1160Z`);
 	}
 	// staggered butt joints
 	for (let i = 0; i < 70; i++) {
@@ -873,9 +915,16 @@ const DeckBehind: React.FC<DeckProps> = ({f, lights = 'on', calm = 0, fog = 0.15
 		seat.push(q([pb(sx * Lb - 5, 112, 32), pb(sx * Lb + 5, 112, 32), pb(sx * Lb + 5, 0, 32), pb(sx * Lb - 5, 0, 32)], 5 + sx, T(WOOD.iron), 2.5));
 	}
 	// seat slats (top faces) + rear edge
-	[[30, 12], [9, -9], [-12, -30]].forEach(([za, zb], i) => {
-		seat.push(q([pb(-Lb, SEAT.cushion, za), pb(Lb, SEAT.cushion, za), pb(Lb, SEAT.cushion, zb), pb(-Lb, SEAT.cushion, zb)], 10 + i, T(WOOD.top), 2.5));
-	});
+	seat.push(
+		<path
+			key="slats"
+			d={[[30, 12], [9, -9], [-12, -30]].map(([za, zb], i) => ink.poly([pb(-Lb, SEAT.cushion, za), pb(Lb, SEAT.cushion, za), pb(Lb, SEAT.cushion, zb), pb(-Lb, SEAT.cushion, zb)], 310 + i, 0.7)).join('')}
+			fill={T(WOOD.top)}
+			stroke={INK}
+			strokeWidth={2.5}
+			strokeLinejoin="round"
+		/>,
+	);
 	seat.push(q([pb(-Lb, SEAT.cushion, -30), pb(Lb, SEAT.cushion, -30), pb(Lb, 64, -30), pb(-Lb, 64, -30)], 14, T(WOOD.dark), 2.5));
 	// backrest in FRONT of the occupant (we are behind the bench)
 	const front: React.ReactNode[] = [];
@@ -885,12 +934,12 @@ const DeckBehind: React.FC<DeckProps> = ({f, lights = 'on', calm = 0, fog = 0.15
 		front.push(q([pb(sx * Lb - 6, 116, 34), pb(sx * Lb + 6, 116, 34), pb(sx * Lb + 6, 108, -40), pb(sx * Lb - 6, 108, -40)], 20 + sx, T(WOOD.iron), 2.5));
 		front.push(q([pb(X - 7, 166, -38), pb(X + 7, 166, -38), pb(X + 7, 0, -38), pb(X - 7, 0, -38)], 24 + sx, T(WOOD.iron), 2.5));
 	}
-	[[80, 102], [112, 134], [144, 164]].forEach(([h0, h1], i) => {
-		const face: Pt[] = [pb(-Lb + 6, h1, -36), pb(Lb - 6, h1, -36), pb(Lb - 6, h0, -36), pb(-Lb + 6, h0, -36)];
-		front.push(q(face, 30 + i, T(WOOD.face), 3));
-		front.push(<path key={`bs${i}`} d={qd(face)} fill={S.dn} opacity={0.55} />);
-		front.push(<path key={`bh${i}`} d={ink.line(pb(-Lb + 10, h1 - 2, -36)[0], pb(0, h1 - 2, -36)[1], pb(Lb - 10, h1 - 2, -36)[0], pb(0, h1 - 2, -36)[1], 40 + i, 0.4, 3)} stroke="#e6c08a" strokeWidth={2} opacity={L === 'off' ? 0.1 : 0.45} fill="none" />);
-	});
+	{
+		const sl = [[80, 102], [112, 134], [144, 164]].map(([h0, h1]) => [pb(-Lb + 6, h1, -36), pb(Lb - 6, h1, -36), pb(Lb - 6, h0, -36), pb(-Lb + 6, h0, -36)] as Pt[]);
+		front.push(<path key="bsl" d={sl.map((fc, i) => ink.poly(fc, 330 + i, 0.7)).join('')} fill={T(WOOD.face)} stroke={INK} strokeWidth={3} strokeLinejoin="round" />);
+		front.push(<path key="bss" d={sl.map((fc) => qd(fc)).join('')} fill="#000" fillOpacity={0.18} />);
+		front.push(<path key="bsh" d={sl.map((fc, i) => ink.line(fc[0][0] + 4, fc[0][1] + 2, fc[1][0] - 4, fc[1][1] + 2, 40 + i, 0.4, 3)).join('')} stroke="#e6c08a" strokeWidth={2} strokeOpacity={L === 'off' ? 0.1 : 0.45} fill="none" />);
+	}
 
 	const lit = L !== 'off';
 	return (
@@ -899,44 +948,28 @@ const DeckBehind: React.FC<DeckProps> = ({f, lights = 'on', calm = 0, fog = 0.15
 			<OceanNight f={f} horizon={horizon} calm={calm} fog={fog} mood={L === 'red' ? 'red' : L === 'off' ? 'dark' : 'night'} moon />
 			{seaChildren}
 			{/* deck */}
-			<path d={qd([[-200, edge], [2120, edge], [2120, 1300], [-200, 1300]])} fill={T('#4d535d')} />
-			<path d={alt.join('')} fill="#fff" opacity={0.035} />
-			<path d={planks.join('')} stroke="#000" strokeWidth={2} opacity={0.38} fill="none" />
-			<rect x={-200} y={edge} width={2320} height={600} fill={S.dn} opacity={0.75} />
-			{lit ? <ellipse cx={300} cy={780} rx={560} ry={150} fill={S.gl} opacity={0.75} /> : null}
-			{lit ? <ellipse cx={262} cy={835} rx={34} ry={140} fill={lamp} opacity={0.06} /> : null}
+			<defs>
+				<LinGrad id={`${uid}dk`} stops={[[0, T('#4d535d')], [1, shade(T('#4d535d'), -0.4)]]} />
+			</defs>
+			<rect x={-200} y={edge} width={2320} height={600} fill={`url(#${uid}dk)`} />
+			<path d={alt.join('')} fill="#fff" fillOpacity={0.035} />
+			<path d={planks.join('')} stroke="#000" strokeWidth={2} strokeOpacity={0.38} fill="none" />
+			{lit ? <ellipse cx={300} cy={780} rx={560} ry={150} fill={S.gl} fillOpacity={0.75} /> : null}
+			{lit ? <ellipse cx={262} cy={835} rx={34} ry={140} fill={lamp} fillOpacity={0.06} /> : null}
 			<rect x={-200} y={edge} width={2320} height={26} fill={S.up} />
 			{/* toe board + railing */}
 			<Box ink={ink} k0={60} b={{x0: -200, y0: 688, x1: 2120, y1: 704, k: 0.985, vp: [960, vy], fill: T('#aab1ba'), sw: 3}} />
-			{Array.from({length: 13}, (_, i) => {
-				const x = -20 + i * 165;
-				return (
-					<g key={`post${i}`}>
-						<path d={ink.rect(x - 5, 606, 10, 86, 70 + i, 0.6)} fill={railC} stroke={INK} strokeWidth={3} />
-						<rect x={x - 5} y={606} width={10} height={86} fill={S.pole} />
-					</g>
-				);
-			})}
-			{[655, 610].map((ry, i) => (
-				<g key={`rail${i}`}>
-					<path d={ink.line(-200, ry, 2120, ry, 90 + i, 1, 8)} stroke={INK} strokeWidth={i ? 17 : 12} fill="none" />
-					<path d={ink.line(-200, ry, 2120, ry, 90 + i, 1, 8)} stroke={railC} strokeWidth={i ? 11 : 7} fill="none" />
-					<path d={ink.line(-200, ry - (i ? 3 : 2), 2120, ry - (i ? 3 : 2), 90 + i, 1, 8)} stroke="#fff" strokeWidth={2} opacity={lit ? 0.6 : 0.15} fill="none" />
-				</g>
-			))}
+			<path d={Array.from({length: 13}, (_, i) => ink.rect(-25 + i * 165, 606, 10, 86, 70 + i, 0.6)).join('')} fill={railC} stroke={INK} strokeWidth={3} />
+			<path d={Array.from({length: 13}, (_, i) => `M${-17 + i * 165},608L${-17 + i * 165},690`).join('')} stroke="#fff" strokeWidth={2.5} strokeOpacity={lit ? 0.45 : 0.1}  fill="none" />
+			<path d={ink.line(-200, 655, 2120, 655, 90, 1, 8) + ink.line(-200, 610, 2120, 610, 91, 1, 8)} stroke={INK} strokeWidth={15} fill="none" />
+			<path d={ink.line(-200, 655, 2120, 655, 90, 1, 8) + ink.line(-200, 610, 2120, 610, 91, 1, 8)} stroke={railC} strokeWidth={9} fill="none" />
+			<path d={ink.line(-200, 652, 2120, 652, 90, 1, 8) + ink.line(-200, 607, 2120, 607, 91, 1, 8)} stroke="#fff" strokeWidth={2} strokeOpacity={lit ? 0.6 : 0.15} fill="none" />
 			{/* mooring bitts + rope coil */}
 			<ellipse cx={560} cy={748} rx={80} ry={14} fill={S.sh} />
 			<Box ink={ink} k0={100} b={{x0: 500, y0: 728, x1: 620, y1: 746, k: 0.96, vp: [960, vy], fill: T('#2b2f36'), sw: 3}} />
-			{[525, 595].map((bx, i) => (
-				<g key={`bitt${i}`}>
-					<path d={ink.rect(bx - 11, 694, 22, 40, 104 + i, 0.6)} fill={T('#31363e')} stroke={INK} strokeWidth={3} />
-					<rect x={bx - 11} y={694} width={22} height={40} fill={S.pole} />
-					<path d={ink.ellipse(bx, 694, 13, 5, 108 + i, 0.4, 8)} fill={T('#4a505a')} stroke={INK} strokeWidth={2.5} />
-				</g>
-			))}
-			{[0, 1, 2].map((i) => (
-				<path key={`rope${i}`} d={ink.ellipse(690, 745 - i * 5, 46 - i * 9, 12 - i * 2, 112 + i, 0.8, 10)} fill="none" stroke={T('#b59a62')} strokeWidth={6} />
-			))}
+			<path d={ink.rect(514, 694, 22, 40, 104, 0.6) + ink.rect(584, 694, 22, 40, 105, 0.6)} fill={T('#31363e')} stroke={INK} strokeWidth={3} />
+			<path d={ink.ellipse(525, 694, 13, 5, 108, 0.4, 8) + ink.ellipse(595, 694, 13, 5, 109, 0.4, 8)} fill={T('#4a505a')} stroke={INK} strokeWidth={2.5} />
+			<path d={[0, 1, 2].map((i) => ink.ellipse(690, 745 - i * 5, 46 - i * 9, 12 - i * 2, 112 + i, 0.8, 10)).join('')} fill="none" stroke={T('#b59a62')} strokeWidth={6} />
 			{/* deck locker (right) */}
 			<ellipse cx={1720} cy={808} rx={150} ry={20} fill={S.sh} />
 			<Box ink={ink} k0={120} b={{x0: 1610, y0: 735, x1: 1840, y1: 806, k: 0.86, vp: [960, vy], fill: T('#d5d9de'), sw: 4, frontShade: S.dn}} />
@@ -945,14 +978,14 @@ const DeckBehind: React.FC<DeckProps> = ({f, lights = 'on', calm = 0, fog = 0.15
 			</text>
 			{/* lifebuoy on the railing */}
 			<g transform="translate(1440, 640)">
-				<path d={ink.ellipse(4, 6, 46, 46, 130, 1, 12)} fill="none" stroke="#000" strokeWidth={22} opacity={0.25} />
+				<path d={ink.ellipse(4, 6, 46, 46, 130, 1, 12)} fill="none" stroke="#000" strokeWidth={22} strokeOpacity={0.25} />
 				<path d={ink.ellipse(0, 0, 42, 42, 131, 1, 12)} fill="none" stroke={INK} strokeWidth={26} />
 				<path d={ink.ellipse(0, 0, 42, 42, 131, 1, 12)} fill="none" stroke={T('#e8521d')} strokeWidth={19} />
 				<path d={ink.ellipse(0, 0, 42, 42, 131, 1, 12)} fill="none" stroke={T('#f4f4f4')} strokeWidth={19} strokeDasharray="22 44" />
-				<path d="M-30,-22 Q-10,-40 18,-36" stroke="#fff" strokeWidth={4} opacity={lit ? 0.5 : 0.1} fill="none" strokeLinecap="round" />
+				<path d="M-30,-22 Q-10,-40 18,-36" stroke="#fff" strokeWidth={4} strokeOpacity={lit ? 0.5 : 0.1} fill="none" strokeLinecap="round" />
 			</g>
 			{/* stern lamp: pole, head, light cone */}
-			{lit ? <path d={qd([[244, 392], [280, 392], [470, edge + 10], [60, edge + 10]])} fill={S.cone} opacity={0.75} /> : null}
+			{lit ? <path d={qd([[244, 392], [280, 392], [470, edge + 10], [60, edge + 10]])} fill={S.cone} fillOpacity={0.75} /> : null}
 			<path d={ink.rect(255, 384, 12, edge + 6 - 384, 140, 0.6)} fill={T('#2a2c30')} stroke={INK} strokeWidth={3} />
 			<rect x={255} y={384} width={12} height={edge - 380} fill={S.pole} />
 			<path d={ink.poly([[240, 356], [282, 356], [276, 392], [246, 392]], 141, 0.6)} fill={L === 'off' ? '#222' : lamp} stroke={INK} strokeWidth={3} />
@@ -1024,7 +1057,7 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 	const q = (pts: Pt[], k: number, fill: string, w = 3) => <path key={`q${k}`} d={ink.poly(pts, 400 + k, 0.7)} fill={fill} stroke={INK} strokeWidth={w} strokeLinejoin="round" />;
 	const bench: React.ReactNode[] = [];
 	// cast shadow thrown toward the camera by the door light + contact shadow
-	if (doorLight) bench.push(<path key="cast" d={qd([pb(-Lb, 0, 70), pb(Lb, 0, 70), pb(Lb * 1.45, 0, -330), pb(-Lb * 1.45, 0, -330)])} fill={S.up} opacity={0.9} />);
+	if (doorLight) bench.push(<path key="cast" d={qd([pb(-Lb, 0, 70), pb(Lb, 0, 70), pb(Lb * 1.45, 0, -330), pb(-Lb * 1.45, 0, -330)])} fill={S.up} fillOpacity={0.9} />);
 	bench.push(<ellipse key="ao" cx={pb(0, 0, 30)[0]} cy={pb(0, 0, 30)[1]} rx={Lb * s * 1.1} ry={22} fill={S.sh} />);
 	// back legs / posts (far)
 	for (const sx of [-1, 1]) {
@@ -1032,21 +1065,36 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 		bench.push(q([pb(X - 7, 0, 68), pb(X + 7, 0, 68), pb(X + 7, 168, 96), pb(X - 7, 168, 96)], 1 + sx, T(WOOD.iron), 2.5));
 	}
 	// backrest slats (reclined, behind her torso)
-	[[86, 108], [116, 138], [146, 166]].forEach(([h0, h1], i) => {
-		const zA = 66 + ((h0 - 80) / 90) * 30;
-		const zB = 66 + ((h1 - 80) / 90) * 30;
-		const face: Pt[] = [pb(-Lb, h1, zB), pb(Lb, h1, zB), pb(Lb, h0, zA), pb(-Lb, h0, zA)];
-		bench.push(q(face, 10 + i, T(WOOD.face), 3));
-		bench.push(<path key={`bh${i}`} d={qd(face)} fill={S.hl} />);
-		bench.push(q([pb(-Lb, h1, zB), pb(Lb, h1, zB), pb(Lb, h1, zB + 6), pb(-Lb, h1, zB + 6)], 14 + i, T(WOOD.top), 2));
-	});
-	// seat slats (top) + front apron
-	[[-4, 18], [22, 42], [46, 64]].forEach(([za, zb], i) => {
-		bench.push(q([pb(-Lb, SEAT.topFront + (i * 2), za), pb(Lb, SEAT.topFront + i * 2, za), pb(Lb, SEAT.topFront + i * 2 + 1, zb), pb(-Lb, SEAT.topFront + i * 2 + 1, zb)].reverse() as Pt[], 20 + i, T(WOOD.top), 2.5));
-	});
+	{
+		const faces: string[] = [];
+		const tops: string[] = [];
+		const hls: string[] = [];
+		[[86, 108], [116, 138], [146, 166]].forEach(([h0, h1], i) => {
+			const zA = 66 + ((h0 - 80) / 90) * 30;
+			const zB = 66 + ((h1 - 80) / 90) * 30;
+			const face: Pt[] = [pb(-Lb, h1, zB), pb(Lb, h1, zB), pb(Lb, h0, zA), pb(-Lb, h0, zA)];
+			faces.push(ink.poly(face, 410 + i, 0.7));
+			hls.push(qd([face[0], face[1], [face[1][0], face[1][1] + 6], [face[0][0], face[0][1] + 6]]));
+			tops.push(ink.poly([pb(-Lb, h1, zB), pb(Lb, h1, zB), pb(Lb, h1, zB + 6), pb(-Lb, h1, zB + 6)], 414 + i, 0.7));
+		});
+		bench.push(<path key="bkf" d={faces.join('')} fill={T(WOOD.face)} stroke={INK} strokeWidth={3} strokeLinejoin="round" />);
+		bench.push(<path key="bkh" d={hls.join('')} fill="#fff" fillOpacity={0.12} />);
+		bench.push(<path key="bkt" d={tops.join('')} fill={T(WOOD.top)} stroke={INK} strokeWidth={2} strokeLinejoin="round" />);
+		// seat slats (top)
+		bench.push(
+			<path
+				key="sst"
+				d={[[-4, 18], [22, 42], [46, 64]].map(([za, zb], i) => ink.poly([pb(-Lb, SEAT.topFront + i * 2 + 1, zb), pb(Lb, SEAT.topFront + i * 2 + 1, zb), pb(Lb, SEAT.topFront + i * 2, za), pb(-Lb, SEAT.topFront + i * 2, za)], 420 + i, 0.7)).join('')}
+				fill={T(WOOD.top)}
+				stroke={INK}
+				strokeWidth={2.5}
+				strokeLinejoin="round"
+			/>,
+		);
+	}
 	const apron: Pt[] = [pb(-Lb, SEAT.topFront, -4), pb(Lb, SEAT.topFront, -4), pb(Lb, SEAT.frontBottom, -4), pb(-Lb, SEAT.frontBottom, -4)];
 	bench.push(q(apron, 30, T(WOOD.face), 3));
-	bench.push(<path key="apS" d={qd(apron)} fill={S.dn} opacity={0.6} />);
+	bench.push(<path key="apS" d={qd(apron)} fill={S.dn} fillOpacity={0.6} />);
 	// end frames: front legs + armrests (at the ends, never in front of the occupant)
 	for (const sx of [-1, 1]) {
 		const X = sx * Lb;
@@ -1058,7 +1106,11 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 	return (
 		<g>
 			<ShadeDefs id={uid} glow={lamp} />
-			<rect x={-200} y={-200} width={2320} height={1500} fill={T('#0a0f19')} />
+			<defs>
+				<LinGrad id={`${uid}dk`} stops={[[0, T('#4d535d')], [1, shade(T('#4d535d'), -0.38)]]} />
+				<LinGrad id={`${uid}lw`} stops={[[0, T('#c8ccd2')], [1, shade(T('#c8ccd2'), -0.22)]]} />
+				<LinGrad id={`${uid}uw`} stops={[[0, T('#d3d8de')], [1, shade(T('#d3d8de'), -0.18)]]} />
+			</defs>
 			<OceanNight f={f} horizon={vy} mood={L === 'red' ? 'red' : 'dark'} stars />
 			{/* side railings far ends */}
 			<path d={sidePosts.join('')} fill={T('#b9bfc7')} stroke={INK} strokeWidth={2} />
@@ -1073,15 +1125,9 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 			<path d={ink.poly(rectW(-1020, 1020, 1060, 1095, 0.5), 20, 1)} fill={T('#e6e9ed')} stroke={INK} strokeWidth={4} />
 			<path d={ink.line(960, 252, 960, 140, 21, 0.6, 2)} stroke={T('#30343a')} strokeWidth={6} fill="none" />
 			<circle cx={960} cy={136} r={6} fill={lit ? '#fff' : '#333'} />
-			{lit ? <circle cx={960} cy={136} r={26} fill="#fff" opacity={0.12} /> : null}
-			<path d={ink.poly(rectW(-1000, 1000, 600, 1060, 0.5), 22, 1)} fill={T('#d3d8de')} stroke={INK} strokeWidth={5} />
-			<path d={qd(rectW(-1000, 1000, 600, 1060, 0.5))} fill={S.dn} opacity={0.35} />
-			{upWin.map(([a, b], i) => (
-				<g key={`uw${i}`}>
-					<path d={ink.poly(rectW(a, b, 700, 900, 0.5), 30 + i, 0.8)} fill={winFill(doorsLit)} stroke={INK} strokeWidth={4} />
-					<path d={qd(rectW(a, b, 700, 900, 0.5))} fill={S.sp} />
-				</g>
-			))}
+			{lit ? <circle cx={960} cy={136} r={26} fill="#fff" fillOpacity={0.12} /> : null}
+			<path d={ink.poly(rectW(-1000, 1000, 600, 1060, 0.5), 22, 1)} fill={`url(#${uid}uw)`} stroke={INK} strokeWidth={5} />
+			<path d={upWin.map(([a, b], i) => ink.poly(rectW(a, b, 700, 900, 0.5), 30 + i, 0.8)).join('')} fill={winFill(doorsLit)} stroke={INK} strokeWidth={4} />
 			{/* upper deck railing on the slab */}
 			<path
 				d={Array.from({length: 17}, (_, i) => {
@@ -1096,16 +1142,11 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 			/>
 			<path d={ink.poly([pw(-1150, 700, 0.548), pw(1150, 700, 0.548)], 40, 0.8, false)} stroke={T('#c9ced5')} strokeWidth={5} fill="none" />
 			<Box ink={ink} k0={41} b={{x0: pw(-1170, 0, 0.548)[0], y0: pw(0, 600, 0.548)[1], x1: pw(1170, 0, 0.548)[0], y1: pw(0, 560, 0.548)[1], k: kw / 0.548, vp: [960, vy], fill: T('#e3e6ea'), sw: 4}} />
-			<path d={ink.poly(rectW(-Wd, Wd, 0, 560, kw), 42, 1.2)} fill={T('#c8ccd2')} stroke={INK} strokeWidth={5} />
-			<path d={qd(rectW(-Wd, Wd, 0, 560, kw))} fill={S.dn} opacity={0.4} />
-			<path d={qd(rectW(-Wd, Wd, 520, 560, kw))} fill="#000" opacity={0.22} />
-			{lowWin.map(([a, b], i) => (
-				<g key={`lw${i}`}>
-					<path d={ink.poly(rectW(a, b, 210, 410, kw), 50 + i, 0.8)} fill={winFill(doorsLit)} stroke={INK} strokeWidth={4} />
-					<path d={qd(rectW(a, b, 210, 410, kw))} fill={S.sp} />
-					<path d={qd(rectW(a - 8, b + 8, 198, 210, kw))} fill={T('#e5e8ec')} stroke={INK} strokeWidth={2} />
-				</g>
-			))}
+			<path d={ink.poly(rectW(-Wd, Wd, 0, 560, kw), 42, 1.2)} fill={`url(#${uid}lw)`} stroke={INK} strokeWidth={5} />
+			<path d={qd(rectW(-Wd, Wd, 520, 560, kw))} fill="#000" fillOpacity={0.22} />
+			<path d={lowWin.map(([a, b], i) => ink.poly(rectW(a, b, 210, 410, kw), 50 + i, 0.8)).join('')} fill={winFill(doorsLit)} stroke={INK} strokeWidth={4} />
+			<path d={lowWin.map(([a, b]) => qd(rectW(a - 8, b + 8, 198, 210, kw))).join('')} fill={T('#e5e8ec')} stroke={INK} strokeWidth={2} />
+			<path d={[...lowWin.map(([a, b]) => qd(rectW(a + 20, a + (b - a) * 0.35, 260, 410, kw))), ...upWin.map(([a, b]) => qd(rectW(a + 20, a + (b - a) * 0.35, 750, 900, 0.5)))].join('')} fill="#fff" fillOpacity={0.08} />
 			{/* recessed double doors with lit glass */}
 			<path d={qd(dLeft)} fill={T('#1a1d22')} />
 			<path d={ink.poly([pw(-130, 425, kw), pw(-130, 425, 0.53), pw(-130, 0, 0.53), pw(-130, 0, kw)], 60, 0.6)} fill={T('#8d96a1')} stroke={INK} strokeWidth={3} />
@@ -1116,7 +1157,7 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 				return (
 					<g key={`door${sd}`}>
 						<path d={ink.poly(leaf, 62 + sd, 0.6)} fill={T('#9aa3ae')} stroke={INK} strokeWidth={3.5} />
-						<path d={qd(leaf)} fill={S.dn} opacity={0.4} />
+						<path d={qd(leaf)} fill={S.dn} fillOpacity={0.4} />
 						<path d={ink.poly(glass, 64 + sd, 0.5)} fill={L === 'off' ? '#111' : L === 'red' ? '#a02020' : '#ffe39a'} stroke={INK} strokeWidth={3} />
 						<path d={qd(glass)} fill={S.sp} />
 						<path d={ink.rect(pw(sd * 14, 0, 0.53)[0] - 3, pw(0, 200, 0.53)[1], 6, 22, 66 + sd, 0.4)} fill={T('#3a3f46')} stroke={INK} strokeWidth={2} />
@@ -1127,13 +1168,10 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 			<Box ink={ink} k0={70} b={{x0: 944, y0: pw(0, 470, kw)[1] - 8, x1: 976, y1: pw(0, 470, kw)[1] + 6, k: 0.97, vp: [960, vy], fill: lit ? lamp : '#333', sw: 2.5}} />
 			{lit ? <ellipse cx={960} cy={pw(0, 470, kw)[1]} rx={180} ry={120} fill={S.gl} /> : null}
 			{/* deck */}
-			<path d={qd([pw(-Wd, 0, kw), pw(Wd, 0, kw), pw(Wd, 0, 2.4), pw(-Wd, 0, 2.4)])} fill={T('#4d535d')} />
-			<path d={planks.join('')} stroke="#000" strokeWidth={2} opacity={0.35} fill="none" />
-			<path d={qd([pw(-Wd, 0, kw), pw(Wd, 0, kw), pw(Wd, 0, 2.4), pw(-Wd, 0, 2.4)])} fill={S.dn} opacity={0.7} />
-			{doorLight ? <path d={qd([pw(-140, 0, kw), pw(140, 0, kw), pw(330, 0, 1.15), pw(-330, 0, 1.15)])} fill={S.cone} opacity={0.6} /> : null}
-			{doorsLit && doorLight
-				? lowWin.map(([a, b], i) => <path key={`sp${i}`} d={qd([pw(a, 0, kw), pw(b, 0, kw), pw(b * 1.15, 0, 0.75), pw(a * 1.15, 0, 0.75)])} fill={S.cone} opacity={0.35} />)
-				: null}
+			<path d={qd([pw(-Wd, 0, kw), pw(Wd, 0, kw), pw(Wd, 0, 1.6), pw(-Wd, 0, 1.6)])} fill={`url(#${uid}dk)`} />
+			<path d={planks.join('')} stroke="#000" strokeWidth={2} strokeOpacity={0.35} fill="none" />
+			{doorLight ? <path d={qd([pw(-140, 0, kw), pw(140, 0, kw), pw(330, 0, 1.15), pw(-330, 0, 1.15)])} fill={S.cone} fillOpacity={0.6} /> : null}
+			{doorsLit && doorLight ? <path d={lowWin.map(([a, b]) => qd([pw(a, 0, kw), pw(b, 0, kw), pw(b * 1.15, 0, 0.75), pw(a * 1.15, 0, 0.75)])).join('')} fill={lamp} fillOpacity={0.07} /> : null}
 			<path d={qd([pw(-Wd, 0, kw), pw(Wd, 0, kw), pw(Wd, 0, kw * 1.05), pw(-Wd, 0, kw * 1.05)])} fill={S.up} />
 			<path d={qd(rectW(-Wd, Wd, 0, 40, kw))} fill={S.dn} />
 			<path d={ink.line(pw(-Wd, 0, kw)[0], 800, pw(Wd, 0, kw)[0], 800, 80, 1, 6)} stroke={INK} strokeWidth={4} fill="none" />
@@ -1148,19 +1186,11 @@ const DeckFront: React.FC<DeckProps> = ({f, lights = 'on', children, benchX = 96
 				const top = pw(0, 110, kn)[1];
 				return (
 					<g>
-						{Array.from({length: 15}, (_, i) => {
-							const X = -1050 + i * 150;
-							const a = pw(X, 110, kn);
-							return (
-								<g key={`fp${i}`}>
-									<path d={ink.rect(a[0] - 8, top, 16, 200, 90 + i, 0.6)} fill={T('#c9ced5')} stroke={INK} strokeWidth={4} />
-									<rect x={a[0] - 8} y={top} width={16} height={200} fill={S.pole} />
-								</g>
-							);
-						})}
+						<path d={Array.from({length: 15}, (_, i) => ink.rect(pw(-1050 + i * 150, 110, kn)[0] - 8, top, 16, 200, 90 + i, 0.6)).join('')} fill={T('#c9ced5')} stroke={INK} strokeWidth={4} />
+						<path d={Array.from({length: 15}, (_, i) => `M${pw(-1050 + i * 150, 110, kn)[0] - 3},${top + 4}L${pw(-1050 + i * 150, 110, kn)[0] - 3},${top + 200}`).join('')} stroke="#fff" strokeWidth={3} strokeOpacity={lit ? 0.4 : 0.1}  fill="none" />
 						<path d={ink.line(-200, top, 2120, top, 110, 1, 8)} stroke={INK} strokeWidth={24} fill="none" />
 						<path d={ink.line(-200, top, 2120, top, 110, 1, 8)} stroke={T('#c9ced5')} strokeWidth={16} fill="none" />
-						<path d={ink.line(-200, top - 4, 2120, top - 4, 110, 1, 8)} stroke="#fff" strokeWidth={3} opacity={lit ? 0.55 : 0.15} fill="none" />
+						<path d={ink.line(-200, top - 4, 2120, top - 4, 110, 1, 8)} stroke="#fff" strokeWidth={3} strokeOpacity={lit ? 0.55 : 0.15} fill="none" />
 					</g>
 				);
 			})()}
@@ -1235,8 +1265,8 @@ export const Bridge: React.FC<{
 				const a = p(X, 960, 700);
 				return (
 					<g key={`dl${i}`}>
-						<ellipse cx={a[0]} cy={a[1] + 6} rx={26} ry={8} fill={red ? '#ff3a28' : '#ffcf8a'} opacity={0.8} />
-						<ellipse cx={a[0]} cy={a[1] + 40} rx={110} ry={60} fill={S.gl} opacity={0.4} />
+						<ellipse cx={a[0]} cy={a[1] + 6} rx={26} ry={8} fill={red ? '#ff3a28' : '#ffcf8a'} fillOpacity={0.8} />
+						<ellipse cx={a[0]} cy={a[1] + 40} rx={110} ry={60} fill={S.gl} fillOpacity={0.4} />
 					</g>
 				);
 			})}
@@ -1273,8 +1303,8 @@ export const Bridge: React.FC<{
 						<rect x={n0[0]} y={n0[1]} width={w} height={h} fill={on ? (red ? '#240505' : '#05140f') : '#050608'} />
 						{on && m.kind === 'radar' ? (
 							<g>
-								<ellipse cx={cx} cy={cy} rx={h * 0.42} ry={h * 0.42} fill="none" stroke={red ? '#ff5a4a' : '#3cf08a'} strokeWidth={2} opacity={0.7} />
-								<ellipse cx={cx} cy={cy} rx={h * 0.22} ry={h * 0.22} fill="none" stroke={red ? '#ff5a4a' : '#3cf08a'} strokeWidth={1.5} opacity={0.5} />
+								<ellipse cx={cx} cy={cy} rx={h * 0.42} ry={h * 0.42} fill="none" stroke={red ? '#ff5a4a' : '#3cf08a'} strokeWidth={2} strokeOpacity={0.7} />
+								<ellipse cx={cx} cy={cy} rx={h * 0.22} ry={h * 0.22} fill="none" stroke={red ? '#ff5a4a' : '#3cf08a'} strokeWidth={1.5} strokeOpacity={0.5} />
 								<path d={`M${cx},${cy} L${cx + Math.cos(f / 9 + i) * h * 0.42},${cy + Math.sin(f / 9 + i) * h * 0.42}`} stroke={red ? '#ff8a7a' : '#7dffb0'} strokeWidth={2.5} />
 							</g>
 						) : null}
@@ -1288,15 +1318,32 @@ export const Bridge: React.FC<{
 						{on && m.kind === 'eng' ? (
 							<g>
 								{[0, 1, 2, 3].map((b) => (
-									<rect key={b} x={n0[0] + w * (0.12 + b * 0.2)} y={n1[1] - h * (0.25 + 0.5 * h01(b, i))} width={w * 0.12} height={h * (0.25 + 0.5 * h01(b, i)) - 6} fill={b === 3 ? '#ffb02e' : '#35d06a'} opacity={0.8} />
+									<rect key={b} x={n0[0] + w * (0.12 + b * 0.2)} y={n1[1] - h * (0.25 + 0.5 * h01(b, i))} width={w * 0.12} height={h * (0.25 + 0.5 * h01(b, i)) - 6} fill={b === 3 ? '#ffb02e' : '#35d06a'} fillOpacity={0.8} />
 								))}
 							</g>
 						) : null}
 						<rect x={n0[0]} y={n0[1]} width={w} height={h} fill={S.sp} />
-						{on ? <ellipse cx={cx} cy={n1[1] + 30} rx={w * 0.6} ry={40} fill={S.gl} opacity={0.35} /> : null}
+						{on ? <ellipse cx={cx} cy={n1[1] + 30} rx={w * 0.6} ry={40} fill={S.gl} fillOpacity={0.35} /> : null}
 					</g>
 				);
 			})}
+			{/* console front: panels, vents, switches */}
+			{[-1, 1].map((sd) =>
+				[0, 1, 2].map((i) => {
+					const X0 = sd < 0 ? -840 + i * 250 : 340 + i * 250;
+					const a = p(X0, 380, 700);
+					const b = p(X0 + 200, 120, 700);
+					return (
+						<g key={`cp${sd}${i}`}>
+							<path d={ink.rect(a[0], a[1], b[0] - a[0], b[1] - a[1], 200 + i + sd * 7, 0.8)} fill={T('#262b34')} stroke={INK} strokeWidth={4} />
+							<path d={Array.from({length: 5}, (_, k) => `M${a[0] + 24},${a[1] + 30 + k * 26}L${b[0] - 24},${a[1] + 30 + k * 26}`).join('')} stroke="#000" strokeWidth={5} strokeOpacity={0.35}  fill="none" />
+							{[0, 1, 2].map((k) => (
+								<circle key={k} cx={a[0] + 40 + k * 50} cy={b[1] - 40} r={9} fill={L === 'off' ? '#222' : h01(k, i, Math.floor(f / 25) + sd) > 0.4 ? (k === 2 ? '#ff5a4a' : '#35d06a') : '#1a1f1a'} stroke={INK} strokeWidth={2} />
+							))}
+						</g>
+					);
+				}),
+			)}
 			{/* throttle levers */}
 			{[-1, 1].map((sd) => {
 				const a = p(sd * 60, 425, 800);
@@ -1359,21 +1406,21 @@ export const FerryCorridor: React.FC<{f: number; lights?: Lights; children?: Rea
 			<ShadeDefs id={uid} glow={lamp} />
 			<rect x={-200} y={-200} width={2320} height={1500} fill={T('#5f6772')} />
 			<path d={qd([p(-W, Hc, Zn), p(W, Hc, Zn), p(W, Hc, Zb), p(-W, Hc, Zb)])} fill={T('#a7aeb7')} />
-			<path d={qd([p(-W, Hc, Zn), p(W, Hc, Zn), p(W, Hc, Zb), p(-W, Hc, Zb)])} fill={S.up} opacity={0.6} />
+			<path d={qd([p(-W, Hc, Zn), p(W, Hc, Zn), p(W, Hc, Zb), p(-W, Hc, Zb)])} fill={S.up} fillOpacity={0.6} />
 			<path d={qd([p(-W, 0, Zn), p(W, 0, Zn), p(W, 0, Zb), p(-W, 0, Zb)])} fill={T('#4b525d')} />
 			{[-1, 1].map((sd) => (
 				<g key={`w${sd}`}>
 					<path d={qd([p(sd * W, Hc, Zn), p(sd * W, Hc, Zb), p(sd * W, 0, Zb), p(sd * W, 0, Zn)])} fill={wall} />
 					<path d={qd([p(sd * W, 260, Zn), p(sd * W, 260, Zb), p(sd * W, 0, Zb), p(sd * W, 0, Zn)])} fill={shade(wall, -0.18)} />
-					<path d={qd([p(sd * W, Hc, Zn), p(sd * W, Hc, Zb), p(sd * W, 0, Zb), p(sd * W, 0, Zn)])} fill={S.dn} opacity={0.45} />
-					<path d={qd([p(sd * W, 0, Zn), p(sd * W, 0, Zb), p(sd * (W - 70), 0, Zb), p(sd * (W - 70), 0, Zn)])} fill="#000" opacity={0.25} />
+					<path d={qd([p(sd * W, Hc, Zn), p(sd * W, Hc, Zb), p(sd * W, 0, Zb), p(sd * W, 0, Zn)])} fill={S.dn} fillOpacity={0.45} />
+					<path d={qd([p(sd * W, 0, Zn), p(sd * W, 0, Zb), p(sd * (W - 70), 0, Zb), p(sd * (W - 70), 0, Zn)])} fill="#000" fillOpacity={0.25} />
 				</g>
 			))}
-			<path d={plates.join('')} stroke="#000" strokeWidth={2} opacity={0.22} fill="none" />
-			<path d={qd([p(-W, 0, Zn), p(W, 0, Zn), p(W, 0, Zb), p(-W, 0, Zb)])} fill={S.dn} opacity={0.55} />
+			<path d={plates.join('')} stroke="#000" strokeWidth={2} strokeOpacity={0.22} fill="none" />
+			<path d={qd([p(-W, 0, Zn), p(W, 0, Zn), p(W, 0, Zb), p(-W, 0, Zb)])} fill={S.dn} fillOpacity={0.55} />
 			{/* end wall + door to the bridge */}
 			<path d={ink.rect(b0[0], b0[1], b1[0] - b0[0], b1[1] - b0[1], 5, 1)} fill={T('#c0c6cd')} stroke={INK} strokeWidth={4} />
-			<path d={qd([b0, [b1[0], b0[1]], b1, [b0[0], b1[1]]])} fill={S.dn} opacity={0.4} />
+			<path d={qd([b0, [b1[0], b0[1]], b1, [b0[0], b1[1]]])} fill={S.dn} fillOpacity={0.4} />
 			<Box3 ink={ink} k0={6} c={c} b={{X0: -200, X1: 200, H0: 0, H1: 780, Z0: Zb - 10, Z1: Zb, fill: T('#8a939e'), sw: 4, nearShade: S.dn}} />
 			{(() => {
 				const a = p(0, 600, Zb - 10);
@@ -1391,7 +1438,7 @@ export const FerryCorridor: React.FC<{f: number; lights?: Lights; children?: Rea
 						<g key={`sd${sd}${i}`}>
 							<path d={qd([p(sd * W, 820, Z), p(sd * W, 820, Zd), p(sd * W, 0, Zd), p(sd * W, 0, Z)])} fill={T('#2a2f36')} />
 							<path d={ink.poly([p(Xr, 800, Z + 20), p(Xr, 800, Zd - 20), p(Xr, 0, Zd - 20), p(Xr, 0, Z + 20)], 20 + i + sd * 7, 0.8)} fill={T('#727c88')} stroke={INK} strokeWidth={4} />
-							<path d={qd([p(Xr, 800, Z + 20), p(Xr, 800, Zd - 20), p(Xr, 0, Zd - 20), p(Xr, 0, Z + 20)])} fill={sd < 0 ? S.rt : S.lt} opacity={0.4} />
+							<path d={qd([p(Xr, 800, Z + 20), p(Xr, 800, Zd - 20), p(Xr, 0, Zd - 20), p(Xr, 0, Z + 20)])} fill={sd < 0 ? S.rt : S.lt} fillOpacity={0.4} />
 							<path d={qd([p(sd * W, 820, Zd), p(Xr, 820, Zd), p(Xr, 0, Zd), p(sd * W, 0, Zd)])} fill={T('#9aa3ad')} stroke={INK} strokeWidth={3} />
 							<path d={ink.poly([p(sd * W, 830, Z - 10), p(sd * W, 830, Zd + 10), p(sd * W, 0, Zd + 10), p(sd * W, 0, Z - 10)], 30 + i + sd * 7, 0.8)} fill="none" stroke={INK} strokeWidth={5} />
 							{(() => {
@@ -1404,16 +1451,16 @@ export const FerryCorridor: React.FC<{f: number; lights?: Lights; children?: Rea
 			)}
 			{/* pipes along the upper left wall + ceiling */}
 			{[0, 1, 2].map((i) => {
-				const X = -W + 40 + i * 46;
-				const H = Hc - 40 - i * 10;
-				const a = p(X, H, Zn);
-				const b = p(X, H, Zb);
-				const w0 = (30 - i * 6) * (1000 / Zn);
+				const X = -W + 30;
+				const H = Hc - 60 - i * 70;
+				const r = 26 - i * 5;
+				const pipe = [p(X, H + r, Zn), p(X, H + r, Zb), p(X, H - r, Zb), p(X, H - r, Zn)];
+				const hi = [p(X, H + r * 0.55, Zn), p(X, H + r * 0.55, Zb), p(X, H + r * 0.2, Zb), p(X, H + r * 0.2, Zn)];
 				return (
 					<g key={`pipe${i}`}>
-						<path d={`M${a[0]},${a[1]}L${b[0]},${b[1]}`} stroke={INK} strokeWidth={w0 + 6} strokeLinecap="round" />
-						<path d={`M${a[0]},${a[1]}L${b[0]},${b[1]}`} stroke={T(['#6b7480', '#8a6a3a', '#5a6a5a'][i])} strokeWidth={w0} strokeLinecap="round" />
-						<path d={`M${a[0]},${a[1] - w0 * 0.25}L${b[0]},${b[1]}`} stroke="#fff" strokeWidth={w0 * 0.18} opacity={0.3} strokeLinecap="round" />
+						<path d={ink.poly(pipe, 50 + i, 0.6)} fill={T(['#6b7480', '#8a6a3a', '#5a6a5a'][i])} stroke={INK} strokeWidth={4} />
+						<path d={qd(hi)} fill="#fff" fillOpacity={0.22} />
+						<path d={qd([pipe[0], pipe[1], hi[1], hi[0]])} fill="#000" fillOpacity={0.0} />
 					</g>
 				);
 			})}
@@ -1425,7 +1472,7 @@ export const FerryCorridor: React.FC<{f: number; lights?: Lights; children?: Rea
 				const on = L !== 'off';
 				return (
 					<g key={`cl${i}`}>
-						{on ? <ellipse cx={fl[0]} cy={fl[1]} rx={520 * (1000 / Z)} ry={110 * (1000 / Z)} fill={S.gl} opacity={0.8} /> : null}
+						{on ? <ellipse cx={fl[0]} cy={fl[1]} rx={520 * (1000 / Z)} ry={110 * (1000 / Z)} fill={S.gl} fillOpacity={0.8} /> : null}
 						<Box3 ink={ink} k0={40 + i * 6} c={c} b={{X0: -90, X1: 90, H0: Hc - 40, H1: Hc, Z0: Z, Z1: Z + 90, fill: on ? lamp : '#222', sw: 3}} />
 						{on ? <ellipse cx={(a[0] + b[0]) / 2} cy={b[1]} rx={300 * (1000 / Z)} ry={160 * (1000 / Z)} fill={S.gl} /> : null}
 					</g>
@@ -1481,7 +1528,7 @@ export const FerryWindow: React.FC<{f: number; reflection?: React.ReactNode; ref
 				</linearGradient>
 			</defs>
 			<rect x={-200} y={-200} width={2320} height={1500} fill={T('#7f8b9c')} />
-			<rect x={-200} y={-200} width={2320} height={1500} fill={S.dn} opacity={0.5} />
+			<rect x={-200} y={-200} width={2320} height={1500} fill={S.dn} fillOpacity={0.5} />
 			<path d={bolts.join('')} fill={T('#5d6672')} stroke={INK} strokeWidth={2} />
 			{/* frame + reveal (the wall's thickness) */}
 			<path d={rr(o0[0] - 30, o0[1] - 30, o1[0] + 30, o1[1] + 30, 140)} fill={T('#b9c0c9')} stroke={INK} strokeWidth={8} />
@@ -1495,7 +1542,7 @@ export const FerryWindow: React.FC<{f: number; reflection?: React.ReactNode; ref
 				<g opacity={reflectionOpacity}>{reflection}</g>
 				{children}
 				<rect x={g0[0]} y={g0[1]} width={g1[0] - g0[0]} height={g1[1] - g0[1]} fill={S.sp} />
-				<path d={`M${g0[0] + 60},${g1[1] - 30} Q960,${g1[1] - 70} ${g1[0] - 60},${g1[1] - 30}`} stroke="#cfe0f0" strokeWidth={30} opacity={0.04} fill="none" />
+				<path d={`M${g0[0] + 60},${g1[1] - 30} Q960,${g1[1] - 70} ${g1[0] - 60},${g1[1] - 30}`} stroke="#cfe0f0" strokeWidth={30} strokeOpacity={0.04} fill="none" />
 			</g>
 			<path d={ink.curve([[g0[0] + 100, g0[1]], [g1[0] - 100, g0[1]], [g1[0], g0[1] + 100], [g1[0], g1[1] - 100], [g1[0] - 100, g1[1]], [g0[0] + 100, g1[1]], [g0[0], g1[1] - 100], [g0[0], g0[1] + 100]], 3, 1.2, true)} fill="none" stroke={INK} strokeWidth={7} />
 		</g>
@@ -1526,7 +1573,7 @@ export const EngineRoomDoor: React.FC<{f: number; label?: string; sub?: string; 
 	const H0 = 360 - (1020 - 520);
 	const Hh = H0 + 860;
 	const th = (open * Math.PI) / 2.3;
-	const rec = 40;
+	const rec = 70;
 	const leaf = (u: number, v: number): Pt => p(-340 + u * Math.cos(th), H0 + v, Zd + rec + u * Math.sin(th));
 	const aff = (u0: number, v0: number, u1: number, v1: number) => {
 		const a = leaf(u0, v0);
@@ -1556,38 +1603,38 @@ export const EngineRoomDoor: React.FC<{f: number; label?: string; sub?: string; 
 		<g>
 			<ShadeDefs id={uid} glow="#fff6c8" />
 			<rect x={-200} y={-200} width={2320} height={1500} fill={T('#6c7580')} />
-			<rect x={-200} y={-200} width={2320} height={1500} fill={S.dn} opacity={0.5} />
-			<path d={`M-200,600L2120,600`} stroke="#000" strokeWidth={2} opacity={0.2} />
+			<rect x={-200} y={-200} width={2320} height={1500} fill={S.dn} fillOpacity={0.5} />
+			<path d={`M-200,600L2120,600`} stroke="#000" strokeWidth={2} strokeOpacity={0.2}  fill="none" />
 			<path d={rivets.join('')} fill={T('#4a515b')} stroke={INK} strokeWidth={2} />
 			{/* door frame (raised) */}
 			<path d={ink.rect(o0[0] - 50, o0[1] - 50, o1[0] - o0[0] + 100, o1[1] - o0[1] + 70, 1, 1.2)} fill={T('#8b949f')} stroke={INK} strokeWidth={7} />
 			<path d={qd([[o0[0] - 50, o0[1] - 50], [o1[0] + 50, o0[1] - 50], [o1[0] + 50, o1[1] + 20], [o0[0] - 50, o1[1] + 20]])} fill={S.hl} />
 			{/* dark room beyond */}
 			<path d={qd([o0, [o1[0], o0[1]], o1, [o0[0], o1[1]]])} fill="#04060a" />
-			{beam ? <path d={qd([[960, 1100], [i0[0] + 80, i0[1] + 120], [i1[0] - 80, i0[1] + 120]])} fill="#fff6c8" opacity={0.07} /> : null}
+			{beam ? <path d={qd([[960, 1100], [i0[0] + 80, i0[1] + 120], [i1[0] - 80, i0[1] + 120]])} fill="#fff6c8" fillOpacity={0.07} /> : null}
 			{/* reveals */}
 			<path d={ink.poly([o0, i0, [i0[0], i1[1]], [o0[0], o1[1]]], 2, 0.6)} fill={T('#5d6570')} stroke={INK} strokeWidth={3} />
 			<path d={ink.poly([[o1[0], o0[1]], [i1[0], i0[1]], i1, o1], 3, 0.6)} fill={T('#5d6570')} stroke={INK} strokeWidth={3} />
 			<path d={ink.poly([o0, [o1[0], o0[1]], [i1[0], i0[1]], i0], 4, 0.6)} fill={T('#3d444d')} stroke={INK} strokeWidth={3} />
 			{/* the leaf */}
 			<path d={ink.poly(leafPts, 5, 1)} fill={T('#9aa3ad')} stroke={INK} strokeWidth={7} />
-			<path d={qd(leafPts)} fill={S.dn} opacity={0.35 + open * 0.3} />
+			<path d={qd(leafPts)} fill={S.dn} fillOpacity={0.35 + open * 0.3} />
 			<g transform={aff(0, 0, 680, 860)}>
 				<path d={ink.ellipse(340, 630, 80, 80, 6, 1.5, 12)} fill="#0c1018" stroke={INK} strokeWidth={8} />
-				<path d="M290,620 Q320,580 370,575" stroke="#fff" strokeWidth={6} opacity={0.18} fill="none" />
+				<path d="M290,620 Q320,580 370,575" stroke="#fff" strokeWidth={6} strokeOpacity={0.18} fill="none" />
 				<path d={ink.rect(110, 320, 460, 120, 7, 1.2)} fill="#f2c94c" stroke={INK} strokeWidth={5} />
 				<g transform="translate(340,380) scale(1,-1)">
-					<text x={0} y={-2} textAnchor="middle" fontFamily="Inter" fontWeight={800} fontSize={48} fill="#1a1a1a">
+					<text x={0} y={-14} textAnchor="middle" fontFamily="Inter" fontWeight={800} fontSize={48} fill="#1a1a1a">
 						{label}
 					</text>
-					<text x={0} y={-42} textAnchor="middle" fontFamily="Inter" fontWeight={700} fontSize={30} fill="#1a1a1a">
+					<text x={0} y={42} textAnchor="middle" fontFamily="Inter" fontWeight={700} fontSize={30} fill="#1a1a1a">
 						{sub}
 					</text>
 				</g>
 				<path d={ink.line(600, 340, 650, 340, 8, 0.6, 1)} stroke={INK} strokeWidth={16} />
 				<path d={ink.line(600, 340, 650, 340, 8, 0.6, 1)} stroke="#c9ced5" strokeWidth={8} />
 			</g>
-			{beam ? <path d={qd([[960, 1120], [700, 300], [1220, 300]])} fill="#fff6c8" opacity={0.1} /> : null}
+			{beam ? <path d={qd([[960, 1120], [700, 300], [1220, 300]])} fill="#fff6c8" fillOpacity={0.1} /> : null}
 		</g>
 	);
 };
@@ -1615,8 +1662,8 @@ export const CeilingSpeaker: React.FC<{f: number; active?: number; lights?: Ligh
 		<g>
 			<ShadeDefs id={uid} glow={glow} />
 			<rect x={-200} y={-200} width={2320} height={1500} fill={T('#b9bfc7')} />
-			<rect x={-200} y={-200} width={2320} height={1500} fill={S.up} opacity={0.55} />
-			<path d={tiles.join('')} stroke="#000" strokeWidth={3} opacity={0.22} fill="none" />
+			<rect x={-200} y={-200} width={2320} height={1500} fill={S.up} fillOpacity={0.55} />
+			<path d={tiles.join('')} stroke="#000" strokeWidth={3} strokeOpacity={0.22} fill="none" />
 			<ellipse cx={975} cy={600} rx={rx + 60} ry={ry + 50} fill={S.sh} />
 			{/* housing: ring on the ceiling, side band, grille cap */}
 			<path d={ink.ellipse(960, 515, rx + 18, ry + 14, 10, 1.5, 16)} fill={T('#c9ced4')} stroke={INK} strokeWidth={8} />
@@ -1624,7 +1671,7 @@ export const CeilingSpeaker: React.FC<{f: number; active?: number; lights?: Ligh
 			<path d={`M${960 - rx - 2},515 L${960 - rx - 2},560 M${960 + rx + 2},515 L${960 + rx + 2},560`} stroke={INK} strokeWidth={8} />
 			<path d={ink.ellipse(960, 560, rx, ry, 11, 1.5, 16)} fill={red ? '#3c1010' : '#d6dade'} stroke={INK} strokeWidth={10} />
 			<path d={ink.ellipse(960, 560, rx - 60, ry - 52, 12, 1.5, 16)} fill={red ? '#1f0606' : '#2d3138'} stroke={INK} strokeWidth={8} />
-			<ellipse cx={960} cy={560} rx={rx - 60} ry={ry - 52} fill={S.dn} opacity={0.6} />
+			<ellipse cx={960} cy={560} rx={rx - 60} ry={ry - 52} fill={S.dn} fillOpacity={0.6} />
 			{Array.from({length: 13}, (_, r) =>
 				Array.from({length: 13}, (_, cc) => {
 					const x = 960 + (cc - 6) * 38;
@@ -1634,13 +1681,11 @@ export const CeilingSpeaker: React.FC<{f: number; active?: number; lights?: Ligh
 					return <ellipse key={`${r}-${cc}`} cx={x} cy={y} rx={9 + pulse * 3} ry={8 + pulse * 2.6} fill={active > 0 ? `rgba(255,${red ? 80 : 230},${red ? 60 : 170},${0.15 + active * 0.5})` : '#111'} />;
 				}),
 			)}
-			<path d={`M${960 - rx + 40},${560 - ry * 0.55} Q${960 - rx * 0.3},${560 - ry - 6} ${960 + rx * 0.35},${560 - ry + 12}`} stroke="#fff" strokeWidth={8} opacity={0.35} fill="none" strokeLinecap="round" />
-			{active > 0 ? <ellipse cx={960} cy={560} rx={520} ry={470} fill={S.gl} opacity={0.5 * active} /> : null}
+			<path d={`M${960 - rx + 40},${560 - ry * 0.55} Q${960 - rx * 0.3},${560 - ry - 6} ${960 + rx * 0.35},${560 - ry + 12}`} stroke="#fff" strokeWidth={8} strokeOpacity={0.35} fill="none" strokeLinecap="round" />
+			{active > 0 ? <ellipse cx={960} cy={560} rx={520} ry={470} fill={S.gl} fillOpacity={0.5 * active} /> : null}
 		</g>
 	);
 };
 
 export const Ellipsis = wobEllipse;
 
-// keep helpers referenced for tree-shaking-free type checks
-export type {Ink, Shades};

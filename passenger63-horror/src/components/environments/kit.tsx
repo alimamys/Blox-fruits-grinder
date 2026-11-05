@@ -316,7 +316,7 @@ export const Box: React.FC<{ink: Ink; k0: number; b: BoxSpec}> = ({ink, k0, b}) 
 
 /** Soft contact shadow (cheap radial gradient, no blur filter). */
 export const Shadow: React.FC<{S: Shades; cx: number; cy: number; rx: number; ry: number; o?: number}> = ({S, cx, cy, rx, ry, o = 1}) => (
-	<ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={S.sh} opacity={o} />
+	<ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={S.sh} fillOpacity={o} />
 );
 
 /** Smooth seeded 0..1 noise for idle motion (no snapping). */
@@ -357,6 +357,8 @@ export interface Box3Spec {
 	stroke?: string;
 	/** skip the near face (open shelf) */
 	open?: boolean;
+	/** draw the side face (default true; false when a neighbour always hides it) */
+	sides?: boolean;
 }
 
 /** Axis-aligned box in world space; draws only the faces the camera sees. */
@@ -373,11 +375,45 @@ export const Box3: React.FC<{ink: Ink; k0: number; c: Cam3; b: Box3Spec}> = ({in
 	};
 	if (c.eye > H1) face('t', [p(X0, H1, Z0), p(X1, H1, Z0), p(X1, H1, Z1), p(X0, H1, Z1)], top, b.topShade, 1);
 	if (c.eye < H0) face('b', [p(X0, H0, Z0), p(X1, H0, Z0), p(X1, H0, Z1), p(X0, H0, Z1)], bottom, undefined, 2);
-	if (X0 > 0) face('l', [p(X0, H1, Z0), p(X0, H1, Z1), p(X0, H0, Z1), p(X0, H0, Z0)], side, b.sideShade, 3);
-	if (X1 < 0) face('r', [p(X1, H1, Z0), p(X1, H1, Z1), p(X1, H0, Z1), p(X1, H0, Z0)], side, b.sideShade, 4);
+	const sides = b.sides !== false;
+	if (sides && X0 > 0) face('l', [p(X0, H1, Z0), p(X0, H1, Z1), p(X0, H0, Z1), p(X0, H0, Z0)], side, b.sideShade, 3);
+	if (sides && X1 < 0) face('r', [p(X1, H1, Z0), p(X1, H1, Z1), p(X1, H0, Z1), p(X1, H0, Z0)], side, b.sideShade, 4);
 	if (!b.open) face('n', [p(X0, H1, Z0), p(X1, H1, Z0), p(X1, H0, Z0), p(X0, H0, Z0)], fill, b.nearShade, 5);
 	return <g>{out}</g>;
 };
 
 /** A world-space quad (4 corners given as [X, H, Z]). */
 export const quad3 = (c: Cam3, pts: Array<[number, number, number]>): Pt[] => pts.map(([X, H, Z]) => P3(c, X, H, Z));
+
+/** Vertical (default) or custom linear gradient def from colour stops. */
+export const LinGrad: React.FC<{id: string; stops: Array<[number, string, number?]>; x1?: number; y1?: number; x2?: number; y2?: number}> = ({id, stops, x1 = 0, y1 = 0, x2 = 0, y2 = 1}) => (
+	<linearGradient id={id} x1={x1} y1={y1} x2={x2} y2={y2}>
+		{stops.map(([o, c, a], i) => (
+			<stop key={i} offset={o} stopColor={c} stopOpacity={a ?? 1} />
+		))}
+	</linearGradient>
+);
+
+/** Face outlines of a world box (same visibility rules as <Box3/>), as path data,
+ *  so many boxes can be batched into a few <path> elements. `q` = plain quads for
+ *  gradient overlays. */
+export const box3Faces = (ink: Ink, k0: number, c: Cam3, b: Omit<Box3Spec, 'fill'>) => {
+	const {X0, X1, H0, H1, Z0, Z1, amp = 1} = b;
+	const p = (X: number, H: number, Z: number) => P3(c, X, H, Z);
+	const out: {top?: string; side?: string; near?: string; topQ?: string; nearQ?: string} = {};
+	if (c.eye > H1) {
+		const pts = [p(X0, H1, Z0), p(X1, H1, Z0), p(X1, H1, Z1), p(X0, H1, Z1)];
+		out.top = ink.poly(pts, k0 + 1, amp);
+		out.topQ = qd(pts);
+	}
+	if (b.sides !== false) {
+		if (X0 > 0) out.side = ink.poly([p(X0, H1, Z0), p(X0, H1, Z1), p(X0, H0, Z1), p(X0, H0, Z0)], k0 + 3, amp);
+		else if (X1 < 0) out.side = ink.poly([p(X1, H1, Z0), p(X1, H1, Z1), p(X1, H0, Z1), p(X1, H0, Z0)], k0 + 4, amp);
+	}
+	if (!b.open) {
+		const pts = [p(X0, H1, Z0), p(X1, H1, Z0), p(X1, H0, Z0), p(X0, H0, Z0)];
+		out.near = ink.poly(pts, k0 + 5, amp);
+		out.nearQ = qd(pts);
+	}
+	return out;
+};

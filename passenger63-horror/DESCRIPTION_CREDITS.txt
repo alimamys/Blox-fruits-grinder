@@ -1,0 +1,26 @@
+Sound effects include the following recordings from Freesound.org, used under Creative Commons Attribution 3.0 (https://creativecommons.org/licenses/by/3.0/):
+
+- "FX - motor barco.wav" by vinjatovix (https://freesound.org/s/109578/)
+- "Tunnel at trainstation Impulse-Response reverb clap" by jorickhoofd (https://freesound.org/s/160134/)
+- "Tunnel 2 Impulse-Response reverb closeby high-pitch clap" by jorickhoofd (https://freesound.org/s/160135/)
+- "Staircase Impulse-Response long reverb 20m away clap" by jorickhoofd (https://freesound.org/s/160138/)
+- "Basement Impulse-Response reverb 6m away medium-pitched clap" by jorickhoofd (https://freesound.org/s/160143/)
+- "Parking Garage - Metal Door - Knock & Bang" by HazMattt (https://freesound.org/s/187284/)
+- "Knocking_iron_door5.mp3" by Taira Komori (https://freesound.org/s/211497/)
+- "Knocking_iron_door4.mp3" by Taira Komori (https://freesound.org/s/211498/)
+- "Knocking_iron_door2.mp3" by Taira Komori (https://freesound.org/s/211502/)
+- "Knocking_iron_door3.mp3" by Taira Komori (https://freesound.org/s/211503/)
+- "Scared Group Of Screaming People" by marsebastia (https://freesound.org/s/381895/)
+- "Face Slap" by Jagadamba (https://freesound.org/s/387705/)
+- "Slap 8" by Jagadamba (https://freesound.org/s/387749/)
+- "Slap 11" by Jagadamba (https://freesound.org/s/387756/)
+- "lapping-clapotis STE-035.wav" by clapclapcinoeil (https://freesound.org/s/388970/)
+- "Porta de ferro_4800_24bit.wav" by rubenslutero (https://freesound.org/s/402612/)
+- "loud_splash1.ogg" by smcameron (https://freesound.org/s/50782/)
+- "Small waves at a small pier.wav" by Satoration (https://freesound.org/s/58504/)
+- "Subway speaker malfunction.wav" by jobro (https://freesound.org/s/75131/)
+- "Windscape With Metal Scrape.wav" by Benboncan (https://freesound.org/s/78430/)
+- "Diesel engine boat 4 loop 100307.wav" by LG (https://freesound.org/s/91533/)
+
+Other sound effects: CC0 recordings from FSD50K / Freesound, VSCO-2 CE (Versilian Studios) and Kenney.nl.
+Voices: Chatterbox (Resemble AI, MIT). Fonts: SIL Open Font License.
