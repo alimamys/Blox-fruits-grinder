@@ -40,7 +40,10 @@ const final = path.join('out', audioOnly ? `${base}_audio_preview.wav` : `${base
 const codecArgs = audioOnly
 	? ['--codec=wav', '--audio-codec=pcm-16']
 	: ['--codec=h264', '--crf=20', '--pixel-format=yuv420p', '--audio-codec=aac', '--audio-bitrate=320k'];
-run(npx, ['remotion', 'render', 'src/index.ts', comp, raw, ...codecArgs, ...browserArgs, ...extra]);
+// flags passed by the user (e.g. --crf=23) override the defaults above
+const userFlags = new Set(extra.map((a) => a.split('=')[0]));
+const defaults = codecArgs.filter((a) => !userFlags.has(a.split('=')[0]));
+run(npx, ['remotion', 'render', 'src/index.ts', comp, raw, ...defaults, ...browserArgs, ...extra]);
 
 // ffmpeg: system one, or the copy bundled with Remotion
 const hasSystemFfmpeg = spawnSync('ffmpeg', ['-version'], {stdio: 'ignore'}).status === 0;
