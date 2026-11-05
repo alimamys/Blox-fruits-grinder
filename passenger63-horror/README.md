@@ -68,8 +68,8 @@ You can also pass `--browser-executable=...` to `npx remotion render`, or uncomm
 
 | edit | length | composition |
 | --- | --- | --- |
-| Full story, exactly as written | **16:15** | `Passenger63Horror` |
-| Tight edit | **14:39** | `Passenger63HorrorTight` |
+| Full story, exactly as written | **16:18** | `Passenger63Horror` |
+| Tight edit | **14:42** | `Passenger63HorrorTight` |
 
 The brief targets 7–9 minutes, but the story itself is about 1,800 words. At the requested 130–155 words per minute, that is 12–14 minutes of speech before any pauses or suspense holds. The narrator here averages 148 wpm while speaking.
 

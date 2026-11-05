@@ -35,9 +35,9 @@
   "seconds": 1.722
  },
  "crew/crew_002_maam.wav": {
-  "hash": "0eec017bba8a364b17d94baf23a02db8",
+  "hash": "91aadc8c2c95a5b4de0cde4bae96d3fd",
   "provider": "chatterbox",
-  "seconds": 0.514
+  "seconds": 0.751
  },
  "crew/crew_003_why.wav": {
   "hash": "033338714c7aaa2264682cd9e154f3f6",
@@ -45,9 +45,9 @@
   "seconds": 1.773
  },
  "crew/crew_004_who.wav": {
-  "hash": "f4882c93ddef26f943a5d3d3a7ba2440",
+  "hash": "6be73333113591af909064121267e508",
   "provider": "chatterbox",
-  "seconds": 1.181
+  "seconds": 0.789
  },
  "crew/crew_005_sir.wav": {
   "hash": "6efc985089e5dcea7ffc10b38c93e3d2",
@@ -230,9 +230,9 @@
   "seconds": 1.13
  },
  "emma/emma_013_daniel_2.wav": {
-  "hash": "252960a7d2abf23514366d5fffbb213e",
+  "hash": "fda0dacccea0668209a935d89b5d647a",
   "provider": "chatterbox",
-  "seconds": 1.311
+  "seconds": 1.019
  },
  "emma/emma_014_husband.wav": {
   "hash": "bf8eaa84d7fc139a21417b004537a4e9",
@@ -272,7 +272,7 @@
  "narrator/narrator_001_hook.wav": {
   "hash": "5eb45d8b06180f73f64509af7e157bb6",
   "provider": "chatterbox",
-  "seconds": 7.089
+  "seconds": 7.304
  },
  "narrator/narrator_002_sixty_three.wav": {
   "hash": "b958133294242e929ffaa7000d0c8177",
@@ -282,7 +282,7 @@
  "narrator/narrator_003_manifest.wav": {
   "hash": "627a941d8cfbb8a2b09828f8b2c313b2",
   "provider": "chatterbox",
-  "seconds": 1.986
+  "seconds": 2.158
  },
  "narrator/narrator_004_sixty_two_names.wav": {
   "hash": "6716e403ca091bd8c9ffffb90b9e216a",
@@ -307,17 +307,17 @@
  "narrator/narrator_008_one_conclusion.wav": {
   "hash": "066b086632ec41f58ddae94da4f58642",
   "provider": "chatterbox",
-  "seconds": 1.629
+  "seconds": 1.895
  },
  "narrator/narrator_009_someone.wav": {
   "hash": "7d0e721e038e836a52ae7f754fe24023",
   "provider": "chatterbox",
-  "seconds": 3.099
+  "seconds": 3.654
  },
  "narrator/narrator_010_found_her.wav": {
   "hash": "5a31deef3736640b46f5f0d34c060955",
   "provider": "chatterbox",
-  "seconds": 2.522
+  "seconds": 2.973
  },
  "narrator/narrator_011_old_woman.wav": {
   "hash": "f0e8a19fd87b9342bdef594bbdca754a",
@@ -327,12 +327,12 @@
  "narrator/narrator_012_approached.wav": {
   "hash": "21c08f7ee64ec60eab1b88ad71cf94b0",
   "provider": "chatterbox",
-  "seconds": 1.467
+  "seconds": 1.729
  },
  "narrator/narrator_013_didnt_move.wav": {
   "hash": "80c621e9a9e6f01d8e6bd95ea2b5e62c",
   "provider": "chatterbox",
-  "seconds": 1.052
+  "seconds": 1.086
  },
  "narrator/narrator_014_turned.wav": {
   "hash": "6b83d8887d50f36fb154aaddf06ddbac",
@@ -342,7 +342,7 @@
  "narrator/narrator_015_pale.wav": {
   "hash": "86db433950166d2dd27ff89c375c1b34",
   "provider": "chatterbox",
-  "seconds": 3.248
+  "seconds": 3.471
  },
  "narrator/narrator_016_smiled.wav": {
   "hash": "66f7c2799343dda329baedd4e9507990",
@@ -357,7 +357,7 @@
  "narrator/narrator_018_looked_past.wav": {
   "hash": "5b8ac8cd93183322ef2e6e18c2fcdb40",
   "provider": "chatterbox",
-  "seconds": 3.297
+  "seconds": 3.471
  },
  "narrator/narrator_019_smile_gone.wav": {
   "hash": "1ccd26343e799416c4d580742420f70f",
@@ -367,7 +367,7 @@
  "narrator/narrator_020_checked.wav": {
   "hash": "b95811e4d9af892ad16f94224a20fa61",
   "provider": "chatterbox",
-  "seconds": 1.929
+  "seconds": 2.158
  },
  "narrator/narrator_021_daniel_clarke.wav": {
   "hash": "89322dc76c581f8d588749afd2bed170",
@@ -382,22 +382,22 @@
  "narrator/narrator_023_looked_back.wav": {
   "hash": "c784b3989560cbcfe9199b9ca561fcbf",
   "provider": "chatterbox",
-  "seconds": 3.347
+  "seconds": 3.947
  },
  "narrator/narrator_024_then_she_said.wav": {
   "hash": "2ec8bcf9b82b3e4f4b650d1d2642af2e",
   "provider": "chatterbox",
-  "seconds": 0.955
+  "seconds": 1.124
  },
  "narrator/narrator_025_left.wav": {
   "hash": "39154171ab09bee619b30eb92cf58417",
   "provider": "chatterbox",
-  "seconds": 3.432
+  "seconds": 4.047
  },
  "narrator/narrator_026_last_ferry.wav": {
   "hash": "d3971d1a5b00d400d8e11f413ebbb96c",
   "provider": "chatterbox",
-  "seconds": 2.132
+  "seconds": 2.513
  },
  "narrator/narrator_027_counts.wav": {
   "hash": "c9d7e0def7fd879aec85c10631206511",
@@ -417,12 +417,12 @@
  "narrator/narrator_030_daniel_emma.wav": {
   "hash": "2d2b306a6151d2efbbbd0baa565a42ae",
   "provider": "chatterbox",
-  "seconds": 4.461
+  "seconds": 5.015
  },
  "narrator/narrator_031_tired.wav": {
   "hash": "a0fc4536051a78f327c5d8bcad100ebb",
   "provider": "chatterbox",
-  "seconds": 0.957
+  "seconds": 1.086
  },
  "narrator/narrator_032_window.wav": {
   "hash": "2ac09499e4b8bdbd0be3cc6652f6b6df",
@@ -432,12 +432,12 @@
  "narrator/narrator_033_nothing_unusual.wav": {
   "hash": "cc71041fe717f9c49d5640cb887c1c7e",
   "provider": "chatterbox",
-  "seconds": 2.842
+  "seconds": 2.872
  },
  "narrator/narrator_034_routine_count.wav": {
   "hash": "c4880a9d32b29e0f8d3ce31c4835d5f8",
   "provider": "chatterbox",
-  "seconds": 3.352
+  "seconds": 3.944
  },
  "narrator/narrator_035_reached_62.wav": {
   "hash": "dece88442ab89f342e0c67f0d05fa4cd",
@@ -447,7 +447,7 @@
  "narrator/narrator_036_few_minutes.wav": {
   "hash": "a79ab5440bc6f6df61c942b9f33fae7f",
   "provider": "chatterbox",
-  "seconds": 2.291
+  "seconds": 2.619
  },
  "narrator/narrator_037_sixty_three.wav": {
   "hash": "1e06fc3e273a8632bd03fd74e3ac1423",
@@ -482,12 +482,12 @@
  "narrator/narrator_043_noticed.wav": {
   "hash": "62574f0932a7de99688298203cd0fe0e",
   "provider": "chatterbox",
-  "seconds": 1.45
+  "seconds": 1.708
  },
  "narrator/narrator_044_bench.wav": {
   "hash": "8178519b8704551364a5ed2a9328fab7",
   "provider": "chatterbox",
-  "seconds": 3.569
+  "seconds": 4.209
  },
  "narrator/narrator_045_nobody_remembered.wav": {
   "hash": "1a9a966361bf9e5274051142b5d2e75f",
@@ -502,12 +502,12 @@
  "narrator/narrator_047_just_coat.wav": {
   "hash": "ecea25ce68b8e8141a542cdc332d1db0",
   "provider": "chatterbox",
-  "seconds": 2.826
+  "seconds": 3.19
  },
  "narrator/narrator_048_approached.wav": {
   "hash": "95703baed8e1df29834eef166a864e02",
   "provider": "chatterbox",
-  "seconds": 5.452
+  "seconds": 6.431
  },
  "narrator/narrator_049_daniel.wav": {
   "hash": "6efe5fd8f9108bc40e5145573875fa0c",
@@ -517,7 +517,7 @@
  "narrator/narrator_050_looking.wav": {
   "hash": "9a2616d4680256e230d6008b0a78af18",
   "provider": "chatterbox",
-  "seconds": 2.198
+  "seconds": 2.515
  },
  "narrator/narrator_051_found_daniel.wav": {
   "hash": "adbe459cfbd6f1779c602a3e31002f67",
@@ -525,14 +525,14 @@
   "seconds": 2.56
  },
  "narrator/narrator_052_laughed.wav": {
-  "hash": "9d187ae6ac3f16f01f59312b30d326c7",
+  "hash": "0923f87252245b2fb68fc415db35a2ce",
   "provider": "chatterbox",
-  "seconds": 1.091
+  "seconds": 1.191
  },
  "narrator/narrator_053_saw_her.wav": {
   "hash": "837f7307b40efedc5753562805edaf7d",
   "provider": "chatterbox",
-  "seconds": 1.049
+  "seconds": 1.235
  },
  "narrator/narrator_054_face_changed.wav": {
   "hash": "23f4db6dda7701f5f0f95878e62af107",
@@ -542,12 +542,12 @@
  "narrator/narrator_055_didnt_answer.wav": {
   "hash": "45c0d8e3be2b8edb916a2abeda3ab5d0",
   "provider": "chatterbox",
-  "seconds": 1.005
+  "seconds": 1.086
  },
  "narrator/narrator_056_wave.wav": {
   "hash": "eb07bf323d0b0db33964131d17c9e198",
   "provider": "chatterbox",
-  "seconds": 3.137
+  "seconds": 3.699
  },
  "narrator/narrator_057_stood.wav": {
   "hash": "e3a87af1e82c36989a932973707d49b7",
@@ -562,17 +562,17 @@
  "narrator/narrator_059_stared.wav": {
   "hash": "54f4e13301bf5ad755a377ea1f9cb12d",
   "provider": "chatterbox",
-  "seconds": 1.25
+  "seconds": 1.444
  },
  "narrator/narrator_060_sick.wav": {
-  "hash": "ee512ba29284c0dc54a7672d0d177a7a",
+  "hash": "5a903e638df67fedea064424c04faca8",
   "provider": "chatterbox",
-  "seconds": 1.371
+  "seconds": 1.403
  },
  "narrator/narrator_061_laughed.wav": {
   "hash": "277a787a193b34ffc31bbb2f34cc646d",
   "provider": "chatterbox",
-  "seconds": 2.493
+  "seconds": 2.872
  },
  "narrator/narrator_062_wasnt.wav": {
   "hash": "6adc162adbbd64dbbf0050437df7baeb",
@@ -592,7 +592,7 @@
  "narrator/narrator_065_only_difference.wav": {
   "hash": "c1e40abe6c4c905fc19cfc21aca95b40",
   "provider": "chatterbox",
-  "seconds": 4.765
+  "seconds": 5.62
  },
  "narrator/narrator_066_same.wav": {
   "hash": "e8be2f8cb94bf995674542a1962b45c1",
@@ -602,17 +602,17 @@
  "narrator/narrator_067_step.wav": {
   "hash": "433045895302211a9fa96701280e990e",
   "provider": "chatterbox",
-  "seconds": 3.099
+  "seconds": 3.586
  },
  "narrator/narrator_068_smiled.wav": {
   "hash": "6fc5512b77f3dcaf8914e353a920adcd",
   "provider": "chatterbox",
-  "seconds": 1.765
+  "seconds": 1.801
  },
  "narrator/narrator_069_flickered.wav": {
   "hash": "910e6d7da63a07c353bbf0d98ba7c372",
   "provider": "chatterbox",
-  "seconds": 2.192
+  "seconds": 2.515
  },
  "narrator/narrator_070_once_twice.wav": {
   "hash": "4d5888e77d102cace9fd17720004026c",
@@ -637,17 +637,17 @@
  "narrator/narrator_074_bench_empty.wav": {
   "hash": "000953344ed2aeecdeb43c669c18373b",
   "provider": "chatterbox",
-  "seconds": 1.093
+  "seconds": 1.287
  },
  "narrator/narrator_075_gone.wav": {
   "hash": "278e60d6c1123477f69c9529d897bd46",
   "provider": "chatterbox",
-  "seconds": 1.141
+  "seconds": 1.343
  },
  "narrator/narrator_076_rear_deck.wav": {
   "hash": "ef8754fa858599c8ff1e13c736c3c360",
   "provider": "chatterbox",
-  "seconds": 2.133
+  "seconds": 2.158
  },
  "narrator/narrator_077_bathrooms.wav": {
   "hash": "73cfee7a69e99e295ff8aa8e75d24e9a",
@@ -682,7 +682,7 @@
  "narrator/narrator_083_purser.wav": {
   "hash": "b29e04071c00c614642666aaa3afccec",
   "provider": "chatterbox",
-  "seconds": 3.787
+  "seconds": 3.944
  },
  "narrator/narrator_084_sixty_one.wav": {
   "hash": "d3dbbf64b5caec4e6ef3ea4a09564aee",
@@ -692,7 +692,7 @@
  "narrator/narrator_085_daniel_gone.wav": {
   "hash": "41717d2cd25131a1ed7d228a5ef46829",
   "provider": "chatterbox",
-  "seconds": 1.519
+  "seconds": 1.551
  },
  "narrator/narrator_086_not_physically.wav": {
   "hash": "bfbe70620eb01d3a6ae50c959b28ee83",
@@ -702,7 +702,7 @@
  "narrator/narrator_087_disappeared.wav": {
   "hash": "d628115e9df41cea611dc352fbb009d3",
   "provider": "chatterbox",
-  "seconds": 2.704
+  "seconds": 3.187
  },
  "narrator/narrator_088_refreshed.wav": {
   "hash": "68d189dc89a92acba258728572aa085f",
@@ -712,7 +712,7 @@
  "narrator/narrator_089_ticket.wav": {
   "hash": "2144fa32baf9c1d535eaac81ad47a47d",
   "provider": "chatterbox",
-  "seconds": 3.774
+  "seconds": 4.301
  },
  "narrator/narrator_090_email.wav": {
   "hash": "387c4cabdd390e268547beea4773e880",
@@ -722,7 +722,7 @@
  "narrator/narrator_091_reservation.wav": {
   "hash": "2020126b7a04138d901afb0c3c8c0446",
   "provider": "chatterbox",
-  "seconds": 3.419
+  "seconds": 3.586
  },
  "narrator/narrator_092_one_passenger.wav": {
   "hash": "e5fdd1e76a9ae4571d177406100e21dc",
@@ -732,7 +732,7 @@
  "narrator/narrator_093_stared.wav": {
   "hash": "5596e60c1160fe3e17c18a1273feda27",
   "provider": "chatterbox",
-  "seconds": 1.714
+  "seconds": 1.801
  },
  "narrator/narrator_094_identification.wav": {
   "hash": "061d1f0f73febc0c308d414b3144b10e",
@@ -747,7 +747,7 @@
  "narrator/narrator_096_looked.wav": {
   "hash": "625ea0358a57edb545cfae1119234563",
   "provider": "chatterbox",
-  "seconds": 4.191
+  "seconds": 4.851
  },
  "narrator/narrator_097_photo.wav": {
   "hash": "09fcafafe10c65776c702e155578415c",
@@ -757,7 +757,7 @@
  "narrator/narrator_098_name_said.wav": {
   "hash": "f02457d9bf1fa6e10b03d49b1051235d",
   "provider": "chatterbox",
-  "seconds": 0.949
+  "seconds": 1.086
  },
  "narrator/narrator_099_unknown.wav": {
   "hash": "c459e49aea8b290f7951acb05b018f2e",
@@ -767,7 +767,7 @@
  "narrator/narrator_100_grabbed.wav": {
   "hash": "dea5b0d7704c54c5aba85a213b84c13a",
   "provider": "chatterbox",
-  "seconds": 2.317
+  "seconds": 2.515
  },
  "narrator/narrator_101_shouting.wav": {
   "hash": "29844ada72d28975ddff4c79cfda73d1",
@@ -782,7 +782,7 @@
  "narrator/narrator_103_hit.wav": {
   "hash": "5341d08fe48b51491a683d3275c94164",
   "provider": "chatterbox",
-  "seconds": 2.39
+  "seconds": 2.818
  },
  "narrator/narrator_104_stopped.wav": {
   "hash": "e16c5232f8bf126dcb9a2ccf35095cc2",
@@ -802,22 +802,22 @@
  "narrator/narrator_107_beneath.wav": {
   "hash": "1693148ea7feeab83312691bb9390074",
   "provider": "chatterbox",
-  "seconds": 0.979
+  "seconds": 1.152
  },
  "narrator/narrator_108_captain_crew.wav": {
   "hash": "f64218d65d00499b1eba9040ba33eb9f",
   "provider": "chatterbox",
-  "seconds": 1.948
+  "seconds": 2.158
  },
  "narrator/narrator_109_radar.wav": {
   "hash": "1627be9281711a3c29d8ce17a239210d",
   "provider": "chatterbox",
-  "seconds": 5.144
+  "seconds": 5.372
  },
  "narrator/narrator_110_knocking.wav": {
   "hash": "dab74d5fdca9ca7e84fab8c342ff7544",
   "provider": "chatterbox",
-  "seconds": 1.44
+  "seconds": 1.535
  },
  "narrator/narrator_111_not_one.wav": {
   "hash": "dd04acfedfa5920caeb43f11ac025d10",
@@ -837,22 +837,22 @@
  "narrator/narrator_114_pa_on.wav": {
   "hash": "06f3dcae2d26556acff0fb8938cdd12e",
   "provider": "chatterbox",
-  "seconds": 2.192
+  "seconds": 2.515
  },
  "narrator/narrator_115_womans_voice.wav": {
-  "hash": "689bde2b9a909a374cb1bad497aca5cd",
+  "hash": "39f4ac36d03a6dba1946b18438347aca",
   "provider": "chatterbox",
-  "seconds": 1.878
+  "seconds": 2.158
  },
  "narrator/narrator_116_pale.wav": {
-  "hash": "f0011213fb26888a326efcb1e094ce6c",
+  "hash": "4f051bb69414ad5d1905a12354adf6d3",
   "provider": "chatterbox",
-  "seconds": 1.358
+  "seconds": 1.218
  },
  "narrator/narrator_117_grabbed.wav": {
-  "hash": "f0661356772213ecd226ce498ba8484a",
+  "hash": "8fb4ba0477407ea780c2484c0cc47e1d",
   "provider": "chatterbox",
-  "seconds": 1.052
+  "seconds": 1.086
  },
  "narrator/narrator_118_voice_changed.wav": {
   "hash": "42c7b5352f474f2a583af210f7bfeee6",
@@ -867,7 +867,7 @@
  "narrator/narrator_120_turned_off.wav": {
   "hash": "3a3829827e4f5bc6512c9248153578dd",
   "provider": "chatterbox",
-  "seconds": 3.322
+  "seconds": 3.917
  },
  "narrator/narrator_121_cable.wav": {
   "hash": "ac0f1d998fec22eb2b326fb879819200",
@@ -902,12 +902,12 @@
  "narrator/narrator_127_rushed.wav": {
   "hash": "3a149475f7d65134bc9f3411cc6a2c7f",
   "provider": "chatterbox",
-  "seconds": 1.759
+  "seconds": 2.073
  },
  "narrator/narrator_128_nav_blank.wav": {
   "hash": "e12e046e42b98f51265bf64a3636e46d",
   "provider": "chatterbox",
-  "seconds": 2.039
+  "seconds": 2.158
  },
  "narrator/narrator_129_gps.wav": {
   "hash": "08c861231fad550e3de6b36bdaa96d1a",
@@ -917,7 +917,7 @@
  "narrator/narrator_130_windshield.wav": {
   "hash": "f43e6476a59ec3e41475ba702f9b74f3",
   "provider": "chatterbox",
-  "seconds": 1.617
+  "seconds": 1.906
  },
  "narrator/narrator_131_no_coast.wav": {
   "hash": "524e0acd7258914a177e7b83d218f958",
@@ -927,7 +927,7 @@
  "narrator/narrator_132_ten_minutes.wav": {
   "hash": "cabcb59f6fa176da65c08204a4d66499",
   "provider": "chatterbox",
-  "seconds": 2.019
+  "seconds": 2.38
  },
  "narrator/narrator_133_instead.wav": {
   "hash": "83adc40d3b259d4ac2ccd798ca381544",
@@ -937,12 +937,12 @@
  "narrator/narrator_134_radioed.wav": {
   "hash": "c884e22575aedc57fdff7b3c7053170a",
   "provider": "chatterbox",
-  "seconds": 1.69
+  "seconds": 1.801
  },
  "narrator/narrator_135_answered.wav": {
   "hash": "64749224d3d87d4d466e703e71cfa354",
   "provider": "chatterbox",
-  "seconds": 1.062
+  "seconds": 1.086
  },
  "narrator/narrator_136_exhaled.wav": {
   "hash": "134c0f89e0a85acca4fbf1d99dc63323",
@@ -957,12 +957,12 @@
  "narrator/narrator_138_nobody_spoke.wav": {
   "hash": "8392018527f08c7d4d6e4d1579e79f2b",
   "provider": "chatterbox",
-  "seconds": 1.842
+  "seconds": 1.895
  },
  "narrator/narrator_139_looked_out.wav": {
   "hash": "8928a78022bcb10178eabb46e08e2909",
   "provider": "chatterbox",
-  "seconds": 2.156
+  "seconds": 2.541
  },
  "narrator/narrator_140_operator.wav": {
   "hash": "f2971da23325c7a349570fe437c3fc03",
@@ -972,12 +972,12 @@
  "narrator/narrator_141_radio_error.wav": {
   "hash": "25bf683620475d08776522f0dfcf2d7d",
   "provider": "chatterbox",
-  "seconds": 2.676
+  "seconds": 3.155
  },
  "narrator/narrator_142_photograph.wav": {
   "hash": "f9e19b502bcacbf8db32e8805128ff35",
   "provider": "chatterbox",
-  "seconds": 3.307
+  "seconds": 3.586
  },
  "narrator/narrator_143_loaded.wav": {
   "hash": "2d220089b278a5f22456d839cd3c0e71",
@@ -997,7 +997,7 @@
  "narrator/narrator_146_current_time.wav": {
   "hash": "fa9fe7aa3488c9f2d334364cba5796d7",
   "provider": "chatterbox",
-  "seconds": 2.006
+  "seconds": 2.364
  },
  "narrator/narrator_147_zoomed.wav": {
   "hash": "05a460d22a3aa2deac20329bf34677c3",
@@ -1032,7 +1032,7 @@
  "narrator/narrator_153_missing.wav": {
   "hash": "8d3d992fb94785de0cf8dda56647e443",
   "provider": "chatterbox",
-  "seconds": 1.12
+  "seconds": 1.18
  },
  "narrator/narrator_154_pointed.wav": {
   "hash": "7776cfed36e0878fd9bc9863172f3876",
@@ -1042,7 +1042,7 @@
  "narrator/narrator_155_end_gangway.wav": {
   "hash": "df1c2a4f73533e90ac709497db1b3c0c",
   "provider": "chatterbox",
-  "seconds": 3.156
+  "seconds": 3.721
  },
  "narrator/narrator_156_watching.wav": {
   "hash": "a70e8313fd4bb3111a41d49f312d1478",
@@ -1052,12 +1052,12 @@
  "narrator/narrator_157_turned.wav": {
   "hash": "e653b6821137120c6f2a3fa964dd9465",
   "provider": "chatterbox",
-  "seconds": 3.949
+  "seconds": 4.301
  },
  "narrator/narrator_158_didnt_answer.wav": {
   "hash": "b904535d880163726e61a8e8402f1586",
   "provider": "chatterbox",
-  "seconds": 2.354
+  "seconds": 2.515
  },
  "narrator/narrator_159_not_announcement.wav": {
   "hash": "59ce763fe6d92a3a2ac8dcfe44a1ef72",
@@ -1077,7 +1077,7 @@
  "narrator/narrator_162_looked_at_her.wav": {
   "hash": "ff10ff5b6dd58e5265321364873d764c",
   "provider": "chatterbox",
-  "seconds": 2.428
+  "seconds": 2.862
  },
  "narrator/narrator_163_nodded.wav": {
   "hash": "b5c8fe04774c0e0a5484f72abf50b493",
@@ -1087,12 +1087,12 @@
  "narrator/narrator_164_again.wav": {
   "hash": "cfde680af5b15714ab2970b9caef3f0c",
   "provider": "chatterbox",
-  "seconds": 2.05
+  "seconds": 2.417
  },
  "narrator/narrator_165_covered.wav": {
   "hash": "8b23de8b12a3f8e99383df64c76ebdcd",
   "provider": "chatterbox",
-  "seconds": 1.209
+  "seconds": 1.424
  },
  "narrator/narrator_166_changed.wav": {
   "hash": "ec2a97935c3f15fa6849f716567f57e4",
@@ -1117,12 +1117,12 @@
  "narrator/narrator_170_screamed.wav": {
   "hash": "bb4d792f22f9845f06de3347ad9ce42d",
   "provider": "chatterbox",
-  "seconds": 2.145
+  "seconds": 2.515
  },
  "narrator/narrator_171_back.wav": {
   "hash": "0398dff2745c53c92bf2a3111a98841e",
   "provider": "chatterbox",
-  "seconds": 3.133
+  "seconds": 3.229
  },
  "narrator/narrator_172_not_alone.wav": {
   "hash": "62860e2f14786217b7e5835052e16614",
@@ -1132,7 +1132,7 @@
  "narrator/narrator_173_people.wav": {
   "hash": "f7e37f5280afcb2af4d123970a1515fb",
   "provider": "chatterbox",
-  "seconds": 1.509
+  "seconds": 1.778
  },
  "narrator/narrator_174_dozens.wav": {
   "hash": "e3d8155ac5ad373d5fc4a6155b7aabb3",
@@ -1142,22 +1142,22 @@
  "narrator/narrator_175_not_swimming.wav": {
   "hash": "aad8663236592958aad7a7a931b2e6e5",
   "provider": "chatterbox",
-  "seconds": 3.035
+  "seconds": 3.121
  },
  "narrator/narrator_176_heads.wav": {
   "hash": "a6cb5129c02f170192d90b64ae158fe8",
   "provider": "chatterbox",
-  "seconds": 3.654
+  "seconds": 4.285
  },
  "narrator/narrator_177_still.wav": {
   "hash": "7e5582b0dc39d084c8b447cf208c8005",
   "provider": "chatterbox",
-  "seconds": 1.772
+  "seconds": 2.044
  },
  "narrator/narrator_178_raised.wav": {
   "hash": "16edbc04c3f6fd5711451eb8971ba0e2",
   "provider": "chatterbox",
-  "seconds": 1.397
+  "seconds": 1.645
  },
  "narrator/narrator_179_another.wav": {
   "hash": "70b3857e0e19917b7dc0dea54eb13b87",
@@ -1167,7 +1167,7 @@
  "narrator/narrator_180_all.wav": {
   "hash": "a913e8f2eb5bd56fdb3679500d0699cf",
   "provider": "chatterbox",
-  "seconds": 1.102
+  "seconds": 1.298
  },
  "narrator/narrator_181_stared.wav": {
   "hash": "7e621c9d73c97dfbbe3a4d49e69355fc",
@@ -1182,7 +1182,7 @@
  "narrator/narrator_183_pointed.wav": {
   "hash": "6314abe754f48fcde30f257f4e0e85d5",
   "provider": "chatterbox",
-  "seconds": 1.569
+  "seconds": 1.801
  },
  "narrator/narrator_184_lights_died.wav": {
   "hash": "9414720b46ca8b2b938253cb93fbf46d",
@@ -1195,9 +1195,9 @@
   "seconds": 1.236
  },
  "narrator/narrator_186_screamed.wav": {
-  "hash": "002b8d89b6f8d62df21acf8b971f710f",
+  "hash": "22e1ea7c332b9bf5354b408513772e42",
   "provider": "chatterbox",
-  "seconds": 1.335
+  "seconds": 1.361
  },
  "narrator/narrator_187_held.wav": {
   "hash": "2933e512e49dbf56dfebe96149de9bd8",
@@ -1237,7 +1237,7 @@
  "narrator/narrator_194_gone.wav": {
   "hash": "8a6fd2827cd2f4162f6667fd960635fa",
   "provider": "chatterbox",
-  "seconds": 1.131
+  "seconds": 1.205
  },
  "narrator/narrator_195_looked_down.wav": {
   "hash": "fd4b272effe85f3ed1d2805aa3213ede",
@@ -1257,12 +1257,12 @@
  "narrator/narrator_198_railing.wav": {
   "hash": "eda12f75b98abe4e8d25771c73b2537a",
   "provider": "chatterbox",
-  "seconds": 1.296
+  "seconds": 1.527
  },
  "narrator/narrator_199_gone_too.wav": {
   "hash": "0046d95f29e254d06c1e4d5bc38de931",
   "provider": "chatterbox",
-  "seconds": 1.798
+  "seconds": 2.118
  },
  "narrator/narrator_200_ocean_empty.wav": {
   "hash": "e9b669ff34acb3f5d246d72fc38ae94c",
@@ -1277,7 +1277,7 @@
  "narrator/narrator_202_engines.wav": {
   "hash": "e3e16d20b5d4f09e33a29efc2cc7b256",
   "provider": "chatterbox",
-  "seconds": 2.545
+  "seconds": 2.872
  },
  "narrator/narrator_203_gps.wav": {
   "hash": "fc72afd13e0d6c32dd52354b7a5a4a7e",
@@ -1292,12 +1292,12 @@
  "narrator/narrator_205_harbor_lights.wav": {
   "hash": "29a7d0149dc016f0724b1ec9e0e62459",
   "provider": "chatterbox",
-  "seconds": 2.777
+  "seconds": 3.023
  },
  "narrator/narrator_206_police_waiting.wav": {
   "hash": "ae8f5db4ac2e81ccabbe1f29b5925a31",
   "provider": "chatterbox",
-  "seconds": 1.938
+  "seconds": 2.284
  },
  "narrator/narrator_207_told.wav": {
   "hash": "e505d2b0b21a5e4dec7342bb80fad110",
@@ -1332,12 +1332,12 @@
  "narrator/narrator_213_wedding.wav": {
   "hash": "7254dafc2122618444fdc422a436409d",
   "provider": "chatterbox",
-  "seconds": 2.846
+  "seconds": 3.355
  },
  "narrator/narrator_214_honeymoon.wav": {
   "hash": "1ad4ca77fff33e889b415d048495eb6e",
   "provider": "chatterbox",
-  "seconds": 2.892
+  "seconds": 3.022
  },
  "narrator/narrator_215_christmas.wav": {
   "hash": "3856504f2e492d19578d648fba585702",
@@ -1362,7 +1362,7 @@
  "narrator/narrator_219_ring.wav": {
   "hash": "4bd77a2fbaab19e9daad90ec50fd6324",
   "provider": "chatterbox",
-  "seconds": 2.458
+  "seconds": 2.872
  },
  "narrator/narrator_220_uncomfortable.wav": {
   "hash": "e3e4b8abaf04bcc0c9a3d05be949aafb",
@@ -1372,7 +1372,7 @@
  "narrator/narrator_221_turned_ring.wav": {
   "hash": "dac9a19d2237b8ad5431e83b0b02494f",
   "provider": "chatterbox",
-  "seconds": 3.411
+  "seconds": 3.586
  },
  "narrator/narrator_222_expected.wav": {
   "hash": "87e31908d4bfc7ae4a928b2b5bd91ddb",
@@ -1392,12 +1392,12 @@
  "narrator/narrator_225_security.wav": {
   "hash": "ff9c8dcdcd1caf13550e9f354da41146",
   "provider": "chatterbox",
-  "seconds": 3.212
+  "seconds": 3.586
  },
  "narrator/narrator_226_most.wav": {
   "hash": "142b7ccd0cd48083c1bebbcc0825ad3c",
   "provider": "chatterbox",
-  "seconds": 3.949
+  "seconds": 4.657
  },
  "narrator/narrator_227_talking.wav": {
   "hash": "93811e7a91eb3bfba1552ee80c217737",
@@ -1422,12 +1422,12 @@
  "narrator/narrator_231_behind.wav": {
   "hash": "acf8e2329597ef73c68e82e71bd13a5a",
   "provider": "chatterbox",
-  "seconds": 3.862
+  "seconds": 4.554
  },
  "narrator/narrator_232_next_frame.wav": {
   "hash": "26d58817dfbff214ba81f9585d04071b",
   "provider": "chatterbox",
-  "seconds": 2.315
+  "seconds": 2.729
  },
  "narrator/narrator_233_never.wav": {
   "hash": "91d0907302f76b3893fabde0b36ee4f5",
@@ -1437,7 +1437,7 @@
  "narrator/narrator_234_replaced.wav": {
   "hash": "8c722693bad52e774eba4ca711cf24b7",
   "provider": "chatterbox",
-  "seconds": 2.442
+  "seconds": 2.515
  },
  "narrator/narrator_235_refused.wav": {
   "hash": "ad2cd28a60fb8b836529bed675ce4498",
@@ -1457,7 +1457,7 @@
  "narrator/narrator_238_afternoon.wav": {
   "hash": "1447d1a47810ef710eec92d41c58f0c8",
   "provider": "chatterbox",
-  "seconds": 3.721
+  "seconds": 3.944
  },
  "narrator/narrator_239_showed.wav": {
   "hash": "7d33bed00f313f26d7e51895dab1be88",
@@ -1477,7 +1477,7 @@
  "narrator/narrator_242_very_back.wav": {
   "hash": "4e9e037c882da5ff15394ee8c24d1a55",
   "provider": "chatterbox",
-  "seconds": 3.863
+  "seconds": 4.556
  },
  "narrator/narrator_243_beside.wav": {
   "hash": "ae500e8b89dcb2c3e4c77d2bf53788d6",
@@ -1492,7 +1492,7 @@
  "narrator/narrator_245_staring.wav": {
   "hash": "c02a460a9ba81d617f93d2ef0ae06d90",
   "provider": "chatterbox",
-  "seconds": 4.21
+  "seconds": 4.965
  },
  "narrator/narrator_246_message.wav": {
   "hash": "57baf1815f284f91291b2e4f464f03d7",
@@ -1502,7 +1502,7 @@
  "narrator/narrator_247_dont_let.wav": {
   "hash": "995bb3c461ed619cfacd66c4253d221d",
   "provider": "chatterbox",
-  "seconds": 1.356
+  "seconds": 1.597
  },
  "narrator/narrator_248_rang.wav": {
   "hash": "6d7b4ee9024f10b32140013816f94d5c",
@@ -1522,17 +1522,17 @@
  "narrator/narrator_251_again.wav": {
   "hash": "386d87a836146a42ddcfcfbde845a77e",
   "provider": "chatterbox",
-  "seconds": 1.033
+  "seconds": 1.086
  },
  "narrator/narrator_252_switched_off.wav": {
   "hash": "fd3e5d2429f67badee6ea3642f3fccbf",
   "provider": "chatterbox",
-  "seconds": 1.364
+  "seconds": 1.607
  },
  "narrator/narrator_253_black.wav": {
   "hash": "83e41864dbe5fc6dafc58f853c9d08ba",
   "provider": "chatterbox",
-  "seconds": 1.193
+  "seconds": 1.405
  },
  "narrator/narrator_254_several.wav": {
   "hash": "da1e5a3c84900ff2a9859139018144f5",
@@ -1542,7 +1542,7 @@
  "narrator/narrator_255_turned_on.wav": {
   "hash": "a6e938932b74b2d38aea8520f770599e",
   "provider": "chatterbox",
-  "seconds": 2.045
+  "seconds": 2.41
  },
  "narrator/narrator_256_no_call.wav": {
   "hash": "23836b44829212aa32a8ef7485402a3a",
@@ -1552,7 +1552,7 @@
  "narrator/narrator_257_behind.wav": {
   "hash": "f02157f1ee67dfd30d17a695aa6650d9",
   "provider": "chatterbox",
-  "seconds": 3.476
+  "seconds": 3.983
  },
  "old-woman/oldwoman_001_not_passenger.wav": {
   "hash": "3f8b722337623f8e88694dcfcf51f9f3",
@@ -1575,14 +1575,14 @@
   "seconds": 1.583
  },
  "old-woman/oldwoman_005_daniel.wav": {
-  "hash": "76436e83073022a0fbbf6d739c1f5571",
+  "hash": "9c637299de5c5f78d5812eca2c66db71",
   "provider": "chatterbox",
-  "seconds": 1.549
+  "seconds": 1.584
  },
  "old-woman/oldwoman_006_daniel_2.wav": {
-  "hash": "906170e8ede0b02637a8cf4c74bf673f",
+  "hash": "0d69fda1ee64a9a2324c4b936ed027dd",
   "provider": "chatterbox",
-  "seconds": 1.615
+  "seconds": 1.672
  },
  "old-woman/oldwoman_007_sweetheart.wav": {
   "hash": "41610e88705f128730d3c6a5188fb38f",
@@ -1605,14 +1605,14 @@
   "seconds": 1.087
  },
  "old-woman/pa_006_daniel_2.wav": {
-  "hash": "0dec29f32401dc0de0bfec9fd11f3e2c",
+  "hash": "91289247da7985ddd0346c8b1dfaeb19",
   "provider": "chatterbox",
-  "seconds": 1.275
+  "seconds": 1.577
  },
  "old-woman/pa_007_daniel_3.wav": {
-  "hash": "4c7120fdbcc99023ddd1d3da4c8088be",
+  "hash": "5a0d4ac5dc536dd307b96add7e7b5770",
   "provider": "chatterbox",
-  "seconds": 1.183
+  "seconds": 1.888
  },
  "old-woman/pa_008_daniel_4.wav": {
   "hash": "c5e6d3d701c20b774b39b8f16be4acbe",
@@ -1620,9 +1620,9 @@
   "seconds": 1.398
  },
  "pa/pa_001_passenger37.wav": {
-  "hash": "a8d88f47fd09c7765b21b46dcd2700ce",
+  "hash": "639205a9cce1161a363e77a2604b85a0",
   "provider": "chatterbox",
-  "seconds": 2.173
+  "seconds": 1.984
  },
  "pa/pa_002_proceed.wav": {
   "hash": "8ab538c1c92982470af1df5549a6f1a2",
@@ -1650,8 +1650,8 @@
   "seconds": 1.073
  },
  "police/police_002_maam.wav": {
-  "hash": "f244076b0badd8ed8416ac65d53c0b7a",
+  "hash": "e993a1ec62903da58fcf7c5472b50919",
   "provider": "chatterbox",
-  "seconds": 0.88
+  "seconds": 0.769
  }
 }

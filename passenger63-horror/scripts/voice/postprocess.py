@@ -117,8 +117,8 @@ def fx_radio(x, seed=2):
 def fx_distant(x):
     _irs()
     y = dsp.hp(x, 160, SR, 2)
-    y = dsp.lp(y, 2300, SR, 2)
-    y = dsp.reverb(y * dsp.db(-4), DIST_IR, wet=0.55, dry=0.75)
+    y = dsp.lp(y, 3200, SR, 2)  # keep consonants: the name must stay intelligible
+    y = dsp.reverb(y * dsp.db(-4), DIST_IR, wet=0.42, dry=0.85)
     return y
 
 

@@ -1,1991 +1,1991 @@
 {
- "generatedAt": "2026-11-05T06:30:02.467Z",
+ "generatedAt": "2026-11-05T13:29:37.842Z",
  "files": {
   "captain/captain_001_radio_call.wav": {
-   "duration": 4.339,
+   "duration": 5.077,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "captain/captain_002_radio_again.wav": {
-   "duration": 2.531,
+   "duration": 2.167,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "captain/captain_003_lost_nav.wav": {
-   "duration": 4.381,
+   "duration": 4.721,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "captain/captain_004_ns8.wav": {
-   "duration": 1.652,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "captain/captain_005_negative.wav": {
-   "duration": 2.475,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crew/crew2_001_count.wav": {
-   "duration": 2.534,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crew/crew_001_ticket.wav": {
-   "duration": 1.605,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crew/crew_002_maam.wav": {
-   "duration": 0.803,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crew/crew_003_why.wav": {
-   "duration": 1.492,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crew/crew_004_who.wav": {
-   "duration": 0.727,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crew/crew_005_sir.wav": {
-   "duration": 2.757,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_001_who_is_she.wav": {
-   "duration": 1.442,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_002_what_happened.wav": {
-   "duration": 1.331,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_003_whats_going_on.wav": {
-   "duration": 1.632,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_004_feel_that.wav": {
-   "duration": 1.585,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_005_lights.wav": {
-   "duration": 1.986,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_006_oh_god.wav": {
-   "duration": 1.42,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_007_windows.wav": {
-   "duration": 1.852,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_008_crew.wav": {
-   "duration": 2.429,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_009_help.wav": {
-   "duration": 1.729,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_010_what_is_that.wav": {
-   "duration": 1.45,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_011_under_us.wav": {
-   "duration": 2.149,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_012_stay_calm.wav": {
-   "duration": 3.509,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_013_phone.wav": {
-   "duration": 2.894,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_014_look.wav": {
-   "duration": 1.802,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "crowd/crowd_015_mum.wav": {
-   "duration": 1.542,
-   "channels": 2,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_001_go_sleep.wav": {
-   "duration": 1.941,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_002_no.wav": {
-   "duration": 0.984,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_003_grandmother.wav": {
-   "duration": 1.774,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_004_died.wav": {
-   "duration": 1.743,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_005_impossible.wav": {
-   "duration": 1.242,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_006_used_to_say.wav": {
-   "duration": 1.476,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_007_exactly.wav": {
-   "duration": 1.494,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "daniel/daniel_008_i_know.wav": {
-   "duration": 0.986,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_001_wake_me.wav": {
-   "duration": 1.62,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_002_daniel.wav": {
-   "duration": 0.91,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_003_what_is_it.wav": {
-   "duration": 1.008,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_004_so.wav": {
-   "duration": 0.843,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_005_no.wav": {
-   "duration": 0.847,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_006_not_funny.wav": {
-   "duration": 1.214,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_007_no.wav": {
-   "duration": 0.847,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_008_where.wav": {
-   "duration": 1.153,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_009_stop.wav": {
-   "duration": 0.898,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_010_what.wav": {
-   "duration": 0.796,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_011_shes_dead.wav": {
-   "duration": 1.403,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_012_scream.wav": {
-   "duration": 0.984,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_013_daniel_2.wav": {
-   "duration": 0.934,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_014_husband.wav": {
-   "duration": 1.295,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "emma/emma_015_husbands.wav": {
-   "duration": 1.155,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "harbor/harbor_001_go_ahead.wav": {
-   "duration": 2.478,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "harbor/harbor_002_confirm.wav": {
-   "duration": 3.665,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "harbor/harbor_003_captain.wav": {
-   "duration": 1.061,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "harbor/harbor_004_docked.wav": {
-   "duration": 3.326,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "harbor/harbor_005_looking.wav": {
-   "duration": 2.942,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_001_hook.wav": {
-   "duration": 7.109,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_002_sixty_three.wav": {
-   "duration": 1.256,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_003_manifest.wav": {
-   "duration": 2.041,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_004_sixty_two_names.wav": {
-   "duration": 1.478,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_005_counted_again.wav": {
-   "duration": 1.36,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_006_sixty_three_people.wav": {
-   "duration": 1.633,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_007_nobody_boarded.wav": {
-   "duration": 4.663,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_008_one_conclusion.wav": {
-   "duration": 1.92,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_009_someone.wav": {
-   "duration": 3.266,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_010_found_her.wav": {
-   "duration": 2.657,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_011_old_woman.wav": {
-   "duration": 5.597,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_012_approached.wav": {
-   "duration": 1.643,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_013_didnt_move.wav": {
-   "duration": 1.241,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_014_turned.wav": {
-   "duration": 2.347,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_015_pale.wav": {
-   "duration": 3.692,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_016_smiled.wav": {
-   "duration": 1.599,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_017_swallowed.wav": {
-   "duration": 1.532,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_018_looked_past.wav": {
-   "duration": 3.368,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_019_smile_gone.wav": {
-   "duration": 1.677,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_020_checked.wav": {
-   "duration": 2.079,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_021_daniel_clarke.wav": {
-   "duration": 4.157,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_022_alive.wav": {
-   "duration": 3.531,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_023_looked_back.wav": {
-   "duration": 3.918,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_024_then_she_said.wav": {
-   "duration": 1.242,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_025_left.wav": {
-   "duration": 4.277,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_026_last_ferry.wav": {
-   "duration": 1.941,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_027_counts.wav": {
-   "duration": 2.501,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_028_weather.wav": {
-   "duration": 2.679,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_029_crossing.wav": {
-   "duration": 2.323,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_030_daniel_emma.wav": {
-   "duration": 4.979,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_031_tired.wav": {
-   "duration": 1.16,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_032_window.wav": {
-   "duration": 4.031,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_033_nothing_unusual.wav": {
-   "duration": 3.179,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_034_routine_count.wav": {
-   "duration": 3.969,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_035_reached_62.wav": {
-   "duration": 2.073,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_036_few_minutes.wav": {
-   "duration": 2.536,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_037_sixty_three.wav": {
-   "duration": 1.239,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_038_frowned.wav": {
-   "duration": 1.708,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_039_sixty_three_b.wav": {
-   "duration": 1.256,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_040_called.wav": {
-   "duration": 2.612,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_041_boarding_list.wav": {
-   "duration": 2.535,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_042_nobody_understood.wav": {
-   "duration": 1.709,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_043_noticed.wav": {
-   "duration": 1.652,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_044_bench.wav": {
-   "duration": 3.504,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_045_nobody_remembered.wav": {
-   "duration": 2.403,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_046_no_luggage.wav": {
-   "duration": 3.497,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_047_just_coat.wav": {
-   "duration": 3.148,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_048_approached.wav": {
-   "duration": 6.034,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_049_daniel.wav": {
-   "duration": 1.19,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_050_looking.wav": {
-   "duration": 2.442,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_051_found_daniel.wav": {
-   "duration": 2.461,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_052_laughed.wav": {
-   "duration": 1.128,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_053_saw_her.wav": {
-   "duration": 1.327,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_054_face_changed.wav": {
-   "duration": 3.008,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_055_didnt_answer.wav": {
-   "duration": 1.206,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_056_wave.wav": {
-   "duration": 3.791,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_057_stood.wav": {
-   "duration": 2.646,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_058_whispered.wav": {
-   "duration": 1.303,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_059_stared.wav": {
-   "duration": 1.293,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_060_sick.wav": {
-   "duration": 1.342,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_061_laughed.wav": {
-   "duration": 2.443,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_062_wasnt.wav": {
-   "duration": 1.161,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_063_raised.wav": {
-   "duration": 2.526,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_064_knew.wav": {
-   "duration": 5.448,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_065_only_difference.wav": {
-   "duration": 5.106,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_066_same.wav": {
-   "duration": 3.653,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_067_step.wav": {
-   "duration": 3.391,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_068_smiled.wav": {
-   "duration": 1.731,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_069_flickered.wav": {
-   "duration": 2.244,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_070_once_twice.wav": {
-   "duration": 1.294,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_071_darkness.wav": {
-   "duration": 1.027,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_072_screamed.wav": {
-   "duration": 1.192,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_073_three_seconds.wav": {
-   "duration": 2.728,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_074_bench_empty.wav": {
-   "duration": 1.588,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_075_gone.wav": {
-   "duration": 1.472,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_076_rear_deck.wav": {
-   "duration": 2.298,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_077_bathrooms.wav": {
-   "duration": 1.38,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_078_storage.wav": {
-   "duration": 1.799,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_079_searched.wav": {
-   "duration": 2.89,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_080_another_count.wav": {
-   "duration": 2.849,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_081_sixty_two.wav": {
-   "duration": 1.128,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_082_relaxed.wav": {
-   "duration": 1.396,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_083_purser.wav": {
-   "duration": 3.895,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_084_sixty_one.wav": {
-   "duration": 2.307,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_085_daniel_gone.wav": {
-   "duration": 1.824,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_086_not_physically.wav": {
-   "duration": 3.016,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_087_disappeared.wav": {
-   "duration": 3.129,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_088_refreshed.wav": {
-   "duration": 3.29,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_089_ticket.wav": {
-   "duration": 4.644,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_090_email.wav": {
-   "duration": 2.233,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_091_reservation.wav": {
-   "duration": 3.859,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_092_one_passenger.wav": {
-   "duration": 2.244,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_093_stared.wav": {
-   "duration": 1.714,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_094_identification.wav": {
-   "duration": 2.39,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_095_license.wav": {
-   "duration": 2.84,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_096_looked.wav": {
-   "duration": 4.123,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_097_photo.wav": {
-   "duration": 1.778,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_098_name_said.wav": {
-   "duration": 1.116,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_099_unknown.wav": {
-   "duration": 1.003,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_100_grabbed.wav": {
-   "duration": 2.534,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_101_shouting.wav": {
    "duration": 1.44,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_102_nobody_laughing.wav": {
-   "duration": 1.614,
+  "captain/captain_005_negative.wav": {
+   "duration": 2.343,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_103_hit.wav": {
-   "duration": 2.584,
+  "crew/crew2_001_count.wav": {
+   "duration": 3.041,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_104_stopped.wav": {
-   "duration": 1.303,
+  "crew/crew_001_ticket.wav": {
+   "duration": 1.722,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_105_another.wav": {
-   "duration": 1.281,
+  "crew/crew_002_maam.wav": {
+   "duration": 0.751,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_106_then_another.wav": {
-   "duration": 1.091,
+  "crew/crew_003_why.wav": {
+   "duration": 1.773,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_107_beneath.wav": {
-   "duration": 1.394,
+  "crew/crew_004_who.wav": {
+   "duration": 0.789,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_108_captain_crew.wav": {
-   "duration": 1.869,
+  "crew/crew_005_sir.wav": {
+   "duration": 3.592,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_109_radar.wav": {
-   "duration": 5.387,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_110_knocking.wav": {
-   "duration": 1.745,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_111_not_one.wav": {
-   "duration": 2.794,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_112_moved_away.wav": {
-   "duration": 2.692,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_113_screamed.wav": {
-   "duration": 1.326,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_114_pa_on.wav": {
-   "duration": 2.3,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_115_womans_voice.wav": {
-   "duration": 1.924,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_116_pale.wav": {
-   "duration": 1.431,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_117_grabbed.wav": {
-   "duration": 1.188,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_118_voice_changed.wav": {
-   "duration": 4.174,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_119_shaking.wav": {
-   "duration": 1.357,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_120_turned_off.wav": {
-   "duration": 3.945,
-   "channels": 1,
+  "crowd/crowd_001_who_is_she.wav": {
+   "duration": 1.256,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_121_cable.wav": {
-   "duration": 2.49,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_122_every_speaker.wav": {
-   "duration": 5.703,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_123_phones.wav": {
-   "duration": 2.329,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_124_no_signal.wav": {
-   "duration": 4.737,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_125_backed_away.wav": {
-   "duration": 2.468,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_126_engines.wav": {
-   "duration": 1.886,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_127_rushed.wav": {
-   "duration": 1.825,
-   "channels": 1,
-   "sampleRate": 24000,
-   "provider": "kokoro"
-  },
-  "narrator/narrator_128_nav_blank.wav": {
-   "duration": 2.368,
-   "channels": 1,
+  "crowd/crowd_002_what_happened.wav": {
+   "duration": 1.231,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_129_gps.wav": {
-   "duration": 3.475,
-   "channels": 1,
+  "crowd/crowd_003_whats_going_on.wav": {
+   "duration": 1.465,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_130_windshield.wav": {
-   "duration": 1.802,
-   "channels": 1,
+  "crowd/crowd_004_feel_that.wav": {
+   "duration": 1.268,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_131_no_coast.wav": {
-   "duration": 2.646,
-   "channels": 1,
+  "crowd/crowd_005_lights.wav": {
+   "duration": 1.703,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_132_ten_minutes.wav": {
-   "duration": 2.052,
-   "channels": 1,
+  "crowd/crowd_006_oh_god.wav": {
+   "duration": 1.605,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_133_instead.wav": {
-   "duration": 3.184,
-   "channels": 1,
+  "crowd/crowd_007_windows.wav": {
+   "duration": 1.593,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_134_radioed.wav": {
-   "duration": 2.043,
-   "channels": 1,
+  "crowd/crowd_008_crew.wav": {
+   "duration": 2.303,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_135_answered.wav": {
-   "duration": 1.279,
-   "channels": 1,
+  "crowd/crowd_009_help.wav": {
+   "duration": 3.407,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_136_exhaled.wav": {
-   "duration": 1.404,
-   "channels": 1,
+  "crowd/crowd_010_what_is_that.wav": {
+   "duration": 1.122,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_137_another_pause.wav": {
-   "duration": 3.54,
-   "channels": 1,
+  "crowd/crowd_011_under_us.wav": {
+   "duration": 2.469,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_138_nobody_spoke.wav": {
-   "duration": 2.026,
-   "channels": 1,
+  "crowd/crowd_012_stay_calm.wav": {
+   "duration": 2.745,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_139_looked_out.wav": {
-   "duration": 2.217,
-   "channels": 1,
+  "crowd/crowd_013_phone.wav": {
+   "duration": 3.196,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_140_operator.wav": {
-   "duration": 1.514,
-   "channels": 1,
+  "crowd/crowd_014_look.wav": {
+   "duration": 1.914,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_141_radio_error.wav": {
-   "duration": 3.001,
-   "channels": 1,
+  "crowd/crowd_015_mum.wav": {
+   "duration": 1.617,
+   "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_142_photograph.wav": {
-   "duration": 3.89,
+  "daniel/daniel_001_go_sleep.wav": {
+   "duration": 2.145,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_143_loaded.wav": {
-   "duration": 1.884,
+  "daniel/daniel_002_no.wav": {
+   "duration": 1.513,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_144_north_star.wav": {
-   "duration": 4.188,
+  "daniel/daniel_003_grandmother.wav": {
+   "duration": 1.504,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_145_timestamp.wav": {
-   "duration": 2.526,
+  "daniel/daniel_004_died.wav": {
+   "duration": 2.087,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_146_current_time.wav": {
-   "duration": 2.609,
+  "daniel/daniel_005_impossible.wav": {
+   "duration": 1.386,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_147_zoomed.wav": {
-   "duration": 1.541,
+  "daniel/daniel_006_used_to_say.wav": {
+   "duration": 1.401,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_148_there_he_was.wav": {
-   "duration": 4.289,
+  "daniel/daniel_007_exactly.wav": {
+   "duration": 1.568,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_149_same_crew.wav": {
-   "duration": 3.247,
+  "daniel/daniel_008_i_know.wav": {
+   "duration": 1.053,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_150_emma.wav": {
-   "duration": 0.741,
+  "emma/emma_001_wake_me.wav": {
+   "duration": 1.659,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_151_shoulder.wav": {
-   "duration": 2.252,
+  "emma/emma_002_daniel.wav": {
+   "duration": 1.433,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_152_alone.wav": {
-   "duration": 2.444,
+  "emma/emma_003_what_is_it.wav": {
+   "duration": 1.205,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_153_missing.wav": {
-   "duration": 1.422,
+  "emma/emma_004_so.wav": {
+   "duration": 1.543,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_154_pointed.wav": {
-   "duration": 1.558,
+  "emma/emma_005_no.wav": {
+   "duration": 1.062,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_155_end_gangway.wav": {
-   "duration": 3.444,
+  "emma/emma_006_not_funny.wav": {
+   "duration": 1.765,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_156_watching.wav": {
-   "duration": 2.194,
+  "emma/emma_007_no.wav": {
+   "duration": 0.721,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_157_turned.wav": {
-   "duration": 4.084,
+  "emma/emma_008_where.wav": {
+   "duration": 1.436,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_158_didnt_answer.wav": {
-   "duration": 2.372,
+  "emma/emma_009_stop.wav": {
+   "duration": 0.843,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_159_not_announcement.wav": {
-   "duration": 3.765,
+  "emma/emma_010_what.wav": {
+   "duration": 0.899,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_160_quiet.wav": {
-   "duration": 1.898,
+  "emma/emma_011_shes_dead.wav": {
+   "duration": 1.938,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_161_walking.wav": {
-   "duration": 2.485,
+  "emma/emma_012_scream.wav": {
+   "duration": 1.13,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_162_looked_at_her.wav": {
-   "duration": 2.206,
+  "emma/emma_013_daniel_2.wav": {
+   "duration": 1.019,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_163_nodded.wav": {
-   "duration": 0.983,
+  "emma/emma_014_husband.wav": {
+   "duration": 1.561,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_164_again.wav": {
-   "duration": 2.269,
+  "emma/emma_015_husbands.wav": {
+   "duration": 1.312,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_165_covered.wav": {
-   "duration": 1.328,
+  "harbor/harbor_001_go_ahead.wav": {
+   "duration": 1.807,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_166_changed.wav": {
-   "duration": 3.488,
+  "harbor/harbor_002_confirm.wav": {
+   "duration": 3.423,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_167_crying.wav": {
-   "duration": 1.639,
+  "harbor/harbor_003_captain.wav": {
+   "duration": 1.169,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_168_slapped.wav": {
-   "duration": 1.713,
+  "harbor/harbor_004_docked.wav": {
+   "duration": 2.688,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_169_blinked.wav": {
-   "duration": 2.667,
+  "harbor/harbor_005_looking.wav": {
+   "duration": 2.413,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_170_screamed.wav": {
-   "duration": 2.321,
+  "narrator/narrator_001_hook.wav": {
+   "duration": 7.304,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_171_back.wav": {
-   "duration": 3.208,
+  "narrator/narrator_002_sixty_three.wav": {
+   "duration": 1.026,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_172_not_alone.wav": {
-   "duration": 2.052,
+  "narrator/narrator_003_manifest.wav": {
+   "duration": 2.158,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_173_people.wav": {
-   "duration": 1.967,
+  "narrator/narrator_004_sixty_two_names.wav": {
+   "duration": 1.336,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_174_dozens.wav": {
-   "duration": 2.41,
+  "narrator/narrator_005_counted_again.wav": {
+   "duration": 1.3,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_175_not_swimming.wav": {
-   "duration": 3.139,
+  "narrator/narrator_006_sixty_three_people.wav": {
+   "duration": 1.27,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_176_heads.wav": {
-   "duration": 4.413,
+  "narrator/narrator_007_nobody_boarded.wav": {
+   "duration": 3.85,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_177_still.wav": {
-   "duration": 2.048,
+  "narrator/narrator_008_one_conclusion.wav": {
+   "duration": 1.895,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_178_raised.wav": {
-   "duration": 2.118,
+  "narrator/narrator_009_someone.wav": {
+   "duration": 3.654,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_179_another.wav": {
-   "duration": 1.162,
+  "narrator/narrator_010_found_her.wav": {
+   "duration": 2.973,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_180_all.wav": {
-   "duration": 1.51,
+  "narrator/narrator_011_old_woman.wav": {
+   "duration": 6.499,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_181_stared.wav": {
-   "duration": 1.177,
+  "narrator/narrator_012_approached.wav": {
+   "duration": 1.729,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_182_smiled.wav": {
-   "duration": 1.494,
+  "narrator/narrator_013_didnt_move.wav": {
+   "duration": 1.086,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_183_pointed.wav": {
-   "duration": 1.728,
+  "narrator/narrator_014_turned.wav": {
+   "duration": 2.376,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_184_lights_died.wav": {
-   "duration": 1.516,
+  "narrator/narrator_015_pale.wav": {
+   "duration": 3.471,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_185_darkness.wav": {
-   "duration": 1.263,
+  "narrator/narrator_016_smiled.wav": {
+   "duration": 1.856,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_186_screamed.wav": {
-   "duration": 1.406,
+  "narrator/narrator_017_swallowed.wav": {
+   "duration": 1.608,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_187_held.wav": {
-   "duration": 2.53,
+  "narrator/narrator_018_looked_past.wav": {
+   "duration": 3.471,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_188_struck.wav": {
-   "duration": 2.741,
+  "narrator/narrator_019_smile_gone.wav": {
+   "duration": 1.491,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_189_another_impact.wav": {
-   "duration": 1.481,
+  "narrator/narrator_020_checked.wav": {
+   "duration": 2.158,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_190_climbing.wav": {
-   "duration": 1.956,
+  "narrator/narrator_021_daniel_clarke.wav": {
+   "duration": 4.836,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_191_against.wav": {
-   "duration": 3.419,
+  "narrator/narrator_022_alive.wav": {
+   "duration": 4.198,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_192_ran.wav": {
-   "duration": 1.029,
+  "narrator/narrator_023_looked_back.wav": {
+   "duration": 3.947,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_193_emergency.wav": {
-   "duration": 2.536,
+  "narrator/narrator_024_then_she_said.wav": {
+   "duration": 1.124,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_194_gone.wav": {
-   "duration": 1.434,
+  "narrator/narrator_025_left.wav": {
+   "duration": 4.047,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_195_looked_down.wav": {
-   "duration": 2.716,
+  "narrator/narrator_026_last_ferry.wav": {
+   "duration": 2.513,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_196_screamed_name.wav": {
-   "duration": 1.429,
+  "narrator/narrator_027_counts.wav": {
+   "duration": 2.524,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_197_no_answer.wav": {
-   "duration": 1.157,
+  "narrator/narrator_028_weather.wav": {
+   "duration": 2.768,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_198_railing.wav": {
-   "duration": 1.452,
+  "narrator/narrator_029_crossing.wav": {
+   "duration": 2.383,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_199_gone_too.wav": {
-   "duration": 1.769,
+  "narrator/narrator_030_daniel_emma.wav": {
+   "duration": 5.015,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_200_ocean_empty.wav": {
-   "duration": 4.546,
+  "narrator/narrator_031_tired.wav": {
+   "duration": 1.086,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_201_nothing.wav": {
-   "duration": 0.901,
+  "narrator/narrator_032_window.wav": {
+   "duration": 3.985,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_202_engines.wav": {
-   "duration": 2.867,
+  "narrator/narrator_033_nothing_unusual.wav": {
+   "duration": 2.872,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_203_gps.wav": {
-   "duration": 2.932,
+  "narrator/narrator_034_routine_count.wav": {
+   "duration": 3.944,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_204_nav_showed.wav": {
-   "duration": 5.165,
+  "narrator/narrator_035_reached_62.wav": {
+   "duration": 2.254,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_205_harbor_lights.wav": {
-   "duration": 3.057,
+  "narrator/narrator_036_few_minutes.wav": {
+   "duration": 2.619,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_206_police_waiting.wav": {
-   "duration": 2.321,
+  "narrator/narrator_037_sixty_three.wav": {
+   "duration": 1.089,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_207_told.wav": {
-   "duration": 1.744,
+  "narrator/narrator_038_frowned.wav": {
+   "duration": 2.183,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_208_list.wav": {
-   "duration": 4.743,
+  "narrator/narrator_039_sixty_three_b.wav": {
+   "duration": 1.044,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_209_checked.wav": {
-   "duration": 5.37,
+  "narrator/narrator_040_called.wav": {
+   "duration": 2.746,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_210_database.wav": {
-   "duration": 2.632,
+  "narrator/narrator_041_boarding_list.wav": {
+   "duration": 2.566,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_211_photographs.wav": {
-   "duration": 5.104,
+  "narrator/narrator_042_nobody_understood.wav": {
+   "duration": 1.325,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_212_every.wav": {
-   "duration": 2.744,
+  "narrator/narrator_043_noticed.wav": {
+   "duration": 1.708,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_213_wedding.wav": {
-   "duration": 3.289,
+  "narrator/narrator_044_bench.wav": {
+   "duration": 4.209,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_214_honeymoon.wav": {
-   "duration": 2.907,
+  "narrator/narrator_045_nobody_remembered.wav": {
+   "duration": 2.144,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_215_christmas.wav": {
-   "duration": 2.892,
+  "narrator/narrator_046_no_luggage.wav": {
+   "duration": 3.405,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_216_emma_screamed.wav": {
-   "duration": 1.157,
+  "narrator/narrator_047_just_coat.wav": {
+   "duration": 3.19,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_217_records.wav": {
-   "duration": 1.995,
+  "narrator/narrator_048_approached.wav": {
+   "duration": 6.431,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_218_record.wav": {
-   "duration": 3.291,
+  "narrator/narrator_049_daniel.wav": {
+   "duration": 1.1,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_219_ring.wav": {
-   "duration": 2.701,
+  "narrator/narrator_050_looking.wav": {
+   "duration": 2.515,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_220_uncomfortable.wav": {
-   "duration": 2.079,
+  "narrator/narrator_051_found_daniel.wav": {
+   "duration": 2.56,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_221_turned_ring.wav": {
-   "duration": 3.237,
+  "narrator/narrator_052_laughed.wav": {
+   "duration": 1.191,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_222_expected.wav": {
-   "duration": 2.16,
+  "narrator/narrator_053_saw_her.wav": {
+   "duration": 1.235,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_223_instead.wav": {
-   "duration": 1.283,
+  "narrator/narrator_054_face_changed.wav": {
+   "duration": 2.755,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_224_37.wav": {
-   "duration": 1.227,
+  "narrator/narrator_055_didnt_answer.wav": {
+   "duration": 1.086,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_225_security.wav": {
-   "duration": 4.103,
+  "narrator/narrator_056_wave.wav": {
+   "duration": 3.699,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_226_most.wav": {
-   "duration": 4.374,
+  "narrator/narrator_057_stood.wav": {
+   "duration": 2.658,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_227_talking.wav": {
-   "duration": 3.388,
+  "narrator/narrator_058_whispered.wav": {
+   "duration": 1.224,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_228_1217.wav": {
-   "duration": 3.508,
+  "narrator/narrator_059_stared.wav": {
+   "duration": 1.444,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_229_one_frame.wav": {
-   "duration": 1.711,
+  "narrator/narrator_060_sick.wav": {
+   "duration": 1.403,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_230_appeared.wav": {
-   "duration": 3.807,
+  "narrator/narrator_061_laughed.wav": {
+   "duration": 2.872,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_231_behind.wav": {
-   "duration": 4.732,
+  "narrator/narrator_062_wasnt.wav": {
+   "duration": 1.034,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_232_next_frame.wav": {
-   "duration": 2.464,
+  "narrator/narrator_063_raised.wav": {
+   "duration": 2.473,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_233_never.wav": {
-   "duration": 3.016,
+  "narrator/narrator_064_knew.wav": {
+   "duration": 6.445,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_234_replaced.wav": {
-   "duration": 2.882,
+  "narrator/narrator_065_only_difference.wav": {
+   "duration": 5.62,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_235_refused.wav": {
-   "duration": 2.782,
+  "narrator/narrator_066_same.wav": {
+   "duration": 4.304,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_236_stopped.wav": {
-   "duration": 2.333,
+  "narrator/narrator_067_step.wav": {
+   "duration": 3.586,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_237_year.wav": {
-   "duration": 2.45,
+  "narrator/narrator_068_smiled.wav": {
+   "duration": 1.801,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_238_afternoon.wav": {
-   "duration": 4.504,
+  "narrator/narrator_069_flickered.wav": {
+   "duration": 2.515,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_239_showed.wav": {
-   "duration": 4.105,
+  "narrator/narrator_070_once_twice.wav": {
+   "duration": 1.496,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_240_almost_deleted.wav": {
-   "duration": 1.684,
+  "narrator/narrator_071_darkness.wav": {
+   "duration": 0.903,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_241_zoomed.wav": {
-   "duration": 1.407,
+  "narrator/narrator_072_screamed.wav": {
+   "duration": 1.18,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_242_very_back.wav": {
-   "duration": 3.962,
+  "narrator/narrator_073_three_seconds.wav": {
+   "duration": 2.484,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_243_beside.wav": {
-   "duration": 2.234,
+  "narrator/narrator_074_bench_empty.wav": {
+   "duration": 1.287,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_244_same_clothes.wav": {
-   "duration": 5.147,
+  "narrator/narrator_075_gone.wav": {
+   "duration": 1.343,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_245_staring.wav": {
-   "duration": 4.705,
+  "narrator/narrator_076_rear_deck.wav": {
+   "duration": 2.158,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_246_message.wav": {
-   "duration": 1.385,
+  "narrator/narrator_077_bathrooms.wav": {
+   "duration": 1.734,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_247_dont_let.wav": {
-   "duration": 1.571,
+  "narrator/narrator_078_storage.wav": {
+   "duration": 1.773,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_248_rang.wav": {
-   "duration": 2.427,
+  "narrator/narrator_079_searched.wav": {
+   "duration": 3.238,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_249_didnt_answer.wav": {
-   "duration": 1.266,
+  "narrator/narrator_080_another_count.wav": {
+   "duration": 2.355,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
-  "narrator/narrator_250_stopped.wav": {
+  "narrator/narrator_081_sixty_two.wav": {
    "duration": 1.007,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_082_relaxed.wav": {
+   "duration": 1.194,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_083_purser.wav": {
+   "duration": 3.944,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_084_sixty_one.wav": {
+   "duration": 2.848,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_085_daniel_gone.wav": {
+   "duration": 1.551,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_086_not_physically.wav": {
+   "duration": 2.813,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_087_disappeared.wav": {
+   "duration": 3.187,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_088_refreshed.wav": {
+   "duration": 3.063,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_089_ticket.wav": {
+   "duration": 4.301,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_090_email.wav": {
+   "duration": 2.42,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_091_reservation.wav": {
+   "duration": 3.586,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_092_one_passenger.wav": {
+   "duration": 2.233,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_093_stared.wav": {
+   "duration": 1.801,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_094_identification.wav": {
+   "duration": 2.152,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_095_license.wav": {
+   "duration": 2.287,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_096_looked.wav": {
+   "duration": 4.851,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_097_photo.wav": {
+   "duration": 1.811,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_098_name_said.wav": {
+   "duration": 1.086,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_099_unknown.wav": {
+   "duration": 0.894,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_100_grabbed.wav": {
+   "duration": 2.515,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_101_shouting.wav": {
+   "duration": 1.348,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_102_nobody_laughing.wav": {
+   "duration": 1.694,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_103_hit.wav": {
+   "duration": 2.818,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_104_stopped.wav": {
+   "duration": 1.146,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_105_another.wav": {
+   "duration": 1.122,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_106_then_another.wav": {
+   "duration": 0.788,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_107_beneath.wav": {
+   "duration": 1.152,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_108_captain_crew.wav": {
+   "duration": 2.158,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_109_radar.wav": {
+   "duration": 5.372,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_110_knocking.wav": {
+   "duration": 1.535,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_111_not_one.wav": {
+   "duration": 2.902,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_112_moved_away.wav": {
+   "duration": 2.194,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_113_screamed.wav": {
+   "duration": 1.158,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_114_pa_on.wav": {
+   "duration": 2.515,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_115_womans_voice.wav": {
+   "duration": 2.158,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_116_pale.wav": {
+   "duration": 1.218,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_117_grabbed.wav": {
+   "duration": 1.086,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_118_voice_changed.wav": {
+   "duration": 3.883,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_119_shaking.wav": {
+   "duration": 1.169,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_120_turned_off.wav": {
+   "duration": 3.918,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_121_cable.wav": {
+   "duration": 2.563,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_122_every_speaker.wav": {
+   "duration": 5.477,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_123_phones.wav": {
+   "duration": 2.786,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_124_no_signal.wav": {
+   "duration": 4.682,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_125_backed_away.wav": {
+   "duration": 2.513,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_126_engines.wav": {
+   "duration": 2.402,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_127_rushed.wav": {
+   "duration": 2.073,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_128_nav_blank.wav": {
+   "duration": 2.158,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_129_gps.wav": {
+   "duration": 3.921,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_130_windshield.wav": {
+   "duration": 1.906,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_131_no_coast.wav": {
+   "duration": 2.727,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_132_ten_minutes.wav": {
+   "duration": 2.38,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_133_instead.wav": {
+   "duration": 3.277,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_134_radioed.wav": {
+   "duration": 1.801,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_135_answered.wav": {
+   "duration": 1.086,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_136_exhaled.wav": {
+   "duration": 1.196,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_137_another_pause.wav": {
+   "duration": 3.747,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_138_nobody_spoke.wav": {
+   "duration": 1.895,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_139_looked_out.wav": {
+   "duration": 2.541,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_140_operator.wav": {
+   "duration": 1.32,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_141_radio_error.wav": {
+   "duration": 3.155,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_142_photograph.wav": {
+   "duration": 3.586,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_143_loaded.wav": {
+   "duration": 1.597,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_144_north_star.wav": {
+   "duration": 4.357,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_145_timestamp.wav": {
+   "duration": 2.765,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_146_current_time.wav": {
+   "duration": 2.364,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_147_zoomed.wav": {
+   "duration": 1.61,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_148_there_he_was.wav": {
+   "duration": 4.537,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_149_same_crew.wav": {
+   "duration": 3.274,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_150_emma.wav": {
+   "duration": 0.547,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_151_shoulder.wav": {
+   "duration": 2.171,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_152_alone.wav": {
+   "duration": 2.474,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_153_missing.wav": {
+   "duration": 1.18,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_154_pointed.wav": {
+   "duration": 1.219,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_155_end_gangway.wav": {
+   "duration": 3.721,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_156_watching.wav": {
+   "duration": 2.232,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_157_turned.wav": {
+   "duration": 4.301,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_158_didnt_answer.wav": {
+   "duration": 2.515,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_159_not_announcement.wav": {
+   "duration": 3.605,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_160_quiet.wav": {
+   "duration": 2.35,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_161_walking.wav": {
+   "duration": 2.344,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_162_looked_at_her.wav": {
+   "duration": 2.862,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_163_nodded.wav": {
+   "duration": 0.714,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_164_again.wav": {
+   "duration": 2.417,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_165_covered.wav": {
+   "duration": 1.424,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_166_changed.wav": {
+   "duration": 3.697,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_167_crying.wav": {
+   "duration": 1.592,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_168_slapped.wav": {
+   "duration": 2.027,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_169_blinked.wav": {
+   "duration": 3.046,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_170_screamed.wav": {
+   "duration": 2.515,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_171_back.wav": {
+   "duration": 3.229,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_172_not_alone.wav": {
+   "duration": 2.236,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_173_people.wav": {
+   "duration": 1.778,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_174_dozens.wav": {
+   "duration": 2.252,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_175_not_swimming.wav": {
+   "duration": 3.121,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_176_heads.wav": {
+   "duration": 4.285,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_177_still.wav": {
+   "duration": 2.044,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_178_raised.wav": {
+   "duration": 1.645,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_179_another.wav": {
+   "duration": 0.829,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_180_all.wav": {
+   "duration": 1.298,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_181_stared.wav": {
+   "duration": 1.208,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_182_smiled.wav": {
+   "duration": 1.453,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_183_pointed.wav": {
+   "duration": 1.801,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_184_lights_died.wav": {
+   "duration": 1.548,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_185_darkness.wav": {
+   "duration": 1.236,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_186_screamed.wav": {
+   "duration": 1.361,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_187_held.wav": {
+   "duration": 2.668,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_188_struck.wav": {
+   "duration": 3.12,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_189_another_impact.wav": {
+   "duration": 1.264,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_190_climbing.wav": {
+   "duration": 1.783,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_191_against.wav": {
+   "duration": 3.607,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_192_ran.wav": {
+   "duration": 1.007,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_193_emergency.wav": {
+   "duration": 2.548,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_194_gone.wav": {
+   "duration": 1.205,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_195_looked_down.wav": {
+   "duration": 2.724,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_196_screamed_name.wav": {
+   "duration": 1.559,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_197_no_answer.wav": {
+   "duration": 0.821,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_198_railing.wav": {
+   "duration": 1.527,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_199_gone_too.wav": {
+   "duration": 2.118,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_200_ocean_empty.wav": {
+   "duration": 4.993,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_201_nothing.wav": {
+   "duration": 0.626,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_202_engines.wav": {
+   "duration": 2.872,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_203_gps.wav": {
+   "duration": 2.682,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_204_nav_showed.wav": {
+   "duration": 4.991,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_205_harbor_lights.wav": {
+   "duration": 3.023,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_206_police_waiting.wav": {
+   "duration": 2.284,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_207_told.wav": {
+   "duration": 1.475,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_208_list.wav": {
+   "duration": 6.002,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_209_checked.wav": {
+   "duration": 5.019,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_210_database.wav": {
+   "duration": 2.492,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_211_photographs.wav": {
+   "duration": 4.911,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_212_every.wav": {
+   "duration": 2.541,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_213_wedding.wav": {
+   "duration": 3.355,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_214_honeymoon.wav": {
+   "duration": 3.023,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_215_christmas.wav": {
+   "duration": 2.743,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_216_emma_screamed.wav": {
+   "duration": 1.079,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_217_records.wav": {
+   "duration": 1.854,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_218_record.wav": {
+   "duration": 3.662,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_219_ring.wav": {
+   "duration": 2.872,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_220_uncomfortable.wav": {
+   "duration": 1.631,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_221_turned_ring.wav": {
+   "duration": 3.586,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_222_expected.wav": {
+   "duration": 2.386,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_223_instead.wav": {
+   "duration": 1.198,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_224_37.wav": {
+   "duration": 0.93,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_225_security.wav": {
+   "duration": 3.586,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_226_most.wav": {
+   "duration": 4.657,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_227_talking.wav": {
+   "duration": 3.812,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_228_1217.wav": {
+   "duration": 3.053,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_229_one_frame.wav": {
+   "duration": 2.077,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_230_appeared.wav": {
+   "duration": 3.757,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_231_behind.wav": {
+   "duration": 4.554,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_232_next_frame.wav": {
+   "duration": 2.729,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_233_never.wav": {
+   "duration": 2.54,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_234_replaced.wav": {
+   "duration": 2.515,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_235_refused.wav": {
+   "duration": 2.547,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_236_stopped.wav": {
+   "duration": 2.217,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_237_year.wav": {
+   "duration": 2.371,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_238_afternoon.wav": {
+   "duration": 3.944,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_239_showed.wav": {
+   "duration": 4.147,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_240_almost_deleted.wav": {
+   "duration": 1.454,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_241_zoomed.wav": {
+   "duration": 1.532,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_242_very_back.wav": {
+   "duration": 4.556,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_243_beside.wav": {
+   "duration": 2.125,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_244_same_clothes.wav": {
+   "duration": 5.159,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_245_staring.wav": {
+   "duration": 4.965,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_246_message.wav": {
+   "duration": 1.342,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_247_dont_let.wav": {
+   "duration": 1.597,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_248_rang.wav": {
+   "duration": 2.509,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_249_didnt_answer.wav": {
+   "duration": 1.249,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
+  },
+  "narrator/narrator_250_stopped.wav": {
+   "duration": 0.812,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "chatterbox"
   },
   "narrator/narrator_251_again.wav": {
-   "duration": 1.301,
+   "duration": 1.086,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "narrator/narrator_252_switched_off.wav": {
-   "duration": 1.495,
+   "duration": 1.607,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "narrator/narrator_253_black.wav": {
-   "duration": 1.47,
+   "duration": 1.405,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "narrator/narrator_254_several.wav": {
-   "duration": 2.286,
+   "duration": 2.062,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "narrator/narrator_255_turned_on.wav": {
-   "duration": 2.272,
+   "duration": 2.41,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "narrator/narrator_256_no_call.wav": {
-   "duration": 2.885,
+   "duration": 3.142,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "narrator/narrator_257_behind.wav": {
-   "duration": 4.182,
+   "duration": 3.983,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_001_not_passenger.wav": {
-   "duration": 1.637,
+   "duration": 1.341,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_002_waiting.wav": {
-   "duration": 2.022,
+   "duration": 2.42,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_003_passenger37.wav": {
-   "duration": 1.942,
+   "duration": 1.458,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_004_shouldnt.wav": {
-   "duration": 1.819,
+   "duration": 1.583,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_005_daniel.wav": {
-   "duration": 1.846,
+   "duration": 1.584,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_006_daniel_2.wav": {
-   "duration": 1.844,
+   "duration": 1.672,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_007_sweetheart.wav": {
-   "duration": 1.616,
+   "duration": 1.315,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_008_see.wav": {
-   "duration": 0.776,
+   "duration": 0.568,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_009_everyone.wav": {
-   "duration": 1.621,
+   "duration": 1.488,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/oldwoman_final_64.wav": {
-   "duration": 1.659,
+   "duration": 1.087,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/pa_006_daniel_2.wav": {
-   "duration": 1.56,
+   "duration": 1.577,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/pa_007_daniel_3.wav": {
-   "duration": 1.573,
+   "duration": 1.888,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "old-woman/pa_008_daniel_4.wav": {
-   "duration": 1.56,
+   "duration": 1.398,
    "channels": 2,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "pa/pa_001_passenger37.wav": {
-   "duration": 2.475,
+   "duration": 1.984,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "pa/pa_002_proceed.wav": {
-   "duration": 2.592,
+   "duration": 2.464,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "pa/pa_003_passenger37_soft.wav": {
-   "duration": 2.701,
+   "duration": 2.322,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "pa/pa_004_daniel.wav": {
-   "duration": 1.685,
+   "duration": 1.254,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "pa/pa_005_family.wav": {
-   "duration": 2.574,
+   "duration": 2.247,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "police/police_001_whose.wav": {
-   "duration": 1.449,
+   "duration": 1.073,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "police/police_002_maam.wav": {
-   "duration": 1.255,
+   "duration": 0.769,
    "channels": 1,
    "sampleRate": 24000,
-   "provider": "kokoro"
+   "provider": "chatterbox"
   },
   "sfx/bass_hit.wav": {
    "duration": 2,
