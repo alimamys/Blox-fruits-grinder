@@ -328,7 +328,14 @@ To use real images or footage, put the file in `public/` and render it with Remo
   - The old woman's outline is the only thing in the film that never "boils".
 - **The one CCTV frame** is a single 1/30 s frame at the `cctv_glitch` beat. Pause on it.
 - **"Earlier that night":** the script's *FOUR HOURS EARLIER* heading contradicts the story's own clock (11:28 PM departure, 12:17 AM count), so the time card reads *EARLIER THAT NIGHT · 11:28 PM*.
-- **Two lines were added for character:** a sleepy *"Wake me up when we're home." / "Mm‑hm. Go to sleep."* so Emma and Daniel start in normal life, a second *"Daniel!"* after the scream, and passenger fragments. Remove them from `timeline.ts` if you want the script word for word.
+- **Small additions to the script, for character:**
+  - a sleepy *"Wake me up when we're home." / "Mm‑hm. Go to sleep."*, so Emma and Daniel start in normal life;
+  - the steward counting *"…sixty‑two… sixty‑three"* in her own voice, where the narrator had *"She counted. Sixty‑three."*;
+  - a second *"Daniel!"* after the scream;
+  - background passenger fragments.
+
+  Remove their ids from `timeline.ts` if you want the script word for word.
+- **Mix QA:** after `npm run audio-preview`, run `.venv/bin/python scripts/analyze_mix.py`. It reports integrated loudness, dialogue vs. ambience level, per‑character levels, stereo balance, the level of the final whisper, and whether the last seconds are silent.
 
 ## Credits / licences
 

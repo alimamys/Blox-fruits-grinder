@@ -38,7 +38,7 @@ const Clicker: React.FC<{f: number; value: number; bump?: number}> = ({f, value,
 	);
 };
 
-const RowShot: React.FC<{f: number; d: number; emmaAsleep?: boolean; danielTalk?: number; emmaTalk?: number; labels?: boolean; push?: number; danielYawn?: boolean}> = ({
+const RowShot: React.FC<{f: number; d: number; emmaAsleep?: boolean; danielTalk?: number; emmaTalk?: number; labels?: boolean; push?: number; danielYawn?: boolean; seatEmpty?: boolean}> = ({
 	f,
 	d,
 	emmaAsleep = true,
@@ -47,11 +47,13 @@ const RowShot: React.FC<{f: number; d: number; emmaAsleep?: boolean; danielTalk?
 	labels = false,
 	push = 0.06,
 	danielYawn = false,
+	seatEmpty = false,
 }) => (
 	<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1 + push, cx: 900}} rock={0.5}>
 		<CabinRow f={f} reflection={<Daniel x={1040} y={640} s={0.9} frame={f} pose="sit" opacity={Math.floor(f / 40) % 7 === 3 ? 0 : 0.16} />}>
 			<Emma x={790} y={900} s={1.15} frame={f} pose="sit" eyes={emmaAsleep ? 'closed' : 'dot'} tilt={emmaAsleep ? 24 : 0} mouth={emmaTalk > 0 ? 'flat' : 'smile'} talk={emmaTalk * 0.4} />
-			<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[0.9, -0.3]} mouth={danielYawn ? 'o' : 'flat'} talk={danielTalk} eyes={danielYawn ? 'squint' : 'dot'} />
+			{/* easter egg: for two frames seat 18B is empty */}
+			{seatEmpty ? null : <Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[0.9, -0.3]} mouth={danielYawn ? 'o' : 'flat'} talk={danielTalk} eyes={danielYawn ? 'squint' : 'dot'} />}
 		</CabinRow>
 		{labels ? (
 			<>
@@ -126,7 +128,7 @@ export const Departure: React.FC = () => (
 			},
 			// Daniel and his wife Emma (labels)
 			{at: 'narrator_030_daniel_emma', render: ({f, d}) => <RowShot f={f} d={d} emmaAsleep={false} labels />},
-			{at: 'narrator_031_tired', render: ({f, d}) => <RowShot f={f} d={d} emmaAsleep={false} danielYawn={f > 8 && f < 30} />},
+			{at: 'narrator_031_tired', render: ({f, d}) => <RowShot f={f} d={d} emmaAsleep={false} danielYawn={f > 8 && f < 30} seatEmpty={f >= d - 4 && f < d - 2} />},
 			{at: 'narrator_032_window', render: ({f, d}) => <RowShot f={f} d={d} emmaAsleep={f > d * 0.45} push={0.1} />},
 			{
 				at: 'emma_001_wake_me',
