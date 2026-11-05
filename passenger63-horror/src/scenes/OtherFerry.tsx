@@ -52,7 +52,8 @@ export const OtherFerry: React.FC = () => (
 			},
 			{at: 'narrator_142_photograph', render: ({f, d}) => <ImageTransfer f={f} progress={clamp((f - d * 0.6) / (d * 2)) * 0.12} />},
 			{
-				at: 'narrator_143_loaded',
+				at: 'image_loading',
+				off: -0.6,
 				render: ({f, d}) => (
 					<Evidence f={f} title="INCOMING IMAGE" lines={['PORT MASON VTS']}>
 						<ImageTransfer f={f} progress={0.12 + 0.88 * easeInOut(clamp(f / (d - 4)))}>
@@ -75,7 +76,7 @@ export const OtherFerry: React.FC = () => (
 						<div style={{fontFamily: FONT.mono, fontSize: 280, color: '#ff4a3d', textShadow: '0 0 40px rgba(255,60,40,0.5)', background: '#050505', padding: '20px 60px', border: '12px solid #2b2f36', borderRadius: 20}}>
 							00:49
 						</div>
-						<div style={{position: 'absolute', bottom: 120, fontFamily: FONT.mono, fontSize: 36, color: '#7f97b6', letterSpacing: 6}}>BRIDGE CLOCK · NORTH STAR 8</div>
+						<div style={{position: 'absolute', top: 90, fontFamily: FONT.mono, fontSize: 36, color: '#7f97b6', letterSpacing: 6}}>BRIDGE CLOCK · NORTH STAR 8</div>
 						<div style={{display: 'none'}}>{f}</div>
 					</AbsoluteFill>
 				),

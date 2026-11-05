@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // npm run render                 -> out/passenger63.mp4   (render + loudness master)
-// npm run render -- --tight      -> out/passenger63_tight.mp4
+// npm run render -- --full       -> out/passenger63_full.mp4 (complete story, ~16 min)
 // npm run audio-preview          -> out/passenger63_audio_preview.wav (audio only, mastered)
 // npm run render -- --segments=1 -> one single Remotion pass (needs ~15 GB of temp space)
 //
@@ -23,13 +23,13 @@ import {fileURLToPath} from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
-const tight = args.includes('--tight');
+const full = args.includes('--full');
 const audioOnly = args.includes('--audio-only');
 const segArg = args.find((a) => a.startsWith('--segments='));
 const segments = Math.max(1, parseInt(segArg ? segArg.split('=')[1] : '6', 10) || 6);
-const comp = tight ? 'Passenger63HorrorTight' : 'Passenger63Horror';
-const base = tight ? 'passenger63_tight' : 'passenger63';
-const extra = args.filter((a) => !['--tight', '--audio-only'].includes(a) && !a.startsWith('--segments='));
+const comp = full ? 'Passenger63HorrorFull' : 'Passenger63Horror';
+const base = full ? 'passenger63_full' : 'passenger63';
+const extra = args.filter((a) => !['--full', '--audio-only'].includes(a) && !a.startsWith('--segments='));
 const outDir = path.join(root, 'out');
 const partsDir = path.join(outDir, `.parts-${base}${audioOnly ? '-audio' : ''}`);
 const bundleDir = path.join(root, 'build', 'bundle');

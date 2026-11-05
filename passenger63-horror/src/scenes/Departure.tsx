@@ -4,6 +4,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Crew1, Crew2, Daniel, Emma, OldWoman, Passenger} from '../components/characters/Cast';
+import {walkPhase} from '../components/characters/StickPerson';
 import {FerryExterior, Harbor, OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, FerryWindow, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {DeparturesBoard, GateCounter, WeatherPanel} from '../components/evidence/Documents';
@@ -12,8 +13,9 @@ import {CCTVOverlay} from '../components/evidence/CCTV';
 import {BigText, CrudeLabel, Evidence} from '../components/fx/Fx';
 import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {FONT} from '../utils/fonts';
+import {wordsOf} from '../data/speech';
 import {Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, SeaBg, talkOf, TimeCard} from './common';
+import {Closeup, headY, SeaBg, speak, talkOf, TimeCard} from './common';
 
 /** Mechanical tally counter close-up. */
 const Clicker: React.FC<{f: number; value: number; bump?: number}> = ({f, value, bump = -99}) => {
@@ -33,36 +35,42 @@ const Clicker: React.FC<{f: number; value: number; bump?: number}> = ({f, value,
 				</div>
 				<div style={{position: 'absolute', right: 70, top: -70, width: 120, height: 100, background: '#8a9098', border: '10px solid #111', borderRadius: 20, transform: `translateY(${k * 20}px)`}} />
 			</div>
-			<div style={{position: 'absolute', bottom: 60, fontFamily: FONT.hand, fontSize: 48, color: '#cfd6e0'}}>HEAD COUNT</div>
+			<div style={{position: 'absolute', top: 60, fontFamily: FONT.hand, fontSize: 48, color: '#cfd6e0'}}>HEAD COUNT</div>
 		</AbsoluteFill>
 	);
 };
 
-const RowShot: React.FC<{f: number; d: number; emmaAsleep?: boolean; danielTalk?: number; emmaTalk?: number; labels?: boolean; push?: number; danielYawn?: boolean; seatEmpty?: boolean}> = ({
-	f,
-	d,
-	emmaAsleep = true,
-	danielTalk = 0,
-	emmaTalk = 0,
-	labels = false,
-	push = 0.06,
-	danielYawn = false,
-	seatEmpty = false,
-}) => (
-	<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1 + push, cx: 900}} rock={0.5}>
-		<CabinRow f={f} reflection={<Daniel x={1040} y={640} s={0.9} frame={f} pose="sit" opacity={Math.floor(f / 40) % 7 === 3 ? 0 : 0.16} />}>
-			<Emma x={790} y={900} s={1.15} frame={f} pose="sit" eyes={emmaAsleep ? 'closed' : 'dot'} tilt={emmaAsleep ? 24 : 0} mouth={emmaTalk > 0 ? 'flat' : 'smile'} talk={emmaTalk * 0.4} />
-			{/* easter egg: for two frames seat 18B is empty */}
-			{seatEmpty ? null : <Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[0.9, -0.3]} mouth={danielYawn ? 'o' : 'flat'} talk={danielTalk} eyes={danielYawn ? 'squint' : 'dot'} />}
-		</CabinRow>
-		{labels ? (
-			<>
-				<CrudeLabel x={480} y={380} text="EMMA" f={f} ax={720} ay={560} appear={4} />
-				<CrudeLabel x={1420} y={380} text="DANIEL" f={f} ax={1090} ay={560} appear={14} />
-			</>
-		) : null}
-	</Stage>
-);
+/** Daniel (window seat) and Emma in their row. `sleep` 0..1 lowers Emma's head onto his shoulder. */
+const RowShot: React.FC<{
+	f: number;
+	d: number;
+	sleep?: number;
+	danielTalk?: {talk: number; viseme: 'a' | 'e' | 'o' | 'm'};
+	emmaTalk?: {talk: number; viseme: 'a' | 'e' | 'o' | 'm'};
+	labels?: boolean;
+	push?: number;
+	danielYawn?: boolean;
+	seatEmpty?: boolean;
+}> = ({f, d, sleep = 1, danielTalk, emmaTalk, labels = false, push = 0.06, danielYawn = false, seatEmpty = false}) => {
+	const k = easeInOut(clamp(sleep));
+	return (
+		<Stage f={f} d={d} from={{z: 1.04, cy: 560}} to={{z: 1.04 + push, cx: 940, cy: 580}} rock={0.5}>
+			<CabinRow f={f} reflection={<Daniel x={1040} y={640} s={0.9} frame={f} pose="sit" opacity={Math.floor(f / 40) % 7 === 3 ? 0 : 0.16} />}>
+				{/* easter egg: for two frames seat 18B is empty */}
+				{seatEmpty ? null : (
+					<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={k > 0.5 ? [-0.6, 0.4] : [0.9, -0.3]} tilt={4 * k} mouth={danielYawn ? 'o' : 'flat'} eyes={danielYawn ? 'squint' : 'dot'} {...danielTalk} />
+				)}
+				<Emma x={860 + 23 * k} y={900} s={1.15} frame={f} pose="sit" eyes={k > 0.4 ? 'closed' : 'dot'} lean={15 * k} tilt={40 * k} mouth={emmaTalk && emmaTalk.talk > 0 ? 'flat' : 'smile'} {...emmaTalk} />
+			</CabinRow>
+			{labels ? (
+				<>
+					<CrudeLabel x={480} y={330} text="EMMA" f={f} ax={800} ay={600} appear={4} />
+					<CrudeLabel x={1440} y={330} text="DANIEL" f={f} ax={1090} ay={600} appear={14} />
+				</>
+			) : null}
+		</Stage>
+	);
+};
 
 export const Departure: React.FC = () => (
 	<Shots
@@ -127,13 +135,14 @@ export const Departure: React.FC = () => (
 				),
 			},
 			// Daniel and his wife Emma (labels)
-			{at: 'narrator_030_daniel_emma', render: ({f, d}) => <RowShot f={f} d={d} emmaAsleep={false} labels />},
-			{at: 'narrator_031_tired', render: ({f, d}) => <RowShot f={f} d={d} emmaAsleep={false} danielYawn={f > 8 && f < 30} seatEmpty={f >= d - 4 && f < d - 2} />},
-			{at: 'narrator_032_window', render: ({f, d}) => <RowShot f={f} d={d} emmaAsleep={f > d * 0.45} push={0.1} />},
+			{at: 'narrator_030_daniel_emma', render: ({f, d}) => <RowShot f={f} d={d} sleep={0} labels />},
+			{at: 'narrator_031_tired', render: ({f, d}) => <RowShot f={f} d={d} sleep={0} danielYawn={f > 8 && f < 30} seatEmpty={f >= d - 4 && f < d - 2} />},
+			// Daniel sat by the window. Emma fell asleep against his shoulder.
+			{at: 'narrator_032_window', render: ({f, d}) => <RowShot f={f} d={d} sleep={(f - d * 0.5) / 26} push={0.12} labels={f < d * 0.45} />},
 			{
 				at: 'emma_001_wake_me',
 				off: -0.2,
-				render: ({f, d, sf, api}) => <RowShot f={f} d={d} emmaTalk={talkOf(api, sf, 'emma_001_wake_me')} danielTalk={talkOf(api, sf, 'daniel_001_go_sleep')} push={0.04} />,
+				render: ({f, d, sf, api}) => <RowShot f={f} d={d} sleep={0.85} emmaTalk={speak(api, sf, 'emma_001_wake_me')} danielTalk={speak(api, sf, 'daniel_001_go_sleep')} push={0.04} />,
 			},
 			// Daniel looks out of the window - his reflection is missing for a moment
 			{
@@ -160,7 +169,7 @@ export const Departure: React.FC = () => (
 								<OceanNight f={f * 3} horizon={520} />
 								<FerryExterior f={f} x={960} y={620} s={0.42} />
 							</Stage>
-							<div style={{position: 'absolute', left: 70, bottom: 60, fontFamily: FONT.mono, fontSize: 52, color: '#e9eef5'}}>{`23:${String(Math.min(59, mins)).padStart(2, '0')}`}</div>
+							<div style={{position: 'absolute', left: 70, top: 60, fontFamily: FONT.mono, fontSize: 52, color: '#e9eef5'}}>{`23:${String(Math.min(59, mins)).padStart(2, '0')}`}</div>
 						</AbsoluteFill>
 					);
 				},
@@ -203,19 +212,33 @@ export const Departure: React.FC = () => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
 						<PassengerCabin f={f} facing="aft" />
 						<Crew1 x={600} y={1160} s={1.2} frame={f} arms={f < d * 0.4 ? 'wave' : 'relaxed'} look={[1, 0]} />
-						<Crew2 x={lerpF(f, 0, d * 0.6, 1500, 1200)} y={1160} s={1.2} frame={f} pose={f < d * 0.6 ? 'walk' : 'stand'} phase={f * 0.3} arms={f > d * 0.6 ? 'point' : 'relaxed'} />
+						<Crew2 x={lerpF(f, 0, d * 0.6, 1500, 1200)} y={1160} s={1.2} frame={f} pose={f < d * 0.6 ? 'walk' : 'stand'} turn={f < d * 0.6 ? -0.9 : 0} phase={walkPhase(lerpF(f, 0, d * 0.6, 1500, 1200), 1.2)} arms={f > d * 0.6 ? 'point' : 'relaxed'} />
 					</Stage>
 				),
 			},
 			{
 				at: 'crew2_001_count',
 				off: -0.1,
-				render: ({f, d, sf, api}) => (
-					<AbsoluteFill>
-						<Closeup who="crew1" f={f} d={d} color="#2a3446" props={{palette: {skin: '#f0caa6', shirt: '#1f3c6d', pants: '#1c2333', hair: '#8a5a2b', shoes: '#111'}, hair: 'ponytail', female: true, talk: talkOf(api, sf, 'crew2_001_count'), look: [0.6, 0], brows: 'worried'}} />
-						<BigText f={f} text="63" appear={Math.round(d * 0.7)} y={950} size={140} color="#ff3b30" />
-					</AbsoluteFill>
-				),
+				render: ({f, d, sf, api}) => {
+					// the counter follows the spoken numbers
+					const t0 = api.at('crew2_001_count');
+					const words = wordsOf('crew2_001_count');
+					let n = 60;
+					words.forEach(([, a], i) => {
+						if (sf >= t0 + a * 30) n = 61 + Math.min(2, i);
+					});
+					return (
+						<AbsoluteFill>
+							<Stage f={f} d={d} from={{z: 1.05, cy: 520}} to={{z: 1.18, cy: 500}} rock={0.5}>
+								<PassengerCabin f={f} facing="aft" />
+								<Crew2 x={980} y={1150} s={1.3} frame={f} arms="point" look={[0.4, -0.2]} brows="worried" {...speak(api, sf, 'crew2_001_count')} />
+							</Stage>
+							<AbsoluteFill style={{alignItems: 'flex-end', justifyContent: 'flex-start', padding: 60}}>
+								<div style={{fontFamily: FONT.marker, fontSize: 150, color: n >= 63 ? '#ff3b30' : '#fff', textShadow: '6px 6px 0 #000', transform: `scale(${n >= 63 ? 1.12 : 1})`}}>{n}</div>
+							</AbsoluteFill>
+						</AbsoluteFill>
+					);
+				},
 			},
 			// boarding list says 62
 			{
@@ -225,7 +248,7 @@ export const Departure: React.FC = () => (
 						<Evidence f={f} title="BOARDING LIST" lines={['62']}>
 							<PassengerManifest f={f} device="tablet" scroll={lerpF(f, 0, d, 46, 51, easeInOut)} visibleRows={10} countLabel="62" ghost63 />
 						</Evidence>
-						<BigText f={f} text="62" appear={Math.round(d * 0.55)} y={960} size={130} />
+						<BigText f={f} text="62" appear={Math.round(d * 0.55)} y={150} size={130} />
 					</AbsoluteFill>
 				),
 			},
@@ -270,7 +293,7 @@ export const Departure: React.FC = () => (
 							<Harbor f={0} variant="island" horizon={700} />
 							<rect x={0} y={700} width={1920} height={400} fill="#2a2c31" />
 							{Array.from({length: 7}, (_, i) => (
-								<Passenger key={i} id={i * 7 + 3} x={((i * 260 + f * 18) % 2200) - 140} y={980} s={0.75} frame={f} pose="walk" phase={f * 0.4 + i} />
+								<Passenger key={i} id={i * 7 + 3} x={((i * 260 + f * 18) % 2200) - 140} y={980} s={0.75} frame={f} pose="walk" turn={0.9} phase={walkPhase(f * 18, 0.75) + i} />
 							))}
 						</Stage>
 					</CCTVOverlay>

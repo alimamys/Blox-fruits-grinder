@@ -2,14 +2,15 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Crew1, Daniel, Emma, OldWoman} from '../components/characters/Cast';
+import {walkPhase} from '../components/characters/StickPerson';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {PassengerManifest} from '../components/evidence/Manifest';
 import {BroochCloseup, GrandmaKidPhoto, GrandmaPortrait, PhotoEvidence} from '../components/evidence/Photos';
 import {CrudeLabel, Evidence, Flash, LightsOverlay} from '../components/fx/Fx';
-import {clamp, lerpF} from '../utils/anim';
+import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {FONT} from '../utils/fonts';
 import {Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, SeaBg, talkOf} from './common';
+import {Closeup, headY, SeaBg, speak, talkOf} from './common';
 
 const CabinBg: React.FC<{f: number}> = ({f}) => (
 	<g>
@@ -88,9 +89,9 @@ export const Recognition: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
 						<CabinRow f={f}>
-							<Emma x={790} y={900} s={1.15} frame={f} pose="sit" eyes={f > d * 0.5 ? 'dot' : 'closed'} tilt={f > d * 0.5 ? 0 : 24} />
+							<Emma x={860 + 23 * (1 - clamp((f - d * 0.5) / 12))} y={900} s={1.15} frame={f} pose="sit" eyes={f > d * 0.5 ? 'dot' : 'closed'} lean={15 * (1 - easeInOut(clamp((f - d * 0.5) / 12)))} tilt={40 * (1 - easeInOut(clamp((f - d * 0.5) / 12)))} />
 							<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[0.9, -0.2]} />
-							<Crew1 x={lerpF(f, 0, d, 1750, 1420)} y={1010} s={1.35} frame={f} pose={f < d * 0.8 ? 'walk' : 'stand'} phase={f * 0.3} />
+							<Crew1 x={lerpF(f, 0, d * 0.8, 1750, 1420)} y={1010} s={1.35} frame={f} pose={f < d * 0.8 ? 'walk' : 'stand'} turn={f < d * 0.8 ? -0.9 : -0.3} phase={walkPhase(lerpF(f, 0, d * 0.8, 1750, 1420), 1.35)} />
 						</CabinRow>
 					</Stage>
 				),
@@ -101,16 +102,16 @@ export const Recognition: React.FC = () => (
 				render: ({f, d, sf, api}) => (
 					<Stage f={f} d={d} from={{z: 1.15, cx: 1150}} to={{z: 1.2}} rock={0.4}>
 						<CabinRow f={f}>
-							<Emma x={790} y={900} s={1.15} frame={f} pose="sit" look={[1, -0.3]} />
+							<Emma x={860} y={900} s={1.15} frame={f} pose="sit" look={[1, -0.3]} />
 							<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[1, -0.6]} brows="raised" />
-							<Crew1 x={1420} y={1010} s={1.35} frame={f} talk={talkOf(api, sf, 'crew_005_sir')} look={[-1, 0.4]} tilt={-6} />
+							<Crew1 x={1420} y={1010} s={1.35} frame={f} {...speak(api, sf, 'crew_005_sir')} look={[-1, 0.4]} tilt={-6} />
 						</CabinRow>
 					</Stage>
 				),
 			},
 			{
 				at: 'narrator_052_laughed',
-				render: ({f, d, sf, api}) => <DanielClose f={f} d={d} props={{mouth: 'laugh', look: [0.6, 0], talk: talkOf(api, sf, 'daniel_002_no')}} />,
+				render: ({f, d, sf, api}) => <DanielClose f={f} d={d} props={{mouth: 'laugh', look: [0.6, 0], ...speak(api, sf, 'daniel_002_no')}} />,
 			},
 			// Then he saw her (through the rear doors)
 			{
@@ -125,7 +126,7 @@ export const Recognition: React.FC = () => (
 				at: 'narrator_054_face_changed',
 				render: ({f, d}) => <DanielClose f={f} d={d} push={0.1} props={f < 8 ? {mouth: 'smile'} : {mouth: 'o', eyes: 'wide', brows: 'raised', look: [0.3, -0.1]}} />,
 			},
-			{at: 'emma_002_daniel', off: -0.1, render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} props={{brows: 'worried', look: [1, 0], talk: talkOf(api, sf, 'emma_002_daniel')}} />},
+			{at: 'emma_002_daniel', off: -0.1, render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} props={{brows: 'worried', look: [1, 0], ...speak(api, sf, 'emma_002_daniel')}} />},
 			{at: 'narrator_055_didnt_answer', render: ({f, d}) => <DanielClose f={f} d={d} push={0.12} props={{eyes: 'wide', mouth: 'flat', look: [0.4, -0.1]}} />},
 			// The woman lifted one hand. And gave him a tiny wave.
 			{at: 'narrator_056_wave', render: ({f, d}) => <WomanWave f={f} d={d} wave={clamp((f - 6) / (d - 6))} />},
@@ -135,7 +136,7 @@ export const Recognition: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.04}} rock={0.5}>
 						<CabinRow f={f}>
-							<Emma x={790} y={900} s={1.15} frame={f} pose="sit" arms={f > d * 0.5 ? 'grabRight' : 'relaxed'} look={[1, -0.8]} brows="worried" />
+							<Emma x={860} y={900} s={1.15} frame={f} pose="sit" arms={f > d * 0.5 ? 'grabRight' : 'relaxed'} look={[1, -0.8]} brows="worried" />
 							{f < d * 0.3 ? (
 								<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" eyes="wide" look={[1, 0]} />
 							) : (
@@ -145,14 +146,16 @@ export const Recognition: React.FC = () => (
 					</Stage>
 				),
 			},
-			{at: 'emma_003_what_is_it', off: -0.1, render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} props={{brows: 'worried', look: [1, -0.5], talk: talkOf(api, sf, 'emma_003_what_is_it'), arms: 'grabRight'}} />},
+			{at: 'emma_003_what_is_it', off: -0.1, render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} props={{brows: 'worried', look: [1, -0.5], ...speak(api, sf, 'emma_003_what_is_it'), arms: 'grabRight'}} />},
 			{
-				at: 'narrator_058_whispered',
+				at: 'daniel_003_grandmother',
+				off: -0.15,
 				render: ({f, d, sf, api}) => <DanielClose f={f} d={d} push={0.1} props={{eyes: 'wide', brows: 'worried', look: [0.6, 0], talk: talkOf(api, sf, 'daniel_003_grandmother') * 0.5, mouth: 'flat'}} />,
 			},
-			{at: 'narrator_059_stared', render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} props={{brows: 'raised', look: [1, -0.3], talk: talkOf(api, sf, 'emma_004_so')}} />},
+			{at: 'emma_004_so', off: -0.1, render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} props={{brows: 'raised', look: [1, -0.3], ...speak(api, sf, 'emma_004_so')}} />},
 			{
-				at: 'narrator_060_sick',
+				at: 'daniel_004_died',
+				off: -0.15,
 				render: ({f, d, sf, api}) => (
 					<DanielClose f={f} d={d} push={0.14} props={{pale: clamp(f / 20) * 0.8, sweat: f > 12, brows: 'worried', mouth: 'wobbly', look: [0.3, 0.2], talk: talkOf(api, sf, 'daniel_004_died') * 0.4}} />
 				),
@@ -161,7 +164,8 @@ export const Recognition: React.FC = () => (
 			{at: 'narrator_062_wasnt', render: ({f, d}) => <DanielClose f={f} d={d} push={0.08} props={{pale: 0.8, mouth: 'flat', brows: 'flat', look: [-0.6, 0]}} />},
 			// C. DEAD GRANDMOTHER REVEAL - quick flash images
 			{
-				at: 'narrator_063_raised',
+				at: 'daniel_004_died',
+				frac: 0.8,
 				render: ({f}) => (
 					<AbsoluteFill style={{background: '#2a2018'}}>
 						<PhotoEvidence f={f} rot={-3} sepia={0.75} stamp="'97" w={1240} h={760}>
@@ -215,13 +219,13 @@ export const Recognition: React.FC = () => (
 									<GrandmaPortrait f={f} ribbon />
 								</PhotoEvidence>
 							</div>
-							<div style={{position: 'absolute', bottom: 60, width: '100%', textAlign: 'center', fontFamily: FONT.hand, fontSize: 54, color: '#cfcfcf'}}>12 YEARS AGO</div>
+							<div style={{position: 'absolute', top: 50, width: '100%', textAlign: 'center', fontFamily: FONT.hand, fontSize: 54, color: '#cfcfcf'}}>12 YEARS AGO</div>
 						</div>
 						<div style={{flex: 1, position: 'relative', overflow: 'hidden', opacity: clamp((f - d * 0.45) / 6)}}>
 							<div style={{position: 'absolute', left: -480, top: 0, width: 1920, height: 1080}}>
 								<Closeup who="woman" f={f} d={d} s={3.6} cy={400} push={0.02} bg={<SeaBg f={f} />} props={{mouth: 'faint'}} />
 							</div>
-							<div style={{position: 'absolute', bottom: 60, width: '100%', textAlign: 'center', fontFamily: FONT.hand, fontSize: 54, color: '#cfcfcf'}}>TONIGHT</div>
+							<div style={{position: 'absolute', top: 50, width: '100%', textAlign: 'center', fontFamily: FONT.hand, fontSize: 54, color: '#cfcfcf'}}>TONIGHT</div>
 						</div>
 					</AbsoluteFill>
 				),
@@ -253,12 +257,12 @@ export const Recognition: React.FC = () => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
 						<CabinRow f={f}>
 							<Emma x={lerpF(f, 0, d, 880, 960)} y={1010} s={1.25} frame={f} arms="grabRight" brows="worried" look={[1, 0]} />
-							<Daniel x={lerpF(f, 0, d * 0.4, 1120, 1260) - lerpF(f, d * 0.55, d, 0, 90)} y={1010} s={1.25} frame={f} pose={f < d * 0.4 ? 'walk' : 'stand'} phase={f * 0.3} eyes="wide" look={[1, 0]} />
+							<Daniel x={lerpF(f, 0, d * 0.4, 1120, 1260) - lerpF(f, d * 0.55, d, 0, 90)} y={1010} s={1.25} frame={f} pose={f < d * 0.4 ? 'walk' : 'stand'} turn={f < d * 0.4 ? 0.9 : 0.3} phase={walkPhase(lerpF(f, 0, d * 0.4, 1120, 1260), 1.25)} eyes="wide" look={[1, 0]} />
 						</CabinRow>
 					</Stage>
 				),
 			},
-			{at: 'emma_005_no', off: -0.1, render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} push={0.08} props={{brows: 'angry', talk: talkOf(api, sf, 'emma_005_no'), look: [1, 0], arms: 'grabRight'}} />},
+			{at: 'emma_005_no', off: -0.1, render: ({f, d, sf, api}) => <EmmaClose f={f} d={d} push={0.08} props={{brows: 'angry', ...speak(api, sf, 'emma_005_no'), look: [1, 0], arms: 'grabRight'}} />},
 			{at: 'narrator_068_smiled', render: ({f, d}) => <Closeup who="woman" f={f} d={d} s={4.6} cy={420} push={0.06} bg={<SeaBg f={f} />} props={{mouth: f < 8 ? 'faint' : 'smile'}} />},
 			// D. LIGHTS OUT - flicker, flicker, darkness
 			{

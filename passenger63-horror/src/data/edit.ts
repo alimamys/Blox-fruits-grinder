@@ -1,46 +1,202 @@
 // Edit selection.
 //
-// 'full'  - the complete story exactly as written (default).
-// 'tight' - drops a handful of narration lines whose information is already
-//           carried by the picture, for a shorter YouTube cut. No dialogue, no
-//           reveal and no story beat is removed.
+// 'short' - the YouTube cut (default, ~10 min): every story beat, reveal and twist,
+//           without recaps, filler descriptions and slow back-and-forth. Pauses are
+//           tightened and silent beats shortened so it never stops moving.
+// 'full'  - the complete story exactly as written (~16 min), original pacing.
 //
-// Switch with:  REMOTION_EDIT=tight npm run start   (or edit the default below)
-export type EditMode = 'full' | 'tight';
+// Compositions: Passenger63Horror (short) and Passenger63HorrorFull (full).
+export type EditMode = 'full' | 'short';
 
-const fromEnv = typeof process !== 'undefined' ? process.env?.REMOTION_EDIT : undefined;
-export const EDIT_MODE: EditMode = fromEnv === 'tight' ? 'tight' : 'full';
-
-export const TRIM_IN_TIGHT_EDIT = new Set<string>([
+/** Voice lines dropped from the short edit. */
+export const CUT_IN_SHORT = new Set<string>([
+	// hook
+	'narrator_005_counted_again',
+	'narrator_006_sixty_three_people',
 	'narrator_007_nobody_boarded',
+	'narrator_017_swallowed',
+	'narrator_018_looked_past',
+	'narrator_020_checked',
+	'narrator_022_alive',
+	'narrator_023_looked_back',
+	// departure
+	'narrator_026_last_ferry',
+	'narrator_027_counts',
 	'narrator_028_weather',
+	'narrator_029_crossing',
+	'narrator_030_daniel_emma',
 	'narrator_031_tired',
-	'emma_001_wake_me',
-	'daniel_001_go_sleep',
 	'narrator_033_nothing_unusual',
+	'narrator_034_routine_count',
+	'narrator_035_reached_62',
+	'narrator_036_few_minutes',
+	'narrator_037_sixty_three',
 	'narrator_038_frowned',
 	'narrator_039_sixty_three_b',
+	'narrator_040_called',
+	'narrator_041_boarding_list',
+	'narrator_042_nobody_understood',
+	'narrator_046_no_luggage',
+	'narrator_047_just_coat',
+	// recognition
 	'narrator_048_approached',
 	'narrator_049_daniel',
-	'narrator_050_looking',
+	'narrator_055_didnt_answer',
+	'narrator_058_whispered',
+	'narrator_059_stared',
+	'narrator_060_sick',
 	'narrator_061_laughed',
 	'narrator_062_wasnt',
+	'narrator_063_raised',
 	'narrator_064_knew',
-	'narrator_077_bathrooms',
-	'narrator_086_not_physically',
+	'narrator_066_same',
+	// erasure
+	'narrator_079_searched',
+	'narrator_087_disappeared',
+	'narrator_088_refreshed',
+	'narrator_089_ticket',
+	'narrator_090_email',
+	'narrator_093_stared',
 	'narrator_094_identification',
-	'narrator_095_license',
+	'narrator_096_looked',
+	'narrator_101_shouting',
+	// hull
 	'narrator_108_captain_crew',
+	'narrator_109_radar',
+	'narrator_114_pa_on',
+	'narrator_116_pale',
+	'narrator_118_voice_changed',
+	'narrator_119_shaking',
+	'narrator_124_no_signal',
+	// navigation
+	'narrator_127_rushed',
 	'narrator_130_windshield',
+	'narrator_134_radioed',
+	'captain_002_radio_again',
+	'narrator_135_answered',
+	'narrator_136_exhaled',
 	'narrator_137_another_pause',
+	'narrator_138_nobody_spoke',
+	'narrator_139_looked_out',
+	'narrator_140_operator',
+	// the other ferry
 	'narrator_141_radio_error',
+	'narrator_143_loaded',
+	'narrator_147_zoomed',
 	'narrator_149_same_crew',
+	'narrator_150_emma',
+	'narrator_151_shoulder',
+	'narrator_154_pointed',
+	// grandmother calls
 	'narrator_159_not_announcement',
+	'narrator_163_nodded',
+	'narrator_164_again',
+	'narrator_166_changed',
+	'narrator_167_crying',
+	// people in the water
+	'narrator_176_heads',
+	'narrator_177_still',
+	'narrator_181_stared',
+	'narrator_183_pointed',
+	// vanish
+	'narrator_196_screamed_name',
+	'narrator_203_gps',
+	'narrator_204_nav_showed',
+	// police
 	'narrator_207_told',
 	'narrator_208_list',
+	'narrator_209_checked',
+	'narrator_210_database',
+	'narrator_214_honeymoon',
+	'narrator_216_emma_screamed',
+	'narrator_217_records',
 	'narrator_220_uncomfortable',
+	// cctv
+	'narrator_233_never',
 	'narrator_234_replaced',
 	'narrator_235_refused',
+	'narrator_236_stopped',
+	// finale
 	'narrator_240_almost_deleted',
 	'narrator_244_same_clothes',
+	'narrator_249_didnt_answer',
+	'narrator_250_stopped',
+	'narrator_251_again',
+	'ring_2',
 ]);
+
+/** Silent beats held for a shorter time in the short edit (seconds). */
+export const SHORT_BEAT_HOLD: Record<string, number> = {
+	disclaimer_hold: 3.0,
+	hook_title: 2.8,
+	departure_card: 1.8,
+	blackout_1: 0.9,
+	thud_1: 1.0,
+	thud_2: 1.5,
+	thud_3: 1.4,
+	knocks_start: 1.0,
+	knocks_many: 1.8,
+	pa_static_1: 0.9,
+	pa_static_2: 0.5,
+	phone_message: 2.4,
+	engine_down: 0.6,
+	radio_static_1: 1.0,
+	radio_silence: 1.1,
+	image_loading: 1.4,
+	voice_stopped: 0.8,
+	people_reveal: 2.0,
+	stillness: 1.2,
+	arm_1: 0.45,
+	arm_2: 0.4,
+	all_arms: 1.2,
+	dark_screams: 1.0,
+	scratches: 2.0,
+	running: 0.6,
+	emma_breathing: 0.6,
+	engines_back: 0.6,
+	ring_rotate: 1.1,
+	cctv_glitch: 0.7,
+	cctv_scrub: 0.9,
+	zoom_hold: 0.8,
+	message_hold: 1.3,
+	ring_1: 1.3,
+	several_seconds: 1.5,
+	sixty_three: 1.4,
+	final_silence: 1.8,
+};
+
+/** Lines whose pause after them is a deliberate dramatic hold - kept (up to 0.9 s). */
+export const DRAMATIC_PAUSE = new Set<string>([
+	'narrator_009_someone',
+	'oldwoman_001_not_passenger',
+	'oldwoman_003_passenger37',
+	'oldwoman_004_shouldnt',
+	'daniel_004_died',
+	'narrator_065_only_difference',
+	'narrator_071_darkness',
+	'narrator_075_gone',
+	'narrator_085_daniel_gone',
+	'narrator_099_unknown',
+	'narrator_102_nobody_laughing',
+	'narrator_107_beneath',
+	'harbor_004_docked',
+	'harbor_005_looking',
+	'narrator_153_missing',
+	'narrator_156_watching',
+	'emma_011_shes_dead',
+	'oldwoman_007_sweetheart',
+	'oldwoman_009_everyone',
+	'narrator_194_gone',
+	'narrator_201_nothing',
+	'narrator_212_every',
+	'narrator_224_37',
+	'narrator_232_next_frame',
+	'narrator_245_staring',
+	'narrator_247_dont_let',
+]);
+
+/** Pause after a line in the short edit. */
+export const shortPause = (id: string, pause: number) => (DRAMATIC_PAUSE.has(id) ? Math.min(pause, 0.9) : Math.min(pause, 0.25));
+
+/** Silence after a scene's last step in the short edit. */
+export const shortTail = (tail: number) => Math.min(tail, 0.15);

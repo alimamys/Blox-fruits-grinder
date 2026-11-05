@@ -13,8 +13,10 @@ export type VideoSettings = {
 	grain: boolean;
 	/** Play voice / SFX / ambience (turn off for a silent visual check). */
 	audio: boolean;
-	/** Which edit to render. */
-	edit: 'full' | 'tight';
+	/** Burned-in subtitles (word-timed from the voice files). */
+	subtitles: boolean;
+	/** Which edit to render: the ~10 min YouTube cut or the complete story. */
+	edit: 'short' | 'full';
 };
 
 export const DEFAULT_SETTINGS: VideoSettings = {
@@ -22,7 +24,8 @@ export const DEFAULT_SETTINGS: VideoSettings = {
 	cctvOverlay: true,
 	grain: true,
 	audio: true,
-	edit: 'full',
+	subtitles: true,
+	edit: 'short',
 };
 
 const Ctx = createContext<VideoSettings>(DEFAULT_SETTINGS);

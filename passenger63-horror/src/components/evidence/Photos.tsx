@@ -89,9 +89,6 @@ const svgWrap = (children: React.ReactNode, bg = '#000') => (
 	</AbsoluteFill>
 );
 
-/** Tiny black-coated woman for the background easter eggs. */
-const TinyWoman: React.FC<{x: number; y: number; s?: number}> = ({x, y, s = 0.18}) => <OldWoman x={x} y={y} s={s} frame={null} />;
-
 /* --------------------------- story photographs --------------------------- */
 
 export const WeddingPhoto: React.FC<{f: number}> = () =>
@@ -107,7 +104,6 @@ export const WeddingPhoto: React.FC<{f: number}> = () =>
 			{/* Emma alone at the altar, the place beside her empty */}
 			<Emma x={1040} y={930} s={1.25} frame={null} mouth="smile" arms="hold" palette={{...PALETTES.emma, shirt: '#fbfbf7', pants: '#fbfbf7'}} />
 			<path d="M1000,700 l40,-30 l40,30" fill="#ffd1dc" stroke="#111" strokeWidth={3} />
-			<TinyWoman x={1500} y={890} s={0.22} />
 		</g>,
 		'#efe6d8',
 	);
@@ -131,7 +127,6 @@ export const HoneymoonPhoto: React.FC<{f: number}> = () =>
 				<path d="M1230,560 L1400,560 L1400,820 L1230,820 Z" fill="#6b3a2a" stroke="#111" strokeWidth={6} />
 				<path d="M1210,820 L1420,820 L1420,860 L1210,860 Z" fill="#6b3a2a" stroke="#111" strokeWidth={6} />
 			</g>
-			<TinyWoman x={1780} y={700} s={0.16} />
 		</g>,
 		'#3b2a24',
 	);
@@ -149,7 +144,6 @@ export const ChristmasPhoto: React.FC<{f: number}> = () =>
 			<Emma x={460} y={900} s={1.2} frame={null} pose="sit" mouth="smile" arms="relaxed" palette={{...PALETTES.emma, shirt: '#2f6b3a'}} hat="beanie" />
 			{/* the empty place beside her */}
 			<path d="M760,560 L1000,560 L1000,880 L760,880 Z" fill="#7a2f2f" stroke="#111" strokeWidth={6} />
-			<TinyWoman x={140} y={600} s={0.16} />
 		</g>,
 		'#4a2a2a',
 	);
@@ -309,11 +303,16 @@ export const DaylightPhoto: React.FC<{f: number}> = ({f}) => (
 			{Array.from({length: 16}, (_, i) => (
 				<Passenger key={i} id={i + 30} x={120 + i * 85 + (i % 3) * 20} y={760 + (i % 4) * 70} s={0.62 + (i % 4) * 0.05} frame={null} mouth={i % 3 ? 'smile' : 'grin'} arms={i % 5 === 0 ? 'wave' : 'relaxed'} />
 			))}
-			{/* the same bench at the very back */}
-			<rect x={1460} y={548} width={300} height={16} fill="#7a5532" stroke="#111" strokeWidth={4} />
+			{/* the same bench at the very back: backrest behind them, seat under them */}
+			<ellipse cx={1605} cy={641} rx={170} ry={7} fill="#000" opacity={0.18} />
+			<rect x={1468} y={600} width={10} height={40} fill="#4a3320" />
+			<rect x={1732} y={600} width={10} height={40} fill="#4a3320" />
+			<rect x={1460} y={566} width={290} height={11} fill="#8a6440" stroke="#111" strokeWidth={3} />
+			<rect x={1460} y={582} width={290} height={11} fill="#7a5532" stroke="#111" strokeWidth={3} />
+			<path d="M1452,605 L1758,605 L1764,611 L1446,611 Z" fill="#9a7450" stroke="#111" strokeWidth={3} />
+			<rect x={1446} y={611} width={318} height={9} fill="#6b4a2b" stroke="#111" strokeWidth={3} />
 			<OldWoman x={1540} y={640} s={0.42} pose="sit" mouth="faint" />
 			<Daniel x={1660} y={640} s={0.42} frame={null} pose="sit" arms="fingerLips" mouth="flat" eyes="dot" look={[0, 0]} />
-			<rect x={1450} y={596} width={320} height={14} fill="#7a5532" stroke="#111" strokeWidth={4} />
 		</svg>
 		<div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, background: 'linear-gradient(180deg, rgba(255,250,230,0.12), rgba(0,0,0,0))'}} />
 		<div style={{position: 'absolute', display: 'none'}}>{h1(f)}</div>

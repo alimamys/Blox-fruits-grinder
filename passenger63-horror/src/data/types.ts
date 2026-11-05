@@ -165,6 +165,4 @@ export interface SceneDef {
 	bedAutomation?: BedAutomation[];
 	/** How long (s) the beds take to move to this scene's levels. */
 	bedFade?: number;
-	/** Steps in this list are dropped in the "tight" edit (see src/data/edit.ts). */
-	trimmable?: string[];
 }

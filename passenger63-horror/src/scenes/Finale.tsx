@@ -66,7 +66,7 @@ export const Finale: React.FC = () => (
 							<Apartment />
 							<Emma x={760} y={1060} s={1.4} frame={f} pose="sit" mouth="flat" look={[1, -0.2]} />
 						</Stage>
-						<div style={{position: 'absolute', left: 70, bottom: 60, fontFamily: FONT.hand, fontSize: 64, color: '#fff', textShadow: '4px 4px 0 #000'}}>
+						<div style={{position: 'absolute', left: 70, top: 60, fontFamily: FONT.hand, fontSize: 64, color: '#fff', textShadow: '4px 4px 0 #000'}}>
 							{['NOVEMBER', 'JANUARY', 'APRIL', 'JULY', 'SEPTEMBER'][Math.min(4, Math.floor((f / d) * 5))]}
 						</div>
 					</AbsoluteFill>

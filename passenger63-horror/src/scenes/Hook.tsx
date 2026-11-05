@@ -2,6 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, Crew2, Daniel, Emma, OldWoman, Purser} from '../components/characters/Cast';
+import {walkPhase} from '../components/characters/StickPerson';
 import {FerryExterior, OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {PassengerManifest, PassengerRecord} from '../components/evidence/Manifest';
@@ -9,7 +10,7 @@ import {BigText, CrudeLabel, Evidence, Flash, PassengerCounter} from '../compone
 import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {FONT} from '../utils/fonts';
 import {Cam, Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, SeaBg, talkOf} from './common';
+import {Closeup, headY, SeaBg, speak, talkOf} from './common';
 
 export const Disclaimer: React.FC = () => (
 	<Shots
@@ -50,7 +51,7 @@ const DeckWide: React.FC<{f: number; d: number; push?: number; crewX?: number | 
 		<RearDeck f={f} view="behind" fog={0.18}>
 			<OldWoman x={0} y={860} s={0.62} pose="sit" back={womanTurn < 0.5} turn={womanTurn >= 0.5 ? (1 - womanTurn) * 1.2 : 0} />
 		</RearDeck>
-		{crewX !== null ? <Crew1 x={crewX} y={1000} s={0.95} frame={f} pose={crewWalk ? 'walk' : 'stand'} phase={f * 0.32} back={false} talk={crewTalk} arms="relaxed" /> : null}
+		{crewX !== null ? <Crew1 x={crewX} y={1000} s={0.95} frame={f} pose={crewWalk ? 'walk' : 'stand'} turn={crewWalk ? 0.9 : 0.3} phase={walkPhase(crewX, 0.95)} back={false} talk={crewTalk} arms="relaxed" /> : null}
 	</Stage>
 );
 
@@ -66,7 +67,7 @@ export const Hook: React.FC = () => (
 							<OceanNight f={f} horizon={520} />
 							<FerryExterior f={f} x={980} y={600} s={0.62} tinyWoman />
 						</Stage>
-						<div style={{position: 'absolute', left: 70, bottom: 60, fontFamily: FONT.mono, fontSize: 46, color: '#e9eef5', opacity: clamp(f / 6)}}>12:17 AM</div>
+						<div style={{position: 'absolute', left: 70, top: 60, fontFamily: FONT.mono, fontSize: 46, color: '#e9eef5', opacity: clamp(f / 6)}}>12:17 AM</div>
 					</AbsoluteFill>
 				),
 			},
@@ -115,7 +116,7 @@ export const Hook: React.FC = () => (
 						<Evidence f={f} title="MANIFEST" lines={['62 NAMES']}>
 							<PassengerManifest f={f} scroll={lerpF(f, 0, d, 44, 50.5, easeInOut)} visibleRows={11} countLabel="62" highlight="" />
 						</Evidence>
-						<BigText f={f} text="62 NAMES" appear={4} y={980} size={96} />
+						<BigText f={f} text="62 NAMES" appear={4} y={150} size={96} />
 					</AbsoluteFill>
 				),
 			},
@@ -207,7 +208,7 @@ export const Hook: React.FC = () => (
 						<RearDeck f={f} view="behind" fog={0.1}>
 							<OldWoman x={0} y={860} s={0.62} pose="sit" back />
 						</RearDeck>
-						<Crew1 x={560} y={1000} s={0.95} frame={f} talk={talkOf(api, sf, 'crew_001_ticket')} arms="relaxed" look={[1, 0]} />
+						<Crew1 x={560} y={1000} s={0.95} frame={f} {...speak(api, sf, 'crew_001_ticket')} arms="relaxed" look={[1, 0]} />
 					</Stage>
 				),
 			},
@@ -226,7 +227,7 @@ export const Hook: React.FC = () => (
 			{
 				at: 'crew_002_maam',
 				off: -0.1,
-				render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} bg={<SeaBg f={f} />} props={{brows: 'worried', talk: talkOf(api, sf, 'crew_002_maam'), look: [1, 0]}} />,
+				render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} bg={<SeaBg f={f} />} props={{brows: 'worried', ...speak(api, sf, 'crew_002_maam'), look: [1, 0]}} />,
 			},
 			// Slowly... the woman turned around.
 			{
@@ -259,7 +260,7 @@ export const Hook: React.FC = () => (
 			{
 				at: 'oldwoman_001_not_passenger',
 				off: -0.1,
-				render: ({f, d}) => <Closeup who="woman" f={f} d={d} s={4.6} cy={420} push={0.05} bg={<SeaBg f={f} />} props={{mouth: 'faint'}} />,
+				render: ({f, d, sf, api}) => <Closeup who="woman" f={f} d={d} s={4.6} cy={420} push={0.05} bg={<SeaBg f={f} />} props={{mouth: 'faint', ...speak(api, sf, 'oldwoman_001_not_passenger')}} />,
 			},
 			// The crew member swallowed.
 			{
@@ -275,7 +276,7 @@ export const Hook: React.FC = () => (
 						<RearDeck f={f} view="front" doorsLit>
 							<OldWoman x={-60} y={912} s={0.75} pose="sit" look={[-0.6, 0]} />
 						</RearDeck>
-						<Crew1 x={560} y={1050} s={1.0} frame={f} talk={talkOf(api, sf, 'crew_003_why')} brows="worried" look={[1, 0]} />
+						<Crew1 x={560} y={1050} s={1.0} frame={f} {...speak(api, sf, 'crew_003_why')} brows="worried" look={[1, 0]} />
 					</Stage>
 				),
 			},
@@ -297,13 +298,13 @@ export const Hook: React.FC = () => (
 			{
 				at: 'oldwoman_002_waiting',
 				off: -0.1,
-				render: ({f, d}) => <Closeup who="woman" f={f} d={d} s={4.6} cy={420} push={0.06} bg={<SeaBg f={f} />} props={{mouth: 'faint', look: [-0.5, 0]}} />,
+				render: ({f, d, sf, api}) => <Closeup who="woman" f={f} d={d} s={4.6} cy={420} push={0.06} bg={<SeaBg f={f} />} props={{mouth: 'faint', look: [-0.5, 0], ...speak(api, sf, 'oldwoman_002_waiting')}} />,
 			},
 			// "Who?"
 			{
 				at: 'crew_004_who',
 				off: -0.05,
-				render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} bg={<SeaBg f={f} />} props={{brows: 'worried', talk: talkOf(api, sf, 'crew_004_who'), look: [1, 0]}} />,
+				render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} bg={<SeaBg f={f} />} props={{brows: 'worried', ...speak(api, sf, 'crew_004_who'), look: [1, 0]}} />,
 			},
 			// Her smile disappeared.
 			{
@@ -314,10 +315,10 @@ export const Hook: React.FC = () => (
 			{
 				at: 'oldwoman_003_passenger37',
 				off: -0.1,
-				render: ({f, d}) => (
+				render: ({f, d, sf, api}) => (
 					<AbsoluteFill>
-						<Closeup who="woman" f={f} d={d} s={5.6} cy={380} push={0.08} bg={<SeaBg f={f} />} props={{mouth: 'flat'}} />
-						<BigText f={f} text="PASSENGER 37" appear={10} y={960} size={88} font={FONT.mono} spacing={10} />
+						<Closeup who="woman" f={f} d={d} s={5.6} cy={380} push={0.08} bg={<SeaBg f={f} />} props={{mouth: 'flat', ...speak(api, sf, 'oldwoman_003_passenger37')}} />
+						<BigText f={f} text="PASSENGER 37" appear={10} y={150} size={88} font={FONT.mono} spacing={10} />
 					</AbsoluteFill>
 				),
 			},
@@ -340,6 +341,19 @@ export const Hook: React.FC = () => (
 					</Evidence>
 				),
 			},
+			// ... Seat 18B -> Daniel and Emma in 18A/18B
+			{
+				at: 'narrator_021_daniel_clarke',
+				frac: 0.66,
+				render: ({f, d}) => (
+					<Stage f={f} d={d} from={{z: 1.12, cx: 960, cy: 600}} to={{z: 1.2, cx: 980, cy: 600}} rock={0.5}>
+						<CabinRow f={f}>
+							<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[0.8, -0.2]} mouth="flat" tilt={5} />
+							<Emma x={883} y={900} s={1.15} frame={f} pose="sit" eyes="closed" lean={15} tilt={40} mouth="flat" />
+						</CabinRow>
+					</Stage>
+				),
+			},
 			// Alive. Thirty-two. Travelling with his wife. -> cut to Daniel and Emma in 18A/18B
 			{
 				at: 'narrator_022_alive',
@@ -355,8 +369,8 @@ export const Hook: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.08}} rock={0.5}>
 						<CabinRow f={f}>
-							<Emma x={790} y={900} s={1.15} frame={f} pose="sit" eyes="closed" tilt={24} mouth="flat" />
-							<Daniel x={960} y={900} s={1.15} frame={f} pose="sit" look={[0.8, -0.2]} mouth="flat" />
+							<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[0.8, -0.2]} mouth="flat" tilt={5} />
+							<Emma x={883} y={900} s={1.15} frame={f} pose="sit" eyes="closed" lean={15} tilt={40} mouth="flat" />
 						</CabinRow>
 					</Stage>
 				),
@@ -375,7 +389,7 @@ export const Hook: React.FC = () => (
 			{
 				at: 'oldwoman_004_shouldnt',
 				off: -0.15,
-				render: ({f, d}) => <Closeup who="woman" f={f} d={d} s={7.2} cy={360} push={0.06} bg={<SeaBg f={f} />} props={{mouth: 'faint', look: [-0.3, 0]}} />,
+				render: ({f, d, sf, api}) => <Closeup who="woman" f={f} d={d} s={7.2} cy={360} push={0.06} bg={<SeaBg f={f} />} props={{mouth: 'faint', look: [-0.3, 0], ...speak(api, sf, 'oldwoman_004_shouldnt')}} />,
 			},
 			// TITLE HIT
 			{

@@ -2,25 +2,39 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, Daniel, Emma, OldWoman} from '../components/characters/Cast';
-import type {StickProps} from '../components/characters/StickPerson';
+import type {StickProps, Viseme} from '../components/characters/StickPerson';
+import {envelopeAt, visemeAt} from '../data/speech';
+import {FPS} from '../data/timeline';
 import {OceanNight} from '../components/environments/Outdoor';
 import {FONT} from '../utils/fonts';
 import {clamp} from '../utils/anim';
 import {Cam, Svg, type SceneApi} from '../utils/scene';
 
-/** Mouth openness (0..1) while any of the given lines is being spoken. */
-export const talkOf = (api: SceneApi, sf: number, ...ids: string[]) => {
+/**
+ * Lip sync: mouth openness (0..1, from the measured voice envelope) and mouth shape
+ * while any of the given lines is being spoken. Spread it onto a character:
+ *   <Emma {...speak(api, sf, 'emma_009_stop')} />
+ */
+export const speak = (api: SceneApi, sf: number, ...ids: string[]): {talk: number; viseme: Viseme} => {
 	for (const id of ids) {
 		if (!api.has(id)) continue;
 		const a = api.at(id);
 		const b = api.end(id);
-		if (sf >= a && sf < b - 2) return 0.35 + 0.65 * Math.abs(Math.sin((sf - a) * 0.75)) * (0.6 + 0.4 * Math.sin(sf * 0.31));
+		if (sf >= a && sf < b) {
+			const t = (sf - a) / FPS;
+			const env = envelopeAt(id, t);
+			if (env === null) return {talk: 0.35 + 0.65 * Math.abs(Math.sin((sf - a) * 0.75)) * (0.6 + 0.4 * Math.sin(sf * 0.31)), viseme: 'a'};
+			return {talk: env, viseme: visemeAt(id, t)};
+		}
 	}
-	return 0;
+	return {talk: 0, viseme: 'm'};
 };
 
+/** Mouth openness only (see speak()). */
+export const talkOf = (api: SceneApi, sf: number, ...ids: string[]) => speak(api, sf, ...ids).talk;
+
 /** y for a figure so that its head centre lands on `cy` at scale `s`. */
-export const headY = (cy: number, s: number, sitting = false) => cy + (sitting ? 232 : 262) * s;
+export const headY = (cy: number, s: number, sitting = false) => cy + (sitting ? 209 : 262) * s;
 
 type Who = 'daniel' | 'emma' | 'woman' | 'captain' | 'crew1';
 

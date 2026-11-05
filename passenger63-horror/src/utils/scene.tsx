@@ -25,7 +25,7 @@ export const makeSceneApi = (scene: SceneTiming): SceneApi => {
 	const get = (m: string) => {
 		const s = scene.markers[m];
 		if (!s) {
-			// a marker trimmed in the "tight" edit - fall back to the scene start
+			// a marker cut from this edit - fall back to the scene start
 			return {start: scene.start, end: scene.start};
 		}
 		return s;
@@ -80,8 +80,10 @@ const ShotBody: React.FC<{render: ShotSpec['render']; d: number; from: number; a
  * Cuts land exactly on voice-line / beat markers. Each shot lasts until the next
  * shot's start, so changing the audio retimes every cut automatically.
  */
-export const Shots: React.FC<{shots: ShotSpec[]}> = ({shots}) => {
+export const Shots: React.FC<{shots: ShotSpec[]}> = ({shots: all}) => {
 	const api = useScene();
+	// a shot cut on a line that is not in this edit is dropped - the previous shot runs on
+	const shots = all.filter((s) => typeof s.at === 'number' || api.has(s.at));
 	const starts = shots.map((s) => {
 		if (typeof s.at === 'number') return s.at;
 		if (s.frac !== undefined) return api.frac(s.at, s.frac);
@@ -127,9 +129,11 @@ export const Cam: React.FC<{
 	shakeAt?: number[];
 	shakeAmp?: number;
 	ease?: (t: number) => number;
+	/** handheld drift amount (0 = locked off) */
+	hand?: number;
 	children: React.ReactNode;
 	style?: React.CSSProperties;
-}> = ({f, d, from = {}, to, rock = 0, shakeAt = [], shakeAmp = 14, ease = easeInOut, children, style}) => {
+}> = ({f, d, from = {}, to, rock = 0, shakeAt = [], shakeAmp = 14, ease = easeInOut, hand = 1, children, style}) => {
 	const a = {cx: 960, cy: 540, z: 1, r: 0, ...from};
 	const b = {...a, ...(to ?? {})};
 	const t = ease(clamp(f / Math.max(1, d - 1)));
@@ -139,8 +143,15 @@ export const Cam: React.FC<{
 	const r = a.r + (b.r - a.r) * t;
 	const rk = rocking(f, rock);
 	const [sx, sy] = shakeFn(f, shakeAt, shakeAmp);
-	const tx = 960 - cx * z + sx;
-	const ty = 540 - cy * z + sy + rk.dy;
+	// handheld drift: slow, smooth, never still (scaled by `hand`)
+	const g = (f + seedOf(d)) / 30;
+	const hx = (Math.sin(g * 0.71) * 3.2 + Math.sin(g * 1.83 + 1.3) * 1.4) * hand;
+	const hy = (Math.sin(g * 0.57 + 2.1) * 2.6 + Math.sin(g * 1.37 + 0.4) * 1.1) * hand;
+	const hr = (Math.sin(g * 0.43 + 0.7) * 0.14) * hand;
+	// a hair of over-scan so the drift never shows the stage edge
+	const ze = z * (1 + 0.007 * hand);
+	const tx = 960 - cx * ze + sx + hx;
+	const ty = 540 - cy * ze + sy + rk.dy + hy;
 	return (
 		<AbsoluteFill style={{overflow: 'hidden', ...style}}>
 			<div
@@ -151,7 +162,7 @@ export const Cam: React.FC<{
 					width: 1920,
 					height: 1080,
 					transformOrigin: '0 0',
-					transform: `translate(${tx}px, ${ty}px) rotate(${r + rk.rot}deg) scale(${z})`,
+					transform: `translate(${tx}px, ${ty}px) rotate(${r + rk.rot + hr}deg) scale(${ze})`,
 				}}
 			>
 				{children}
@@ -159,6 +170,8 @@ export const Cam: React.FC<{
 		</AbsoluteFill>
 	);
 };
+
+const seedOf = (n: number) => (n * 37) % 997;
 
 /** Full-stage SVG canvas (1920x1080 coordinates). */
 export const Svg: React.FC<{children: React.ReactNode; style?: React.CSSProperties}> = ({children, style}) => (
@@ -177,11 +190,12 @@ export const Stage: React.FC<{
 	shakeAt?: number[];
 	shakeAmp?: number;
 	bg?: string;
+	hand?: number;
 	children: React.ReactNode;
 	overlay?: React.ReactNode;
-}> = ({f, d, from, to, rock, shakeAt, shakeAmp, bg = '#05070c', children, overlay}) => (
+}> = ({f, d, from, to, rock, shakeAt, shakeAmp, bg = '#05070c', hand = 1, children, overlay}) => (
 	<AbsoluteFill style={{background: bg}}>
-		<Cam f={f} d={d} from={from} to={to} rock={rock} shakeAt={shakeAt} shakeAmp={shakeAmp}>
+		<Cam f={f} d={d} from={from} to={to} rock={rock} shakeAt={shakeAt} shakeAmp={shakeAmp} hand={hand}>
 			<Svg>{children}</Svg>
 		</Cam>
 		{overlay}

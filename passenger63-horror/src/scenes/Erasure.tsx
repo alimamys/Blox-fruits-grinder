@@ -9,7 +9,7 @@ import {BoardingPass, EmailInbox, PhoneScreen, Reservation} from '../components/
 import {BigText, CrudeLabel, Evidence, PassengerCounter} from '../components/fx/Fx';
 import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, talkOf} from './common';
+import {Closeup, headY, speak, talkOf} from './common';
 
 const Room: React.FC<{color?: string}> = ({color = '#7f8b9c'}) => <rect x={-200} y={-200} width={2400} height={1600} fill={color} />;
 
@@ -82,7 +82,7 @@ export const Erasure: React.FC = () => (
 						<Evidence f={f} title="MANIFEST" lines={['61 NAMES']}>
 							<PassengerManifest f={f} scroll={30} refreshAt={Math.round(d * 0.62)} visibleRows={11} glitch={f > d * 0.55 && f < d * 0.7} />
 						</Evidence>
-						<BigText f={f} text="61 NAMES" appear={Math.round(d * 0.7)} y={980} size={96} color="#ff5a4d" />
+						<BigText f={f} text="61 NAMES" appear={Math.round(d * 0.7)} y={150} size={96} color="#ff5a4d" />
 					</AbsoluteFill>
 				),
 			},
@@ -101,7 +101,7 @@ export const Erasure: React.FC = () => (
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
 						<CabinRow f={f}>
-							<Emma x={790} y={900} s={1.15} frame={f} pose="sit" brows="worried" look={[1, -0.6]} />
+							<Emma x={860} y={900} s={1.15} frame={f} pose="sit" brows="worried" look={[1, -0.6]} />
 							<Daniel x={1080} y={1010} s={1.25} frame={f} look={[1, 0]} mouth="flat" brows="worried" />
 							<Purser x={1480} y={1010} s={1.25} frame={f} look={[-1, 0]} eyes="wide" />
 						</CabinRow>
@@ -131,7 +131,7 @@ export const Erasure: React.FC = () => (
 						<Evidence f={f} title="REFRESHED" lines={['61 PASSENGERS']}>
 							<PassengerManifest f={f} scroll={lerpF(f, 0, d, 50, 52, easeInOut)} visibleRows={11} erased refreshAt={Math.round(d * 0.35)} />
 						</Evidence>
-						<BigText f={f} text="61 PASSENGERS" appear={Math.round(d * 0.6)} y={980} size={88} color="#ff5a4d" />
+						<BigText f={f} text="61 PASSENGERS" appear={Math.round(d * 0.6)} y={150} size={88} color="#ff5a4d" />
 					</AbsoluteFill>
 				),
 			},
@@ -191,7 +191,7 @@ export const Erasure: React.FC = () => (
 						push={0.12}
 						color="#7f8b9c"
 						bg={<Room />}
-						props={{eyes: 'wide', brows: 'worried', sweat: true, look: [0, 0.8], talk: talkOf(api, sf, 'daniel_005_impossible'), mouth: 'wobbly', shiver: 1.5}}
+						props={{eyes: 'wide', brows: 'worried', sweat: true, look: [0, 0.8], ...speak(api, sf, 'daniel_005_impossible'), mouth: 'wobbly', shiver: 1.5}}
 					/>
 				),
 			},
@@ -255,7 +255,7 @@ export const Erasure: React.FC = () => (
 			{
 				at: 'narrator_101_shouting',
 				render: ({f, d, sf, api}) => (
-					<Closeup who="emma" f={f} d={d} s={3.2} push={0.1} color="#7f8b9c" bg={<Room />} props={{brows: 'angry', mouth: 'shout', talk: talkOf(api, sf, 'emma_006_not_funny'), look: [-1, 0], arms: 'shrug'}} />
+					<Closeup who="emma" f={f} d={d} s={3.2} push={0.1} color="#7f8b9c" bg={<Room />} props={{brows: 'angry', mouth: 'shout', ...speak(api, sf, 'emma_006_not_funny'), look: [-1, 0], arms: 'shrug'}} />
 				),
 			},
 			{

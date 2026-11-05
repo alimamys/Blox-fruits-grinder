@@ -1,7 +1,17 @@
-// The one stick figure every character is built from. Intentionally crude:
-// round head, dot eyes, block body, thick uneven black outlines, flat colours.
+// The one stick figure every character is built from: round head, dot eyes, block
+// body, thick black outlines, flat colours with a soft shadow side for depth.
 // Coordinates are relative to the figure's feet (0,0); a standing adult is ~300 px.
-import React from 'react';
+//
+// Animation built in (only when `frame` is a number - figures with frame={null}
+// never move, which is how the old woman stays unnaturally still):
+//   - breathing (shoulders/head rise and fall), blinks, small eye saccades
+//   - walking: from the front the feet step up and down (no sideways leg swing);
+//     side-on (|turn| >= 0.5) the legs and arms swing with bending knees/elbows
+//   - `lean` tilts the whole upper body over the hips (Emma resting on Daniel)
+//   - `talk` (0..1, from the real voice envelope) + `viseme` shape the mouth
+// Seated pose: hips on the seat at -72, knees forward at -60, shins down to the floor
+// (head centre at -209). Seats are drawn with their cushion top at y - 72*s.
+import React, {useId} from 'react';
 import {boilOf, h1, wob, wobCircle, wobEllipse, wobLine, wobPoly, type Pt} from '../../utils/rough';
 
 export type Pose = 'stand' | 'sit' | 'walk' | 'run';
@@ -17,6 +27,7 @@ export type ArmPreset =
 	| 'hold'
 	| 'holdOne'
 	| 'folded'
+	| 'lap'
 	| 'coverEars'
 	| 'fingerLips'
 	| 'shrug'
@@ -28,9 +39,11 @@ export type ArmPreset =
 	| 'hug'
 	| 'hipsHands'
 	| 'phoneEar';
+export type ArmSpec = {l: [number, number]; r: [number, number]};
 export type Eyes = 'dot' | 'wide' | 'closed' | 'squint' | 'gray' | 'none';
 export type Brows = 'none' | 'flat' | 'worried' | 'angry' | 'raised' | 'sad';
 export type Mouth = 'smile' | 'faint' | 'grin' | 'flat' | 'frown' | 'o' | 'scream' | 'wobbly' | 'open' | 'shout' | 'laugh';
+export type Viseme = 'a' | 'e' | 'o' | 'm';
 export type Hair = 'short' | 'medium' | 'bun' | 'ponytail' | 'grayShort' | 'none' | 'curly' | 'long' | 'buzz';
 export type Hat = 'none' | 'captain' | 'police' | 'cap' | 'beanie';
 export type Prop = 'none' | 'phone' | 'clicker' | 'tablet' | 'card' | 'ring' | 'flashlight' | 'handset' | 'notebook';
@@ -49,18 +62,22 @@ export interface StickProps {
 	s?: number;
 	flip?: boolean;
 	pose?: Pose;
-	arms?: ArmPreset | {l: [number, number]; r: [number, number]};
+	arms?: ArmPreset | ArmSpec;
 	eyes?: Eyes;
 	brows?: Brows;
 	mouth?: Mouth;
-	/** 0..1 mouth opening for talking */
+	/** 0..1 mouth opening for talking (use talkOf() - it follows the real voice) */
 	talk?: number;
+	/** mouth shape while talking */
+	viseme?: Viseme;
 	/** eye direction -1..1 */
 	look?: [number, number];
 	/** head tilt in degrees */
 	tilt?: number;
-	/** -1..1 head turn (features slide sideways) */
+	/** -1..1 head/body turn; |turn| >= 0.5 draws the figure side-on (for walking across) */
 	turn?: number;
+	/** upper body lean over the hips, degrees (+ = toward +x) */
+	lean?: number;
 	/** show the back of the head / body */
 	back?: boolean;
 	palette: Palette;
@@ -79,10 +96,10 @@ export interface StickProps {
 	sweat?: boolean;
 	pale?: number;
 	blush?: boolean;
-	/** frame for line boil; pass null for a figure whose lines never move */
+	/** frame for animation + line boil; pass null for a figure that never moves */
 	frame: number | null;
 	seed?: number;
-	/** walking phase (radians) */
+	/** walking phase (radians) - use walkPhase(distance, s) so feet don't slide */
 	phase?: number;
 	shiver?: number;
 	opacity?: number;
@@ -92,6 +109,8 @@ export interface StickProps {
 	line?: number;
 	female?: boolean;
 	child?: boolean;
+	/** set false to switch off breathing/blinking */
+	idle?: boolean;
 }
 
 const INK = '#141414';
@@ -105,9 +124,10 @@ const mixHex = (a: string, b: string, t: number) => {
 	return `#${((1 << 24) | (r << 16) | (g << 8) | bl).toString(16).slice(1)}`;
 };
 
-const ARM_PRESETS: Record<ArmPreset, {l: [number, number]; r: [number, number]}> = {
-	down: {l: [10, 0], r: [10, 0]},
-	relaxed: {l: [16, -12], r: [16, -12]},
+/** [upper-arm angle from straight down (+ = out to that side), forearm bend] in degrees */
+export const ARM_PRESETS: Record<ArmPreset, ArmSpec> = {
+	down: {l: [8, 4], r: [8, 4]},
+	relaxed: {l: [14, -14], r: [14, -14]},
 	wave: {l: [10, 0], r: [150, 25]},
 	tinyWave: {l: [12, -70], r: [40, 95]},
 	point: {l: [10, 0], r: [92, 0]},
@@ -117,6 +137,7 @@ const ARM_PRESETS: Record<ArmPreset, {l: [number, number]; r: [number, number]}>
 	hold: {l: [22, -105], r: [22, -105]},
 	holdOne: {l: [10, 0], r: [22, -105]},
 	folded: {l: [10, -80], r: [10, -80]},
+	lap: {l: [4, -46], r: [4, -46]},
 	coverEars: {l: [128, -160], r: [128, -160]},
 	fingerLips: {l: [10, 0], r: [-20, -160]},
 	shrug: {l: [55, 85], r: [55, 85]},
@@ -130,22 +151,69 @@ const ARM_PRESETS: Record<ArmPreset, {l: [number, number]; r: [number, number]}>
 	phoneEar: {l: [10, 0], r: [30, -165]},
 };
 
+const specOf = (a: ArmPreset | ArmSpec | undefined): ArmSpec => (typeof a === 'object' ? a : ARM_PRESETS[a ?? 'relaxed']);
+
+const smooth = (t: number) => t * t * (3 - 2 * t);
+
+/**
+ * Arm keyframes -> a smoothly blended arm spec. keys: [frame, preset][], each change
+ * eases over `dur` frames starting at its frame. Use it instead of switching presets
+ * with a ternary (which snaps).
+ */
+export const armTween = (f: number, keys: Array<[number, ArmPreset | ArmSpec]>, dur = 8): ArmSpec => {
+	let cur = specOf(keys[0][1]);
+	for (let i = 1; i < keys.length; i++) {
+		const [at, a] = keys[i];
+		if (f <= at) break;
+		const t = smooth(Math.min(1, (f - at) / Math.max(1, dur)));
+		const nx = specOf(a);
+		cur = {
+			l: [cur.l[0] + (nx.l[0] - cur.l[0]) * t, cur.l[1] + (nx.l[1] - cur.l[1]) * t],
+			r: [cur.r[0] + (nx.r[0] - cur.r[0]) * t, cur.r[1] + (nx.r[1] - cur.r[1]) * t],
+		};
+	}
+	return cur;
+};
+
+/** Walking phase for a figure that has moved `distance` px at scale s - keeps the feet planted. */
+export const walkPhase = (distance: number, s = 1, pose: Pose = 'walk') => Math.abs(distance) / ((pose === 'run' ? 46 : 30) * s);
+
 const rad = (d: number) => (d * Math.PI) / 180;
 
+/** Two-bone leg: knee position for hip -> foot with segment length L, bending toward bend (unit-ish x). */
+const knee = (hx: number, hy: number, fx: number, fy: number, L: number, bendX: number): Pt => {
+	const dx = fx - hx;
+	const dy = fy - hy;
+	const d = Math.hypot(dx, dy) || 1;
+	const mx = (hx + fx) / 2;
+	const my = (hy + fy) / 2;
+	if (d >= 2 * L) return [mx, my];
+	const off = Math.sqrt(L * L - (d / 2) * (d / 2));
+	// perpendicular to the leg, pick the side that points along bendX
+	let px = -dy / d;
+	let py = dx / d;
+	if (px * bendX < 0) {
+		px = -px;
+		py = -py;
+	}
+	return [mx + px * off * Math.abs(bendX), my + py * off * Math.abs(bendX)];
+};
+
 export const StickPerson: React.FC<StickProps> = (p) => {
+	const uid = useId().replace(/[^a-zA-Z0-9]/g, '');
 	const {
 		x = 0,
 		y = 0,
 		s = 1,
 		flip = false,
 		pose = 'stand',
-		eyes = 'dot',
 		brows = 'none',
 		mouth = 'flat',
 		talk = 0,
-		look = [0, 0],
-		tilt = 0,
+		viseme = 'a',
+		tilt: tilt0 = 0,
 		turn = 0,
+		lean = 0,
 		back = false,
 		palette,
 		hair = 'short',
@@ -159,45 +227,70 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 		line = 1,
 		female = false,
 	} = p;
-	const boil = frame === null ? 0 : boilOf(frame);
+	const live = frame !== null && p.idle !== false;
+	const fr = frame ?? 0;
+	const tsec = fr / 30;
+	const ph = seed * 1.37;
+	const boil = frame === null ? 0 : boilOf(frame, 4);
 	const sd = seed * 31 + boil * 7;
-	const amp = frame === null ? 0.6 : 1.6;
+	const amp = frame === null ? 0.5 : 0.9;
 	const lw = 5.5 * line;
 	const skin = p.pale ? mixHex(palette.skin, '#dfe6dc', p.pale) : palette.skin;
 
 	const sitting = pose === 'sit';
+	const walking = pose === 'walk' || pose === 'run';
+	const side = Math.abs(turn) >= 0.5 && !back;
+	const dir = turn >= 0 ? 1 : -1;
 	const k = p.child ? 0.62 : 1;
 	const headR = 36 * (p.child ? 1.08 : 1);
-	const headY = (sitting ? -232 : -262) * k;
-	const shY = (sitting ? -190 : -219) * k;
-	const hipY = (sitting ? -95 : -120) * k;
-	const shW = (female ? 29 : 33) * k;
-	const hipW = (female ? 27 : 27) * k;
 
-	const shx = shiver ? Math.sin((frame ?? 0) * 2.3) * shiver : 0;
+	// ---- idle motion
+	const breath = live ? Math.sin((tsec * 2 * Math.PI) / (3.6 + (seed % 5) * 0.25) + ph) : 0;
+	const bob = walking ? -Math.abs(Math.sin(phase)) * (pose === 'run' ? 9 : 5) * k : 0;
+	const hipY = (sitting ? -72 : -120) * k + bob;
+	const shY = (sitting ? -167 : -219) * k + bob - breath * 1.5 * k;
+	const headY = (sitting ? -209 : -262) * k + bob - breath * 1.8 * k;
+	const shW = (female ? 29 : 33) * k * (side ? 0.74 : 1);
+	const hipW = 27 * k * (side ? 0.78 : 1);
+	const shx = shiver ? Math.sin(fr * 2.3) * shiver : 0;
+	const walkRot = walking ? (side ? dir * (pose === 'run' ? 9 : 3) : Math.sin(phase) * 1.4) : 0;
+	const bodyRot = lean + walkRot;
+	const talkNod = live && talk > 0.05 ? Math.sin(tsec * 5.1 + ph) * 2.2 * Math.min(1, talk * 1.5) : 0;
+	const tilt = tilt0 + talkNod + (live ? Math.sin(tsec * 0.45 + ph) * 1.2 : 0);
+
+	// blinks + eye saccades
+	const period = 96 + ((seed * 29) % 70);
+	const blinking = live && (fr + seed * 17) % period < 4;
+	let eyes: Eyes = p.eyes ?? 'dot';
+	if (blinking && (eyes === 'dot' || eyes === 'wide')) eyes = 'closed';
+	let look: [number, number] = p.look ?? [0, 0];
+	if (live && !p.look) {
+		const seg = Math.floor((fr + seed * 11) / 70);
+		look = [h1(seg, seed, 1) * 0.45, h1(seg, seed, 2) * 0.25];
+	}
 
 	// ---- arms
-	const armSpec = typeof p.arms === 'string' || p.arms === undefined ? ARM_PRESETS[(p.arms as ArmPreset) ?? 'relaxed'] : p.arms;
+	let armSpec = specOf(p.arms);
+	if (sitting && (p.arms === 'folded' || p.arms === undefined)) armSpec = ARM_PRESETS[p.arms === 'folded' ? 'lap' : 'lap'];
 	let {l: la, r: ra} = armSpec;
-	const t = (frame ?? 0) / 30;
-	if (p.arms === 'wave') ra = [150, 25 + Math.sin(t * 9) * 28];
-	if (pose === 'walk' || pose === 'run') {
-		const sw = (pose === 'run' ? 38 : 20) * Math.sin(phase);
-		if (p.arms === undefined || p.arms === 'relaxed' || p.arms === 'down') {
-			la = [14 + sw, -10 - Math.max(0, sw)];
-			ra = [14 - sw, -10 - Math.max(0, -sw)];
-		}
+	if (p.arms === 'wave') ra = [150, 25 + Math.sin(tsec * 9) * 28];
+	if (live && !walking) {
+		// arms are never perfectly frozen
+		const sway = Math.sin(tsec * 0.9 + ph) * 1.6;
+		la = [la[0] + sway, la[1]];
+		ra = [ra[0] - sway, ra[1]];
 	}
+	const defaultArms = p.arms === undefined || p.arms === 'relaxed' || p.arms === 'down';
 	const U = 54 * k;
 	const F = 50 * k;
-	const armPts = (side: -1 | 1, a: [number, number]): Pt[] => {
-		const sx = side * (shW - 3);
+	const armPts = (sideSign: -1 | 1, a: [number, number]): Pt[] => {
+		const sx = sideSign * (shW - 3);
 		const sy = shY + 6;
 		const a1 = rad(a[0]);
 		const a2 = rad(a[0] + a[1]);
-		const ex = sx + side * Math.sin(a1) * U;
+		const ex = sx + sideSign * Math.sin(a1) * U;
 		const ey = sy + Math.cos(a1) * U;
-		const hx = ex + side * Math.sin(a2) * F;
+		const hx = ex + sideSign * Math.sin(a2) * F;
 		const hy = ey + Math.cos(a2) * F;
 		return [
 			[sx, sy],
@@ -205,34 +298,73 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 			[hx, hy],
 		];
 	};
-	const L = armPts(-1, la);
-	const R = armPts(1, ra);
+	let L = armPts(-1, la);
+	let R = armPts(1, ra);
+	if (walking && defaultArms) {
+		const amt = pose === 'run' ? 40 : 22;
+		if (side) {
+			// arms swing forward/back in the picture plane, elbows bent forward
+			const swingArm = (o: number): Pt[] => {
+				const a = rad(amt * Math.sin(phase + o));
+				const sx = dir * 3;
+				const sy = shY + 8;
+				const ex = sx + dir * Math.sin(a) * U;
+				const ey = sy + Math.cos(a) * U;
+				const b = a + rad(pose === 'run' ? 70 : 25);
+				return [
+					[sx, sy],
+					[ex, ey],
+					[ex + dir * Math.sin(b) * F, ey + Math.cos(b) * F],
+				];
+			};
+			L = swingArm(0); // far arm (drawn behind the body)
+			R = swingArm(Math.PI);
+		} else {
+			// from the front an arm swinging forward reads as the hand rising
+			const sw = Math.sin(phase);
+			L = armPts(-1, [10 + Math.max(0, sw) * 6, -8 - Math.max(0, sw) * amt * 1.4]);
+			R = armPts(1, [10 + Math.max(0, -sw) * 6, -8 - Math.max(0, -sw) * amt * 1.4]);
+		}
+	}
 
-	// ---- legs
+	// ---- legs: [hip, knee, foot]
 	const legs: Pt[][] = [];
+	const legLen = 120 * k;
 	if (sitting) {
-		for (const side of [-1, 1]) {
+		for (const sg of [-1, 1]) {
 			legs.push([
-				[side * 13 * k, hipY],
-				[side * 25 * k, -58 * k],
-				[side * 25 * k, 0],
+				[sg * 13 * k, hipY + 6 * k],
+				[sg * 21 * k, -54 * k],
+				[sg * 23 * k, -1],
 			]);
 		}
+	} else if (walking && side) {
+		const sw = pose === 'run' ? 34 : 22;
+		for (let i = 0; i < 2; i++) {
+			const o = i === 0 ? 0 : Math.PI;
+			const ang = rad(sw * Math.sin(phase + o));
+			const hx = dir * (i === 0 ? -3 : 3);
+			const fx = hx + dir * Math.sin(ang) * legLen * 0.92;
+			// the leg swinging forward lifts its foot
+			const lift = Math.max(0, Math.cos(phase + o)) * (pose === 'run' ? 26 : 13) * k;
+			const fy = -lift;
+			legs.push([[hx, hipY], knee(hx, hipY, fx, fy, legLen / 2 + 1, dir), [fx, fy]]);
+		}
+	} else if (walking) {
+		// toward / away from the camera: alternate stepping, feet stay under the hips
+		for (const sg of [-1, 1] as const) {
+			const o = sg === 1 ? Math.PI : 0;
+			const lift = Math.max(0, Math.sin(phase + o)) * (pose === 'run' ? 30 : 16) * k;
+			const hx = sg * 13 * k;
+			const fx = hx + sg * 3;
+			const fy = -lift;
+			legs.push([[hx, hipY], knee(hx, hipY, fx, fy, legLen / 2 + 1, sg * 0.35), [fx, fy]]);
+		}
 	} else {
-		const sw = pose === 'walk' ? 24 : pose === 'run' ? 40 : 0;
-		for (const side of [-1, 1]) {
-			const ang = rad(sw * Math.sin(phase + (side === 1 ? Math.PI : 0)));
-			const hx = side * 13 * k;
-			const len = -hipY;
-			const kx = hx + Math.sin(ang) * len * 0.5 + side * 3;
-			const ky = hipY + Math.cos(ang) * len * 0.5;
-			const fx = hx + Math.sin(ang) * len + side * 8;
-			const fy = hipY + Math.cos(ang) * len - (pose !== 'stand' ? Math.max(0, Math.sin(phase + (side === 1 ? Math.PI : 0))) * 10 : 0);
-			legs.push([
-				[hx, hipY],
-				[kx, ky],
-				[fx, fy],
-			]);
+		for (const sg of [-1, 1] as const) {
+			const hx = sg * 13 * k;
+			const fx = hx + sg * 7;
+			legs.push([[hx, hipY], knee(hx, hipY, fx, 0, legLen / 2 + 1, sg * 0.12), [fx, 0]]);
 		}
 	}
 
@@ -242,8 +374,8 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 		? [
 				[-shW - 2, shY],
 				[shW + 2, shY],
-				[shW + 14, (sitting ? -40 : -22) * k],
-				[-shW - 14, (sitting ? -40 : -22) * k],
+				[shW + (sitting ? 6 : 14), sitting ? hipY + 4 : -22 * k],
+				[-shW - (sitting ? 6 : 14), sitting ? hipY + 4 : -22 * k],
 			]
 		: [
 				[-shW, shY],
@@ -264,32 +396,34 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 	const eyeFill = eyes === 'gray' ? '#7c8388' : INK;
 	const eyesEl: React.ReactNode[] = [];
 	if (!back && eyes !== 'none') {
-		for (const side of [-1, 1]) {
-			const ex = hx0 + side * eyeDX + faceDX + (Math.abs(turn) > 0.6 && Math.sign(turn) !== side ? -turn * 4 : 0);
-			if (Math.abs(turn) > 0.85 && Math.sign(turn) === -side) continue;
+		for (const sg of [-1, 1]) {
+			const ex = hx0 + sg * eyeDX + faceDX + (Math.abs(turn) > 0.6 && Math.sign(turn) !== sg ? -turn * 4 : 0);
+			if (Math.abs(turn) > 0.85 && Math.sign(turn) === -sg) continue;
 			if (eyes === 'wide') {
-				eyesEl.push(<path key={`ew${side}`} d={wobCircle(ex, eyeY, 9.5, sd + side, 0.8, 8)} fill="#fff" stroke={INK} strokeWidth={3} />);
-				eyesEl.push(<circle key={`ep${side}`} cx={ex + lx} cy={eyeY + ly} r={4} fill={INK} />);
+				eyesEl.push(<path key={`ew${sg}`} d={wobCircle(ex, eyeY, 9.5, sd + sg, 0.6, 8)} fill="#fff" stroke={INK} strokeWidth={3} />);
+				eyesEl.push(<circle key={`ep${sg}`} cx={ex + lx} cy={eyeY + ly} r={4} fill={INK} />);
 			} else if (eyes === 'closed') {
-				eyesEl.push(<path key={`ec${side}`} d={`M${ex - 7},${eyeY} Q${ex},${eyeY + 6} ${ex + 7},${eyeY}`} fill="none" stroke={INK} strokeWidth={3.5} strokeLinecap="round" />);
+				eyesEl.push(<path key={`ec${sg}`} d={`M${ex - 7},${eyeY} Q${ex},${eyeY + 6} ${ex + 7},${eyeY}`} fill="none" stroke={INK} strokeWidth={3.5} strokeLinecap="round" />);
 			} else if (eyes === 'squint') {
-				eyesEl.push(<path key={`es${side}`} d={wobLine(ex - 6, eyeY, ex + 6, eyeY, sd + side, 0.6, 1)} stroke={INK} strokeWidth={4} strokeLinecap="round" />);
+				eyesEl.push(<path key={`es${sg}`} d={wobLine(ex - 6, eyeY, ex + 6, eyeY, sd + sg, 0.5, 1)} stroke={INK} strokeWidth={4} strokeLinecap="round" />);
 			} else {
-				eyesEl.push(<circle key={`ed${side}`} cx={ex + lx} cy={eyeY + ly} r={eyes === 'gray' ? 5 : 5.2} fill={eyeFill} />);
+				eyesEl.push(<circle key={`ed${sg}`} cx={ex + lx} cy={eyeY + ly} r={eyes === 'gray' ? 5 : 5.2} fill={eyeFill} />);
+				eyesEl.push(<circle key={`eh${sg}`} cx={ex + lx + 1.6} cy={eyeY + ly - 1.8} r={1.4} fill="#fff" opacity={eyes === 'gray' ? 0.35 : 0.8} />);
 			}
 		}
 	}
 	const browsEl: React.ReactNode[] = [];
 	if (!back && brows !== 'none') {
-		for (const side of [-1, 1]) {
-			const bx = hx0 + side * eyeDX + faceDX;
-			const by = eyeY - 13 - (brows === 'raised' ? 6 : 0);
+		const lift = live && talk > 0.6 ? 2 : 0;
+		for (const sg of [-1, 1]) {
+			const bx = hx0 + sg * eyeDX + faceDX;
+			const by = eyeY - 13 - (brows === 'raised' ? 6 : 0) - lift;
 			const inner = brows === 'worried' || brows === 'sad' ? -5 : brows === 'angry' ? 5 : 0;
 			const outer = brows === 'sad' ? 3 : 0;
 			browsEl.push(
 				<path
-					key={`b${side}`}
-					d={wobLine(bx - side * 8, by + inner, bx + side * 8, by + outer, sd + side * 3, 0.7, 1)}
+					key={`b${sg}`}
+					d={wobLine(bx - sg * 8, by + inner, bx + sg * 8, by + outer, sd + sg * 3, 0.5, 1)}
 					stroke={INK}
 					strokeWidth={4}
 					strokeLinecap="round"
@@ -304,35 +438,53 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 	if (!back) {
 		const open = Math.max(0, Math.min(1, talk));
 		const mk = (d: string, fill = 'none', w = 4) => <path d={d} fill={fill} stroke={INK} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" />;
-		switch (open > 0.15 && (mouth === 'flat' || mouth === 'smile' || mouth === 'frown' || mouth === 'faint') ? 'open' : mouth) {
-			case 'smile':
-				mouthEl = mk(`M${mx - 12},${my - 2} Q${mx},${my + 10} ${mx + 12},${my - 2}`);
-				break;
-			case 'faint':
-				mouthEl = mk(`M${mx - 8},${my} Q${mx},${my + 3.5} ${mx + 8},${my}`, 'none', 3);
-				break;
-			case 'grin':
-			case 'laugh':
-				mouthEl = mk(`M${mx - 14},${my - 4} Q${mx},${my + 16} ${mx + 14},${my - 4} Z`, '#5a1d1d');
-				break;
-			case 'frown':
-				mouthEl = mk(`M${mx - 11},${my + 5} Q${mx},${my - 5} ${mx + 11},${my + 5}`);
-				break;
-			case 'o':
-				mouthEl = mk(wobEllipse(mx, my + 2, 6, 8, sd + 5, 0.6, 8), '#3a1414', 3.5);
-				break;
-			case 'scream':
-			case 'shout':
-				mouthEl = mk(wobEllipse(mx, my + 4, 11, mouth === 'scream' ? 15 : 10, sd + 6, 1, 10), '#2a0d0d', 4);
-				break;
-			case 'wobbly':
-				mouthEl = mk(`M${mx - 12},${my + 2} L${mx - 6},${my - 2} L${mx},${my + 2} L${mx + 6},${my - 2} L${mx + 12},${my + 2}`);
-				break;
-			case 'open':
-				mouthEl = mk(wobEllipse(mx, my + 1, 8, 2 + open * 7, sd + 7, 0.5, 8), '#3a1414', 3.5);
-				break;
-			default:
-				mouthEl = mk(wobLine(mx - 10, my, mx + 10, my, sd + 8, 0.6, 1));
+		const speaking = open > 0.08 && (mouth === 'flat' || mouth === 'smile' || mouth === 'frown' || mouth === 'faint' || mouth === 'wobbly' || mouth === 'open');
+		if (speaking) {
+			if (viseme === 'm' || open < 0.16) {
+				mouthEl = mk(`M${mx - 9},${my} Q${mx},${my + 2} ${mx + 9},${my}`, 'none', 4);
+			} else {
+				const w = viseme === 'e' ? 12 : viseme === 'o' ? 6.5 : 9.5;
+				const h = (viseme === 'e' ? 1.5 + open * 4.5 : 2 + open * 8.5) * (viseme === 'o' ? 1.1 : 1);
+				mouthEl = (
+					<g>
+						{mk(wobEllipse(mx, my + 1 + h * 0.3, w, h, sd + 7, 0.3, 10), '#3a1414', 3.5)}
+						{open > 0.45 && viseme !== 'o' ? <path d={`M${mx - w * 0.6},${my - h * 0.35 + 1.5} L${mx + w * 0.6},${my - h * 0.35 + 1.5}`} stroke="#f4efe6" strokeWidth={2.5} strokeLinecap="round" /> : null}
+					</g>
+				);
+			}
+		} else {
+			switch (mouth) {
+				case 'smile':
+					mouthEl = mk(`M${mx - 12},${my - 2} Q${mx},${my + 10} ${mx + 12},${my - 2}`);
+					break;
+				case 'faint':
+					mouthEl = mk(`M${mx - 8},${my} Q${mx},${my + 3.5} ${mx + 8},${my}`, 'none', 3);
+					break;
+				case 'grin':
+				case 'laugh':
+					mouthEl = mk(`M${mx - 14},${my - 4} Q${mx},${my + 16} ${mx + 14},${my - 4} Z`, '#5a1d1d');
+					break;
+				case 'frown':
+					mouthEl = mk(`M${mx - 11},${my + 5} Q${mx},${my - 5} ${mx + 11},${my + 5}`);
+					break;
+				case 'o':
+					mouthEl = mk(wobEllipse(mx, my + 2, 6, 8, sd + 5, 0.5, 8), '#3a1414', 3.5);
+					break;
+				case 'scream':
+				case 'shout': {
+					const g = mouth === 'scream' ? 15 + open * 4 : 10 + open * 4;
+					mouthEl = mk(wobEllipse(mx, my + 4, 11, g, sd + 6, 0.8, 10), '#2a0d0d', 4);
+					break;
+				}
+				case 'wobbly':
+					mouthEl = mk(`M${mx - 12},${my + 2} L${mx - 6},${my - 2} L${mx},${my + 2} L${mx + 6},${my - 2} L${mx + 12},${my + 2}`);
+					break;
+				case 'open':
+					mouthEl = mk(wobEllipse(mx, my + 1, 8, 2 + open * 7, sd + 7, 0.4, 8), '#3a1414', 3.5);
+					break;
+				default:
+					mouthEl = mk(wobLine(mx - 10, my, mx + 10, my, sd + 8, 0.5, 1));
+			}
 		}
 	}
 
@@ -344,10 +496,10 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 	const cx = hx0;
 	const cy = headY;
 	if (back) {
-		hairFront.push(<path key="hb" d={wobCircle(cx, cy - 2, hr + 1, sd + 40, 1.2)} fill={hc} stroke={INK} strokeWidth={lw} />);
-		if (hair === 'bun') hairFront.push(<path key="bunb" d={wobCircle(cx, cy - hr * 0.78, hr * 0.36, sd + 41, 0.6)} fill={mixHex(hc, '#000000', 0.1)} stroke={INK} strokeWidth={lw * 0.7} />);
-		if (hair === 'medium' || hair === 'long') hairFront.push(<path key="hbm" d={wobPoly([[cx - hr - 2, cy], [cx + hr + 2, cy], [cx + hr + 6, cy + hr * 1.35], [cx - hr - 6, cy + hr * 1.35]], sd + 42, 1.5)} fill={hc} stroke={INK} strokeWidth={lw} />);
-		if (hair === 'ponytail') hairFront.push(<path key="hbp" d={wobEllipse(cx + 4, cy + hr * 0.9, 10, 24, sd + 43, 1)} fill={hc} stroke={INK} strokeWidth={lw * 0.8} />);
+		hairFront.push(<path key="hb" d={wobCircle(cx, cy - 2, hr + 1, sd + 40, 1)} fill={hc} stroke={INK} strokeWidth={lw} />);
+		if (hair === 'bun') hairFront.push(<path key="bunb" d={wobCircle(cx, cy - hr * 0.78, hr * 0.36, sd + 41, 0.5)} fill={mixHex(hc, '#000000', 0.1)} stroke={INK} strokeWidth={lw * 0.7} />);
+		if (hair === 'medium' || hair === 'long') hairFront.push(<path key="hbm" d={wobPoly([[cx - hr - 2, cy], [cx + hr + 2, cy], [cx + hr + 6, cy + hr * 1.35], [cx - hr - 6, cy + hr * 1.35]], sd + 42, 1.2)} fill={hc} stroke={INK} strokeWidth={lw} />);
+		if (hair === 'ponytail') hairFront.push(<path key="hbp" d={wobEllipse(cx + 4, cy + hr * 0.9, 10, 24, sd + 43, 0.8)} fill={hc} stroke={INK} strokeWidth={lw * 0.8} />);
 	} else {
 		switch (hair) {
 			case 'short':
@@ -369,7 +521,7 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 								[cx - hr * 0.8, cy - hr * 0.35],
 							],
 							sd + 50,
-							1.4,
+							1.1,
 						)}
 						fill={hc}
 						stroke={INK}
@@ -379,8 +531,8 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 				break;
 			case 'grayShort':
 				hairFront.push(
-					<path key="hg" d={wob([[cx - hr - 3, cy + 4], [cx - hr, cy - hr * 0.6], [cx - hr * 0.6, cy - hr * 0.55], [cx - hr * 0.7, cy - 2]], sd + 51, 1.2)} fill={hc} stroke={INK} strokeWidth={lw * 0.7} />,
-					<path key="hg2" d={wob([[cx + hr + 3, cy + 4], [cx + hr, cy - hr * 0.6], [cx + hr * 0.6, cy - hr * 0.55], [cx + hr * 0.7, cy - 2]], sd + 52, 1.2)} fill={hc} stroke={INK} strokeWidth={lw * 0.7} />,
+					<path key="hg" d={wob([[cx - hr - 3, cy + 4], [cx - hr, cy - hr * 0.6], [cx - hr * 0.6, cy - hr * 0.55], [cx - hr * 0.7, cy - 2]], sd + 51, 1)} fill={hc} stroke={INK} strokeWidth={lw * 0.7} />,
+					<path key="hg2" d={wob([[cx + hr + 3, cy + 4], [cx + hr, cy - hr * 0.6], [cx + hr * 0.6, cy - hr * 0.55], [cx + hr * 0.7, cy - 2]], sd + 52, 1)} fill={hc} stroke={INK} strokeWidth={lw * 0.7} />,
 				);
 				break;
 			case 'medium':
@@ -397,7 +549,7 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 								[cx - hr - 10, cy + hr * len],
 							],
 							sd + 53,
-							1.6,
+							1.2,
 						)}
 						fill={hc}
 						stroke={INK}
@@ -421,7 +573,7 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 								[cx - hr * 0.8, cy - hr * 0.1],
 							],
 							sd + 54,
-							1.4,
+							1.1,
 						)}
 						fill={hc}
 						stroke={INK}
@@ -432,7 +584,7 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 			}
 			case 'bun':
 				hairFront.push(
-					<path key="hbun" d={wobCircle(cx + 2, cy - hr - 10, hr * 0.42, sd + 55, 0.5)} fill={hc} stroke={INK} strokeWidth={lw * 0.8} />,
+					<path key="hbun" d={wobCircle(cx + 2, cy - hr - 10, hr * 0.42, sd + 55, 0.4)} fill={hc} stroke={INK} strokeWidth={lw * 0.8} />,
 					<path
 						key="hbuncap"
 						d={wob(
@@ -448,7 +600,7 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 								[cx - hr * 0.7, cy - hr * 0.5],
 							],
 							sd + 56,
-							0.8,
+							0.6,
 						)}
 						fill={hc}
 						stroke={INK}
@@ -457,11 +609,11 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 				);
 				break;
 			case 'ponytail':
-				hairBack.push(<path key="hpt" d={wobEllipse(cx + hr + 6, cy + 8, 11, 26, sd + 57, 1)} fill={hc} stroke={INK} strokeWidth={lw * 0.8} />);
+				hairBack.push(<path key="hpt" d={wobEllipse(cx + hr + 6, cy + 8, 11, 26, sd + 57, 0.8)} fill={hc} stroke={INK} strokeWidth={lw * 0.8} />);
 				hairFront.push(
 					<path
 						key="hpf"
-						d={wob([[cx - hr - 2, cy - 2], [cx - hr * 0.8, cy - hr * 0.8], [cx, cy - hr - 5], [cx + hr * 0.85, cy - hr * 0.75], [cx + hr + 2, cy - 4], [cx + hr * 0.5, cy - hr * 0.6], [cx - hr * 0.5, cy - hr * 0.55]], sd + 58, 1.2)}
+						d={wob([[cx - hr - 2, cy - 2], [cx - hr * 0.8, cy - hr * 0.8], [cx, cy - hr - 5], [cx + hr * 0.85, cy - hr * 0.75], [cx + hr + 2, cy - 4], [cx + hr * 0.5, cy - hr * 0.6], [cx - hr * 0.5, cy - hr * 0.55]], sd + 58, 1)}
 						fill={hc}
 						stroke={INK}
 						strokeWidth={lw * 0.8}
@@ -471,7 +623,7 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 			case 'curly':
 				for (let i = 0; i < 7; i++) {
 					const a = Math.PI + (i / 6) * Math.PI;
-					hairFront.push(<path key={`hc${i}`} d={wobCircle(cx + Math.cos(a) * hr * 0.95, cy + Math.sin(a) * hr * 0.9, 11, sd + 60 + i, 1)} fill={hc} stroke={INK} strokeWidth={lw * 0.6} />);
+					hairFront.push(<path key={`hc${i}`} d={wobCircle(cx + Math.cos(a) * hr * 0.95, cy + Math.sin(a) * hr * 0.9, 11, sd + 60 + i, 0.8)} fill={hc} stroke={INK} strokeWidth={lw * 0.6} />);
 				}
 				break;
 			default:
@@ -484,14 +636,14 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 	if (hat === 'captain' || hat === 'police' || hat === 'cap') {
 		const top = hat === 'captain' ? '#f4f4f0' : hat === 'police' ? '#1b2233' : '#24406e';
 		hatEl.push(
-			<path key="hat1" d={wobPoly([[cx - hr - 6, cy - hr * 0.55], [cx + hr + 6, cy - hr * 0.55], [cx + hr + 12, cy - hr - 18], [cx - hr - 12, cy - hr - 18]], sd + 70, 1.2)} fill={top} stroke={INK} strokeWidth={lw} />,
-			<path key="hat2" d={wobPoly([[cx - hr - 4, cy - hr * 0.6], [cx + hr + 4, cy - hr * 0.6], [cx + hr + 2, cy - hr * 0.3], [cx - hr - 2, cy - hr * 0.3]], sd + 71, 1)} fill={hat === 'captain' ? '#111' : '#0c0f18'} stroke={INK} strokeWidth={lw * 0.7} />,
+			<path key="hat1" d={wobPoly([[cx - hr - 6, cy - hr * 0.55], [cx + hr + 6, cy - hr * 0.55], [cx + hr + 12, cy - hr - 18], [cx - hr - 12, cy - hr - 18]], sd + 70, 1)} fill={top} stroke={INK} strokeWidth={lw} />,
+			<path key="hat2" d={wobPoly([[cx - hr - 4, cy - hr * 0.6], [cx + hr + 4, cy - hr * 0.6], [cx + hr + 2, cy - hr * 0.3], [cx - hr - 2, cy - hr * 0.3]], sd + 71, 0.8)} fill={hat === 'captain' ? '#111' : '#0c0f18'} stroke={INK} strokeWidth={lw * 0.7} />,
 		);
-		if (hat === 'captain') hatEl.push(<path key="hat3" d={wobCircle(cx, cy - hr * 0.95, 7, sd + 72, 0.6, 6)} fill="#d8b23a" stroke={INK} strokeWidth={2.5} />);
+		if (hat === 'captain') hatEl.push(<path key="hat3" d={wobCircle(cx, cy - hr * 0.95, 7, sd + 72, 0.5, 6)} fill="#d8b23a" stroke={INK} strokeWidth={2.5} />);
 		if (hat === 'police') hatEl.push(<rect key="hat4" x={cx - hr - 8} y={cy - hr * 0.85} width={hr * 2 + 16} height={7} fill="#e8e8e8" opacity={0.85} />);
 	}
 	if (hat === 'beanie') {
-		hatEl.push(<path key="bn" d={wob([[cx - hr - 3, cy - hr * 0.35], [cx - hr, cy - hr * 0.9], [cx, cy - hr - 12], [cx + hr, cy - hr * 0.9], [cx + hr + 3, cy - hr * 0.35]], sd + 73, 1.2)} fill="#6b2d2d" stroke={INK} strokeWidth={lw * 0.8} />);
+		hatEl.push(<path key="bn" d={wob([[cx - hr - 3, cy - hr * 0.35], [cx - hr, cy - hr * 0.9], [cx, cy - hr - 12], [cx + hr, cy - hr * 0.9], [cx + hr + 3, cy - hr * 0.35]], sd + 73, 1)} fill="#6b2d2d" stroke={INK} strokeWidth={lw * 0.8} />);
 	}
 
 	// ---- props at the hands
@@ -505,64 +657,113 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 		propEl.push(
 			<g key="ph">
 				{p.propGlow ? <ellipse cx={at[0]} cy={at[1] - 40} rx={70} ry={80} fill={p.propGlow} opacity={0.18} /> : null}
-				<path d={wobPoly([[at[0] - w / 2, at[1] - hh], [at[0] + w / 2, at[1] - hh], [at[0] + w / 2, at[1]], [at[0] - w / 2, at[1]]], sd + 80, 0.8)} fill="#1d1d22" stroke={INK} strokeWidth={3.5} />
+				<path d={wobPoly([[at[0] - w / 2, at[1] - hh], [at[0] + w / 2, at[1] - hh], [at[0] + w / 2, at[1]], [at[0] - w / 2, at[1]]], sd + 80, 0.6)} fill="#1d1d22" stroke={INK} strokeWidth={3.5} />
 				<rect x={at[0] - w / 2 + 4} y={at[1] - hh + 4} width={w - 8} height={hh - 8} fill={p.propGlow ?? '#5b7fb3'} opacity={0.9} />
 			</g>,
 		);
 	}
-	if (prop === 'clicker') propEl.push(<path key="cl" d={wobRect(at[0] - 8, at[1] - 16, 16, 20, sd + 81, 0.8)} fill="#b9bcc2" stroke={INK} strokeWidth={3} />);
-	if (prop === 'card') propEl.push(<path key="cd" d={wobRect(at[0] - 18, at[1] - 26, 36, 24, sd + 82, 0.8)} fill="#e9e4d4" stroke={INK} strokeWidth={3} />);
-	if (prop === 'handset') propEl.push(<path key="hs" d={wobRect(at[0] - 9, at[1] - 30, 18, 34, sd + 83, 0.8)} fill="#222" stroke={INK} strokeWidth={3} />);
-	if (prop === 'notebook') propEl.push(<path key="nb" d={wobRect(at[0] - 16, at[1] - 30, 32, 38, sd + 84, 0.8)} fill="#f2efe6" stroke={INK} strokeWidth={3} />);
+	if (prop === 'clicker') propEl.push(<path key="cl" d={wobRect(at[0] - 8, at[1] - 16, 16, 20, sd + 81, 0.6)} fill="#b9bcc2" stroke={INK} strokeWidth={3} />);
+	if (prop === 'card') propEl.push(<path key="cd" d={wobRect(at[0] - 18, at[1] - 26, 36, 24, sd + 82, 0.6)} fill="#e9e4d4" stroke={INK} strokeWidth={3} />);
+	if (prop === 'handset') propEl.push(<path key="hs" d={wobRect(at[0] - 9, at[1] - 30, 18, 34, sd + 83, 0.6)} fill="#222" stroke={INK} strokeWidth={3} />);
+	if (prop === 'notebook') propEl.push(<path key="nb" d={wobRect(at[0] - 16, at[1] - 30, 32, 38, sd + 84, 0.6)} fill="#f2efe6" stroke={INK} strokeWidth={3} />);
 	if (p.arms === 'fingerLips' && !back) propEl.push(<path key="fl" d={`M${hand[0]},${hand[1] - 6} L${hand[0] - 1},${hand[1] - 30}`} stroke={INK} strokeWidth={8} strokeLinecap="round" />, <path key="fl2" d={`M${hand[0]},${hand[1] - 6} L${hand[0] - 1},${hand[1] - 30}`} stroke={skin} strokeWidth={4} strokeLinecap="round" />);
 	if (prop === 'ring') propEl.push(<circle key="rg" cx={at[0]} cy={at[1] - 10} r={7} fill="none" stroke="#d4af37" strokeWidth={4} />);
 	if (prop === 'flashlight') {
 		propEl.push(
 			<g key="fl">
 				<path d={`M${at[0]},${at[1] - 6} L${at[0] + 520},${at[1] - 120} L${at[0] + 520},${at[1] + 110} Z`} fill="#fff6c8" opacity={0.12} />
-				<path d={wobRect(at[0] - 10, at[1] - 12, 26, 13, sd + 85, 0.6)} fill="#333" stroke={INK} strokeWidth={3} />
+				<path d={wobRect(at[0] - 10, at[1] - 12, 26, 13, sd + 85, 0.5)} fill="#333" stroke={INK} strokeWidth={3} />
 			</g>,
 		);
 	}
 
-	const armPath = (pts: Pt[], sdo: number) => wob(pts, sd + sdo, amp * 0.6, false);
+	const armPath = (pts: Pt[], sdo: number) => wob(pts, sd + sdo, amp * 0.5, false);
 	const lum = parseInt(palette.shirt.slice(1, 3), 16) + parseInt(palette.shirt.slice(3, 5), 16) + parseInt(palette.shirt.slice(5, 7), 16);
 	const sleeve = lum < 90 ? mixHex(palette.shirt, '#5a5f68', 0.35) : palette.shirt;
-	const armsEl = [L, R].map((arm, i) => (
+	const armEl = (arm: Pt[], i: number, far = false) => (
 		<g key={`arm${i}`}>
 			<path d={armPath(arm, 30 + i)} stroke={INK} strokeWidth={17 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-			<path d={armPath(arm, 30 + i)} stroke={sleeve} strokeWidth={9 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-			<path d={wobCircle(arm[2][0], arm[2][1], 9 * k, sd + 35 + i, 0.8, 7)} fill={skin} stroke={INK} strokeWidth={3.5} />
+			<path d={armPath(arm, 30 + i)} stroke={far ? mixHex(sleeve, '#000000', 0.25) : sleeve} strokeWidth={9 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+			<path d={wobCircle(arm[2][0], arm[2][1], 9 * k, sd + 35 + i, 0.6, 7)} fill={far ? mixHex(skin, '#000000', 0.15) : skin} stroke={INK} strokeWidth={3.5} />
 		</g>
-	));
+	);
+	const farArm = side && walking;
+	const lapArms = sitting && !back && (p.arms === undefined || p.arms === 'folded' || p.arms === 'lap');
+	const backArms = back || farArm ? (farArm ? [armEl(L, 0, true)] : [armEl(L, 0), armEl(R, 1)]) : [];
+	const frontArms = back ? [] : farArm ? [armEl(R, 1)] : [armEl(L, 0), armEl(R, 1)];
 
-	return (
-		<g transform={`translate(${x},${y}) scale(${flip ? -s : s},${s})`} opacity={opacity}>
-			{/* shadow */}
-			{!sitting ? <ellipse cx={0} cy={2} rx={46 * k} ry={9 * k} fill="#000" opacity={0.22} /> : null}
+	// ---- legs
+	const pantsShade = mixHex(palette.pants, '#000000', 0.22);
+	const showLegs = !(sitting && back) && (!coat || sitting);
+	const legEls = legs.map((lg, i) => {
+		const shade = side && walking && i === 0;
+		return (
+			<g key={`leg${i}`}>
+				<path d={wob(lg, sd + 20 + i, amp * 0.5, false)} stroke={INK} strokeWidth={26 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+				<path d={wob(lg, sd + 20 + i, amp * 0.5, false)} stroke={shade ? pantsShade : palette.pants} strokeWidth={16 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+			</g>
+		);
+	});
+	const shoeEls = legs.map((lg, i) => {
+		const [fx, fy] = lg[2];
+		if (sitting) return <path key={`sh${i}`} d={wobEllipse(fx, fy - 5 * k, 15 * k, 9 * k, sd + 25 + i, 0.6, 8)} fill={palette.shoes} stroke={INK} strokeWidth={3} />;
+		if (side && walking) return <path key={`sh${i}`} d={wobEllipse(fx + dir * 8 * k, fy - 4 * k, 18 * k, 7 * k, sd + 25 + i, 0.6, 8)} fill={palette.shoes} stroke={INK} strokeWidth={3} />;
+		return <path key={`sh${i}`} d={wobEllipse(fx + (i === 0 ? -5 : 5), fy - 2, 16 * k, 8 * k, sd + 25 + i, 0.6, 8)} fill={palette.shoes} stroke={INK} strokeWidth={3} />;
+	});
+	// seated: the lap (thighs coming toward us, lit from above) + knee caps
+	const lapTop = mixHex(coat ? palette.shirt : palette.pants, '#ffffff', 0.13);
+	const lap =
+		sitting && !back ? (
+			<g key="lap">
+				<path
+					d={wobPoly(
+						[
+							[-hipW - 3, hipY - 3],
+							[hipW + 3, hipY - 3],
+							[35 * k, -63 * k],
+							[32 * k, -51 * k],
+							[-32 * k, -51 * k],
+							[-35 * k, -63 * k],
+						],
+						sd + 27,
+						0.5,
+					)}
+					fill={lapTop}
+					stroke={INK}
+					strokeWidth={lw * 0.9}
+					strokeLinejoin="round"
+				/>
+				<path d={`M0,${hipY + 2} L0,${-53 * k}`} stroke={INK} strokeWidth={2.5} opacity={0.55} />
+				{[-1, 1].map((sg) => (
+					<ellipse key={sg} cx={sg * 18 * k} cy={-57 * k} rx={12 * k} ry={4.5 * k} fill="#fff" opacity={0.12} />
+				))}
+				{coat ? <path d={wobPoly([[-shW - 4, hipY - 4], [shW + 4, hipY - 4], [36 * k, -30 * k], [-36 * k, -30 * k]], sd + 28, 0.5)} fill={palette.shirt} stroke={INK} strokeWidth={lw * 0.8} /> : null}
+			</g>
+		) : null;
+
+	// ---- shading (one light from the upper left)
+	const shadeBody = !back ? (
+		<g clipPath={`url(#bc${uid})`}>
+			<path d={`M${shW * 0.3},${shY - 10} L${shW + 30},${shY - 10} L${shW + 30},${hipY + 40} L${hipW * 0.2},${hipY + 40} Z`} fill="#000" opacity={0.13} />
+			<path d={`M${-shW - 10},${shY + 4} L${shW + 10},${shY + 4}`} stroke="#fff" strokeOpacity={0.12} strokeWidth={6} />
+		</g>
+	) : null;
+
+	const bodyD = wobPoly(bodyPts, sd + 10, amp);
+	const headD = wobCircle(cx, cy, hr, sd + 1, amp * 0.8, 11);
+	const upper = (
+		<g transform={`rotate(${bodyRot} 0 ${hipY})`}>
 			{hairBack}
-			{/* legs */}
-			{!coat || sitting
-				? legs.map((lg, i) => (
-						<g key={`leg${i}`}>
-							<path d={wob(lg, sd + 20 + i, amp * 0.6, false)} stroke={INK} strokeWidth={26 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-							<path d={wob(lg, sd + 20 + i, amp * 0.6, false)} stroke={palette.pants} strokeWidth={16 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-						</g>
-					))
-				: null}
-			{/* shoes */}
-			{legs.map((lg, i) => (
-				<path key={`sh${i}`} d={wobEllipse(lg[2][0] + (i === 0 ? -5 : 5), lg[2][1] - 2, 16 * k, 8 * k, sd + 25 + i, 1, 8)} fill={palette.shoes} stroke={INK} strokeWidth={3} />
-			))}
-			{back ? armsEl : null}
+			{backArms}
 			{/* body */}
-			<path d={wobPoly(bodyPts, sd + 10, amp)} fill={palette.shirt} stroke={INK} strokeWidth={lw} strokeLinejoin="round" />
-			{coat ? <path d={wobLine(0, shY + 18, 0, (sitting ? -44 : -26) * k, sd + 11, 1, 3)} stroke="#000" strokeWidth={2.5} opacity={0.6} /> : null}
-			{p.stripe && !back ? <path d={wobLine(-shW + 3, shY + 34, shW - 3, shY + 34, sd + 12, 1, 2)} stroke={p.stripe} strokeWidth={9} /> : null}
+			<path d={bodyD} fill={palette.shirt} stroke={INK} strokeWidth={lw} strokeLinejoin="round" />
+			{shadeBody}
+			{coat && !sitting ? <path d={wobLine(0, shY + 18, 0, -26 * k, sd + 11, 0.8, 3)} stroke="#000" strokeWidth={2.5} opacity={0.6} /> : null}
+			{p.stripe && !back ? <path d={wobLine(-shW + 3, shY + 34, shW - 3, shY + 34, sd + 12, 0.8, 2)} stroke={p.stripe} strokeWidth={9} /> : null}
 			{p.vest && !back ? (
 				<g>
-					<path d={wobPoly([[-shW + 6, shY + 4], [shW - 6, shY + 4], [hipW - 2, hipY], [-hipW + 2, hipY]], sd + 13, 1)} fill={p.vest} stroke={INK} strokeWidth={3} />
-					<path d={wobLine(-hipW + 4, hipY - 26, hipW - 4, hipY - 26, sd + 14, 0.8, 2)} stroke="#e9eef2" strokeWidth={5} opacity={0.9} />
+					<path d={wobPoly([[-shW + 6, shY + 4], [shW - 6, shY + 4], [hipW - 2, hipY], [-hipW + 2, hipY]], sd + 13, 0.8)} fill={p.vest} stroke={INK} strokeWidth={3} />
+					<path d={wobLine(-hipW + 4, hipY - 26, hipW - 4, hipY - 26, sd + 14, 0.6, 2)} stroke="#e9eef2" strokeWidth={5} opacity={0.9} />
 					{p.vestText ? (
 						<text x={0} y={shY + 36} textAnchor="middle" fontFamily="Patrick Hand" fontSize={15} fontWeight={700} fill="#14213a">
 							{p.vestText}
@@ -579,11 +780,13 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 					</text>
 				</g>
 			) : null}
-			{/* arms */}
-			{!back ? armsEl : null}
 			{/* head */}
 			<g transform={headTransform}>
-				<path d={wobCircle(cx, cy, hr, sd + 1, amp * 0.9, 11)} fill={back ? palette.hair : skin} stroke={INK} strokeWidth={lw} />
+				{/* neck shadow */}
+				{!back ? <ellipse cx={cx} cy={cy + hr * 0.95} rx={hr * 0.55} ry={6} fill="#000" opacity={0.12} /> : null}
+				<path d={headD} fill={back ? palette.hair : skin} stroke={INK} strokeWidth={lw} />
+				{!back ? <ellipse cx={cx + hr * 0.5} cy={cy + hr * 0.12} rx={hr * 0.55} ry={hr * 0.92} fill="#000" opacity={0.07} clipPath={`url(#hc${uid})`} /> : null}
+				{!back ? <ellipse cx={cx - hr * 0.42} cy={cy - hr * 0.42} rx={hr * 0.26} ry={hr * 0.16} fill="#fff" opacity={0.18} /> : null}
 				{!back && p.blush ? (
 					<>
 						<ellipse cx={cx - 20 + faceDX} cy={cy + 8} rx={7} ry={4} fill="#e88" opacity={0.5} />
@@ -607,20 +810,56 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 					</g>
 				) : null}
 				{p.mustache && !back ? (
-					<path d={wob([[mx - 18, my - 2], [mx - 8, my - 9], [mx, my - 6], [mx + 8, my - 9], [mx + 18, my - 2], [mx, my - 3]], sd + 90, 0.8)} fill={p.mustache} stroke={INK} strokeWidth={2.5} />
+					<path d={wob([[mx - 18, my - 2], [mx - 8, my - 9], [mx, my - 6], [mx + 8, my - 9], [mx + 18, my - 2], [mx, my - 3]], sd + 90, 0.6)} fill={p.mustache} stroke={INK} strokeWidth={2.5} />
 				) : null}
 				{mouthEl}
 				{hairFront}
 				{hatEl}
 				{!back && p.sweat ? <path d={`M${cx + hr * 0.75},${cy - hr * 0.5} q6,10 0,14 q-6,-4 0,-14`} fill="#8fc3ff" stroke={INK} strokeWidth={2} /> : null}
 				{!back && p.tears
-					? [-1, 1].map((side) => {
-							const ty = eyeY + 8 + ((((frame ?? 0) * 1.4 + (side > 0 ? 9 : 0)) % 26) * (p.tears ?? 0));
-							return <path key={`t${side}`} d={`M${cx + side * eyeDX + faceDX},${ty} q4,7 0,10 q-4,-3 0,-10`} fill="#7fb6ff" stroke="#2b4d7a" strokeWidth={1.5} opacity={Math.min(1, p.tears ?? 0)} />;
+					? [-1, 1].map((sg) => {
+							const ty = eyeY + 8 + ((fr * 1.4 + (sg > 0 ? 9 : 0)) % 26) * (p.tears ?? 0);
+							return <path key={`t${sg}`} d={`M${cx + sg * eyeDX + faceDX},${ty} q4,7 0,10 q-4,-3 0,-10`} fill="#7fb6ff" stroke="#2b4d7a" strokeWidth={1.5} opacity={Math.min(1, p.tears ?? 0)} />;
 						})
 					: null}
 			</g>
+			{lapArms ? null : frontArms}
 			{propEl}
+		</g>
+	);
+
+	return (
+		<g transform={`translate(${x},${y}) scale(${flip ? -s : s},${s})`} opacity={opacity}>
+			<defs>
+				<clipPath id={`bc${uid}`}>
+					<path d={bodyD} />
+				</clipPath>
+				<clipPath id={`hc${uid}`}>
+					<path d={headD} />
+				</clipPath>
+			</defs>
+			{/* contact shadow */}
+			{!sitting ? <ellipse cx={0} cy={2} rx={(walking ? 40 : 46) * k} ry={9 * k} fill="#000" opacity={0.22} /> : <ellipse cx={0} cy={-1} rx={40 * k} ry={7 * k} fill="#000" opacity={0.18} />}
+			{/* legs behind the body when standing/walking; in front of it (over the seat) when sitting */}
+			{!sitting && showLegs ? legEls : null}
+			{!sitting ? shoeEls : null}
+			{upper}
+			{sitting ? lap : null}
+			{sitting && showLegs ? (
+				<>
+					{legs.map((lg, i) => (
+						// only the shins - the thighs are the lap shape
+						<g key={`shin${i}`}>
+							<path d={wob([lg[1], lg[2]], sd + 22 + i, amp * 0.4, false)} stroke={INK} strokeWidth={24 * k} fill="none" strokeLinecap="round" />
+							<path d={wob([lg[1], lg[2]], sd + 22 + i, amp * 0.4, false)} stroke={i === 1 ? pantsShade : palette.pants} strokeWidth={14 * k} fill="none" strokeLinecap="round" />
+						</g>
+					))}
+					{shoeEls}
+					{/* re-draw the knee edge over the tops of the shins so the knees read */}
+					<path d={`M${-31 * k},${-51 * k} L${31 * k},${-51 * k}`} stroke={INK} strokeWidth={lw * 0.9} strokeLinecap="round" />
+				</>
+			) : null}
+			{lapArms ? <g transform={`rotate(${bodyRot} 0 ${hipY})`}>{frontArms}</g> : null}
 		</g>
 	);
 };

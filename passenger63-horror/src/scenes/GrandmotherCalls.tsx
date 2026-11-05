@@ -9,7 +9,7 @@ import {Flash} from '../components/fx/Fx';
 import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {h01} from '../utils/rough';
 import {Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, SeaBg, talkOf} from './common';
+import {Closeup, headY, SeaBg, speak, talkOf} from './common';
 
 const Room: React.FC = () => <rect x={-200} y={-200} width={2400} height={1600} fill="#7f8b9c" />;
 
@@ -46,7 +46,7 @@ export const GrandmotherCalls: React.FC = () => (
 					</Stage>
 				),
 			},
-			{at: 'emma_008_where', off: -0.1, render: ({f, d, sf, api}) => <EmmaC f={f} d={d} props={{brows: 'worried', arms: 'grabRight', talk: talkOf(api, sf, 'emma_008_where'), look: [1, 0]}} />},
+			{at: 'emma_008_where', off: -0.1, render: ({f, d, sf, api}) => <EmmaC f={f} d={d} props={{brows: 'worried', arms: 'grabRight', ...speak(api, sf, 'emma_008_where'), look: [1, 0]}} />},
 			{at: 'narrator_158_didnt_answer', render: ({f, d}) => <DanielC f={f} d={d} push={0.1} props={{tilt: lerpF(f, 0, 20, 0, -10), look: [-0.8, -0.3], mouth: 'flat', brows: 'raised'}} />},
 			{at: 'narrator_159_not_announcement', render: ({f, d}) => <RearDoors f={f} d={d} z={[1.6, 2.2]} />},
 			{at: 'narrator_160_quiet', render: ({f, d}) => <RearDoors f={f} d={d} z={[2.2, 2.7]} />},
@@ -66,17 +66,17 @@ export const GrandmotherCalls: React.FC = () => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.2, cy: 520}} rock={0.4}>
 						<PassengerCabin f={f} facing="aft" lights="dim" />
 						<Daniel x={lerpF(f, 0, d, 1000, 980)} y={lerpF(f, 0, d, 1160, 1060)} s={lerpF(f, 0, d, 1.3, 1.15)} frame={f} back pose="walk" phase={f * 0.25} />
-						<Emma x={lerpF(f, 0, d, 760, 830)} y={1180} s={1.35} frame={f} arms="grabRight" brows="angry" talk={talkOf(api, sf, 'emma_009_stop')} mouth="shout" look={[1, -0.5]} />
+						<Emma x={lerpF(f, 0, d, 760, 830)} y={1180} s={1.35} frame={f} arms="grabRight" brows="angry" {...speak(api, sf, 'emma_009_stop')} mouth="shout" look={[1, -0.5]} />
 					</Stage>
 				),
 			},
 			{at: 'narrator_162_looked_at_her', render: ({f, d}) => <DanielC f={f} d={d} push={0.08} props={{tears: clamp(f / 12), brows: 'sad', look: [-0.8, 0], mouth: 'wobbly'}} />},
-			{at: 'daniel_006_used_to_say', off: -0.1, render: ({f, d, sf, api}) => <DanielC f={f} d={d} push={0.06} props={{tears: 1, brows: 'sad', look: [-0.8, 0], talk: talkOf(api, sf, 'daniel_006_used_to_say')}} />},
-			{at: 'emma_010_what', off: -0.05, render: ({f, d, sf, api}) => <EmmaC f={f} d={d} props={{brows: 'worried', look: [1, 0], talk: talkOf(api, sf, 'emma_010_what')}} />},
+			{at: 'daniel_006_used_to_say', off: -0.1, render: ({f, d, sf, api}) => <DanielC f={f} d={d} push={0.06} props={{tears: 1, brows: 'sad', look: [-0.8, 0], ...speak(api, sf, 'daniel_006_used_to_say')}} />},
+			{at: 'emma_010_what', off: -0.05, render: ({f, d, sf, api}) => <EmmaC f={f} d={d} props={{brows: 'worried', look: [1, 0], ...speak(api, sf, 'emma_010_what')}} />},
 			{at: 'daniel_007_exactly', off: -0.1, render: ({f, d, sf, api}) => <DanielC f={f} d={d} s={4.2} push={0.08} props={{tears: 1, brows: 'sad', look: [0, 0], eyes: 'dot', talk: talkOf(api, sf, 'daniel_007_exactly') * 0.5}} />},
-			{at: 'emma_011_shes_dead', off: -0.1, render: ({f, d, sf, api}) => <EmmaC f={f} d={d} props={{brows: 'angry', look: [1, 0], talk: talkOf(api, sf, 'emma_011_shes_dead'), arms: 'grabRight'}} />},
-			{at: 'narrator_163_nodded', render: ({f, d, sf, api}) => <DanielC f={f} d={d} push={0.05} props={{tears: 1, brows: 'sad', tilt: Math.sin(f / 5) * 5, look: [-0.6, 0.3], talk: talkOf(api, sf, 'daniel_008_i_know')}} />},
-			{at: 'narrator_164_again', render: ({f, d}) => <RearDoors f={f} d={d} z={[2.5, 2.8]} warm={0.2} />},
+			{at: 'emma_011_shes_dead', off: -0.1, render: ({f, d, sf, api}) => <EmmaC f={f} d={d} props={{brows: 'angry', look: [1, 0], ...speak(api, sf, 'emma_011_shes_dead'), arms: 'grabRight'}} />},
+			{at: 'daniel_008_i_know', off: -0.1, render: ({f, d, sf, api}) => <DanielC f={f} d={d} push={0.05} props={{tears: 1, brows: 'sad', tilt: Math.sin(f / 5) * 5, look: [-0.6, 0.3], ...speak(api, sf, 'daniel_008_i_know')}} />},
+			{at: 'oldwoman_006_daniel_2', off: -0.2, render: ({f, d}) => <RearDoors f={f} d={d} z={[2.5, 2.8]} warm={0.2} />},
 			{at: 'narrator_165_covered', render: ({f, d}) => <DanielC f={f} d={d} push={0.06} props={{arms: f > 6 ? 'coverEars' : 'relaxed', eyes: 'closed', tears: 1, brows: 'sad', mouth: 'wobbly'}} />},
 			// The voice changed. Younger. Kinder.
 			{at: 'narrator_166_changed', render: ({f, d}) => <RearDoors f={f} d={d} z={[2.6, 3.4]} warm={clamp(f / (d * 0.8))} />},
@@ -97,7 +97,7 @@ export const GrandmotherCalls: React.FC = () => (
 					</AbsoluteFill>
 				),
 			},
-			{at: 'narrator_167_crying', render: ({f, d}) => <DanielC f={f} d={d} push={0.05} props={{tears: 1.4, brows: 'sad', mouth: 'wobbly', eyes: 'closed', shiver: 1}} />},
+			{at: 'oldwoman_007_sweetheart', frac: 0.6, render: ({f, d}) => <DanielC f={f} d={d} push={0.05} props={{tears: 1.4, brows: 'sad', mouth: 'wobbly', eyes: 'closed', shiver: 1}} />},
 			// Emma slapped him. Hard.
 			{
 				at: 'narrator_168_slapped',
@@ -251,7 +251,7 @@ export const PeopleInWater: React.FC = () => (
 				),
 			},
 			{
-				at: 'narrator_176_heads',
+				at: 'narrator_175_not_swimming',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 2.1, cx: 1120, cy: 600}} to={{z: 2.15}}>
 						<Sea f={f}>
@@ -262,7 +262,7 @@ export const PeopleInWater: React.FC = () => (
 			},
 			// The sea was perfectly still. (hold - almost silence)
 			{
-				at: 'narrator_177_still',
+				at: 'stillness',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.0}}>
 						<Sea f={f}>
@@ -294,11 +294,12 @@ export const PeopleInWater: React.FC = () => (
 					);
 				},
 			},
-			{at: 'narrator_181_stared', render: ({f, d}) => <Closeup who="daniel" f={f} d={d} s={3.4} cy={460} bg={<SeaBg f={f} calm={1} />} push={0.1} props={{eyes: 'wide', pale: 0.9, mouth: 'o', brows: 'worried', shiver: 1.2}} />},
-			{at: 'narrator_182_smiled', render: ({f, d}) => <Closeup who="woman" f={f} d={d} s={4.4} cy={420} bg={<SeaBg f={f} calm={1} />} push={0.04} props={{mouth: f > 8 ? 'smile' : 'faint', pose: 'stand', look: [-0.4, 0]}} />},
+			{at: 'all_arms', frac: 0.35, render: ({f, d}) => <Closeup who="daniel" f={f} d={d} s={3.4} cy={460} bg={<SeaBg f={f} calm={1} />} push={0.1} props={{eyes: 'wide', pale: 0.9, mouth: 'o', brows: 'worried', shiver: 1.2}} />},
+			{at: 'narrator_182_smiled', render: ({f, d, sf, api}) => <Closeup who="woman" f={f} d={d} s={4.4} cy={420} bg={<SeaBg f={f} calm={1} />} push={0.04} props={{mouth: f > 8 ? 'smile' : 'faint', pose: 'stand', look: [-0.4, 0], ...speak(api, sf, 'oldwoman_008_see')}} />},
 			// She pointed toward the water.
 			{
-				at: 'narrator_183_pointed',
+				at: 'oldwoman_008_see',
+				frac: 0.9,
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.6, cx: 1250, cy: 560}} to={{z: 1.65}}>
 						<RearDeck f={f} view="behind" calm={1} fog={0.05} seaChildren={<SeaPeople f={f} raised={() => 1} />} />

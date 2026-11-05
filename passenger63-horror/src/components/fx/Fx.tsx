@@ -156,6 +156,9 @@ export const BigText: React.FC<{f: number; text: string; appear?: number; size?:
 	fadeIn = 5,
 }) => {
 	const o = clamp((f - appear) / Math.max(1, fadeIn));
+	// punch in: overshoot then settle
+	const pt = clamp((f - appear) / 7);
+	const pop = 1 + 0.32 * (1 - pt) * (1 - pt) - 0.04 * Math.sin(pt * Math.PI);
 	return (
 		<AbsoluteFill style={{alignItems: 'center', justifyContent: 'flex-start'}}>
 			<div
@@ -170,7 +173,7 @@ export const BigText: React.FC<{f: number; text: string; appear?: number; size?:
 					color,
 					opacity: o,
 					textShadow: '0 0 18px rgba(0,0,0,0.9), 4px 4px 0 #000',
-					transform: `rotate(${h1(text.length) * 0.8}deg)`,
+					transform: `rotate(${h1(text.length) * 0.8}deg) scale(${pop})`,
 					lineHeight: 1.05,
 					whiteSpace: 'pre-line',
 				}}
@@ -186,7 +189,7 @@ export const PAOverlay: React.FC<{f: number; text: string; appear?: number; inti
 	const o = clamp((f - appear) / 5);
 	const bars = 28;
 	return (
-		<AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 110, opacity: o}}>
+		<AbsoluteFill style={{justifyContent: 'flex-start', alignItems: 'center', paddingTop: 70, opacity: o}}>
 			<div
 				style={{
 					display: 'flex',

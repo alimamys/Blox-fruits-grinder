@@ -11,7 +11,7 @@ import {clamp, lerpF} from '../utils/anim';
 import {FONT} from '../utils/fonts';
 import {h01, wobLine} from '../utils/rough';
 import {Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, talkOf} from './common';
+import {Closeup, headY, speak, talkOf} from './common';
 
 const RedRoom: React.FC = () => <rect x={-200} y={-200} width={2400} height={1600} fill="#3c1010" />;
 
@@ -197,7 +197,7 @@ export const Vanish: React.FC = () => (
 				off: -0.1,
 				render: ({f, d, sf, api}) => (
 					<AbsoluteFill>
-						<Closeup who="emma" f={f} d={d} s={3.6} cy={440} color="#3c1010" bg={<RedRoom />} push={0.12} props={{mouth: 'scream', eyes: 'wide', brows: 'worried', talk: talkOf(api, sf, 'emma_012_scream'), shiver: 2}} />
+						<Closeup who="emma" f={f} d={d} s={3.6} cy={440} color="#3c1010" bg={<RedRoom />} push={0.12} props={{mouth: 'scream', eyes: 'wide', brows: 'worried', ...speak(api, sf, 'emma_012_scream'), shiver: 2}} />
 						<EmergencyLights f={f} intensity={0.45} />
 					</AbsoluteFill>
 				),
@@ -208,7 +208,7 @@ export const Vanish: React.FC = () => (
 					<AbsoluteFill>
 						<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.1, cy: 500}}>
 							<FerryCorridor f={f} lights="red" />
-							<Emma x={960} y={1200} s={1.6} frame={f} back={f > d * 0.3} mouth="shout" talk={talkOf(api, sf, 'emma_013_daniel_2')} arms="shrug" />
+							<Emma x={960} y={1200} s={1.6} frame={f} back={f > d * 0.3} mouth="shout" {...speak(api, sf, 'emma_013_daniel_2')} arms="shrug" />
 						</Stage>
 						<EmergencyLights f={f} intensity={0.4} />
 					</AbsoluteFill>
@@ -306,7 +306,7 @@ export const Vanish: React.FC = () => (
 							<Harbor f={f} horizon={520} distant />
 							<FerryExterior f={f} x={lerpF(f, 0, d, 700, 860)} y={720} s={0.5} />
 						</Stage>
-						<div style={{position: 'absolute', left: 70, bottom: 60, fontFamily: FONT.mono, fontSize: 46, color: '#e9eef5'}}>00:59 AM</div>
+						<div style={{position: 'absolute', left: 70, top: 60, fontFamily: FONT.mono, fontSize: 46, color: '#e9eef5'}}>00:59 AM</div>
 					</AbsoluteFill>
 				),
 			},

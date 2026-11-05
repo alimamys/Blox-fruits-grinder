@@ -11,7 +11,7 @@ import {clamp, lerpF, shake} from '../utils/anim';
 import {FONT} from '../utils/fonts';
 import {h01, wobLine, wobRect} from '../utils/rough';
 import {Cam, Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, talkOf} from './common';
+import {Closeup, headY, talkOf, speak} from './common';
 
 const Room: React.FC<{color?: string}> = ({color = '#7f8b9c'}) => <rect x={-200} y={-200} width={2400} height={1600} fill={color} />;
 
@@ -168,7 +168,8 @@ export const Hull: React.FC = () => (
 			},
 			// PA switches on
 			{
-				at: 'narrator_114_pa_on',
+				at: 'pa_static_1',
+				off: -0.25,
 				render: ({f, d, api, from}) => {
 					const on = api.at('pa_static_1') - from;
 					return (
@@ -190,7 +191,7 @@ export const Hull: React.FC = () => (
 					</AbsoluteFill>
 				),
 			},
-			{at: 'narrator_116_pale', render: ({f, d}) => <Closeup who="daniel" f={f} d={d} s={3.2} color="#7f8b9c" bg={<Room />} push={0.1} props={{pale: clamp(f / 15), eyes: 'wide', brows: 'worried', look: [0, -0.8]}} />},
+			{at: 'pa_001_passenger37', frac: 0.62, render: ({f, d}) => <Closeup who="daniel" f={f} d={d} s={3.2} color="#7f8b9c" bg={<Room />} push={0.1} props={{pale: clamp(f / 15), eyes: 'wide', brows: 'worried', look: [0, -0.8]}} />},
 			{
 				at: 'pa_002_proceed',
 				off: -0.1,
@@ -206,7 +207,7 @@ export const Hull: React.FC = () => (
 			{
 				at: 'narrator_117_grabbed',
 				render: ({f, d, sf, api}) => (
-					<Closeup who="emma" f={f} d={d} s={3.2} color="#7f8b9c" bg={<Room />} push={0.08} props={{arms: 'grabRight', brows: 'worried', look: [1, 0], talk: talkOf(api, sf, 'emma_007_no'), mouth: 'frown'}} />
+					<Closeup who="emma" f={f} d={d} s={3.2} color="#7f8b9c" bg={<Room />} push={0.08} props={{arms: 'grabRight', brows: 'worried', look: [1, 0], ...speak(api, sf, 'emma_007_no'), mouth: 'frown'}} />
 				),
 			},
 			{
@@ -238,7 +239,7 @@ export const Hull: React.FC = () => (
 					</AbsoluteFill>
 				),
 			},
-			{at: 'narrator_119_shaking', render: ({f, d}) => <Closeup who="daniel" f={f} d={d} s={3.6} cy={440} color="#7f8b9c" bg={<Room />} push={0.04} props={{pale: 0.7, eyes: 'wide', brows: 'worried', mouth: 'wobbly', shiver: 3, sweat: true}} />},
+			{at: 'pa_005_family', frac: 0.55, render: ({f, d}) => <Closeup who="daniel" f={f} d={d} s={3.6} cy={440} color="#7f8b9c" bg={<Room />} push={0.04} props={{pale: 0.7, eyes: 'wide', brows: 'worried', mouth: 'wobbly', shiver: 3, sweat: true}} />},
 			{
 				at: 'pa_005_family',
 				off: -0.1,

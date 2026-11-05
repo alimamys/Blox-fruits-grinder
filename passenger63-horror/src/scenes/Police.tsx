@@ -9,7 +9,7 @@ import {ChristmasPhoto, HoneymoonPhoto, PhotoEvidence, WeddingPhoto, WeddingRing
 import {BigText, CrudeLabel, Evidence} from '../components/fx/Fx';
 import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {Shots, Stage} from '../utils/scene';
-import {Closeup, talkOf} from './common';
+import {Closeup, speak, talkOf} from './common';
 
 const Quay: React.FC<{f: number}> = ({f}) => (
 	<g>
@@ -131,7 +131,7 @@ export const Police: React.FC = () => (
 			{
 				at: 'narrator_216_emma_screamed',
 				render: ({f, d, sf, api}) => (
-					<Closeup who="emma" f={f} d={d} s={3.4} cy={450} color="#0b0f18" bg={<Quay f={f} />} push={0.1} props={{mouth: 'shout', brows: 'angry', tears: 1.2, talk: talkOf(api, sf, 'emma_014_husband'), look: [1, 0]}} />
+					<Closeup who="emma" f={f} d={d} s={3.4} cy={450} color="#0b0f18" bg={<Quay f={f} />} push={0.1} props={{mouth: 'shout', brows: 'angry', tears: 1.2, ...speak(api, sf, 'emma_014_husband'), look: [1, 0]}} />
 				),
 			},
 			// government records: single, never married
@@ -151,9 +151,9 @@ export const Police: React.FC = () => (
 					<Closeup who="emma" f={f} d={d} s={2.6} cy={360} color="#0b0f18" bg={<Quay f={f} />} push={0.08} props={{arms: f > d * 0.5 ? 'holdOne' : 'relaxed', prop: f > d * 0.5 ? 'ring' : 'none', tears: 1, brows: 'sad', look: [0.4, 0.8]}} />
 				),
 			},
-			{at: 'narrator_220_uncomfortable', render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} s={3.2} cy={450} color="#0b0f18" bg={<Quay f={f} />} props={{palette: {skin: '#e3b894', shirt: '#1b2233', pants: '#151a26', hair: '#3a2a1f', shoes: '#0d0d0d'}, hat: 'police', vest: '#c9e23d', vestText: 'POLICE', stripe: undefined, brows: 'worried', look: [-0.8, 0.4], talk: talkOf(api, sf, 'police_001_whose')}} />},
-			{at: 'emma_015_husbands', off: -0.05, render: ({f, d, sf, api}) => <Closeup who="emma" f={f} d={d} s={3.4} cy={450} color="#0b0f18" bg={<Quay f={f} />} push={0.06} props={{mouth: 'shout', brows: 'angry', tears: 1.2, talk: talkOf(api, sf, 'emma_015_husbands'), arms: 'holdOne', prop: 'ring', look: [1, 0]}} />},
-			{at: 'police_002_maam', off: -0.05, render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} s={3.2} cy={450} color="#0b0f18" bg={<Quay f={f} />} props={{palette: {skin: '#e3b894', shirt: '#1b2233', pants: '#151a26', hair: '#3a2a1f', shoes: '#0d0d0d'}, hat: 'police', vest: '#c9e23d', vestText: 'POLICE', stripe: undefined, brows: 'sad', look: [-0.8, 0.4], talk: talkOf(api, sf, 'police_002_maam'), arms: 'holdOne', prop: 'ring'}} />},
+			{at: 'narrator_220_uncomfortable', render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} s={3.2} cy={450} color="#0b0f18" bg={<Quay f={f} />} props={{palette: {skin: '#e3b894', shirt: '#1b2233', pants: '#151a26', hair: '#3a2a1f', shoes: '#0d0d0d'}, hat: 'police', vest: '#c9e23d', vestText: 'POLICE', stripe: undefined, brows: 'worried', look: [-0.8, 0.4], ...speak(api, sf, 'police_001_whose')}} />},
+			{at: 'emma_015_husbands', off: -0.05, render: ({f, d, sf, api}) => <Closeup who="emma" f={f} d={d} s={3.4} cy={450} color="#0b0f18" bg={<Quay f={f} />} push={0.06} props={{mouth: 'shout', brows: 'angry', tears: 1.2, ...speak(api, sf, 'emma_015_husbands'), arms: 'holdOne', prop: 'ring', look: [1, 0]}} />},
+			{at: 'police_002_maam', off: -0.05, render: ({f, d, sf, api}) => <Closeup who="crew1" f={f} d={d} s={3.2} cy={450} color="#0b0f18" bg={<Quay f={f} />} props={{palette: {skin: '#e3b894', shirt: '#1b2233', pants: '#151a26', hair: '#3a2a1f', shoes: '#0d0d0d'}, hat: 'police', vest: '#c9e23d', vestText: 'POLICE', stripe: undefined, brows: 'sad', look: [-0.8, 0.4], ...speak(api, sf, 'police_002_maam'), arms: 'holdOne', prop: 'ring'}} />},
 			// M. WEDDING RING - extreme close-up, the camera rotates
 			{at: 'narrator_221_turned_ring', render: ({f, d}) => <WeddingRing f={f} turn={lerpF(f, 0, d, 0, 0.12, easeInOut)} />},
 			{at: 'narrator_222_expected', render: ({f, d}) => <WeddingRing f={f} turn={0.12} expected={clamp((f - 6) / 10)} />},
@@ -169,7 +169,7 @@ export const Police: React.FC = () => (
 						<div style={{position: 'absolute', inset: 0, transform: `scale(${lerpF(f, 0, d, 1.0, 1.15)})`}}>
 							<WeddingRing f={f} turn={1} />
 						</div>
-						<BigText f={f} text="37" appear={4} y={940} size={120} color="#f2e2b0" />
+						<BigText f={f} text="37" appear={4} y={150} size={120} color="#f2e2b0" />
 					</AbsoluteFill>
 				),
 			},

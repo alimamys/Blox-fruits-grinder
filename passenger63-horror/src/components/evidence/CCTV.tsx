@@ -63,16 +63,16 @@ export const CCTVOverlay: React.FC<{
 							</>
 						)}
 					</div>
-					<div style={{position: 'absolute', left: 50, bottom: 40, fontFamily: FONT.mono, fontSize: 44, color: '#f2f2f2', textShadow: '2px 2px 0 #000'}}>
+					<div style={{position: 'absolute', right: 50, top: 100, fontFamily: FONT.mono, fontSize: 44, color: '#f2f2f2', textShadow: '2px 2px 0 #000'}}>
 						{date} {timestamp}
 					</div>
-					<div style={{position: 'absolute', right: 50, bottom: 40, fontFamily: FONT.mono, fontSize: 36, color: '#f2f2f2', textShadow: '2px 2px 0 #000'}}>
+					<div style={{position: 'absolute', right: 50, top: 160, fontFamily: FONT.mono, fontSize: 36, color: '#f2f2f2', textShadow: '2px 2px 0 #000'}}>
 						{speed ? `${speed}  ` : ''}
 						{frameNo !== undefined ? `FRAME ${frameNo.toLocaleString('en-US')}` : ''}
 					</div>
 				</>
 			) : (
-				<div style={{position: 'absolute', left: 50, bottom: 40, fontFamily: FONT.mono, fontSize: 40, color: '#fff'}}>{timestamp}</div>
+				<div style={{position: 'absolute', left: 50, top: 40, fontFamily: FONT.mono, fontSize: 40, color: '#fff'}}>{timestamp}</div>
 			)}
 		</AbsoluteFill>
 	);

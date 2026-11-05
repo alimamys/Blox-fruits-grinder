@@ -11,7 +11,7 @@ import {Evidence} from '../components/fx/Fx';
 import {clamp, lerpF} from '../utils/anim';
 import {FONT} from '../utils/fonts';
 import {Shots, Stage, Svg} from '../utils/scene';
-import {Closeup, headY, talkOf} from './common';
+import {Closeup, headY, speak, talkOf} from './common';
 
 const BridgeBg: React.FC<{f: number}> = ({f}) => (
 	<g>
@@ -37,8 +37,23 @@ const Radio: React.FC<{f: number; mode: 'tx' | 'rx' | 'idle' | 'static'; level?:
 	</Console>
 );
 
-const CaptainClose: React.FC<{f: number; d: number; talk?: number; props?: any}> = ({f, d, talk = 0, props = {}}) => (
-	<Closeup who="captain" f={f} d={d} s={3.0} cy={460} color="#161b24" bg={<BridgeBg f={f} />} push={0.05} props={{arms: 'phoneEar', prop: 'handset', talk, look: [0.4, 0], ...props}} />
+const CaptainClose: React.FC<{f: number; d: number; talk?: number; viseme?: 'a' | 'e' | 'o' | 'm'; props?: any}> = ({f, d, talk = 0, viseme = 'a', props = {}}) => (
+	<Closeup who="captain" f={f} d={d} s={3.0} cy={460} color="#161b24" bg={<BridgeBg f={f} />} push={0.05} props={{arms: 'phoneEar', prop: 'handset', talk, viseme, look: [0.4, 0], ...props}} />
+);
+
+/** Port Mason harbor control: the operator on the radio handset. */
+const OperatorShot: React.FC<{f: number; d: number; talk?: number; viseme?: 'a' | 'e' | 'o' | 'm'}> = ({f, d, talk = 0, viseme}) => (
+	<Stage f={f} d={d} from={{z: 1.2, cy: 520}} to={{z: 1.3}} bg="#0e141c">
+		<rect x={-200} y={-200} width={2400} height={1600} fill="#1c2531" />
+		<rect x={380} y={220} width={520} height={320} fill="#0a1220" stroke="#111" strokeWidth={10} />
+		<rect x={1020} y={220} width={520} height={320} fill="#0a1220" stroke="#111" strokeWidth={10} />
+		<rect x={1060} y={260} width={440} height={50} fill="#5a4a1e" />
+		<text x={1280} y={296} textAnchor="middle" fontFamily={FONT.mono} fontSize={30} fill="#ffcf6b">
+			NORTH STAR 8 · ALONGSIDE
+		</text>
+		<rect x={200} y={760} width={1520} height={500} fill="#3a414c" stroke="#111" strokeWidth={8} />
+		<HarborOperator x={960} y={headY(560, 1.9)} s={1.9} frame={f} arms="phoneEar" prop="handset" brows="raised" look={[0.6, -0.4]} mouth="frown" talk={talk} viseme={viseme} />
+	</Stage>
 );
 
 export const Navigation: React.FC = () => (
@@ -129,14 +144,18 @@ export const Navigation: React.FC = () => (
 				),
 			},
 			{at: 'captain_001_radio_call', off: -0.25, render: ({f}) => <Radio f={f} mode="tx" level={0.85} caption="NORTH STAR 8 → PORT MASON CONTROL" />},
+			{at: 'captain_001_radio_call', frac: 0.42, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} {...speak(api, sf, 'captain_001_radio_call')} props={{brows: 'worried'}} />},
 			{at: 'radio_static_1', render: ({f}) => <Radio f={f} mode="static" level={0.4} />},
-			{at: 'captain_002_radio_again', off: -0.2, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} talk={talkOf(api, sf, 'captain_002_radio_again')} props={{brows: 'worried'}} />},
+			{at: 'harbor_001_go_ahead', off: -0.15, render: ({f}) => <Radio f={f} mode="rx" level={0.8} caption="PORT MASON CONTROL" />},
+			{at: 'captain_003_lost_nav', off: -0.2, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} {...speak(api, sf, 'captain_003_lost_nav')} props={{brows: 'worried'}} />},
+			{at: 'captain_002_radio_again', off: -0.2, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} {...speak(api, sf, 'captain_002_radio_again')} props={{brows: 'worried'}} />},
 			{at: 'narrator_135_answered', frac: 0.5, render: ({f}) => <Radio f={f} mode="rx" level={0.8} caption="PORT MASON CONTROL" />},
-			{at: 'narrator_136_exhaled', render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} talk={talkOf(api, sf, 'captain_003_lost_nav')} props={{eyes: f < 15 ? 'closed' : 'dot'}} />},
+			{at: 'narrator_136_exhaled', render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} {...speak(api, sf, 'captain_003_lost_nav')} props={{eyes: f < 15 ? 'closed' : 'dot'}} />},
 			// Silence.
 			{at: 'radio_silence', render: ({f}) => <Radio f={f} mode="idle" level={0} />},
 			{at: 'harbor_002_confirm', off: -0.2, render: ({f}) => <Radio f={f} mode="rx" level={0.7} caption="PORT MASON CONTROL" />},
-			{at: 'captain_004_ns8', off: -0.2, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} talk={talkOf(api, sf, 'captain_004_ns8')} props={{brows: 'raised'}} />},
+			{at: 'harbor_002_confirm', frac: 0.45, render: ({f, d, sf, api}) => <OperatorShot f={f} d={d} {...speak(api, sf, 'harbor_002_confirm')} />},
+			{at: 'captain_004_ns8', off: -0.2, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} {...speak(api, sf, 'captain_004_ns8')} props={{brows: 'raised'}} />},
 			// Another pause. The harbor operator sounded confused.
 			{
 				at: 'narrator_137_another_pause',
@@ -187,10 +206,21 @@ export const Navigation: React.FC = () => (
 					</Stage>
 				),
 			},
-			{at: 'captain_005_negative', off: -0.2, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} talk={talkOf(api, sf, 'captain_005_negative')} props={{brows: 'worried', look: [0.8, -0.2]}} />},
+			{at: 'captain_005_negative', off: -0.2, render: ({f, d, sf, api}) => <CaptainClose f={f} d={d} {...speak(api, sf, 'captain_005_negative')} props={{brows: 'worried', look: [0.8, -0.2]}} />},
 			// "Sir, I'm looking at your vessel right now." - the live berth camera
 			{
 				at: 'narrator_140_operator',
+				render: ({f}) => (
+					<Evidence f={f} title="LIVE CAMERA" lines={['NORTH STAR 8 · BERTH 3']}>
+						<CCTVOverlay f={f} camera={'PORT MASON VTS\nCAM 2 · BERTH 3 · LIVE'} timestamp={`00:49:${String(40 + Math.floor(f / 30)).padStart(2, '0')}`} date="">
+							<HarborPhoto f={f} stamp={false} people={false} />
+						</CCTVOverlay>
+					</Evidence>
+				),
+			},
+			{
+				at: 'harbor_005_looking',
+				off: -0.1,
 				render: ({f}) => (
 					<Evidence f={f} title="LIVE CAMERA" lines={['NORTH STAR 8 · BERTH 3']}>
 						<CCTVOverlay f={f} camera={'PORT MASON VTS\nCAM 2 · BERTH 3 · LIVE'} timestamp={`00:49:${String(40 + Math.floor(f / 30)).padStart(2, '0')}`} date="">

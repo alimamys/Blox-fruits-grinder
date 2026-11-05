@@ -12,7 +12,7 @@
 //   - Re-voice a line:       regenerate it, then `npm run retime`
 // Visuals read the computed markers, so every cut follows the voices automatically.
 import manifest from './generated/audioManifest.json';
-import {EDIT_MODE, TRIM_IN_TIGHT_EDIT, type EditMode} from './edit';
+import {CUT_IN_SHORT, SHORT_BEAT_HOLD, shortPause, shortTail, type EditMode} from './edit';
 import type {BedAutomation, BedName, Beat, SceneDef, SfxCue, Step, VoiceLine} from './types';
 import {LINE_BY_ID} from './voiceLines';
 import {VOICES} from './voiceConfig';
@@ -822,7 +822,7 @@ export const breathSound = (l: VoiceLine): string | null => {
 	if (l.breath === 'none') return null;
 	// expressive TTS / recorded takes perform the breath themselves - no synthetic breath on top
 	const provider = FILES[l.filename]?.provider;
-	if (provider && ['elevenlabs', 'openai'].includes(provider)) return null;
+	if (provider && ['elevenlabs', 'openai', 'chatterbox'].includes(provider)) return null;
 	const g = FEMALE.has(l.character) ? 'f' : 'm';
 	const map: Record<string, string> = {
 		shakyInhale: 'breath_shaky_inhale',
@@ -893,10 +893,15 @@ const toFrame = (s: number) => Math.round(s * FPS);
 
 const isBeat = (s: Step): s is Beat => typeof s !== 'string';
 
-const stepsForEdit = (def: SceneDef, mode: EditMode): Step[] =>
-	mode === 'tight' ? def.steps.filter((s) => isBeat(s) || !TRIM_IN_TIGHT_EDIT.has(s)) : def.steps;
+const stepsForEdit = (def: SceneDef, mode: EditMode): Step[] => {
+	if (mode === 'full') return def.steps;
+	return def.steps
+		.filter((s) => !CUT_IN_SHORT.has(isBeat(s) ? s.beat : s))
+		.map((s) => (isBeat(s) && SHORT_BEAT_HOLD[s.beat] !== undefined ? {...s, hold: SHORT_BEAT_HOLD[s.beat]} : s));
+};
 
-export const buildTimeline = (mode: EditMode = EDIT_MODE): Timeline => {
+export const buildTimeline = (mode: EditMode = 'short'): Timeline => {
+	const short = mode === 'short';
 	let cursor = 0;
 	const scenes: SceneTiming[] = [];
 	const allLines: TimedLine[] = [];
@@ -938,18 +943,18 @@ export const buildTimeline = (mode: EditMode = EDIT_MODE): Timeline => {
 			lines.push(tl);
 			markers[l.id] = {start, end: start + dur};
 			const breathTail = breath && !BREATH_BEFORE.has(l.breath) ? 0.9 : 0;
-			t = start + dur + l.pauseAfter + breathTail;
+			t = start + dur + (short ? shortPause(l.id, l.pauseAfter) : l.pauseAfter) + breathTail;
 			if (breath) {
 				const bs = BREATH_BEFORE.has(l.breath) ? start - 0.55 : start + dur + 0.05;
 				allSfx.push({sound: breath, start: bs, end: bs + 1.5, volume: l.character === 'narrator' ? 0.3 : 0.42});
 			}
 		}
-		t += def.tail;
+		t += short ? shortTail(def.tail) : def.tail;
 		const sceneEnd = toFrame(t) / FPS;
 
 		const resolve = (at: string, offset = 0, fromEnd = false) => {
 			const m = markers[at];
-			if (!m) return null; // marker trimmed out (tight edit) or typo - cue is skipped
+			if (!m) return null; // marker cut from this edit (or a typo) - cue is skipped
 			return (fromEnd ? m.end : m.start) + offset;
 		};
 
@@ -1006,10 +1011,10 @@ export const buildTimeline = (mode: EditMode = EDIT_MODE): Timeline => {
 	return {scenes, totalSeconds: cursor, totalFrames, lines: allLines, sfx: allSfx, beds, markers: globalMarkers};
 };
 
-/** The edit rendered by the main composition (full story unless REMOTION_EDIT=tight). */
-export const TIMELINE: Timeline = buildTimeline();
-/** The shorter alternative edit (composition Passenger63HorrorTight). */
-export const TIMELINE_TIGHT: Timeline = buildTimeline('tight');
+/** The main composition's edit: the ~10 minute YouTube cut. */
+export const TIMELINE: Timeline = buildTimeline('short');
+/** The complete story at its original pacing (composition Passenger63HorrorFull). */
+export const TIMELINE_FULL: Timeline = buildTimeline('full');
 
 export const sceneById = (id: string, tl: Timeline = TIMELINE): SceneTiming => {
 	const s = tl.scenes.find((x) => x.id === id);
