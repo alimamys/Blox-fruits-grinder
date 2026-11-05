@@ -189,6 +189,41 @@ AZURE_SPEECH_REGION=westeurope
 AWS_ACCESS_KEY_ID=... / AWS_SECRET_ACCESS_KEY=... / AWS_REGION=...   (Polly, needs `pip install boto3`)
 ```
 
+#### Re-voicing with Chatterbox (free, local, expressive)
+
+[Chatterbox](https://github.com/resemble-ai/chatterbox) by Resemble AI is an open-source TTS model under the MIT licence, so it is free and usable commercially. It clones a voice from a short reference clip and has an emotion "exaggeration" control, so it sounds far more human than Kokoro.
+
+- **References:** each character's timbre comes from `voice-references/<character>.wav`. Build those clips from the Kokoro casting:
+
+  ```bash
+  .venv/bin/python scripts/voice/make_references.py
+  ```
+
+  For even better results, replace any clip with a real 10–20 s recording of one clean voice; existing clips are never overwritten.
+- **Emotion:** each line's metadata sets `exaggeration` (calm grandmother ~0.35, terror ~1.1) and `cfg_weight` (lower is slower and more deliberate). The narrator is kept restrained. Chatterbox can't truly whisper, so whisper lines still go through the whisper effect.
+- **Model files:** the model (~3 GB) downloads once from Hugging Face. The network must allow `huggingface.co` and its CDN hosts (`*.hf.co`, e.g. `us.aws.cdn.hf.co`, `cas-bridge.xethub.hf.co`). You can also place `ve.safetensors`, `t3_cfg.safetensors`, `s3gen.safetensors`, `tokenizer.json` and `conds.pt` in `.voice-models/chatterbox/`.
+- **Speed:** it runs on GPU (CUDA / Apple MPS) when available, otherwise on CPU, which is slow: expect an hour or more for the full script on 4 cores. Generated takes carry Resemble's inaudible watermark.
+
+Set up its own venv:
+
+```bash
+python3 -m venv .venv-chatterbox
+```
+
+```bash
+.venv-chatterbox/bin/pip install -r scripts/voice/requirements-chatterbox.txt
+```
+
+Then generate one character first, then everything:
+
+```bash
+npm run generate-voices -- --provider chatterbox --character oldWoman
+```
+
+```bash
+npm run generate-voices -- --provider chatterbox
+```
+
 #### Re-voicing with ElevenLabs (recommended for human-sounding delivery)
 
 The local Kokoro voices are clear but flat. ElevenLabs is already cast and wired up:

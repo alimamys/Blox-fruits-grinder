@@ -4,7 +4,7 @@
 // character only:   npm run generate-voices -- --character oldWoman
 import type {CharacterId} from './types';
 
-export type ProviderName = 'kokoro' | 'elevenlabs' | 'openai' | 'azure' | 'polly';
+export type ProviderName = 'kokoro' | 'chatterbox' | 'elevenlabs' | 'openai' | 'azure' | 'polly';
 
 /** Which provider `npm run generate-voices` uses unless --provider is passed. */
 export const DEFAULT_PROVIDER: ProviderName = 'kokoro';
@@ -38,6 +38,10 @@ export interface CharacterVoice {
 		kokoro: KokoroVoice;
 		/** ElevenLabs: a voice NAME from your account's voice list (premade voices work on every
 		 *  account), or paste a voiceId from the Voice Library to override it. */
+		/** Chatterbox (free, open-source, runs locally): clones the timbre of a short reference
+		 *  clip and performs the line with emotion "exaggeration". Replace the reference WAV with
+		 *  a real recording (10-20 s, clean, one speaker) to change the voice. */
+		chatterbox: {reference: string; exaggeration: number};
 		elevenlabs: {voiceName: string; voiceId?: string; model: string};
 		openai: {voice: string; model: string};
 		azure: {voice: string};
@@ -62,6 +66,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: -0.4, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_michael', 0.8], ['bm_george', 0.2]], lang: 'en-us'},
+			chatterbox: {reference: 'voice-references/narrator.wav', exaggeration: 0.45},
 			elevenlabs: {voiceName: 'George', model: ELEVEN_MODEL},
 			openai: {voice: 'onyx', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-RyanNeural'},
@@ -77,6 +82,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_puck', 1]], lang: 'en-us'},
+			chatterbox: {reference: 'voice-references/daniel.wav', exaggeration: 0.5},
 			elevenlabs: {voiceName: 'Chris', model: ELEVEN_MODEL},
 			openai: {voice: 'ash', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-GuyNeural'},
@@ -92,6 +98,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['af_heart', 1]], lang: 'en-us'},
+			chatterbox: {reference: 'voice-references/emma.wav', exaggeration: 0.5},
 			elevenlabs: {voiceName: 'Sarah', model: ELEVEN_MODEL},
 			openai: {voice: 'coral', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-JennyNeural'},
@@ -108,6 +115,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: -1.0, tremor: 0.35, pan: 0.22, lufs: -20},
 		providers: {
 			kokoro: {blend: [['bf_emma', 0.6], ['af_nicole', 0.4]], lang: 'en-gb'},
+			chatterbox: {reference: 'voice-references/oldWoman.wav', exaggeration: 0.35},
 			elevenlabs: {voiceName: 'Lily', model: ELEVEN_MODEL},
 			openai: {voice: 'sage', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-AbbiNeural'},
@@ -123,6 +131,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: -0.6, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['bm_george', 1]], lang: 'en-gb'},
+			chatterbox: {reference: 'voice-references/captain.wav', exaggeration: 0.4},
 			elevenlabs: {voiceName: 'Daniel', model: ELEVEN_MODEL},
 			openai: {voice: 'ballad', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-ThomasNeural'},
@@ -138,6 +147,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_fenrir', 1]], lang: 'en-us'},
+			chatterbox: {reference: 'voice-references/crew1.wav', exaggeration: 0.5},
 			elevenlabs: {voiceName: 'Liam', model: ELEVEN_MODEL},
 			openai: {voice: 'echo', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-DavisNeural'},
@@ -153,6 +163,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -21},
 		providers: {
 			kokoro: {blend: [['af_sarah', 1]], lang: 'en-us'},
+			chatterbox: {reference: 'voice-references/crew2.wav', exaggeration: 0.5},
 			elevenlabs: {voiceName: 'Laura', model: ELEVEN_MODEL},
 			openai: {voice: 'shimmer', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-SaraNeural'},
@@ -168,6 +179,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_onyx', 0.7], ['am_eric', 0.3]], lang: 'en-us'},
+			chatterbox: {reference: 'voice-references/harbor.wav', exaggeration: 0.35},
 			elevenlabs: {voiceName: 'Eric', model: ELEVEN_MODEL},
 			openai: {voice: 'verse', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-TonyNeural'},
@@ -184,6 +196,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['bf_isabella', 1]], lang: 'en-gb'},
+			chatterbox: {reference: 'voice-references/pa.wav', exaggeration: 0.35},
 			elevenlabs: {voiceName: 'Alice', model: ELEVEN_MODEL},
 			openai: {voice: 'nova', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-SoniaNeural'},
@@ -199,6 +212,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['bm_fable', 1]], lang: 'en-gb'},
+			chatterbox: {reference: 'voice-references/police.wav', exaggeration: 0.45},
 			elevenlabs: {voiceName: 'Roger', model: ELEVEN_MODEL},
 			openai: {voice: 'fable', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-AlfieNeural'},
@@ -214,6 +228,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -24},
 		providers: {
 			kokoro: {blend: [['af_river', 1]], lang: 'en-us'},
+			chatterbox: {reference: 'voice-references/crowd.wav', exaggeration: 0.6},
 			elevenlabs: {voiceName: 'Jessica', model: ELEVEN_MODEL},
 			openai: {voice: 'alloy', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-AriaNeural'},

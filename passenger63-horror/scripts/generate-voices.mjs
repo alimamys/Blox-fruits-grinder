@@ -19,7 +19,10 @@ const run = (cmd, cmdArgs) => {
 
 const pickPython = () => {
 	if (process.env.PYTHON) return process.env.PYTHON;
-	for (const p of ['.venv/bin/python', '.venv/Scripts/python.exe']) {
+	// Chatterbox (PyTorch) lives in its own venv so it can't break the light Kokoro one
+	const wantsChatterbox = args.some((a, i) => a === '--provider=chatterbox' || (a === '--provider' && args[i + 1] === 'chatterbox'));
+	const venvs = wantsChatterbox ? ['.venv-chatterbox/bin/python', '.venv-chatterbox/Scripts/python.exe'] : [];
+	for (const p of [...venvs, '.venv/bin/python', '.venv/Scripts/python.exe']) {
 		if (fs.existsSync(path.join(root, p))) return path.join(root, p);
 	}
 	return process.platform === 'win32' ? 'python' : 'python3';

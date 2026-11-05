@@ -96,6 +96,97 @@ class KokoroProvider:
 
 
 # ----------------------------------------------------------------------------
+# Chatterbox (local, open-source, free - Resemble AI, MIT licence)
+# ----------------------------------------------------------------------------
+CHATTERBOX_FILES = ['ve.safetensors', 't3_cfg.safetensors', 's3gen.safetensors', 'tokenizer.json', 'conds.pt']
+
+# emotion -> exaggeration (Chatterbox's expressiveness knob, ~0.25 flat .. 1.2 extreme)
+CHATTERBOX_EXAGGERATION = {
+    'screaming': 1.15,
+    'panicked': 0.95,
+    'distressed': 0.85,
+    'grieving': 0.8,
+    'angry': 0.85,
+    'afraid': 0.7,
+    'protective': 0.7,
+    'breathless': 0.75,
+    'amused': 0.6,
+    'confused': 0.55,
+    'uneasy': 0.5,
+    'whispering': 0.35,
+    'hypnotized': 0.35,
+    'unnaturally_calm': 0.35,
+    'matter_of_fact': 0.35,
+    'comforting': 0.45,
+    'warm': 0.45,
+    'affectionate': 0.45,
+    'sleepy': 0.3,
+    'tired': 0.35,
+}
+
+
+class ChatterboxProvider:
+    """Zero-shot voice cloning TTS with emotion control. Each character's timbre comes
+    from its reference clip (voice-references/*.wav); the delivery comes from the model."""
+
+    name = 'chatterbox'
+
+    def __init__(self, models_dir: Path):
+        try:
+            import torch  # type: ignore
+            from chatterbox.tts import ChatterboxTTS  # type: ignore
+        except ImportError as e:
+            raise ProviderUnavailable(
+                'chatterbox-tts is not installed. Create its own venv:\n'
+                '  python3 -m venv .venv-chatterbox && .venv-chatterbox/bin/pip install -r scripts/voice/requirements-chatterbox.txt'
+            ) from e
+        self.torch = torch
+        torch.set_num_threads(max(1, os.cpu_count() or 1))
+        device = 'cuda' if torch.cuda.is_available() else 'mps' if getattr(torch.backends, 'mps', None) and torch.backends.mps.is_available() else 'cpu'
+        local = models_dir / 'chatterbox'
+        try:
+            if all((local / f).exists() for f in CHATTERBOX_FILES):
+                self.model = ChatterboxTTS.from_local(str(local), device)
+            else:
+                self.model = ChatterboxTTS.from_pretrained(device)
+        except Exception as e:  # network / download problems
+            raise ProviderUnavailable(
+                f'Could not load the Chatterbox model ({type(e).__name__}: {str(e)[:200]}).\n'
+                '  It downloads once from huggingface.co (allow huggingface.co, cdn-lfs.huggingface.co and\n'
+                '  cas-bridge.xethub.hf.co), or place the model files in .voice-models/chatterbox/.'
+            ) from e
+        self.device = device
+        print(f'[voice] Chatterbox loaded on {device}')
+
+    def synthesize(self, job: dict):
+        line = job['line']
+        cfg = job['providers']['chatterbox']
+        root = Path(__file__).resolve().parent.parent.parent
+        ref = root / cfg['reference']
+        if not ref.exists():
+            raise ProviderUnavailable(f'Reference clip {cfg["reference"]} is missing - run scripts/voice/make_references.py')
+        base = float(cfg.get('exaggeration', 0.5))
+        emo = CHATTERBOX_EXAGGERATION.get(line['emotion'])
+        if line['character'] == 'narrator':
+            # a documentary narrator stays restrained; only lean in slightly on unease
+            exaggeration = base + (0.08 if line['emotion'] == 'uneasy' else 0.0)
+        elif emo is not None:
+            exaggeration = (emo + base) / 2 + 0.25 * (float(line['intensity']) - 0.4)
+        else:
+            exaggeration = base + 0.3 * (float(line['intensity']) - 0.4)
+        exaggeration = float(np.clip(exaggeration, 0.25, 1.3))
+        # lower cfg weight = slower, more deliberate delivery (and better with high exaggeration)
+        pace = float(line['pace'])
+        cfg_weight = 0.3 if pace <= 0.92 else 0.6 if pace >= 1.05 else 0.5
+        if exaggeration > 0.8:
+            cfg_weight = min(cfg_weight, 0.35)
+        self.torch.manual_seed(job['seed'] % (2**31))
+        wav = self.model.generate(_speak_text(line), audio_prompt_path=str(ref), exaggeration=exaggeration, cfg_weight=cfg_weight, temperature=0.8)
+        x = wav.squeeze(0).detach().cpu().numpy().astype(np.float64)
+        return x, self.model.sr
+
+
+# ----------------------------------------------------------------------------
 # HTTP helpers
 # ----------------------------------------------------------------------------
 def _post(url: str, body: bytes, headers: dict, timeout=120) -> bytes:
@@ -370,6 +461,8 @@ class PollyProvider:
 def make_provider(name: str, models_dir: Path, emotion_directions: dict):
     if name == 'kokoro':
         return KokoroProvider(models_dir)
+    if name == 'chatterbox':
+        return ChatterboxProvider(models_dir)
     if name == 'elevenlabs':
         return ElevenLabsProvider()
     if name == 'openai':

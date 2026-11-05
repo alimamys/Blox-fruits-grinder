@@ -85,7 +85,7 @@ def build_job(line: dict, data: dict, crowd_index: int, provider_name: str = 'ko
         pitch = lerp(pitch, other['post']['pitchSemitones'], a)
         tremor = lerp(tremor, other['post']['tremor'], a)
         if a >= 0.5:
-            for p in ('elevenlabs', 'openai', 'azure', 'polly'):
+            for p in ('chatterbox', 'elevenlabs', 'openai', 'azure', 'polly'):
                 providers[p] = other['providers'][p]
             desc = f"{desc} (now {int(a * 100)}% {other['displayName']}: {other['description']})"
 
@@ -96,6 +96,7 @@ def build_job(line: dict, data: dict, crowd_index: int, provider_name: str = 'ko
         pool = data['CROWD_VOICE_POOL']
         pick = pool[crowd_index % len(pool)]
         kokoro = {'blend': [[pick['voice'], 1]], 'lang': pick['lang']}
+        providers['chatterbox'] = {**providers['chatterbox'], 'reference': f"voice-references/crowd_{pick['voice']}.wav"}
         epool = data.get('ELEVEN_CROWD_POOL') or []
         if epool:
             providers['elevenlabs'] = {**providers['elevenlabs'], 'voiceName': epool[crowd_index % len(epool)], 'voiceId': None}
@@ -129,6 +130,8 @@ def build_job(line: dict, data: dict, crowd_index: int, provider_name: str = 'ko
         'seed': seed,
         'voiceDescription': desc,
         'natural': natural,
+        # only these providers can genuinely whisper; others get the whisper vocoder
+        'whisperNative': provider_name in ('elevenlabs', 'openai', 'azure'),
         'shoutSemis': shout_semis,
     }
 
@@ -242,7 +245,7 @@ def build_crowd_bed(provider, data: dict, seconds=46.0) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--provider', help='kokoro | elevenlabs | openai | azure | polly (default from voiceConfig.ts)')
+    ap.add_argument('--provider', help='kokoro | chatterbox | elevenlabs | openai | azure | polly (default from voiceConfig.ts)')
     ap.add_argument('--character', action='append', help='only this character id (repeatable), e.g. oldWoman')
     ap.add_argument('--only', help='comma separated line ids')
     ap.add_argument('--force', action='store_true', help='regenerate even if unchanged')

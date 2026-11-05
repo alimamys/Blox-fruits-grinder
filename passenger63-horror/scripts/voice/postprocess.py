@@ -170,7 +170,7 @@ def fx_multi(x):
     return sum(layers)
 
 
-def apply_effect(x: np.ndarray, effect: str, seed: int, natural: bool = False) -> np.ndarray:
+def apply_effect(x: np.ndarray, effect: str, seed: int, whisper_native: bool = False) -> np.ndarray:
     if effect in ('none', None):
         return x
     if effect == 'room':
@@ -190,9 +190,9 @@ def apply_effect(x: np.ndarray, effect: str, seed: int, natural: bool = False) -
     if effect == 'distant':
         return fx_distant(x)
     if effect == 'whisper':
-        return fx_room(fx_whisper(x, voiced=0.75 if natural else 0.36, seed=seed), 0.06)
+        return fx_room(fx_whisper(x, voiced=0.75 if whisper_native else 0.36, seed=seed), 0.06)
     if effect == 'whisperClose':
-        return fx_whisper_close(x, seed, natural)
+        return fx_whisper_close(x, seed, whisper_native)
     if effect == 'shout':
         return fx_shout(x)
     if effect == 'crowdRoom':
@@ -242,7 +242,7 @@ def process_line(audio: np.ndarray, sr: int, job: dict) -> np.ndarray:
         x = dsp.biquad(x, 'highshelf', 6000, -2.0, 0.7)
         x = dsp.biquad(x, 'peak', 2600, 1.2, 1.0)
 
-    y = apply_effect(x, effect, seed, natural)
+    y = apply_effect(x, effect, seed, job.get('whisperNative', False))
     target = job['lufs'] + EFFECT_LUFS_OFFSET.get(effect, 0.0)
     y = dsp.normalize_lufs(y, target)
     if y.ndim == 1 and abs(job['pan']) > 0.01:
