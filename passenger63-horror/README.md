@@ -158,9 +158,15 @@ Sound effects and ambience automation use the same markers, for example `{sound:
 
 ### Which TTS provider is configured
 
-The default provider is **Kokoro v1.0**, a local, offline neural TTS model (Apache‑2.0), run through `kokoro-onnx`. No API key is needed. All 331 lines in `public/audio` were generated with it.
+All 331 lines in `public/audio` were generated with **[Chatterbox](https://github.com/resemble-ai/chatterbox)** (Resemble AI, MIT licence). It is a free, local, expressive model that runs offline once downloaded and needs no API key. Each character's timbre is cloned from a reference clip in `voice-references/`. Chatterbox then performs the line with emotion, breath and natural intonation.
 
-The cast is defined once, in `src/data/voiceConfig.ts`:
+- Dialogue, PA, radio and crowd lines use the standard Chatterbox model with per-line `exaggeration` and `cfg_weight` taken from the line's emotion metadata.
+- The narrator uses **Chatterbox Turbo**: steadier, about 4× faster, and very consistent across 257 lines.
+- Every take was transcribed with Whisper and compared with the script (see [Voice QA](#voice-qa)). Flagged lines were re-rolled best-of-4.
+
+The fallback provider (`DEFAULT_PROVIDER` in `voiceConfig.ts`) is still **Kokoro v1.0** (Apache‑2.0, via `kokoro-onnx`). It is fast and fully offline, but flatter. Kokoro also builds the reference clips.
+
+The cast is defined once, in `src/data/voiceConfig.ts`. The Kokoro blend below is also the timbre the Chatterbox reference clip is built from:
 
 | character | Kokoro voice (blend) | post |
 | --- | --- | --- |
@@ -223,6 +229,29 @@ npm run generate-voices -- --provider chatterbox --character oldWoman
 ```bash
 npm run generate-voices -- --provider chatterbox
 ```
+
+To try several takes of a line and automatically keep the one Whisper hears closest to the script:
+
+```bash
+.venv-chatterbox/bin/python scripts/voice/generate_voices.py --provider chatterbox --retake oldwoman_005_daniel --best-of 4
+```
+
+The chosen take number is stored in `voice-scripts/retakes.json`, so a regeneration reproduces exactly the same take.
+
+**Pace fit.** Turbo ignores the per-line `pace` mark and occasionally rushes a line. After synthesis, any narrator line that runs faster than 2.8 words/s × its `pace` is slowed with Rubber Band (pitch-preserving, via ffmpeg). It is only ever slowed, by at most 18%. Whisper still transcribes the stretched lines perfectly.
+
+#### Voice QA
+
+```bash
+.venv-chatterbox/bin/python scripts/voice/qa_voices.py --provider chatterbox
+```
+
+This transcribes every take with Whisper (`openai/whisper-base.en`) and writes `build/voice_qa.json`. A take is flagged when:
+
+- its words differ from the script, after normalising numbers, acronyms and spellings such as "Mum" / "Mom"; or
+- its length is implausible.
+
+Effect-heavy lines (radio, PA, whisper, distant) and one- or two-word lines get a lower threshold. Add `--retake-failed` to re-roll every flagged line best-of-4.
 
 #### Re-voicing with ElevenLabs (recommended for human-sounding delivery)
 
@@ -302,6 +331,7 @@ npm run generate-voices -- --only narrator_009_someone,oldwoman_final_64
 Every line carries `emotion`, `intensity` (0–1), `pace`, `volume`, `pauseBefore` / `pauseAfter`, `fearLevel` (1 confusion → 5 terror), `breath`, `audioEffect`, `pan` and a free‑text `direction`. Providers interpret it as follows:
 
 - **Kokoro** has no emotion input. It realises the metadata through pace, varied sentence and clause pauses (deliberately not uniform), gain, breath SFX placed before or after the line, and the post chain: whisper vocoder, shout saturation, PA, radio, distance, tremor.
+- **Chatterbox** turns emotion and intensity into `exaggeration`, with a calm narrator and grandmother and a lot more exaggeration for terror. Pace sets `cfg_weight`, where lower is slower and more deliberate. The narrator's Turbo takes are pace-fitted afterwards. Breath SFX and the post chain apply as for Kokoro, but with no pitching or tremor, because the cloned voice already carries age and character.
 - **OpenAI** receives natural‑language acting instructions built from the metadata (see `voice-scripts/acting_instructions.json`).
 - **Azure** gets SSML with `mstts:express-as` styles, prosody and breaks (`voice-scripts/ssml_azure.json`).
 - **Polly** gets SSML prosody and breaks (`voice-scripts/ssml_polly.json`).
@@ -398,5 +428,5 @@ To use real images or footage, put the file in `public/` and render it with Remo
 ## Credits / licences
 
 - Fonts: Patrick Hand, Permanent Marker, Special Elite, IBM Plex Mono and Inter, all under the SIL Open Font License, bundled in `public/fonts`.
-- Voices: generated with Kokoro‑82M (Apache‑2.0) via `kokoro-onnx`.
+- Voices: performed by Chatterbox / Chatterbox Turbo (Resemble AI, MIT) from reference clips made with Kokoro‑82M (Apache‑2.0, via `kokoro-onnx`). The takes carry Resemble's inaudible Perth watermark. QA transcription uses Whisper base.en (MIT).
 - All sound effects, textures and visuals are generated by this project.

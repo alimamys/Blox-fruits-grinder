@@ -245,6 +245,58 @@ def build_crowd_bed(provider, data: dict, seconds=46.0) -> None:
     print(f'  crowd bed -> {out.relative_to(ROOT)}')
 
 
+def best_take(provider, job: dict, n: int, out: Path, cache: dict, provider_name: str, asr_holder: dict):
+    """Generate n takes (new seeds), score each against the script with Whisper and
+    return (audio or None if the existing file won, hash, retake number)."""
+    from qa_voices import assess, load_asr
+
+    if 'asr' not in asr_holder:
+        asr_holder['asr'] = load_asr()
+    asr = asr_holder['asr']
+    line = job['line']
+    n0 = job.get('retake', 0)
+    base_seed = job['seed'] - 7919 * n0
+
+    def with_retake(rn):
+        j = dict(job, seed=base_seed + 7919 * rn)
+        if rn:
+            j['retake'] = rn
+        else:
+            j.pop('retake', None)
+        return j
+
+    best = None  # (score, y, hash, rn, report)
+    # the take already on disk (the previous retake number) competes too
+    for prev in ([n0 - 1] if n0 >= 1 else []) + [n0]:
+        jp = with_retake(prev)
+        hp = job_hash(jp, provider_name)
+        if out.exists() and cache.get(line['filename'], {}).get('hash') == hp:
+            x, sr = dsp.read_wav(str(out))
+            r = assess(asr, line, x, sr)
+            best = (r['score'], None, hp, prev, r)
+            print(f'      existing take #{prev}: sim {r["similarity"]:.2f} "{r["heard"][:60]}"', flush=True)
+    for k in range(n):
+        rn = n0 + k
+        if best and best[3] == rn:
+            continue
+        jk = with_retake(rn)
+        try:
+            audio, sr = provider.synthesize(jk)
+        except ProviderUnavailable as e:
+            print(f'\n[voice] {e}')
+            return None
+        y = postprocess.process_line(audio, sr, jk)
+        r = assess(asr, line, y, dsp.SR)
+        print(f'      take #{rn}: sim {r["similarity"]:.2f} {r["duration"]:.2f}s "{r["heard"][:60]}"', flush=True)
+        if best is None or r['score'] > best[0] + 1e-6:
+            best = (r['score'], y, job_hash(jk, provider_name), rn, r)
+        if r['ok'] and r['similarity'] >= 0.99:
+            break
+    _, y, h, rn, r = best
+    print(f'      -> keeping take #{rn} (sim {r["similarity"]:.2f}{"" if r["ok"] else ", still below threshold"})', flush=True)
+    return y, h, rn
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--provider', help='kokoro | chatterbox | elevenlabs | openai | azure | polly (default from voiceConfig.ts)')
@@ -257,6 +309,7 @@ def main() -> int:
     ap.add_argument('--retake', help='comma separated line ids to re-roll with a new random take (remembered in voice-scripts/retakes.json)')
     ap.add_argument('--estimate', action='store_true', help='print how many characters would be sent to the provider, then exit')
     ap.add_argument('--max-chars', type=int, default=0, help='stop before sending more than this many characters (quota guard)')
+    ap.add_argument('--best-of', type=int, default=1, help='try N takes per line, transcribe each with Whisper and keep the one closest to the script (local providers)')
     args = ap.parse_args()
 
     load_env()
@@ -334,6 +387,8 @@ def main() -> int:
         jobs = sorted(jobs, key=lambda j: (j['line']['character'] == 'narrator', j['providers']['chatterbox']['reference']))
 
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
+    retakes_path.parent.mkdir(parents=True, exist_ok=True)
+    asr_holder: dict = {}
     done = skipped = 0
     sent = 0
     t0 = time.time()
@@ -347,18 +402,34 @@ def main() -> int:
         if args.max_chars and sent + chars(job) > args.max_chars:
             print(f'\n[voice] --max-chars {args.max_chars} reached; stopping. Re-run later to continue (finished lines are kept).')
             break
-        try:
-            audio, sr = provider.synthesize(job)
-        except ProviderUnavailable as e:
-            print(f'\n[voice] {e}')
-            break
-        sent += chars(job)
-        y = postprocess.process_line(audio, sr, job)
-        out.parent.mkdir(parents=True, exist_ok=True)
-        dsp.write_wav(str(out), dsp.resample(y, dsp.SR, VOICE_SR), VOICE_SR)
-        cache[line['filename']] = {'hash': h, 'provider': provider_name, 'seconds': round(len(y) / dsp.SR, 3)}
+        if args.best_of > 1:
+            picked = best_take(provider, job, args.best_of, out, cache, provider_name, asr_holder)
+            if picked is None:
+                break
+            y, h, rn = picked
+            if rn:
+                retakes[line['id']] = rn
+            else:
+                retakes.pop(line['id'], None)
+            retakes_path.write_text(json.dumps(retakes, indent=1, sort_keys=True))
+            sent += chars(job)
+        else:
+            try:
+                audio, sr = provider.synthesize(job)
+            except ProviderUnavailable as e:
+                print(f'\n[voice] {e}')
+                break
+            sent += chars(job)
+            y = postprocess.process_line(audio, sr, job)
+        if y is not None:
+            out.parent.mkdir(parents=True, exist_ok=True)
+            dsp.write_wav(str(out), dsp.resample(y, dsp.SR, VOICE_SR), VOICE_SR)
+            secs = len(y) / dsp.SR
+        else:
+            secs = cache[line['filename']]['seconds']  # the existing take won
+        cache[line['filename']] = {'hash': h, 'provider': provider_name, 'seconds': round(secs, 3)}
         done += 1
-        print(f'  [{done:3d}] {line["filename"]:<52} {len(y) / dsp.SR:5.2f}s')
+        print(f'  [{done:3d}] {line["filename"]:<52} {secs:5.2f}s', flush=True)
         if done % 20 == 0:
             CACHE.write_text(json.dumps(cache, indent=1, sort_keys=True))
     CACHE.write_text(json.dumps(cache, indent=1, sort_keys=True))

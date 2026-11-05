@@ -256,6 +256,32 @@ def trim_silence(x: np.ndarray, sr=SR, thresh_db=-46.0, lead=0.03, tail=0.1) -> 
     return fade(x[s:e], 0.004, min(0.06, tail * 0.8), sr)
 
 
+def time_stretch(x: np.ndarray, factor: float, sr=SR) -> np.ndarray:
+    """Pitch-preserving time stretch (factor > 1 = longer/slower) with ffmpeg's
+    Rubber Band filter, settings suited to speech. Falls back to atempo."""
+    import os
+    import subprocess
+    import tempfile
+
+    if abs(factor - 1.0) < 0.01:
+        return x
+    stereo = x.ndim == 2
+    with tempfile.TemporaryDirectory() as td:
+        src, dst = os.path.join(td, 'in.wav'), os.path.join(td, 'out.wav')
+        write_wav(src, x, sr)
+        for filt in (f'rubberband=tempo={1 / factor:.5f}:transients=mixed:detector=soft:window=standard:pitchq=quality:channels=together',
+                     f'atempo={1 / factor:.5f}'):
+            r = subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', filt, '-ar', str(sr), dst], capture_output=True)
+            if r.returncode == 0:
+                break
+        else:
+            return x
+        y, _ = read_wav(dst)
+    if stereo and y.ndim == 1:
+        y = np.stack([y, y], axis=1)
+    return y
+
+
 def pitch_shift_resample(x: np.ndarray, semitones: float, sr=SR) -> np.ndarray:
     """Tape-style shift: pitch AND formants move, duration changes by 2^(-st/12)."""
     if abs(semitones) < 1e-3:

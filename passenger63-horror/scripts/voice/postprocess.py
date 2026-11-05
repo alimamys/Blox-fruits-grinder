@@ -15,6 +15,7 @@ Design rules from the brief:
 from __future__ import annotations
 
 import hashlib
+import re
 
 import numpy as np
 
@@ -212,6 +213,21 @@ EFFECT_LUFS_OFFSET = {
 }
 
 
+NARRATOR_WPS = 2.8  # words/second at pace 1.0 (~170 wpm), the fastest the narrator may go
+MAX_PACE_STRETCH = 1.18
+
+
+def pace_fit_factor(line: dict, seconds: float) -> float:
+    """Expressive models (Chatterbox Turbo) ignore the per-line pace mark and now
+    and then rush a line. Return how much to slow this line down (1.0 = untouched):
+    only ever slower, at most 18 %, and only when it runs faster than the mark."""
+    words = len(re.findall(r"[A-Za-z0-9']+", (line.get('spokenText') or line['text']).replace('.', ' ')))
+    if words < 3 or seconds <= 0:
+        return 1.0
+    target = NARRATOR_WPS * min(1.0, line.get('pace', 1.0))
+    return float(np.clip((words / seconds) / target, 1.0, MAX_PACE_STRETCH))
+
+
 def process_line(audio: np.ndarray, sr: int, job: dict) -> np.ndarray:
     """audio: mono float array from the TTS provider."""
     line = job['line']
@@ -243,6 +259,8 @@ def process_line(audio: np.ndarray, sr: int, job: dict) -> np.ndarray:
         x = dsp.biquad(x, 'peak', 2600, 1.2, 1.0)
 
     y = apply_effect(x, effect, seed, job.get('whisperNative', False))
+    if natural and line['character'] == 'narrator':
+        y = dsp.time_stretch(y, pace_fit_factor(line, len(y) / SR), SR)
     target = job['lufs'] + EFFECT_LUFS_OFFSET.get(effect, 0.0)
     y = dsp.normalize_lufs(y, target)
     if y.ndim == 1 and abs(job['pan']) > 0.01:
