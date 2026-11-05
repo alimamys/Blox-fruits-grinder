@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-05T13:29:37.842Z",
+ "generatedAt": "2026-11-05T18:38:36.642Z",
  "files": {
   "captain/captain_001_radio_call.wav": {
    "duration": 5.077,
@@ -1990,317 +1990,362 @@
   "sfx/bass_hit.wav": {
    "duration": 2,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
+  },
+  "sfx/boom_hit.wav": {
+   "duration": 3,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_crying_f.wav": {
    "duration": 1.8,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_crying_m.wav": {
    "duration": 1.8,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_exhale_f.wav": {
    "duration": 0.85,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_exhale_m.wav": {
    "duration": 0.85,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_fast_f.wav": {
    "duration": 1.6,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_fast_m.wav": {
    "duration": 1.6,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_ragged_f.wav": {
    "duration": 2.2,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_ragged_m.wav": {
    "duration": 2.2,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_shaky_inhale_f.wav": {
    "duration": 0.9,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_shaky_inhale_m.wav": {
    "duration": 0.9,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_sharp_inhale_f.wav": {
    "duration": 0.32,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/breath_sharp_inhale_m.wav": {
    "duration": 0.32,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/bridge_electronics.wav": {
-   "duration": 20,
-   "channels": 1,
-   "sampleRate": 24000
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/cable_pull.wav": {
    "duration": 0.8,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/cctv_static.wav": {
    "duration": 2,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/crowd_murmur.wav": {
-   "duration": 46,
+   "duration": 46.5,
    "channels": 2,
-   "sampleRate": 24000
+   "sampleRate": 48000
   },
   "sfx/data_transfer.wav": {
    "duration": 2.5,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/daylight_ambience.wav": {
-   "duration": 24,
+   "duration": 40.5,
    "channels": 2,
-   "sampleRate": 24000
+   "sampleRate": 48000
   },
   "sfx/emergency_alarm.wav": {
    "duration": 7.9,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/emergency_hum.wav": {
-   "duration": 10,
-   "channels": 1,
-   "sampleRate": 24000
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/engine_roar.wav": {
    "duration": 5,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/engine_slowdown.wav": {
    "duration": 7,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/ferry_engine.wav": {
-   "duration": 20,
-   "channels": 1,
-   "sampleRate": 24000
+   "duration": 60.5,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/ferry_horn.wav": {
    "duration": 5.7,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/footsteps_running.wav": {
    "duration": 3.35,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/footsteps_walk.wav": {
    "duration": 3.35,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/glitch.wav": {
    "duration": 0.55,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/heartbeat.wav": {
    "duration": 4.5,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/impact_hull.wav": {
    "duration": 4.3,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/impact_hull_l.wav": {
    "duration": 4.3,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/impact_hull_r.wav": {
    "duration": 4.3,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/knocking_hull.wav": {
    "duration": 10.6,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/light_flicker.wav": {
    "duration": 0.9,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/lights_off.wav": {
    "duration": 2.1,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/lights_on.wav": {
    "duration": 1.3,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/low_horror_drone.wav": {
-   "duration": 30,
+   "duration": 60.5,
    "channels": 2,
-   "sampleRate": 24000
+   "sampleRate": 48000
   },
   "sfx/marine_radio.wav": {
    "duration": 0.5,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/metal_creak.wav": {
    "duration": 3.2,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/metal_door.wav": {
    "duration": 2.05,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/ocean_ambience.wav": {
-   "duration": 30,
+   "duration": 60.5,
    "channels": 2,
-   "sampleRate": 24000
+   "sampleRate": 48000
   },
   "sfx/pa_click.wav": {
    "duration": 0.3,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/pa_static.wav": {
    "duration": 1.5,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/page_flip.wav": {
    "duration": 0.6,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/phone_alert.wav": {
    "duration": 1,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/phone_off.wav": {
    "duration": 0.8,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/phone_on.wav": {
    "duration": 0.9,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/phone_ring.wav": {
    "duration": 4.6,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/phone_vibrate.wav": {
    "duration": 1.1,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/power_down.wav": {
    "duration": 3.5,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/radio_static.wav": {
    "duration": 6,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/ring_clink.wav": {
    "duration": 0.9,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/riser_long.wav": {
+   "duration": 5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/riser_short.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/room_tone.wav": {
-   "duration": 20,
-   "channels": 1,
-   "sampleRate": 24000
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/scratch_hull.wav": {
    "duration": 3.45,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/scream_distant.wav": {
    "duration": 4.1,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/screams_crowd.wav": {
    "duration": 4.3,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/slap.wav": {
    "duration": 0.85,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/stinger.wav": {
+   "duration": 2.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/sub_drop.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/tension_pulse.wav": {
+   "duration": 60.5,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/title_hit.wav": {
    "duration": 5.75,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/ui_click.wav": {
    "duration": 0.12,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/ui_refresh.wav": {
    "duration": 0.6,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/water_lap.wav": {
    "duration": 8,
    "channels": 2,
-   "sampleRate": 32000
+   "sampleRate": 48000
   },
   "sfx/water_splash.wav": {
    "duration": 1.4,
-   "channels": 1,
-   "sampleRate": 32000
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/whoosh_1.wav": {
+   "duration": 0.7,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/whoosh_2.wav": {
+   "duration": 0.95,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/whoosh_3.wav": {
+   "duration": 1.2,
+   "channels": 2,
+   "sampleRate": 48000
   },
   "sfx/wind.wav": {
-   "duration": 24,
+   "duration": 30.5,
    "channels": 2,
-   "sampleRate": 24000
+   "sampleRate": 48000
   }
  }
 }

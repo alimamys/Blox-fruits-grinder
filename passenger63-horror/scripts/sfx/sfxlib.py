@@ -392,19 +392,6 @@ def sat(x, drive=2.0):
     return np.tanh(x * drive) / np.tanh(drive)
 
 
-def follower(x, att_ms, rel_ms):
-    a = np.max(np.abs(st(x)), axis=1)
-    ga = math.exp(-1 / (SR * att_ms / 1000))
-    gr = math.exp(-1 / (SR * rel_ms / 1000))
-    # vectorised-ish one-pole with separate attack/release (loop in chunks for speed)
-    out = np.empty_like(a)
-    v = 0.0
-    for i, s in enumerate(a):
-        v = ga * v + (1 - ga) * s if s > v else gr * v + (1 - gr) * s
-        out[i] = v
-    return out
-
-
 def comp(x, thr_db=-18, ratio=3.0, att_ms=5, rel_ms=120, makeup_db=0.0):
     x = st(x)
     # envelope on a decimated signal for speed
@@ -469,15 +456,19 @@ def clap_ir(key: str, length: float | None = None, stretch_f: float = 1.0) -> np
         y = mono(vari(y, 1 / stretch_f))
     if length is not None:
         y = y[: secs(length)]
-    y = y * np.hanning(2 * secs(0.25))[secs(0.25):].repeat(1)[:len(y)] if False else y
     fo = min(len(y), secs(0.3))
     y[-fo:] *= np.linspace(1, 0, fo) ** 2
     y = signal.sosfilt(signal.butter(2, 60, 'highpass', fs=SR, output='sos'), y)
     return y / np.sqrt(np.sum(y ** 2))
 
 
+_IR_KEYS = {'hull': ('fsd:160135', 'fsd:160134'), 'hall': ('fsd:160138',), 'steel': ('fsd:160143',), 'cabin': ('fsd:160143',)}
+
+
 def room(kind: str) -> np.ndarray:
     """Stereo impulse responses built from real clap recordings (CC-BY, jorickhoofd)."""
+    for key in _IR_KEYS.get(kind, ()):
+        USED.setdefault(key, set()).add(_CURRENT[0])  # credit every sound that uses this space
     if kind in _ir_cache:
         return _ir_cache[kind]
     if kind == 'hull':  # huge steel volume: two different tunnel takes, slowed a little
@@ -620,3 +611,128 @@ def write(path: Path, x: np.ndarray) -> None:
     y = np.clip(x + tpdf, -1, 32767 / 32768)
     path.parent.mkdir(parents=True, exist_ok=True)
     sf.write(str(path), y, SR, subtype='PCM_16')
+
+
+# ----------------------------------------------------------------------------
+# Phase-aligned extension / looping for TONAL material (engines, hum, sustained notes).
+# An equal-power crossfade between two unrelated parts of a tonal recording partially
+# cancels (audible dips every splice). Instead, each splice point is chosen where the
+# waveforms match (normalised cross-correlation of the low band), and matching material
+# is crossfaded at equal gain.
+# ----------------------------------------------------------------------------
+_DEC = 8
+
+
+def _analysis(x):
+    m = mono(x)
+    m = signal.sosfilt(signal.butter(4, 700, 'lowpass', fs=SR, output='sos'), m)
+    return m[::_DEC]
+
+
+def _ncc(a, tmpl):
+    k = len(tmpl)
+    if len(a) < k:
+        return np.zeros(1)
+    num = signal.correlate(a, tmpl, mode='valid', method='fft')
+    c = np.concatenate([[0], np.cumsum(a ** 2)])
+    den = np.sqrt(np.maximum(c[k:] - c[:-k], 1e-20) * (np.sum(tmpl ** 2) + 1e-20))
+    return num / den
+
+
+def _xfade(a, b, r):
+    """Crossfade a -> b. Correlated material (r high) gets an equal-gain fade."""
+    t = np.linspace(0, 1, len(a))[:, None]
+    if r > 0.55:
+        return a * (1 - t) + b * t
+    return a * np.cos(t * math.pi / 2) + b * np.sin(t * math.pi / 2)
+
+
+def _plan(x, total_n, k, min_seg, seed, wrap):
+    """Plan (src_start, out_start, length) segments; consecutive ones overlap by k samples."""
+    a = _analysis(x)
+    kd = max(8, k // _DEC)
+    n_src = len(x)
+    r = np.random.default_rng(seed)
+    s = int(r.uniform(0, max(1, n_src * 0.3)))
+    first = s
+    segs = []
+    o = 0
+    while True:
+        rem = total_n - o
+        can_finish = s + rem + k <= n_src
+        if can_finish:
+            segs.append((s, o, rem))
+            break
+        L = n_src - k - s  # play this source run as long as possible
+        segs.append((s, o, L))
+        o += L
+        rem = total_n - o
+        tail = a[(s + L) // _DEC:(s + L) // _DEC + kd]
+        sc = _ncc(a, tail)
+        # candidates must leave room for at least min_seg (or the whole remainder) after them
+        need = min(rem, min_seg) + k
+        valid = np.arange(len(sc)) * _DEC
+        ok = (valid + need <= n_src) & (np.abs(valid - (s + L)) > SR)
+        if wrap and s + 0 + rem + k <= n_src:
+            pass
+        score = np.where(ok, sc, -9)
+        if wrap and rem + k <= n_src:
+            # this will be the final run: also align its end (output position total_n) with the loop start
+            head = a[first // _DEC:first // _DEC + kd]
+            sh = _ncc(a, head)  # similarity of src[p:p+k] to the loop head
+            p_idx = (valid + rem) // _DEC
+            p_ok = p_idx < len(sh)
+            score = np.where(ok & p_ok, sc + np.where(p_ok, sh[np.minimum(p_idx, len(sh) - 1)], -9), -9)
+        s = int(valid[int(np.argmax(score))])
+    return segs, first
+
+
+def _render(x, segs, k, total_n):
+    a = _analysis(x)
+    kd = max(8, k // _DEC)
+    out = np.zeros((total_n + k, 2))
+    for i, (s, o, L) in enumerate(segs):
+        piece = x[s:s + L + k]
+        if i == 0:
+            out[o:o + len(piece)] = piece
+            continue
+        ps, po, pl = segs[i - 1]
+        ta = a[(ps + pl) // _DEC:(ps + pl) // _DEC + kd]
+        tb = a[s // _DEC:s // _DEC + kd]
+        r = float(np.dot(ta, tb) / (np.linalg.norm(ta) * np.linalg.norm(tb) + 1e-12)) if len(ta) == len(tb) else 0.0
+        out[o:o + k] = _xfade(out[o:o + k], piece[:k], r)
+        out[o + k:o + len(piece)] = piece[k:]
+    return out
+
+
+def extend_aligned(x, total: float, xfade: float = 0.6, min_seg: float = 2.0, seed: int = 1) -> np.ndarray:
+    x = st(x)
+    n = secs(total)
+    k = secs(xfade)
+    segs, _ = _plan(x, n, k, secs(min_seg), seed, wrap=False)
+    return _render(x, segs, k, n)[:n]
+
+
+def loop_aligned(x, T: float, xfade: float = 0.6, min_seg: float = 2.0, seed: int = 1) -> np.ndarray:
+    """A seamless loop of exactly T seconds from a tonal recording (y[-1] -> y[0] continuous)."""
+    x = st(x)
+    n = secs(T)
+    k = secs(xfade)
+    segs, first = _plan(x, n, k, secs(min_seg), seed, wrap=True)
+    out = _render(x, segs, k, n)
+    a = _analysis(x)
+    kd = max(8, k // _DEC)
+    ta = _analysis(out[n:n + k])[:kd]
+    tb = _analysis(out[:k])[:kd]
+    r = float(np.dot(ta, tb) / (np.linalg.norm(ta) * np.linalg.norm(tb) + 1e-12)) if len(ta) == len(tb) else 0.0
+    y = out[:n].copy()
+    y[:k] = _xfade(out[n:n + k], out[:k], r)
+    return y
+
+
+def circ(y, fn, pre: float = 5.0):
+    """Apply a processing function to a periodic signal without breaking its loop seam."""
+    y = st(y)
+    k = min(len(y), secs(pre))
+    z = fn(np.concatenate([y[-k:], y]))
+    return z[k:k + len(y)]

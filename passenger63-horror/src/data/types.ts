@@ -140,7 +140,7 @@ export interface Beat {
 
 export type Step = string | Beat;
 
-export type BedName = 'ocean' | 'engine' | 'wind' | 'drone' | 'crowd' | 'bridge' | 'emergency' | 'room' | 'daylight';
+export type BedName = 'ocean' | 'engine' | 'wind' | 'drone' | 'crowd' | 'bridge' | 'emergency' | 'room' | 'daylight' | 'tension';
 
 /** Ambience automation point: set bed levels at a marker, ramping over `fade` seconds. */
 export interface BedAutomation {

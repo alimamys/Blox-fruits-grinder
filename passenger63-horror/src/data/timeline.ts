@@ -76,15 +76,16 @@ export const SCENES: SceneDef[] = [
 			b('hook_title', 3.6, 'TITLE HIT: THE 63RD PASSENGER'),
 		],
 		tail: 0.2,
-		beds: {ocean: 0.32, engine: 0.18, wind: 0.08, drone: 0.1},
+		beds: {ocean: 0.26, engine: 0.16, wind: 0.08, drone: 0.08, tension: 0.12},
 		bedFade: 0.05,
 		bedAutomation: [
 			// rear deck: engine falls away, wind comes up
 			{at: 'narrator_010_found_her', fade: 1.2, set: {engine: 0.07, wind: 0.24, drone: 0.12}},
 			// woman speaks: almost nothing but ocean and wind
-			{at: 'oldwoman_001_not_passenger', offset: -0.3, fade: 0.4, set: {drone: 0.03}},
+			{at: 'oldwoman_001_not_passenger', offset: -0.3, fade: 0.4, set: {drone: 0.03, tension: 0}},
 			{at: 'narrator_020_checked', fade: 0.6, set: {drone: 0.1, engine: 0.12}},
-			{at: 'oldwoman_004_shouldnt', offset: -0.3, fade: 0.5, set: {drone: 0.0, engine: 0.05}},
+			{at: 'narrator_021_daniel_clarke', fade: 0.8, set: {tension: 0.16}},
+			{at: 'oldwoman_004_shouldnt', offset: -0.3, fade: 0.5, set: {drone: 0.0, engine: 0.05, tension: 0}},
 			{at: 'hook_title', fade: 0.2, set: {drone: 0.22, ocean: 0.18, wind: 0.12, engine: 0}},
 		],
 		sfx: [
@@ -92,7 +93,7 @@ export const SCENES: SceneDef[] = [
 			{sound: 'ui_click', at: 'narrator_001_hook', offset: 1.6, volume: 0.5, note: 'clicker'},
 			{sound: 'ui_click', at: 'narrator_001_hook', offset: 2.3, volume: 0.5},
 			{sound: 'bass_hit', at: 'narrator_002_sixty_three', offset: -0.05, volume: 0.55},
-			{sound: 'ui_refresh', at: 'narrator_004_sixty_two_names', offset: -0.15, volume: 0.35},
+			{sound: 'ui_refresh', at: 'narrator_004_sixty_two_names', offset: -0.15, volume: 0.5},
 			{sound: 'bass_hit', at: 'narrator_006_sixty_three_people', offset: -0.05, volume: 0.35},
 			{sound: 'metal_creak', at: 'narrator_009_someone', offset: 0.6, volume: 0.35},
 			{sound: 'footsteps_walk', at: 'narrator_012_approached', volume: 0.45, maxDuration: 2.2},
@@ -135,12 +136,12 @@ export const SCENES: SceneDef[] = [
 			'narrator_047_just_coat',
 		],
 		tail: 0.3,
-		beds: {ocean: 0.24, engine: 0.26, wind: 0.03, drone: 0, crowd: 0.16, room: 0.2},
+		beds: {ocean: 0.2, engine: 0.21, wind: 0.03, drone: 0, crowd: 0.16, room: 0.2, tension: 0},
 		bedFade: 0.8,
 		bedAutomation: [
 			{at: 'narrator_030_daniel_emma', fade: 1, set: {crowd: 0.12, engine: 0.2}},
 			{at: 'narrator_037_sixty_three', fade: 2, set: {drone: 0.06}},
-			{at: 'narrator_043_noticed', fade: 1.5, set: {crowd: 0.07, drone: 0.1, wind: 0.08}},
+			{at: 'narrator_043_noticed', fade: 1.5, set: {crowd: 0.07, drone: 0.07, wind: 0.08, tension: 0.1}},
 		],
 		sfx: [
 			{sound: 'ferry_horn', at: 'departure_card', offset: 0.3, volume: 0.55},
@@ -148,7 +149,7 @@ export const SCENES: SceneDef[] = [
 			{sound: 'ui_click', at: 'narrator_037_sixty_three', offset: -0.15, volume: 0.5},
 			{sound: 'ui_click', at: 'narrator_038_frowned', offset: 0.8, volume: 0.4},
 			{sound: 'ui_click', at: 'narrator_039_sixty_three_b', offset: -0.15, volume: 0.5},
-			{sound: 'ui_refresh', at: 'narrator_041_boarding_list', offset: 0.2, volume: 0.3},
+			{sound: 'ui_refresh', at: 'narrator_041_boarding_list', offset: 0.2, volume: 0.5},
 			{sound: 'metal_creak', at: 'narrator_044_bench', offset: 0.4, volume: 0.25},
 		],
 		overlays: [{line: 'crowd_001_who_is_she', at: 'narrator_044_bench', offset: 2.6, volume: 0.6}],
@@ -196,26 +197,27 @@ export const SCENES: SceneDef[] = [
 			'narrator_075_gone',
 		],
 		tail: 0.2,
-		beds: {ocean: 0.2, engine: 0.24, crowd: 0.12, room: 0.2, drone: 0.06, wind: 0},
+		beds: {ocean: 0.18, engine: 0.22, crowd: 0.12, room: 0.2, drone: 0.05, wind: 0, tension: 0},
 		bedFade: 1,
 		bedAutomation: [
-			{at: 'narrator_053_saw_her', fade: 1.2, set: {crowd: 0.06, drone: 0.12}},
+			{at: 'narrator_053_saw_her', fade: 1.2, set: {crowd: 0.06, drone: 0.08, tension: 0.12}},
 			// "She died twelve years ago." - drop the ambience slightly
 			{at: 'daniel_004_died', offset: -0.2, fade: 0.5, set: {engine: 0.12, crowd: 0.02, ocean: 0.12, drone: 0.05}},
 			{at: 'narrator_063_raised', fade: 1.5, set: {engine: 0.2, ocean: 0.18, drone: 0.12}},
+			{at: 'narrator_065_only_difference', fade: 1.5, set: {engine: 0.2, ocean: 0.16, drone: 0.08, tension: 0.16}},
 			// blackout: cut almost everything instantly
-			{at: 'narrator_071_darkness', fade: 0.03, set: {engine: 0.05, crowd: 0, room: 0, drone: 0.05, ocean: 0.1}},
+			{at: 'narrator_071_darkness', fade: 0.03, set: {engine: 0.05, crowd: 0, room: 0, drone: 0.05, ocean: 0.1, tension: 0}},
 			{at: 'narrator_073_three_seconds', offset: 1.0, fade: 0.05, set: {engine: 0.22, room: 0.18, crowd: 0.1, drone: 0.14}},
 		],
 		sfx: [
 			{sound: 'footsteps_walk', at: 'narrator_050_looking', volume: 0.4, maxDuration: 2.4},
 			{sound: 'heartbeat', at: 'narrator_054_face_changed', volume: 0.3, maxDuration: 4},
-			{sound: 'light_flicker', at: 'narrator_069_flickered', offset: 0.6, volume: 0.45},
-			{sound: 'light_flicker', at: 'narrator_070_once_twice', offset: 0.0, volume: 0.6, maxDuration: 0.6},
-			{sound: 'light_flicker', at: 'narrator_070_once_twice', offset: 0.75, volume: 0.65, maxDuration: 0.6},
+			{sound: 'light_flicker', at: 'narrator_069_flickered', offset: 0.6, volume: 0.35},
+			{sound: 'light_flicker', at: 'narrator_070_once_twice', offset: 0.0, volume: 0.47, maxDuration: 0.6},
+			{sound: 'light_flicker', at: 'narrator_070_once_twice', offset: 0.75, volume: 0.51, maxDuration: 0.6},
 			{sound: 'lights_off', at: 'narrator_071_darkness', offset: -0.1, volume: 0.8},
 			{sound: 'screams_crowd', at: 'blackout_1', offset: -0.2, volume: 0.55},
-			{sound: 'lights_on', at: 'narrator_073_three_seconds', offset: 1.0, volume: 0.7},
+			{sound: 'lights_on', at: 'narrator_073_three_seconds', offset: 1.0, volume: 0.45},
 			{sound: 'wind', at: 'narrator_074_bench_empty', volume: 0.3, maxDuration: 4},
 		],
 		overlays: [
@@ -258,21 +260,21 @@ export const SCENES: SceneDef[] = [
 			'narrator_102_nobody_laughing',
 		],
 		tail: 0.3,
-		beds: {ocean: 0.18, engine: 0.24, crowd: 0.1, room: 0.2, drone: 0.08},
+		beds: {ocean: 0.16, engine: 0.22, crowd: 0.1, room: 0.2, drone: 0.08, tension: 0},
 		bedFade: 1,
 		bedAutomation: [
 			{at: 'narrator_082_relaxed', fade: 1, set: {drone: 0.02, crowd: 0.14}},
-			{at: 'narrator_083_purser', fade: 1.2, set: {drone: 0.12, crowd: 0.08}},
+			{at: 'narrator_083_purser', fade: 1.2, set: {drone: 0.08, crowd: 0.08, tension: 0.12}},
 			{at: 'narrator_093_stared', fade: 1, set: {drone: 0.16}},
-			{at: 'narrator_102_nobody_laughing', fade: 0.4, set: {crowd: 0, drone: 0.1}},
+			{at: 'narrator_102_nobody_laughing', fade: 0.4, set: {crowd: 0, drone: 0.1, tension: 0}},
 		],
 		sfx: [
-			{sound: 'metal_door', at: 'narrator_077_bathrooms', volume: 0.45},
-			{sound: 'metal_door', at: 'narrator_078_storage', volume: 0.5},
+			{sound: 'metal_door', at: 'narrator_077_bathrooms', volume: 0.36},
+			{sound: 'metal_door', at: 'narrator_078_storage', volume: 0.36},
 			{sound: 'ui_click', at: 'narrator_081_sixty_two', offset: -0.1, volume: 0.4},
 			{sound: 'glitch', at: 'narrator_084_sixty_one', offset: 1.1, volume: 0.4},
 			{sound: 'glitch', at: 'narrator_085_daniel_gone', offset: 0.5, volume: 0.35},
-			{sound: 'ui_refresh', at: 'narrator_088_refreshed', offset: 0.1, volume: 0.4},
+			{sound: 'ui_refresh', at: 'narrator_088_refreshed', offset: 0.1, volume: 0.5},
 			{sound: 'glitch', at: 'narrator_089_ticket', offset: 2.2, volume: 0.35},
 			{sound: 'ui_click', at: 'narrator_090_email', offset: 0.2, volume: 0.35},
 			{sound: 'glitch', at: 'narrator_090_email', offset: 1.5, volume: 0.3},
@@ -329,16 +331,17 @@ export const SCENES: SceneDef[] = [
 			'narrator_125_backed_away',
 		],
 		tail: 0.3,
-		beds: {ocean: 0.2, engine: 0.24, crowd: 0.08, room: 0.18, drone: 0.08},
+		beds: {ocean: 0.18, engine: 0.22, crowd: 0.08, room: 0.18, drone: 0.06, tension: 0},
 		bedFade: 0.8,
 		bedAutomation: [
-			{at: 'thud_1', fade: 0.05, set: {crowd: 0, drone: 0.04}},
+			{at: 'thud_1', fade: 0.05, set: {crowd: 0, drone: 0.03, tension: 0.18}},
 			{at: 'narrator_108_captain_crew', fade: 1.5, set: {drone: 0.12}},
-			{at: 'knocks_start', fade: 0.5, set: {drone: 0.18, crowd: 0.1}},
-			{at: 'pa_static_1', fade: 0.3, set: {crowd: 0.03, drone: 0.08}},
+			{at: 'knocks_start', fade: 0.5, set: {drone: 0.12, crowd: 0.1, tension: 0.26}},
+			{at: 'pa_static_1', fade: 0.3, set: {crowd: 0.03, drone: 0.08, tension: 0}},
 			{at: 'pa_004_daniel', offset: -0.3, fade: 0.5, set: {engine: 0.14, drone: 0.12}},
-			{at: 'narrator_123_phones', fade: 1, set: {crowd: 0.08, drone: 0.16}},
-			{at: 'phone_message', fade: 0.3, set: {crowd: 0.02}},
+			{at: 'narrator_122_every_speaker', fade: 1, set: {tension: 0.16}},
+			{at: 'narrator_123_phones', fade: 1, set: {crowd: 0.08, drone: 0.11}},
+			{at: 'phone_message', fade: 0.3, set: {crowd: 0.02, tension: 0.1}},
 		],
 		sfx: [
 			// AUDIO CUE: heavy knock beneath hull (x3, moving across the stereo field)
@@ -350,9 +353,9 @@ export const SCENES: SceneDef[] = [
 			// AUDIO CUE: many knocks all along the hull
 			{sound: 'knocking_hull', at: 'knocks_start', volume: 0.55, maxDuration: 1.3},
 			{sound: 'knocking_hull', at: 'narrator_111_not_one', volume: 0.75, maxDuration: 9},
-			{sound: 'scream_distant', at: 'hull_scream', offset: -0.4, volume: 0.45},
-			{sound: 'pa_static', at: 'pa_static_1', volume: 0.7},
-			{sound: 'pa_static', at: 'pa_static_2', volume: 0.5, maxDuration: 0.8},
+			{sound: 'scream_distant', at: 'hull_scream', offset: -0.4, volume: 0.56},
+			{sound: 'pa_static', at: 'pa_static_1', volume: 0.52},
+			{sound: 'pa_static', at: 'pa_static_2', volume: 0.38, maxDuration: 0.8},
 			{sound: 'pa_click', at: 'narrator_120_turned_off', offset: 0.9, volume: 0.6},
 			{sound: 'cable_pull', at: 'narrator_121_cable', offset: 0.9, volume: 0.6},
 			{sound: 'marine_radio', at: 'pa_008_daniel_4', offset: -0.2, volume: 0.25, maxDuration: 0.5},
@@ -406,25 +409,25 @@ export const SCENES: SceneDef[] = [
 			'harbor_005_looking',
 		],
 		tail: 0.2,
-		beds: {ocean: 0.2, engine: 0.24, drone: 0.1, crowd: 0, room: 0.05},
+		beds: {ocean: 0.18, engine: 0.22, drone: 0.08, crowd: 0, room: 0.05, tension: 0.04},
 		bedFade: 0.5,
 		bedAutomation: [
 			{at: 'engine_down', fade: 3.5, set: {engine: 0.06}},
-			{at: 'narrator_128_nav_blank', fade: 1, set: {bridge: 0.22, room: 0, ocean: 0.12}},
+			{at: 'narrator_128_nav_blank', fade: 1, set: {bridge: 0.22, room: 0, ocean: 0.12, tension: 0.12}},
 			{at: 'narrator_131_no_coast', fade: 1.5, set: {drone: 0.16}},
 			{at: 'narrator_134_radioed', fade: 1, set: {drone: 0.08}},
 			// "docked twenty-three minutes ago" - remove nearly all music, only bridge electronics
-			{at: 'harbor_003_captain', offset: -0.4, fade: 0.6, set: {drone: 0, ocean: 0.06, engine: 0.03}},
+			{at: 'harbor_003_captain', offset: -0.4, fade: 0.6, set: {drone: 0, ocean: 0.06, engine: 0.03, tension: 0}},
 			{at: 'narrator_139_looked_out', fade: 2, set: {drone: 0.08, ocean: 0.12}},
 			{at: 'harbor_005_looking', offset: -0.2, fade: 0.4, set: {drone: 0}},
 		],
 		sfx: [
 			{sound: 'engine_slowdown', at: 'narrator_126_engines', offset: 0.3, volume: 0.6},
 			{sound: 'footsteps_running', at: 'narrator_127_rushed', volume: 0.45, maxDuration: 2.2},
-			{sound: 'metal_door', at: 'narrator_127_rushed', offset: 1.6, volume: 0.4},
+			{sound: 'metal_door', at: 'narrator_127_rushed', offset: 1.6, volume: 0.36},
 			{sound: 'glitch', at: 'narrator_128_nav_blank', offset: 0.4, volume: 0.25},
 			{sound: 'marine_radio', at: 'captain_001_radio_call', offset: -0.25, volume: 0.45},
-			{sound: 'radio_static', at: 'radio_static_1', volume: 0.5, maxDuration: 1.5},
+			{sound: 'radio_static', at: 'radio_static_1', volume: 0.4, maxDuration: 1.5},
 			{sound: 'marine_radio', at: 'captain_002_radio_again', offset: -0.25, volume: 0.4},
 			{sound: 'marine_radio', at: 'harbor_001_go_ahead', offset: -0.2, volume: 0.4},
 			{sound: 'marine_radio', at: 'captain_003_lost_nav', offset: -0.25, volume: 0.35},
@@ -459,15 +462,15 @@ export const SCENES: SceneDef[] = [
 			'narrator_156_watching',
 		],
 		tail: 0.3,
-		beds: {ocean: 0.1, engine: 0.04, bridge: 0.2, drone: 0.08},
+		beds: {ocean: 0.1, engine: 0.04, bridge: 0.2, drone: 0.06, tension: 0.15},
 		bedFade: 1,
 		bedAutomation: [
 			{at: 'narrator_150_emma', fade: 2, set: {drone: 0.14}},
-			{at: 'narrator_155_end_gangway', fade: 2, set: {drone: 0.2, bridge: 0.1}},
+			{at: 'narrator_155_end_gangway', fade: 2, set: {drone: 0.14, bridge: 0.1, tension: 0.22}},
 		],
 		sfx: [
-			{sound: 'data_transfer', at: 'narrator_142_photograph', offset: 1.4, volume: 0.35},
-			{sound: 'data_transfer', at: 'image_loading', volume: 0.3},
+			{sound: 'data_transfer', at: 'narrator_142_photograph', offset: 1.4, volume: 0.5},
+			{sound: 'data_transfer', at: 'image_loading', volume: 0.5},
 			{sound: 'ui_click', at: 'narrator_147_zoomed', offset: 0.3, volume: 0.35},
 			{sound: 'ui_click', at: 'narrator_150_emma', offset: -0.2, volume: 0.3},
 			{sound: 'ui_click', at: 'narrator_155_end_gangway', offset: 0.8, volume: 0.3},
@@ -505,19 +508,19 @@ export const SCENES: SceneDef[] = [
 			'narrator_170_screamed',
 		],
 		tail: 0.2,
-		beds: {ocean: 0.16, engine: 0.06, wind: 0.1, crowd: 0.04, drone: 0.1, room: 0.1},
+		beds: {ocean: 0.16, engine: 0.06, wind: 0.1, crowd: 0.04, drone: 0.08, room: 0.1, tension: 0.06},
 		bedFade: 1.5,
 		bedAutomation: [
 			{at: 'narrator_160_quiet', fade: 1, set: {crowd: 0, drone: 0.06, room: 0.06}},
-			{at: 'oldwoman_007_sweetheart', offset: -0.4, fade: 0.6, set: {drone: 0.0, wind: 0.06}},
-			{at: 'narrator_168_slapped', fade: 0.05, set: {drone: 0.1, wind: 0.1}},
-			{at: 'voice_stopped', fade: 0.1, set: {drone: 0, wind: 0.04, ocean: 0.08}},
+			{at: 'oldwoman_007_sweetheart', offset: -0.4, fade: 0.6, set: {drone: 0.0, wind: 0.06, tension: 0}},
+			{at: 'narrator_168_slapped', fade: 0.05, set: {drone: 0.08, wind: 0.1, tension: 0.14}},
+			{at: 'voice_stopped', fade: 0.1, set: {drone: 0, wind: 0.04, ocean: 0.08, tension: 0}},
 		],
 		sfx: [
 			{sound: 'wind', at: 'oldwoman_005_daniel', offset: -0.8, volume: 0.25, maxDuration: 3},
 			{sound: 'footsteps_walk', at: 'narrator_161_walking', volume: 0.4, maxDuration: 1.6},
 			{sound: 'slap', at: 'narrator_168_slapped', offset: 0.62, volume: 0.9},
-			{sound: 'scream_distant', at: 'narrator_170_screamed', offset: 1.5, volume: 0.6},
+			{sound: 'scream_distant', at: 'narrator_170_screamed', offset: 1.5, volume: 0.75},
 		],
 		overlays: [],
 	},
@@ -548,7 +551,7 @@ export const SCENES: SceneDef[] = [
 		],
 		tail: 0.3,
 		// PEOPLE IN WATER: remove most ambience. Almost silent.
-		beds: {ocean: 0.06, engine: 0, wind: 0.05, drone: 0.04, crowd: 0, room: 0},
+		beds: {ocean: 0.06, engine: 0, wind: 0.05, drone: 0.04, crowd: 0, room: 0, tension: 0},
 		bedFade: 1.2,
 		bedAutomation: [
 			{at: 'people_reveal', fade: 2, set: {ocean: 0.02, wind: 0.03, drone: 0.02}},
@@ -598,18 +601,19 @@ export const SCENES: SceneDef[] = [
 			'narrator_205_harbor_lights',
 		],
 		tail: 0.3,
-		beds: {ocean: 0.05, wind: 0.05, drone: 0.03, engine: 0, crowd: 0, room: 0},
+		beds: {ocean: 0.05, wind: 0.05, drone: 0.03, engine: 0, crowd: 0, room: 0, tension: 0},
 		bedFade: 0.03,
 		bedAutomation: [
 			// BLACKOUT: cut most audio instantly
 			{at: 'narrator_184_lights_died', offset: 1.0, fade: 0.02, set: {ocean: 0.03, wind: 0.02, drone: 0.0}},
-			{at: 'narrator_188_struck', fade: 0.5, set: {drone: 0.14, ocean: 0.1}},
-			{at: 'narrator_193_emergency', fade: 0.1, set: {emergency: 0.2, drone: 0.12}},
-			{at: 'narrator_194_gone', fade: 0.8, set: {drone: 0.06}},
+			{at: 'narrator_188_struck', fade: 0.5, set: {drone: 0.1, ocean: 0.1, tension: 0.18}},
+			{at: 'narrator_191_against', fade: 0.6, set: {tension: 0.24}},
+			{at: 'narrator_193_emergency', fade: 0.1, set: {emergency: 0.3, drone: 0.1}},
+			{at: 'narrator_194_gone', fade: 0.8, set: {drone: 0.06, tension: 0.08}},
 			{at: 'narrator_198_railing', fade: 1, set: {ocean: 0.12, wind: 0.14}},
-			{at: 'narrator_201_nothing', fade: 0.6, set: {drone: 0, wind: 0.08}},
-			{at: 'engines_back', fade: 0.6, set: {engine: 0.26, emergency: 0, ocean: 0.2, wind: 0.06, bridge: 0.1}},
-			{at: 'narrator_205_harbor_lights', fade: 2, set: {bridge: 0}},
+			{at: 'narrator_201_nothing', fade: 0.6, set: {drone: 0, wind: 0.08, tension: 0}},
+			{at: 'engines_back', fade: 0.6, set: {engine: 0.22, emergency: 0, ocean: 0.18, wind: 0.06, bridge: 0.1, tension: 0.2}},
+			{at: 'narrator_205_harbor_lights', fade: 3, set: {bridge: 0, tension: 0}},
 		],
 		sfx: [
 			{sound: 'power_down', at: 'narrator_184_lights_died', offset: 0.7, volume: 0.9},
@@ -618,15 +622,15 @@ export const SCENES: SceneDef[] = [
 			{sound: 'impact_hull_l', at: 'narrator_188_struck', offset: 1.25, volume: 1.0},
 			{sound: 'impact_hull_r', at: 'narrator_189_another_impact', offset: 0.9, volume: 1.0},
 			// AUDIO CUE: scratching against the metal hull, from below, all around
-			{sound: 'scratch_hull', at: 'scratches', volume: 0.85},
-			{sound: 'scratch_hull', at: 'narrator_191_against', offset: 0.6, volume: 0.5},
+			{sound: 'scratch_hull', at: 'scratches', volume: 0.7},
+			{sound: 'scratch_hull', at: 'narrator_191_against', offset: 0.6, volume: 0.41},
 			{sound: 'footsteps_running', at: 'narrator_192_ran', volume: 0.55},
 			{sound: 'screams_crowd', at: 'narrator_192_ran', offset: 0.2, volume: 0.35, maxDuration: 2},
 			{sound: 'emergency_alarm', at: 'narrator_193_emergency', offset: 0.1, volume: 0.18, maxDuration: 7},
-			{sound: 'lights_on', at: 'narrator_193_emergency', offset: 0.05, volume: 0.5},
+			{sound: 'lights_on', at: 'narrator_193_emergency', offset: 0.05, volume: 0.33},
 			{sound: 'footsteps_running', at: 'narrator_198_railing', volume: 0.35, maxDuration: 1.6},
-			{sound: 'engine_roar', at: 'narrator_202_engines', offset: 0.6, volume: 0.75},
-			{sound: 'ui_refresh', at: 'narrator_203_gps', offset: 0.2, volume: 0.35},
+			{sound: 'engine_roar', at: 'narrator_202_engines', offset: 0.6, volume: 0.6},
+			{sound: 'ui_refresh', at: 'narrator_203_gps', offset: 0.2, volume: 0.5},
 			{sound: 'ferry_horn', at: 'narrator_205_harbor_lights', offset: 1.4, volume: 0.35},
 		],
 		overlays: [
@@ -667,12 +671,12 @@ export const SCENES: SceneDef[] = [
 			'narrator_224_37',
 		],
 		tail: 0.3,
-		beds: {ocean: 0.08, room: 0.16, drone: 0.05, engine: 0, wind: 0.04},
+		beds: {ocean: 0.08, room: 0.16, drone: 0.05, engine: 0, wind: 0.04, tension: 0},
 		bedFade: 2,
 		bedAutomation: [
-			{at: 'narrator_212_every', fade: 1.5, set: {drone: 0.12}},
+			{at: 'narrator_212_every', fade: 1.5, set: {drone: 0.08, tension: 0.08}},
 			{at: 'narrator_221_turned_ring', fade: 1, set: {drone: 0.08, room: 0.08}},
-			{at: 'ring_rotate', fade: 0.6, set: {drone: 0.16}},
+			{at: 'ring_rotate', fade: 0.6, set: {drone: 0.16, tension: 0}},
 		],
 		sfx: [
 			{sound: 'ui_click', at: 'narrator_210_database', offset: 0.3, volume: 0.3},
@@ -708,11 +712,14 @@ export const SCENES: SceneDef[] = [
 		],
 		tail: 0.4,
 		// CCTV: mostly room ambience
-		beds: {room: 0.14, ocean: 0.03, drone: 0.04},
+		beds: {room: 0.14, ocean: 0.03, drone: 0.04, tension: 0},
 		bedFade: 1,
 		bedAutomation: [
-			{at: 'narrator_228_1217', fade: 1, set: {drone: 0.1}},
+			{at: 'narrator_228_1217', fade: 1, set: {drone: 0.08, tension: 0.08}},
+			{at: 'cctv_glitch', fade: 0.05, set: {tension: 0}},
+			{at: 'narrator_230_appeared', fade: 0.4, set: {tension: 0.12}},
 			{at: 'narrator_233_never', fade: 2, set: {drone: 0.04, room: 0.1}},
+			{at: 'narrator_232_next_frame', fade: 2, set: {tension: 0}},
 		],
 		sfx: [
 			{sound: 'cctv_static', at: 'narrator_225_security', offset: 1.2, volume: 0.25, maxDuration: 1.2},
@@ -759,7 +766,7 @@ export const SCENES: SceneDef[] = [
 			'oldwoman_final_64',
 		],
 		tail: 0.05,
-		beds: {daylight: 0.16, room: 0.1, ocean: 0, drone: 0, engine: 0, wind: 0},
+		beds: {daylight: 0.13, room: 0.1, ocean: 0, drone: 0, engine: 0, wind: 0, tension: 0},
 		bedFade: 2,
 		bedAutomation: [
 			{at: 'narrator_241_zoomed', fade: 2, set: {daylight: 0.08, drone: 0.06}},
@@ -790,7 +797,7 @@ export const SCENES: SceneDef[] = [
 		tail: 0,
 		sfx: [],
 		overlays: [],
-		beds: {ocean: 0, engine: 0, wind: 0, drone: 0, crowd: 0, bridge: 0, emergency: 0, room: 0, daylight: 0},
+		beds: {ocean: 0, engine: 0, wind: 0, drone: 0, crowd: 0, bridge: 0, emergency: 0, room: 0, daylight: 0, tension: 0},
 		bedFade: 0.01,
 	},
 ];
@@ -831,22 +838,25 @@ const HITS: Record<string, SfxCue[]> = {
 		hit('stinger', 'narrator_053_saw_her', 0.0, 0.45),
 		hit('sub_drop', 'daniel_004_died', 0.1, 0.35),
 		hit('boom_hit', 'narrator_065_only_difference', 2.4, 0.35),
-		hit('riser_short', 'narrator_069_flickered', -1.0, 0.3),
+		hit('riser_short', 'narrator_069_flickered', -2.0, 0.3),
 		hit('boom_hit', 'narrator_074_bench_empty', 0.0, 0.45),
 	],
 	erasure: [
-		hit('riser_short', 'narrator_084_sixty_one', -1.6, 0.35),
+		hit('riser_short', 'narrator_084_sixty_one', -1.0, 0.35),
 		hit('boom_hit', 'narrator_084_sixty_one', 1.0, 0.45),
 		hit('sub_drop', 'narrator_092_one_passenger', 0.0, 0.35),
 		hit('stinger', 'narrator_099_unknown', -0.05, 0.4),
 	],
 	hull: [
 		hit('stinger', 'pa_001_passenger37', 0.0, 0.35),
-		hit('riser_long', 'narrator_121_cable', 0.0, 0.3),
+		hit('riser_long', 'pa_008_daniel_4', -5.0, 0.3),
 		hit('boom_hit', 'pa_008_daniel_4', 0.0, 0.4),
 		hit('boom_hit', 'phone_message', 0.0, 0.35),
 	],
 	navigation: [
+		...['captain_001_radio_call', 'harbor_001_go_ahead', 'captain_003_lost_nav', 'harbor_002_confirm', 'captain_004_ns8', 'harbor_004_docked', 'captain_005_negative', 'harbor_005_looking'].map((l) =>
+			hit('marine_radio', l, 0.05, 0.28, {fromEnd: true}),
+		),
 		hit('riser_short', 'harbor_004_docked', -2.0, 0.35),
 		hit('boom_hit', 'harbor_004_docked', 1.15, 0.45),
 		hit('sub_drop', 'harbor_005_looking', 0.6, 0.4),
@@ -980,7 +990,7 @@ export interface Timeline {
 	markers: Record<string, Span & {scene: string}>;
 }
 
-const BED_NAMES: BedName[] = ['ocean', 'engine', 'wind', 'drone', 'crowd', 'bridge', 'emergency', 'room', 'daylight'];
+const BED_NAMES: BedName[] = ['ocean', 'engine', 'wind', 'drone', 'crowd', 'bridge', 'emergency', 'room', 'daylight', 'tension'];
 
 const toFrame = (s: number) => Math.round(s * FPS);
 
@@ -1061,7 +1071,8 @@ export const buildTimeline = (mode: EditMode = 'short'): Timeline => {
 		const sfx: TimedSfx[] = [];
 		const enter = def.enter ?? ENTER[def.id];
 		if (enter && audioExists(`sfx/${enter.sound}.wav`)) {
-			const at = Math.max(0, sceneStart + (enter.offset ?? -0.12));
+			const peak: Record<string, number> = {whoosh_1: 0.36, whoosh_2: 0.5, whoosh_3: 0.74};
+			const at = Math.max(0, sceneStart + (enter.offset ?? -(peak[enter.sound] ?? 0.12)));
 			sfx.push({sound: enter.sound, start: at, end: at + 3, volume: enter.volume ?? 0.5});
 		}
 		for (const cue of [...(def.sfx as SfxCue[]), ...(HITS[def.id] ?? [])]) {
