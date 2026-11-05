@@ -1,0 +1,1657 @@
+{
+ "captain/captain_001_radio_call.wav": {
+  "hash": "9f68fa04375685a1834af40210f9e33a",
+  "provider": "kokoro",
+  "seconds": 4.339
+ },
+ "captain/captain_002_radio_again.wav": {
+  "hash": "4cb241ae9777fabe4f5b2bbb0b110e6f",
+  "provider": "kokoro",
+  "seconds": 2.531
+ },
+ "captain/captain_003_lost_nav.wav": {
+  "hash": "db290c14faa03a39cea3bf8ab93aaa61",
+  "provider": "kokoro",
+  "seconds": 4.381
+ },
+ "captain/captain_004_ns8.wav": {
+  "hash": "3d68f8160390e82e927b586a97e865ba",
+  "provider": "kokoro",
+  "seconds": 1.652
+ },
+ "captain/captain_005_negative.wav": {
+  "hash": "4563697674f450fb22a1007acef897c0",
+  "provider": "kokoro",
+  "seconds": 2.475
+ },
+ "crew/crew2_001_count.wav": {
+  "hash": "ab848c0f08fe66e65d7a8df39456e648",
+  "provider": "kokoro",
+  "seconds": 2.534
+ },
+ "crew/crew_001_ticket.wav": {
+  "hash": "35c43fc4c2e82917e07683f4f5c47390",
+  "provider": "kokoro",
+  "seconds": 1.605
+ },
+ "crew/crew_002_maam.wav": {
+  "hash": "1c8764d4992e5da21da116bf48bfc6f7",
+  "provider": "kokoro",
+  "seconds": 0.803
+ },
+ "crew/crew_003_why.wav": {
+  "hash": "bee66e26c3f9d7a88be96c33d5dbd31b",
+  "provider": "kokoro",
+  "seconds": 1.491
+ },
+ "crew/crew_004_who.wav": {
+  "hash": "a05fa2f3572636028be7b4b27ae78855",
+  "provider": "kokoro",
+  "seconds": 0.727
+ },
+ "crew/crew_005_sir.wav": {
+  "hash": "8836205bc0d93422d73fc70dd1b8135f",
+  "provider": "kokoro",
+  "seconds": 2.757
+ },
+ "crowd/crowd_001_who_is_she.wav": {
+  "hash": "31fb74a49a4faa17a736e5186e5007c3",
+  "provider": "kokoro",
+  "seconds": 1.442
+ },
+ "crowd/crowd_002_what_happened.wav": {
+  "hash": "2dec141d230a14c9dea356cd143ddd51",
+  "provider": "kokoro",
+  "seconds": 1.331
+ },
+ "crowd/crowd_003_whats_going_on.wav": {
+  "hash": "ab9c4b27f5dc16726ae2fe6285d34883",
+  "provider": "kokoro",
+  "seconds": 1.632
+ },
+ "crowd/crowd_004_feel_that.wav": {
+  "hash": "fb3657eebc80736e0569c9b83e3e071c",
+  "provider": "kokoro",
+  "seconds": 1.585
+ },
+ "crowd/crowd_005_lights.wav": {
+  "hash": "0002c3ec9788182f42d61dbc43770165",
+  "provider": "kokoro",
+  "seconds": 1.986
+ },
+ "crowd/crowd_006_oh_god.wav": {
+  "hash": "d153d7910886c71666ce7d2d1dfec283",
+  "provider": "kokoro",
+  "seconds": 1.42
+ },
+ "crowd/crowd_007_windows.wav": {
+  "hash": "0472224de38ec099c8526fa7b78b41f6",
+  "provider": "kokoro",
+  "seconds": 1.852
+ },
+ "crowd/crowd_008_crew.wav": {
+  "hash": "2a2316a32ac1580d23c7141ac20c22cc",
+  "provider": "kokoro",
+  "seconds": 2.429
+ },
+ "crowd/crowd_009_help.wav": {
+  "hash": "0bd3e8fd509f8542899e0e5512d9a2c8",
+  "provider": "kokoro",
+  "seconds": 1.729
+ },
+ "crowd/crowd_010_what_is_that.wav": {
+  "hash": "edd066621ea0c123f8f5338465ec9bdd",
+  "provider": "kokoro",
+  "seconds": 1.45
+ },
+ "crowd/crowd_011_under_us.wav": {
+  "hash": "362fad8ab21446db5ff6d55f9e351c8a",
+  "provider": "kokoro",
+  "seconds": 2.149
+ },
+ "crowd/crowd_012_stay_calm.wav": {
+  "hash": "ab8586adb2784607f33a354ceef4f07c",
+  "provider": "kokoro",
+  "seconds": 3.509
+ },
+ "crowd/crowd_013_phone.wav": {
+  "hash": "32b5c92e6e85dc763f2717076d1fd457",
+  "provider": "kokoro",
+  "seconds": 2.894
+ },
+ "crowd/crowd_014_look.wav": {
+  "hash": "b0dd750a7e1579e0df79dd5014bcb2e7",
+  "provider": "kokoro",
+  "seconds": 1.802
+ },
+ "crowd/crowd_015_mum.wav": {
+  "hash": "1543ac404c416485d02007fcfd93b094",
+  "provider": "kokoro",
+  "seconds": 1.542
+ },
+ "daniel/daniel_001_go_sleep.wav": {
+  "hash": "eab0b83738d688a1eb5cc8df6cd8149e",
+  "provider": "kokoro",
+  "seconds": 1.941
+ },
+ "daniel/daniel_002_no.wav": {
+  "hash": "a8988d3402ba83feae17ef9515bc1903",
+  "provider": "kokoro",
+  "seconds": 0.984
+ },
+ "daniel/daniel_003_grandmother.wav": {
+  "hash": "07274e693aa53dc24d557ac375afa1d8",
+  "provider": "kokoro",
+  "seconds": 1.774
+ },
+ "daniel/daniel_004_died.wav": {
+  "hash": "2b39bf98b39a7bf3b131a99574afda8b",
+  "provider": "kokoro",
+  "seconds": 1.743
+ },
+ "daniel/daniel_005_impossible.wav": {
+  "hash": "648badac8554d79298e9da7cc236a3de",
+  "provider": "kokoro",
+  "seconds": 1.242
+ },
+ "daniel/daniel_006_used_to_say.wav": {
+  "hash": "feb801c29a677a033233dd6c5eee2588",
+  "provider": "kokoro",
+  "seconds": 1.476
+ },
+ "daniel/daniel_007_exactly.wav": {
+  "hash": "315f9fb2fbe157a87cfb5b15ebc6c344",
+  "provider": "kokoro",
+  "seconds": 1.494
+ },
+ "daniel/daniel_008_i_know.wav": {
+  "hash": "0ffb612787fb91e2ee5efcb5ab55a300",
+  "provider": "kokoro",
+  "seconds": 0.986
+ },
+ "emma/emma_001_wake_me.wav": {
+  "hash": "376d2c7392004adf6841f083321f1537",
+  "provider": "kokoro",
+  "seconds": 1.62
+ },
+ "emma/emma_002_daniel.wav": {
+  "hash": "7187aed05187280f8541f9f416a459c2",
+  "provider": "kokoro",
+  "seconds": 0.91
+ },
+ "emma/emma_003_what_is_it.wav": {
+  "hash": "cf0233c33d5bb447ea4c32a1e17f6fb9",
+  "provider": "kokoro",
+  "seconds": 1.008
+ },
+ "emma/emma_004_so.wav": {
+  "hash": "7f9905af5fb68772f3bff1717fd02a37",
+  "provider": "kokoro",
+  "seconds": 0.843
+ },
+ "emma/emma_005_no.wav": {
+  "hash": "b90c92b66411b09e35ae6ef85c0d9d5d",
+  "provider": "kokoro",
+  "seconds": 0.847
+ },
+ "emma/emma_006_not_funny.wav": {
+  "hash": "450c44b4ed48f924f6ea026eb9543acf",
+  "provider": "kokoro",
+  "seconds": 1.214
+ },
+ "emma/emma_007_no.wav": {
+  "hash": "e9fddcd78dbf1b95f9c519b697fcf2ab",
+  "provider": "kokoro",
+  "seconds": 0.847
+ },
+ "emma/emma_008_where.wav": {
+  "hash": "c442adfd03bb3aedb708a5e91b3755f8",
+  "provider": "kokoro",
+  "seconds": 1.153
+ },
+ "emma/emma_009_stop.wav": {
+  "hash": "0e74590ee4532cefb8ad41c4b33b84fe",
+  "provider": "kokoro",
+  "seconds": 0.898
+ },
+ "emma/emma_010_what.wav": {
+  "hash": "bf856e5621658c61df991ef8d98b9e85",
+  "provider": "kokoro",
+  "seconds": 0.796
+ },
+ "emma/emma_011_shes_dead.wav": {
+  "hash": "35269ec87936c3ec5ab41f885791f457",
+  "provider": "kokoro",
+  "seconds": 1.403
+ },
+ "emma/emma_012_scream.wav": {
+  "hash": "1bfc22447b17f7d7205f28d255443577",
+  "provider": "kokoro",
+  "seconds": 0.984
+ },
+ "emma/emma_013_daniel_2.wav": {
+  "hash": "2c7d0391c0cab22f23cc4083a89009e2",
+  "provider": "kokoro",
+  "seconds": 0.934
+ },
+ "emma/emma_014_husband.wav": {
+  "hash": "d992827cc050f10aecdb23bfe036e539",
+  "provider": "kokoro",
+  "seconds": 1.295
+ },
+ "emma/emma_015_husbands.wav": {
+  "hash": "a046b6d817c48ca8933e5adecc35cd20",
+  "provider": "kokoro",
+  "seconds": 1.155
+ },
+ "harbor/harbor_001_go_ahead.wav": {
+  "hash": "595793fb90b0fbfdd6ef33b24ab9526d",
+  "provider": "kokoro",
+  "seconds": 2.478
+ },
+ "harbor/harbor_002_confirm.wav": {
+  "hash": "5e13378c76dff981bd4c9b8e834ae457",
+  "provider": "kokoro",
+  "seconds": 3.664
+ },
+ "harbor/harbor_003_captain.wav": {
+  "hash": "16ce36d3a8ccfcf98fcf7554651cf170",
+  "provider": "kokoro",
+  "seconds": 1.06
+ },
+ "harbor/harbor_004_docked.wav": {
+  "hash": "8376be37a9c4dfe5cdcb74cae5682932",
+  "provider": "kokoro",
+  "seconds": 3.326
+ },
+ "harbor/harbor_005_looking.wav": {
+  "hash": "b9568fb81546732282da61c0119fa0bc",
+  "provider": "kokoro",
+  "seconds": 2.942
+ },
+ "narrator/narrator_001_hook.wav": {
+  "hash": "f75009faa58716f8dc37a6f33f8a369c",
+  "provider": "kokoro",
+  "seconds": 7.109
+ },
+ "narrator/narrator_002_sixty_three.wav": {
+  "hash": "6b5afadea92810cb561411629c4faed1",
+  "provider": "kokoro",
+  "seconds": 1.256
+ },
+ "narrator/narrator_003_manifest.wav": {
+  "hash": "666be8dee61e2de7a795caecc728ae4f",
+  "provider": "kokoro",
+  "seconds": 2.041
+ },
+ "narrator/narrator_004_sixty_two_names.wav": {
+  "hash": "3c195412fa575414bdf813b03deb6fdf",
+  "provider": "kokoro",
+  "seconds": 1.478
+ },
+ "narrator/narrator_005_counted_again.wav": {
+  "hash": "2800a0ab3ea3504a804b8f23baea1643",
+  "provider": "kokoro",
+  "seconds": 1.359
+ },
+ "narrator/narrator_006_sixty_three_people.wav": {
+  "hash": "7d9b7cdeb38fd6187f5eba0051d3905f",
+  "provider": "kokoro",
+  "seconds": 1.633
+ },
+ "narrator/narrator_007_nobody_boarded.wav": {
+  "hash": "da52ba57ecdacbff4b61a734330bbc05",
+  "provider": "kokoro",
+  "seconds": 4.663
+ },
+ "narrator/narrator_008_one_conclusion.wav": {
+  "hash": "b7648402d5d47cccfae8e97ba778ecb5",
+  "provider": "kokoro",
+  "seconds": 1.92
+ },
+ "narrator/narrator_009_someone.wav": {
+  "hash": "fe0e480db5e3b210c64063429efe5132",
+  "provider": "kokoro",
+  "seconds": 3.266
+ },
+ "narrator/narrator_010_found_her.wav": {
+  "hash": "707d81a40836ae20901cabd1138c4dd5",
+  "provider": "kokoro",
+  "seconds": 2.657
+ },
+ "narrator/narrator_011_old_woman.wav": {
+  "hash": "e074caafc62048e7ebec8624200b6753",
+  "provider": "kokoro",
+  "seconds": 5.597
+ },
+ "narrator/narrator_012_approached.wav": {
+  "hash": "e0f5e60ab22fff3e1ae432111657d09e",
+  "provider": "kokoro",
+  "seconds": 1.643
+ },
+ "narrator/narrator_013_didnt_move.wav": {
+  "hash": "fef58ba77115f0fc58f42e520a7a1919",
+  "provider": "kokoro",
+  "seconds": 1.241
+ },
+ "narrator/narrator_014_turned.wav": {
+  "hash": "6e063287b1ebbeb4b56bba845e7ca224",
+  "provider": "kokoro",
+  "seconds": 2.347
+ },
+ "narrator/narrator_015_pale.wav": {
+  "hash": "5005af1124ceb1d223dba00b6a0da380",
+  "provider": "kokoro",
+  "seconds": 3.692
+ },
+ "narrator/narrator_016_smiled.wav": {
+  "hash": "1f0cfc11e6ede05de40410caca690282",
+  "provider": "kokoro",
+  "seconds": 1.599
+ },
+ "narrator/narrator_017_swallowed.wav": {
+  "hash": "011a8a2293204fa558d02ebd5995123f",
+  "provider": "kokoro",
+  "seconds": 1.532
+ },
+ "narrator/narrator_018_looked_past.wav": {
+  "hash": "8b3dbdf3835cbb2893c27dc71db26c79",
+  "provider": "kokoro",
+  "seconds": 3.368
+ },
+ "narrator/narrator_019_smile_gone.wav": {
+  "hash": "af9c64d4b88ccb4a213cb5200b0f4267",
+  "provider": "kokoro",
+  "seconds": 1.677
+ },
+ "narrator/narrator_020_checked.wav": {
+  "hash": "85c284048416bc4a4eebc5f31aca1d10",
+  "provider": "kokoro",
+  "seconds": 2.079
+ },
+ "narrator/narrator_021_daniel_clarke.wav": {
+  "hash": "7d1782456ec3f985523a097b23fffeb1",
+  "provider": "kokoro",
+  "seconds": 4.157
+ },
+ "narrator/narrator_022_alive.wav": {
+  "hash": "531845c4d267b3df92bbe52e36344ca6",
+  "provider": "kokoro",
+  "seconds": 3.53
+ },
+ "narrator/narrator_023_looked_back.wav": {
+  "hash": "377f94c2e80894b0858777ab752c2cce",
+  "provider": "kokoro",
+  "seconds": 3.918
+ },
+ "narrator/narrator_024_then_she_said.wav": {
+  "hash": "ab74c1e97b4cfa0902488662ea0175ea",
+  "provider": "kokoro",
+  "seconds": 1.242
+ },
+ "narrator/narrator_025_left.wav": {
+  "hash": "153d51f8b63160fb6cd7a318c8b7a0af",
+  "provider": "kokoro",
+  "seconds": 4.277
+ },
+ "narrator/narrator_026_last_ferry.wav": {
+  "hash": "e2eeab17e98e48b3d4fd1bf05ce0ca7c",
+  "provider": "kokoro",
+  "seconds": 1.941
+ },
+ "narrator/narrator_027_counts.wav": {
+  "hash": "c5036a9bb4d59856aa7e2ce3fdf017ec",
+  "provider": "kokoro",
+  "seconds": 2.501
+ },
+ "narrator/narrator_028_weather.wav": {
+  "hash": "192d7b3fdba541f79b165d975a90739c",
+  "provider": "kokoro",
+  "seconds": 2.679
+ },
+ "narrator/narrator_029_crossing.wav": {
+  "hash": "01750397b2d5282975f3722b80eb68ac",
+  "provider": "kokoro",
+  "seconds": 2.323
+ },
+ "narrator/narrator_030_daniel_emma.wav": {
+  "hash": "481330a9f825ac49b5c9aea9005570c8",
+  "provider": "kokoro",
+  "seconds": 4.979
+ },
+ "narrator/narrator_031_tired.wav": {
+  "hash": "e7e39127146f02c73c8ea6af9d8f60ce",
+  "provider": "kokoro",
+  "seconds": 1.16
+ },
+ "narrator/narrator_032_window.wav": {
+  "hash": "ff0a40ca3d42faa8d07c9d95f83359b4",
+  "provider": "kokoro",
+  "seconds": 4.031
+ },
+ "narrator/narrator_033_nothing_unusual.wav": {
+  "hash": "a1982aafc39771ce1d86f148687ad914",
+  "provider": "kokoro",
+  "seconds": 3.178
+ },
+ "narrator/narrator_034_routine_count.wav": {
+  "hash": "dd5fdd1b185419f9a5c1fe7afc2720ce",
+  "provider": "kokoro",
+  "seconds": 3.969
+ },
+ "narrator/narrator_035_reached_62.wav": {
+  "hash": "27813c384626d06aaf12e050021b48ec",
+  "provider": "kokoro",
+  "seconds": 2.073
+ },
+ "narrator/narrator_036_few_minutes.wav": {
+  "hash": "94856d06a3f416991ea5c2a218274499",
+  "provider": "kokoro",
+  "seconds": 2.536
+ },
+ "narrator/narrator_037_sixty_three.wav": {
+  "hash": "f8f7c0e9314cec9b6ec9839adf3da327",
+  "provider": "kokoro",
+  "seconds": 1.239
+ },
+ "narrator/narrator_038_frowned.wav": {
+  "hash": "beb707b90261fc291190238ac59585d6",
+  "provider": "kokoro",
+  "seconds": 1.708
+ },
+ "narrator/narrator_039_sixty_three_b.wav": {
+  "hash": "6b5afadea92810cb561411629c4faed1",
+  "provider": "kokoro",
+  "seconds": 1.256
+ },
+ "narrator/narrator_040_called.wav": {
+  "hash": "003495ca15c69551b4572388540079b9",
+  "provider": "kokoro",
+  "seconds": 2.612
+ },
+ "narrator/narrator_041_boarding_list.wav": {
+  "hash": "bfba7503b92eac451ba907fe6a937574",
+  "provider": "kokoro",
+  "seconds": 2.535
+ },
+ "narrator/narrator_042_nobody_understood.wav": {
+  "hash": "6221bf3c5d8d9dbb8760b93a81cdefcf",
+  "provider": "kokoro",
+  "seconds": 1.709
+ },
+ "narrator/narrator_043_noticed.wav": {
+  "hash": "85404df66f88456bb29a4e5b6997620b",
+  "provider": "kokoro",
+  "seconds": 1.652
+ },
+ "narrator/narrator_044_bench.wav": {
+  "hash": "c7c42a1194743bca99867459a5171bdd",
+  "provider": "kokoro",
+  "seconds": 3.504
+ },
+ "narrator/narrator_045_nobody_remembered.wav": {
+  "hash": "db4af49f38b06d533705b3d0fac57cd6",
+  "provider": "kokoro",
+  "seconds": 2.403
+ },
+ "narrator/narrator_046_no_luggage.wav": {
+  "hash": "f4c853729f84e6b781c22d3cff320d7d",
+  "provider": "kokoro",
+  "seconds": 3.497
+ },
+ "narrator/narrator_047_just_coat.wav": {
+  "hash": "ad92dc2140258b1f3dbdf92d5e69efed",
+  "provider": "kokoro",
+  "seconds": 3.148
+ },
+ "narrator/narrator_048_approached.wav": {
+  "hash": "808abf405ffae7e5c5d884873a97e11e",
+  "provider": "kokoro",
+  "seconds": 6.034
+ },
+ "narrator/narrator_049_daniel.wav": {
+  "hash": "45f2dc7103bb5caec108bb38bc34cc2a",
+  "provider": "kokoro",
+  "seconds": 1.19
+ },
+ "narrator/narrator_050_looking.wav": {
+  "hash": "ddf562b44a1ca100db18f059a451c5de",
+  "provider": "kokoro",
+  "seconds": 2.442
+ },
+ "narrator/narrator_051_found_daniel.wav": {
+  "hash": "e0b40ec8de74ac137a4daae583572552",
+  "provider": "kokoro",
+  "seconds": 2.461
+ },
+ "narrator/narrator_052_laughed.wav": {
+  "hash": "e664fd99bac8aef7a197473aa2e9ae4a",
+  "provider": "kokoro",
+  "seconds": 1.128
+ },
+ "narrator/narrator_053_saw_her.wav": {
+  "hash": "b874fc1602cbd0d608713e32a3d628e8",
+  "provider": "kokoro",
+  "seconds": 1.327
+ },
+ "narrator/narrator_054_face_changed.wav": {
+  "hash": "57a1e34c2ac826e95900d07d20885014",
+  "provider": "kokoro",
+  "seconds": 3.008
+ },
+ "narrator/narrator_055_didnt_answer.wav": {
+  "hash": "4dd9940c666f065f4821e1d7c9bd6d4f",
+  "provider": "kokoro",
+  "seconds": 1.206
+ },
+ "narrator/narrator_056_wave.wav": {
+  "hash": "1fcecdad3f8e1a64d0cf6c8a7be9a0dd",
+  "provider": "kokoro",
+  "seconds": 3.791
+ },
+ "narrator/narrator_057_stood.wav": {
+  "hash": "d2c89f7ad65298e46a1c7aa4444c67ec",
+  "provider": "kokoro",
+  "seconds": 2.646
+ },
+ "narrator/narrator_058_whispered.wav": {
+  "hash": "209f228f472e4f6d97501d7f23275f0c",
+  "provider": "kokoro",
+  "seconds": 1.303
+ },
+ "narrator/narrator_059_stared.wav": {
+  "hash": "be28ed972863467d7c3f9b60a9f01e6e",
+  "provider": "kokoro",
+  "seconds": 1.293
+ },
+ "narrator/narrator_060_sick.wav": {
+  "hash": "1bec8ac81fffa42a9a0dd85b765fbb5e",
+  "provider": "kokoro",
+  "seconds": 1.342
+ },
+ "narrator/narrator_061_laughed.wav": {
+  "hash": "c56c85b248cdea7c799a6c8628d63468",
+  "provider": "kokoro",
+  "seconds": 2.443
+ },
+ "narrator/narrator_062_wasnt.wav": {
+  "hash": "9593b3b03948f1db3cf9ed3db2875ca7",
+  "provider": "kokoro",
+  "seconds": 1.161
+ },
+ "narrator/narrator_063_raised.wav": {
+  "hash": "1e07d3c5265fc88093cfe395fc8b4ddc",
+  "provider": "kokoro",
+  "seconds": 2.526
+ },
+ "narrator/narrator_064_knew.wav": {
+  "hash": "4a503f8aa8302918a8db099d6f1011f7",
+  "provider": "kokoro",
+  "seconds": 5.448
+ },
+ "narrator/narrator_065_only_difference.wav": {
+  "hash": "9bac073231ee0dbce4a67bf027bafdb2",
+  "provider": "kokoro",
+  "seconds": 5.106
+ },
+ "narrator/narrator_066_same.wav": {
+  "hash": "bc23fa7b7ac271e0179eea06f38d878b",
+  "provider": "kokoro",
+  "seconds": 3.653
+ },
+ "narrator/narrator_067_step.wav": {
+  "hash": "1cda68af34e26645c18305fb3ba2137f",
+  "provider": "kokoro",
+  "seconds": 3.391
+ },
+ "narrator/narrator_068_smiled.wav": {
+  "hash": "d3402e7ef964fec7c75d58a3d10faf1a",
+  "provider": "kokoro",
+  "seconds": 1.731
+ },
+ "narrator/narrator_069_flickered.wav": {
+  "hash": "682d56e7e9c75a0318cb5f30fac0c9dc",
+  "provider": "kokoro",
+  "seconds": 2.244
+ },
+ "narrator/narrator_070_once_twice.wav": {
+  "hash": "30a219f65dbdf14833ce618384e0777c",
+  "provider": "kokoro",
+  "seconds": 1.294
+ },
+ "narrator/narrator_071_darkness.wav": {
+  "hash": "8cb5c455c3ca6ff9b301b723eeb16269",
+  "provider": "kokoro",
+  "seconds": 1.026
+ },
+ "narrator/narrator_072_screamed.wav": {
+  "hash": "4fc9c0bc6551f80ee3a8af89f1f2ab91",
+  "provider": "kokoro",
+  "seconds": 1.192
+ },
+ "narrator/narrator_073_three_seconds.wav": {
+  "hash": "2c7f1d705a28b5a9338c7c7fa9e9d6a7",
+  "provider": "kokoro",
+  "seconds": 2.727
+ },
+ "narrator/narrator_074_bench_empty.wav": {
+  "hash": "e05bbe4faa65cc4677d4535ab31c52ac",
+  "provider": "kokoro",
+  "seconds": 1.588
+ },
+ "narrator/narrator_075_gone.wav": {
+  "hash": "687fe577616957169486c78cafc8260e",
+  "provider": "kokoro",
+  "seconds": 1.472
+ },
+ "narrator/narrator_076_rear_deck.wav": {
+  "hash": "9ce93ddcb7838ccde22378be06d940bc",
+  "provider": "kokoro",
+  "seconds": 2.298
+ },
+ "narrator/narrator_077_bathrooms.wav": {
+  "hash": "f5a25f8b3f6bdd3ed3aed46f758c7541",
+  "provider": "kokoro",
+  "seconds": 1.38
+ },
+ "narrator/narrator_078_storage.wav": {
+  "hash": "7819cbfaeb52cb72581b15067281cc1e",
+  "provider": "kokoro",
+  "seconds": 1.799
+ },
+ "narrator/narrator_079_searched.wav": {
+  "hash": "934578aa130a34b348e9d2c691072aa3",
+  "provider": "kokoro",
+  "seconds": 2.89
+ },
+ "narrator/narrator_080_another_count.wav": {
+  "hash": "be91ea921147ed0a9ce8648f0a2657ba",
+  "provider": "kokoro",
+  "seconds": 2.849
+ },
+ "narrator/narrator_081_sixty_two.wav": {
+  "hash": "6989301b77c9267494d75506b7438c8b",
+  "provider": "kokoro",
+  "seconds": 1.128
+ },
+ "narrator/narrator_082_relaxed.wav": {
+  "hash": "e9977e68465f2cfe0d7c3b7bf859bd7c",
+  "provider": "kokoro",
+  "seconds": 1.396
+ },
+ "narrator/narrator_083_purser.wav": {
+  "hash": "223fe22a766ebd5c988ba646f12e434d",
+  "provider": "kokoro",
+  "seconds": 3.895
+ },
+ "narrator/narrator_084_sixty_one.wav": {
+  "hash": "bc1b1c8c31e046bcea033bc5e7d09120",
+  "provider": "kokoro",
+  "seconds": 2.307
+ },
+ "narrator/narrator_085_daniel_gone.wav": {
+  "hash": "85a5dbb514808cfca828860bfe11e096",
+  "provider": "kokoro",
+  "seconds": 1.824
+ },
+ "narrator/narrator_086_not_physically.wav": {
+  "hash": "32b02e514bce7cd89625c8ef6cf25656",
+  "provider": "kokoro",
+  "seconds": 3.016
+ },
+ "narrator/narrator_087_disappeared.wav": {
+  "hash": "8c5f394e762443e8bb3921d3a7e4d510",
+  "provider": "kokoro",
+  "seconds": 3.129
+ },
+ "narrator/narrator_088_refreshed.wav": {
+  "hash": "37a17c26a90c8d4c4cb0844d86e348ee",
+  "provider": "kokoro",
+  "seconds": 3.29
+ },
+ "narrator/narrator_089_ticket.wav": {
+  "hash": "e629ed20911e89ff1e7f07dd4033fed0",
+  "provider": "kokoro",
+  "seconds": 4.644
+ },
+ "narrator/narrator_090_email.wav": {
+  "hash": "b7cdc0db0f2dafd02e979be6b94c68be",
+  "provider": "kokoro",
+  "seconds": 2.233
+ },
+ "narrator/narrator_091_reservation.wav": {
+  "hash": "605594c4b6b4c39aab1576d211611ea2",
+  "provider": "kokoro",
+  "seconds": 3.859
+ },
+ "narrator/narrator_092_one_passenger.wav": {
+  "hash": "9868e7ff32a8fed24f6808b9c87ba358",
+  "provider": "kokoro",
+  "seconds": 2.244
+ },
+ "narrator/narrator_093_stared.wav": {
+  "hash": "8f061e430d5fa0d50e2c803ab43206c1",
+  "provider": "kokoro",
+  "seconds": 1.714
+ },
+ "narrator/narrator_094_identification.wav": {
+  "hash": "dd64f16832516ae2278b46868e2d1b02",
+  "provider": "kokoro",
+  "seconds": 2.39
+ },
+ "narrator/narrator_095_license.wav": {
+  "hash": "d1ed5ec7fe4911847bdebc0ad2f012bd",
+  "provider": "kokoro",
+  "seconds": 2.84
+ },
+ "narrator/narrator_096_looked.wav": {
+  "hash": "19e85b2d4f6e76f8dc0014424fb85737",
+  "provider": "kokoro",
+  "seconds": 4.123
+ },
+ "narrator/narrator_097_photo.wav": {
+  "hash": "08a0826d740d28385f5fd3ffe8d1632a",
+  "provider": "kokoro",
+  "seconds": 1.778
+ },
+ "narrator/narrator_098_name_said.wav": {
+  "hash": "cffd73601433816c98c08a82950ddd3c",
+  "provider": "kokoro",
+  "seconds": 1.116
+ },
+ "narrator/narrator_099_unknown.wav": {
+  "hash": "5a407b173d58b9b2d7e507d105ce81c6",
+  "provider": "kokoro",
+  "seconds": 1.003
+ },
+ "narrator/narrator_100_grabbed.wav": {
+  "hash": "cfd80d872d6e6701ce4e76e6a7b23791",
+  "provider": "kokoro",
+  "seconds": 2.534
+ },
+ "narrator/narrator_101_shouting.wav": {
+  "hash": "8353200facb75ec629fbc111e94bdbff",
+  "provider": "kokoro",
+  "seconds": 1.44
+ },
+ "narrator/narrator_102_nobody_laughing.wav": {
+  "hash": "a37bd007b30409b7d67cc5eccd812a6b",
+  "provider": "kokoro",
+  "seconds": 1.614
+ },
+ "narrator/narrator_103_hit.wav": {
+  "hash": "d71feb9b4a2eef9992c1f6532bdf2d20",
+  "provider": "kokoro",
+  "seconds": 2.584
+ },
+ "narrator/narrator_104_stopped.wav": {
+  "hash": "e185a55da5440438a7126d6438d540b6",
+  "provider": "kokoro",
+  "seconds": 1.303
+ },
+ "narrator/narrator_105_another.wav": {
+  "hash": "c2bb0a0a7f57487f31e564e6db01bdf4",
+  "provider": "kokoro",
+  "seconds": 1.281
+ },
+ "narrator/narrator_106_then_another.wav": {
+  "hash": "e9d3b724d95d38906a499b7131607361",
+  "provider": "kokoro",
+  "seconds": 1.091
+ },
+ "narrator/narrator_107_beneath.wav": {
+  "hash": "a696bfb55ca97fcee98c55b69d01e05f",
+  "provider": "kokoro",
+  "seconds": 1.394
+ },
+ "narrator/narrator_108_captain_crew.wav": {
+  "hash": "ac77a9174244ef6911c4d3c86bebc058",
+  "provider": "kokoro",
+  "seconds": 1.869
+ },
+ "narrator/narrator_109_radar.wav": {
+  "hash": "4c9e565d3d42a422e3fc9c368c3b4836",
+  "provider": "kokoro",
+  "seconds": 5.387
+ },
+ "narrator/narrator_110_knocking.wav": {
+  "hash": "ac7a04b9f34a15b85a850de5caa45a61",
+  "provider": "kokoro",
+  "seconds": 1.745
+ },
+ "narrator/narrator_111_not_one.wav": {
+  "hash": "6a39db31a502050a695ce8a5c27d958b",
+  "provider": "kokoro",
+  "seconds": 2.794
+ },
+ "narrator/narrator_112_moved_away.wav": {
+  "hash": "71b6787f9c649434b26f711707f42be4",
+  "provider": "kokoro",
+  "seconds": 2.692
+ },
+ "narrator/narrator_113_screamed.wav": {
+  "hash": "7752663df9bfcf73ba2e94d4ee1b5449",
+  "provider": "kokoro",
+  "seconds": 1.326
+ },
+ "narrator/narrator_114_pa_on.wav": {
+  "hash": "1fcfdeb377b48d6e5874a709b02dd277",
+  "provider": "kokoro",
+  "seconds": 2.3
+ },
+ "narrator/narrator_115_womans_voice.wav": {
+  "hash": "0c913d1868d7747d06edad74f16f9f2b",
+  "provider": "kokoro",
+  "seconds": 1.924
+ },
+ "narrator/narrator_116_pale.wav": {
+  "hash": "37aeeaec2970fa30256b4315c99c01ab",
+  "provider": "kokoro",
+  "seconds": 1.431
+ },
+ "narrator/narrator_117_grabbed.wav": {
+  "hash": "bbc811d3ebe528ca13ebdbbe16d3b5da",
+  "provider": "kokoro",
+  "seconds": 1.188
+ },
+ "narrator/narrator_118_voice_changed.wav": {
+  "hash": "d6ba17d039c8ceb1066544623fe42c16",
+  "provider": "kokoro",
+  "seconds": 4.174
+ },
+ "narrator/narrator_119_shaking.wav": {
+  "hash": "81de7ba4923e1fee11889d8730024318",
+  "provider": "kokoro",
+  "seconds": 1.357
+ },
+ "narrator/narrator_120_turned_off.wav": {
+  "hash": "d64058e6b4bc3edd1c4ae9bb437f5cbd",
+  "provider": "kokoro",
+  "seconds": 3.945
+ },
+ "narrator/narrator_121_cable.wav": {
+  "hash": "afef4f1375e28920b2c02cec3d57f9a6",
+  "provider": "kokoro",
+  "seconds": 2.49
+ },
+ "narrator/narrator_122_every_speaker.wav": {
+  "hash": "8fabf68f6671b5dad2d802752bbb3228",
+  "provider": "kokoro",
+  "seconds": 5.703
+ },
+ "narrator/narrator_123_phones.wav": {
+  "hash": "d823ff39ef008e570333803b9b1f8f69",
+  "provider": "kokoro",
+  "seconds": 2.329
+ },
+ "narrator/narrator_124_no_signal.wav": {
+  "hash": "f6e79968abd828436e196c7837260878",
+  "provider": "kokoro",
+  "seconds": 4.737
+ },
+ "narrator/narrator_125_backed_away.wav": {
+  "hash": "08341a7b1e7d6f148227babe89503fc7",
+  "provider": "kokoro",
+  "seconds": 2.468
+ },
+ "narrator/narrator_126_engines.wav": {
+  "hash": "cf0785ed86626e2cad33a5d525d55b9b",
+  "provider": "kokoro",
+  "seconds": 1.886
+ },
+ "narrator/narrator_127_rushed.wav": {
+  "hash": "afdb61c54128ec11072a0cfe9f4ddfab",
+  "provider": "kokoro",
+  "seconds": 1.825
+ },
+ "narrator/narrator_128_nav_blank.wav": {
+  "hash": "9fe15ff806a39be6642de5a5a895f8c2",
+  "provider": "kokoro",
+  "seconds": 2.368
+ },
+ "narrator/narrator_129_gps.wav": {
+  "hash": "2a0bf6dd70d5709c8a26d5858c442fcd",
+  "provider": "kokoro",
+  "seconds": 3.475
+ },
+ "narrator/narrator_130_windshield.wav": {
+  "hash": "9b2132fe7a8fe2d5af53876fad05e2c3",
+  "provider": "kokoro",
+  "seconds": 1.802
+ },
+ "narrator/narrator_131_no_coast.wav": {
+  "hash": "1cb42dec3224569fe8dbebac6ffe396e",
+  "provider": "kokoro",
+  "seconds": 2.646
+ },
+ "narrator/narrator_132_ten_minutes.wav": {
+  "hash": "6ed6d6208f075692e0aebfeca5a9c706",
+  "provider": "kokoro",
+  "seconds": 2.052
+ },
+ "narrator/narrator_133_instead.wav": {
+  "hash": "0ccf570d7a5bebdef8a935eacef7007e",
+  "provider": "kokoro",
+  "seconds": 3.184
+ },
+ "narrator/narrator_134_radioed.wav": {
+  "hash": "f6724a9cc8135c09a73ba349e95bf51e",
+  "provider": "kokoro",
+  "seconds": 2.043
+ },
+ "narrator/narrator_135_answered.wav": {
+  "hash": "3e264f01a7a3b8c7c3a3498c2656052f",
+  "provider": "kokoro",
+  "seconds": 1.279
+ },
+ "narrator/narrator_136_exhaled.wav": {
+  "hash": "ed9d5027a7cb1757a3bc57a20bc42e4c",
+  "provider": "kokoro",
+  "seconds": 1.404
+ },
+ "narrator/narrator_137_another_pause.wav": {
+  "hash": "6a7330dfeee2e6603b887b2b87dddd67",
+  "provider": "kokoro",
+  "seconds": 3.54
+ },
+ "narrator/narrator_138_nobody_spoke.wav": {
+  "hash": "eb53dea5eadb59b2879773f2850722a6",
+  "provider": "kokoro",
+  "seconds": 2.026
+ },
+ "narrator/narrator_139_looked_out.wav": {
+  "hash": "9d88a67cb19958bb3f1d2d7a69197f4a",
+  "provider": "kokoro",
+  "seconds": 2.217
+ },
+ "narrator/narrator_140_operator.wav": {
+  "hash": "01c8ec3f8079b9b5fceb49918e2e1919",
+  "provider": "kokoro",
+  "seconds": 1.514
+ },
+ "narrator/narrator_141_radio_error.wav": {
+  "hash": "68716176de043834d2c769dcf170f97d",
+  "provider": "kokoro",
+  "seconds": 3.001
+ },
+ "narrator/narrator_142_photograph.wav": {
+  "hash": "2170ddae4c275dda9a005da78526141e",
+  "provider": "kokoro",
+  "seconds": 3.89
+ },
+ "narrator/narrator_143_loaded.wav": {
+  "hash": "aebf39bc4d3fa4277b90e8511834f9be",
+  "provider": "kokoro",
+  "seconds": 1.884
+ },
+ "narrator/narrator_144_north_star.wav": {
+  "hash": "6bb8eb4d5c1f4832dc081269b86f7b21",
+  "provider": "kokoro",
+  "seconds": 4.188
+ },
+ "narrator/narrator_145_timestamp.wav": {
+  "hash": "7205b4853178717908920937c3e102fc",
+  "provider": "kokoro",
+  "seconds": 2.526
+ },
+ "narrator/narrator_146_current_time.wav": {
+  "hash": "25798e67133b453ea961ebe52f04fb88",
+  "provider": "kokoro",
+  "seconds": 2.608
+ },
+ "narrator/narrator_147_zoomed.wav": {
+  "hash": "059333a140b22f21d2d0ed6b472e827d",
+  "provider": "kokoro",
+  "seconds": 1.54
+ },
+ "narrator/narrator_148_there_he_was.wav": {
+  "hash": "5b856b9fdb9ccb3fa726ce2d27d65a28",
+  "provider": "kokoro",
+  "seconds": 4.289
+ },
+ "narrator/narrator_149_same_crew.wav": {
+  "hash": "679de34af754c7c85da9c82ccf489ce5",
+  "provider": "kokoro",
+  "seconds": 3.247
+ },
+ "narrator/narrator_150_emma.wav": {
+  "hash": "0263d8236f6d5f888fb13376b70a914c",
+  "provider": "kokoro",
+  "seconds": 0.741
+ },
+ "narrator/narrator_151_shoulder.wav": {
+  "hash": "0b833aafd5ce2821b523025106ee7a3e",
+  "provider": "kokoro",
+  "seconds": 2.252
+ },
+ "narrator/narrator_152_alone.wav": {
+  "hash": "b6152307cfac66ada35984905c974c76",
+  "provider": "kokoro",
+  "seconds": 2.444
+ },
+ "narrator/narrator_153_missing.wav": {
+  "hash": "ba793a9545c11e6a420f2769cd625c28",
+  "provider": "kokoro",
+  "seconds": 1.422
+ },
+ "narrator/narrator_154_pointed.wav": {
+  "hash": "66faef0844fb654e3dd5bda4ca5518de",
+  "provider": "kokoro",
+  "seconds": 1.558
+ },
+ "narrator/narrator_155_end_gangway.wav": {
+  "hash": "180b753c265866f620b0e8bbb9349143",
+  "provider": "kokoro",
+  "seconds": 3.444
+ },
+ "narrator/narrator_156_watching.wav": {
+  "hash": "fa8aee3847d8ceaafbc4d4c70e710572",
+  "provider": "kokoro",
+  "seconds": 2.194
+ },
+ "narrator/narrator_157_turned.wav": {
+  "hash": "405131e939d8060f55cc25b44241dd3b",
+  "provider": "kokoro",
+  "seconds": 4.083
+ },
+ "narrator/narrator_158_didnt_answer.wav": {
+  "hash": "2e9a89b9af73f0a0d8da4a97f30fab6a",
+  "provider": "kokoro",
+  "seconds": 2.372
+ },
+ "narrator/narrator_159_not_announcement.wav": {
+  "hash": "21ac423e0caf8eb36a677b0a2eed1a0e",
+  "provider": "kokoro",
+  "seconds": 3.765
+ },
+ "narrator/narrator_160_quiet.wav": {
+  "hash": "1f1d493ff5372a7df8ea57adf547a668",
+  "provider": "kokoro",
+  "seconds": 1.898
+ },
+ "narrator/narrator_161_walking.wav": {
+  "hash": "1efbc37c26fa1063b5e5df6a52ac6613",
+  "provider": "kokoro",
+  "seconds": 2.485
+ },
+ "narrator/narrator_162_looked_at_her.wav": {
+  "hash": "612496d08f61de25b6cb2d2fe402d51d",
+  "provider": "kokoro",
+  "seconds": 2.206
+ },
+ "narrator/narrator_163_nodded.wav": {
+  "hash": "f0a0f2b847ff527e86b02b8bba0ad4be",
+  "provider": "kokoro",
+  "seconds": 0.983
+ },
+ "narrator/narrator_164_again.wav": {
+  "hash": "168eabd6a69475d5bbce797c095f6111",
+  "provider": "kokoro",
+  "seconds": 2.269
+ },
+ "narrator/narrator_165_covered.wav": {
+  "hash": "e914096b9f09f03c36138eaf7d75eeab",
+  "provider": "kokoro",
+  "seconds": 1.328
+ },
+ "narrator/narrator_166_changed.wav": {
+  "hash": "a12b547a3f44675daeec5543d0d14456",
+  "provider": "kokoro",
+  "seconds": 3.488
+ },
+ "narrator/narrator_167_crying.wav": {
+  "hash": "b49ab34f07b360d73af6032b29ff793c",
+  "provider": "kokoro",
+  "seconds": 1.639
+ },
+ "narrator/narrator_168_slapped.wav": {
+  "hash": "0c703854a96928ca6bfc8886694e2904",
+  "provider": "kokoro",
+  "seconds": 1.713
+ },
+ "narrator/narrator_169_blinked.wav": {
+  "hash": "88a9a94e84f24699b2625d6e903c6944",
+  "provider": "kokoro",
+  "seconds": 2.667
+ },
+ "narrator/narrator_170_screamed.wav": {
+  "hash": "e5be97b3ad386fb3275071ab43df7c5b",
+  "provider": "kokoro",
+  "seconds": 2.321
+ },
+ "narrator/narrator_171_back.wav": {
+  "hash": "3f957436c87ba9cb8308e42ccfcedb9b",
+  "provider": "kokoro",
+  "seconds": 3.208
+ },
+ "narrator/narrator_172_not_alone.wav": {
+  "hash": "9eee9b090fd70e5bcb696c4b761e3c30",
+  "provider": "kokoro",
+  "seconds": 2.052
+ },
+ "narrator/narrator_173_people.wav": {
+  "hash": "c9ee1def12a32422416d7e079c0c2e2c",
+  "provider": "kokoro",
+  "seconds": 1.967
+ },
+ "narrator/narrator_174_dozens.wav": {
+  "hash": "e085f65ad1d9db2b1292d82f2587509f",
+  "provider": "kokoro",
+  "seconds": 2.41
+ },
+ "narrator/narrator_175_not_swimming.wav": {
+  "hash": "10f4118d027ea6aceed32b2fc6e87c69",
+  "provider": "kokoro",
+  "seconds": 3.139
+ },
+ "narrator/narrator_176_heads.wav": {
+  "hash": "e21c8c99bbd877b3d2ee6beff95355b2",
+  "provider": "kokoro",
+  "seconds": 4.413
+ },
+ "narrator/narrator_177_still.wav": {
+  "hash": "f7c7a9ecd0a7ac57305103e427afe1e4",
+  "provider": "kokoro",
+  "seconds": 2.048
+ },
+ "narrator/narrator_178_raised.wav": {
+  "hash": "a94449f7515d3ff37fb9a31ef577b4c3",
+  "provider": "kokoro",
+  "seconds": 2.118
+ },
+ "narrator/narrator_179_another.wav": {
+  "hash": "edf813fb6c4ea4fa55cf68cc1cd5784e",
+  "provider": "kokoro",
+  "seconds": 1.162
+ },
+ "narrator/narrator_180_all.wav": {
+  "hash": "a31d58299afc55686790b89661868f76",
+  "provider": "kokoro",
+  "seconds": 1.51
+ },
+ "narrator/narrator_181_stared.wav": {
+  "hash": "821e66391b1a93e2cdecddcb646e6af9",
+  "provider": "kokoro",
+  "seconds": 1.177
+ },
+ "narrator/narrator_182_smiled.wav": {
+  "hash": "0335085e1cfc3034834217f512725c6e",
+  "provider": "kokoro",
+  "seconds": 1.494
+ },
+ "narrator/narrator_183_pointed.wav": {
+  "hash": "61cce3c96b6c92a95aec9f64fc23802b",
+  "provider": "kokoro",
+  "seconds": 1.727
+ },
+ "narrator/narrator_184_lights_died.wav": {
+  "hash": "5b3803db8211cc3b3b46fd094733878b",
+  "provider": "kokoro",
+  "seconds": 1.516
+ },
+ "narrator/narrator_185_darkness.wav": {
+  "hash": "3e0ea394eaa225135198e18f411502f3",
+  "provider": "kokoro",
+  "seconds": 1.263
+ },
+ "narrator/narrator_186_screamed.wav": {
+  "hash": "f4c4a3e2e0e709b7e81816a73154c136",
+  "provider": "kokoro",
+  "seconds": 1.406
+ },
+ "narrator/narrator_187_held.wav": {
+  "hash": "6c909aad8412d3122f7337271eb23051",
+  "provider": "kokoro",
+  "seconds": 2.53
+ },
+ "narrator/narrator_188_struck.wav": {
+  "hash": "f3576cfd2c7d41a2b3159556f49dbd71",
+  "provider": "kokoro",
+  "seconds": 2.741
+ },
+ "narrator/narrator_189_another_impact.wav": {
+  "hash": "669504e1b06108d55e4295d23be8fc30",
+  "provider": "kokoro",
+  "seconds": 1.481
+ },
+ "narrator/narrator_190_climbing.wav": {
+  "hash": "ca125a07916d52db53ea52542a23461d",
+  "provider": "kokoro",
+  "seconds": 1.956
+ },
+ "narrator/narrator_191_against.wav": {
+  "hash": "a1fe63f22aca7764536769738604002a",
+  "provider": "kokoro",
+  "seconds": 3.419
+ },
+ "narrator/narrator_192_ran.wav": {
+  "hash": "4b49d87311ba263b71dbe8abc7a11857",
+  "provider": "kokoro",
+  "seconds": 1.029
+ },
+ "narrator/narrator_193_emergency.wav": {
+  "hash": "1acb515f86b9f06eb2e440adfd9a55d8",
+  "provider": "kokoro",
+  "seconds": 2.536
+ },
+ "narrator/narrator_194_gone.wav": {
+  "hash": "ebcdf44f26aba9cb5132f416a3f4d855",
+  "provider": "kokoro",
+  "seconds": 1.434
+ },
+ "narrator/narrator_195_looked_down.wav": {
+  "hash": "35324b6b06d113fabdba3165d1c8f249",
+  "provider": "kokoro",
+  "seconds": 2.716
+ },
+ "narrator/narrator_196_screamed_name.wav": {
+  "hash": "00e0e3645b09125925135b651e44fdc1",
+  "provider": "kokoro",
+  "seconds": 1.429
+ },
+ "narrator/narrator_197_no_answer.wav": {
+  "hash": "da45682eab38c631af68f3aa06dcf681",
+  "provider": "kokoro",
+  "seconds": 1.157
+ },
+ "narrator/narrator_198_railing.wav": {
+  "hash": "45326c43ce4bcb0e4ee4a801e04fe686",
+  "provider": "kokoro",
+  "seconds": 1.451
+ },
+ "narrator/narrator_199_gone_too.wav": {
+  "hash": "41169cd21262a0d0ec8b18253ead992e",
+  "provider": "kokoro",
+  "seconds": 1.769
+ },
+ "narrator/narrator_200_ocean_empty.wav": {
+  "hash": "e6d7316760592037015c732c6595179c",
+  "provider": "kokoro",
+  "seconds": 4.546
+ },
+ "narrator/narrator_201_nothing.wav": {
+  "hash": "f4b2c65134f1101588058ffdd2bbef5a",
+  "provider": "kokoro",
+  "seconds": 0.901
+ },
+ "narrator/narrator_202_engines.wav": {
+  "hash": "f1a7c4844b3c3b1caefc8f79c267737c",
+  "provider": "kokoro",
+  "seconds": 2.866
+ },
+ "narrator/narrator_203_gps.wav": {
+  "hash": "dc7905f605342d73ec2ab380de1e907a",
+  "provider": "kokoro",
+  "seconds": 2.932
+ },
+ "narrator/narrator_204_nav_showed.wav": {
+  "hash": "e36ecb061fc9e78399f07b516b392818",
+  "provider": "kokoro",
+  "seconds": 5.165
+ },
+ "narrator/narrator_205_harbor_lights.wav": {
+  "hash": "1cba9965bd48b42e501753ccf65568ab",
+  "provider": "kokoro",
+  "seconds": 3.057
+ },
+ "narrator/narrator_206_police_waiting.wav": {
+  "hash": "d84b35a6733823c59282a26817d8ec0a",
+  "provider": "kokoro",
+  "seconds": 2.321
+ },
+ "narrator/narrator_207_told.wav": {
+  "hash": "2236c8078f717d957d7b3d76531d7db8",
+  "provider": "kokoro",
+  "seconds": 1.743
+ },
+ "narrator/narrator_208_list.wav": {
+  "hash": "c14d1a48268656ab113e5e55ee7ee9c5",
+  "provider": "kokoro",
+  "seconds": 4.743
+ },
+ "narrator/narrator_209_checked.wav": {
+  "hash": "d5abd62e54aadfeb1666a8071edaeffc",
+  "provider": "kokoro",
+  "seconds": 5.369
+ },
+ "narrator/narrator_210_database.wav": {
+  "hash": "1c279efdbe6a220491434b9c99433884",
+  "provider": "kokoro",
+  "seconds": 2.632
+ },
+ "narrator/narrator_211_photographs.wav": {
+  "hash": "af409ca2f8a62fb00c6cbe539e9e1ea8",
+  "provider": "kokoro",
+  "seconds": 5.104
+ },
+ "narrator/narrator_212_every.wav": {
+  "hash": "8ed34edccb579c08518acdc9bc390bac",
+  "provider": "kokoro",
+  "seconds": 2.744
+ },
+ "narrator/narrator_213_wedding.wav": {
+  "hash": "0f2699f41e53861eb803f75e813bc8d6",
+  "provider": "kokoro",
+  "seconds": 3.289
+ },
+ "narrator/narrator_214_honeymoon.wav": {
+  "hash": "4d6aaf14386a3abd8a755e6fa730910f",
+  "provider": "kokoro",
+  "seconds": 2.907
+ },
+ "narrator/narrator_215_christmas.wav": {
+  "hash": "1e8cfa6f2493a449675c07b43dbd016c",
+  "provider": "kokoro",
+  "seconds": 2.892
+ },
+ "narrator/narrator_216_emma_screamed.wav": {
+  "hash": "2d0b676bbc4a2e1f14face0a3f144815",
+  "provider": "kokoro",
+  "seconds": 1.157
+ },
+ "narrator/narrator_217_records.wav": {
+  "hash": "0d38cfcce9c6af930d3a000cd9b79a7f",
+  "provider": "kokoro",
+  "seconds": 1.995
+ },
+ "narrator/narrator_218_record.wav": {
+  "hash": "e2efce7271c71119bbf8a25d2e47ac21",
+  "provider": "kokoro",
+  "seconds": 3.291
+ },
+ "narrator/narrator_219_ring.wav": {
+  "hash": "f02ee7938f53dc56d63ec89e2f80384d",
+  "provider": "kokoro",
+  "seconds": 2.701
+ },
+ "narrator/narrator_220_uncomfortable.wav": {
+  "hash": "486b00970a3e91ae7bd159618b9efaab",
+  "provider": "kokoro",
+  "seconds": 2.079
+ },
+ "narrator/narrator_221_turned_ring.wav": {
+  "hash": "d267d3f6c41ab47745ff9b21ca067b3f",
+  "provider": "kokoro",
+  "seconds": 3.237
+ },
+ "narrator/narrator_222_expected.wav": {
+  "hash": "ad88e59a1250117c4c9c0d452aa5cba8",
+  "provider": "kokoro",
+  "seconds": 2.16
+ },
+ "narrator/narrator_223_instead.wav": {
+  "hash": "da342205e6724a34e278b585badbfbac",
+  "provider": "kokoro",
+  "seconds": 1.283
+ },
+ "narrator/narrator_224_37.wav": {
+  "hash": "181750e6e0f8dc6b5590adcbe8199184",
+  "provider": "kokoro",
+  "seconds": 1.227
+ },
+ "narrator/narrator_225_security.wav": {
+  "hash": "e9e57d74ddb7adc1c84589ec93e97dc7",
+  "provider": "kokoro",
+  "seconds": 4.103
+ },
+ "narrator/narrator_226_most.wav": {
+  "hash": "438e467f5beb095ce8cfab0bc9cbb048",
+  "provider": "kokoro",
+  "seconds": 4.374
+ },
+ "narrator/narrator_227_talking.wav": {
+  "hash": "f450724a7e2ce6c3b84fb795efbe01bf",
+  "provider": "kokoro",
+  "seconds": 3.388
+ },
+ "narrator/narrator_228_1217.wav": {
+  "hash": "2479d83efdf742a8cc17495c674c6bef",
+  "provider": "kokoro",
+  "seconds": 3.508
+ },
+ "narrator/narrator_229_one_frame.wav": {
+  "hash": "b26126a79f9ae78f59145a5707f4bffc",
+  "provider": "kokoro",
+  "seconds": 1.711
+ },
+ "narrator/narrator_230_appeared.wav": {
+  "hash": "11a18c07bb0e32be512cbe1be4222472",
+  "provider": "kokoro",
+  "seconds": 3.807
+ },
+ "narrator/narrator_231_behind.wav": {
+  "hash": "93a1354c2f06c2067704021e329f1266",
+  "provider": "kokoro",
+  "seconds": 4.732
+ },
+ "narrator/narrator_232_next_frame.wav": {
+  "hash": "bfe1801ffee99a2a8e966ed6989c5b0d",
+  "provider": "kokoro",
+  "seconds": 2.464
+ },
+ "narrator/narrator_233_never.wav": {
+  "hash": "bf386fac6346976cf1a42286f27bff76",
+  "provider": "kokoro",
+  "seconds": 3.016
+ },
+ "narrator/narrator_234_replaced.wav": {
+  "hash": "71e4cf7053c35cda3000b0ef087810f0",
+  "provider": "kokoro",
+  "seconds": 2.882
+ },
+ "narrator/narrator_235_refused.wav": {
+  "hash": "4cad6f7ed21fc8f010b1b6a778b7896c",
+  "provider": "kokoro",
+  "seconds": 2.782
+ },
+ "narrator/narrator_236_stopped.wav": {
+  "hash": "77a6437225f21f83ffb34fa931439306",
+  "provider": "kokoro",
+  "seconds": 2.333
+ },
+ "narrator/narrator_237_year.wav": {
+  "hash": "7fe5477364820d9076c4e82d5379e8c7",
+  "provider": "kokoro",
+  "seconds": 2.45
+ },
+ "narrator/narrator_238_afternoon.wav": {
+  "hash": "df9658e078d3bafb361bf210e6a7db6f",
+  "provider": "kokoro",
+  "seconds": 4.504
+ },
+ "narrator/narrator_239_showed.wav": {
+  "hash": "d706339befde228e7df1e797463bf8af",
+  "provider": "kokoro",
+  "seconds": 4.105
+ },
+ "narrator/narrator_240_almost_deleted.wav": {
+  "hash": "818036da62f9521d55588f4b4b59471e",
+  "provider": "kokoro",
+  "seconds": 1.684
+ },
+ "narrator/narrator_241_zoomed.wav": {
+  "hash": "67c97aa42718f784beb21be2863ca1ab",
+  "provider": "kokoro",
+  "seconds": 1.407
+ },
+ "narrator/narrator_242_very_back.wav": {
+  "hash": "de777516be7233c77b01604eb2263961",
+  "provider": "kokoro",
+  "seconds": 3.962
+ },
+ "narrator/narrator_243_beside.wav": {
+  "hash": "28be430eba526d6d3a8a8686b2ba30a3",
+  "provider": "kokoro",
+  "seconds": 2.234
+ },
+ "narrator/narrator_244_same_clothes.wav": {
+  "hash": "a2d9e5fb7398e959fed36102ec769cf9",
+  "provider": "kokoro",
+  "seconds": 5.147
+ },
+ "narrator/narrator_245_staring.wav": {
+  "hash": "c4e4f13675adbc16d8ced8f2f18b8e88",
+  "provider": "kokoro",
+  "seconds": 4.705
+ },
+ "narrator/narrator_246_message.wav": {
+  "hash": "df31bec102d2c4fff8c71d99f32ba6ae",
+  "provider": "kokoro",
+  "seconds": 1.385
+ },
+ "narrator/narrator_247_dont_let.wav": {
+  "hash": "9b86a90f101de9abe7e24f80dd7e29da",
+  "provider": "kokoro",
+  "seconds": 1.571
+ },
+ "narrator/narrator_248_rang.wav": {
+  "hash": "1d95256cd89868ac37eee2f27e604542",
+  "provider": "kokoro",
+  "seconds": 2.427
+ },
+ "narrator/narrator_249_didnt_answer.wav": {
+  "hash": "7cd3f40cabff3614df6e3ce92e1da2c3",
+  "provider": "kokoro",
+  "seconds": 1.266
+ },
+ "narrator/narrator_250_stopped.wav": {
+  "hash": "e971bcb0ed9337789243b87029089b66",
+  "provider": "kokoro",
+  "seconds": 1.007
+ },
+ "narrator/narrator_251_again.wav": {
+  "hash": "80f906673551017169e4d41ff82a5d7f",
+  "provider": "kokoro",
+  "seconds": 1.301
+ },
+ "narrator/narrator_252_switched_off.wav": {
+  "hash": "4d2ac2dfaae1a85c3f57df6bd7669ff3",
+  "provider": "kokoro",
+  "seconds": 1.495
+ },
+ "narrator/narrator_253_black.wav": {
+  "hash": "8807fd5e96055eea4ec9fecc9249f1ca",
+  "provider": "kokoro",
+  "seconds": 1.47
+ },
+ "narrator/narrator_254_several.wav": {
+  "hash": "00dfbe0dcbd40ccfa3db6557638a5f9a",
+  "provider": "kokoro",
+  "seconds": 2.286
+ },
+ "narrator/narrator_255_turned_on.wav": {
+  "hash": "80760cb5dfa3d0103f6f2ee5ed572ffc",
+  "provider": "kokoro",
+  "seconds": 2.272
+ },
+ "narrator/narrator_256_no_call.wav": {
+  "hash": "e9fb78f488f628d9138d146cacae01fc",
+  "provider": "kokoro",
+  "seconds": 2.885
+ },
+ "narrator/narrator_257_behind.wav": {
+  "hash": "0f7438487b02912b1138512bef344ed9",
+  "provider": "kokoro",
+  "seconds": 4.182
+ },
+ "old-woman/oldwoman_001_not_passenger.wav": {
+  "hash": "1d9684a33be1f5ea4c8ddcabcb7a70e1",
+  "provider": "kokoro",
+  "seconds": 1.637
+ },
+ "old-woman/oldwoman_002_waiting.wav": {
+  "hash": "5fdfb65ea1b83655491bf6c73b566c9a",
+  "provider": "kokoro",
+  "seconds": 2.022
+ },
+ "old-woman/oldwoman_003_passenger37.wav": {
+  "hash": "b84b6ab9458e57ab1d07b7bc3cd79b99",
+  "provider": "kokoro",
+  "seconds": 1.942
+ },
+ "old-woman/oldwoman_004_shouldnt.wav": {
+  "hash": "d4e094f7c2d6a57a09b3f452ea3a6d1f",
+  "provider": "kokoro",
+  "seconds": 1.819
+ },
+ "old-woman/oldwoman_005_daniel.wav": {
+  "hash": "aa3977b7e641c26e98c7b674d0f86dbf",
+  "provider": "kokoro",
+  "seconds": 1.846
+ },
+ "old-woman/oldwoman_006_daniel_2.wav": {
+  "hash": "77253b7ea84d24b4dee19585660c9168",
+  "provider": "kokoro",
+  "seconds": 1.844
+ },
+ "old-woman/oldwoman_007_sweetheart.wav": {
+  "hash": "0c0de098749de44d4a2a6866dca4201a",
+  "provider": "kokoro",
+  "seconds": 1.616
+ },
+ "old-woman/oldwoman_008_see.wav": {
+  "hash": "11227c6e73d000d37530f9ee199e6e0d",
+  "provider": "kokoro",
+  "seconds": 0.776
+ },
+ "old-woman/oldwoman_009_everyone.wav": {
+  "hash": "9f5292d06dd88cc04199610ac01b3eb5",
+  "provider": "kokoro",
+  "seconds": 1.621
+ },
+ "old-woman/oldwoman_final_64.wav": {
+  "hash": "ae58067f49cd45b65a872b0ea8370c8e",
+  "provider": "kokoro",
+  "seconds": 1.659
+ },
+ "old-woman/pa_006_daniel_2.wav": {
+  "hash": "3602857477467ed0b78649a53786138a",
+  "provider": "kokoro",
+  "seconds": 1.56
+ },
+ "old-woman/pa_007_daniel_3.wav": {
+  "hash": "bef4b34e287131041ee90674724ec377",
+  "provider": "kokoro",
+  "seconds": 1.573
+ },
+ "old-woman/pa_008_daniel_4.wav": {
+  "hash": "5f66c6b41dab137bed2ab9db300a13e4",
+  "provider": "kokoro",
+  "seconds": 1.56
+ },
+ "pa/pa_001_passenger37.wav": {
+  "hash": "ec91fd6acfdf4554f07042a6a63dc6ee",
+  "provider": "kokoro",
+  "seconds": 2.475
+ },
+ "pa/pa_002_proceed.wav": {
+  "hash": "e6b70d735f4746098b3cec9535873269",
+  "provider": "kokoro",
+  "seconds": 2.592
+ },
+ "pa/pa_003_passenger37_soft.wav": {
+  "hash": "2c1c6241d4ccd79b5deca0f5979742d9",
+  "provider": "kokoro",
+  "seconds": 2.701
+ },
+ "pa/pa_004_daniel.wav": {
+  "hash": "85cf087ad2d3a43f08614db91a7e948a",
+  "provider": "kokoro",
+  "seconds": 1.685
+ },
+ "pa/pa_005_family.wav": {
+  "hash": "d80363fbc2f09f3fac109f320dd8d483",
+  "provider": "kokoro",
+  "seconds": 2.574
+ },
+ "police/police_001_whose.wav": {
+  "hash": "27dfa76f77b362fc4ebd7e68b71c325b",
+  "provider": "kokoro",
+  "seconds": 1.449
+ },
+ "police/police_002_maam.wav": {
+  "hash": "97ac140cdfa062acfb12a7a068139b2c",
+  "provider": "kokoro",
+  "seconds": 1.255
+ }
+}
