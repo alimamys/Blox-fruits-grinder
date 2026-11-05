@@ -9,7 +9,7 @@ or OpenAI gpt-image) from the art list in scripts/images/art.json.
 
 Keys come from the environment or the git-ignored .env: GEMINI_API_KEY (default
 provider "gemini", model IMAGE_MODEL or gemini-3.1-flash-image) or OPENAI_API_KEY
-(provider "openai", model gpt-image-1).
+(provider "openai", model gpt-image-2).
 
 Each art entry:
   {"id": "bg_cabin_aft", "group": "backgrounds", "prompt": "...",
@@ -138,7 +138,7 @@ def main() -> int:
     art = json.loads(ART.read_text())
     style = art['style']
     items = art['items']
-    model = args.model or (os.environ.get('IMAGE_MODEL') or ('gemini-3.1-flash-image' if args.provider == 'gemini' else 'gpt-image-1'))
+    model = args.model or (os.environ.get('IMAGE_MODEL') or ('gemini-3.1-flash-image' if args.provider == 'gemini' else 'gpt-image-2'))
     key = os.environ.get('GEMINI_API_KEY' if args.provider == 'gemini' else 'OPENAI_API_KEY')
     if not key and not args.dry_run:
         print(f'[images] {"GEMINI_API_KEY" if args.provider == "gemini" else "OPENAI_API_KEY"} is not set (environment or .env).')

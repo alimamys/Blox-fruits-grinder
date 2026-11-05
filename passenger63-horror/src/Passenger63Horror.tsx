@@ -6,6 +6,7 @@ import {AbsoluteFill, Sequence, useCurrentFrame} from 'remotion';
 import {AudioLayer} from './audio/AudioLayer';
 import {Grain, Vignette} from './components/fx/Fx';
 import {Subtitles} from './components/fx/Subtitles';
+import {RestyledLayer} from './components/fx/Restyled';
 import {SettingsProvider, type VideoSettings} from './data/settings';
 import {TIMELINE, TIMELINE_FULL} from './data/timeline';
 import {SCENE_COMPONENTS} from './scenes';
@@ -58,6 +59,7 @@ export const Passenger63Horror: React.FC<VideoSettings> = (settings) => {
 						</Sequence>
 					);
 				})}
+				{settings.restyled !== false ? <RestyledLayer timeline={tl} /> : null}
 				<GlobalFx end={endScene.startFrame} />
 				{settings.subtitles !== false ? <Subtitles timeline={tl} until={endScene.startFrame} /> : null}
 				{settings.audio ? <AudioLayer timeline={tl} /> : null}

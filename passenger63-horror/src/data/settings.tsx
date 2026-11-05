@@ -15,6 +15,8 @@ export type VideoSettings = {
 	audio: boolean;
 	/** Burned-in subtitles (word-timed from the voice files). */
 	subtitles: boolean;
+	/** Use the image-model redraws of each shot (public/restyle) over the code-rendered picture. */
+	restyled: boolean;
 	/** Which edit to render: the ~10 min YouTube cut or the complete story. */
 	edit: 'short' | 'full';
 };
@@ -25,6 +27,7 @@ export const DEFAULT_SETTINGS: VideoSettings = {
 	grain: true,
 	audio: true,
 	subtitles: true,
+	restyled: true,
 	edit: 'short',
 };
 

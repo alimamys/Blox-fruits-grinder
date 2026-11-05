@@ -26,7 +26,7 @@ const resolve = (a) => {
 };
 const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE || (fs.existsSync('/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell') ? '/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell' : undefined);
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
-const inputProps = {audio: false};
+const inputProps = {audio: false, ...(process.env.PROPS ? JSON.parse(process.env.PROPS) : {})};
 const composition = await selectComposition({serveUrl, id: compId, inputProps, browserExecutable});
 fs.mkdirSync(path.join(root, 'out/stills'), {recursive: true});
 for (const a of args) {

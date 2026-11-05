@@ -71,7 +71,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 			kokoro: {blend: [['am_michael', 0.8], ['bm_george', 0.2]], lang: 'en-us'},
 			// the narrator stays restrained, so the ~4x faster Turbo model (no emotion knob) is used
 			chatterbox: {reference: 'voice-references/narrator.wav', exaggeration: 0.45, model: 'turbo'},
-			fish: {referenceId: 'ef9c79b62ef34530bf452c0e50e3c260', voiceName: 'horror (deep, low, serious)'},
+			fish: {referenceId: 'ef9c79b62ef34530bf452c0e50e3c260', voiceName: 'horror (deep, low, serious)', speed: 1.12},
 			elevenlabs: {voiceName: 'George', model: ELEVEN_MODEL},
 			openai: {voice: 'onyx', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-RyanNeural'},

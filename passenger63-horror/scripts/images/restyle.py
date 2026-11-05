@@ -1,0 +1,324 @@
+#!/usr/bin/env python3
+"""Redraw every illustrated shot of the video with an image model, keeping the
+stick-figure style, composition and poses - only the rendering quality goes up.
+
+    .venv/bin/python scripts/images/restyle.py plan        # classify shots -> build/restyle_plan.json
+    .venv/bin/python scripts/images/restyle.py gen [--only ids] [--limit N] [--workers 6]
+    .venv/bin/python scripts/images/restyle.py manifest    # -> src/data/generated/restyle.json
+
+Inputs: build/shotmap.json (scripts/images/shotmap.mjs) and build/keyframes/*.png
+(scripts/images/keyframes.mjs - clean renders of each shot at 20/50/80%).
+Text-heavy screens (manifest, phone, radio, documents...) and black frames are left
+to the code renderer: image models garble small text. Shots that change a lot inside
+get all three keyframes; shots where a visible character speaks also get a
+"mouth open" variant that Remotion swaps in time with the voice.
+
+Provider: OpenAI gpt-image (OPENAI_API_KEY, IMAGE_MODEL default gpt-image-2,
+IMAGE_QUALITY default high). Output: public/restyle/*.jpg (cached - nothing is
+generated twice for the same source frame and prompt).
+"""
+from __future__ import annotations
+
+import argparse
+import base64
+import hashlib
+import io
+import json
+import os
+import re
+import sys
+import threading
+import time
+import urllib.error
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parent.parent.parent
+SHOTMAP = ROOT / 'build' / 'shotmap.json'
+KEYS = ROOT / 'build' / 'keyframes'
+PLAN = ROOT / 'build' / 'restyle_plan.json'
+OUT = ROOT / 'public' / 'restyle'
+CACHE = OUT / '.cache.json'
+MANIFEST = ROOT / 'src' / 'data' / 'generated' / 'restyle.json'
+SCENE_FILES = {
+    'hook': 'Hook', 'departure': 'Departure', 'recognition': 'Recognition', 'erasure': 'Erasure', 'hull': 'Hull',
+    'navigation': 'Navigation', 'otherFerry': 'OtherFerry', 'grandmotherCalls': 'GrandmotherCalls',
+    'peopleInWater': 'GrandmotherCalls', 'vanish': 'Vanish', 'police': 'Police', 'cctv': 'Cctv', 'finale': 'Finale', 'end': 'Finale',
+}
+UI_WORDS = (
+    'Evidence', 'PhoneShot', 'PhoneScreen', 'Clicker', 'PassengerCounter', '<Radio', 'Console', 'TimeCard', 'PassengerManifest',
+    'DriverLicense', 'Reservation', 'BoardingPass', 'EmailInbox', 'NavScreen', 'RadarScreen', '<Compass', 'HarborControl',
+    'PoliceCaseFile', 'DatabaseSearch', 'CivilRecord', 'MessageThread', 'ImageTransfer', 'PAPanel', 'GateCounter',
+    'DeparturesBoard', 'WeatherPanel', 'WeddingRing', 'PhotoAlbum', 'IncomingCall', 'LockScreen', 'BigNumber',
+)
+WHO = {
+    'daniel': 'Daniel (the man in the blue jacket)',
+    'emma': 'Emma (the woman in the burgundy top)',
+    'oldWoman': 'the old woman in the long black coat',
+    'captain': 'the captain in the white captain hat',
+    'crew1': 'the young crew member in the navy uniform',
+    'crew2': 'the female crew member with the ponytail',
+    'harbor': 'the man with glasses holding the phone handset',
+    'police': 'the police officer in the yellow vest',
+}
+
+RESTYLE_PROMPT = (
+    'Redraw this exact frame as a polished, high-quality 2D cartoon illustration in the SAME stick-figure character style: '
+    'big round heads, simple dot eyes, small simple mouths, simple rounded bodies and tube-like arms and legs, thick clean dark outlines. '
+    'Keep the composition, camera angle and framing, every character\'s position, pose, gaze, expression and clothing colours, '
+    'the lighting mood and darkness level, and the whole scene layout exactly the same. '
+    'Upgrade only the rendering quality: crisp confident line art, soft cel shading with subtle gradients, cinematic lighting with soft shadows, '
+    'richer materials and textures and more depth in the environment, like a premium animated YouTube story. '
+    'Do not add or remove any characters or objects. Keep any text exactly as it is. No subtitles, no captions, no watermark.'
+)
+
+
+def mouth_prompt(char: str) -> str:
+    who = WHO.get(char, 'the person speaking')
+    return (
+        f'Edit this image: {who} is talking - draw their mouth open mid-word (a small open oval mouth, same style). '
+        'Change absolutely nothing else: same pose, same eyes, same everything, same framing, same lighting.'
+    )
+
+
+# ---------------------------------------------------------------------------
+# plan
+# ---------------------------------------------------------------------------
+def shot_blocks(scene_src: str, marker: str, nth: int) -> str:
+    """Source text of the nth shot entry cut on `marker` (best effort)."""
+    pat = r"at: 0\b" if marker == '0' else r"at: '" + re.escape(marker) + "'"
+    hits = [m.start() for m in re.finditer(pat, scene_src)]
+    if not hits:
+        return ''
+    a = hits[min(nth, len(hits) - 1)]
+    nxt = re.search(r"\n\t\t\t(\{\s*at:|\{\n\t\t\t\tat:)", scene_src[a + 5:])
+    return scene_src[a: a + 5 + (nxt.start() if nxt else 4000)]
+
+
+def small(path: Path) -> np.ndarray:
+    return np.asarray(Image.open(path).convert('L').resize((192, 108))).astype(np.float32) / 255.0
+
+
+def cmd_plan() -> None:
+    sm = json.loads(SHOTMAP.read_text())
+    timeline_lines = json.loads((ROOT / 'build' / 'timeline_lines.json').read_text())
+    srcs = {k: (ROOT / 'src' / 'scenes' / f'{v}.tsx').read_text() for k, v in SCENE_FILES.items()}
+    seen: dict[tuple, int] = {}
+    plan = []
+    for sh in sm['shots']:
+        key = (sh['scene'], sh['marker'])
+        nth = seen.get(key, 0)
+        seen[key] = nth + 1
+        code = shot_blocks(srcs[sh['scene']], sh['marker'], nth)
+        k = [KEYS / f"{sh['id']}_k{i}.png" for i in range(3)]
+        if not all(p.exists() for p in k):
+            plan.append({**sh, 'mode': 'missing'})
+            continue
+        a, b, c = (small(p) for p in k)
+        motion = float(max(np.mean(np.abs(a - b)), np.mean(np.abs(b - c))))
+        lum = float(np.mean(b))
+        ui = [w for w in UI_WORDS if w in code]
+        talk = []
+        for lid in sorted(set(re.findall(r"(?:speak|talkOf)\(api, sf, '([a-z0-9_]+)'", code))):
+            ln = timeline_lines.get(lid)
+            if ln and ln['character'] in WHO and ln['from'] < sh['to'] and ln['to'] > sh['from']:
+                talk.append({'line': lid, 'character': ln['character']})
+        if lum < 0.035:
+            mode = 'skip-dark'
+        elif ui:
+            mode = 'skip-ui'
+        else:
+            mode = 'multi' if motion > 0.045 else 'single'
+        plan.append({**sh, 'mode': mode, 'motion': round(motion, 3), 'lum': round(lum, 3), 'ui': ui, 'talk': talk if mode == 'single' else []})
+    PLAN.write_text(json.dumps(plan, indent=1))
+    from collections import Counter
+
+    cnt = Counter(p['mode'] for p in plan)
+    gens = sum(1 if p['mode'] == 'single' else 3 if p['mode'] == 'multi' else 0 for p in plan)
+    talks = sum(len({t['character'] for t in p.get('talk', [])}) for p in plan)
+    print(f'{len(plan)} shots: {dict(cnt)} -> {gens} restyles + {talks} mouth variants')
+
+
+# ---------------------------------------------------------------------------
+# generation
+# ---------------------------------------------------------------------------
+_lock = threading.Lock()
+
+
+def load_env() -> None:
+    env = ROOT / '.env'
+    if env.exists():
+        for raw in env.read_text().splitlines():
+            raw = raw.strip()
+            if raw and not raw.startswith('#') and '=' in raw:
+                k, v = raw.split('=', 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+def letterbox(img: Image.Image) -> bytes:
+    im = img.convert('RGB').resize((1536, 864), Image.LANCZOS)
+    canvas = Image.new('RGB', (1536, 1024), (0, 0, 0))
+    canvas.paste(im, (0, 80))
+    bio = io.BytesIO()
+    canvas.save(bio, 'PNG')
+    return bio.getvalue()
+
+
+def openai_edit(png: bytes, prompt: str) -> Image.Image:
+    key = os.environ['OPENAI_API_KEY']
+    model = os.environ.get('IMAGE_MODEL', 'gpt-image-2')
+    boundary = '----p63' + hashlib.md5(png[:2000] + prompt.encode()).hexdigest()
+    buf = io.BytesIO()
+    for n, v in [('model', model), ('prompt', prompt), ('size', '1536x1024'), ('quality', os.environ.get('IMAGE_QUALITY', 'high'))]:
+        buf.write(f'--{boundary}\r\nContent-Disposition: form-data; name="{n}"\r\n\r\n{v}\r\n'.encode())
+    buf.write(f'--{boundary}\r\nContent-Disposition: form-data; name="image[]"; filename="src.png"\r\nContent-Type: image/png\r\n\r\n'.encode())
+    buf.write(png)
+    buf.write(f'\r\n--{boundary}--\r\n'.encode())
+    delay = 10.0
+    for attempt in range(7):
+        req = urllib.request.Request(
+            'https://api.openai.com/v1/images/edits',
+            data=buf.getvalue(),
+            headers={'Authorization': f'Bearer {key}', 'Content-Type': f'multipart/form-data; boundary={boundary}'},
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=900) as r:
+                d = json.loads(r.read())
+            out = Image.open(io.BytesIO(base64.b64decode(d['data'][0]['b64_json']))).convert('RGB')
+            return out.crop((0, 80, 1536, 944)).resize((1920, 1080), Image.LANCZOS)
+        except urllib.error.HTTPError as e:
+            msg = e.read()[:300].decode(errors='replace')
+            if e.code in (429, 500, 502, 503, 504) and attempt < 6:
+                time.sleep(delay)
+                delay = min(120, delay * 2)
+                continue
+            raise RuntimeError(f'HTTP {e.code}: {msg}') from e
+        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError) as e:
+            if attempt < 6:
+                time.sleep(delay)
+                delay = min(120, delay * 2)
+                continue
+            raise RuntimeError(f'connection: {e}') from e
+    raise RuntimeError('too many retries')
+
+
+def job_list(plan: list, only: set | None) -> list:
+    jobs = []
+    for p in plan:
+        if only and p['id'] not in only:
+            continue
+        if p['mode'] == 'single':
+            jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k1.png", 'out': OUT / f"{p['id']}_k1.jpg", 'prompt': RESTYLE_PROMPT, 'kind': 'restyle'})
+            for ch in sorted({t['character'] for t in p.get('talk', [])}):
+                jobs.append({'shot': p['id'], 'src': OUT / f"{p['id']}_k1.jpg", 'out': OUT / f"{p['id']}_k1_talk_{ch}.jpg", 'prompt': mouth_prompt(ch), 'kind': 'mouth', 'after': OUT / f"{p['id']}_k1.jpg"})
+        elif p['mode'] == 'multi':
+            for i in range(3):
+                jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k{i}.png", 'out': OUT / f"{p['id']}_k{i}.jpg", 'prompt': RESTYLE_PROMPT, 'kind': 'restyle'})
+    return jobs
+
+
+def cmd_gen(only: set | None, limit: int, workers: int) -> None:
+    load_env()
+    if not os.environ.get('OPENAI_API_KEY'):
+        print('OPENAI_API_KEY is not set (environment or .env).')
+        sys.exit(1)
+    OUT.mkdir(parents=True, exist_ok=True)
+    plan = json.loads(PLAN.read_text())
+    cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
+    jobs = job_list(plan, only)
+    restyles = [j for j in jobs if j['kind'] == 'restyle']
+    mouths = [j for j in jobs if j['kind'] == 'mouth']
+    state = {'done': 0, 'failed': 0, 'skipped': 0}
+
+    def run(j: dict) -> None:
+        if not j['src'].exists():
+            state['failed'] += 1
+            return
+        src = j['src'].read_bytes()
+        h = hashlib.sha1(src + j['prompt'].encode()).hexdigest()
+        if j['out'].exists() and cache.get(j['out'].name) == h:
+            state['skipped'] += 1
+            return
+        try:
+            img = openai_edit(letterbox(Image.open(io.BytesIO(src))), j['prompt'])
+        except Exception as e:  # noqa: BLE001
+            state['failed'] += 1
+            print(f'  ! {j["out"].name}: {e}', flush=True)
+            return
+        img.save(j['out'], 'JPEG', quality=90)
+        with _lock:
+            cache[j['out'].name] = h
+            CACHE.write_text(json.dumps(cache, indent=1, sort_keys=True))
+            state['done'] += 1
+            print(f'  [{state["done"]}] {j["out"].name}', flush=True)
+
+    for batch in (restyles, mouths):
+        if limit:
+            batch = batch[:limit]
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            list(ex.map(run, batch))
+    print(f'restyle: generated {state["done"]}, cached {state["skipped"]}, failed {state["failed"]}')
+
+
+# ---------------------------------------------------------------------------
+# manifest for Remotion
+# ---------------------------------------------------------------------------
+FX = {
+    'narrator_069_flickered': 'flicker', 'narrator_070_once_twice': 'flicker', 'narrator_184_lights_died': 'flicker',
+    'thud_1': 'shake', 'thud_2': 'shake', 'thud_3': 'shake', 'narrator_103_hit': 'shake', 'narrator_188_struck': 'shake',
+    'narrator_189_another_impact': 'shake', 'knocks_many': 'tremble', 'narrator_111_not_one': 'tremble', 'scratches': 'tremble',
+    'narrator_112_moved_away': 'tremble', 'cctv_glitch': 'glitch',
+}
+
+
+def cmd_manifest() -> None:
+    plan = json.loads(PLAN.read_text())
+    shots = []
+    for p in plan:
+        if p['mode'] not in ('single', 'multi'):
+            continue
+        ks = [1] if p['mode'] == 'single' else [0, 1, 2]
+        frames = []
+        for k in ks:
+            f = OUT / f"{p['id']}_k{k}.jpg"
+            if not f.exists():
+                frames = []
+                break
+            fr = {'src': f'restyle/{f.name}'}
+            if p['mode'] == 'single':
+                talk = {}
+                for t in p.get('talk', []):
+                    m = OUT / f"{p['id']}_k1_talk_{t['character']}.jpg"
+                    if m.exists():
+                        talk.setdefault(t['character'], {'src': f'restyle/{m.name}', 'lines': []})['lines'].append(t['line'])
+                if talk:
+                    fr['talk'] = list(talk.values())
+            frames.append(fr)
+        if frames:
+            shots.append({'id': p['id'], 'from': p['from'], 'to': p['to'], 'frames': frames, 'fx': FX.get(p['marker'])})
+    MANIFEST.write_text(json.dumps({'shots': shots}, indent=1))
+    print(f'manifest: {len(shots)} restyled shots -> {MANIFEST.relative_to(ROOT)}')
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument('cmd', choices=['plan', 'gen', 'manifest'])
+    ap.add_argument('--only')
+    ap.add_argument('--limit', type=int, default=0)
+    ap.add_argument('--workers', type=int, default=6)
+    a = ap.parse_args()
+    if a.cmd == 'plan':
+        cmd_plan()
+    elif a.cmd == 'gen':
+        cmd_gen(set(a.only.split(',')) if a.only else None, a.limit, a.workers)
+    else:
+        cmd_manifest()
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

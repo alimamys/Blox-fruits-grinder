@@ -1,5 +1,5 @@
 import React, {createContext, useContext} from 'react';
-import {AbsoluteFill, Sequence, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, getInputProps, Sequence, useCurrentFrame} from 'remotion';
 import {FPS, type SceneTiming} from '../data/timeline';
 import {clamp, easeInOut, rocking, shake as shakeFn} from './anim';
 
@@ -92,6 +92,15 @@ export const Shots: React.FC<{shots: ShotSpec[]}> = ({shots: all}) => {
 	// keep cuts monotonic even if a marker was trimmed
 	for (let i = 1; i < starts.length; i++) starts[i] = Math.max(starts[i], starts[i - 1]);
 	starts[0] = 0;
+	// shot map for the image restyle pipeline (scripts/images/shotmap.mjs)
+	if ((getInputProps() as {logShots?: boolean}).logShots) {
+		const list = shots.map((s, i) => ({
+			at: typeof s.at === 'number' ? s.at : s.at,
+			from: api.scene.startFrame + starts[i],
+			to: api.scene.startFrame + (i === shots.length - 1 ? api.total : starts[i + 1]),
+		}));
+		console.log('P63SHOTS ' + JSON.stringify({scene: api.scene.id, shots: list}));
+	}
 	return (
 		<>
 			{shots.map((s, i) => {
