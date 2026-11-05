@@ -484,6 +484,13 @@ class FishProvider:
             try:
                 data = _post(f'{FISH_API}/v1/tts', json.dumps(body).encode(), headers, timeout=180)
                 return _wav_bytes_to_array(data)
+            except (urllib.error.URLError, ConnectionError, TimeoutError, OSError) as e:
+                # dropped / reset connections through the proxy: back off and retry
+                if attempt < 5:
+                    time.sleep(delay)
+                    delay *= 2
+                    continue
+                raise RuntimeError(f'Fish Audio: connection failed ({e})') from e
             except RuntimeError as e:
                 msg = str(e)
                 if ('HTTP 429' in msg or 'HTTP 5' in msg) and attempt < 5:
