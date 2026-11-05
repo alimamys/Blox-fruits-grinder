@@ -7,6 +7,7 @@ import {Crew1, Crew2, Daniel, Emma, OldWoman, Passenger} from '../components/cha
 import {walkPhase, armTween} from '../components/characters/StickPerson';
 import {FerryExterior, Harbor, OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, FerryWindow, PassengerCabin, RearDeck} from '../components/environments/Interior';
+import {RoomBackdrop} from '../components/environments/Rooms';
 import {DeparturesBoard, GateCounter, WeatherPanel} from '../components/evidence/Documents';
 import {PassengerManifest} from '../components/evidence/Manifest';
 import {CCTVOverlay} from '../components/evidence/CCTV';
@@ -185,7 +186,7 @@ export const Departure: React.FC = () => (
 				at: 'narrator_038_frowned',
 				render: ({f, d}) =>
 					f < d * 0.5 ? (
-						<Closeup who="crew1" f={f} d={d} color="#2a3446" props={{brows: 'angry', mouth: 'frown', look: [0, 1]}} />
+						<Closeup who="crew1" f={f} d={d} color="#2a3446" bg={<RoomBackdrop f={0} variant="crew" />} props={{brows: 'angry', mouth: 'frown', look: [0, 1]}} />
 					) : (
 						<Clicker f={f} value={Math.min(63, Math.floor((f - d * 0.5) * 3))} />
 					),
@@ -242,7 +243,7 @@ export const Departure: React.FC = () => (
 				at: 'narrator_042_nobody_understood',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.3, cy: 460}} to={{z: 1.35}} bg="#1a2232">
-						<rect x={-200} y={-200} width={2400} height={1600} fill="#2a3446" />
+						<RoomBackdrop f={0} variant="crew" />
 						<Crew1 x={760} y={1060} s={1.5} frame={f} look={[1, 0]} brows="worried" mouth="wobbly" arms="shrug" />
 						<Crew2 x={1180} y={1060} s={1.5} frame={f} look={[-1, 0]} brows="worried" mouth="flat" />
 						<CrudeLabel x={960} y={300} text="???" f={f} appear={6} size={90} />

@@ -5,6 +5,7 @@ import {Captain, Crew1, Crew2, Daniel, Emma, OldWoman, Purser} from '../componen
 import {walkPhase} from '../components/characters/StickPerson';
 import {FerryExterior, OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
+import {RoomBackdrop} from '../components/environments/Rooms';
 import {PassengerManifest, PassengerRecord} from '../components/evidence/Manifest';
 import {BigText, CrudeLabel, Evidence, Flash, PassengerCounter} from '../components/fx/Fx';
 import {clamp, easeInOut, lerpF} from '../utils/anim';
@@ -108,7 +109,7 @@ export const Hook: React.FC = () => (
 				at: 'narrator_003_manifest',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.6, cx: 960, cy: 420}} to={{z: 1.75, cy: 440}} bg="#0d1220">
-						<rect x={-200} y={-200} width={2400} height={1600} fill="#1a2232" />
+						<RoomBackdrop f={0} variant="bridge" />
 						<Captain x={960} y={headY(380, 2.2)} s={2.2} frame={f} arms="hold" prop="tablet" propGlow="#bcd6ff" look={[0, 1]} brows="flat" />
 					</Stage>
 				),
@@ -168,7 +169,7 @@ export const Hook: React.FC = () => (
 				at: 'narrator_008_one_conclusion',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.15, cy: 470}} to={{z: 1.2, cy: 480}} bg="#121a28">
-						<rect x={-200} y={-200} width={2400} height={1600} fill="#2a3446" />
+						<RoomBackdrop f={0} variant="crew" />
 						<Crew2 x={560} y={1080} s={1.35} frame={f} look={[f < d / 2 ? 1 : 0.6, 0]} brows="worried" mouth="flat" />
 						<Captain x={960} y={1080} s={1.35} frame={f} look={[f < d / 2 ? -1 : 1, 0]} brows="flat" mouth="frown" />
 						<Crew1 x={1360} y={1080} s={1.35} frame={f} look={[-1, 0]} brows="worried" mouth="flat" />

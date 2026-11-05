@@ -5,6 +5,7 @@ import {Daniel, Emma, OldWoman, Passenger} from '../components/characters/Cast';
 import {armTween} from '../components/characters/StickPerson';
 import {OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
+import {RoomBackdrop} from '../components/environments/Rooms';
 import {GrandmaKidPhoto, PhotoEvidence} from '../components/evidence/Photos';
 import {Flash} from '../components/fx/Fx';
 import {clamp, easeInOut, lerpF} from '../utils/anim';
@@ -12,7 +13,8 @@ import {h01} from '../utils/rough';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, SeaBg, speak, talkOf} from './common';
 
-const Room: React.FC = () => <rect x={-200} y={-200} width={2400} height={1600} fill="#7f8b9c" />;
+/** Close-up backdrop: the passenger cabin. */
+const Room: React.FC = () => <RoomBackdrop f={0} variant="cabin" />;
 
 const DanielC: React.FC<{f: number; d: number; props?: any; s?: number; push?: number}> = ({f, d, props = {}, s = 3.3, push = 0.06}) => (
 	<Closeup who="daniel" f={f} d={d} s={s} cy={460} color="#7f8b9c" bg={<Room />} push={push} props={props} />

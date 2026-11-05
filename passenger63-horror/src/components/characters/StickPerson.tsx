@@ -656,7 +656,6 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 		const hh = prop === 'phone' ? 38 : 44;
 		propEl.push(
 			<g key="ph">
-				{p.propGlow ? <ellipse cx={at[0]} cy={at[1] - 40} rx={70} ry={80} fill={p.propGlow} opacity={0.18} /> : null}
 				<path d={wobPoly([[at[0] - w / 2, at[1] - hh], [at[0] + w / 2, at[1] - hh], [at[0] + w / 2, at[1]], [at[0] - w / 2, at[1]]], sd + 80, 0.6)} fill="#1d1d22" stroke={INK} strokeWidth={3.5} />
 				<rect x={at[0] - w / 2 + 4} y={at[1] - hh + 4} width={w - 8} height={hh - 8} fill={p.propGlow ?? '#5b7fb3'} opacity={0.9} />
 			</g>,

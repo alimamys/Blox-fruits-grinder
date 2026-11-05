@@ -5,6 +5,7 @@ import {Captain, Crew1, Daniel, Emma, Passenger} from '../components/characters/
 import {armTween} from '../components/characters/StickPerson';
 import {FerryExterior, OceanNight, Underwater} from '../components/environments/Outdoor';
 import {CabinRow, CeilingSpeaker, PassengerCabin} from '../components/environments/Interior';
+import {RoomBackdrop} from '../components/environments/Rooms';
 import {MarineRadio, RadarScreen} from '../components/evidence/Navigation';
 import {LockAlert, NoServiceScreen, PhoneScreen} from '../components/evidence/Phone';
 import {Evidence, PAOverlay} from '../components/fx/Fx';
@@ -14,7 +15,8 @@ import {h01, wobLine, wobRect} from '../utils/rough';
 import {Cam, Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, talkOf, speak} from './common';
 
-const Room: React.FC<{color?: string}> = ({color = '#7f8b9c'}) => <rect x={-200} y={-200} width={2400} height={1600} fill={color} />;
+/** Close-up backdrop: a real interior (crew areas for the dark variants). */
+const Room: React.FC<{color?: string}> = ({color = '#7f8b9c'}) => <RoomBackdrop f={0} variant={color === '#7f8b9c' ? 'cabin' : 'crew'} />;
 
 /** Wide exterior with ripples at given (frame, x) hits. */
 const HullWide: React.FC<{f: number; d: number; hits: Array<{at: number; x: number}>; z?: number}> = ({f, d, hits, z = 1}) => (

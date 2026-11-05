@@ -50,7 +50,7 @@ SCENE_FILES = {
     'peopleInWater': 'GrandmotherCalls', 'vanish': 'Vanish', 'police': 'Police', 'cctv': 'Cctv', 'finale': 'Finale', 'end': 'Finale',
 }
 UI_WORDS = (
-    'Evidence', 'PhoneShot', 'PhoneScreen', 'Clicker', 'PassengerCounter', '<Radio', 'Console', 'TimeCard', 'PassengerManifest',
+    '<Evidence', 'PhoneShot', 'PhoneScreen', 'Clicker', 'PassengerCounter', '<Radio', 'Console', 'TimeCard', 'PassengerManifest',
     'DriverLicense', 'Reservation', 'BoardingPass', 'EmailInbox', 'NavScreen', 'RadarScreen', '<Compass', 'HarborControl',
     'PoliceCaseFile', 'DatabaseSearch', 'CivilRecord', 'MessageThread', 'ImageTransfer', 'PAPanel', 'GateCounter',
     'DeparturesBoard', 'WeatherPanel', 'WeddingRing', 'PhotoAlbum', 'IncomingCall', 'LockScreen', 'BigNumber',
@@ -106,6 +106,36 @@ def small(path: Path) -> np.ndarray:
     return np.asarray(Image.open(path).convert('L').resize((192, 108))).astype(np.float32) / 255.0
 
 
+def aligned_diff(a: np.ndarray, b: np.ndarray) -> float:
+    """Difference between two frames after undoing a camera zoom/pan (so push-ins
+    and drifts don't count as motion)."""
+    h, w = a.shape
+    best = float(np.mean(np.abs(a - b)))
+    img_b = Image.fromarray((b * 255).astype('uint8'))
+    for z in np.arange(0.84, 1.17, 0.02):
+        zw, zh = int(round(w * z)), int(round(h * z))
+        bz = np.asarray(img_b.resize((zw, zh), Image.BILINEAR)).astype(np.float32) / 255.0
+        for dx in range(-14, 15, 2):
+            for dy in range(-10, 11, 2):
+                x0 = (zw - w) // 2 + dx
+                y0 = (zh - h) // 2 + dy
+                # overlap region
+                ax0, ay0 = max(0, -x0), max(0, -y0)
+                ax1, ay1 = min(w, zw - x0), min(h, zh - y0)
+                if ax1 - ax0 < w * 0.7 or ay1 - ay0 < h * 0.7:
+                    continue
+                d = float(np.mean(np.abs(a[ay0:ay1, ax0:ax1] - bz[ay0 + y0: ay1 + y0, ax0 + x0: ax1 + x0])))
+                best = min(best, d)
+    return best
+
+
+# shots that stay code-rendered: small legal text, the title card, counters that tick in sync with the voice
+FORCE_SKIP = {'hook_00', 'hook_01', 'hook_26', 'departure_04'}
+# very dark shots that still matter (keep them dark - see DARK_NOTE)
+FORCE_INCLUDE = {'finale_17', 'finale_18', 'vanish_03'}
+DARK_NOTE = ' This is a very dark night scene: keep it just as dark and dim, only the faint light sources lit.'
+
+
 def cmd_plan() -> None:
     sm = json.loads(SHOTMAP.read_text())
     timeline_lines = json.loads((ROOT / 'build' / 'timeline_lines.json').read_text())
@@ -122,7 +152,7 @@ def cmd_plan() -> None:
             plan.append({**sh, 'mode': 'missing'})
             continue
         a, b, c = (small(p) for p in k)
-        motion = float(max(np.mean(np.abs(a - b)), np.mean(np.abs(b - c))))
+        motion = float(max(aligned_diff(b, a), aligned_diff(b, c)))
         lum = float(np.mean(b))
         ui = [w for w in UI_WORDS if w in code]
         talk = []
@@ -130,14 +160,17 @@ def cmd_plan() -> None:
             ln = timeline_lines.get(lid)
             if ln and ln['character'] in WHO and ln['from'] < sh['to'] and ln['to'] > sh['from']:
                 talk.append({'line': lid, 'character': ln['character']})
-        if lum < 0.035:
+        if sh['id'] in FORCE_SKIP:
+            mode = 'skip-fixed'
+        elif lum < 0.035 and sh['id'] not in FORCE_INCLUDE:
             mode = 'skip-dark'
         elif ui:
             mode = 'skip-ui'
         else:
-            mode = 'multi' if motion > 0.045 else 'single'
+            mode = 'multi' if motion > 0.035 else 'single'
         cctv = 'CCTVOverlay' in code or 'CabinCam' in code
-        plan.append({**sh, 'mode': mode, 'motion': round(motion, 3), 'lum': round(lum, 3), 'ui': ui, 'cctv': cctv, 'talk': talk if mode == 'single' else []})
+        dark = lum < 0.05
+        plan.append({**sh, 'mode': mode, 'motion': round(motion, 3), 'lum': round(lum, 3), 'ui': ui, 'cctv': cctv, 'dark': dark, 'talk': talk if mode == 'single' else []})
     PLAN.write_text(json.dumps(plan, indent=1))
     from collections import Counter
 
@@ -216,12 +249,12 @@ def job_list(plan: list, only: set | None) -> list:
         if only and p['id'] not in only:
             continue
         if p['mode'] == 'single':
-            jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k1.png", 'out': OUT / f"{p['id']}_k1.jpg", 'prompt': RESTYLE_PROMPT + (CCTV_NOTE if p.get('cctv') else ''), 'kind': 'restyle'})
+            jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k1.png", 'out': OUT / f"{p['id']}_k1.jpg", 'prompt': RESTYLE_PROMPT + (CCTV_NOTE if p.get('cctv') else '') + (DARK_NOTE if p.get('dark') else ''), 'kind': 'restyle'})
             for ch in sorted({t['character'] for t in p.get('talk', [])}):
                 jobs.append({'shot': p['id'], 'src': OUT / f"{p['id']}_k1.jpg", 'out': OUT / f"{p['id']}_k1_talk_{ch}.jpg", 'prompt': mouth_prompt(ch), 'kind': 'mouth', 'after': OUT / f"{p['id']}_k1.jpg"})
         elif p['mode'] == 'multi':
             for i in range(3):
-                jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k{i}.png", 'out': OUT / f"{p['id']}_k{i}.jpg", 'prompt': RESTYLE_PROMPT + (CCTV_NOTE if p.get('cctv') else ''), 'kind': 'restyle'})
+                jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k{i}.png", 'out': OUT / f"{p['id']}_k{i}.jpg", 'prompt': RESTYLE_PROMPT + (CCTV_NOTE if p.get('cctv') else '') + (DARK_NOTE if p.get('dark') else ''), 'kind': 'restyle'})
     return jobs
 
 

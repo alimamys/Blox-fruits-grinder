@@ -4,7 +4,7 @@ import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, Crew2, Daniel, Emma, Purser} from '../components/characters/Cast';
 import {armTween} from '../components/characters/StickPerson';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
-import {FlashlightBeam, StorageRoom, Washroom} from '../components/environments/Rooms';
+import {FlashlightBeam, RoomBackdrop, StorageRoom, Washroom} from '../components/environments/Rooms';
 import {DeckPlan, DriverLicense} from '../components/evidence/Documents';
 import {PassengerManifest} from '../components/evidence/Manifest';
 import {BoardingPass, EmailInbox, PhoneScreen, Reservation} from '../components/evidence/Phone';
@@ -13,7 +13,8 @@ import {clamp, easeInOut, easeOut, lerpF} from '../utils/anim';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, speak, talkOf} from './common';
 
-const Room: React.FC<{color?: string}> = ({color = '#7f8b9c'}) => <rect x={-200} y={-200} width={2400} height={1600} fill={color} />;
+/** Close-up backdrop: a real interior (crew areas for the dark variants). */
+const Room: React.FC<{color?: string}> = ({color = '#7f8b9c'}) => <RoomBackdrop f={0} variant={color === '#7f8b9c' ? 'cabin' : 'crew'} />;
 
 const PhoneShot: React.FC<{f: number; d: number; children: React.ReactNode; service?: boolean}> = ({f, d, children, service = false}) => (
 	<AbsoluteFill style={{background: '#1b2433'}}>

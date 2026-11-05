@@ -148,7 +148,7 @@ export const CrowdHead: React.FC<{
 			{dim > 0 ? <ellipse cx={0} cy={-10} rx={72} ry={82} fill="#000" fillOpacity={phone ? dim * 0.35 : dim} /> : null}
 			{phone ? (
 				<g>
-					<ellipse cx={0} cy={-20} rx={80} ry={70} fill="#bfe0ff" fillOpacity={0.28} />
+					<ellipse cx={0} cy={-26} rx={26} ry={22} fill="#bfe0ff" fillOpacity={0.22} />
 					<path d={ink.rect(-12, 0, 24, 36, 6, 0.6)} fill="#dff0ff" stroke={INK} strokeWidth={3} />
 				</g>
 			) : null}
