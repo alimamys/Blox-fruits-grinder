@@ -4,10 +4,10 @@
 // character only:   npm run generate-voices -- --character oldWoman
 import type {CharacterId} from './types';
 
-export type ProviderName = 'kokoro' | 'chatterbox' | 'elevenlabs' | 'openai' | 'azure' | 'polly';
+export type ProviderName = 'kokoro' | 'chatterbox' | 'fish' | 'elevenlabs' | 'openai' | 'azure' | 'polly';
 
 /** Which provider `npm run generate-voices` uses unless --provider is passed. */
-export const DEFAULT_PROVIDER: ProviderName = 'kokoro';
+export const DEFAULT_PROVIDER: ProviderName = 'fish';
 
 export interface KokoroVoice {
 	/** A single Kokoro voice id, or a weighted blend of several (weights are normalised). */
@@ -42,6 +42,9 @@ export interface CharacterVoice {
 		 *  clip and performs the line with emotion "exaggeration". Replace the reference WAV with
 		 *  a real recording (10-20 s, clean, one speaker) to change the voice. */
 		chatterbox: {reference: string; exaggeration: number; model?: 'standard' | 'turbo'};
+		/** Fish Audio (https://fish.audio): a public library voice id (cast with
+		 *  scripts/voice/fish_cast.py). `speed` multiplies the line pace. Key: FISH_API_KEY. */
+		fish: {referenceId: string; voiceName: string; speed?: number; model?: string};
 		elevenlabs: {voiceName: string; voiceId?: string; model: string};
 		openai: {voice: string; model: string};
 		azure: {voice: string};
@@ -68,6 +71,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 			kokoro: {blend: [['am_michael', 0.8], ['bm_george', 0.2]], lang: 'en-us'},
 			// the narrator stays restrained, so the ~4x faster Turbo model (no emotion knob) is used
 			chatterbox: {reference: 'voice-references/narrator.wav', exaggeration: 0.45, model: 'turbo'},
+			fish: {referenceId: 'ef9c79b62ef34530bf452c0e50e3c260', voiceName: 'horror (deep, low, serious)'},
 			elevenlabs: {voiceName: 'George', model: ELEVEN_MODEL},
 			openai: {voice: 'onyx', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-RyanNeural'},
@@ -84,6 +88,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['am_puck', 1]], lang: 'en-us'},
 			chatterbox: {reference: 'voice-references/daniel.wav', exaggeration: 0.5},
+			fish: {referenceId: 'e4ffba2adbd7417b8fd2621f61b5d8ad', voiceName: 'Hello (young male)'},
 			elevenlabs: {voiceName: 'Chris', model: ELEVEN_MODEL},
 			openai: {voice: 'ash', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-GuyNeural'},
@@ -100,6 +105,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['af_heart', 1]], lang: 'en-us'},
 			chatterbox: {reference: 'voice-references/emma.wav', exaggeration: 0.5},
+			fish: {referenceId: '933563129e564b19a115bedd57b7406a', voiceName: 'Sarah (young, soft)'},
 			elevenlabs: {voiceName: 'Sarah', model: ELEVEN_MODEL},
 			openai: {voice: 'coral', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-JennyNeural'},
@@ -117,6 +123,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['bf_emma', 0.6], ['af_nicole', 0.4]], lang: 'en-gb'},
 			chatterbox: {reference: 'voice-references/oldWoman.wav', exaggeration: 0.35},
+			fish: {referenceId: '001262690f2a4eea84aa764cc536df24', voiceName: 'Amy (old, calm, serious)'},
 			elevenlabs: {voiceName: 'Lily', model: ELEVEN_MODEL},
 			openai: {voice: 'sage', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-AbbiNeural'},
@@ -133,6 +140,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['bm_george', 1]], lang: 'en-gb'},
 			chatterbox: {reference: 'voice-references/captain.wav', exaggeration: 0.4},
+			fish: {referenceId: 'd67524ad1936410896ad120583cb1117', voiceName: 'Andrew (older, deep)'},
 			elevenlabs: {voiceName: 'Daniel', model: ELEVEN_MODEL},
 			openai: {voice: 'ballad', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-ThomasNeural'},
@@ -149,6 +157,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['am_fenrir', 1]], lang: 'en-us'},
 			chatterbox: {reference: 'voice-references/crew1.wav', exaggeration: 0.5},
+			fish: {referenceId: '536d3a5e000945adb7038665781a4aca', voiceName: 'Ethan'},
 			elevenlabs: {voiceName: 'Liam', model: ELEVEN_MODEL},
 			openai: {voice: 'echo', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-DavisNeural'},
@@ -165,6 +174,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['af_sarah', 1]], lang: 'en-us'},
 			chatterbox: {reference: 'voice-references/crew2.wav', exaggeration: 0.5},
+			fish: {referenceId: 'f6a19fe5ab494e1fa51bb1476d583a44', voiceName: 'Abby (US)'},
 			elevenlabs: {voiceName: 'Laura', model: ELEVEN_MODEL},
 			openai: {voice: 'shimmer', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-SaraNeural'},
@@ -181,6 +191,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['am_onyx', 0.7], ['am_eric', 0.3]], lang: 'en-us'},
 			chatterbox: {reference: 'voice-references/harbor.wav', exaggeration: 0.35},
+			fish: {referenceId: 'c5f56a6cc2ec4fa8920cb4c5889a3fb7', voiceName: 'Slax (clear, crisp)'},
 			elevenlabs: {voiceName: 'Eric', model: ELEVEN_MODEL},
 			openai: {voice: 'verse', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-TonyNeural'},
@@ -198,6 +209,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['bf_isabella', 1]], lang: 'en-gb'},
 			chatterbox: {reference: 'voice-references/pa.wav', exaggeration: 0.35},
+			fish: {referenceId: 'b347db033a6549378b48d00acb0d06cd', voiceName: 'Selene (soft female)'},
 			elevenlabs: {voiceName: 'Alice', model: ELEVEN_MODEL},
 			openai: {voice: 'nova', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-SoniaNeural'},
@@ -214,6 +226,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['bm_fable', 1]], lang: 'en-gb'},
 			chatterbox: {reference: 'voice-references/police.wav', exaggeration: 0.45},
+			fish: {referenceId: '76b55591c758444cb95253708696dfad', voiceName: 'Joe (deep, serious)'},
 			elevenlabs: {voiceName: 'Roger', model: ELEVEN_MODEL},
 			openai: {voice: 'fable', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-AlfieNeural'},
@@ -230,6 +243,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		providers: {
 			kokoro: {blend: [['af_river', 1]], lang: 'en-us'},
 			chatterbox: {reference: 'voice-references/crowd.wav', exaggeration: 0.6},
+			fish: {referenceId: '933563129e564b19a115bedd57b7406a', voiceName: 'Sarah (crowd fallback - crowd lines keep Chatterbox)'},
 			elevenlabs: {voiceName: 'Jessica', model: ELEVEN_MODEL},
 			openai: {voice: 'alloy', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-AriaNeural'},

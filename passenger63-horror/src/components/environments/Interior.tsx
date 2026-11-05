@@ -178,11 +178,13 @@ export const SeatedCrowd: React.FC<{
 	lap?: boolean;
 }> = ({x, y, s, id, f, back = false, lean = 0, look = 0, mouth = 'flat', phone = false, eyes = 'dot', dim = 0, lights = 'on', legs = true, lap = true}) => {
 	const ink = makeInk(f, id * 29 + 7);
+	// people keep their own colours under red emergency light (just tinted), so faces stay readable
 	const L = lights === 'off' ? 'on' : lights;
-	const sh = tone(SHIRTS[(id * 7) % SHIRTS.length], L);
-	const pa = tone(PANTS[id % PANTS.length], L);
-	const sk = tone(SKINS[(id * 3) % SKINS.length], L);
-	const hr = tone(HAIRS[(id * 5) % HAIRS.length], L);
+	const tn = (cc: string) => (L === 'red' ? mix(mix(cc, '#000', 0.25), '#d0301f', 0.42) : tone(cc, L));
+	const sh = tn(SHIRTS[(id * 7) % SHIRTS.length]);
+	const pa = tn(PANTS[id % PANTS.length]);
+	const sk = tn(SKINS[(id * 3) % SKINS.length]);
+	const hr = tn(HAIRS[(id * 5) % HAIRS.length]);
 	const ln = lean / s;
 	const sleeve = mix(sh, '#000', 0.12);
 	return (
@@ -315,49 +317,72 @@ export const PassengerCabin: React.FC<{
 	const coverC = T('#e6e9ee');
 	const baseC = T('#1a1e27');
 
-	/* ---------- room shell */
+	/* ---------- room shell (flat fills + translucent falloff bands, batched windows: cheap to render) */
 	const shell: React.ReactNode[] = [];
+	const P = (X: number, H: number, Z: number) => p(X, H, Z);
+	const quadZ = (pts: Array<[number, number, number]>) => qd(pts.map(([X, H, Z]) => P(X, H, Z)));
+	shell.push(<path key="ceil" d={quadZ([[-W, Hc, Zn], [W, Hc, Zn], [W, Hc, Zb], [-W, Hc, Zb]])} fill={ceilC} />);
+	shell.push(<path key="floor" d={quadZ([[-W, 0, Zn], [W, 0, Zn], [W, 0, Zb], [-W, 0, Zb]])} fill={floorC} />);
+	shell.push(<path key="aisle" d={quadZ([[-88, 0, Zn], [88, 0, Zn], [88, 0, Zb], [-88, 0, Zb]])} fill={aisleC} />);
+	for (const sd of [-1, 1]) shell.push(<path key={`w${sd}`} d={quadZ([[sd * W, Hc, Zn], [sd * W, Hc, Zb], [sd * W, 0, Zb], [sd * W, 0, Zn]])} fill={wallC} />);
+	// light falloff: darker toward the camera (floor, ceiling, walls), lower wall panels, seam AO
 	shell.push(
-		<defs key="g">
-			<LinGrad id={`${uid}c`} stops={[[0, shade(ceilC, -0.3)], [1, ceilC]]} />
-			<LinGrad id={`${uid}f`} stops={[[0, floorC], [1, shade(floorC, -0.5)]]} />
-			<LinGrad id={`${uid}a`} stops={[[0, aisleC], [1, shade(aisleC, -0.5)]]} />
-			<LinGrad id={`${uid}wl`} x2={1} y2={0} stops={[[0, shade(wallC, -0.25)], [1, wallC]]} />
-			<LinGrad id={`${uid}wr`} x2={1} y2={0} stops={[[0, wallC], [1, shade(wallC, -0.25)]]} />
-		</defs>,
+		<path
+			key="fall"
+			d={[
+				quadZ([[-W, 0, Zn], [W, 0, Zn], [W, 0, 1250], [-W, 0, 1250]]),
+				quadZ([[-W, 0, Zn], [W, 0, Zn], [W, 0, 900], [-W, 0, 900]]),
+				quadZ([[-W, Hc, Zn], [W, Hc, Zn], [W, Hc, 900], [-W, Hc, 900]]),
+				...[-1, 1].map((sd) => quadZ([[sd * W, Hc, Zn], [sd * W, Hc, 1100], [sd * W, 0, 1100], [sd * W, 0, Zn]])),
+			].join('')}
+			fill="#000"
+			fillOpacity={0.13}
+		/>,
 	);
-	// ceiling + floor
-	shell.push(<path key="ceil" d={qd([p(-W, Hc, Zn), p(W, Hc, Zn), p(W, Hc, Zb), p(-W, Hc, Zb)])} fill={`url(#${uid}c)`} />);
-	shell.push(<path key="floor" d={qd([p(-W, 0, Zn), p(W, 0, Zn), p(W, 0, Zb), p(-W, 0, Zb)])} fill={`url(#${uid}f)`} />);
-	shell.push(<path key="aisle" d={qd([p(-88, 0, Zn), p(88, 0, Zn), p(88, 0, Zb), p(-88, 0, Zb)])} fill={`url(#${uid}a)`} />);
-	// side walls
+	shell.push(<path key="lw" d={[-1, 1].map((sd) => quadZ([[sd * W, 300, Zn], [sd * W, 300, Zb], [sd * W, 0, Zb], [sd * W, 0, Zn]])).join('')} fill={wallLow} fillOpacity={0.75} />);
+	shell.push(
+		<path
+			key="ao"
+			d={[-1, 1]
+				.map((sd) => quadZ([[sd * W, Hc, Zn], [sd * W, Hc, Zb], [sd * W, Hc - 70, Zb], [sd * W, Hc - 70, Zn]]) + quadZ([[sd * W, 0, Zn], [sd * W, 0, Zb], [sd * W - sd * 90, 0, Zb], [sd * W - sd * 90, 0, Zn]]))
+				.join('')}
+			fill="#000"
+			fillOpacity={0.2}
+		/>,
+	);
+	// windows: one per row, recessed 34 units (batched by kind)
+	const glassNear: string[] = [];
+	const glassFar: string[] = [];
+	const hor: string[] = [];
+	const sheen: string[] = [];
+	const jambs: string[] = [];
+	const sills: string[] = [];
 	for (const sd of [-1, 1]) {
 		const X = sd * W;
-		shell.push(<path key={`w${sd}`} d={qd([p(X, Hc, Zn), p(X, Hc, Zb), p(X, 0, Zb), p(X, 0, Zn)])} fill={`url(#${uid}${sd < 0 ? 'wl' : 'wr'})`} />);
-		shell.push(<path key={`wl${sd}`} d={qd([p(X, 300, Zn), p(X, 300, Zb), p(X, 0, Zb), p(X, 0, Zn)])} fill={wallLow} fillOpacity={0.75} />);
-		// ceiling seam AO + floor seam AO
-		shell.push(<path key={`ao${sd}`} d={qd([p(X, Hc, Zn), p(X, Hc, Zb), p(X, Hc - 70, Zb), p(X, Hc - 70, Zn)])} fill="#000" fillOpacity={0.16} />);
-		shell.push(<path key={`fa${sd}`} d={qd([p(X, 0, Zn), p(X, 0, Zb), p(X - sd * 90, 0, Zb), p(X - sd * 90, 0, Zn)])} fill="#000" fillOpacity={0.22} />);
-		// windows: one per row, recessed 34 units
+		const Xg = X + sd * 34;
+		const lo = 300;
+		const hi = 760;
 		for (let i = 0; i < 10; i++) {
 			const z0 = rowZ(i) + 70;
 			const z1 = z0 + 230 + i * 12;
 			if (z1 > Zb - 40) continue;
-			const Xg = X + sd * 34;
-			const lo = 300;
-			const hi = 760;
-			const glass = [p(Xg, hi, z0), p(Xg, hi, z1), p(Xg, lo, z1), p(Xg, lo, z0)];
-			const o = Math.max(1.2, 4 * (1000 / z0));
-			shell.push(<path key={`g${sd}${i}`} d={ink.poly(glass, 40 + i * 2 + sd, 0.8)} fill={T('#08111f')} stroke={INK} strokeWidth={o} />);
-			shell.push(<path key={`gh${sd}${i}`} d={qd([p(Xg, 470, z0), p(Xg, 470, z1), p(Xg, 466, z1), p(Xg, 466, z0)])} fill="#2a3f5c" fillOpacity={0.6} />);
-			shell.push(<path key={`gs${sd}${i}`} d={qd([glass[0], [glass[0][0] + (glass[1][0] - glass[0][0]) * 0.3, glass[1][1] + (glass[0][1] - glass[1][1]) * 0.7], [glass[3][0] + (glass[2][0] - glass[3][0]) * 0.12, glass[2][1] + (glass[3][1] - glass[2][1]) * 0.88], glass[3]])} fill="#fff" fillOpacity={0.035} />);
-			// far jamb (faces the camera) + sill top
-			shell.push(<path key={`j${sd}${i}`} d={qd([p(X, hi, z1), p(Xg, hi, z1), p(Xg, lo, z1), p(X, lo, z1)])} fill={shade(wallC, -0.18)} stroke={INK} strokeWidth={o * 0.7} />);
-			shell.push(<path key={`s${sd}${i}`} d={qd([p(X, lo, z0), p(X, lo, z1), p(Xg, lo, z1), p(Xg, lo, z0)])} fill={shade(wallC, 0.25)} stroke={INK} strokeWidth={o * 0.7} />);
+			const glass = [P(Xg, hi, z0), P(Xg, hi, z1), P(Xg, lo, z1), P(Xg, lo, z0)];
+			(i < 3 ? glassNear : glassFar).push(ink.poly(glass, 40 + i * 2 + sd, 0.8));
+			hor.push(quadZ([[Xg, 470, z0], [Xg, 470, z1], [Xg, 466, z1], [Xg, 466, z0]]));
+			sheen.push(qd([glass[0], [glass[0][0] + (glass[1][0] - glass[0][0]) * 0.3, glass[1][1] + (glass[0][1] - glass[1][1]) * 0.7], [glass[3][0] + (glass[2][0] - glass[3][0]) * 0.12, glass[2][1] + (glass[3][1] - glass[2][1]) * 0.88], glass[3]]));
+			jambs.push(quadZ([[X, hi, z1], [Xg, hi, z1], [Xg, lo, z1], [X, lo, z1]]));
+			sills.push(quadZ([[X, lo, z0], [X, lo, z1], [Xg, lo, z1], [Xg, lo, z0]]));
 		}
-		// dado rail + window band outline
-		shell.push(<path key={`dr${sd}`} d={ink.poly([p(X, 300, Zn), p(X, 300, Zb)], 60 + sd, 1, false)} stroke={INK} strokeWidth={4} fill="none" />);
-		// luggage rack (open box running the length of the cabin)
+	}
+	shell.push(<path key="gN" d={glassNear.join('')} fill={T('#08111f')} stroke={INK} strokeWidth={3.2} />);
+	shell.push(<path key="gF" d={glassFar.join('')} fill={T('#08111f')} stroke={INK} strokeWidth={1.6} />);
+	shell.push(<path key="gH" d={hor.join('')} fill="#2a3f5c" fillOpacity={0.6} />);
+	shell.push(<path key="gS" d={sheen.join('')} fill="#fff" fillOpacity={0.035} />);
+	shell.push(<path key="gJ" d={jambs.join('')} fill={shade(wallC, -0.18)} stroke={INK} strokeWidth={1.8} />);
+	shell.push(<path key="gL" d={sills.join('')} fill={shade(wallC, 0.25)} stroke={INK} strokeWidth={1.8} />);
+	shell.push(<path key="dr" d={ink.poly([P(-W, 300, Zn), P(-W, 300, Zb)], 59, 1, false) + ink.poly([P(W, 300, Zn), P(W, 300, Zb)], 61, 1, false)} stroke={INK} strokeWidth={4} fill="none" />);
+	// luggage racks (open boxes running the length of the cabin) + their light strips
+	for (const sd of [-1, 1]) {
 		shell.push(
 			<Box3
 				key={`rack${sd}`}
@@ -367,24 +392,20 @@ export const PassengerCabin: React.FC<{
 				b={{X0: sd < 0 ? -W : W - 120, X1: sd < 0 ? -W + 120 : W, H0: 880, H1: 940, Z0: Zn, Z1: Zb - 10, fill: T('#b9c0ca'), open: true, sw: 4}}
 			/>,
 		);
-		shell.push(<path key={`rl${sd}`} d={qd([p(sd * (W - 120), 880, Zn), p(sd * (W - 120), 880, Zb), p(sd * (W - 100), 880, Zb), p(sd * (W - 100), 880, Zn)])} fill={lamp} fillOpacity={L === 'off' ? 0.15 : 0.85} />);
 	}
+	shell.push(<path key="rl" d={[-1, 1].map((sd) => quadZ([[sd * (W - 120), 880, Zn], [sd * (W - 120), 880, Zb], [sd * (W - 100), 880, Zb], [sd * (W - 100), 880, Zn]])).join('')} fill={lamp} fillOpacity={L === 'off' ? 0.15 : 0.85} />);
 	// ceiling light strips + ribs
 	const ribs: string[] = [];
 	for (let i = 0; i < 11; i++) {
 		const Z = rowZ(i) + 180;
 		if (Z > Zb) break;
-		const a = p(-W, Hc, Z);
-		const b = p(W, Hc, Z);
+		const a = P(-W, Hc, Z);
+		const b = P(W, Hc, Z);
 		ribs.push(`M${a[0].toFixed(1)},${a[1].toFixed(1)}L${b[0].toFixed(1)},${b[1].toFixed(1)}`);
 	}
 	shell.push(<path key="ribs" d={ribs.join('')} stroke="#000" strokeWidth={2} strokeOpacity={0.18} fill="none" />);
-	for (const sd of [-1, 1]) {
-		const xa = sd * 300;
-		const xb = sd * 360;
-		shell.push(<path key={`lsg${sd}`} d={qd([p(sd * 210, Hc, Zn), p(sd * 450, Hc, Zn), p(sd * 450, Hc, Zb), p(sd * 210, Hc, Zb)])} fill={lamp} fillOpacity={L === 'on' ? 0.16 : 0.07} />);
-		shell.push(<path key={`ls${sd}`} d={ink.poly([p(xa, Hc, Zn), p(xb, Hc, Zn), p(xb, Hc, Zb), p(xa, Hc, Zb)], 80 + sd, 1)} fill={L === 'off' ? '#222' : lamp} stroke={INK} strokeWidth={3} />);
-	}
+	shell.push(<path key="lsg" d={[-1, 1].map((sd) => quadZ([[sd * 210, Hc, Zn], [sd * 450, Hc, Zn], [sd * 450, Hc, Zb], [sd * 210, Hc, Zb]])).join('')} fill={lamp} fillOpacity={L === 'on' ? 0.16 : 0.07} />);
+	shell.push(<path key="ls" d={[-1, 1].map((sd) => ink.poly([P(sd * 300, Hc, Zn), P(sd * 360, Hc, Zn), P(sd * 360, Hc, Zb), P(sd * 300, Hc, Zb)], 80 + sd, 1)).join('')} fill={L === 'off' ? '#222' : lamp} stroke={INK} strokeWidth={3} />);
 
 	/* ---------- end wall */
 	const bw0 = p(-W, Hc, Zb);
@@ -577,7 +598,7 @@ export const PassengerCabin: React.FC<{
 		const draw = (k: string, bk: Bucket) =>
 			bk.d.length ? (
 				<g key={k}>
-					<path d={bk.d.join('')} fill={bk.fill} stroke={INK} strokeWidth={bk.w} strokeLinejoin="round" />
+					<path d={bk.d.join('')} fill={bk.fill} stroke={row >= 3 && !k.endsWith('n') ? 'none' : INK} strokeWidth={bk.w} strokeLinejoin="round" />
 					{bk.ov && bk.ovd && bk.ovd.length ? <path d={bk.ovd.join('')} fill={bk.ov} /> : null}
 				</g>
 			) : null;
@@ -834,7 +855,7 @@ export const CabinRow: React.FC<{
 /** The rear deck: bench, railing, open black sea.
  *  view 'behind' - from behind the bench, facing the open sea (her back to us).
  *                  Occupant at local (0, 860), s = 0.62 -> seat top 815; the backrest
- *                  slats are drawn IN FRONT of the children (top ~765).
+ *                  slats are drawn IN FRONT of the children (top ~776, ~40px above the seat, so shoulders + upper back show).
  *  view 'front'  - from the stern railing looking back at the bench and the lit
  *                  cabin doors. Occupant at local (0, 912), s = 0.75 -> seat top 858;
  *                  backrest behind her, children after the bench.
@@ -922,10 +943,10 @@ const DeckBehind: React.FC<DeckProps> = ({f, lights = 'on', calm = 0, fog = 0.15
 		const X = sx * (Lb - 22);
 		// armrest bar from the front post to the back post
 		front.push(q([pb(sx * Lb - 6, 116, 34), pb(sx * Lb + 6, 116, 34), pb(sx * Lb + 6, 108, -40), pb(sx * Lb - 6, 108, -40)], 20 + sx, T(WOOD.iron), 2.5));
-		front.push(q([pb(X - 7, 166, -38), pb(X + 7, 166, -38), pb(X + 7, 0, -38), pb(X - 7, 0, -38)], 24 + sx, T(WOOD.iron), 2.5));
+		front.push(q([pb(X - 7, 150, -38), pb(X + 7, 150, -38), pb(X + 7, 0, -38), pb(X - 7, 0, -38)], 24 + sx, T(WOOD.iron), 2.5));
 	}
 	{
-		const sl = [[80, 102], [112, 134], [144, 164]].map(([h0, h1]) => [pb(-Lb + 6, h1, -36), pb(Lb - 6, h1, -36), pb(Lb - 6, h0, -36), pb(-Lb + 6, h0, -36)] as Pt[]);
+		const sl = [[78, 96], [104, 122], [130, 147]].map(([h0, h1]) => [pb(-Lb + 6, h1, -36), pb(Lb - 6, h1, -36), pb(Lb - 6, h0, -36), pb(-Lb + 6, h0, -36)] as Pt[]);
 		front.push(<path key="bsl" d={sl.map((fc, i) => ink.poly(fc, 330 + i, 0.7)).join('')} fill={T(WOOD.face)} stroke={INK} strokeWidth={3} strokeLinejoin="round" />);
 		front.push(<path key="bss" d={sl.map((fc) => qd(fc)).join('')} fill="#000" fillOpacity={0.18} />);
 		front.push(<path key="bsh" d={sl.map((fc, i) => ink.line(fc[0][0] + 4, fc[0][1] + 2, fc[1][0] - 4, fc[1][1] + 2, 40 + i, 0.4, 3)).join('')} stroke="#e6c08a" strokeWidth={2} strokeOpacity={L === 'off' ? 0.1 : 0.45} fill="none" />);
@@ -1650,7 +1671,7 @@ export const CeilingSpeaker: React.FC<{f: number; active?: number; lights?: Ligh
 		<g>
 			<ShadeDefs id={uid} glow={glow} />
 			<rect x={-200} y={-200} width={2320} height={1500} fill={T('#b9bfc7')} />
-			<rect x={-200} y={-200} width={2320} height={1500} fill={S.up} fillOpacity={0.55} />
+			<rect x={-200} y={-200} width={2320} height={520} fill="#000" fillOpacity={0.18} />
 			<path d={tiles.join('')} stroke="#000" strokeWidth={3} strokeOpacity={0.22} fill="none" />
 			<ellipse cx={975} cy={600} rx={rx + 60} ry={ry + 50} fill={S.sh} />
 			{/* housing: ring on the ceiling, side band, grille cap */}

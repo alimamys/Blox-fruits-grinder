@@ -85,7 +85,7 @@ def build_job(line: dict, data: dict, crowd_index: int, provider_name: str = 'ko
         pitch = lerp(pitch, other['post']['pitchSemitones'], a)
         tremor = lerp(tremor, other['post']['tremor'], a)
         if a >= 0.5:
-            for p in ('chatterbox', 'elevenlabs', 'openai', 'azure', 'polly'):
+            for p in ('chatterbox', 'elevenlabs', 'openai', 'azure', 'polly', 'fish'):
                 providers[p] = other['providers'][p]
             desc = f"{desc} (now {int(a * 100)}% {other['displayName']}: {other['description']})"
 
@@ -299,7 +299,7 @@ def best_take(provider, job: dict, n: int, out: Path, cache: dict, provider_name
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--provider', help='kokoro | chatterbox | elevenlabs | openai | azure | polly (default from voiceConfig.ts)')
+    ap.add_argument('--provider', help='kokoro | chatterbox | fish | elevenlabs | openai | azure | polly (default from voiceConfig.ts)')
     ap.add_argument('--character', action='append', help='only this character id (repeatable), e.g. oldWoman')
     ap.add_argument('--only', help='comma separated line ids')
     ap.add_argument('--force', action='store_true', help='regenerate even if unchanged')

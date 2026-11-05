@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import io
 import json
+import time
 import os
 import urllib.error
 import urllib.request
@@ -399,6 +400,103 @@ class ElevenLabsProvider:
 
 
 # ----------------------------------------------------------------------------
+# Fish Audio
+# ----------------------------------------------------------------------------
+FISH_API = 'https://api.fish.audio'
+
+# Fish S2 understands free-form inline direction in square brackets. Kept short and
+# only on character lines - an over-directed narrator is what makes TTS sound fake.
+FISH_EMOTION_TAGS = {
+    'whispering': '[whispering]',
+    'afraid': '[scared]',
+    'panicked': '[panicked, breathless]',
+    'grieving': '[sad, voice breaking]',
+    'screaming': '[screaming]',
+    'comforting': '[softly]',
+    'unnaturally_calm': '[calm, eerie]',
+    'matter_of_fact': '[calm]',
+    'sleepy': '[sleepy]',
+    'tired': '[tired]',
+    'amused': '[amused]',
+    'hypnotized': '[dreamy, distant]',
+    'distressed': '[distressed]',
+    'angry': '[angry]',
+    'affectionate': '[warmly]',
+    'warm': '[warmly]',
+    'confused': '[confused]',
+    'protective': '[urgent]',
+    'breathless': '[breathless]',
+    'uneasy': '[uneasy]',
+    'serious': '[serious]',
+    'authoritative': '[firm]',
+}
+
+
+def fish_text(job: dict) -> str:
+    line = job['line']
+    text = _speak_text(line)
+    tags = []
+    if line.get('fishTags'):
+        tags.append(line['fishTags'])
+    elif line['audioEffect'] in ('whisper', 'whisperClose'):
+        tags.append('[whispering]')
+    elif line['character'] == 'narrator':
+        if line['volume'] < 0.9 or line['emotion'] == 'whispering':
+            tags.append('[quietly]')
+    else:
+        tag = FISH_EMOTION_TAGS.get(line['emotion'])
+        if tag:
+            tags.append(tag)
+        if line['audioEffect'] == 'shout' and line['emotion'] != 'screaming':
+            tags.append('[shouting]')
+    return (' '.join(tags) + ' ' + text).strip()
+
+
+class FishProvider:
+    """Fish Audio text-to-speech (https://fish.audio). Voices are public library models
+    referenced by id (`referenceId` in voiceConfig.ts). The model defaults to the free
+    `s2.1-pro-free`; set FISH_MODEL (e.g. s2.1-pro) to use a paid model with API credit."""
+
+    name = 'fish'
+
+    def __init__(self):
+        self.key = os.environ.get('FISH_API_KEY')
+        if not self.key:
+            raise ProviderUnavailable('FISH_API_KEY is not set (environment variable or .env file).')
+        self.model = os.environ.get('FISH_MODEL', 's2.1-pro-free')
+
+    def quota(self):
+        return None
+
+    def synthesize(self, job: dict):
+        cfg = job['providers']['fish']
+        body = {
+            'text': fish_text(job),
+            'reference_id': cfg['referenceId'],
+            'format': 'wav',
+            'normalize': True,
+            'latency': 'normal',
+            'prosody': {'speed': round(float(np.clip(job['perceivedSpeed'] * cfg.get('speed', 1.0), 0.8, 1.25)), 2)},
+        }
+        headers = {'Authorization': f'Bearer {self.key}', 'Content-Type': 'application/json', 'model': cfg.get('model') or self.model}
+        delay = 2.0
+        for attempt in range(6):
+            try:
+                data = _post(f'{FISH_API}/v1/tts', json.dumps(body).encode(), headers, timeout=180)
+                return _wav_bytes_to_array(data)
+            except RuntimeError as e:
+                msg = str(e)
+                if ('HTTP 429' in msg or 'HTTP 5' in msg) and attempt < 5:
+                    time.sleep(delay)
+                    delay *= 2
+                    continue
+                if 'HTTP 402' in msg:
+                    raise ProviderUnavailable(f'Fish Audio: no API credit for model {headers["model"]} ({msg[:200]})') from e
+                raise
+        raise RuntimeError('Fish Audio: too many retries')
+
+
+# ----------------------------------------------------------------------------
 # OpenAI
 # ----------------------------------------------------------------------------
 class OpenAIProvider:
@@ -490,6 +588,8 @@ def make_provider(name: str, models_dir: Path, emotion_directions: dict):
         return ChatterboxProvider(models_dir)
     if name == 'elevenlabs':
         return ElevenLabsProvider()
+    if name == 'fish':
+        return FishProvider()
     if name == 'openai':
         return OpenAIProvider(emotion_directions)
     if name == 'azure':

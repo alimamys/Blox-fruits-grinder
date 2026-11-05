@@ -213,7 +213,7 @@ EFFECT_LUFS_OFFSET = {
 }
 
 
-NARRATOR_WPS = 2.8  # words/second at pace 1.0 (~170 wpm), the fastest the narrator may go
+NARRATOR_WPS = 3.05  # words/second at pace 1.0 (~183 wpm), the fastest the narrator may go
 MAX_PACE_STRETCH = 1.18
 
 

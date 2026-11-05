@@ -74,22 +74,9 @@ export const OceanNight: React.FC<{
 					<stop offset="0.7" stopColor={pal.sky[1]} />
 					<stop offset="1" stopColor={pal.sky[2]} />
 				</linearGradient>
-				<linearGradient id={`${uid}hz`} x1="0" y1="0" x2="0" y2="1">
-					<stop offset="0" stopColor={pal.haze} stopOpacity={0} />
-					<stop offset="0.5" stopColor={pal.haze} stopOpacity={0.55} />
-					<stop offset="1" stopColor={pal.haze} stopOpacity={0} />
-				</linearGradient>
-				<linearGradient id={`${uid}deep`} x1="0" y1="0" x2="0" y2="1">
-					<stop offset="0" stopColor="#000" stopOpacity={0} />
-					<stop offset="1" stopColor="#000" stopOpacity={mood === 'day' ? 0.15 : 0.45} />
-				</linearGradient>
 				<radialGradient id={`${uid}fog`}>
 					<stop offset="0" stopColor="#9aa7b8" stopOpacity="0.35" />
 					<stop offset="1" stopColor="#9aa7b8" stopOpacity="0" />
-				</radialGradient>
-				<radialGradient id={`${uid}moon`}>
-					<stop offset="0" stopColor="#dfe6ef" stopOpacity="0.35" />
-					<stop offset="1" stopColor="#dfe6ef" stopOpacity="0" />
 				</radialGradient>
 			</defs>
 			<rect x={-200} y={-200} width={2320} height={horizon + 210} fill={`url(#${uid}sky)`} />
@@ -119,7 +106,7 @@ export const OceanNight: React.FC<{
 				</g>
 			) : null}
 			{glow ? <ellipse cx={960} cy={horizon} rx={900} ry={50} fill={glow} fillOpacity={0.18} /> : null}
-			<rect x={-200} y={horizon - 70} width={2320} height={140} fill={`url(#${uid}hz)`} fillOpacity={0.7} />
+			<path d={`M-200,${horizon - 60}h2320v120h-2320Z M-200,${horizon - 22}h2320v44h-2320Z`} fill={pal.haze} fillOpacity={0.16} />
 			{waves}
 			<path d={crests.join('')} fill="none" stroke={pal.crest} strokeWidth={2.5} strokeOpacity={0.32 * (0.4 + still * 0.6)} />
 			<path d={glints.join('')} stroke={pal.glint} strokeWidth={2} strokeLinecap="round" strokeOpacity={moon ? 0.45 : 0.22}  fill="none" />
@@ -344,7 +331,6 @@ export const Harbor: React.FC<{
 						<path d={qd([[bd.x + bd.w, top], [bd.x + bd.w + dep, top - dep * 0.45], [bd.x + bd.w + dep, horizon], [bd.x + bd.w, horizon]])} fill="#05070c" stroke="#000" strokeWidth={2} />
 						<path d={qd([[bd.x, top], [bd.x + bd.w, top], [bd.x + bd.w + dep, top - dep * 0.45], [bd.x + dep, top - dep * 0.45]])} fill="#151b27" stroke="#000" strokeWidth={2} />
 						<path d={ink.rect(bd.x, top, bd.w, bd.h + 4, i, 1)} fill="#0b0f18" stroke="#000" strokeWidth={3} />
-						<rect x={bd.x} y={top} width={bd.w} height={bd.h} fill={S.hl} fillOpacity={0.25} />
 						{Array.from({length: Math.floor(bd.h / 34)}, (_, r) =>
 							Array.from({length: Math.floor(bd.w / 30)}, (_, c) =>
 								h01(i, r, c) > 0.55 ? <rect key={`${r}-${c}`} x={bd.x + 10 + c * 30} y={top + 14 + r * 34} width={12} height={14} fill="#f6d27a" fillOpacity={0.75} /> : null,
@@ -356,7 +342,7 @@ export const Harbor: React.FC<{
 			{/* quay: top face + front face */}
 			<path d={qd([[-60, horizon - 14], [1980, horizon - 14], [1960, horizon], [-40, horizon]])} fill="#3a3e46" />
 			<path d={ink.poly([[-40, horizon], [1960, horizon], [1960, horizon + 70], [-40, horizon + 70]], 40, 1.2)} fill="#24272d" stroke="#000" strokeWidth={4} />
-			<rect x={-40} y={horizon} width={2000} height={70} fill={S.dn} fillOpacity={0.6} />
+			<rect x={-40} y={horizon + 40} width={2000} height={30} fill="#000" fillOpacity={0.3} />
 			{/* light reflections in the water below the quay */}
 			<path
 				d={lamps
@@ -374,7 +360,8 @@ export const Harbor: React.FC<{
 			/>
 			{lamps.map((lx, i) => (
 				<g key={`lamp${i}`}>
-					<ellipse cx={lx} cy={horizon - 110} rx={150} ry={150} fill={S.gl} />
+					<circle cx={lx} cy={horizon - 120} r={130} fill="#ffad4d" fillOpacity={0.05} />
+					<circle cx={lx} cy={horizon - 135} r={60} fill="#ffad4d" fillOpacity={0.08} />
 					<path d={ink.line(lx, horizon, lx, horizon - 140, 50 + i, 0.8, 2)} stroke="#111" strokeWidth={6} />
 					<circle cx={lx} cy={horizon - 144} r={9} fill="#ffc26b" />
 					<ellipse cx={lx} cy={horizon - 6} rx={70} ry={10} fill="#ffad4d" fillOpacity={0.2} />
