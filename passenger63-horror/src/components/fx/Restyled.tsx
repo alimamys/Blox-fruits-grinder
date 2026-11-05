@@ -66,13 +66,20 @@ const Still: React.FC<{shot: Shot; lines: Record<string, {start: number; end: nu
 		height: '100%',
 		objectFit: 'cover',
 		transform: `translate(${px + sx}px, ${py + sy}px) scale(${z})`,
-		filter: bright < 1 ? `brightness(${bright})` : undefined,
+		filter: shot.fx === 'cctv' ? 'saturate(0.55) contrast(1.08)' : bright < 1 ? `brightness(${bright})` : undefined,
 	};
 	return (
 		<AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
 			{prev ? <Img src={staticFile(prev)} style={style} /> : null}
 			<Img src={staticFile(src)} style={{...style, opacity: fade}} />
 			{shot.fx === 'glitch' && f % 3 === 0 ? <AbsoluteFill style={{background: 'rgba(255,255,255,0.08)', mixBlendMode: 'screen'}} /> : null}
+			{shot.fx === 'cctv' ? (
+				<>
+					<AbsoluteFill style={{background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 4px)'}} />
+					<AbsoluteFill style={{backgroundImage: `url(${staticFile(`textures/grain_${f % 4}.png`)})`, backgroundPosition: `${(h01(f, 1) * 512) | 0}px ${(h01(f, 2) * 512) | 0}px`, opacity: 0.12, mixBlendMode: 'overlay'}} />
+					<AbsoluteFill style={{background: 'radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.7) 100%)'}} />
+				</>
+			) : null}
 		</AbsoluteFill>
 	);
 };

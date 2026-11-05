@@ -77,6 +77,9 @@ RESTYLE_PROMPT = (
 )
 
 
+CCTV_NOTE = ' This is a security-camera frame: keep the camera text overlays exactly, keep the high fixed camera angle.'
+
+
 def mouth_prompt(char: str) -> str:
     who = WHO.get(char, 'the person speaking')
     return (
@@ -133,7 +136,8 @@ def cmd_plan() -> None:
             mode = 'skip-ui'
         else:
             mode = 'multi' if motion > 0.045 else 'single'
-        plan.append({**sh, 'mode': mode, 'motion': round(motion, 3), 'lum': round(lum, 3), 'ui': ui, 'talk': talk if mode == 'single' else []})
+        cctv = 'CCTVOverlay' in code or 'CabinCam' in code
+        plan.append({**sh, 'mode': mode, 'motion': round(motion, 3), 'lum': round(lum, 3), 'ui': ui, 'cctv': cctv, 'talk': talk if mode == 'single' else []})
     PLAN.write_text(json.dumps(plan, indent=1))
     from collections import Counter
 
@@ -212,12 +216,12 @@ def job_list(plan: list, only: set | None) -> list:
         if only and p['id'] not in only:
             continue
         if p['mode'] == 'single':
-            jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k1.png", 'out': OUT / f"{p['id']}_k1.jpg", 'prompt': RESTYLE_PROMPT, 'kind': 'restyle'})
+            jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k1.png", 'out': OUT / f"{p['id']}_k1.jpg", 'prompt': RESTYLE_PROMPT + (CCTV_NOTE if p.get('cctv') else ''), 'kind': 'restyle'})
             for ch in sorted({t['character'] for t in p.get('talk', [])}):
                 jobs.append({'shot': p['id'], 'src': OUT / f"{p['id']}_k1.jpg", 'out': OUT / f"{p['id']}_k1_talk_{ch}.jpg", 'prompt': mouth_prompt(ch), 'kind': 'mouth', 'after': OUT / f"{p['id']}_k1.jpg"})
         elif p['mode'] == 'multi':
             for i in range(3):
-                jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k{i}.png", 'out': OUT / f"{p['id']}_k{i}.jpg", 'prompt': RESTYLE_PROMPT, 'kind': 'restyle'})
+                jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k{i}.png", 'out': OUT / f"{p['id']}_k{i}.jpg", 'prompt': RESTYLE_PROMPT + (CCTV_NOTE if p.get('cctv') else ''), 'kind': 'restyle'})
     return jobs
 
 
@@ -299,7 +303,7 @@ def cmd_manifest() -> None:
                     fr['talk'] = list(talk.values())
             frames.append(fr)
         if frames:
-            shots.append({'id': p['id'], 'from': p['from'], 'to': p['to'], 'frames': frames, 'fx': FX.get(p['marker'])})
+            shots.append({'id': p['id'], 'from': p['from'], 'to': p['to'], 'frames': frames, 'fx': FX.get(p['marker']) or ('cctv' if p.get('cctv') else None)})
     MANIFEST.write_text(json.dumps({'shots': shots}, indent=1))
     print(f'manifest: {len(shots)} restyled shots -> {MANIFEST.relative_to(ROOT)}')
 

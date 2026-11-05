@@ -1,11 +1,11 @@
 {
- "total": 673.4333333333333,
+ "total": 664.0333333333333,
  "scenes": [
   {
    "id": "hook",
    "name": "Hook - 63 passengers, 62 names",
    "start": 0,
-   "duration": 73.267,
+   "duration": 68.967,
    "narrationText": "At 12:17 in the morning, the crew of the North Star ferry counted the passengers for the third time. Sixty-three. The captain looked at the manifest. Sixty-two names. There was only one conclusion. Someone on the ferry... wasn't supposed to be there. They found her sitting alone at the very back. An old woman. Black coat. Hands folded in her lap. Staring out at the ocean. A crew member approached her. She didn't move. Slowly... the woman turned around. Her face was pale. Her eyes looked almost gray. She smiled. And said: Her smile disappeared. Passenger 37. Daniel Clarke. Seat 18B. Then she said:",
    "dialogueIds": [
     "crew_001_ticket",
@@ -21,8 +21,8 @@
   {
    "id": "departure",
    "name": "Earlier that night - departure and the first count",
-   "start": 73.267,
-   "duration": 30.067,
+   "start": 68.967,
+   "duration": 28.667,
    "narrationText": "The North Star left Bell Island at 11:28 PM. Daniel sat by the window. Emma fell asleep against his shoulder. Then they noticed the woman. She was sitting on a bench at the rear of the ferry. Alone. Nobody remembered seeing her board.",
    "dialogueIds": [
     "emma_001_wake_me",
@@ -33,8 +33,8 @@
   {
    "id": "recognition",
    "name": "Daniel recognizes her",
-   "start": 103.333,
-   "duration": 64.833,
+   "start": 97.633,
+   "duration": 61.767,
    "narrationText": "The crew immediately went looking for him. They found Daniel still sitting beside Emma. Daniel laughed. Then he saw her. His face changed instantly. Emma noticed. The woman lifted one hand. And gave him a tiny wave. Daniel stood up. Emma grabbed his arm. The only difference... was that she looked exactly as she had on the day she died. Daniel took one step toward her. Emma pulled him back. The old woman smiled again. Then every light on the ferry flickered. Once. Twice. Darkness. People screamed. Three seconds later... the lights returned. The bench was empty. The woman was gone.",
    "dialogueIds": [
     "crew_005_sir",
@@ -50,8 +50,8 @@
   {
    "id": "erasure",
    "name": "Daniel disappears from the manifest",
-   "start": 168.167,
-   "duration": 50.6,
+   "start": 159.4,
+   "duration": 49.967,
    "narrationText": "Crew checked the rear deck. Nothing. Bathrooms. Nothing. Storage rooms. Nothing. The captain ordered another passenger count. Sixty-two. Everyone relaxed. Then the purser looked at the manifest. And went completely still. There were now... sixty-one names. Daniel Clarke was gone. Not physically. Daniel was standing right there. Emma opened the reservation on her phone. Her booking showed: One passenger. Emma Clarke. Daniel handed over his driver's license. The photograph was Daniel. The name said: Unknown. Daniel grabbed it. The name was gone. Nobody was laughing.",
    "dialogueIds": [
     "daniel_005_impossible",
@@ -61,7 +61,7 @@
   {
    "id": "hull",
    "name": "Something under the ferry",
-   "start": 218.767,
+   "start": 209.367,
    "duration": 72.733,
    "narrationText": "Then something hit the underside of the ferry. Everyone stopped. Another impact. Then another. From beneath them. Then the knocking started. Not one knock. Many. All along the hull. Passengers moved away from the windows. Somebody screamed. A woman's voice filled the ferry. Emma grabbed him. The captain turned the PA system off. The voice continued. The captain pulled the power cable. Still: Now the voice was coming from every speaker. Every radio. Every passenger's phone. One by one, phone screens lit up. Daniel backed away. Emma held him.",
    "dialogueIds": [
@@ -79,7 +79,7 @@
   {
    "id": "navigation",
    "name": "Navigation failure and marine radio",
-   "start": 291.5,
+   "start": 282.1,
    "duration": 59.033,
    "narrationText": "Then the ferry's engines slowed. The navigation screen had gone blank. GPS lost. Compass spinning. Radar empty. No coastline. No lights. Nothing. They should have been ten minutes from port. Instead... there was black ocean in every direction.",
    "dialogueIds": [
@@ -97,7 +97,7 @@
   {
    "id": "otherFerry",
    "name": "The other ferry",
-   "start": 350.533,
+   "start": 341.133,
    "duration": 37.333,
    "narrationText": "Then harbor control sent a photograph through the marine system. The North Star. Docked at Port Mason. Passengers walking off. Timestamp: 12:26 AM. The current time was 12:49. There he was. Walking down the gangway. Same uniform. Same face. Emma was in the photograph. Alone. Daniel was missing. At the very end of the gangway... stood the old woman. Black coat. Watching the camera.",
    "dialogueIds": []
@@ -105,7 +105,7 @@
   {
    "id": "grandmotherCalls",
    "name": "The grandmother calls",
-   "start": 387.867,
+   "start": 378.467,
    "duration": 45.867,
    "narrationText": "Daniel suddenly turned toward the rear of the ferry. Emma grabbed him. He didn't answer. He could hear something. Quiet. Coming from outside. He began walking. Emma pulled harder. He looked at her. Tears in his eyes. He covered his ears. Emma slapped him. Hard. He blinked. For a second... the voice stopped. Then someone screamed from the rear deck.",
    "dialogueIds": [
@@ -124,7 +124,7 @@
   {
    "id": "peopleInWater",
    "name": "People in the water",
-   "start": 433.733,
+   "start": 424.333,
    "duration": 31.867,
    "narrationText": "The old woman was back. Standing beside the railing. This time... she wasn't alone. There were people in the water. Dozens of them. Floating upright. Not swimming. Just standing in the black ocean. One of them raised an arm. Then another. Then all of them. The old woman smiled.",
    "dialogueIds": [
@@ -135,7 +135,7 @@
   {
    "id": "vanish",
    "name": "Daniel disappears",
-   "start": 465.6,
+   "start": 456.2,
    "duration": 60.067,
    "narrationText": "The ferry lights died. Total darkness. Passengers screamed. Emma held Daniel's arm with both hands. Something struck the side of the ferry. Hard. Then another impact. Then something began climbing. Against the metal hull. From below. All around them. People ran. Emergency lights switched on. Red. Daniel was gone. Emma looked down. Her hands were empty. No answer. She ran to the railing. The old woman was gone too. The ocean was empty. No floating people. No splash. No Daniel. Nothing. Then the engines suddenly roared back to life. Five minutes later... they saw the harbor lights.",
    "dialogueIds": [
@@ -146,7 +146,7 @@
   {
    "id": "police",
    "name": "Police investigation",
-   "start": 525.667,
+   "start": 516.267,
    "duration": 45.633,
    "narrationText": "Police were waiting when the ferry docked. Emma showed them photographs. Wedding photos. Holiday pictures. Birthdays. In every photograph... Emma was alone. At their wedding... she stood by herself at the altar. At Christmas... an empty chair beside her. Emma Clarke. Thirty years old. Single. Never married. She pulled Daniel's wedding ring from her pocket. He turned the ring over. There was an engraving inside. Emma expected: D + E. Instead it said: 37.",
    "dialogueIds": [
@@ -159,7 +159,7 @@
   {
    "id": "cctv",
    "name": "CCTV evidence",
-   "start": 571.3,
+   "start": 561.9,
    "duration": 36.133,
    "narrationText": "Security footage from the ferry was reviewed the next morning. For most of the crossing... Emma could be seen sitting beside an empty seat. Talking. Laughing. Resting her head against nothing. At 12:17 AM... the footage distorted. One frame. Just one. Daniel appeared beside her. Looking directly into the camera. Behind his seat... the old woman stood with both hands on his shoulders. The next frame... he was gone again.",
    "dialogueIds": []
@@ -167,7 +167,7 @@
   {
    "id": "finale",
    "name": "Final cliffhanger",
-   "start": 607.433,
+   "start": 598.033,
    "duration": 64,
    "narrationText": "For almost a year... nothing happened. Then one afternoon... Emma received a photograph from an unknown number. It showed the North Star ferry. Bright daylight. Crowded deck. Then she zoomed in. At the very back... the old woman was sitting on the same bench. And beside her... was Daniel. He was staring directly at the camera. One finger pressed against his lips. A message arrived. DON'T LET HER COUNT YOU. Emma's phone rang. Unknown number. She switched the phone off. The screen went black. For several seconds... nothing. Then the screen turned itself back on. No call. No message. Just one number. And from somewhere behind Emma... an old woman's voice whispered:",
    "dialogueIds": [
@@ -177,7 +177,7 @@
   {
    "id": "end",
    "name": "Cut to black",
-   "start": 671.433,
+   "start": 662.033,
    "duration": 2,
    "narrationText": "",
    "dialogueIds": []
