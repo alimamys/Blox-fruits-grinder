@@ -227,7 +227,7 @@ export const HarborPhoto: React.FC<{f: number; stamp?: boolean; people?: boolean
 		else if (p.who === 'crew2') walkers.push(<Crew2 key="c2" {...common} />);
 		else if (p.who === 'purser') walkers.push(<Purser key="pu" {...common} />);
 		else if (p.who === 'emma') walkers.push(<Emma key="e" {...common} mouth="flat" />);
-		else walkers.push(<Passenger key={`p${p.id}`} id={p.id ?? 1} {...common} opacity={p.id === 8 || p.id === 21 ? 0.55 : 1} />);
+		else walkers.push(<Passenger key={`p${p.id}`} id={p.id ?? 1} {...common} opacity={1} />);
 	}
 	return (
 		<AbsoluteFill style={{background: '#05070b'}}>

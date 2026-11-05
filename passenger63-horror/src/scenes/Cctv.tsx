@@ -183,7 +183,7 @@ export const Cctv: React.FC = () => (
 					const no = FRAME_NO + 3 - step;
 					return (
 						<CCTVOverlay f={f} timestamp={fmtClock(GLITCH)} paused frameNo={no}>
-							<CabinCam f={0} emma="rest" daniel={no === FRAME_NO} hands={no === FRAME_NO + 1} />
+							<CabinCam f={0} emma="rest" daniel={no === FRAME_NO} hands={false} />
 						</CCTVOverlay>
 					);
 				},

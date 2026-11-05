@@ -55,7 +55,7 @@ const RowShot: React.FC<{
 	const k = easeInOut(clamp(sleep));
 	return (
 		<Stage f={f} d={d} from={{z: 1.04, cy: 560}} to={{z: 1.04 + push, cx: 940, cy: 580}} rock={0.5}>
-			<CabinRow f={f} reflection={<Daniel x={1040} y={640} s={0.9} frame={f} pose="sit" opacity={Math.floor(f / 40) % 7 === 3 ? 0 : 0.16} />}>
+			<CabinRow f={f}>
 				{/* easter egg: for two frames seat 18B is empty */}
 				{seatEmpty ? null : (
 					<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={k > 0.5 ? [-0.6, 0.4] : [0.9, -0.3]} tilt={4 * k} mouth={danielYawn ? 'o' : 'flat'} eyes={danielYawn ? 'squint' : 'dot'} {...danielTalk} />
@@ -143,20 +143,6 @@ export const Departure: React.FC = () => (
 				at: 'emma_001_wake_me',
 				off: -0.2,
 				render: ({f, d, sf, api}) => <RowShot f={f} d={d} sleep={0.85} emmaTalk={speak(api, sf, 'emma_001_wake_me')} danielTalk={speak(api, sf, 'daniel_001_go_sleep')} push={0.04} />,
-			},
-			// Daniel looks out of the window - his reflection is missing for a moment
-			{
-				at: 'daniel_001_go_sleep',
-				frac: 1,
-				render: ({f, d}) => (
-					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.06}}>
-						<FerryWindow
-							f={f}
-							reflectionOpacity={f > d * 0.55 && f < d * 0.62 ? 0 : 0.26}
-							reflection={<Daniel x={980} y={headY(420, 2.6, true)} s={2.6} frame={f} pose="sit" look={[0, 0]} />}
-						/>
-					</Stage>
-				),
 			},
 			// Nothing unusual happened for the first thirty minutes.
 			{

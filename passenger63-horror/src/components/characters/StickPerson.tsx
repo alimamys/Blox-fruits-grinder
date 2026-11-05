@@ -782,8 +782,6 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 			) : null}
 			{/* head */}
 			<g transform={headTransform}>
-				{/* neck shadow */}
-				{!back ? <ellipse cx={cx} cy={cy + hr * 0.95} rx={hr * 0.55} ry={6} fill="#000" opacity={0.12} /> : null}
 				<path d={headD} fill={back ? palette.hair : skin} stroke={INK} strokeWidth={lw} />
 				{!back ? <ellipse cx={cx + hr * 0.5} cy={cy + hr * 0.12} rx={hr * 0.55} ry={hr * 0.92} fill="#000" opacity={0.07} clipPath={`url(#hc${uid})`} /> : null}
 				{!back ? <ellipse cx={cx - hr * 0.42} cy={cy - hr * 0.42} rx={hr * 0.26} ry={hr * 0.16} fill="#fff" opacity={0.18} /> : null}
