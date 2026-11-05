@@ -452,19 +452,19 @@ export const RoomBackdrop: React.FC<{f: number; variant?: RoomVariant; lights?: 
 	// shell
 	els.push(<rect key="bg" x={-300} y={-300} width={2520} height={1700} fill={T(shade(pal.wall, -0.25))} />);
 	els.push(<path key="ceil" d={q3(c, [[-Wx, Hc, Zn], [Wx, Hc, Zn], [Wx, Hc, Zb], [-Wx, Hc, Zb]])} fill={T(pal.ceil)} />);
-	els.push(<path key="ceilS" d={q3(c, [[-Wx, Hc, Zn], [Wx, Hc, Zn], [Wx, Hc, Zb], [-Wx, Hc, Zb]])} fill={S.up} fillOpacity={0.6} />);
+	els.push(<path key="ceilS" d={q3(c, [[-Wx, Hc, Zn], [Wx, Hc, Zn], [Wx, Hc, 900], [-Wx, Hc, 900]])} fill="#000" fillOpacity={0.18} />);
 	els.push(<path key="floor" d={q3(c, [[-Wx, 0, Zn], [Wx, 0, Zn], [Wx, 0, Zb], [-Wx, 0, Zb]])} fill={T(pal.floor)} />);
 	const fl: Array<[[number, number, number], [number, number, number]]> = [];
 	for (let X = -Wx; X <= Wx; X += 200) fl.push([[X, 0, Zn], [X, 0, Zb]]);
 	for (let Z = 500; Z < Zb; Z += 260) fl.push([[-Wx, 0, Z], [Wx, 0, Z]]);
 	els.push(<path key="fl" d={lineSet(c, fl)} stroke="#000" strokeWidth={2} strokeOpacity={0.18} fill="none" />);
-	els.push(<path key="floorS" d={q3(c, [[-Wx, 0, Zn], [Wx, 0, Zn], [Wx, 0, Zb], [-Wx, 0, Zb]])} fill={S.dn} fillOpacity={0.7} />);
+	els.push(<path key="floorS" d={q3(c, [[-Wx, 0, Zn], [Wx, 0, Zn], [Wx, 0, 900], [-Wx, 0, 900]])} fill="#000" fillOpacity={0.25} />);
 	for (const sd of [-1, 1]) {
 		els.push(<path key={`sw${sd}`} d={q3(c, [[sd * Wx, Hc, Zn], [sd * Wx, Hc, Zb], [sd * Wx, 0, Zb], [sd * Wx, 0, Zn]])} fill={T(shade(pal.wall, -0.12))} />);
-		els.push(<path key={`sws${sd}`} d={q3(c, [[sd * Wx, Hc, Zn], [sd * Wx, Hc, Zb], [sd * Wx, 0, Zb], [sd * Wx, 0, Zn]])} fill={sd < 0 ? S.lt : S.rt} fillOpacity={0.5} />);
+		els.push(<path key={`sws${sd}`} d={q3(c, [[sd * Wx, Hc, Zn], [sd * Wx, Hc, 1100], [sd * Wx, 0, 1100], [sd * Wx, 0, Zn]])} fill="#000" fillOpacity={0.18} />);
 	}
 	els.push(<path key="back" d={ink.poly(quadPts(c, -Wx, Wx, 0, Hc, Zb), 1, 1)} fill={T(pal.wall)} stroke={INK} strokeWidth={4} />);
-	els.push(<path key="backS" d={backQ} fill={S.dn} fillOpacity={0.45} />);
+	els.push(<path key="backS" d={q3(c, [[-Wx, 380, Zb], [Wx, 380, Zb], [Wx, 0, Zb], [-Wx, 0, Zb]])} fill="#000" fillOpacity={0.12} />);
 	els.push(<path key="ao" d={q3(c, [[-Wx, 0, Zb], [Wx, 0, Zb], [Wx, 60, Zb], [-Wx, 60, Zb]])} fill="#000" fillOpacity={0.2} />);
 
 	const props: React.ReactNode[] = [];

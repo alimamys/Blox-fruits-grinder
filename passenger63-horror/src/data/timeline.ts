@@ -351,8 +351,8 @@ export const SCENES: SceneDef[] = [
 			{sound: 'impact_hull_r', at: 'thud_3', volume: 1.05},
 			{sound: 'metal_creak', at: 'thud_3', offset: 0.7, volume: 0.3},
 			// AUDIO CUE: many knocks all along the hull
-			{sound: 'knocking_hull', at: 'knocks_start', volume: 0.55, maxDuration: 1.3},
-			{sound: 'knocking_hull', at: 'narrator_111_not_one', volume: 0.75, maxDuration: 9},
+			{sound: 'knocking_hull', at: 'knocks_start', volume: 1.2, maxDuration: 1.3},
+			{sound: 'knocking_hull', at: 'narrator_111_not_one', volume: 1.25, maxDuration: 9},
 			{sound: 'scream_distant', at: 'hull_scream', offset: -0.4, volume: 0.56},
 			{sound: 'pa_static', at: 'pa_static_1', volume: 0.52},
 			{sound: 'pa_static', at: 'pa_static_2', volume: 0.38, maxDuration: 0.8},

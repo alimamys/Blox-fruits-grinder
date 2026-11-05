@@ -112,7 +112,8 @@ export const OceanNight: React.FC<{
 				: null}
 			{moon ? (
 				<g>
-					<circle cx={moonX} cy={170} r={150} fill={`url(#${uid}moon)`} />
+					<circle cx={moonX} cy={170} r={120} fill="#dfe6ef" fillOpacity={0.035} />
+					<circle cx={moonX} cy={170} r={70} fill="#dfe6ef" fillOpacity={0.05} />
 					<circle cx={moonX} cy={170} r={34} fill="#d9dde3" fillOpacity={0.3} />
 					<circle cx={moonX + 9} cy={164} r={30} fill={pal.sky[1]} fillOpacity={0.16} />
 				</g>
@@ -123,7 +124,6 @@ export const OceanNight: React.FC<{
 			<path d={crests.join('')} fill="none" stroke={pal.crest} strokeWidth={2.5} strokeOpacity={0.32 * (0.4 + still * 0.6)} />
 			<path d={glints.join('')} stroke={pal.glint} strokeWidth={2} strokeLinecap="round" strokeOpacity={moon ? 0.45 : 0.22}  fill="none" />
 			<path d={`M-120,${horizon}L2040,${horizon}`} stroke={pal.crest} strokeWidth={2} strokeOpacity={0.45}  fill="none" />
-			{fog > 0 ? <rect x={-200} y={horizon - 90} width={2320} height={200} fill={`url(#${uid}hz)`} fillOpacity={Math.min(1, fog * 2)} /> : null}
 			{fog > 0
 				? [0, 1, 2, 3].map((i) => (
 						<ellipse
@@ -220,13 +220,13 @@ export const FerryExterior: React.FC<{
 				{/* superstructure: lower level */}
 				{glowBand(-450, 360, -190, 34, 'g1')}
 				<path d={ink.poly([[-470, -122], [390, -122], [370, -212], [-470, -212]], 1, 1.4)} fill={hullTop} stroke={INK} strokeWidth={6} />
-				<path d={qd([[-470, -122], [390, -122], [370, -212], [-470, -212]])} fill={S.dn} fillOpacity={0.35} />
+				<path d={qd([[-470, -150], [383, -150], [390, -122], [-470, -122]])} fill="#000" fillOpacity={0.12} />
 				<path d={qd([[-470, -212], [370, -212], [372, -200], [-470, -200]])} fill="#000" fillOpacity={0.2} />
 				{windows(-450, 360, -190, 30, 34, 17, 10)}
 				{/* upper level */}
 				{glowBand(-360, 270, -268, 30, 'g2')}
 				<path d={ink.poly([[-380, -212], [300, -212], [280, -288], [-380, -288]], 2, 1.4)} fill={hullTop} stroke={INK} strokeWidth={6} />
-				<path d={qd([[-380, -212], [300, -212], [280, -288], [-380, -288]])} fill={S.dn} fillOpacity={0.3} />
+				<path d={qd([[-380, -236], [293, -236], [300, -212], [-380, -212]])} fill="#000" fillOpacity={0.12} />
 				<path d={qd([[-380, -288], [280, -288], [282, -278], [-380, -278]])} fill="#000" fillOpacity={0.18} />
 				{windows(-360, 270, -268, 28, 30, 13, 30)}
 				{/* lifeboats */}
@@ -239,12 +239,12 @@ export const FerryExterior: React.FC<{
 				))}
 				{/* bridge */}
 				<path d={ink.poly([[110, -288], [330, -288], [350, -346], [130, -346]], 5, 1.4)} fill={hullTop} stroke={INK} strokeWidth={6} />
-				<path d={qd([[110, -288], [330, -288], [350, -346], [130, -346]])} fill={S.dn} fillOpacity={0.3} />
 				<path d={ink.poly([[140, -308], [335, -308], [342, -334], [146, -334]], 6, 1)} fill={lights === 'off' ? '#0c0f14' : lights === 'red' ? '#4a0a0a' : '#2d3d52'} stroke={INK} strokeWidth={4} />
 				<path d={qd([[150, -332], [200, -332], [185, -310], [146, -310]])} fill="#fff" fillOpacity={0.12} />
 				{/* funnel (cylinder shading) */}
 				<path d={ink.poly([[-215, -288], [-120, -288], [-130, -392], [-205, -392]], 7, 1.4)} fill="#1b3f73" stroke={INK} strokeWidth={6} />
-				<path d={qd([[-215, -288], [-120, -288], [-130, -392], [-205, -392]])} fill={S.pole} />
+				<path d={qd([[-200, -290], [-180, -290], [-185, -390], [-200, -390]])} fill="#fff" fillOpacity={0.18} />
+				<path d={qd([[-140, -290], [-122, -290], [-131, -390], [-145, -390]])} fill="#000" fillOpacity={0.25} />
 				<path d={ink.poly([[-210, -350], [-126, -350], [-127, -366], [-208, -366]], 8, 0.8)} fill="#e8c547" stroke={INK} strokeWidth={3} />
 				{/* mast + navigation lights */}
 				<path d={ink.line(230, -346, 230, -460, 9, 1, 2)} stroke={INK} strokeWidth={6} />
@@ -257,9 +257,9 @@ export const FerryExterior: React.FC<{
 				<circle cx={-470} cy={-140} r={6} fill="#ff3b30" fillOpacity={lights === 'off' ? 0.2 : 0.4 + 0.6 * (Math.floor(f / 15) % 2)} />
 				{/* hull: shaded topsides, dark bottom, sheer highlight, waterline foam */}
 				<path d={ink.poly(hull, 11, 1.6)} fill={hullTop} stroke={INK} strokeWidth={7} />
-				<path d={qd(hull)} fill={S.dn} fillOpacity={0.45} />
+				<path d={qd([[-575, -128], [560, -128], [563, -110], [-572, -110]])} fill="#fff" fillOpacity={0.12} />
 				<path d={ink.poly([[-560, -40], [585, -40], [540, 12], [-555, 12]], 12, 1.2)} fill={hullLow} stroke={INK} strokeWidth={6} />
-				<path d={qd([[-560, -40], [585, -40], [540, 12], [-555, 12]])} fill={S.dn} fillOpacity={0.6} />
+				<path d={qd([[-558, -12], [562, -12], [540, 12], [-555, 12]])} fill="#000" fillOpacity={0.3} />
 				<path d={ink.line(-560, -52, 590, -52, 13, 1, 6)} stroke="#e8c547" strokeWidth={6} />
 				<path d={ink.line(-565, -122, 600, -122, 14, 0.8, 6)} stroke="#fff" strokeWidth={3} strokeOpacity={day ? 0.8 : 0.45}  fill="none" />
 				{/* portholes */}
