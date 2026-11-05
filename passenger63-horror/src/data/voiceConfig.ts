@@ -36,14 +36,19 @@ export interface CharacterVoice {
 	};
 	providers: {
 		kokoro: KokoroVoice;
-		elevenlabs: {voiceId: string; model: string};
+		/** ElevenLabs: a voice NAME from your account's voice list (premade voices work on every
+		 *  account), or paste a voiceId from the Voice Library to override it. */
+		elevenlabs: {voiceName: string; voiceId?: string; model: string};
 		openai: {voice: string; model: string};
 		azure: {voice: string};
 		polly: {voice: string; engine: 'neural' | 'generative' | 'standard'};
 	};
 }
 
-const ELEVEN_MODEL = 'eleven_multilingual_v2';
+// eleven_v3 understands inline audio tags ([whispers], [sighs], [crying]...), which is what
+// fixes flat delivery. If your plan/API key cannot use v3 the generator falls back to
+// eleven_multilingual_v2 automatically.
+const ELEVEN_MODEL = 'eleven_v3';
 const OPENAI_MODEL = 'gpt-4o-mini-tts';
 
 export const VOICES: Record<CharacterId, CharacterVoice> = {
@@ -57,7 +62,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: -0.4, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_michael', 0.8], ['bm_george', 0.2]], lang: 'en-us'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_NARRATOR_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'George', model: ELEVEN_MODEL},
 			openai: {voice: 'onyx', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-RyanNeural'},
 			polly: {voice: 'Matthew', engine: 'generative'},
@@ -72,7 +77,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_puck', 1]], lang: 'en-us'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_DANIEL_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Chris', model: ELEVEN_MODEL},
 			openai: {voice: 'ash', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-GuyNeural'},
 			polly: {voice: 'Stephen', engine: 'generative'},
@@ -87,7 +92,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['af_heart', 1]], lang: 'en-us'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_EMMA_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Sarah', model: ELEVEN_MODEL},
 			openai: {voice: 'coral', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-JennyNeural'},
 			polly: {voice: 'Danielle', engine: 'generative'},
@@ -103,7 +108,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: -1.0, tremor: 0.35, pan: 0.22, lufs: -20},
 		providers: {
 			kokoro: {blend: [['bf_emma', 0.6], ['af_nicole', 0.4]], lang: 'en-gb'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_OLD_WOMAN_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Lily', model: ELEVEN_MODEL},
 			openai: {voice: 'sage', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-AbbiNeural'},
 			polly: {voice: 'Amy', engine: 'generative'},
@@ -118,7 +123,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: -0.6, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['bm_george', 1]], lang: 'en-gb'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_CAPTAIN_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Daniel', model: ELEVEN_MODEL},
 			openai: {voice: 'ballad', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-ThomasNeural'},
 			polly: {voice: 'Brian', engine: 'neural'},
@@ -133,7 +138,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_fenrir', 1]], lang: 'en-us'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_CREW1_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Liam', model: ELEVEN_MODEL},
 			openai: {voice: 'echo', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-DavisNeural'},
 			polly: {voice: 'Gregory', engine: 'neural'},
@@ -148,7 +153,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -21},
 		providers: {
 			kokoro: {blend: [['af_sarah', 1]], lang: 'en-us'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_CREW2_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Laura', model: ELEVEN_MODEL},
 			openai: {voice: 'shimmer', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-SaraNeural'},
 			polly: {voice: 'Kimberly', engine: 'neural'},
@@ -163,7 +168,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['am_onyx', 0.7], ['am_eric', 0.3]], lang: 'en-us'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_HARBOR_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Eric', model: ELEVEN_MODEL},
 			openai: {voice: 'verse', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-TonyNeural'},
 			polly: {voice: 'Joey', engine: 'neural'},
@@ -179,7 +184,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['bf_isabella', 1]], lang: 'en-gb'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_PA_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Alice', model: ELEVEN_MODEL},
 			openai: {voice: 'nova', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-SoniaNeural'},
 			polly: {voice: 'Emma', engine: 'neural'},
@@ -194,7 +199,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -19},
 		providers: {
 			kokoro: {blend: [['bm_fable', 1]], lang: 'en-gb'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_POLICE_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Roger', model: ELEVEN_MODEL},
 			openai: {voice: 'fable', model: OPENAI_MODEL},
 			azure: {voice: 'en-GB-AlfieNeural'},
 			polly: {voice: 'Arthur', engine: 'neural'},
@@ -209,7 +214,7 @@ export const VOICES: Record<CharacterId, CharacterVoice> = {
 		post: {pitchSemitones: 0, tremor: 0, pan: 0, lufs: -24},
 		providers: {
 			kokoro: {blend: [['af_river', 1]], lang: 'en-us'},
-			elevenlabs: {voiceId: 'REPLACE_WITH_CROWD_VOICE_ID', model: ELEVEN_MODEL},
+			elevenlabs: {voiceName: 'Jessica', model: ELEVEN_MODEL},
 			openai: {voice: 'alloy', model: OPENAI_MODEL},
 			azure: {voice: 'en-US-AriaNeural'},
 			polly: {voice: 'Ivy', engine: 'neural'},
@@ -232,6 +237,9 @@ export const CROWD_VOICE_POOL: Array<{voice: string; lang: 'en-us' | 'en-gb'}> =
 	{voice: 'af_sky', lang: 'en-us'},
 	{voice: 'af_alloy', lang: 'en-us'},
 ];
+
+/** ElevenLabs premade voices rotated across the background passenger fragments. */
+export const ELEVEN_CROWD_POOL = ['Jessica', 'Will', 'River', 'Charlie', 'Matilda', 'Callum', 'Aria', 'Charlotte', 'Bill', 'Laura', 'Liam', 'Sarah'];
 
 /**
  * How emotion tags are realised per provider. Kokoro has no emotion control, so the

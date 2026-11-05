@@ -125,58 +125,161 @@ def _pcm16_to_array(data: bytes):
 # ----------------------------------------------------------------------------
 # ElevenLabs
 # ----------------------------------------------------------------------------
-ELEVEN_V3_TAGS = {
+ELEVEN_API = 'https://api.elevenlabs.io/v1'
+
+# eleven_v3 audio tags. Emotion -> delivery tag; breath cue -> performed breath.
+ELEVEN_EMOTION_TAGS = {
     'whispering': '[whispers]',
     'afraid': '[nervously]',
-    'panicked': '[panicked]',
-    'grieving': '[crying]',
+    'panicked': '[panicking]',
+    'grieving': '[sad]',
     'screaming': '[screaming]',
     'comforting': '[softly]',
     'unnaturally_calm': '[calmly]',
+    'matter_of_fact': '[calmly]',
     'sleepy': '[sleepily]',
+    'tired': '[tired]',
     'amused': '[chuckles]',
     'hypnotized': '[dreamily]',
     'distressed': '[distressed]',
-    'angry': '[angrily]',
+    'angry': '[frustrated]',
+    'affectionate': '[warmly]',
+    'warm': '[warmly]',
+    'confused': '[confused]',
+    'protective': '[urgently]',
+    'breathless': '[breathless]',
+}
+ELEVEN_BREATH_TAGS = {
+    'shakyInhale': '[shaky breath]',
+    'sharpInhale': '[gasps]',
+    'exhale': '[exhales]',
+    'fastBreathing': '[breathing heavily]',
+    'raggedBreathing': '',
+    'cryingBreath': '[crying]',
 }
 
 
+def eleven_text(job: dict, v3: bool) -> str:
+    """Line text with v3 audio tags. The narrator stays untagged except for quiet,
+    restrained lines - over-acting narration is what makes TTS sound fake."""
+    line = job['line']
+    text = _speak_text(line)
+    if not v3:
+        return text
+    tags = []
+    if line.get('elevenTags'):
+        tags.append(line['elevenTags'])
+    else:
+        breath = ELEVEN_BREATH_TAGS.get(line.get('breath', 'none'), '')
+        if breath:
+            tags.append(breath)
+        if line['audioEffect'] in ('whisper', 'whisperClose'):
+            tags.append('[whispers]')
+        elif line['character'] == 'narrator':
+            if line['volume'] < 0.9 or line['emotion'] == 'whispering':
+                tags.append('[quietly]')
+        else:
+            tag = ELEVEN_EMOTION_TAGS.get(line['emotion'])
+            if tag and tag not in tags:
+                tags.append(tag)
+            if line['audioEffect'] == 'shout' and line['emotion'] != 'screaming':
+                tags.append('[shouting]')
+    return (' '.join(tags) + ' ' + text).strip()
+
+
 class ElevenLabsProvider:
+    """ElevenLabs text-to-speech. Voices are resolved by NAME from your account
+    (premade voices exist on every account) unless a voiceId is given."""
+
     name = 'elevenlabs'
 
     def __init__(self):
         self.key = os.environ.get('ELEVENLABS_API_KEY')
         if not self.key:
-            raise ProviderUnavailable('ELEVENLABS_API_KEY is not set (put it in .env or your shell).')
+            raise ProviderUnavailable('ELEVENLABS_API_KEY is not set (environment variable or .env file).')
+        self._voices = None
+        self._v3_ok = True
+
+    def _get(self, path: str):
+        req = urllib.request.Request(ELEVEN_API + path, headers={'xi-api-key': self.key})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            raise ProviderUnavailable(f'ElevenLabs {path} -> HTTP {e.code}: {e.read()[:300]!r}') from e
+        except urllib.error.URLError as e:
+            raise ProviderUnavailable(f'Cannot reach api.elevenlabs.io ({e.reason}). Is the host allowed by your network?') from e
+
+    def quota(self) -> tuple[int, int] | None:
+        try:
+            sub = self._get('/user/subscription')
+            return int(sub.get('character_count', 0)), int(sub.get('character_limit', 0))
+        except ProviderUnavailable:
+            return None
+
+    def voice_id(self, cfg: dict) -> str:
+        if cfg.get('voiceId'):
+            return cfg['voiceId']
+        if self._voices is None:
+            self._voices = {v['name'].strip().lower(): v['voice_id'] for v in self._get('/voices').get('voices', [])}
+        want = cfg['voiceName'].strip().lower()
+        for name, vid in self._voices.items():
+            if name == want or name.split(' ')[0].split('-')[0].strip() == want:
+                return vid
+        raise ProviderUnavailable(
+            f"ElevenLabs voice '{cfg['voiceName']}' is not in your account. Available: {', '.join(sorted(self._voices))}.\n"
+            '  Set voiceName (or a voiceId from the Voice Library) in src/data/voiceConfig.ts.'
+        )
+
+    def _tts(self, vid: str, body: dict) -> bytes:
+        return _post(
+            f'{ELEVEN_API}/text-to-speech/{vid}?output_format=pcm_24000',
+            json.dumps(body).encode(),
+            {'xi-api-key': self.key, 'Content-Type': 'application/json', 'Accept': 'audio/pcm'},
+        )
 
     def synthesize(self, job: dict):
         line = job['line']
         cfg = job['providers']['elevenlabs']
-        if cfg['voiceId'].startswith('REPLACE_'):
-            raise ProviderUnavailable(f"Set providers.elevenlabs.voiceId for {line['character']} in src/data/voiceConfig.ts")
-        text = _speak_text(line)
-        if cfg['model'].startswith('eleven_v3'):
-            tag = ELEVEN_V3_TAGS.get(line['emotion'])
-            if tag:
-                text = f'{tag} {text}'
+        vid = self.voice_id(cfg)
         i = float(line['intensity'])
+        model = cfg['model']
+        v3 = model.startswith('eleven_v3') and self._v3_ok
+        if v3:
+            body = {
+                'text': eleven_text(job, True),
+                'model_id': model,
+                # v3 stability: 0.0 creative, 0.5 natural, 1.0 robust
+                'voice_settings': {'stability': 0.0 if i >= 0.6 else 0.5, 'similarity_boost': 0.8},
+            }
+            try:
+                return _pcm16_to_array(self._tts(vid, body)), 24000
+            except RuntimeError as e:
+                msg = str(e)
+                if 'HTTP 4' not in msg:
+                    raise
+                if 'voice_settings' in msg or 'stability' in msg:
+                    body.pop('voice_settings')
+                    return _pcm16_to_array(self._tts(vid, body)), 24000
+                print(f'  [elevenlabs] eleven_v3 unavailable for this key ({msg[:120]}), falling back to eleven_multilingual_v2')
+                self._v3_ok = False
         body = {
-            'text': text,
-            'model_id': cfg['model'],
+            'text': eleven_text(job, False),
+            'model_id': 'eleven_multilingual_v2' if model.startswith('eleven_v3') else model,
             'voice_settings': {
-                'stability': round(max(0.2, 0.62 - 0.4 * i), 2),
+                'stability': round(max(0.25, 0.6 - 0.35 * i), 2),
                 'similarity_boost': 0.8,
-                'style': round(min(0.8, 0.1 + 0.55 * i), 2),
+                'style': round(min(0.7, 0.15 + 0.5 * i), 2),
                 'use_speaker_boost': True,
-                'speed': round(float(np.clip(job['speed'], 0.7, 1.2)), 2),
+                'speed': round(float(np.clip(job['perceivedSpeed'], 0.75, 1.15)), 2),
             },
         }
-        data = _post(
-            f"https://api.elevenlabs.io/v1/text-to-speech/{cfg['voiceId']}?output_format=pcm_44100",
-            json.dumps(body).encode(),
-            {'xi-api-key': self.key, 'Content-Type': 'application/json', 'Accept': 'audio/pcm'},
-        )
-        return _pcm16_to_array(data), 44100
+        # neighbouring lines give the model the flow of the story
+        if job.get('prevText'):
+            body['previous_text'] = job['prevText']
+        if job.get('nextText'):
+            body['next_text'] = job['nextText']
+        return _pcm16_to_array(self._tts(vid, body)), 24000
 
 
 # ----------------------------------------------------------------------------

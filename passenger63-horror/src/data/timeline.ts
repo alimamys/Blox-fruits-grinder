@@ -798,7 +798,7 @@ export const SCENES: SceneDef[] = [
 // ---------------------------------------------------------------------------
 // TIMING COMPUTATION
 // ---------------------------------------------------------------------------
-type ManifestEntry = {duration: number; peak?: number};
+type ManifestEntry = {duration: number; peak?: number; provider?: string};
 const FILES = (manifest as {files: Record<string, ManifestEntry>}).files ?? {};
 
 export const audioExists = (file: string) => Boolean(FILES[file]);
@@ -820,6 +820,9 @@ const FEMALE = new Set(['emma', 'oldWoman', 'crew2', 'pa']);
 
 export const breathSound = (l: VoiceLine): string | null => {
 	if (l.breath === 'none') return null;
+	// expressive TTS / recorded takes perform the breath themselves - no synthetic breath on top
+	const provider = FILES[l.filename]?.provider;
+	if (provider && provider !== 'kokoro') return null;
 	const g = FEMALE.has(l.character) ? 'f' : 'm';
 	const map: Record<string, string> = {
 		shakyInhale: 'breath_shaky_inhale',

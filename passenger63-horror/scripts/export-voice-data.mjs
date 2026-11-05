@@ -24,9 +24,9 @@ for (const f of files) {
 
 const require = createRequire(import.meta.url);
 const {VOICE_LINES} = require(path.join(outDir, 'voiceLines.cjs'));
-const {VOICES, CROWD_VOICE_POOL, EMOTION_DIRECTIONS, DEFAULT_PROVIDER} = require(path.join(outDir, 'voiceConfig.cjs'));
+const {VOICES, CROWD_VOICE_POOL, ELEVEN_CROWD_POOL, EMOTION_DIRECTIONS, DEFAULT_PROVIDER} = require(path.join(outDir, 'voiceConfig.cjs'));
 
-const data = {VOICE_LINES, VOICES, CROWD_VOICE_POOL, EMOTION_DIRECTIONS, DEFAULT_PROVIDER};
+const data = {VOICE_LINES, VOICES, CROWD_VOICE_POOL, ELEVEN_CROWD_POOL, EMOTION_DIRECTIONS, DEFAULT_PROVIDER};
 const out = path.join(root, 'build', 'voice-data.json');
 fs.writeFileSync(out, JSON.stringify(data, null, 2));
 console.log(`Exported ${VOICE_LINES.length} voice lines for ${Object.keys(VOICES).length} characters -> ${path.relative(root, out)}`);

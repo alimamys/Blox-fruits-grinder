@@ -127,10 +127,11 @@ def fx_whisper(x, voiced=0.36, seed=5):
     return dsp.hp(y, 110, SR, 2)
 
 
-def fx_whisper_close(x, seed=9):
+def fx_whisper_close(x, seed=9, natural=False):
     """Final "Sixty-four": close, dry, slightly behind/right, with a barely
-    audible second whisper underneath (about -27 dB)."""
-    main = fx_whisper(x, voiced=0.2, seed=seed)
+    audible second whisper underneath (about -27 dB). A real (expressive TTS or
+    recorded) whisper is kept almost untouched."""
+    main = fx_whisper(x, voiced=0.85 if natural else 0.2, seed=seed)
     main = dsp.biquad(main, 'lowshelf', 230, 3.0, 0.7)  # proximity
     under = dsp.noise_vocoder(dsp.pitch_shift_resample(x, -2.2), SR, seed=seed + 1)
     under = _delay(under, 0.032) * dsp.db(-27)
@@ -169,7 +170,7 @@ def fx_multi(x):
     return sum(layers)
 
 
-def apply_effect(x: np.ndarray, effect: str, seed: int) -> np.ndarray:
+def apply_effect(x: np.ndarray, effect: str, seed: int, natural: bool = False) -> np.ndarray:
     if effect in ('none', None):
         return x
     if effect == 'room':
@@ -189,9 +190,9 @@ def apply_effect(x: np.ndarray, effect: str, seed: int) -> np.ndarray:
     if effect == 'distant':
         return fx_distant(x)
     if effect == 'whisper':
-        return fx_room(fx_whisper(x, seed=seed), 0.06)
+        return fx_room(fx_whisper(x, voiced=0.75 if natural else 0.36, seed=seed), 0.06)
     if effect == 'whisperClose':
-        return fx_whisper_close(x, seed)
+        return fx_whisper_close(x, seed, natural)
     if effect == 'shout':
         return fx_shout(x)
     if effect == 'crowdRoom':
@@ -221,9 +222,8 @@ def process_line(audio: np.ndarray, sr: int, job: dict) -> np.ndarray:
         x = x.mean(axis=1)
     x = dsp.resample(x, sr, SR)
 
-    semis = job['pitchSemitones']
-    if effect == 'shout':
-        semis += 2.0 if line['emotion'] == 'screaming' else 1.0
+    natural = job.get('natural', False)
+    semis = job['pitchSemitones'] + job.get('shoutSemis', 0.0)
     x = dsp.pitch_shift_resample(x, semis)
     if job['tremor'] > 0:
         t = job['tremor']
@@ -242,7 +242,7 @@ def process_line(audio: np.ndarray, sr: int, job: dict) -> np.ndarray:
         x = dsp.biquad(x, 'highshelf', 6000, -2.0, 0.7)
         x = dsp.biquad(x, 'peak', 2600, 1.2, 1.0)
 
-    y = apply_effect(x, effect, seed)
+    y = apply_effect(x, effect, seed, natural)
     target = job['lufs'] + EFFECT_LUFS_OFFSET.get(effect, 0.0)
     y = dsp.normalize_lufs(y, target)
     if y.ndim == 1 and abs(job['pan']) > 0.01:

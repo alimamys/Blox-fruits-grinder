@@ -60,7 +60,7 @@ def load_env():
             os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 
-def build_job(line: dict, data: dict, crowd_index: int) -> dict:
+def build_job(line: dict, data: dict, crowd_index: int, provider_name: str = 'kokoro') -> dict:
     voices = data['VOICES']
     vc = voices[line['character']]
     post = vc['post']
@@ -96,9 +96,19 @@ def build_job(line: dict, data: dict, crowd_index: int) -> dict:
         pool = data['CROWD_VOICE_POOL']
         pick = pool[crowd_index % len(pool)]
         kokoro = {'blend': [[pick['voice'], 1]], 'lang': pick['lang']}
+        epool = data.get('ELEVEN_CROWD_POOL') or []
+        if epool:
+            providers['elevenlabs'] = {**providers['elevenlabs'], 'voiceName': epool[crowd_index % len(epool)], 'voiceId': None}
+
+    # Pitch / tremor / shout pitching are workarounds for the flat local Kokoro voices.
+    # Expressive providers (ElevenLabs, OpenAI...) perform age, breath and shouting
+    # themselves, so their takes are left at natural pitch.
+    natural = provider_name != 'kokoro'
+    if natural:
+        pitch, tremor = 0.0, 0.0
 
     shout_semis = 0.0
-    if line['audioEffect'] == 'shout':
+    if line['audioEffect'] == 'shout' and not natural:
         shout_semis = 2.0 if line['emotion'] == 'screaming' else 1.0
     # tape-style pitch changes duration; compensate so `pace` keeps its meaning
     # (pitching down by resampling lengthens the take, so synthesise slightly faster)
@@ -118,6 +128,8 @@ def build_job(line: dict, data: dict, crowd_index: int) -> dict:
         'lufs': lufs,
         'seed': seed,
         'voiceDescription': desc,
+        'natural': natural,
+        'shoutSemis': shout_semis,
     }
 
 
@@ -237,6 +249,8 @@ def main() -> int:
     ap.add_argument('--scripts-only', action='store_true', help='write performance script + SSML, no audio')
     ap.add_argument('--skip-crowd-bed', action='store_true')
     ap.add_argument('--models-dir', default=str(ROOT / '.voice-models'))
+    ap.add_argument('--estimate', action='store_true', help='print how many characters would be sent to the provider, then exit')
+    ap.add_argument('--max-chars', type=int, default=0, help='stop before sending more than this many characters (quota guard)')
     args = ap.parse_args()
 
     load_env()
@@ -248,7 +262,12 @@ def main() -> int:
 
     lines = data['VOICE_LINES']
     crowd_ix = {l['id']: i for i, l in enumerate([l for l in lines if l['character'] == 'crowd'])}
-    jobs = [build_job(l, data, crowd_ix.get(l['id'], 0)) for l in lines]
+    jobs = [build_job(l, data, crowd_ix.get(l['id'], 0), provider_name) for l in lines]
+    # story context for providers that use it (ElevenLabs previous_text / next_text)
+    story = [j for j in jobs if j['line']['character'] != 'crowd']
+    for i, j in enumerate(story):
+        j['prevText'] = (story[i - 1]['line'].get('spokenText') or story[i - 1]['line']['text']) if i > 0 else ''
+        j['nextText'] = (story[i + 1]['line'].get('spokenText') or story[i + 1]['line']['text']) if i + 1 < len(story) else ''
     write_scripts(data, jobs)
     print(f'Wrote performance script + SSML for {len(jobs)} lines -> voice-scripts/')
     if args.scripts_only:
@@ -260,6 +279,22 @@ def main() -> int:
         wanted = {s.strip() for s in args.only.split(',') if s.strip()}
         jobs = [j for j in jobs if j['line']['id'] in wanted]
 
+    def chars(job):
+        if provider_name == 'elevenlabs':
+            from providers import eleven_text
+
+            return len(eleven_text(job, job['providers']['elevenlabs']['model'].startswith('eleven_v3')))
+        return len(job['line'].get('spokenText') or job['line']['text'])
+
+    if args.estimate:
+        per = {}
+        for j in jobs:
+            per[j['line']['character']] = per.get(j['line']['character'], 0) + chars(j)
+        for c, n in sorted(per.items(), key=lambda kv: -kv[1]):
+            print(f'  {c:10s} {n:6d} characters')
+        print(f'  TOTAL      {sum(per.values()):6d} characters for {len(jobs)} line(s) with provider "{provider_name}"')
+        return 0
+
     try:
         provider = make_provider(provider_name, Path(args.models_dir), data['EMOTION_DIRECTIONS'])
     except ProviderUnavailable as e:
@@ -268,8 +303,14 @@ def main() -> int:
         print('Performance scripts/SSML were written to voice-scripts/ so the lines can be recorded or generated later.')
         return 2
 
+    if hasattr(provider, 'quota'):
+        q = provider.quota()
+        if q:
+            print(f'[voice] {provider_name} quota: {q[0]:,} of {q[1]:,} characters used this period ({q[1] - q[0]:,} left)')
+
     cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
     done = skipped = 0
+    sent = 0
     t0 = time.time()
     for job in jobs:
         line = job['line']
@@ -278,7 +319,15 @@ def main() -> int:
         if not args.force and out.exists() and cache.get(line['filename'], {}).get('hash') == h:
             skipped += 1
             continue
-        audio, sr = provider.synthesize(job)
+        if args.max_chars and sent + chars(job) > args.max_chars:
+            print(f'\n[voice] --max-chars {args.max_chars} reached; stopping. Re-run later to continue (finished lines are kept).')
+            break
+        try:
+            audio, sr = provider.synthesize(job)
+        except ProviderUnavailable as e:
+            print(f'\n[voice] {e}')
+            break
+        sent += chars(job)
         y = postprocess.process_line(audio, sr, job)
         out.parent.mkdir(parents=True, exist_ok=True)
         dsp.write_wav(str(out), dsp.resample(y, dsp.SR, VOICE_SR), VOICE_SR)
@@ -294,7 +343,7 @@ def main() -> int:
     if provider_name == 'kokoro' and wants_crowd and not args.skip_crowd_bed and not args.only and (args.force or not bed.exists() or done):
         build_crowd_bed(provider, data)
 
-    print(f'\nGenerated {done} line(s), {skipped} unchanged, in {time.time() - t0:.0f}s with provider "{provider_name}".')
+    print(f'\nGenerated {done} line(s), {skipped} unchanged, in {time.time() - t0:.0f}s with provider "{provider_name}" ({sent:,} characters sent).')
     return 0
 
 

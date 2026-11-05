@@ -189,7 +189,30 @@ AZURE_SPEECH_REGION=westeurope
 AWS_ACCESS_KEY_ID=... / AWS_SECRET_ACCESS_KEY=... / AWS_REGION=...   (Polly, needs `pip install boto3`)
 ```
 
-For ElevenLabs, also replace the `REPLACE_WITH_..._VOICE_ID` placeholders in `voiceConfig.ts` with your chosen voice ids. With `eleven_v3`, emotion tags such as `[whispers]` and `[crying]` are added automatically.
+#### Re-voicing with ElevenLabs (recommended for human-sounding delivery)
+
+The local Kokoro voices are clear but flat. ElevenLabs is already cast and wired up:
+
+- **Casting:** every character has a premade voice, chosen by name, which every account has. Narrator *George*, Daniel *Chris*, Emma *Sarah*, old woman *Lily*, captain *Daniel*, crew *Liam* / *Laura*, harbor *Eric*, PA *Alice*, police *Roger*, plus 12 rotating passenger voices.
+- **Changing a voice:** set `voiceName`, or paste a `voiceId` from the Voice Library into `voiceConfig.ts`. An elderly "grandmother" voice from the library suits the old woman best.
+- **Emotion:** the model is `eleven_v3`, which performs inline audio tags generated from each line's metadata. Examples: `[whispers] Sixty-four.`, `[shaky breath] [whispers] That looks like my grandmother.`, `[screaming] Daniel?!`. The narrator stays untagged except `[quietly]` on restrained lines. If your key can't use v3, the generator falls back to `eleven_multilingual_v2` and passes the neighbouring lines as `previous_text` / `next_text` for natural flow.
+- **Post-processing:** ElevenLabs takes keep their natural pitch, with no Kokoro tremor or pitching. The whisper effects are much lighter, and the synthetic breath SFX are skipped because the voice performs its own breaths. Radio, PA, phone, distance and stereo placement still apply.
+
+```bash
+npm run generate-voices -- --provider elevenlabs --estimate     # ~12,000 characters for everything
+```
+
+```bash
+npm run generate-voices -- --provider elevenlabs --character oldWoman   # try one character first
+```
+
+```bash
+npm run generate-voices -- --provider elevenlabs                # the rest; the video retimes itself
+```
+
+`--max-chars N` stops before spending more than N characters. Finished lines are kept, so you can resume next month. The generator prints your remaining quota before it starts.
+
+Check ElevenLabs' current pricing and terms. As far as I know, the free plan's monthly credits are a little short of the ~12k characters this script needs, and free‑plan audio is licensed for non‑commercial use with attribution. A monetised YouTube upload needs at least their cheapest paid plan.
 
 Missing credentials never break the project. The generator writes the scripts and SSML, prints what is missing, and the video keeps rendering with whatever audio exists.
 
@@ -247,7 +270,7 @@ Every line carries `emotion`, `intensity` (0–1), `pace`, `volume`, `pauseBefor
 - **OpenAI** receives natural‑language acting instructions built from the metadata (see `voice-scripts/acting_instructions.json`).
 - **Azure** gets SSML with `mstts:express-as` styles, prosody and breaks (`voice-scripts/ssml_azure.json`).
 - **Polly** gets SSML prosody and breaks (`voice-scripts/ssml_polly.json`).
-- **ElevenLabs** maps intensity to stability and style, plus v3 audio tags.
+- **ElevenLabs** gets v3 audio tags built from emotion, effect and breath, and maps intensity to stability. With v2 it also gets style and speed settings, plus the neighbouring lines as context.
 - **Human actors:** `voice-scripts/performance_script.md` is a complete, scene‑by‑scene recording script with every direction.
 
 The post chain (`scripts/voice/postprocess.py`) does the following:

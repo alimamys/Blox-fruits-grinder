@@ -50,12 +50,17 @@ const walk = (dir) =>
 			})
 		: [];
 
+// which TTS provider made each voice file (expressive providers perform their own breaths)
+const cachePath = path.join(audioDir, '.voice-cache.json');
+const cache = fs.existsSync(cachePath) ? JSON.parse(fs.readFileSync(cachePath, 'utf8')) : {};
+
 const files = {};
 for (const f of walk(audioDir).sort()) {
 	const info = wavInfo(f);
 	if (!info) continue;
 	const rel = path.relative(audioDir, f).split(path.sep).join('/');
 	files[rel] = {duration: Math.round(info.duration * 1000) / 1000, channels: info.channels, sampleRate: info.sampleRate};
+	if (cache[rel]?.provider) files[rel].provider = cache[rel].provider;
 }
 
 fs.mkdirSync(path.dirname(outFile), {recursive: true});
