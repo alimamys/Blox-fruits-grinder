@@ -84,7 +84,21 @@
    "to": 975,
    "frames": [
     {
-     "src": "restyle/hook_10_k1.jpg"
+     "src": "restyle/hook_10_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "crew_001_ticket"
+       ],
+       "mouth": [
+        539.5,
+        654.5,
+        32,
+        20
+       ],
+       "skin": "#e5ab7a"
+      }
+     ]
     }
    ],
    "fx": null
@@ -106,7 +120,21 @@
    "to": 1042,
    "frames": [
     {
-     "src": "restyle/hook_12_k1.jpg"
+     "src": "restyle/hook_12_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "crew_002_maam"
+       ],
+       "mouth": [
+        958.0,
+        586.0,
+        77,
+        49
+       ],
+       "skin": "#d9a172"
+      }
+     ]
     }
    ],
    "fx": null
@@ -150,7 +178,21 @@
    "to": 1377,
    "frames": [
     {
-     "src": "restyle/hook_16_k1.jpg"
+     "src": "restyle/hook_16_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "oldwoman_001_not_passenger"
+       ],
+       "mouth": [
+        958.5,
+        579.5,
+        104,
+        66
+       ],
+       "skin": "#ddccbc"
+      }
+     ]
     }
    ],
    "fx": null
@@ -161,7 +203,21 @@
    "to": 1439,
    "frames": [
     {
-     "src": "restyle/hook_17_k1.jpg"
+     "src": "restyle/hook_17_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "crew_003_why"
+       ],
+       "mouth": [
+        382.5,
+        776.0,
+        30,
+        19
+       ],
+       "skin": "#d0986a"
+      }
+     ]
     }
    ],
    "fx": null
@@ -172,7 +228,21 @@
    "to": 1535,
    "frames": [
     {
-     "src": "restyle/hook_18_k1.jpg"
+     "src": "restyle/hook_18_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "oldwoman_002_waiting"
+       ],
+       "mouth": [
+        963.5,
+        582.5,
+        104,
+        66
+       ],
+       "skin": "#e0d4c8"
+      }
+     ]
     }
    ],
    "fx": null
@@ -183,7 +253,21 @@
    "to": 1565,
    "frames": [
     {
-     "src": "restyle/hook_19_k1.jpg"
+     "src": "restyle/hook_19_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "crew_004_who"
+       ],
+       "mouth": [
+        960.0,
+        583.5,
+        77,
+        50
+       ],
+       "skin": "#bc8560"
+      }
+     ]
     }
    ],
    "fx": null
@@ -205,7 +289,21 @@
    "to": 1700,
    "frames": [
     {
-     "src": "restyle/hook_21_k1.jpg"
+     "src": "restyle/hook_21_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "oldwoman_003_passenger37"
+       ],
+       "mouth": [
+        957.5,
+        580.0,
+        128,
+        81
+       ],
+       "skin": "#d3c7bb"
+      }
+     ]
     }
    ],
    "fx": null
@@ -333,7 +431,21 @@
    "to": 3195,
    "frames": [
     {
-     "src": "restyle/recognition_03_k1.jpg"
+     "src": "restyle/recognition_03_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "crew_005_sir"
+       ],
+       "mouth": [
+        1276.0,
+        717.5,
+        35,
+        22
+       ],
+       "skin": "#e7bb8a"
+      }
+     ]
     }
    ],
    "fx": null
@@ -344,7 +456,21 @@
    "to": 3292,
    "frames": [
     {
-     "src": "restyle/recognition_04_k1.jpg"
+     "src": "restyle/recognition_04_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "daniel_002_no"
+       ],
+       "mouth": [
+        963.5,
+        577.0,
+        72,
+        45
+       ],
+       "skin": "#f0c399"
+      }
+     ]
     }
    ],
    "fx": null
@@ -383,7 +509,32 @@
    "to": 3477,
    "frames": [
     {
-     "src": "restyle/recognition_07_k1.jpg"
+     "src": "restyle/recognition_07_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_002_daniel"
+       ],
+       "mouth": [
+        960.5,
+        578.0,
+        72,
+        45
+       ],
+       "skin": "#e7c4ad"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "recognition_08",
+   "from": 3477,
+   "to": 3609,
+   "frames": [
+    {
+     "src": "restyle/recognition_08_k1.jpg"
     }
    ],
    "fx": null
@@ -405,7 +556,21 @@
    "to": 3731,
    "frames": [
     {
-     "src": "restyle/recognition_10_k1.jpg"
+     "src": "restyle/recognition_10_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_003_what_is_it"
+       ],
+       "mouth": [
+        963.5,
+        580.5,
+        72,
+        46
+       ],
+       "skin": "#f9d3b4"
+      }
+     ]
     }
    ],
    "fx": null
@@ -416,7 +581,21 @@
    "to": 3801,
    "frames": [
     {
-     "src": "restyle/recognition_11_k1.jpg"
+     "src": "restyle/recognition_11_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "daniel_003_grandmother"
+       ],
+       "mouth": [
+        964.5,
+        575.0,
+        74,
+        47
+       ],
+       "skin": "#e5bb93"
+      }
+     ]
     }
    ],
    "fx": null
@@ -427,7 +606,21 @@
    "to": 3837,
    "frames": [
     {
-     "src": "restyle/recognition_12_k1.jpg"
+     "src": "restyle/recognition_12_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_004_so"
+       ],
+       "mouth": [
+        962.0,
+        575.5,
+        71,
+        46
+       ],
+       "skin": "#f2c8aa"
+      }
+     ]
     }
    ],
    "fx": null
@@ -438,7 +631,21 @@
    "to": 3894,
    "frames": [
     {
-     "src": "restyle/recognition_13_k1.jpg"
+     "src": "restyle/recognition_13_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "daniel_004_died"
+       ],
+       "mouth": [
+        958.0,
+        574.5,
+        75,
+        48
+       ],
+       "skin": "#e1d7c6"
+      }
+     ]
     }
    ],
    "fx": null
@@ -460,7 +667,21 @@
    "to": 4280,
    "frames": [
     {
-     "src": "restyle/recognition_17_k1.jpg"
+     "src": "restyle/recognition_17_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_005_no"
+       ],
+       "mouth": [
+        958.0,
+        575.0,
+        73,
+        47
+       ],
+       "skin": "#efc6ae"
+      }
+     ]
     }
    ],
    "fx": null
@@ -472,6 +693,28 @@
    "frames": [
     {
      "src": "restyle/recognition_18_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "recognition_23",
+   "from": 4656,
+   "to": 4707,
+   "frames": [
+    {
+     "src": "restyle/recognition_23_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "recognition_24",
+   "from": 4707,
+   "to": 4782,
+   "frames": [
+    {
+     "src": "restyle/recognition_24_k1.jpg"
     }
    ],
    "fx": null

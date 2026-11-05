@@ -6,11 +6,11 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Img, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import manifest from '../../data/generated/restyle.json';
-import {envelopeAt} from '../../data/speech';
+import {envelopeAt, visemeAt} from '../../data/speech';
 import {FPS, type Timeline} from '../../data/timeline';
 import {h01} from '../../utils/rough';
 
-type Talk = {src: string; lines: string[]};
+type Talk = {src?: string; lines: string[]; mouth?: [number, number, number, number]; skin?: string};
 type Frame = {src: string; talk?: Talk[]};
 type Shot = {id: string; from: number; to: number; frames: Frame[]; fx?: string | null};
 const SHOTS = (manifest as {shots: Shot[]}).shots ?? [];
@@ -47,6 +47,7 @@ const Still: React.FC<{shot: Shot; lines: Record<string, {start: number; end: nu
 	// talking: swap to the open-mouth drawing while the line is loud
 	const frame = shot.frames[idx];
 	let src = frame.src;
+	const mouths: Array<{box: [number, number, number, number]; open: number; vis: string; skin?: string}> = [];
 	for (const tk of frame.talk ?? []) {
 		for (const id of tk.lines) {
 			const m = lines[id];
@@ -54,7 +55,10 @@ const Still: React.FC<{shot: Shot; lines: Record<string, {start: number; end: nu
 			const ts = g / FPS - m.start;
 			if (ts >= 0 && g / FPS < m.end) {
 				const e = envelopeAt(id, ts) ?? 0.5;
-				if (e > 0.24) src = tk.src;
+				if (e > 0.2) {
+					if (tk.src) src = tk.src;
+					else if (tk.mouth) mouths.push({box: tk.mouth, open: e, vis: visemeAt(id, ts), skin: tk.skin});
+				}
 			}
 		}
 	}
@@ -72,6 +76,23 @@ const Still: React.FC<{shot: Shot; lines: Record<string, {start: number; end: nu
 		<AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
 			{prev ? <Img src={staticFile(prev)} style={style} /> : null}
 			<Img src={staticFile(src)} style={{...style, opacity: fade}} />
+			{mouths.length ? (
+				// drawn mouth in time with the voice, placed where the character's mouth is
+				<svg viewBox="0 0 1920 1080" style={{...style, objectFit: undefined}}>
+					{mouths.map(({box: [cx, cy, w, h], open, vis, skin}, i) => {
+						const k = w / 22; // marker was 22 px wide at the character's scale
+						const rx = (vis === 'e' ? 9.5 : vis === 'o' ? 5.5 : 7.5) * k;
+						const ry = (vis === 'e' ? 1.6 + open * 3.6 : 2 + open * 6.2) * k * (vis === 'o' ? 1.1 : 1);
+						return (
+							<g key={i}>
+								{skin ? <ellipse cx={cx} cy={cy} rx={w * 0.62} ry={Math.max(h * 0.55, 4 * k)} fill={skin} /> : null}
+								<ellipse cx={cx} cy={cy + ry * 0.25} rx={rx} ry={ry} fill="#3a1414" stroke="#141414" strokeWidth={Math.max(1.5, 1.9 * k)} />
+								{open > 0.45 && vis !== 'o' ? <path d={`M${cx - rx * 0.6},${cy - ry * 0.35 + 1.5 * k} L${cx + rx * 0.6},${cy - ry * 0.35 + 1.5 * k}`} stroke="#f4efe6" strokeWidth={1.8 * k} strokeLinecap="round" /> : null}
+							</g>
+						);
+					})}
+				</svg>
+			) : null}
 			{shot.fx === 'glitch' && f % 3 === 0 ? <AbsoluteFill style={{background: 'rgba(255,255,255,0.08)', mixBlendMode: 'screen'}} /> : null}
 			{shot.fx === 'cctv' ? (
 				<>

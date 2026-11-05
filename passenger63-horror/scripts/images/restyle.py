@@ -254,7 +254,7 @@ def job_list(plan: list, only: set | None) -> list:
             continue
         if p['mode'] == 'single':
             jobs.append({'shot': p['id'], 'src': KEYS / f"{p['id']}_k1.png", 'out': OUT / f"{p['id']}_k1.jpg", 'prompt': RESTYLE_PROMPT + (CCTV_NOTE if p.get('cctv') else '') + (DARK_NOTE if p.get('dark') else ''), 'kind': 'restyle'})
-            for ch in sorted({t['character'] for t in p.get('talk', [])}):
+            for ch in (sorted({t['character'] for t in p.get('talk', [])}) if os.environ.get('MOUTH_VARIANTS') else []):
                 jobs.append({'shot': p['id'], 'src': OUT / f"{p['id']}_k1.jpg", 'out': OUT / f"{p['id']}_k1_talk_{ch}.jpg", 'prompt': mouth_prompt(ch), 'kind': 'mouth', 'after': OUT / f"{p['id']}_k1.jpg"})
         elif p['mode'] == 'multi':
             for i in range(3):
@@ -299,7 +299,11 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
         img.save(j['out'], 'JPEG', quality=90)
         with _lock:
             cache[j['out'].name] = h
-            CACHE.write_text(json.dumps(cache, indent=1, sort_keys=True))
+            # merge with what other runs wrote meanwhile
+            disk = json.loads(CACHE.read_text()) if CACHE.exists() else {}
+            disk.update(cache)
+            cache.update(disk)
+            CACHE.write_text(json.dumps(disk, indent=1, sort_keys=True))
             state['done'] += 1
             print(f'  [{state["done"]}] {j["out"].name}', flush=True)
 
@@ -309,6 +313,41 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
         with ThreadPoolExecutor(max_workers=workers) as ex:
             list(ex.map(run, batch))
     print(f'restyle: generated {state["done"]}, cached {state["skipped"]}, failed {state["failed"]}')
+
+
+# ---------------------------------------------------------------------------
+# mouth positions (free lip sync over the redraws)
+# ---------------------------------------------------------------------------
+KEY_SEEDS = [37, 38, 63, 8, 11, 12, 21, 30, 13]
+CHAR_SEED = {'daniel': 37, 'emma': 38, 'oldWoman': 63, 'captain': 8, 'crew1': 11, 'crew2': 12, 'police': 21, 'harbor': 30}
+
+
+def cmd_mouths() -> None:
+    plan = json.loads(PLAN.read_text())
+    found = missing = 0
+    for p in plan:
+        if p['mode'] != 'single':
+            continue
+        f = KEYS / f"{p['id']}_mouth.png"
+        if not p.get('talk') or not f.exists():
+            continue
+        a = np.asarray(Image.open(f).convert('RGB')).astype(np.int32)
+        for t in p['talk']:
+            seed = CHAR_SEED.get(t['character'])
+            if seed is None:
+                continue
+            b = 24 * (KEY_SEEDS.index(seed) + 1)
+            m = (np.abs(a[..., 0] - 255) < 40) & (a[..., 1] < 50) & (np.abs(a[..., 2] - b) < 8)
+            ys, xs = np.nonzero(m)
+            if len(xs) < 12:
+                t.pop('mouth', None)
+                missing += 1
+                continue
+            x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
+            t['mouth'] = [round((x0 + x1) / 2, 1), round((y0 + y1) / 2, 1), int(x1 - x0 + 1), int(y1 - y0 + 1)]
+            found += 1
+    PLAN.write_text(json.dumps(plan, indent=1))
+    print(f'mouths: located {found}, not visible {missing}')
 
 
 # ---------------------------------------------------------------------------
@@ -340,8 +379,23 @@ def cmd_manifest() -> None:
                 talk = {}
                 for t in p.get('talk', []):
                     m = OUT / f"{p['id']}_k1_talk_{t['character']}.jpg"
+                    entry = talk.setdefault(t['character'], {'lines': []})
+                    entry['lines'].append(t['line'])
                     if m.exists():
-                        talk.setdefault(t['character'], {'src': f'restyle/{m.name}', 'lines': []})['lines'].append(t['line'])
+                        entry['src'] = f'restyle/{m.name}'
+                    if t.get('mouth'):
+                        entry['mouth'] = t['mouth']
+                        # skin colour just above the mouth in the redraw, to cover its own closed mouth
+                        try:
+                            im = np.asarray(Image.open(f).convert('RGB')).astype(np.float32)
+                            cx, cy, w, h = t['mouth']
+                            yy = int(max(0, cy - h * 1.15))
+                            patch = im[max(0, yy - 3): yy + 4, int(cx - w * 0.25): int(cx + w * 0.25) + 1].reshape(-1, 3)
+                            r, g, b = np.median(patch, axis=0)
+                            entry['skin'] = '#%02x%02x%02x' % (int(r), int(g), int(b))
+                        except Exception:  # noqa: BLE001
+                            pass
+                talk = {k: v for k, v in talk.items() if v.get('src') or v.get('mouth')}
                 if talk:
                     fr['talk'] = list(talk.values())
             frames.append(fr)
@@ -353,7 +407,7 @@ def cmd_manifest() -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument('cmd', choices=['plan', 'gen', 'manifest'])
+    ap.add_argument('cmd', choices=['plan', 'gen', 'mouths', 'manifest'])
     ap.add_argument('--only')
     ap.add_argument('--limit', type=int, default=0)
     ap.add_argument('--workers', type=int, default=6)
@@ -362,6 +416,8 @@ def main() -> int:
         cmd_plan()
     elif a.cmd == 'gen':
         cmd_gen(set(a.only.split(',')) if a.only else None, a.limit, a.workers)
+    elif a.cmd == 'mouths':
+        cmd_mouths()
     else:
         cmd_manifest()
     return 0

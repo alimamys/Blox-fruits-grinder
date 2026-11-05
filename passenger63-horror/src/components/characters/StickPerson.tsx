@@ -12,6 +12,7 @@
 // Seated pose: hips on the seat at -72, knees forward at -60, shins down to the floor
 // (head centre at -209). Seats are drawn with their cushion top at y - 72*s.
 import React, {useId} from 'react';
+import {getInputProps} from 'remotion';
 import {boilOf, h1, wob, wobCircle, wobEllipse, wobLine, wobPoly, type Pt} from '../../utils/rough';
 
 export type Pose = 'stand' | 'sit' | 'walk' | 'run';
@@ -114,6 +115,15 @@ export interface StickProps {
 }
 
 const INK = '#141414';
+
+/** Mouth-tracking render mode (scripts/images/mouthkeys.mjs): every mouth becomes a flat
+ *  marker in a colour unique to the character, so it can be located in the frame. */
+export const MOUTH_KEY_SEEDS = [37, 38, 63, 8, 11, 12, 21, 30, 13];
+const mouthKeyMode = () => Boolean((getInputProps() as {mouthKey?: boolean}).mouthKey);
+export const mouthKeyColor = (seed: number) => {
+	const i = MOUTH_KEY_SEEDS.indexOf(seed);
+	return i < 0 ? null : `rgb(255,0,${24 * (i + 1)})`;
+};
 
 const mixHex = (a: string, b: string, t: number) => {
 	const pa = parseInt(a.slice(1), 16);
@@ -486,6 +496,11 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 					mouthEl = mk(wobLine(mx - 10, my, mx + 10, my, sd + 8, 0.5, 1));
 			}
 		}
+	}
+
+	if (!back && mouthKeyMode()) {
+		const kc = mouthKeyColor(seed);
+		mouthEl = kc ? <ellipse cx={mx} cy={my + 1} rx={11} ry={7} fill={kc} /> : mouthEl;
 	}
 
 	// ---- hair
