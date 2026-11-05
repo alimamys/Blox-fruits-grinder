@@ -39,7 +39,7 @@ Or render and master the loudness to about −15 LUFS integrated / −1.5 dBTP:
 npm run render
 ```
 
-That writes `out/passenger63.mp4`. Use `npm run render -- --tight` for the shorter edit, and `npm run audio-preview` for a mastered WAV of the soundtrack alone.
+That writes `out/passenger63.mp4`. On a 4‑core machine a full render took about 55 minutes. The per‑frame film grain makes the file large: about 2.5 GB at CRF 18, and the script now uses CRF 20. Pass `-- --crf=23` for a smaller file, or set `grain:false`. Use `npm run render -- --tight` for the shorter edit, and `npm run audio-preview` for a mastered WAV of the soundtrack alone.
 
 Offline machines: rendering needs no internet. All fonts, textures, voices and SFX are local. If Remotion cannot download its headless Chrome, point it at any local Chrome or Chromium:
 

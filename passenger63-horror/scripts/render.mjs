@@ -39,7 +39,7 @@ const raw = path.join('out', audioOnly ? `${base}_audio_raw.wav` : `${base}_raw.
 const final = path.join('out', audioOnly ? `${base}_audio_preview.wav` : `${base}.mp4`);
 const codecArgs = audioOnly
 	? ['--codec=wav', '--audio-codec=pcm-16']
-	: ['--codec=h264', '--crf=18', '--pixel-format=yuv420p', '--audio-codec=aac', '--audio-bitrate=320k'];
+	: ['--codec=h264', '--crf=20', '--pixel-format=yuv420p', '--audio-codec=aac', '--audio-bitrate=320k'];
 run(npx, ['remotion', 'render', 'src/index.ts', comp, raw, ...codecArgs, ...browserArgs, ...extra]);
 
 // ffmpeg: system one, or the copy bundled with Remotion
@@ -63,4 +63,5 @@ if (audioOnly) {
 } else {
 	ff(['-hide_banner', '-y', '-i', raw, '-c:v', 'copy', '-af', filter, '-c:a', 'aac', '-b:a', '256k', '-movflags', '+faststart', final]);
 }
+fs.rmSync(path.join(root, raw), {force: true});
 console.log(`\nDone -> ${final}`);
