@@ -77,20 +77,21 @@ def bottom_shade(im: Image.Image, start: float = 0.55, amount: float = 0.75) -> 
     return Image.composite(Image.new('RGB', (W, H), (0, 0, 0)), im, grad)
 
 
-# where the mystery is in each generated scene (canvas px): set after looking at youtube/gen_*.png
+# where the mystery is in each generated scene (1280x720 px), set after looking at youtube/gen_*.png
 MARKS = {
-    'doorway': {'circle': (300, 330, 95, 190)},
-    'screen': {'arrow': (520, 120, 330, 300)},
-    'wall': {'circle': (930, 380, 170, 250)},
+    'doorway': {'circle': (300, 330, 105, 250), 'lift': (300, 330, 120, 270)},  # the figure in the doorway behind her
+    'screen': {'arrow': (640, 560, 430, 380)},  # the man on her monitor
+    'wall': {'circle': (880, 270, 190, 260)},  # the white figure in the wall
 }
 
 
 def main() -> None:
     OUT.mkdir(exist_ok=True)
+    # text in the bottom band, so it never covers the face or the mystery
     jobs = [
-        ('doorway', 'thumbnail_A_doorway.jpg', [('WHO DREW', WHITE), ('HIM?', RED)], (40, 40, 150, 620)),
-        ('screen', 'thumbnail_B_frame240.jpg', [('FRAME', WHITE), ('240', RED)], (40, 30, 170, 560)),
-        ('wall', 'thumbnail_C_wall.jpg', [('LOOK', WHITE), ('CLOSER.', RED)], (700, 30, 150, 560)),
+        ('doorway', 'thumbnail_A_doorway.jpg', [('WHO DREW HIM?', WHITE)], (40, 590, 112, 1180)),
+        ('screen', 'thumbnail_B_frame240.jpg', [('FRAME 240', RED)], (40, 580, 128, 700)),
+        ('wall', 'thumbnail_C_wall.jpg', [('LOOK CLOSER.', WHITE)], (40, 590, 112, 1180)),
     ]
     for name, out, words, (x, y, size, max_w) in jobs:
         src = OUT / f'gen_{name}.png'
@@ -101,7 +102,16 @@ def main() -> None:
         im = ImageEnhance.Contrast(im).enhance(1.12)
         im = ImageEnhance.Color(im).enhance(1.12)
         im = ImageEnhance.Brightness(im).enhance(1.06)
+        im = bottom_shade(im, 0.62, 0.7)
         mk = MARKS.get(name, {})
+        if 'lift' in mk:
+            # lift the shadows inside the mark so the hidden figure is just visible
+            cx, cy, rx, ry = mk['lift']
+            mask = Image.new('L', (W, H), 0)
+            ImageDraw.Draw(mask).ellipse((cx - rx, cy - ry, cx + rx, cy + ry), fill=255)
+            mask = mask.filter(ImageFilter.GaussianBlur(40))
+            lifted = ImageEnhance.Contrast(im.point(lambda v: int(255 * (v / 255) ** 0.55))).enhance(1.15)
+            im = Image.composite(lifted, im, mask)
         if 'circle' in mk:
             red_circle(im, *mk['circle'])
         if 'arrow' in mk:
