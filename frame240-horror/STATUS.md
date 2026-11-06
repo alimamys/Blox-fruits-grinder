@@ -36,6 +36,10 @@ The plan is in [`PLAN.md`](PLAN.md) and was approved:
   - Mastered to −15 LUFS, with a pre-limiter so the gain stays linear and a −1.5 dBTP safety limiter.
   - Hana sits under the narration.
   - The final 3 s white hold is silent.
+- **Render check fixes:**
+  - The white brush strokes and the lasso are now anchored to where the man stands in the generated canvas pictures (measured on a grid), not the layout positions.
+  - The final limiter is lowered to −2.5 dBFS so the AAC upload copy stays under −1.5 dBTP.
+  - Lip sync is checked on the rendered film with `scripts/lipsync_sheet.py`.
 - **YouTube:** `youtube/` holds `DESCRIPTION.txt`, `TITLE_AND_TAGS.txt` and three thumbnails (`thumbnail_A_doorway.jpg`, `thumbnail_B_frame240.jpg`, `thumbnail_C_wall.jpg`).
 
 ## Resume (in order)
