@@ -411,13 +411,15 @@ node scripts/images/mouthkeys.mjs      # mouth positions for talking shots
 node scripts/images/plates.mjs         # empty background plates for animated shots -> build/plates/
 .venv/bin/python scripts/images/restyle.py plan
 .venv/bin/python scripts/images/restyle.py gen --workers 8   # ~$0.20 per image; cached, resumable
-.venv/bin/python scripts/images/restyle.py mouths
+.venv/bin/python scripts/images/restyle.py align             # register each background plate onto its set
+.venv/bin/python scripts/images/restyle.py mouths            # place lip-sync mouths on the redrawn faces
 .venv/bin/python scripts/images/restyle.py manifest          # -> src/data/generated/restyle.json + plates.json
 .venv/bin/python scripts/images/review.py                    # contact sheets in build/review/
 ```
 
 - **Skipped shots.** Text-heavy screens (manifests, phones, CCTV UI) and near-black frames keep their code-drawn version, because a redraw would garble the text.
-- **Animated shots.** Some shots have real movement: the crew walking up to the old woman, Daniel standing up, the washroom and storage-room search, the empty railing. These are not frozen into a still. Their sets are wrapped in `<PlateBg id>` and their moving characters in `<Anim>` (`src/components/environments/Plates.tsx`). `plates.mjs` renders each set empty through a fixed wide camera, and `restyle.py` redraws it to `public/plates/<id>.jpg`. In the film the redrawn plate then replaces the code-drawn set, and the animated figures move on top under the same camera.
+- **Reviewed shots.** Every redraw is checked side by side with its source (`review.py pairs`). If a redraw invents something (a person in an empty frame, ghosts instead of scratch marks) or loses something (a red evidence circle, a running CCTV clock), its shot goes into `FORCE_SKIP` in `restyle.py` and keeps its code-drawn version.
+- **Animated shots.** Some shots have real movement: the crew walking up to the old woman, Daniel standing up, the washroom and storage-room search, the empty railing. These are not frozen into a still. Their sets are wrapped in `<PlateBg id>` and their moving characters in `<Anim>` (`src/components/environments/Plates.tsx`). `plates.mjs` renders each set empty through a fixed wide camera, and `restyle.py` redraws it to `public/plates/<id>.jpg`. In the film the redrawn plate then replaces the code-drawn set, and the animated figures move on top under the same camera. A redraw drifts and zooms slightly from its source, so `restyle.py align` registers each plate back onto the set (per-axis scale and shift, weighted to the seats and benches the characters use). Without this, seated figures would hover above the seats. The lip-sync mouths are moved into each redraw the same way.
 
 ## Replacing synthetic visuals
 
