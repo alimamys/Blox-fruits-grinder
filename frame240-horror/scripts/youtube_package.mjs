@@ -27,7 +27,11 @@ const CHAPTER = {
 	recording: 'The recording',
 	lastSelection: 'The last selection',
 };
-const ts = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+// same rounding as `npm run check` (scripts/check.mjs), so the chapters match its printout
+const ts = (s) => {
+	const r = Math.round(s * 10) / 10;
+	return `${Math.floor(r / 60)}:${String(Math.floor(r % 60)).padStart(2, '0')}`;
+};
 const chapters = report.scenes.filter((s) => CHAPTER[s.id]).map((s) => `${ts(s.start)} ${CHAPTER[s.id]}`);
 
 const credits = fs.existsSync(creditsFile) ? fs.readFileSync(creditsFile, 'utf8') : '';
