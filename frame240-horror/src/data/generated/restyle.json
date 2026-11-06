@@ -1,1 +1,105 @@
-{"shots": {}}
+{
+ "shots": {
+  "co_04_face_uneasy": {
+   "frames": [
+    {
+     "src": "restyle/co_04_face_uneasy_k1.jpg"
+    }
+   ]
+  },
+  "co_06_desk_wide": {
+   "frames": [
+    {
+     "src": "restyle/co_06_desk_wide_k1.jpg"
+    }
+   ]
+  },
+  "co_07_stylus": {
+   "frames": [
+    {
+     "src": "restyle/co_07_stylus_k1.jpg"
+    }
+   ]
+  },
+  "co_08_eyes": {
+   "frames": [
+    {
+     "src": "restyle/co_08_eyes_k1.jpg"
+    }
+   ]
+  },
+  "co_09_hall_dark": {
+   "frames": [
+    {
+     "src": "restyle/co_09_hall_dark_k1.jpg"
+    }
+   ]
+  },
+  "co_10_figure_real": {
+   "frames": [
+    {
+     "src": "restyle/co_10_figure_real_k1.jpg"
+    }
+   ]
+  },
+  "nn_00_exterior": {
+   "frames": [
+    {
+     "src": "restyle/nn_00_exterior_k1.jpg"
+    }
+   ]
+  },
+  "nn_01_workroom_wide": {
+   "frames": [
+    {
+     "src": "restyle/nn_01_workroom_wide_k1.jpg"
+    }
+   ]
+  },
+  "nn_02_tired": {
+   "frames": [
+    {
+     "src": "restyle/nn_02_tired_k0.jpg"
+    },
+    {
+     "src": "restyle/nn_02_tired_k1.jpg"
+    }
+   ]
+  },
+  "nn_03_phone_mug": {
+   "frames": [
+    {
+     "src": "restyle/nn_03_phone_mug_k1.jpg"
+    }
+   ]
+  },
+  "nn_04_ots_monitor": {
+   "frames": [
+    {
+     "src": "restyle/nn_04_ots_monitor_k1.jpg"
+    }
+   ]
+  },
+  "cl_15_scratch": {
+   "frames": [
+    {
+     "src": "restyle/co_09_hall_dark_k1.jpg"
+    }
+   ]
+  },
+  "cl_18_empty": {
+   "frames": [
+    {
+     "src": "restyle/co_09_hall_dark_k1.jpg"
+    }
+   ]
+  },
+  "er_20_silence": {
+   "frames": [
+    {
+     "src": "restyle/co_09_hall_dark_k1.jpg"
+    }
+   ]
+  }
+ }
+}
