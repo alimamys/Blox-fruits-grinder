@@ -1,0 +1,163 @@
+{
+ "total": 625.625,
+ "scenes": [
+  {
+   "id": "coldOpen",
+   "name": "Cold open - the frame that shouldn't exist",
+   "start": 0,
+   "duration": 43,
+   "narrationText": "There were 239 frames in my animation when I went to bed. When I opened it again, there were 240. In the extra frame, a man was standing in my hallway. I hadn't drawn him. And the next time I pressed play, he was closer. I know how ridiculous that sounds. A drawing can't move by itself. An animation can't create new frames. At least, that's what I believed. Until that night.",
+   "dialogueIds": []
+  },
+  {
+   "id": "normalNight",
+   "name": "A normal night",
+   "start": 43,
+   "duration": 51.125,
+   "narrationText": "My name is Mara. I'm a freelance animator. Most nights, I work until two or three in the morning. It's quieter then. No phone calls. No interruptions. That night, I was finishing a short animation of an empty apartment hallway. Nothing complicated. A flickering ceiling light, a few shadows, and a slow movement toward a closed bedroom door. I'd used my own hallway as a reference. The little crack above the doorframe, the old carpet, even the stain on the ceiling. It was all there. I'd been staring at the same ten seconds of animation for nearly three hours. Eventually, I saved the project, closed my eyes for a moment, and checked the timeline one last time. That's when I noticed the extra frame.",
+   "dialogueIds": []
+  },
+  {
+   "id": "stranger",
+   "name": "The stranger",
+   "start": 94.125,
+   "duration": 58.25,
+   "narrationText": "At first, I thought I'd accidentally duplicated something. I clicked on the final frame. There was a man standing at the far end of the hallway. He was very tall. Taller than the doorframe. His arms hung straight down, and his head tilted slightly forward, as though he were examining something on the floor. His face was almost completely hidden. But something about the drawing bothered me. It matched my animation style perfectly. The same brush texture. The same lighting. Even the same shadows. I checked the layers. Background. Lighting. Ceiling. Door. There was no layer containing a man. I tried selecting him. Nothing. He was part of the picture. Then I pressed play again. He had moved.",
+   "dialogueIds": []
+  },
+  {
+   "id": "closer",
+   "name": "One step closer",
+   "start": 152.375,
+   "duration": 55.875,
+   "narrationText": "I stared at the screen for a long time. Then I played the animation again. The man was closer. Not much. Maybe a meter. I played it a third time. Closer. A fourth time. Closer. He didn't walk. There was no movement between positions. He simply appeared somewhere new every time the animation reached its final frame. Like someone was drawing him in a different place. I stopped the playback. For several seconds, I didn't move. Then I heard something from my actual hallway. It sounded like someone dragging a pencil across a wall. I turned around. The hallway was empty. But the ceiling light was flickering. Exactly like the one in my animation.",
+   "dialogueIds": []
+  },
+  {
+   "id": "warning",
+   "name": "The warning",
+   "start": 208.25,
+   "duration": 49.958,
+   "narrationText": "I called Hana. She'd worked with me on animation projects before. If anyone could explain this, she could.",
+   "dialogueIds": [
+    "hana_001_three_am",
+    "mara_001_look_at_something",
+    "hana_002_whats_this",
+    "mara_002_see_the_man",
+    "hana_003_creepy",
+    "mara_003_no",
+    "hana_004_what_do_you_mean",
+    "mara_004_gets_closer",
+    "hana_005_stop_playing",
+    "mara_005_reopening",
+    "hana_006_get_out"
+   ]
+  },
+  {
+   "id": "hallway",
+   "name": "The hallway changes",
+   "start": 258.208,
+   "duration": 68.458,
+   "narrationText": "I grabbed my keys. I wasn't going to spend another second trying to understand it. But when I reached the hallway, something was wrong. The carpet looked different. The same stain appeared every few feet, repeating in a perfect pattern. The crack above the bedroom door was no longer just a crack. It was a thin, black line. Almost like a pencil mark. I moved closer. The entire wall looked wrong. Too smooth. Too flat. Like someone had painted over a photograph. I reached out and touched the surface. It felt like paper. Then, from behind the bedroom door, I heard a sound. Three gentle taps. The same scratching noise I'd heard through my computer speakers. I ran back to the desk. And for the first time, I understood. The animation wasn't copying my hallway anymore. My hallway was copying the animation.",
+   "dialogueIds": []
+  },
+  {
+   "id": "erase",
+   "name": "Trying to erase him",
+   "start": 326.667,
+   "duration": 70.083,
+   "narrationText": "I needed to know whether I could change it. I picked up my stylus and drew a red line across the hallway wall in the animation. Immediately, I heard a long scraping noise. I looked behind me. A red line had appeared on my real wall. The exact same length. The exact same position. My hands started shaking. If the animation could change the apartment, maybe I could use it to stop the man. I selected a thick white brush. Then I started painting over him. First his legs. Then his arms. Then the strange angle of his head. I kept painting until the entire figure disappeared into the white background. I flattened the layer. Saved the project. And waited. For a few seconds, nothing happened. I thought I'd done it. I thought I'd erased him. But I hadn't erased him. I'd made a much worse mistake.",
+   "dialogueIds": []
+  },
+  {
+   "id": "whiteOnWhite",
+   "name": "White on white",
+   "start": 396.75,
+   "duration": 62.417,
+   "narrationText": "I noticed the changes slowly. The wallpaper had lost its texture. The shadows around the doorframe had disappeared. Even the stains were gone. My apartment looked like an unfinished drawing. I called Hana again. I turned toward my own wall. For the first time, I noticed a faint outline. Not black. Not gray. White. Almost the exact same color as the paint.",
+   "dialogueIds": [
+    "mara_006_got_rid",
+    "hana_007_what_did_you_do",
+    "mara_007_painted_over",
+    "hana_008_listen",
+    "mara_008_what",
+    "hana_009_screenshot",
+    "mara_009_okay",
+    "hana_010_zoomed",
+    "hana_011_shadow",
+    "mara_010_so",
+    "hana_012_shadow_ends",
+    "hana_013_against_wall",
+    "mara_011_oh_god"
+   ]
+  },
+  {
+   "id": "insideWall",
+   "name": "Inside the wall",
+   "start": 459.167,
+   "duration": 73.417,
+   "narrationText": "I backed away. The shape moved. Not like a person walking. More like a drawing being stretched across paper. The outline of a hand appeared near the ceiling. Then an elbow. Then the curve of a head. I could barely see it unless I tilted my phone flashlight sideways. And the worst part was how quietly it moved. No breathing. No footsteps. Just that horrible scratching sound. It was coming from inside the walls now. I grabbed the computer and tried to smash the screen. But the image stayed there. The man was gone from the drawing. In his place was a blank white space. And through that blank space, something was slowly pushing outward. I heard Hana shouting through my phone. I ran for the front door. There was no handle. There wasn't even a door anymore. Just a smooth white rectangle where the entrance had been.",
+   "dialogueIds": [
+    "hana_014_get_out"
+   ]
+  },
+  {
+   "id": "recording",
+   "name": "The recording",
+   "start": 532.583,
+   "duration": 54.417,
+   "narrationText": "",
+   "dialogueIds": [
+    "mara_012_where_i_am",
+    "mara_013_closet",
+    "mara_014_recording",
+    "mara_015_moving_outside",
+    "mara_016_scratching_stops",
+    "mara_017_even_worse",
+    "mara_018_dragging",
+    "mara_019_finger_paper",
+    "mara_020_gap",
+    "mara_021_no_shadow",
+    "mara_022_not_once",
+    "mara_023_understand",
+    "mara_024_didnt_destroy",
+    "mara_025_changed_color",
+    "mara_026_invisible",
+    "mara_027_every_wall",
+    "mara_028_touching_door"
+   ]
+  },
+  {
+   "id": "lastSelection",
+   "name": "The last selection",
+   "start": 587,
+   "duration": 35.625,
+   "narrationText": "",
+   "dialogueIds": [
+    "mara_029_a_face",
+    "mara_030_see_it_now",
+    "mara_031_pressed",
+    "mara_032_not_coming_through",
+    "mara_033_looking_at_me",
+    "mara_034_wait",
+    "mara_035_little_lines",
+    "mara_036_floor",
+    "mara_037_walls",
+    "mara_038_moving",
+    "mara_039_like",
+    "mara_040_selection_box",
+    "mara_041_oh_no",
+    "mara_042_selecting_me",
+    "mara_043_not_drawing"
+   ]
+  },
+  {
+   "id": "end",
+   "name": "Pure white - three seconds of silence",
+   "start": 622.625,
+   "duration": 3,
+   "narrationText": "",
+   "dialogueIds": []
+  }
+ ]
+}

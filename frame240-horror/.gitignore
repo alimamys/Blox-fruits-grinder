@@ -1,0 +1,12 @@
+node_modules/
+out/
+build/
+.voice-models
+.venv
+.env
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+.venv-chatterbox
+*.whl

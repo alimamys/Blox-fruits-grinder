@@ -1,0 +1,1451 @@
+{
+ "bank:1206": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01206.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/536802",
+  "origin": "Freesound @egomassive https://freesound.org/s/536802/",
+  "title": "Switch"
+ },
+ "bank:1208": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01208.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/556632",
+  "origin": "Freesound @cookies+policy https://freesound.org/s/556632/",
+  "title": "Push Toggle Switch 3"
+ },
+ "bank:1229": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01229.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/690301",
+  "origin": "Freesound @Ralph0o7 https://freesound.org/s/690301/",
+  "title": "Double click on computer mouse"
+ },
+ "bank:1252": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01252.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/648732",
+  "origin": "Freesound @AudioPapkin https://freesound.org/s/648732/",
+  "title": "Cinematic Woosh SFX-011"
+ },
+ "bank:1270": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01270.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/369081",
+  "origin": "Freesound @newagesoup https://freesound.org/s/369081/",
+  "title": "VSH-10-fist-thump-metal pipe-short"
+ },
+ "bank:1304": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01304.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/636877",
+  "origin": "Freesound @MathewHenry https://freesound.org/s/636877/",
+  "title": "Deep Metal Hit 2"
+ },
+ "bank:1343": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01343.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/787636",
+  "origin": "Freesound @martian https://freesound.org/s/787636/",
+  "title": "heart beat lav mic"
+ },
+ "bank:1465": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01465.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/562188",
+  "origin": "Freesound @gristi https://freesound.org/s/562188/",
+  "title": "snd_elevator_power_down"
+ },
+ "bank:1715": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01715.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/543809",
+  "origin": "Freesound @Takkyi https://freesound.org/s/543809/",
+  "title": "Wind Howl 4 inch Pipe"
+ },
+ "bank:1716": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01716.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/113175",
+  "origin": "Freesound @Fasolt https://freesound.org/s/113175/",
+  "title": "wind_howling_03"
+ },
+ "bank:1744": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01744.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/184936",
+  "origin": "Freesound @qubodup https://freesound.org/s/184936/",
+  "title": "Cinematic Rumble"
+ },
+ "bank:1745": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01745.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/51097",
+  "origin": "Freesound @RutgerMuller https://freesound.org/s/51097/",
+  "title": "Sounds For Earthquakes - Radiator Metal Rumbling"
+ },
+ "bank:1831": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01831.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/337834",
+  "origin": "Freesound @newagesoup https://freesound.org/s/337834/",
+  "title": "long-metal-scrape-06"
+ },
+ "bank:1837": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01837.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/539968",
+  "origin": "Freesound @Za-Games https://freesound.org/s/539968/",
+  "title": "Deep Boom"
+ },
+ "bank:1882": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01882.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/369132",
+  "origin": "Freesound @newagesoup https://freesound.org/s/369132/",
+  "title": "VSH-32-hand-slap-metal pipe-short"
+ },
+ "bank:1885": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01885.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/369088",
+  "origin": "Freesound @newagesoup https://freesound.org/s/369088/",
+  "title": "VSH-30-hand-slap-metal pipe-short"
+ },
+ "bank:1886": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01886.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/369082",
+  "origin": "Freesound @newagesoup https://freesound.org/s/369082/",
+  "title": "VSH-09-fist-thump-metal pipe-med"
+ },
+ "bank:1891": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "01891.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/805443",
+  "origin": "Freesound @loganzsound https://freesound.org/s/805443/",
+  "title": "iPhone 15 Pro Vibrates twice"
+ },
+ "bank:283": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00283.flac",
+  "license": "CC0-1.0",
+  "orig_path": "kenney_impact-sounds/Audio/impactMetal_light_000.ogg",
+  "origin": "Kenney Impact Sounds",
+  "title": "impactMetal_light_000"
+ },
+ "bank:705": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00705.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/166966",
+  "origin": "Freesound @jamesabels https://freesound.org/s/166966/",
+  "title": "Splash_002"
+ },
+ "bank:734": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00734.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/316744",
+  "origin": "Freesound @Bird_man https://freesound.org/s/316744/",
+  "title": "Big Splash"
+ },
+ "bank:830": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00830.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/346108",
+  "origin": "Freesound @PearceWilsonKing https://freesound.org/s/346108/",
+  "title": "Boat Horn"
+ },
+ "bank:850": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00850.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/563458",
+  "origin": "Freesound @nicholasdaryl https://freesound.org/s/563458/",
+  "title": "Footstep_Run_HardSurface_5"
+ },
+ "bank:858": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00858.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/144096",
+  "origin": "Freesound @elgronbo https://freesound.org/s/144096/",
+  "title": "FootstepsOnMetal-06"
+ },
+ "bank:859": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00859.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/813620",
+  "origin": "Freesound @SecureSubset https://freesound.org/s/813620/",
+  "title": "Footsteps - Metal, Car, Plane, Sheet, Boat"
+ },
+ "bank:860": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00860.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/778437",
+  "origin": "Freesound @BlondPanda https://freesound.org/s/778437/",
+  "title": "Boots_On_Hollow_Metal_Light_03"
+ },
+ "bank:865": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00865.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/563463",
+  "origin": "Freesound @nicholasdaryl https://freesound.org/s/563463/",
+  "title": "Footstep_Run_HardSurface_6"
+ },
+ "bank:866": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00866.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/563462",
+  "origin": "Freesound @nicholasdaryl https://freesound.org/s/563462/",
+  "title": "Footstep_Run_HardSurface_7"
+ },
+ "bank:872": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00872.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/700705",
+  "origin": "Freesound @MathewHenry https://freesound.org/s/700705/",
+  "title": "Metal Door Squeaking 8 (Medium)"
+ },
+ "bank:883": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00883.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/718445",
+  "origin": "Freesound @Rudmer_Rotteveel https://freesound.org/s/718445/",
+  "title": "Metal_Hatch_Small_Open_03"
+ },
+ "bank:897": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00897.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/186362",
+  "origin": "Freesound @estupe https://freesound.org/s/186362/",
+  "title": "latch_box_office"
+ },
+ "bank:954": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00954.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/667180",
+  "origin": "Freesound @MBPL https://freesound.org/s/667180/",
+  "title": "Turned page"
+ },
+ "bank:956": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00956.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/484940",
+  "origin": "Freesound @SpaceJoe https://freesound.org/s/484940/",
+  "title": "Page Turn - 20"
+ },
+ "bank:962": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00962.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/410359",
+  "origin": "Freesound @BenjaminNelan https://freesound.org/s/410359/",
+  "title": "Torch Click 1"
+ },
+ "bank:963": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00963.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/753402",
+  "origin": "Freesound @LukaCafuka https://freesound.org/s/753402/",
+  "title": "Radio receiver on/off"
+ },
+ "bank:964": {
+  "dataset": "bank-sfx v1 (huggingface.co/datasets/Jacob121294/bank-sfx)",
+  "file": "00964.flac",
+  "license": "CC0-1.0",
+  "orig_path": "freesound/477612",
+  "origin": "Freesound @Joao_Janz https://freesound.org/s/477612/",
+  "title": "Digital Radio Rack Unit Knob Turn Snap 1_1"
+ },
+ "fsd:102698": {
+  "author": "Cambra",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 102698,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "record static.wav",
+  "url": "https://freesound.org/s/102698/"
+ },
+ "fsd:104364": {
+  "author": "RutgerMuller",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 104364,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Metal Object Soft Hits.aif",
+  "url": "https://freesound.org/s/104364/"
+ },
+ "fsd:104367": {
+  "author": "RutgerMuller",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 104367,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Squeaking Metal Closet Door in Basement 1.aif",
+  "url": "https://freesound.org/s/104367/"
+ },
+ "fsd:109578": {
+  "author": "vinjatovix",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 109578,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "FX - motor barco.wav",
+  "url": "https://freesound.org/s/109578/"
+ },
+ "fsd:110141": {
+  "author": "Ryding",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 110141,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Scary scream 3.wav",
+  "url": "https://freesound.org/s/110141/"
+ },
+ "fsd:147583": {
+  "author": "CaCtUs2003",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 147583,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Far_Off_Boom_Without_Amplify.wav",
+  "url": "https://freesound.org/s/147583/"
+ },
+ "fsd:149034": {
+  "author": "susychristiansen",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 149034,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "tappingMic.wav",
+  "url": "https://freesound.org/s/149034/"
+ },
+ "fsd:156335": {
+  "author": "dayvonjersen",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 156335,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "keeponcracklin.wav",
+  "url": "https://freesound.org/s/156335/"
+ },
+ "fsd:156358": {
+  "author": "granconill",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 156358,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "piranha_start.wav",
+  "url": "https://freesound.org/s/156358/"
+ },
+ "fsd:157163": {
+  "author": "SteveOShore",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 157163,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Man Sniffling",
+  "url": "https://freesound.org/s/157163/"
+ },
+ "fsd:160134": {
+  "author": "jorickhoofd",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 160134,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Tunnel at trainstation Impulse-Response reverb clap",
+  "url": "https://freesound.org/s/160134/"
+ },
+ "fsd:160135": {
+  "author": "jorickhoofd",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 160135,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Tunnel 2 Impulse-Response reverb closeby high-pitch clap",
+  "url": "https://freesound.org/s/160135/"
+ },
+ "fsd:160138": {
+  "author": "jorickhoofd",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 160138,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Staircase Impulse-Response long reverb 20m away clap",
+  "url": "https://freesound.org/s/160138/"
+ },
+ "fsd:160143": {
+  "author": "jorickhoofd",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 160143,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Basement Impulse-Response reverb 6m away medium-pitched clap",
+  "url": "https://freesound.org/s/160143/"
+ },
+ "fsd:161347": {
+  "author": "OneHand",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 161347,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "gsm_interference.wav",
+  "url": "https://freesound.org/s/161347/"
+ },
+ "fsd:164219": {
+  "author": "Adam_N",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 164219,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Thud_metallic_2.wav",
+  "url": "https://freesound.org/s/164219/"
+ },
+ "fsd:164220": {
+  "author": "Adam_N",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 164220,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Thud_metallic_1.wav",
+  "url": "https://freesound.org/s/164220/"
+ },
+ "fsd:169628": {
+  "author": "Dinsfire",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 169628,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Male voice screaming loudly",
+  "url": "https://freesound.org/s/169628/"
+ },
+ "fsd:174229": {
+  "author": "cognito perceptu",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 174229,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "restaurant.wav",
+  "url": "https://freesound.org/s/174229/"
+ },
+ "fsd:174885": {
+  "author": "toiletrolltube",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 174885,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "110713_01 seagulls (3).wav",
+  "url": "https://freesound.org/s/174885/"
+ },
+ "fsd:182912": {
+  "author": "toiletrolltube",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 182912,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "living room window 7 - 3.2.11.wav",
+  "url": "https://freesound.org/s/182912/"
+ },
+ "fsd:187284": {
+  "author": "HazMattt",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 187284,
+  "license": "CC-BY-3.0",
+  "split": "eval",
+  "title": "Parking Garage - Metal Door - Knock & Bang",
+  "url": "https://freesound.org/s/187284/"
+ },
+ "fsd:192766": {
+  "author": "jemtman",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 192766,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Tall Grass and Seagulls",
+  "url": "https://freesound.org/s/192766/"
+ },
+ "fsd:209772": {
+  "author": "Johnnyfarmer",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 209772,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Metal Boom",
+  "url": "https://freesound.org/s/209772/"
+ },
+ "fsd:211497": {
+  "author": "Taira Komori",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 211497,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Knocking_iron_door5.mp3",
+  "url": "https://freesound.org/s/211497/"
+ },
+ "fsd:211498": {
+  "author": "Taira Komori",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 211498,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Knocking_iron_door4.mp3",
+  "url": "https://freesound.org/s/211498/"
+ },
+ "fsd:211502": {
+  "author": "Taira Komori",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 211502,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Knocking_iron_door2.mp3",
+  "url": "https://freesound.org/s/211502/"
+ },
+ "fsd:211503": {
+  "author": "Taira Komori",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 211503,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Knocking_iron_door3.mp3",
+  "url": "https://freesound.org/s/211503/"
+ },
+ "fsd:219660": {
+  "author": "annatabernero",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 219660,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Young girl Screaming",
+  "url": "https://freesound.org/s/219660/"
+ },
+ "fsd:222537": {
+  "author": "queen_westeros",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 222537,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "WOMAN SCREAM",
+  "url": "https://freesound.org/s/222537/"
+ },
+ "fsd:222589": {
+  "author": "queen_westeros",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 222589,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "MAN SCREAM",
+  "url": "https://freesound.org/s/222589/"
+ },
+ "fsd:241591": {
+  "author": "pushkin",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 241591,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "pandoramachineannalisaloefflerscreams_03.flac",
+  "url": "https://freesound.org/s/241591/"
+ },
+ "fsd:254981": {
+  "author": "dauser",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 254981,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "Knocking on metal door",
+  "url": "https://freesound.org/s/254981/"
+ },
+ "fsd:256862": {
+  "author": "Kodack",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 256862,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Howling Wind",
+  "url": "https://freesound.org/s/256862/"
+ },
+ "fsd:260123": {
+  "author": "SpliceSound",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 260123,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Indoor adult murmur, large group.wav",
+  "url": "https://freesound.org/s/260123/"
+ },
+ "fsd:275617": {
+  "author": "Chernoby",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 275617,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Marina Ambient.wav",
+  "url": "https://freesound.org/s/275617/"
+ },
+ "fsd:318077": {
+  "author": "Drkvixn91",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 318077,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Whimper_Gasp_1_Male",
+  "url": "https://freesound.org/s/318077/"
+ },
+ "fsd:318078": {
+  "author": "Drkvixn91",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 318078,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Whimper_Gasp_1_Female",
+  "url": "https://freesound.org/s/318078/"
+ },
+ "fsd:319019": {
+  "author": "galora",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 319019,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "cry.wav",
+  "url": "https://freesound.org/s/319019/"
+ },
+ "fsd:331685": {
+  "author": "LouisDirector",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 331685,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "GullsChatter.wav",
+  "url": "https://freesound.org/s/331685/"
+ },
+ "fsd:333397": {
+  "author": "jayfrosting",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 333397,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gasp 5 with shock.wav",
+  "url": "https://freesound.org/s/333397/"
+ },
+ "fsd:340703": {
+  "author": "mickyman5000",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 340703,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Zetor_6945_Start_High_Rev.wav",
+  "url": "https://freesound.org/s/340703/"
+ },
+ "fsd:340716": {
+  "author": "mickyman5000",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 340716,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Zetor_6945_Engine_Extreme_Low_Rev_to_Stop.wav",
+  "url": "https://freesound.org/s/340716/"
+ },
+ "fsd:344415": {
+  "author": "jawbutch",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 344415,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Male Gasp 4.wav",
+  "url": "https://freesound.org/s/344415/"
+ },
+ "fsd:361172": {
+  "author": "quattrostagii",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 361172,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "Crowd on Stairs.wav",
+  "url": "https://freesound.org/s/361172/"
+ },
+ "fsd:362431": {
+  "author": "AlexanderChe",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 362431,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "basement Pravdi st. 24 160928_0260.wav",
+  "url": "https://freesound.org/s/362431/"
+ },
+ "fsd:364694": {
+  "author": "alegemaate",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 364694,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "Water Waves",
+  "url": "https://freesound.org/s/364694/"
+ },
+ "fsd:369720": {
+  "author": "jonkalgor",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 369720,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Mobile vibration.wav",
+  "url": "https://freesound.org/s/369720/"
+ },
+ "fsd:369924": {
+  "author": "mephisto_egmont",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 369924,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Metal Doors Close.wav",
+  "url": "https://freesound.org/s/369924/"
+ },
+ "fsd:372769": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372769,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - spiccato - E2 (spic_E1_v1_RR1.wav)",
+  "url": "https://freesound.org/s/372769/"
+ },
+ "fsd:372770": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372770,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - spiccato - E4 (spic_E3_v1_RR1.wav)",
+  "url": "https://freesound.org/s/372770/"
+ },
+ "fsd:372782": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372782,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - spiccato - E2 (spic_E1_v2_RR1.wav)",
+  "url": "https://freesound.org/s/372782/"
+ },
+ "fsd:372783": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372783,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - spiccato - E4 (spic_E3_v2_RR1.wav)",
+  "url": "https://freesound.org/s/372783/"
+ },
+ "fsd:372796": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372796,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - spiccato - E4 (spic_E3_v1_RR2.wav)",
+  "url": "https://freesound.org/s/372796/"
+ },
+ "fsd:372808": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372808,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - spiccato - E2 (spic_E1_v2_RR2.wav)",
+  "url": "https://freesound.org/s/372808/"
+ },
+ "fsd:372821": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372821,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - vibrato sustain - E2 (susvib_E1_v1_1.wav)",
+  "url": "https://freesound.org/s/372821/"
+ },
+ "fsd:372822": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372822,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - vibrato sustain - E2 (susvib_E1_v1_2.wav)",
+  "url": "https://freesound.org/s/372822/"
+ },
+ "fsd:372849": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372849,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - tremolo - E#3 (trem_F2_v1_1.wav)",
+  "url": "https://freesound.org/s/372849/"
+ },
+ "fsd:372860": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 372860,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cello Section - tremolo - E2 (trem_E1_v2_1.wav)",
+  "url": "https://freesound.org/s/372860/"
+ },
+ "fsd:373365": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373365,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Glockenspiel - C6 (glock_medium_C6.wav)",
+  "url": "https://freesound.org/s/373365/"
+ },
+ "fsd:373366": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373366,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Glockenspiel - C7 (glock_medium_C7.wav)",
+  "url": "https://freesound.org/s/373366/"
+ },
+ "fsd:373580": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373580,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Marimba - C5 (Marimba_hit_Outrigger_C4_loud_01.wav)",
+  "url": "https://freesound.org/s/373580/"
+ },
+ "fsd:373728": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373728,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Organ - quiet - D#2 (NT5_PedalQuiet_067_rr1.wav)",
+  "url": "https://freesound.org/s/373728/"
+ },
+ "fsd:373729": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373729,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Organ - quiet - F2 (NT5_PedalQuiet_070_rr1.wav)",
+  "url": "https://freesound.org/s/373729/"
+ },
+ "fsd:373910": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373910,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Timpani - A#2 (Timpani2_Hit_v1_rr1_Sum.wav)",
+  "url": "https://freesound.org/s/373910/"
+ },
+ "fsd:373914": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373914,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Timpani - F2 (Timpani1_Hit_v3_rr1_Sum.wav)",
+  "url": "https://freesound.org/s/373914/"
+ },
+ "fsd:373919": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373919,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Timpani - A#2 (Timpani2_Hit_v4_rr1_Sum.wav)",
+  "url": "https://freesound.org/s/373919/"
+ },
+ "fsd:373929": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373929,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Timpani - A#2 (Timpani2_Hit_v3_rr2_Sum.wav)",
+  "url": "https://freesound.org/s/373929/"
+ },
+ "fsd:373939": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373939,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Timpani - rolls - C#3 (Timpani3_Roll_v3_rr1_Sum.wav)",
+  "url": "https://freesound.org/s/373939/"
+ },
+ "fsd:373945": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 373945,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Timpani - rolls - C#3 (Timpani3_Roll_v5_rr1_Sum.wav)",
+  "url": "https://freesound.org/s/373945/"
+ },
+ "fsd:374600": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 374600,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Violin Section - tremolo - A4 (VlnEns_Trem_A3_v1.wav)",
+  "url": "https://freesound.org/s/374600/"
+ },
+ "fsd:374606": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 374606,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Violin Section - tremolo - E5 (VlnEns_Trem_E4_v1.wav)",
+  "url": "https://freesound.org/s/374606/"
+ },
+ "fsd:374609": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 374609,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Violin Section - tremolo - F#5 (VlnEns_Trem_G4_v1.wav)",
+  "url": "https://freesound.org/s/374609/"
+ },
+ "fsd:375511": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375511,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cymbals (susp_hit_metal_2_ff_2.wav)",
+  "url": "https://freesound.org/s/375511/"
+ },
+ "fsd:375514": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375514,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Cymbals (susp_hit_softmall_f.wav)",
+  "url": "https://freesound.org/s/375514/"
+ },
+ "fsd:375530": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375530,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_hit_ff.wav)",
+  "url": "https://freesound.org/s/375530/"
+ },
+ "fsd:375531": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375531,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_hit_ff_hard.wav)",
+  "url": "https://freesound.org/s/375531/"
+ },
+ "fsd:375533": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375533,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_hit_mf.wav)",
+  "url": "https://freesound.org/s/375533/"
+ },
+ "fsd:375537": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375537,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_hit_mp.wav)",
+  "url": "https://freesound.org/s/375537/"
+ },
+ "fsd:375544": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375544,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_hit_ppp.wav)",
+  "url": "https://freesound.org/s/375544/"
+ },
+ "fsd:375545": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375545,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_hit_pppp.wav)",
+  "url": "https://freesound.org/s/375545/"
+ },
+ "fsd:375550": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375550,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_scrape_1.wav)",
+  "url": "https://freesound.org/s/375550/"
+ },
+ "fsd:375551": {
+  "author": "Samulis",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 375551,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Gong (gong_scrape_2.wav)",
+  "url": "https://freesound.org/s/375551/"
+ },
+ "fsd:379389": {
+  "author": "13FPanska_Sychra_Petr",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 379389,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "bus_engine_shutdown_inside.wav",
+  "url": "https://freesound.org/s/379389/"
+ },
+ "fsd:381895": {
+  "author": "marsebastia",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 381895,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Scared Group Of Screaming People",
+  "url": "https://freesound.org/s/381895/"
+ },
+ "fsd:386573": {
+  "author": "ShaneF91",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 386573,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "heavy_breathing_1.wav",
+  "url": "https://freesound.org/s/386573/"
+ },
+ "fsd:387705": {
+  "author": "Jagadamba",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 387705,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Face Slap",
+  "url": "https://freesound.org/s/387705/"
+ },
+ "fsd:387749": {
+  "author": "Jagadamba",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 387749,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Slap 8",
+  "url": "https://freesound.org/s/387749/"
+ },
+ "fsd:387756": {
+  "author": "Jagadamba",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 387756,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Slap 11",
+  "url": "https://freesound.org/s/387756/"
+ },
+ "fsd:388970": {
+  "author": "clapclapcinoeil",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 388970,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "lapping-clapotis STE-035.wav",
+  "url": "https://freesound.org/s/388970/"
+ },
+ "fsd:391752": {
+  "author": "Alexbuk",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 391752,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "METAL SFX & FOLEY, Metal scrapes on sand paper .wav",
+  "url": "https://freesound.org/s/391752/"
+ },
+ "fsd:392055": {
+  "author": "Alexbuk",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 392055,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "METAL SFX & FOLEY, Long light Screeching metal scrapes on stone.wav",
+  "url": "https://freesound.org/s/392055/"
+ },
+ "fsd:392663": {
+  "author": "corkob",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 392663,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Ambience EXT night beach waves strong wind distant.flac",
+  "url": "https://freesound.org/s/392663/"
+ },
+ "fsd:395736": {
+  "author": "Splushionsindasky",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 395736,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Terror scream: grito de terror caro 2.wav",
+  "url": "https://freesound.org/s/395736/"
+ },
+ "fsd:395881": {
+  "author": "jokallset",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 395881,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Ventilation shut down.wav",
+  "url": "https://freesound.org/s/395881/"
+ },
+ "fsd:396240": {
+  "author": "weaveofkev",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 396240,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Welding_Electric Sparks.wav",
+  "url": "https://freesound.org/s/396240/"
+ },
+ "fsd:398675": {
+  "author": "Dominik_W",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 398675,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Engine, motor (loopable)",
+  "url": "https://freesound.org/s/398675/"
+ },
+ "fsd:398820": {
+  "author": "Anthousai",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 398820,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "fan 01.wav",
+  "url": "https://freesound.org/s/398820/"
+ },
+ "fsd:398944": {
+  "author": "carroll27",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 398944,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "151920_carroll27_exhale_mono.aif",
+  "url": "https://freesound.org/s/398944/"
+ },
+ "fsd:399453": {
+  "author": "celadon_noise",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 399453,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "cemeterygate3.aif",
+  "url": "https://freesound.org/s/399453/"
+ },
+ "fsd:400112": {
+  "author": "shnur_",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 400112,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Natural Metal Coin Sound 4.wav",
+  "url": "https://freesound.org/s/400112/"
+ },
+ "fsd:400115": {
+  "author": "shnur_",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 400115,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Natural Metal Coin Sound 1.wav",
+  "url": "https://freesound.org/s/400115/"
+ },
+ "fsd:400660": {
+  "author": "tomattka",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 400660,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "The Black Sea - waves' rustle",
+  "url": "https://freesound.org/s/400660/"
+ },
+ "fsd:400866": {
+  "author": "eardeer",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 400866,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "metallic thumps.wav",
+  "url": "https://freesound.org/s/400866/"
+ },
+ "fsd:400894": {
+  "author": "bowlingballout",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 400894,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Honk Alarm Repeat loop.mp3",
+  "url": "https://freesound.org/s/400894/"
+ },
+ "fsd:402199": {
+  "author": "s-cheremisinov",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 402199,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Simple Swoosh_19.wav",
+  "url": "https://freesound.org/s/402199/"
+ },
+ "fsd:402203": {
+  "author": "s-cheremisinov",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 402203,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Simple Swoosh_28.wav",
+  "url": "https://freesound.org/s/402203/"
+ },
+ "fsd:402204": {
+  "author": "s-cheremisinov",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 402204,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Simple Swoosh_27.wav",
+  "url": "https://freesound.org/s/402204/"
+ },
+ "fsd:402612": {
+  "author": "rubenslutero",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 402612,
+  "license": "CC-BY-3.0",
+  "split": "eval",
+  "title": "Porta de ferro_4800_24bit.wav",
+  "url": "https://freesound.org/s/402612/"
+ },
+ "fsd:406197": {
+  "author": "kyles",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 406197,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "door metal big heavy close kinda slam thud echo offmic.wav",
+  "url": "https://freesound.org/s/406197/"
+ },
+ "fsd:406448": {
+  "author": "kretopi",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 406448,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Fan.wav",
+  "url": "https://freesound.org/s/406448/"
+ },
+ "fsd:413566": {
+  "author": "p0lter",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 413566,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Refrigerator Hum",
+  "url": "https://freesound.org/s/413566/"
+ },
+ "fsd:418705": {
+  "author": "Mrtenant",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 418705,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "alarm bell.mp3",
+  "url": "https://freesound.org/s/418705/"
+ },
+ "fsd:420716": {
+  "author": "tierrafilm@gmail.com",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 420716,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "ship horn very close",
+  "url": "https://freesound.org/s/420716/"
+ },
+ "fsd:427722": {
+  "author": "lemigoga",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 427722,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "05. Suspiro madre.wav",
+  "url": "https://freesound.org/s/427722/"
+ },
+ "fsd:430977": {
+  "author": "AudioPapkin",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 430977,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Big impact.wav",
+  "url": "https://freesound.org/s/430977/"
+ },
+ "fsd:431817": {
+  "author": "Audy_Leonard",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 431817,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Car air conditioner",
+  "url": "https://freesound.org/s/431817/"
+ },
+ "fsd:434548": {
+  "author": "TheCurlyOne",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 434548,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Scared Breathing 2.flac",
+  "url": "https://freesound.org/s/434548/"
+ },
+ "fsd:50724": {
+  "author": "RutgerMuller",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 50724,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Footsteps Metallic Muffled Louder.wav",
+  "url": "https://freesound.org/s/50724/"
+ },
+ "fsd:50782": {
+  "author": "smcameron",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 50782,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "loud_splash1.ogg",
+  "url": "https://freesound.org/s/50782/"
+ },
+ "fsd:51105": {
+  "author": "RutgerMuller",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 51105,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Sounds For Earthquakes - Kitchen Utilery 2 Metal.wav",
+  "url": "https://freesound.org/s/51105/"
+ },
+ "fsd:51163": {
+  "author": "RutgerMuller",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 51163,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Running Up The Stairs.wav",
+  "url": "https://freesound.org/s/51163/"
+ },
+ "fsd:55025": {
+  "author": "suonidigenova",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 55025,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "hypnotic_motor_ferry_sea.wav",
+  "url": "https://freesound.org/s/55025/"
+ },
+ "fsd:55053": {
+  "author": "suonidigenova",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 55053,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "ferry_engine_pulse.wav",
+  "url": "https://freesound.org/s/55053/"
+ },
+ "fsd:58504": {
+  "author": "Satoration",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 58504,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Small waves at a small pier.wav",
+  "url": "https://freesound.org/s/58504/"
+ },
+ "fsd:73257": {
+  "author": "jakobhandersen",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 73257,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "Ship groans in harbour.wav",
+  "url": "https://freesound.org/s/73257/"
+ },
+ "fsd:75131": {
+  "author": "jobro",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 75131,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Subway speaker malfunction.wav",
+  "url": "https://freesound.org/s/75131/"
+ },
+ "fsd:78430": {
+  "author": "Benboncan",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 78430,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Windscape With Metal Scrape.wav",
+  "url": "https://freesound.org/s/78430/"
+ },
+ "fsd:91533": {
+  "author": "LG",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 91533,
+  "license": "CC-BY-3.0",
+  "split": "dev",
+  "title": "Diesel engine boat 4 loop 100307.wav",
+  "url": "https://freesound.org/s/91533/"
+ }
+}
