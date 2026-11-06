@@ -153,7 +153,7 @@ def aligned_diff(a: np.ndarray, b: np.ndarray) -> float:
 
 
 # shots that stay code-rendered: small legal text, the title card, counters that tick in sync with the voice
-FORCE_SKIP = {'hook_00', 'hook_01', 'hook_26', 'departure_04', 'hull_25', 'otherFerry_04'}  # last two: the redraw invented people in a dark frame
+FORCE_SKIP = {'hook_00', 'hook_01', 'hook_26', 'departure_04', 'hull_25', 'otherFerry_04', 'otherFerry_07'}  # hull_25, otherFerry_04: the redraw invented people; otherFerry_07: it dropped the red evidence circle
 # very dark shots that still matter (keep them dark - see DARK_NOTE)
 FORCE_INCLUDE = {'finale_17', 'finale_18', 'vanish_03'}
 DARK_NOTE = ' This is a very dark night scene: keep it just as dark and dim, only the faint light sources lit.'
