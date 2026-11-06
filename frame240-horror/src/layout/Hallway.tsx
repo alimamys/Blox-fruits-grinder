@@ -9,6 +9,7 @@
 //   - front door on the left wall near the camera, storage-closet door on the right wall
 import React from 'react';
 import {TallFigure, WhiteFigure} from './Figure';
+import {Glow} from './Glow';
 
 export type HallLight = 'night' | 'lit' | 'dim' | 'flash' | 'white' | 'black';
 
@@ -162,7 +163,7 @@ export const Hallway: React.FC<HallProps> = ({
 			{/* ceiling light + stain */}
 			{!flat ? <ellipse cx={stainPos[0] + 40} cy={stainPos[1] + 26} rx={46} ry={14} fill="#6e5236" opacity={0.55} /> : null}
 			<ellipse cx={lightPos[0]} cy={lightPos[1] + 28} rx={56} ry={20} fill={bulb > 0 ? '#fff1c9' : white ? '#f2f1ec' : '#cfd3da'} stroke="rgba(0,0,0,0.4)" strokeWidth={2} />
-			{bulb > 0 ? <ellipse cx={lightPos[0]} cy={lightPos[1] + 120} rx={520} ry={360} fill="#ffcf7a" opacity={0.16 * bulb} /> : null}
+			{bulb > 0 ? <Glow cx={lightPos[0]} cy={lightPos[1] + 120} rx={620} ry={420} color="#ffcf7a" opacity={0.32 * bulb} /> : null}
 			{/* red line across the right wall */}
 			{redLine > 0 ? (
 				<line x1={hp('R', 0.25, 0.55)[0]} y1={hp('R', 0.25, 0.55)[1]} x2={lerp(hp('R', 0.25, 0.55)[0], hp('R', 0.75, 0.55)[0], redLine)} y2={lerp(hp('R', 0.25, 0.55)[1], hp('R', 0.75, 0.55)[1], redLine)} stroke="#d0141c" strokeWidth={9} strokeLinecap="round" />
@@ -190,8 +191,7 @@ export const Hallway: React.FC<HallProps> = ({
 			{flash ? (
 				<>
 					<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.45)" />
-					<ellipse cx={flash[0]} cy={flash[1]} rx={330} ry={250} fill="#f4f2ea" opacity={0.42} />
-					<ellipse cx={flash[0]} cy={flash[1]} rx={170} ry={130} fill="#ffffff" opacity={0.35} />
+					<Glow cx={flash[0]} cy={flash[1]} rx={430} ry={330} color="#f4f2ea" opacity={0.6} />
 				</>
 			) : null}
 		</g>
@@ -209,3 +209,11 @@ export const HallThroughDoor: React.FC<HallProps & {wall?: string}> = ({wall = '
 		<rect x={540} y={232} width={846} height={474} fill="none" stroke="#2a2f3a" strokeWidth={22} />
 	</g>
 );
+
+/** Where the man stands at depth t, as fractions of the picture: [x0, y0, x1, y1]. */
+export const manBox = (t: number): [number, number, number, number] => {
+	const [x, y] = hp('F', t, 0.02);
+	const h = roomH(t) * 0.93;
+	const w = h * 0.32;
+	return [(x - w / 2) / 1920, (y - h) / 1080, (x + w / 2) / 1920, y / 1080];
+};

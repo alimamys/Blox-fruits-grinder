@@ -6,6 +6,9 @@
 // PENCIL stuck through it, oversized BURNT-ORANGE sweatshirt (sleeves pushed up),
 // charcoal sweatpants, grey wool socks.
 import React from 'react';
+import {getInputProps} from 'remotion';
+
+const mouthKey = () => Boolean((getInputProps() as {mouthKey?: boolean}).mouthKey);
 
 export const MARA = {
 	skin: '#d6a47e',
@@ -54,6 +57,8 @@ export interface Pose {
 	phoneIn?: 'L' | 'R' | null;
 	stylusIn?: 'L' | 'R' | null;
 	keysIn?: 'L' | 'R' | null;
+	/** sitting on the floor hugging her knees: knees drawn in front of the body */
+	kneesUp?: boolean;
 }
 
 const rad = (d: number) => (d * Math.PI) / 180;
@@ -199,6 +204,7 @@ export const MaraHead: React.FC<{
 				</g>
 			)}
 			{light ? <ellipse cx={cx + fx * 0.3} cy={cy + r * 0.05} rx={r * 0.9} ry={r * 1.08} fill={light} opacity={0.28} style={{mixBlendMode: 'screen'}} /> : null}
+			{!back && mouthKey() ? <ellipse cx={cx + fx * 0.85} cy={cy + r * 0.62} rx={r * 0.22} ry={r * 0.12} fill="#ff00ff" /> : null}
 		</g>
 	);
 };
@@ -258,10 +264,15 @@ export const Mara: React.FC<Pose> = (p) => {
 	const armRa = armR[0] + armR[1];
 	// draw the far side first when turned
 	const farArmFirst = yaw > 0.3 ? 'L' : yaw < -0.3 ? 'R' : null;
-	return (
-		<g>
+	const legs = (
+		<>
 			{leg(hipL, kneeL, ankleL, legL[0] + legL[1])}
 			{leg(hipR, kneeR, ankleR, legR[0] + legR[1])}
+		</>
+	);
+	return (
+		<g>
+			{p.kneesUp ? null : legs}
 			{farArmFirst === 'L' ? arm(shL, elbowL, wristL, armLa, 'L') : null}
 			{farArmFirst === 'R' ? arm(shR, elbowR, wristR, armRa, 'R') : null}
 			{/* oversized sweatshirt torso */}
@@ -273,6 +284,7 @@ export const Mara: React.FC<Pose> = (p) => {
 				strokeLinejoin="round"
 			/>
 			<path d={`M${hipL[0] - 20 * s},${pelvis[1] + 8 * s} L${hipR[0] + 20 * s},${pelvis[1] + 8 * s}`} stroke={MARA.sweatShade} strokeWidth={10 * s} />
+			{p.kneesUp ? legs : null}
 			{farArmFirst !== 'L' ? arm(shL, elbowL, wristL, armLa, 'L') : null}
 			{farArmFirst !== 'R' ? arm(shR, elbowR, wristR, armRa, 'R') : null}
 			<MaraHead cx={headC[0]} cy={headC[1]} r={56 * s} yaw={yaw} back={back} tilt={(p.tilt ?? 0) + lean * 0.4} expr={p.expr} mouth={p.mouth} gaze={p.gaze} eyesClosed={p.eyesClosed} light={p.light} />
@@ -329,8 +341,8 @@ export const MaraBust: React.FC<{
 					<HandShape p={[cx + r * 0.75, cy + r * 3.5]} a={200} s={r / 38} grip />
 				</g>
 			) : null}
-			{handMouth ? <HandShape p={[cx + r * 0.1, cy + r * 1.6]} a={175} s={r / 34} /> : null}
-			{chinHand ? <HandShape p={[cx + r * 0.1, cy + r * 1.9]} a={180} s={r / 34} grip /> : null}
+			{handMouth ? <HandShape p={[cx + r * 0.1, cy + r * 2.25]} a={175} s={r / 40} /> : null}
+			{chinHand ? <HandShape p={[cx + r * 0.1, cy + r * 2.7]} a={180} s={r / 40} grip /> : null}
 		</g>
 	);
 };

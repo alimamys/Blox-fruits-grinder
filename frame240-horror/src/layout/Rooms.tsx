@@ -3,6 +3,7 @@
 // window against the monitor's glow on Mara's face.
 import React from 'react';
 import {HallThroughDoor, type HallProps} from './Hallway';
+import {Glow} from './Glow';
 import {HandShape, MARA} from './Mara';
 
 const WR = {
@@ -151,7 +152,7 @@ export const Workroom: React.FC<{
 				<rect x={640} y={760} width={640} height={180} fill="#141924" />
 				<Desk x={720} y={690} w={480} h={24} />
 				<Monitor x={850} y={470} w={300} screen={screen} glow={glow} />
-				<ellipse cx={1000} cy={600} rx={260} ry={200} fill={glow ?? WR.glow} opacity={0.12} />
+				<Glow cx={1000} cy={600} rx={320} ry={240} color={glow ?? WR.glow} opacity={0.25} />
 				{children}
 				{/* hallway walls in the dark foreground */}
 				<polygon points="0,0 640,220 640,940 0,1080" fill="#0c0f16" />
@@ -168,7 +169,7 @@ export const Workroom: React.FC<{
 				<rect x={0} y={760} width={1920} height={320} fill="#0b0d12" />
 				<Desk x={620} y={640} w={760} h={26} />
 				<Monitor x={760} y={340} w={480} screen={screen} glow={glow} cracked={cracked} />
-				<ellipse cx={1000} cy={520} rx={500} ry={340} fill={glow ?? WR.glow} opacity={0.08} />
+				<Glow cx={1000} cy={520} rx={560} ry={380} color={glow ?? WR.glow} opacity={0.18} />
 				<rect x={1440} y={120} width={380} height={380} fill="#0c1424" stroke="#1e2433" strokeWidth={10} />
 				<Rain x={1450} y={130} w={360} h={360} seed={5} />
 				{children}
@@ -222,10 +223,10 @@ export const Closet: React.FC<{view: ClosetView; children?: React.ReactNode; den
 				<rect x={1620} y={1016} width={300} height={8} fill="#f7f1d8" />
 				<circle cx={1650} cy={560} r={12} fill="#b8b6ad" />
 				<rect x={0} y={880} width={1920} height={200} fill="#bdbab2" />
-				{children}
 				<rect x={0} y={0} width={1920} height={1080} fill={dark} />
 				{/* her phone light */}
-				<ellipse cx={960} cy={600} rx={420} ry={360} fill="#d9e8ff" opacity={0.28} />
+				<Glow cx={960} cy={560} rx={520} ry={440} color="#d9e8ff" opacity={0.35} />
+				{children}
 			</g>
 		);
 	}
@@ -250,9 +251,9 @@ export const Closet: React.FC<{view: ClosetView; children?: React.ReactNode; den
 					</g>
 				) : null}
 				{bulge > 0 ? <ellipse cx={960} cy={480} rx={330 * bulge} ry={420 * bulge} fill="rgba(0,0,0,0.1)" stroke="rgba(0,0,0,0.2)" strokeWidth={3} /> : null}
+				<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.45)" />
+				<Glow cx={960} cy={560} rx={800} ry={600} color="#dfeaff" opacity={0.3} />
 				{children}
-				<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.55)" />
-				<ellipse cx={960} cy={560} rx={700} ry={520} fill="#dfeaff" opacity={0.22} />
 			</g>
 		);
 	}
@@ -263,8 +264,8 @@ export const Closet: React.FC<{view: ClosetView; children?: React.ReactNode; den
 				<rect x={0} y={0} width={1920} height={760} fill="#d9d8d2" />
 				<rect x={0} y={760} width={1920} height={30} fill="#fff6d6" />
 				<rect x={0} y={790} width={1920} height={290} fill="#4a4741" />
-				{children}
 				<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.62)" />
+				{children}
 				<rect x={0} y={754} width={1920} height={42} fill="#fff3c8" opacity={0.55} />
 			</g>
 		);
@@ -278,9 +279,9 @@ export const Closet: React.FC<{view: ClosetView; children?: React.ReactNode; den
 				<rect x={1740} y={0} width={180} height={1080} fill="#e6e5df" />
 				<rect x={210} y={130} width={240} height={160} fill="#b08a5c" stroke="#000" strokeWidth={2} />
 				<rect x={1480} y={760} width={140} height={140} rx={60} fill="#3d434d" />
-				{children}
 				<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.6)" />
-				<ellipse cx={960} cy={560} rx={380} ry={320} fill="#d9e8ff" opacity={0.3} />
+				<Glow cx={960} cy={560} rx={460} ry={380} color="#d9e8ff" opacity={0.35} />
+				{children}
 			</g>
 		);
 	}
@@ -289,8 +290,9 @@ export const Closet: React.FC<{view: ClosetView; children?: React.ReactNode; den
 		<g>
 			<rect x={0} y={0} width={1920} height={1080} fill="#cfcec8" />
 			<rect x={1500} y={0} width={420} height={1080} fill="#e3e2dc" />
+			<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.7)" />
+			<Glow cx={960} cy={520} rx={760} ry={560} color="#d9e8ff" opacity={0.25} />
 			{children}
-			<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.7)" style={{mixBlendMode: 'multiply'}} />
 		</g>
 	);
 };
@@ -306,7 +308,7 @@ export const Exterior: React.FC = () => (
 				return <rect key={`${r}${c}`} x={430 + c * 225} y={190 + r * 220} width={140} height={150} fill={lit ? '#9fc0ff' : '#0d121c'} stroke="#2b3140" strokeWidth={6} />;
 			}),
 		)}
-		<ellipse cx={1170} cy={485} rx={160} ry={140} fill="#9fc0ff" opacity={0.14} />
+		<Glow cx={1170} cy={485} rx={220} ry={190} color="#9fc0ff" opacity={0.3} />
 		<Rain x={0} y={0} w={1920} h={1080} seed={7} />
 		<rect x={0} y={1000} width={1920} height={80} fill="#06080c" />
 	</g>
@@ -321,8 +323,9 @@ export const WallClose: React.FC<{
 	shape?: 'none' | 'shoulder' | 'body' | 'hand' | 'elbow' | 'head' | 'stretched';
 	rake?: boolean;
 	fingertip?: boolean;
-	photo?: boolean;
-}> = ({tone = 'dark', pencilLine = 0, redLine = false, outline = 0, shape = 'none', rake = false, fingertip = false, photo = false}) => {
+	/** move the shape sideways (px) */
+	shift?: number;
+}> = ({tone = 'dark', pencilLine = 0, redLine = false, outline = 0, shape = 'none', rake = false, fingertip = false, shift = 0}) => {
 	const base = {dark: '#2b3346', flash: '#d8d6cf', flat: '#e4e2dc', white: '#eeede8'}[tone];
 	const s = 'rgba(60,60,70,' + (0.2 + outline * 0.4) + ')';
 	const shapes: Record<string, React.ReactNode> = {
@@ -340,14 +343,13 @@ export const WallClose: React.FC<{
 			{tone !== 'white' && tone !== 'flat'
 				? [180, 520, 860, 1200, 1540, 1880].map((x) => <line key={x} x1={x} y1={0} x2={x} y2={1080} stroke="rgba(0,0,0,0.08)" strokeWidth={6} />)
 				: null}
-			{photo ? <rect x={0} y={0} width={1920} height={1080} fill="url(#none)" stroke="none" /> : null}
-			{shapes[shape]}
+			<g transform={`translate(${shift} 0)`}>{shapes[shape]}</g>
 			{pencilLine > 0 ? <path d={`M760,560 L${760 + 520 * pencilLine},${560 + 30 * pencilLine}`} stroke="#0a0a0a" strokeWidth={5} strokeLinecap="round" /> : null}
 			{redLine ? <line x1={0} y1={520} x2={1920} y2={560} stroke="#d0141c" strokeWidth={22} strokeLinecap="round" /> : null}
 			{fingertip ? <HandShape p={[1260, 700]} a={-75} s={4.2} /> : null}
-			{rake ? <rect x={0} y={0} width={1920} height={1080} fill="url(#rake)" /> : null}
+			{rake ? <Glow cx={-200} cy={540} rx={1400} ry={900} color="#ffffff" opacity={0.6} /> : null}
 			{tone === 'dark' ? <rect x={0} y={0} width={1920} height={1080} fill="rgba(4,6,12,0.45)" /> : null}
-			{tone === 'flash' ? <ellipse cx={960} cy={540} rx={900} ry={600} fill="#fff" opacity={0.15} /> : null}
+			{tone === 'flash' ? <Glow cx={960} cy={540} rx={1000} ry={700} color="#fff" opacity={0.3} /> : null}
 		</g>
 	);
 };
@@ -438,7 +440,7 @@ export const DeskInsert: React.FC<{
 			<rect x={0} y={0} width={1920} height={1080} fill="rgba(0,0,0,0.55)" />
 			<rect x={760} y={360} width={420} height={760} rx={50} fill="#141519" stroke="#000" strokeWidth={4} transform="rotate(18 970 740)" />
 			<rect x={790} y={400} width={360} height={680} rx={30} fill="#dfe9ff" opacity={0.85} transform="rotate(18 970 740)" />
-			<ellipse cx={970} cy={740} rx={520} ry={380} fill="#dfe9ff" opacity={0.15} />
+			<Glow cx={970} cy={740} rx={620} ry={460} color="#dfe9ff" opacity={0.3} />
 		</g>
 	);
 };
