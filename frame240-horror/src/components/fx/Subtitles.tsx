@@ -130,17 +130,24 @@ export const Subtitles: React.FC<{timeline: Timeline; until?: number}> = ({timel
 					letterSpacing: 0.5,
 				}}
 			>
-				{c.words.map((w, i) => {
-					const active = t >= w.a - 0.03 && t < w.b + 0.02;
+				{(() => {
+					// exactly one highlighted word: the latest one that has started and not yet ended
+					let ai = -1;
+					c.words.forEach((w, i) => {
+						if (t >= w.a - 0.03) ai = i;
+					});
+					if (ai >= 0 && t >= c.words[ai].b + 0.02) ai = -1;
+					return c.words.map((w, i) => {
+					const active = i === ai;
 					const said = t >= w.b;
 					return (
 						<span
 							key={i}
 							style={{
 								display: 'inline-block',
-								margin: '0 9px',
+								margin: '0 11px',
 								color: active ? '#ffd84d' : said ? '#ffffff' : 'rgba(255,255,255,0.92)',
-								transform: active ? 'scale(1.07)' : 'scale(1)',
+								transform: active ? 'scale(1.04)' : 'scale(1)',
 								WebkitTextStroke: '10px #000',
 								paintOrder: 'stroke fill',
 								textShadow: '0 4px 14px rgba(0,0,0,0.85)',
@@ -149,7 +156,8 @@ export const Subtitles: React.FC<{timeline: Timeline; until?: number}> = ({timel
 							{w.text}
 						</span>
 					);
-				})}
+					});
+				})()}
 			</div>
 		</div>
 	);
