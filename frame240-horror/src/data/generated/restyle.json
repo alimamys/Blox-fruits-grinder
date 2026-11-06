@@ -76,7 +76,770 @@
   "nn_04_ots_monitor": {
    "frames": [
     {
-     "src": "restyle/nn_04_ots_monitor_k1.jpg"
+     "src": "restyle/nn_04_ots_monitor_k1_bg.jpg",
+     "fg": "restyle/nn_04_ots_monitor_k1_fg.png"
+    }
+   ]
+  },
+  "nn_06_hall_lit": {
+   "frames": [
+    {
+     "src": "restyle/nn_06_hall_lit_k1.jpg"
+    }
+   ]
+  },
+  "nn_07_details": {
+   "frames": [
+    {
+     "src": "restyle/nn_07_details_k0.jpg"
+    },
+    {
+     "src": "restyle/nn_07_details_k1.jpg"
+    },
+    {
+     "src": "restyle/nn_07_details_k2.jpg"
+    }
+   ]
+  },
+  "nn_09_save_rest_check": {
+   "frames": [
+    {
+     "src": "restyle/nn_09_save_rest_check_k0.jpg"
+    },
+    {
+     "src": "restyle/nn_09_save_rest_check_k1.jpg"
+    },
+    {
+     "src": "restyle/nn_09_save_rest_check_k2.jpg"
+    }
+   ]
+  },
+  "st_01_stylus_tap": {
+   "frames": [
+    {
+     "src": "restyle/st_01_stylus_tap_k1.jpg"
+    }
+   ]
+  },
+  "st_06_bothered": {
+   "frames": [
+    {
+     "src": "restyle/st_06_bothered_k1.jpg"
+    }
+   ]
+  },
+  "st_14_part_of_picture": {
+   "frames": [
+    {
+     "src": "restyle/st_14_part_of_picture_k1.jpg"
+    }
+   ]
+  },
+  "st_15_spacebar": {
+   "frames": [
+    {
+     "src": "restyle/st_15_spacebar_k1.jpg"
+    }
+   ]
+  },
+  "st_17_eyes_widen": {
+   "frames": [
+    {
+     "src": "restyle/st_17_eyes_widen_k1.jpg"
+    }
+   ]
+  },
+  "cl_00_frozen": {
+   "frames": [
+    {
+     "src": "restyle/cl_00_frozen_k1.jpg"
+    }
+   ]
+  },
+  "cl_03_eyes_sweat": {
+   "frames": [
+    {
+     "src": "restyle/cl_03_eyes_sweat_k1.jpg"
+    }
+   ]
+  },
+  "cl_06_lip": {
+   "frames": [
+    {
+     "src": "restyle/cl_06_lip_k1.jpg"
+    }
+   ]
+  },
+  "cl_10_wide_dark": {
+   "frames": [
+    {
+     "src": "restyle/cl_10_wide_dark_k1.jpg"
+    }
+   ]
+  },
+  "cl_11_realisation": {
+   "frames": [
+    {
+     "src": "restyle/cl_11_realisation_k1.jpg"
+    }
+   ]
+  },
+  "cl_14_eyes_slide": {
+   "frames": [
+    {
+     "src": "restyle/cl_14_eyes_slide_k1.jpg"
+    }
+   ]
+  },
+  "cl_16_wall_dark": {
+   "frames": [
+    {
+     "src": "restyle/cl_16_wall_dark_k1.jpg"
+    }
+   ]
+  },
+  "cl_17_turn": {
+   "frames": [
+    {
+     "src": "restyle/cl_17_turn_k0.jpg"
+    },
+    {
+     "src": "restyle/cl_17_turn_k1.jpg"
+    },
+    {
+     "src": "restyle/cl_17_turn_k2.jpg"
+    }
+   ]
+  },
+  "cl_19_light": {
+   "frames": [
+    {
+     "src": "restyle/cl_19_light_k1.jpg"
+    }
+   ]
+  },
+  "wa_01_phone_a": {
+   "frames": [
+    {
+     "src": "restyle/wa_01_phone_a_k1.jpg",
+     "talk": "restyle/wa_01_phone_a_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_06_phone_b": {
+   "frames": [
+    {
+     "src": "restyle/wa_06_phone_b_k1.jpg",
+     "talk": "restyle/wa_06_phone_b_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_09_phone_b2": {
+   "frames": [
+    {
+     "src": "restyle/wa_09_phone_b2_k1.jpg",
+     "talk": "restyle/wa_09_phone_b2_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_11_monitor_across": {
+   "frames": [
+    {
+     "src": "restyle/wa_11_monitor_across_k1.jpg"
+    }
+   ]
+  },
+  "wa_14_turn_to_hall": {
+   "frames": [
+    {
+     "src": "restyle/wa_14_turn_to_hall_k1.jpg"
+    }
+   ]
+  },
+  "wa_15_hall_floor": {
+   "frames": [
+    {
+     "src": "restyle/wa_15_hall_floor_k1.jpg"
+    }
+   ]
+  },
+  "ha_00_keys": {
+   "frames": [
+    {
+     "src": "restyle/ha_00_keys_k1.jpg"
+    }
+   ]
+  },
+  "ha_02_hall_mouth": {
+   "frames": [
+    {
+     "src": "restyle/ha_02_hall_mouth_k1_bg.jpg",
+     "fg": "restyle/ha_02_hall_mouth_k1_fg.png"
+    }
+   ]
+  },
+  "ha_03_carpet": {
+   "frames": [
+    {
+     "src": "restyle/ha_03_carpet_k1.jpg"
+    }
+   ]
+  },
+  "ha_04_stains": {
+   "frames": [
+    {
+     "src": "restyle/ha_04_stains_k1.jpg"
+    }
+   ]
+  },
+  "ha_05_doorframe": {
+   "frames": [
+    {
+     "src": "restyle/ha_05_doorframe_k1.jpg"
+    }
+   ]
+  },
+  "ha_06_pencil_crack": {
+   "frames": [
+    {
+     "src": "restyle/ha_06_pencil_crack_k1.jpg"
+    }
+   ]
+  },
+  "ha_07_walk_toward": {
+   "frames": [
+    {
+     "src": "restyle/ha_07_walk_toward_k1.jpg"
+    }
+   ]
+  },
+  "ha_08_wall": {
+   "frames": [
+    {
+     "src": "restyle/ha_08_wall_k1.jpg"
+    }
+   ]
+  },
+  "ha_09_face_flash": {
+   "frames": [
+    {
+     "src": "restyle/ha_09_face_flash_k1.jpg"
+    }
+   ]
+  },
+  "ha_10_painted_photo": {
+   "frames": [
+    {
+     "src": "restyle/ha_10_painted_photo_k1.jpg"
+    }
+   ]
+  },
+  "ha_11_reach": {
+   "frames": [
+    {
+     "src": "restyle/ha_11_reach_k0.jpg"
+    },
+    {
+     "src": "restyle/ha_11_reach_k1.jpg"
+    }
+   ]
+  },
+  "ha_12_paper_face": {
+   "frames": [
+    {
+     "src": "restyle/ha_12_paper_face_k1.jpg"
+    }
+   ]
+  },
+  "ha_13_fingertip": {
+   "frames": [
+    {
+     "src": "restyle/ha_13_fingertip_k1.jpg"
+    }
+   ]
+  },
+  "ha_14_bedroom_door": {
+   "frames": [
+    {
+     "src": "restyle/ha_14_bedroom_door_k1.jpg"
+    }
+   ]
+  },
+  "ha_15_door_close": {
+   "frames": [
+    {
+     "src": "restyle/ha_15_door_close_k1.jpg"
+    }
+   ]
+  },
+  "ha_19_terrified": {
+   "frames": [
+    {
+     "src": "restyle/ha_19_terrified_k1.jpg"
+    }
+   ]
+  },
+  "ha_20_run_back": {
+   "frames": [
+    {
+     "src": "restyle/ha_20_run_back_k0.jpg"
+    },
+    {
+     "src": "restyle/ha_20_run_back_k1.jpg"
+    }
+   ]
+  },
+  "ha_21_understood": {
+   "frames": [
+    {
+     "src": "restyle/ha_21_understood_k1.jpg"
+    }
+   ]
+  },
+  "ha_23_hall_copy": {
+   "frames": [
+    {
+     "src": "restyle/ha_23_hall_copy_k1.jpg"
+    }
+   ]
+  },
+  "er_00_frantic": {
+   "frames": [
+    {
+     "src": "restyle/er_00_frantic_k1.jpg"
+    }
+   ]
+  },
+  "er_01_stylus_red": {
+   "frames": [
+    {
+     "src": "restyle/er_01_stylus_red_k1.jpg"
+    }
+   ]
+  },
+  "er_03_freeze": {
+   "frames": [
+    {
+     "src": "restyle/er_03_freeze_k1.jpg"
+    }
+   ]
+  },
+  "er_04_look_behind": {
+   "frames": [
+    {
+     "src": "restyle/er_04_look_behind_k0.jpg"
+    },
+    {
+     "src": "restyle/er_04_look_behind_k1.jpg"
+    }
+   ]
+  },
+  "er_05_red_wall": {
+   "frames": [
+    {
+     "src": "restyle/er_05_red_wall_k1.jpg"
+    }
+   ]
+  },
+  "er_08_hands_shake": {
+   "frames": [
+    {
+     "src": "restyle/er_08_hands_shake_k1.jpg"
+    }
+   ]
+  },
+  "er_09_jaw_set": {
+   "frames": [
+    {
+     "src": "restyle/er_09_jaw_set_k1.jpg"
+    }
+   ]
+  },
+  "er_16_white_face": {
+   "frames": [
+    {
+     "src": "restyle/er_16_white_face_k1.jpg"
+    }
+   ]
+  },
+  "er_19_waited": {
+   "frames": [
+    {
+     "src": "restyle/er_19_waited_k1.jpg"
+    }
+   ]
+  },
+  "er_22_exhale": {
+   "frames": [
+    {
+     "src": "restyle/er_22_exhale_k1.jpg"
+    }
+   ]
+  },
+  "er_24_relief_fades": {
+   "frames": [
+    {
+     "src": "restyle/er_24_relief_fades_k1.jpg"
+    }
+   ]
+  },
+  "er_25_draining": {
+   "frames": [
+    {
+     "src": "restyle/er_25_draining_k1.jpg"
+    }
+   ]
+  },
+  "wh_00_drained_room": {
+   "frames": [
+    {
+     "src": "restyle/wh_00_drained_room_k1.jpg"
+    }
+   ]
+  },
+  "wh_01_flat_wall": {
+   "frames": [
+    {
+     "src": "restyle/wh_01_flat_wall_k1.jpg"
+    }
+   ]
+  },
+  "wh_02_doorframe": {
+   "frames": [
+    {
+     "src": "restyle/wh_02_doorframe_k1.jpg"
+    }
+   ]
+  },
+  "wh_03_ceiling": {
+   "frames": [
+    {
+     "src": "restyle/wh_03_ceiling_k1.jpg"
+    }
+   ]
+  },
+  "wh_04_white_hall": {
+   "frames": [
+    {
+     "src": "restyle/wh_04_white_hall_k1.jpg"
+    }
+   ]
+  },
+  "wh_05_phone_c": {
+   "frames": [
+    {
+     "src": "restyle/wh_05_phone_c_k1.jpg",
+     "talk": "restyle/wh_05_phone_c_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_08_phone_d": {
+   "frames": [
+    {
+     "src": "restyle/wh_08_phone_d_k1.jpg",
+     "talk": "restyle/wh_08_phone_d_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_17_realisation": {
+   "frames": [
+    {
+     "src": "restyle/wh_17_realisation_k1.jpg"
+    }
+   ]
+  },
+  "wh_18_turn_wall": {
+   "frames": [
+    {
+     "src": "restyle/wh_18_turn_wall_k0.jpg"
+    },
+    {
+     "src": "restyle/wh_18_turn_wall_k1.jpg"
+    }
+   ]
+  },
+  "wh_19_outline": {
+   "frames": [
+    {
+     "src": "restyle/wh_19_outline_k1.jpg"
+    }
+   ]
+  },
+  "wh_20_eyes": {
+   "frames": [
+    {
+     "src": "restyle/wh_20_eyes_k1.jpg"
+    }
+   ]
+  },
+  "wh_23_shoulder": {
+   "frames": [
+    {
+     "src": "restyle/wh_23_shoulder_k0.jpg"
+    },
+    {
+     "src": "restyle/wh_23_shoulder_k1.jpg"
+    }
+   ]
+  },
+  "wh_24_oh_god": {
+   "frames": [
+    {
+     "src": "restyle/wh_24_oh_god_k1.jpg",
+     "talk": "restyle/wh_24_oh_god_k1_talk.jpg"
+    }
+   ]
+  },
+  "iw_00_back_away": {
+   "frames": [
+    {
+     "src": "restyle/iw_00_back_away_k0.jpg"
+    },
+    {
+     "src": "restyle/iw_00_back_away_k1.jpg"
+    }
+   ]
+  },
+  "iw_01_shape_moves": {
+   "frames": [
+    {
+     "src": "restyle/iw_01_shape_moves_k0.jpg"
+    },
+    {
+     "src": "restyle/iw_01_shape_moves_k1.jpg"
+    }
+   ]
+  },
+  "iw_02_face": {
+   "frames": [
+    {
+     "src": "restyle/iw_02_face_k1.jpg"
+    }
+   ]
+  },
+  "iw_03_stretched": {
+   "frames": [
+    {
+     "src": "restyle/iw_03_stretched_k1.jpg"
+    }
+   ]
+  },
+  "iw_04_hand": {
+   "frames": [
+    {
+     "src": "restyle/iw_04_hand_k1.jpg"
+    }
+   ]
+  },
+  "iw_05_elbow": {
+   "frames": [
+    {
+     "src": "restyle/iw_05_elbow_k1.jpg"
+    }
+   ]
+  },
+  "iw_06_head": {
+   "frames": [
+    {
+     "src": "restyle/iw_06_head_k1.jpg"
+    }
+   ]
+  },
+  "iw_07_rake": {
+   "frames": [
+    {
+     "src": "restyle/iw_07_rake_k0.jpg"
+    },
+    {
+     "src": "restyle/iw_07_rake_k1.jpg"
+    }
+   ]
+  },
+  "iw_09_hand_mouth": {
+   "frames": [
+    {
+     "src": "restyle/iw_09_hand_mouth_k1.jpg"
+    }
+   ]
+  },
+  "iw_10_carpet": {
+   "frames": [
+    {
+     "src": "restyle/iw_10_carpet_k1.jpg"
+    }
+   ]
+  },
+  "iw_12_against_wall": {
+   "frames": [
+    {
+     "src": "restyle/iw_12_against_wall_k1.jpg"
+    }
+   ]
+  },
+  "iw_13_smash": {
+   "frames": [
+    {
+     "src": "restyle/iw_13_smash_k0.jpg"
+    },
+    {
+     "src": "restyle/iw_13_smash_k1.jpg"
+    },
+    {
+     "src": "restyle/iw_13_smash_k2.jpg"
+    }
+   ]
+  },
+  "iw_14_cracked_glow": {
+   "frames": [
+    {
+     "src": "restyle/iw_14_cracked_glow_k1.jpg"
+    }
+   ]
+  },
+  "iw_17_push_out": {
+   "frames": [
+    {
+     "src": "restyle/iw_17_push_out_k0.jpg"
+    },
+    {
+     "src": "restyle/iw_17_push_out_k1.jpg"
+    }
+   ]
+  },
+  "iw_20_get_out": {
+   "frames": [
+    {
+     "src": "restyle/iw_20_get_out_k1.jpg"
+    }
+   ]
+  },
+  "iw_21_run_door": {
+   "frames": [
+    {
+     "src": "restyle/iw_21_run_door_k0.jpg"
+    },
+    {
+     "src": "restyle/iw_21_run_door_k1.jpg"
+    }
+   ]
+  },
+  "iw_22_no_handle": {
+   "frames": [
+    {
+     "src": "restyle/iw_22_no_handle_k1.jpg"
+    }
+   ]
+  },
+  "iw_23_no_door": {
+   "frames": [
+    {
+     "src": "restyle/iw_23_no_door_k1.jpg"
+    }
+   ]
+  },
+  "iw_24_scream": {
+   "frames": [
+    {
+     "src": "restyle/iw_24_scream_k1.jpg"
+    }
+   ]
+  },
+  "re_00_closet_wide": {
+   "frames": [
+    {
+     "src": "restyle/re_00_closet_wide_k1.jpg",
+     "talk": "restyle/re_00_closet_wide_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_01_phone_cam": {
+   "frames": [
+    {
+     "src": "restyle/re_01_phone_cam_k1.jpg",
+     "talk": "restyle/re_01_phone_cam_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_02_door_inside": {
+   "frames": [
+    {
+     "src": "restyle/re_02_door_inside_k1.jpg"
+    }
+   ]
+  },
+  "re_04_gap": {
+   "frames": [
+    {
+     "src": "restyle/re_04_gap_k1.jpg"
+    }
+   ]
+  },
+  "re_05_phone_cry": {
+   "frames": [
+    {
+     "src": "restyle/re_05_phone_cry_k1.jpg",
+     "talk": "restyle/re_05_phone_cry_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_12_white_walls": {
+   "frames": [
+    {
+     "src": "restyle/re_12_white_walls_k1.jpg"
+    }
+   ]
+  },
+  "re_15_door_touch": {
+   "frames": [
+    {
+     "src": "restyle/re_15_door_touch_k0.jpg"
+    },
+    {
+     "src": "restyle/re_15_door_touch_k1.jpg"
+    }
+   ]
+  },
+  "ls_00_face_door": {
+   "frames": [
+    {
+     "src": "restyle/ls_00_face_door_k1.jpg"
+    }
+   ]
+  },
+  "ls_01_phone_terror": {
+   "frames": [
+    {
+     "src": "restyle/ls_01_phone_terror_k1.jpg",
+     "talk": "restyle/ls_01_phone_terror_k1_talk.jpg"
+    }
+   ]
+  },
+  "ls_04_eyes": {
+   "frames": [
+    {
+     "src": "restyle/ls_04_eyes_k1.jpg"
+    }
+   ]
+  },
+  "ls_05_bulge": {
+   "frames": [
+    {
+     "src": "restyle/ls_05_bulge_k1.jpg"
+    }
+   ]
+  },
+  "ls_07_top": {
+   "frames": [
+    {
+     "src": "restyle/ls_07_top_k1.jpg"
+    }
+   ]
+  },
+  "ls_16_not_drawing": {
+   "frames": [
+    {
+     "src": "restyle/ls_16_not_drawing_k1.jpg",
+     "talk": "restyle/ls_16_not_drawing_k1_talk.jpg"
     }
    ]
   },
@@ -94,10 +857,341 @@
     }
    ]
   },
+  "wa_02_hana_sleepy": {
+   "frames": [
+    {
+     "src": "restyle/wa_01_phone_a_k1.jpg",
+     "talk": "restyle/wa_01_phone_a_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_03_mara_need": {
+   "frames": [
+    {
+     "src": "restyle/wa_01_phone_a_k1.jpg",
+     "talk": "restyle/wa_01_phone_a_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_07_hana_creepy": {
+   "frames": [
+    {
+     "src": "restyle/wa_06_phone_b_k1.jpg",
+     "talk": "restyle/wa_06_phone_b_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_08_no": {
+   "frames": [
+    {
+     "src": "restyle/wa_06_phone_b_k1.jpg",
+     "talk": "restyle/wa_06_phone_b_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_10_gets_closer": {
+   "frames": [
+    {
+     "src": "restyle/wa_09_phone_b2_k1.jpg",
+     "talk": "restyle/wa_09_phone_b2_k1_talk.jpg"
+    }
+   ]
+  },
+  "wa_12_hana_serious": {
+   "frames": [
+    {
+     "src": "restyle/wa_09_phone_b2_k1.jpg",
+     "talk": "restyle/wa_09_phone_b2_k1_talk.jpg"
+    }
+   ]
+  },
+  "ha_16_tap1": {
+   "frames": [
+    {
+     "src": "restyle/ha_15_door_close_k1.jpg"
+    }
+   ]
+  },
+  "ha_17_tap2": {
+   "frames": [
+    {
+     "src": "restyle/ha_15_door_close_k1.jpg"
+    }
+   ]
+  },
+  "ha_18_tap3": {
+   "frames": [
+    {
+     "src": "restyle/ha_15_door_close_k1.jpg"
+    }
+   ]
+  },
   "er_20_silence": {
    "frames": [
     {
      "src": "restyle/co_09_hall_dark_k1.jpg"
+    }
+   ]
+  },
+  "wh_06_got_rid": {
+   "frames": [
+    {
+     "src": "restyle/wh_05_phone_c_k1.jpg",
+     "talk": "restyle/wh_05_phone_c_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_07_hana_what": {
+   "frames": [
+    {
+     "src": "restyle/wh_05_phone_c_k1.jpg",
+     "talk": "restyle/wh_05_phone_c_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_09_hana_listen": {
+   "frames": [
+    {
+     "src": "restyle/wh_08_phone_d_k1.jpg",
+     "talk": "restyle/wh_08_phone_d_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_10_what": {
+   "frames": [
+    {
+     "src": "restyle/wh_08_phone_d_k1.jpg",
+     "talk": "restyle/wh_08_phone_d_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_12_okay": {
+   "frames": [
+    {
+     "src": "restyle/wh_08_phone_d_k1.jpg",
+     "talk": "restyle/wh_08_phone_d_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_15_so": {
+   "frames": [
+    {
+     "src": "restyle/wh_08_phone_d_k1.jpg",
+     "talk": "restyle/wh_08_phone_d_k1_talk.jpg"
+    }
+   ]
+  },
+  "wh_21_not_gray": {
+   "frames": [
+    {
+     "src": "restyle/wh_19_outline_k1.jpg"
+    }
+   ]
+  },
+  "wh_22_white": {
+   "frames": [
+    {
+     "src": "restyle/wh_19_outline_k1.jpg"
+    }
+   ]
+  },
+  "wh_25_peel": {
+   "frames": [
+    {
+     "src": "restyle/wh_23_shoulder_k1.jpg"
+    }
+   ]
+  },
+  "iw_08_quiet": {
+   "frames": [
+    {
+     "src": "restyle/iw_07_rake_k1.jpg"
+    }
+   ]
+  },
+  "iw_11_scratch": {
+   "frames": [
+    {
+     "src": "restyle/iw_04_hand_k1.jpg"
+    }
+   ]
+  },
+  "iw_15_gone": {
+   "frames": [
+    {
+     "src": "restyle/iw_14_cracked_glow_k1.jpg"
+    }
+   ]
+  },
+  "iw_18_fingers": {
+   "frames": [
+    {
+     "src": "restyle/iw_17_push_out_k1.jpg"
+    }
+   ]
+  },
+  "iw_25_impact": {
+   "frames": [
+    {
+     "src": "restyle/iw_24_scream_k1.jpg"
+    }
+   ]
+  },
+  "re_03_worse": {
+   "frames": [
+    {
+     "src": "restyle/re_01_phone_cam_k1.jpg",
+     "talk": "restyle/re_01_phone_cam_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_06_gap2": {
+   "frames": [
+    {
+     "src": "restyle/re_04_gap_k1.jpg"
+    }
+   ]
+  },
+  "re_07_gap3": {
+   "frames": [
+    {
+     "src": "restyle/re_04_gap_k1.jpg"
+    }
+   ]
+  },
+  "re_08_not_once": {
+   "frames": [
+    {
+     "src": "restyle/re_05_phone_cry_k1.jpg",
+     "talk": "restyle/re_05_phone_cry_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_09_understand": {
+   "frames": [
+    {
+     "src": "restyle/re_00_closet_wide_k1.jpg",
+     "talk": "restyle/re_00_closet_wide_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_10_didnt_destroy": {
+   "frames": [
+    {
+     "src": "restyle/re_05_phone_cry_k1.jpg",
+     "talk": "restyle/re_05_phone_cry_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_11_color": {
+   "frames": [
+    {
+     "src": "restyle/re_01_phone_cam_k1.jpg",
+     "talk": "restyle/re_01_phone_cam_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_13_every_wall": {
+   "frames": [
+    {
+     "src": "restyle/re_00_closet_wide_k1.jpg",
+     "talk": "restyle/re_00_closet_wide_k1_talk.jpg"
+    }
+   ]
+  },
+  "re_14_silence": {
+   "frames": [
+    {
+     "src": "restyle/re_04_gap_k1.jpg"
+    }
+   ]
+  },
+  "ls_02_face_closer": {
+   "frames": [
+    {
+     "src": "restyle/ls_00_face_door_k1.jpg"
+    }
+   ]
+  },
+  "ls_03_not_through": {
+   "frames": [
+    {
+     "src": "restyle/ls_01_phone_terror_k1.jpg",
+     "talk": "restyle/ls_01_phone_terror_k1_talk.jpg"
+    }
+   ]
+  },
+  "ls_06_wait": {
+   "frames": [
+    {
+     "src": "restyle/ls_01_phone_terror_k1.jpg",
+     "talk": "restyle/ls_01_phone_terror_k1_talk.jpg"
+    }
+   ]
+  },
+  "ls_08_floor": {
+   "frames": [
+    {
+     "src": "restyle/ls_07_top_k1.jpg"
+    }
+   ]
+  },
+  "ls_09_walls": {
+   "frames": [
+    {
+     "src": "restyle/re_00_closet_wide_k1.jpg",
+     "talk": "restyle/re_00_closet_wide_k1_talk.jpg"
+    }
+   ]
+  },
+  "ls_10_moving": {
+   "frames": [
+    {
+     "src": "restyle/ls_07_top_k1.jpg"
+    }
+   ]
+  },
+  "ls_11_like": {
+   "frames": [
+    {
+     "src": "restyle/ls_07_top_k1.jpg"
+    }
+   ]
+  },
+  "ls_12_selection_box": {
+   "frames": [
+    {
+     "src": "restyle/ls_07_top_k1.jpg"
+    }
+   ]
+  },
+  "ls_13_oh_no": {
+   "frames": [
+    {
+     "src": "restyle/ls_01_phone_terror_k1.jpg",
+     "talk": "restyle/ls_01_phone_terror_k1_talk.jpg"
+    }
+   ]
+  },
+  "ls_14_selecting": {
+   "frames": [
+    {
+     "src": "restyle/ls_07_top_k1.jpg"
+    }
+   ]
+  },
+  "ls_15_click": {
+   "frames": [
+    {
+     "src": "restyle/ls_07_top_k1.jpg"
+    }
+   ]
+  },
+  "ls_17_cursor": {
+   "frames": [
+    {
+     "src": "restyle/re_00_closet_wide_k1.jpg",
+     "talk": "restyle/re_00_closet_wide_k1_talk.jpg"
     }
    ]
   }

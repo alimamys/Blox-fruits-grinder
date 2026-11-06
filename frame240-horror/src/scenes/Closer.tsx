@@ -72,7 +72,7 @@ export const Closer: React.FC = () => (
 				id: 'cl_06_lip',
 				at: 'narrator_042_fourth_time',
 				render: ({f, d}) => <FrontMara f={f} d={d} b={{r: 250, cx: 1040, cy: 520, expr: 'afraid', mouth: 0.08}} />,
-				art: {
+				art: {move: {z0: 1.1, z1: 1.13}, 
 					kind: 'still',
 					chars: ['mara'],
 					loc: 'workroom',

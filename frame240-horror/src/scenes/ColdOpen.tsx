@@ -108,7 +108,7 @@ export const ColdOpen: React.FC = () => (
 				id: 'co_08_eyes',
 				at: 'narrator_008_believed',
 				render: ({f, d}) => <FaceClose f={f} d={d} b={{r: 560, cy: 580, expr: 'uneasy'}} />,
-				art: {
+				art: {move: {z0: 1.08, z1: 1.11}, 
 					kind: 'still',
 					chars: ['mara'],
 					loc: 'workroom',

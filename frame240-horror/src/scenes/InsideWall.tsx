@@ -70,9 +70,9 @@ export const InsideWall: React.FC = () => (
 				art: {kind: 'still', chars: ['mara'], loc: 'white', mood: MOOD.white, prompt: 'Close-up: Mara\'s face lit by her PHONE\'s flashlight (she holds her smartphone, not a torch), terrified, tracking something moving along the wall with her eyes. Pale white background.'},
 			},
 			// "More like a drawing being stretched across paper."
-			{id: 'iw_03_stretched', at: 'narrator_116_stretched', render: wall('stretched', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame: the faint human outline is stretched sideways, long and thin and distorted, like a drawing being dragged across paper; the wall surface wrinkles slightly along it.'}},
+			{id: 'iw_03_stretched', at: 'narrator_116_stretched', render: wall('stretched', 0.6), art: {move: {z0: 1.07, z1: 1.1}, kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame: the faint human outline is stretched sideways, long and thin and distorted, like a drawing being dragged across paper; the wall surface wrinkles slightly along it.'}},
 			// "The outline of a hand appeared near the ceiling." / elbow / head
-			{id: 'iw_04_hand', at: 'narrator_117_hand', render: wall('hand', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame, high up near the ceiling, just below the ceiling: the outline of a long-fingered hand pressing out from inside the wall, white on white, only its edges and tiny shadows visible.'}},
+			{id: 'iw_04_hand', at: 'narrator_117_hand', render: wall('hand', 0.6), art: {move: {z0: 1.04, z1: 1.08}, kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame, high up near the ceiling, just below the ceiling: the outline of a long-fingered hand pressing out from inside the wall, white on white, only its edges and tiny shadows visible.'}},
 			{id: 'iw_05_elbow', at: 'narrator_118_elbow', render: wall('elbow', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame: the faint raised curve of a long bent elbow pushing out under the surface, white on white.'}},
 			{id: 'iw_06_head', at: 'narrator_119_head', render: wall('head', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, move: {z0: 1.2, z1: 1.26}, prompt: 'The white wall: the faint raised curve of a head, tilted and bent to one side, pressing out under the white surface; no face, just the shape and a thin shadow.'}},
 			// "I could barely see it unless I tilted my phone flashlight sideways."
@@ -197,7 +197,7 @@ export const InsideWall: React.FC = () => (
 						{f / Math.max(1, d) > 0.5 ? [0, 1, 2, 3].map((i) => <HandShape key={i} p={[860 + i * 40, 520]} a={180} s={0.8 + i * 0.05} color="#f4f3ef" />) : null}
 					</Stage>
 				),
-				art: {
+				art: {move: {z0: 1.06, z1: 1.1}, 
 					kind: 'action',
 					keys: 2,
 					chars: ['figure'],
@@ -219,10 +219,28 @@ export const InsideWall: React.FC = () => (
 						<DeskInsert kind="phoneFloor" />
 					</Stage>
 				),
-				art: {kind: 'still', loc: 'white', mood: MOOD.white, prompt: 'Her phone lying face-up on the pale floor where she dropped it, its screen glowing with an active call. No readable text on the screen.'},
+				// (this narration line is cut in the short edit - the shot then falls away)
+				art: {kind: 'reuse', reuse: 'iw_20_get_out', move: {z0: 1.0, z1: 1.06}},
 			},
 			// HANA: "Mara! Get out! Get out right now!"
-			{id: 'iw_20_get_out', at: 'hana_014_get_out', render: ({f, d}) => <Stage f={f} d={d}><DeskInsert kind="phoneFloor" /></Stage>, art: {kind: 'reuse', reuse: 'iw_19_phone_floor', fx: 'shake', move: {z0: 1.12, z1: 1.2}}},
+			{
+				id: 'iw_20_get_out',
+				at: 'hana_014_get_out',
+				render: ({f, d}) => (
+					<Stage f={f} d={d}>
+						<DeskInsert kind="phoneFloor" />
+					</Stage>
+				),
+				art: {
+					kind: 'still',
+					loc: 'white',
+					fx: 'shake',
+					noPeople: true,
+					mood: MOOD.white,
+					move: {z0: 1.06, z1: 1.14},
+					prompt: 'Her smartphone lying face-up on the pale white floor of the drained hallway where she dropped it, its screen glowing with a plain voice-call screen: a dark background and one round grey avatar circle with a single letter H - NO face, NO photo, NO video, no person anywhere on the screen. No other readable text. No people, no hands.',
+				},
+			},
 			// "I ran for the front door."
 			{
 				id: 'iw_21_run_door',
@@ -273,7 +291,7 @@ export const InsideWall: React.FC = () => (
 				id: 'iw_24_scream',
 				at: 'narrator_135_white_rectangle',
 				render: ({f, d}) => <FaceClose f={f} d={d} b={{r: 260, cy: 470, expr: 'scream', light: WL}} bg="#e6e5e0" />,
-				art: {kind: 'still', chars: ['mara'], loc: 'white', mood: MOOD.white, prompt: 'Close-up: Mara with her back pressed against the smooth white rectangle where the door was, screaming in terror, tears in her eyes, the flat white surface behind her head.'},
+				art: {move: {z0: 1.04, z1: 1.08}, kind: 'still', chars: ['mara'], loc: 'white', mood: MOOD.white, prompt: 'Close-up: Mara with her back pressed against the smooth white rectangle where the door was, screaming in terror, tears in her eyes, the flat white surface behind her head.'},
 			},
 			// AUDIO CUE: a low impact from inside the wall
 			{id: 'iw_25_impact', at: 'impact', render: ({f, d}) => <FaceClose f={f} d={d} b={{r: 260, cy: 470, expr: 'scream'}} />, art: {kind: 'reuse', reuse: 'iw_24_scream', fx: 'shake', move: {z0: 1.12, z1: 1.16}}},
