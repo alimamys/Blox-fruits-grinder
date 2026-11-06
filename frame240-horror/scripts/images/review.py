@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Contact sheets for checking the image pipeline by eye.
 
-    .venv/bin/python scripts/images/review.py sources   # every shot's middle source frame, labelled
-    .venv/bin/python scripts/images/review.py pairs      # source | redraw side by side, labelled
-    .venv/bin/python scripts/images/review.py talk       # redraw | mouth-open variant
+    .venv/bin/python scripts/images/review.py sources   # every shot's layout keyframe, labelled
+    .venv/bin/python scripts/images/review.py pairs      # layout | generated frame | character sheet, per keyframe
+    .venv/bin/python scripts/images/review.py talk       # frame | mouth-open variant | both mouths zoomed
+    .venv/bin/python scripts/images/review.py pictures   # canvas picture layout | generated picture
 
 Sheets go to build/review/<kind>_NN.jpg (4 columns, labelled with the shot id and
 classification from build/restyle_plan.json when it exists).
@@ -56,27 +57,50 @@ def main() -> int:
             if f.exists():
                 tiles.append(label(Image.open(f).convert('RGB').resize((480, 270)), f"{p['id']} {p.get('mode', '')}"))
         elif kind == 'pairs':
-            if p.get('mode') not in ('single', 'multi'):
+            if p.get('mode') not in ('still', 'action', 'talk'):
                 continue
-            for k in ([1] if p['mode'] == 'single' else [0, 1, 2]):
+            chars = (p.get('art') or {}).get('chars') or []
+            ref = ROOT / 'references' / 'sheets' / ('mara_board.jpg' if 'mara' in chars else 'figure.png' if 'figure' in chars else 'none')
+            for k in p.get('keys', [1]):
                 a, b = KEYS / f"{p['id']}_k{k}.png", OUT / f"{p['id']}_k{k}.jpg"
                 if a.exists() and b.exists():
-                    t = Image.new('RGB', (964, 270))
+                    t = Image.new('RGB', (1448, 270), (30, 30, 30))
                     t.paste(Image.open(a).convert('RGB').resize((480, 270)), (0, 0))
                     t.paste(Image.open(b).convert('RGB').resize((480, 270)), (484, 0))
-                    tiles.append(label(t, f"{p['id']}_k{k}"))
+                    if ref.exists():
+                        r = Image.open(ref).convert('RGB')
+                        r.thumbnail((480, 270))
+                        t.paste(r, (968, 0))
+                    tiles.append(label(t, f"{p['id']}_k{k}  layout | frame | sheet"))
         elif kind == 'talk':
-            for t in {x['character'] for x in p.get('talk', [])}:
-                a, b = OUT / f"{p['id']}_k1.jpg", OUT / f"{p['id']}_k1_talk_{t}.jpg"
-                if a.exists() and b.exists():
-                    tile = Image.new('RGB', (964, 270))
-                    tile.paste(Image.open(a).convert('RGB').resize((480, 270)), (0, 0))
-                    tile.paste(Image.open(b).convert('RGB').resize((480, 270)), (484, 0))
-                    tiles.append(label(tile, f"{p['id']} talk {t}"))
+            if not p.get('mouth'):
+                continue
+            a, b = OUT / f"{p['id']}_k1.jpg", OUT / f"{p['id']}_k1_talk.jpg"
+            if a.exists() and b.exists():
+                ia, ib = Image.open(a).convert('RGB'), Image.open(b).convert('RGB')
+                import numpy as np
+                d = np.abs(np.asarray(ia).astype(int) - np.asarray(ib).astype(int)).mean(axis=2)
+                ys, xs = np.nonzero(d > 12)
+                cx, cy = (int(xs.mean()), int(ys.mean())) if len(xs) else (960, 540)
+                box = (max(0, cx - 160), max(0, cy - 90), max(0, cx - 160) + 320, max(0, cy - 90) + 180)
+                tile = Image.new('RGB', (1448, 270), (30, 30, 30))
+                tile.paste(ia.resize((480, 270)), (0, 0))
+                tile.paste(ib.resize((480, 270)), (484, 0))
+                tile.paste(ia.crop(box).resize((238, 134)), (968, 0))
+                tile.paste(ib.crop(box).resize((238, 134)), (1210, 0))
+                tiles.append(label(tile, f"{p['id']} frame | mouth open | zoom"))
+    if kind == 'pictures':
+        for f in sorted((ROOT / 'public' / 'pictures').glob('*.jpg')) if (ROOT / 'public' / 'pictures').exists() else []:
+            lay = ROOT / 'build' / 'refs' / f'pic_{f.stem}.png'
+            t = Image.new('RGB', (964, 270))
+            if lay.exists():
+                t.paste(Image.open(lay).convert('RGB').resize((480, 270)), (0, 0))
+            t.paste(Image.open(f).convert('RGB').resize((480, 270)), (484, 0))
+            tiles.append(label(t, f.stem))
     if not tiles:
         print('nothing to show')
         return 0
-    sheets(tiles, kind, cols=2 if kind in ('pairs', 'talk') else 4)
+    sheets(tiles, kind, cols=1 if kind in ('pairs', 'talk') else 2 if kind == 'pictures' else 4)
     return 0
 
 
