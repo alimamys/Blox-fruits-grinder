@@ -29,6 +29,8 @@ const HullWide: React.FC<{f: number; d: number; hits: Array<{at: number; x: numb
 const PAPanel: React.FC<{f: number; on: boolean; unplugged?: number; level?: number}> = ({f, on, unplugged = 0, level = 0}) => (
 	<AbsoluteFill style={{background: '#20252d'}}>
 		<Svg>
+			{/* scaled down and lowered so the PA caption card at the top never covers the panel's title */}
+			<g transform="translate(115, 150) scale(0.88)">
 			<rect x={360} y={160} width={1200} height={760} rx={30} fill="#3a414c" stroke="#111" strokeWidth={10} />
 			<text x={960} y={250} textAnchor="middle" fontFamily={FONT.ui} fontWeight={800} fontSize={54} fill="#e9eef5">
 				PA SYSTEM · ALL DECKS
@@ -52,6 +54,7 @@ const PAPanel: React.FC<{f: number; on: boolean; unplugged?: number; level?: num
 			{unplugged > 0 && unplugged < 0.6
 				? Array.from({length: 8}, (_, i) => <path key={i} d={wobLine(1460, 860, 1460 + Math.cos(i) * 80, 860 + Math.sin(i * 1.3) * 80, f + i, 6, 2)} stroke="#ffe36b" strokeWidth={5} />)
 				: null}
+			</g>
 		</Svg>
 	</AbsoluteFill>
 );
