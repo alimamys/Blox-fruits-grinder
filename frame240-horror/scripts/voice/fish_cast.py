@@ -2,7 +2,7 @@
 """Audition Fish Audio library voices for each character.
 
     .venv-chatterbox/bin/python scripts/voice/fish_cast.py            # all characters
-    .venv-chatterbox/bin/python scripts/voice/fish_cast.py narrator emma
+    .venv-chatterbox/bin/python scripts/voice/fish_cast.py narrator hana
 
 Every candidate reads two real lines of its character. Each take is transcribed with
 Whisper and measured (accuracy, words per second, median pitch). Results go to
@@ -30,73 +30,31 @@ ROOT = HERE.parent.parent
 OUT = ROOT / 'build' / 'fish_cast'
 
 CANDIDATES: dict[str, list[tuple[str, str]]] = {
+    # Mara: narration and her own lines share one voice (the narration is auditioned)
     'narrator': [
-        ('ef9c79b62ef34530bf452c0e50e3c260', 'horror (deep, low, serious)'),
-        ('bf322df2096a46f18c579d0baa36f41d', 'Adrian (deep, measured)'),
-        ('e686ae649ee44f219a108aacba206c1a', 'calm storyteller male'),
-        ('c3958f083c2d407982263c77cfa831e3', 'Documentary (old, deep)'),
-        ('d67524ad1936410896ad120583cb1117', 'Andrew (US storytelling)'),
+        ('2a9605eeafe84974b5b20628d42c0060', 'Female Voice (calm, reflective)'),
+        ('836513f294d64aec8403226e69268b1b', 'STORYTELLING VOICE (young, measured)'),
+        ('ef4741fd388e42848acaea777b643703', 'horror (female, soft, breathy)'),
+        ('57d4a7fa3d944ca5b2407f916ce5f4d5', 'Woman (warm, sincere)'),
     ],
-    'daniel': [
-        ('0327fdb5da9e4fd782899a8058c8ae2b', 'Narrator (young, calm)'),
-        ('e4ffba2adbd7417b8fd2621f61b5d8ad', 'Hello (young)'),
-        ('b7204d4e40ef4a548c7c8547b7f73492', 'Alok'),
-        ('536d3a5e000945adb7038665781a4aca', 'Ethan'),
+    'mara': [
+        ('2a9605eeafe84974b5b20628d42c0060', 'Female Voice (calm, reflective)'),
+        ('836513f294d64aec8403226e69268b1b', 'STORYTELLING VOICE (young, measured)'),
+        ('ef4741fd388e42848acaea777b643703', 'horror (female, soft, breathy)'),
+        ('57d4a7fa3d944ca5b2407f916ce5f4d5', 'Woman (warm, sincere)'),
     ],
-    'emma': [
-        ('933563129e564b19a115bedd57b7406a', 'Sarah (young, soft)'),
-        ('f3a2b90078d54a65af4b95f63bc7798e', 'Sheila (young, US)'),
-        ('6ab4c6b0f37f4243a99046478647be94', 'Jade'),
-    ],
-    'oldWoman': [
-        ('001262690f2a4eea84aa764cc536df24', 'Amy (old, calm, serious)'),
-        ('ebb049b788714bd3ab399e95c6986b0d', 'Granny (old, slow)'),
-        ('300683aa957b44dc860237a6aaa5f9ea', 'Granny (raspy, measured)'),
-        ('f45f7cdfe47a4a55aeb1689030b94a32', 'Warm Storyteller (old woman)'),
-    ],
-    'captain': [
-        ('d67524ad1936410896ad120583cb1117', 'Andrew (old, deep)'),
-        ('1936333080804be19655c6749b2ae7b2', 'Voice DL (old, calm)'),
-        ('f8dfe9c83081432386f143e2fe9767ef', 'Book Record (raspy, calm)'),
-    ],
-    'crew1': [
-        ('536d3a5e000945adb7038665781a4aca', 'Ethan'),
-        ('e4ffba2adbd7417b8fd2621f61b5d8ad', 'Hello (young)'),
-        ('b23b88a8b7cc4482b0bcdc26beb461d7', 'NOLI'),
-    ],
-    'crew2': [
-        ('f6a19fe5ab494e1fa51bb1476d583a44', 'Abby (US audiobook)'),
-        ('06366bd48deb46d98e0df6160f798cb3', 'Middle Aged Woman'),
-        ('b347db033a6549378b48d00acb0d06cd', 'Selene'),
-    ],
-    'harbor': [
-        ('c5f56a6cc2ec4fa8920cb4c5889a3fb7', 'Slax (clear, crisp)'),
-        ('b7204d4e40ef4a548c7c8547b7f73492', 'Alok'),
-        ('7295a63f84f64fa29730719b83239ebd', 'SK1'),
-    ],
-    'pa': [
-        ('06366bd48deb46d98e0df6160f798cb3', 'Middle Aged Woman'),
-        ('b347db033a6549378b48d00acb0d06cd', 'Selene'),
-        ('0af969cba6c24e74b5600d6df78e8975', 'Narration (female)'),
-    ],
-    'police': [
-        ('b23b88a8b7cc4482b0bcdc26beb461d7', 'NOLI'),
-        ('1936333080804be19655c6749b2ae7b2', 'Voice DL'),
-        ('76b55591c758444cb95253708696dfad', 'Joe (deep, serious)'),
+    'hana': [
+        ('bebd3797a58b4b3d9934bf86776b7d2b', 'Yorkshire Woman (Northern English)'),
+        ('0f2279f5f3894673a675eb85a61e1e2e', 'calm woman (clear, friendly)'),
+        ('b88bf358091e4e22924af8e0580beafb', 'Female (relaxed, conversational)'),
+        ('7b0e224b87454737a05e573d318e89ba', 'Woman (mature, measured)'),
     ],
 }
 
 SAMPLE_LINES = {
-    'narrator': ['narrator_001_hook', 'narrator_065_only_difference'],
-    'daniel': ['daniel_003_grandmother', 'daniel_005_impossible'],
-    'emma': ['emma_011_shes_dead', 'emma_001_wake_me'],
-    'oldWoman': ['oldwoman_004_shouldnt', 'oldwoman_002_waiting'],
-    'captain': ['captain_003_lost_nav', 'captain_005_negative'],
-    'crew1': ['crew_001_ticket', 'crew_005_sir'],
-    'crew2': ['crew2_001_count'],
-    'harbor': ['harbor_004_docked', 'harbor_005_looking'],
-    'pa': ['pa_002_proceed', 'pa_001_passenger37'],
-    'police': ['police_001_whose', 'police_002_maam'],
+    'narrator': ['narrator_001_239_frames', 'narrator_073_same_scratching'],
+    'mara': ['mara_004_gets_closer', 'mara_026_invisible'],
+    'hana': ['hana_001_three_am', 'hana_014_get_out'],
 }
 
 

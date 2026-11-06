@@ -198,6 +198,9 @@ def apply_effect(x: np.ndarray, effect: str, seed: int, whisper_native: bool = F
         return fx_shout(x)
     if effect == 'crowdRoom':
         return fx_crowd(x)
+    if effect == 'closet':
+        # a tiny closet: almost dry, very close, a hint of a small boxy room
+        return fx_room(x, 0.035)
     if effect == 'multiSpeaker':
         return fx_multi(x)
     raise ValueError(f'unknown effect {effect}')
@@ -210,6 +213,7 @@ EFFECT_LUFS_OFFSET = {
     'marineRadio': -0.5,
     'pa': 0.0,
     'crowdRoom': 0.0,
+    'closet': -2.0,
 }
 
 

@@ -429,7 +429,13 @@ FISH_EMOTION_TAGS = {
     'uneasy': '[uneasy]',
     'serious': '[serious]',
     'authoritative': '[firm]',
+    'terrified': '[terrified, trembling]',
+    'shaking': '[voice shaking]',
 }
+
+# Mara narrates her own story, frightened: the narration gets a SMALL set of tags for the
+# fear beats only - everything else stays untagged and conversational.
+NARRATOR_TAGS = {'afraid': '[scared]', 'terrified': '[terrified]', 'panicked': '[panicked]', 'breathless': '[breathless]', 'shaking': '[voice shaking]', 'whispering': '[whispering]'}
 
 
 def fish_text(job: dict) -> str:
@@ -441,7 +447,9 @@ def fish_text(job: dict) -> str:
     elif line['audioEffect'] in ('whisper', 'whisperClose'):
         tags.append('[whispering]')
     elif line['character'] == 'narrator':
-        if line['volume'] < 0.9 or line['emotion'] == 'whispering':
+        if line['emotion'] in NARRATOR_TAGS and line.get('fearLevel', 0) >= 3:
+            tags.append(NARRATOR_TAGS[line['emotion']])
+        elif line['volume'] < 0.9:
             tags.append('[quietly]')
     else:
         tag = FISH_EMOTION_TAGS.get(line['emotion'])

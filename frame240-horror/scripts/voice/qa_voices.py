@@ -76,7 +76,7 @@ def similarity(a: list[str], b: list[str]) -> float:
     return difflib.SequenceMatcher(None, a, b).ratio()
 
 
-HEAVY = ('marineRadio', 'pa', 'paSoft', 'multiSpeaker', 'whisper', 'whisperClose', 'distant', 'crowdRoom')
+HEAVY = ('marineRadio', 'pa', 'paSoft', 'multiSpeaker', 'whisper', 'whisperClose', 'distant', 'crowdRoom', 'phone', 'closet', 'shout')
 
 
 def load_asr(model: str = 'openai/whisper-base.en'):

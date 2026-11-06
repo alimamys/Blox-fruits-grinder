@@ -15,6 +15,8 @@ It always reads the untouched takes from --raw-dir (copied there on the first ru
 can be re-run with other settings. Usage:
 
     .venv/bin/python scripts/voice/tighten.py --ids build/short_edit_lines.txt
+
+With no earlier take of a line (a new film), the pacing reference is --target-wps.
 """
 from __future__ import annotations
 
@@ -112,6 +114,7 @@ def main() -> int:
     ap.add_argument('--max-gap', type=float, default=0.45, help='longest pause kept inside a narrator line (s)')
     ap.add_argument('--max-gap-dialogue', type=float, default=0.5)
     ap.add_argument('--max-tempo', type=float, default=1.15)
+    ap.add_argument('--target-wps', type=float, default=2.6, help='pacing reference when no earlier take exists: words per second at pace 1.0 (0 = off)')
     a = ap.parse_args()
     ids_arg = Path(a.ids).read_text().strip() if Path(a.ids).exists() else a.ids
     ids = [i for i in ids_arg.split(',') if i]
@@ -134,6 +137,12 @@ def main() -> int:
         tempo = 1.0
         if (ref / fn).exists():
             want = active_len(ref / fn) * 1.03
+            have = active_len_arr(y, sr)
+            tempo = float(np.clip(have / max(want, 0.2), 1.0, a.max_tempo))
+        elif a.target_wps > 0:
+            # no earlier take: pace against a words-per-second target (slower deliberate lines keep their pace)
+            words = len((lines[i].get('spokenText') or lines[i]['text']).split())
+            want = words / (a.target_wps * lines[i].get('pace', 1.0)) * 1.05 + 0.15
             have = active_len_arr(y, sr)
             tempo = float(np.clip(have / max(want, 0.2), 1.0, a.max_tempo))
         if tempo > 1.01:

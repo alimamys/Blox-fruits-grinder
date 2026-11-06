@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate every voice line of "The 63rd Passenger".
+"""Generate every voice line of "Frame 240".
 
 Normally run through npm (which exports the TS data first and retimes afterwards):
 
@@ -161,7 +161,7 @@ def write_scripts(data: dict, jobs: list[dict]) -> None:
     SCRIPTS_OUT.mkdir(parents=True, exist_ok=True)
     dirs = data['EMOTION_DIRECTIONS']
     voices = data['VOICES']
-    md = ['# The 63rd Passenger - performance script', '',
+    md = ['# Frame 240 - performance script', '',
           'Generated from `src/data/voiceLines.ts` by `npm run generate-voices -- --scripts-only`.',
           'Use it for human voice actors or as a reference when re-voicing with another provider.', '',
           '## Cast', '']
