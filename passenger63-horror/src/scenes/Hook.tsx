@@ -207,7 +207,7 @@ export const Hook: React.FC = () => (
 			// A crew member approached her
 			{
 				at: 'narrator_012_approached',
-				render: ({f, d}) => <DeckWide f={f} d={d} push={0.15} crewX={lerpF(f, 0, d, 120, 520)} crewWalk />,
+				render: ({f, d}) => <DeckWide f={f} d={d} push={0.15} crewX={lerpF(f, 0, d, 40, 600)} crewWalk />,
 			},
 			// "Ma'am, can I see your ticket?"
 			{
