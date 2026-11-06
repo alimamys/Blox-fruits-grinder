@@ -161,13 +161,11 @@ Sound effects and ambience automation use the same markers, for example `{sound:
 
 ### Which TTS provider is configured
 
-All 331 lines in `public/audio` were generated with **[Chatterbox](https://github.com/resemble-ai/chatterbox)** (Resemble AI, MIT licence). It is a free, local, expressive model that runs offline once downloaded and needs no API key. Each character's timbre is cloned from a reference clip in `voice-references/`. Chatterbox then performs the line with emotion, breath and natural intonation.
+**[Fish Audio](https://fish.audio)** voices 316 of the 331 lines in `public/audio`, using the `s2.1-pro-free` model through `FishProvider` in `scripts/voice/providers.py`. Each character has a Fish voice model (`fish.referenceId` in `src/data/voiceConfig.ts`). The line's emotion is passed as a bracketed tag such as `[whispering]` or `[terrified]`. The narrator runs at speed 1.12, which keeps the short edit at about 10½ minutes. To audition other Fish voices for a character, use `scripts/voice/fish_cast.py`.
 
-- Dialogue, PA, radio and crowd lines use the standard Chatterbox model with per-line `exaggeration` and `cfg_weight` taken from the line's emotion metadata.
-- The narrator uses **Chatterbox Turbo**: steadier, about 4× faster, and very consistent across 257 lines.
-- Every take was transcribed with Whisper and compared with the script (see [Voice QA](#voice-qa)). Flagged lines were re-rolled best-of-4.
+The 15 crowd and passenger murmurs are still **[Chatterbox](https://github.com/resemble-ai/chatterbox)** takes (Resemble AI, MIT licence, local). Every take was transcribed with Whisper and compared with the script (see [Voice QA](#voice-qa)). Flagged lines were re-rolled best-of-3.
 
-The fallback provider (`DEFAULT_PROVIDER` in `voiceConfig.ts`) is still **Kokoro v1.0** (Apache‑2.0, via `kokoro-onnx`). It is fast and fully offline, but flatter. Kokoro also builds the reference clips.
+The fallback provider is **Kokoro v1.0** (Apache‑2.0, via `kokoro-onnx`). It is fast and fully offline, but flatter. Kokoro also builds the Chatterbox reference clips.
 
 The cast is defined once, in `src/data/voiceConfig.ts`. The Kokoro blend below is also the timbre the Chatterbox reference clip is built from:
 
@@ -191,8 +189,10 @@ The same file holds voice ids for **ElevenLabs, OpenAI (gpt‑4o‑mini‑tts), 
 Create a `.env` file in this folder (it is git‑ignored), or export the variables in your shell:
 
 ```
+FISH_API_KEY=...          (Fish Audio voices)
+OPENAI_API_KEY=...        (gpt-image-2 illustrations; also OpenAI TTS)
+GEMINI_API_KEY=...        (optional Gemini image provider in scripts/images/gen_images.py)
 ELEVENLABS_API_KEY=...
-OPENAI_API_KEY=...
 AZURE_SPEECH_KEY=...
 AZURE_SPEECH_REGION=westeurope
 AWS_ACCESS_KEY_ID=... / AWS_SECRET_ACCESS_KEY=... / AWS_REGION=...   (Polly, needs `pip install boto3`)
@@ -394,10 +394,30 @@ These are Remotion input props, set in the Studio *Props* panel or with `--props
 | `audio` | `true` | mute everything (fast visual checks) |
 | `edit` | `'short'` | `'full'` for the complete story |
 | `subtitles` | `true` | burned‑in, word‑timed subtitles |
+| `restyled` | `true` | `false` shows the code‑drawn shots instead of the redrawn illustrations |
 
 ```bash
 npx remotion render Passenger63Horror out/no-evidence.mp4 --props='{"evidenceInserts":false,"cctvOverlay":false}'
 ```
+
+## Illustrations (redrawn shots)
+
+Every shot is first drawn in code: React/SVG stick figures, sets and props. `scripts/images/restyle.py` then has **gpt-image-2** redraw each shot in the same stick-figure style at a higher finish. It keeps the composition, the characters and any on-screen text. `RestyledLayer` (`src/components/fx/Restyled.tsx`) lays the redraws over the film and adds a slow push, handheld drift, keyframe crossfades and shake, flicker or CCTV effects. While a character speaks, a drawn mouth follows the voice envelope, which gives lip sync without one image per mouth shape.
+
+```bash
+node scripts/images/shotmap.mjs        # shot list with frame ranges -> build/shotmap.json
+node scripts/images/keyframes.mjs      # code-drawn keyframes per shot -> build/keyframes/
+node scripts/images/mouthkeys.mjs      # mouth positions for talking shots
+node scripts/images/plates.mjs         # empty background plates for animated shots -> build/plates/
+.venv/bin/python scripts/images/restyle.py plan
+.venv/bin/python scripts/images/restyle.py gen --workers 8   # ~$0.20 per image; cached, resumable
+.venv/bin/python scripts/images/restyle.py mouths
+.venv/bin/python scripts/images/restyle.py manifest          # -> src/data/generated/restyle.json + plates.json
+.venv/bin/python scripts/images/review.py                    # contact sheets in build/review/
+```
+
+- **Skipped shots.** Text-heavy screens (manifests, phones, CCTV UI) and near-black frames keep their code-drawn version, because a redraw would garble the text.
+- **Animated shots.** Some shots have real movement: the crew walking up to the old woman, Daniel standing up, the washroom and storage-room search, the empty railing. These are not frozen into a still. Their sets are wrapped in `<PlateBg id>` and their moving characters in `<Anim>` (`src/components/environments/Plates.tsx`). `plates.mjs` renders each set empty through a fixed wide camera, and `restyle.py` redraws it to `public/plates/<id>.jpg`. In the film the redrawn plate then replaces the code-drawn set, and the animated figures move on top under the same camera.
 
 ## Replacing synthetic visuals
 
