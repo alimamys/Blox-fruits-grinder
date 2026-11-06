@@ -12,6 +12,7 @@ import {FONT} from '../utils/fonts';
 import {h01, wobLine} from '../utils/rough';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, speak, talkOf} from './common';
+import {Anim, PlateBg} from '../components/environments/Plates';
 
 const RedRoom: React.FC = () => <rect x={-200} y={-200} width={2400} height={1600} fill="#3c1010" />;
 
@@ -231,8 +232,12 @@ export const Vanish: React.FC = () => (
 				render: ({f, d}) => (
 					<AbsoluteFill>
 						<Stage f={f} d={d} from={{z: 1.0, cy: 600}} to={{z: 1.1}}>
-							<RearDeck f={f} view="behind" lights="red" fog={0.05} />
-							<Emma x={lerpF(f, 0, d, 700, 1000)} y={lerpF(f, 0, d, 1060, 740)} s={lerpF(f, 0, d, 1.1, 0.7)} frame={f} back pose="run" phase={f * 0.45} />
+							<PlateBg id="deck_behind_red">
+								<RearDeck f={0} view="behind" lights="red" fog={0.05} />
+							</PlateBg>
+							<Anim>
+								<Emma x={lerpF(f, 0, d, 700, 1000)} y={lerpF(f, 0, d, 1060, 740)} s={lerpF(f, 0, d, 1.1, 0.7)} frame={f} back pose="run" phase={f * 0.45} />
+							</Anim>
 						</Stage>
 					</AbsoluteFill>
 				),
@@ -241,8 +246,12 @@ export const Vanish: React.FC = () => (
 				at: 'narrator_199_gone_too',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.2, cy: 600}} to={{z: 1.25}}>
-						<RearDeck f={f} view="behind" lights="red" fog={0.05} />
-						<Emma x={1000} y={740} s={0.7} frame={f} back arms="hipsHands" />
+						<PlateBg id="deck_behind_red">
+							<RearDeck f={0} view="behind" lights="red" fog={0.05} />
+						</PlateBg>
+						<Anim>
+							<Emma x={1000} y={740} s={0.7} frame={f} back arms="hipsHands" />
+						</Anim>
 					</Stage>
 				),
 			},

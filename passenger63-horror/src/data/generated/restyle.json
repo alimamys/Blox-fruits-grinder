@@ -40,17 +40,6 @@
    "fx": null
   },
   {
-   "id": "hook_07",
-   "from": 564,
-   "to": 761,
-   "frames": [
-    {
-     "src": "restyle/hook_07_k1.jpg"
-    }
-   ],
-   "fx": null
-  },
-  {
    "id": "hook_08",
    "from": 761,
    "to": 851,
@@ -63,17 +52,6 @@
     },
     {
      "src": "restyle/hook_08_k2.jpg"
-    }
-   ],
-   "fx": null
-  },
-  {
-   "id": "hook_09",
-   "from": 851,
-   "to": 905,
-   "frames": [
-    {
-     "src": "restyle/hook_09_k1.jpg"
     }
    ],
    "fx": null
@@ -342,23 +320,6 @@
    "fx": null
   },
   {
-   "id": "departure_02",
-   "from": 2249,
-   "to": 2368,
-   "frames": [
-    {
-     "src": "restyle/departure_02_k0.jpg"
-    },
-    {
-     "src": "restyle/departure_02_k1.jpg"
-    },
-    {
-     "src": "restyle/departure_02_k2.jpg"
-    }
-   ],
-   "fx": null
-  },
-  {
    "id": "departure_05",
    "from": 2662,
    "to": 2720,
@@ -396,34 +357,6 @@
     }
    ],
    "fx": "cctv"
-  },
-  {
-   "id": "recognition_01",
-   "from": 2929,
-   "to": 3006,
-   "frames": [
-    {
-     "src": "restyle/recognition_01_k0.jpg"
-    },
-    {
-     "src": "restyle/recognition_01_k1.jpg"
-    },
-    {
-     "src": "restyle/recognition_01_k2.jpg"
-    }
-   ],
-   "fx": null
-  },
-  {
-   "id": "recognition_02",
-   "from": 3006,
-   "to": 3081,
-   "frames": [
-    {
-     "src": "restyle/recognition_02_k1.jpg"
-    }
-   ],
-   "fx": null
   },
   {
    "id": "recognition_03",
@@ -524,28 +457,6 @@
        "skin": "#e7c4ad"
       }
      ]
-    }
-   ],
-   "fx": null
-  },
-  {
-   "id": "recognition_08",
-   "from": 3477,
-   "to": 3609,
-   "frames": [
-    {
-     "src": "restyle/recognition_08_k1.jpg"
-    }
-   ],
-   "fx": null
-  },
-  {
-   "id": "recognition_09",
-   "from": 3609,
-   "to": 3688,
-   "frames": [
-    {
-     "src": "restyle/recognition_09_k1.jpg"
     }
    ],
    "fx": null

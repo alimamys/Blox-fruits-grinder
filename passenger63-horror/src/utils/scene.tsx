@@ -150,6 +150,14 @@ export const Cam: React.FC<{
 	children: React.ReactNode;
 	style?: React.CSSProperties;
 }> = ({f, d, from = {}, to, rock = 0, shakeAt = [], shakeAmp = 14, ease = easeInOut, hand = 1, children, style}) => {
+	// plate-source render: a fixed wide camera, no moves (src/components/environments/Plates.tsx)
+	if ((getInputProps() as {plate?: string}).plate) {
+		from = {cx: 960, cy: 540, z: 0.9, r: 0};
+		to = undefined;
+		rock = 0;
+		shakeAt = [];
+		hand = 0;
+	}
 	const a = {cx: 960, cy: 540, z: 1, r: 0, ...from};
 	const b = {...a, ...(to ?? {})};
 	const t = ease(clamp(f / Math.max(1, d - 1)));
@@ -165,7 +173,7 @@ export const Cam: React.FC<{
 	const hy = (Math.sin(g * 0.57 + 2.1) * 2.6 + Math.sin(g * 1.37 + 0.4) * 1.1) * hand;
 	const hr = (Math.sin(g * 0.43 + 0.7) * 0.14) * hand;
 	// a hair of over-scan so the drift never shows the stage edge
-	const ze = z * (1 + 0.007 * hand);
+	const ze = (getInputProps() as {plate?: string}).plate ? z : z * (1 + 0.007 * hand);
 	const tx = 960 - cx * ze + sx + hx;
 	const ty = 540 - cy * ze + sy + rk.dy + hy;
 	return (

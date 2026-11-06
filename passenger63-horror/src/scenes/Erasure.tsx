@@ -12,6 +12,8 @@ import {BigText, CrudeLabel, Evidence, PassengerCounter} from '../components/fx/
 import {clamp, easeInOut, easeOut, lerpF} from '../utils/anim';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, speak, talkOf} from './common';
+import {Anim, PlateBg} from '../components/environments/Plates';
+import {walkPhase} from '../components/characters/StickPerson';
 
 /** Close-up backdrop: a real interior (crew areas for the dark variants). */
 const Room: React.FC<{color?: string}> = ({color = '#7f8b9c'}) => <RoomBackdrop f={0} variant={color === '#7f8b9c' ? 'cabin' : 'crew'} />;
@@ -38,9 +40,13 @@ export const Erasure: React.FC = () => (
 					const hand: [number, number] = [cx + 134 * s, 1020 - 213 * s];
 					return (
 						<Stage f={f} d={d} from={{z: 1.1, cy: 600}} to={{z: 1.18, cx: 900, cy: 640}} rock={0.3}>
-							<RearDeck f={f} view="behind" fog={0.25} />
-							<FlashlightBeam from={hand} to={[960 + Math.sin(f / 9) * 70, 812]} spread={150} />
-							<Crew1 x={cx} y={1020} s={s} frame={f} prop="flashlight" arms="point" pose="walk" phase={f * 0.3} />
+							<PlateBg id="deck_behind_empty">
+								<RearDeck f={0} view="behind" fog={0.25} />
+							</PlateBg>
+							<Anim>
+								<FlashlightBeam from={hand} to={[960 + Math.sin(f / 9) * 70, 812]} spread={150} />
+								<Crew1 x={cx} y={1020} s={s} frame={f} prop="flashlight" arms="point" pose="walk" turn={0.85} phase={walkPhase(cx, s)} />
+							</Anim>
 						</Stage>
 					);
 				},
@@ -56,8 +62,13 @@ export const Erasure: React.FC = () => (
 					const hand: [number, number] = [x - 134 * s, y - 213 * s];
 					return (
 						<Stage f={f} d={d} from={{z: 1.0, cx: 900}} to={{z: 1.07, cx: 860}} rock={0.25}>
-							<Washroom f={f} openDoor={0} open={open} beam={{from: hand, to: [lerpF(f, 0, d, 500, 450), lerpF(f, 0, d, 560, 620)], spread: 140}} />
-							<Crew1 x={x} y={y} s={s} frame={f} flip prop="flashlight" arms="point" brows="worried" />
+							<PlateBg id="washroom">
+								<Washroom f={0} openDoor={0} open={1} />
+							</PlateBg>
+							<Anim>
+								<FlashlightBeam from={hand} to={[lerpF(f, 0, d, 500, 450), lerpF(f, 0, d, 560, 620)]} spread={140} />
+								<Crew1 x={x} y={y} s={s} frame={f} flip prop="flashlight" arms="point" brows="worried" />
+							</Anim>
 						</Stage>
 					);
 				},
@@ -72,8 +83,13 @@ export const Erasure: React.FC = () => (
 					const hand: [number, number] = [x + 134 * s, y - 213 * s];
 					return (
 						<Stage f={f} d={d} from={{z: 1.0, cx: 980}} to={{z: 1.08, cx: 1020}} rock={0.25}>
-							<StorageRoom f={f} beam={{from: hand, to: [lerpF(f, 0, d, 1170, 1300), lerpF(f, 0, d, 650, 590)], spread: 120}} />
-							<Crew1 x={x} y={y} s={s} frame={f} prop="flashlight" arms="point" pose={f < d * 0.6 ? 'walk' : 'stand'} phase={f * 0.3} brows="worried" />
+							<PlateBg id="storage">
+								<StorageRoom f={0} swing={0} />
+							</PlateBg>
+							<Anim>
+								<FlashlightBeam from={hand} to={[lerpF(f, 0, d, 1170, 1300), lerpF(f, 0, d, 650, 590)]} spread={120} />
+								<Crew1 x={x} y={y} s={s} frame={f} prop="flashlight" arms="point" pose={f < d * 0.6 ? 'walk' : 'stand'} turn={f < d * 0.6 ? 0.85 : 0.3} phase={walkPhase(x, s)} brows="worried" />
+							</Anim>
 						</Stage>
 					);
 				},

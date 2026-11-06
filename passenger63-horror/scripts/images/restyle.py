@@ -44,6 +44,14 @@ PLAN = ROOT / 'build' / 'restyle_plan.json'
 OUT = ROOT / 'public' / 'restyle'
 CACHE = OUT / '.cache.json'
 MANIFEST = ROOT / 'src' / 'data' / 'generated' / 'restyle.json'
+PLATE_SRC = ROOT / 'build' / 'plates'
+PLATE_OUT = ROOT / 'public' / 'plates'
+PLATE_SHOTS = ROOT / 'build' / 'plate_shots.json'
+PLATE_MANIFEST = ROOT / 'src' / 'data' / 'generated' / 'plates.json'
+PLATE_NOTE = (
+    ' This is a background set for an animated shot: keep it exactly as shown - do not add any people; '
+    'keep any seated passengers or seated figures that are already there exactly as they are.'
+)
 SCENE_FILES = {
     'hook': 'Hook', 'departure': 'Departure', 'recognition': 'Recognition', 'erasure': 'Erasure', 'hull': 'Hull',
     'navigation': 'Navigation', 'otherFerry': 'OtherFerry', 'grandmotherCalls': 'GrandmotherCalls',
@@ -145,6 +153,7 @@ def cmd_plan() -> None:
     timeline_lines = json.loads((ROOT / 'build' / 'timeline_lines.json').read_text())
     srcs = {k: (ROOT / 'src' / 'scenes' / f'{v}.tsx').read_text() for k, v in SCENE_FILES.items()}
     seen: dict[tuple, int] = {}
+    animated = set(json.loads(PLATE_SHOTS.read_text())) if PLATE_SHOTS.exists() else set()
     plan = []
     for sh in sm['shots']:
         key = (sh['scene'], sh['marker'])
@@ -164,7 +173,9 @@ def cmd_plan() -> None:
             ln = timeline_lines.get(lid)
             if ln and ln['character'] in WHO and ln['from'] < sh['to'] and ln['to'] > sh['from']:
                 talk.append({'line': lid, 'character': ln['character']})
-        if sh['id'] in FORCE_SKIP:
+        if sh['id'] in animated:
+            mode = 'animate'
+        elif sh['id'] in FORCE_SKIP:
             mode = 'skip-fixed'
         elif lum < 0.035 and sh['id'] not in FORCE_INCLUDE:
             mode = 'skip-dark'
@@ -249,6 +260,13 @@ def openai_edit(png: bytes, prompt: str) -> Image.Image:
 
 def job_list(plan: list, only: set | None) -> list:
     jobs = []
+    if PLATE_SRC.exists():
+        PLATE_OUT.mkdir(parents=True, exist_ok=True)
+        for src in sorted(PLATE_SRC.glob('*.png')):
+            if only and src.stem not in only:
+                continue
+            dark = 'red' in src.stem or 'dark' in src.stem
+            jobs.append({'shot': src.stem, 'src': src, 'out': PLATE_OUT / f'{src.stem}.jpg', 'prompt': RESTYLE_PROMPT + PLATE_NOTE + (DARK_NOTE if dark else ''), 'kind': 'restyle'})
     for p in plan:
         if only and p['id'] not in only:
             continue
@@ -402,6 +420,9 @@ def cmd_manifest() -> None:
         if frames:
             shots.append({'id': p['id'], 'from': p['from'], 'to': p['to'], 'frames': frames, 'fx': FX.get(p['marker']) or ('cctv' if p.get('cctv') else None)})
     MANIFEST.write_text(json.dumps({'shots': shots}, indent=1))
+    plates = sorted(p.stem for p in PLATE_OUT.glob('*.jpg')) if PLATE_OUT.exists() else []
+    PLATE_MANIFEST.write_text(json.dumps({'plates': plates}, indent=1))
+    print(f'manifest: {len(plates)} background plates -> {PLATE_MANIFEST.relative_to(ROOT)}')
     print(f'manifest: {len(shots)} restyled shots -> {MANIFEST.relative_to(ROOT)}')
 
 

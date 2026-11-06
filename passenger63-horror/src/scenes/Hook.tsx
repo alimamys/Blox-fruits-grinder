@@ -3,6 +3,7 @@ import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Captain, Crew1, Crew2, Daniel, Emma, OldWoman, Purser} from '../components/characters/Cast';
 import {walkPhase} from '../components/characters/StickPerson';
+import {Anim, PlateBg} from '../components/environments/Plates';
 import {FerryExterior, OceanNight} from '../components/environments/Outdoor';
 import {CabinRow, PassengerCabin, RearDeck} from '../components/environments/Interior';
 import {RoomBackdrop} from '../components/environments/Rooms';
@@ -49,10 +50,12 @@ const DeckWide: React.FC<{f: number; d: number; push?: number; crewX?: number | 
 	womanTurn = 0,
 }) => (
 	<Stage f={f} d={d} from={{z: 1, cy: 560}} to={{z: 1 + push, cy: 640, cx: 960}} rock={0.4}>
-		<RearDeck f={f} view="behind" fog={0.18}>
-			<OldWoman x={0} y={860} s={0.62} pose="sit" back={womanTurn < 0.5} turn={womanTurn >= 0.5 ? (1 - womanTurn) * 1.2 : 0} />
-		</RearDeck>
-		{crewX !== null ? <Crew1 x={crewX} y={1000} s={0.95} frame={f} pose={crewWalk ? 'walk' : 'stand'} turn={crewWalk ? 0.9 : 0.3} phase={walkPhase(crewX, 0.95)} back={false} talk={crewTalk} arms="relaxed" /> : null}
+		<PlateBg id="deck_behind_woman">
+			<RearDeck f={0} view="behind" fog={0.18}>
+				<OldWoman x={0} y={860} s={0.62} pose="sit" back={womanTurn < 0.5} turn={womanTurn >= 0.5 ? (1 - womanTurn) * 1.2 : 0} />
+			</RearDeck>
+		</PlateBg>
+		{crewX !== null ? <Anim><Crew1 x={crewX} y={1000} s={0.95} frame={f} pose={crewWalk ? 'walk' : 'stand'} turn={crewWalk ? 0.9 : 0.3} phase={walkPhase(crewX, 0.95)} back={false} talk={crewTalk} arms="relaxed" /></Anim> : null}
 	</Stage>
 );
 

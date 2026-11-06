@@ -17,6 +17,7 @@ import {FONT} from '../utils/fonts';
 import {wordsOf} from '../data/speech';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, SeaBg, speak, talkOf, TimeCard} from './common';
+import {Anim, PlateBg} from '../components/environments/Plates';
 
 /** Mechanical tally counter close-up. */
 const Clicker: React.FC<{f: number; value: number; bump?: number}> = ({f, value, bump = -99}) => {
@@ -56,18 +57,21 @@ const RowShot: React.FC<{
 	const k = easeInOut(clamp(sleep));
 	return (
 		<Stage f={f} d={d} from={{z: 1.04, cy: 560}} to={{z: 1.04 + push, cx: 940, cy: 580}} rock={0.5}>
-			<CabinRow f={f}>
+			<PlateBg id="cabinrow">
+				<CabinRow f={0} />
+			</PlateBg>
+			<Anim>
 				{/* easter egg: for two frames seat 18B is empty */}
 				{seatEmpty ? null : (
 					<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={k > 0.5 ? [-0.6, 0.4] : [0.9, -0.3]} tilt={4 * k} mouth={danielYawn ? 'o' : 'flat'} eyes={danielYawn ? 'squint' : 'dot'} {...danielTalk} />
 				)}
 				<Emma x={860 + 23 * k} y={900} s={1.15} frame={f} pose="sit" eyes={k > 0.4 ? 'closed' : 'dot'} lean={15 * k} tilt={40 * k} mouth={emmaTalk && emmaTalk.talk > 0 ? 'flat' : 'smile'} {...emmaTalk} />
-			</CabinRow>
+			</Anim>
 			{labels ? (
-				<>
+				<Anim>
 					<CrudeLabel x={480} y={330} text="EMMA" f={f} ax={800} ay={600} appear={4} />
 					<CrudeLabel x={1440} y={330} text="DANIEL" f={f} ax={1090} ay={600} appear={14} />
-				</>
+				</Anim>
 			) : null}
 		</Stage>
 	);

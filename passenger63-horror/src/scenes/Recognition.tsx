@@ -11,6 +11,7 @@ import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {FONT} from '../utils/fonts';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, SeaBg, speak, talkOf} from './common';
+import {Anim, PlateBg} from '../components/environments/Plates';
 
 const CabinBg: React.FC<{f: number}> = ({f}) => (
 	<g>
@@ -38,9 +39,12 @@ const WomanWave: React.FC<{f: number; d: number; wave: number}> = ({f, d, wave})
 	const osc = wave > 0.3 && wave < 0.7 ? Math.sin(f * 0.5) * 8 : 0;
 	return (
 		<Stage f={f} d={d} from={{z: 2.1, cx: 960, cy: 770}} to={{z: 2.25, cy: 770}}>
-			<RearDeck f={f} view="front" doorsLit={false}>
-				<OldWoman x={0} y={912} s={0.75} pose="sit" arms={{l: [10, -80], r: [10 + lift * 30, -80 + lift * 175 + osc]}} />
-			</RearDeck>
+			<PlateBg id="deck_front_dark">
+				<RearDeck f={0} view="front" doorsLit={false} />
+			</PlateBg>
+			<Anim>
+				<OldWoman x={960} y={912} s={0.75} pose="sit" arms={{l: [10, -80], r: [10 + lift * 30, -80 + lift * 175 + osc]}} />
+			</Anim>
 		</Stage>
 	);
 };
@@ -80,19 +84,26 @@ export const Recognition: React.FC = () => (
 			},
 			{at: 'narrator_050_looking', render: ({f, d}) => (
 				<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.15, cy: 520}} rock={0.5}>
-					<PassengerCabin f={f} facing="fore" seatLabels />
-					<Crew1 x={lerpF(f, 0, d, 1240, 1080)} y={1180} s={1.3} frame={f} back pose="walk" phase={f * 0.3} />
+					<PlateBg id="cabin_fore_labels">
+						<PassengerCabin f={0} facing="fore" seatLabels />
+					</PlateBg>
+					<Anim>
+						<Crew1 x={lerpF(f, 0, d, 1240, 1080)} y={lerpF(f, 0, d, 1180, 1120)} s={lerpF(f, 0, d, 1.3, 1.2)} frame={f} back pose="walk" phase={f * 0.28} />
+					</Anim>
 				</Stage>
 			)},
 			{
 				at: 'narrator_051_found_daniel',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.05}} rock={0.5}>
-						<CabinRow f={f}>
+						<PlateBg id="cabinrow">
+							<CabinRow f={0} />
+						</PlateBg>
+						<Anim>
 							<Emma x={860 + 23 * (1 - clamp((f - d * 0.5) / 12))} y={900} s={1.15} frame={f} pose="sit" eyes={f > d * 0.5 ? 'dot' : 'closed'} lean={15 * (1 - easeInOut(clamp((f - d * 0.5) / 12)))} tilt={40 * (1 - easeInOut(clamp((f - d * 0.5) / 12)))} />
 							<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" look={[0.9, -0.2]} />
 							<Crew1 x={lerpF(f, 0, d * 0.8, 1750, 1420)} y={1010} s={1.35} frame={f} pose={f < d * 0.8 ? 'walk' : 'stand'} turn={f < d * 0.8 ? -0.9 : -0.3} phase={walkPhase(lerpF(f, 0, d * 0.8, 1750, 1420), 1.35)} />
-						</CabinRow>
+						</Anim>
 					</Stage>
 				),
 			},
@@ -135,14 +146,22 @@ export const Recognition: React.FC = () => (
 				at: 'narrator_057_stood',
 				render: ({f, d}) => (
 					<Stage f={f} d={d} from={{z: 1.0}} to={{z: 1.04}} rock={0.5}>
-						<CabinRow f={f}>
+						<PlateBg id="cabinrow">
+							<CabinRow f={0} />
+						</PlateBg>
+						<Anim>
 							<Emma x={860} y={900} s={1.15} frame={f} pose="sit" arms={armTween(f, [[0, 'relaxed'], [d * 0.5, 'grabRight']], 7)} look={[1, -0.8]} brows="worried" />
-							{f < d * 0.3 ? (
-								<Daniel x={1040} y={900} s={1.15} frame={f} pose="sit" eyes="wide" look={[1, 0]} />
-							) : (
-								<Daniel x={1060} y={1010} s={1.25} frame={f} eyes="wide" look={[1, 0]} mouth="o" />
-							)}
-						</CabinRow>
+							{/* Daniel rises: the seated pose rises and fades into the standing pose */}
+							{(() => {
+								const up = easeInOut(clamp((f - d * 0.22) / 10));
+								return (
+									<>
+										{up < 1 ? <Daniel x={1040 + 10 * up} y={900 - 40 * up} s={1.15} frame={f} pose="sit" eyes="wide" look={[1, 0]} opacity={1 - up} /> : null}
+										{up > 0 ? <Daniel x={1060 - 20 * (1 - up)} y={1010 + 30 * (1 - up)} s={1.25} frame={f} eyes="wide" look={[1, 0]} mouth="o" opacity={up} /> : null}
+									</>
+								);
+							})()}
+						</Anim>
 					</Stage>
 				),
 			},

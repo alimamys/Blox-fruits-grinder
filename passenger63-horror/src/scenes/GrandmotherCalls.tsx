@@ -12,6 +12,7 @@ import {clamp, easeInOut, lerpF} from '../utils/anim';
 import {h01} from '../utils/rough';
 import {Shots, Stage, Svg} from '../utils/scene';
 import {Closeup, headY, SeaBg, speak, talkOf} from './common';
+import {Anim, PlateBg} from '../components/environments/Plates';
 
 /** Close-up backdrop: the passenger cabin. */
 const Room: React.FC = () => <RoomBackdrop f={0} variant="cabin" />;
@@ -110,9 +111,13 @@ export const GrandmotherCalls: React.FC = () => (
 					return (
 						<AbsoluteFill>
 							<Stage f={f} d={d} from={{z: 1.3, cy: 660}} to={{z: 1.34, cy: 660}} shakeAt={[hit]} shakeAmp={22} bg="#7f8b9c">
-								<Room />
+								<PlateBg id="room_cabin">
+									<Room />
+								</PlateBg>
+								<Anim>
 								<Emma x={720} y={1080} s={1.5} frame={f} arms={armTween(f, [[0, 'relaxed'], [hit - 6, 'slap'], [hit + 8, 'relaxed']], 4)} brows="angry" mouth="frown" look={[1, 0]} />
 								<Daniel x={1160} y={1080} s={1.5} frame={f} tilt={after ? lerpF(f, hit, hit + 4, 0, 18) - lerpF(f, hit + 10, hit + 30, 0, 12) : 0} eyes={after ? 'wide' : 'closed'} tears={1} brows={after ? 'raised' : 'sad'} blush={after} />
+								</Anim>
 							</Stage>
 							<Flash f={f} at={hit} dur={2} />
 						</AbsoluteFill>
