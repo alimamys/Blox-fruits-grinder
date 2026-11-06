@@ -40,6 +40,11 @@ The plan is in [`PLAN.md`](PLAN.md) and was approved:
   - The white brush strokes and the lasso are now anchored to where the man stands in the generated canvas pictures (measured on a grid), not the layout positions.
   - The final limiter is lowered to −2.5 dBFS so the AAC upload copy stays under −1.5 dBTP.
   - Lip sync is checked on the rendered film with `scripts/lipsync_sheet.py`.
+- **Final render** (`node scripts/render.mjs --concurrency=4`):
+  - `out/frame240_1080p_upload.mp4` (not committed, about 540 MB): 1920×1080, 24 fps, 15,367 frames, 10:40.3, H.264 + AAC 256k.
+  - Audio: −15.1 LUFS integrated, LRA 6.0, true peak −1.6 dBTP; the final white hold is digital silence (−91 dB).
+  - Contact sheets (one frame every 4 s) and the lip-sync sheet checked: every picture matches its line, mouths open on words and close in pauses, and the highlighted subtitle word is the one being spoken.
+  - The preview is `previews/frame240_full_720p.mp4` (two-pass, about 48 MB).
 - **YouTube:** `youtube/` holds `DESCRIPTION.txt`, `TITLE_AND_TAGS.txt` and three thumbnails (`thumbnail_A_doorway.jpg`, `thumbnail_B_frame240.jpg`, `thumbnail_C_wall.jpg`).
 
 ## Resume (in order)
