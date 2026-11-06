@@ -21,6 +21,8 @@ The plan is in [`PLAN.md`](PLAN.md) and was approved:
   - a manifest;
   - a cost ledger at `logs/image_costs.jsonl` with a hard stop at `IMAGE_BUDGET_USD=50`.
 - **Voices:** casting candidates are in `scripts/voice/fish_cast.py`; Fish tags are set per line; `closet` acoustics; `tighten.py` has a words-per-second pacing fallback.
+- **Sound effects:** 50 files built from CC0 and CC-BY recordings (`verify_sfx.py`: 0 flagged). The 6 CC-BY recordings are listed in `public/audio/sfx/CREDITS.md`.
+- **First-minute animatic:** `previews/frame240_animatic_first_minute_720p.mp4` (layouts, scratch Kokoro voices, real SFX, −15 LUFS). With scratch voices the whole cut runs 9:04; Drama 3 is expected nearer 10:00. Rendering takes about 1:45 per minute at 1080p on 4 cores.
 
 ## Blocked: needs keys
 
