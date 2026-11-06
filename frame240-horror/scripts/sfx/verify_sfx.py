@@ -21,7 +21,9 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 BED_TAIL = 0.5
 MUSIC = {'tension_pulse'}  # rhythmic: the loop starts on a downbeat, so no RMS-continuity check
 BEDS = {'ocean_ambience', 'ferry_engine', 'wind', 'low_horror_drone', 'crowd_murmur', 'bridge_electronics',
-        'emergency_hum', 'room_tone', 'daylight_ambience', 'tension_pulse'}
+        'emergency_hum', 'room_tone', 'daylight_ambience', 'tension_pulse',
+        # Frame 240
+        'computer_fan', 'rain_window', 'apartment_tone', 'light_buzz_bed', 'closet_tone'}
 
 
 def measure(path: Path) -> dict:

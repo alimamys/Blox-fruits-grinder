@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Sound design for "The 63rd Passenger" built from REAL recordings.
+"""Sound design built from REAL recordings: "Frame 240" (default build, see FRAME240 below);
+the builders written for the previous film ("The 63rd Passenger", ferry/sea) are kept and can
+still be built by name or with --all.
 
 Every file in public/audio/sfx is rebuilt from CC0 / CC-BY field recordings and
 orchestral samples (FSD50K CC0+CC-BY subset, VSCO-2 CE orchestra samples via FSD50K,
@@ -8,9 +10,9 @@ bank-sfx CC0 one-shots), layered, EQ'd, pitched and placed in real recorded spac
 squelch, mains hum) are partly synthetic by nature; see CREDITS.md.
 
 Usage:
-  .venv/bin/python scripts/sfx/build_real_sfx.py                 # build everything
-  .venv/bin/python scripts/sfx/build_real_sfx.py impact_hull wind  # just these
-  options: --out DIR (default public/audio/sfx), --list
+  .venv/bin/python scripts/sfx/build_real_sfx.py                 # build FRAME240 + write CREDITS.md
+  .venv/bin/python scripts/sfx/build_real_sfx.py pencil_scratch wall_thud  # just these
+  options: --out DIR (default public/audio/sfx), --list, --all (every registered builder)
 
 Sources are downloaded once into $P63_SFX_CACHE (default ~/.cache/p63-sfx):
 FSD50K clips individually from huggingface.co/datasets/Fhrozen/FSD50k and the
@@ -1403,6 +1405,471 @@ def breath_crying_f():
 
 
 # ============================================================================
+# FRAME 240: Mara's apartment at night (rain, a computer fan, pencil scratches)
+# Everything below is placed in a real bedroom-sized room (hand claps recorded in a bedroom /
+# landing / shrunk for the closet, CC0 toiletrolltube); see sfxlib.room().
+# ============================================================================
+APT = 'bedroom'
+
+
+def _lv(x, lufs_target: float) -> np.ndarray:
+    """Level-match a layer by loudness (not peak) so transient-heavy and steady sources mix predictably."""
+    return L.norm_lufs(x, lufs_target)
+
+
+def _grab(key, dur, ratio, r, t0=0.0, t1=None, look=2.5):
+    """A `dur`-second piece of a continuous texture recording (writing, scraping, tape), taken from
+    the loudest part of a random `look`-second window and slowed by `ratio` (<1 = lower, slower)."""
+    x = seg(src(key), t0, t1)
+    total = len(x) / SR
+    need = dur * ratio
+    w = min(total, max(look, need * 1.5))
+    a = float(r.uniform(0, max(0.0, total - w)))
+    k = loudest(seg(x, a, a + w), need)
+    if abs(ratio - 1) > 1e-3:
+        k = vari(k, ratio)
+    return fit(k, dur)
+
+
+def _pressure(x, r, rate=8.0, depth=0.55):
+    """Irregular hand pressure (stick-slip) on a stroke: a smooth random gain curve."""
+    x = st(x)
+    n = len(x)
+    k = max(3, int(n / SR * rate) + 2)
+    pts = 1.0 - depth * r.random(k) ** 1.5
+    g = np.interp(np.arange(n), np.linspace(0, n - 1, k), pts)
+    w = np.hanning(secs(0.02))
+    g = np.convolve(g, w / w.sum(), mode='same')
+    return x * g[:, None]
+
+
+def _stroke(keys_gains, dur, ratio, r, fin=0.15, fout=0.25, hp_f=250.0):
+    """One continuous drag: several recordings of the same gesture layered (each from its own random
+    region), with irregular pressure and a swell in / tail off."""
+    k = zeros(dur)
+    for key, g in keys_gains:
+        k = k + _lv(hp(_grab(key, dur, ratio, r), hp_f, 2), -24) * g
+    k = _pressure(k, r)
+    return env(k, [(0, 0.0), (dur * fin, 1.0), (dur * 0.6, 0.85), (dur * (1 - fout), 0.7), (dur, 0.0)])
+
+
+def _hit_of(key, i, thr=-50.0, gap=0.1, max_len=1.5):
+    hs = hits(src(key), thr, gap, 9, max_len)
+    return hs[min(i, len(hs) - 1)]
+
+
+# ---------------------------------------------------------------- beds
+@sfx('computer_fan', 'bed', -36.0, 30.0, "Mara's desktop PC: fan whir + faint drive hum, close, in a small room")
+def computer_fan():
+    T = 30.0
+    # the same tower fan in two different loop orders = a natural, uncorrelated stereo pair
+    front = _stereo_pair(_la('fsd:329546', T, 2401, 0.5, 1.5), _la('fsd:329546', T, 2402, 0.5, 1.5))   # CC0
+    case = circ(_la('fsd:378070', T, 2403, 0.5, 1.5, 1.0, 11.0), lambda z: decorrelate(z, 9), 0.5)  # CPU fan + HDD (CC-BY), its steady part
+    x = mix((_lv(front, -30), 0, 1.0), (_lv(case, -30), 0, 0.6), length=T)
+    # tame the sub rumble so the whir (not the floor) carries on small speakers
+    x = circ(x, lambda z: lshelf(hp(z, 45, 2), 140, -4.0), 1.0)
+    return circ(x, lambda z: reverb(lp(z, 9000), APT, wet=0.15), 2.0)
+
+
+@sfx('rain_window', 'bed', -32.0, 30.0, 'steady rain on the window, heard from inside the apartment')
+def rain_window():
+    T, XF = 30.0, 3.0
+    n = T + XF
+    a = _sb('fsd:402549', n, 2411, (5, 9))   # light rain against closed windows, indoors (CC0)
+    b = _sb('fsd:202636', n, 2412, (5, 9))   # rain against a window pane, interior (CC0)
+    c = _sb('fsd:236292', n, 2413, (5, 9))   # rain on a window: drops on the glass (CC0)
+    x = mix((_stereo_pair(_lv(a, -30), _lv(b, -30)), 0, 1.0), (decorrelate(_lv(c, -30), 9), 0, 0.45), length=n)
+    x = lp(hp(x, 70), 8500)
+    x = reverb(x, APT, wet=0.12)
+    return loop(x, T, XF)
+
+
+@sfx('apartment_tone', 'bed', -40.0, 30.0, 'quiet apartment at night: fridge from the kitchen, building air, far traffic')
+def apartment_tone():
+    T, XF = 30.0, 3.0
+    n = T + XF
+    fridge = _stereo_pair(_la('fsd:200979', T, 2421), _la('fsd:200979', T, 2422))   # fridge hum (CC0)
+    fridge = circ(fridge, lambda z: reverb(lp(z, 900), 'landing', wet=0.7, dry=0.4), 2.0)  # from the kitchen
+    fridge2 = circ(_la('fsd:413566', T, 2423), lambda z: decorrelate(lp(z, 500), 13), 1.0)  # second appliance (CC0)
+    city = lp(hp(_sb('fsd:166171', n, 2424, (2.0, 3.5), 1.0), 50), 380)    # night traffic far away, through glass (CC0)
+    air = _stereo_pair(_sb('fsd:330265', n, 2425, (5, 9)), _sb('fsd:330265', n, 2426, (5, 9)))  # building air hush (CC0)
+    air = lp(hp(air, 60), 1200)
+    noisy = loop(mix((decorrelate(_lv(city, -30), 15), 0, 0.5), (_lv(air, -30), 0, 0.35), length=n), T, XF)
+    x = mix((_lv(fridge, -30), 0, 1.0), (_lv(fridge2, -30), 0, 0.35), (noisy, 0, 1.0), length=T)
+    return circ(x, lambda z: reverb(z, APT, wet=0.2), 2.0)
+
+
+@sfx('closet_tone', 'bed', -45.0, 30.0, 'tiny storage closet: almost silent, close, dead air; the flat faintly through the door')
+def closet_tone():
+    T, XF = 30.0, 3.0
+    n = T + XF
+    still = _stereo_pair(_sb('fsd:151845', n, 2431, (1.6, 3.0), 0.8), _sb('fsd:151845', n, 2434, (1.6, 3.0), 0.8))  # near-silent air (CC0)
+    hush = lp(_sb('fsd:330265', n, 2432, (5, 9)), 420)                    # the flat's air through the door (CC0)
+    x = mix((_lv(still, -30), 0, 1.0), (decorrelate(_lv(hush, -30), 11), 0, 0.3), length=n)
+    x = loop(x, T, XF)
+    fridge = circ(_la('fsd:200979', T, 2433), lambda z: decorrelate(lp(z, 220, 4), 12), 1.0)  # through two walls
+    x = x + _lv(fridge, -30) * 0.25
+    return circ(x, lambda z: reverb(hp(z, 30), 'closet', wet=0.5), 2.0)
+
+
+@sfx('light_buzz_bed', 'bed', -38.0, 30.0, 'faint electrical buzz of a ceiling light (real 50 Hz mains buzz recordings)')
+def light_buzz_bed():
+    T = 30.0
+    e1 = _la('fsd:341609', T, 2441, 0.4, 1.2)   # "Electricity 1" (CC0): mains buzz, 50 Hz odd harmonics + sizzle
+    e4 = _la('fsd:341612', T, 2442, 0.3, 0.8)   # "Electricity 4" (CC0)
+    x = _stereo_pair(_lv(e1, -30), _lv(e4, -30), 0.8)
+    x = circ(x, lambda z: hshelf(lp(hp(z, 45), 9000), 5000, -6.0), 1.0)
+    return circ(x, lambda z: reverb(z, APT, wet=0.3, pre_ms=4), 2.0)  # a fitting overhead, in the room
+
+
+# ---------------------------------------------------------------- computer
+def _mouse_click_dry():
+    # field recording of a real mouse (CC0, Soundscape_Leuphana): press at 1.73 s, release ~150 ms later
+    x = seg(src('bank:1225'), 1.725, 2.04)
+    x = mix((x, 0, 1.0), (lp(x, 1800), 0, 0.35))  # a little desk body under the plastic
+    return fade(x, 0.002, 0.04)
+
+
+@sfx('mouse_click', 'oneshot', -6.0, 0.32, 'single crisp computer mouse click (press + release)')
+def mouse_click():
+    return fade(fit(reverb(_mouse_click_dry(), APT, wet=0.05), 0.32), 0.001, 0.03)
+
+
+@sfx('mouse_click_far', 'oneshot', -20.0, 0.8, 'the same mouse click heard from another room: muffled, roomy, quiet')
+def mouse_click_far():
+    x = lp(lp(_mouse_click_dry(), 1700, 2), 2600, 2)
+    x = peq(x, 450, 3, 1.0)
+    x = reverb(x, 'landing', wet=1.0, dry=0.35, pre_ms=6, tail=0.6)
+    return fade(fit(balance(width(x, 0.6), 0.25), 0.8), 0.002, 0.25)
+
+
+@sfx('key_tap', 'oneshot', -8.0, 0.25, 'single keyboard key press + release')
+def key_tap():
+    x = from_onset(src('bank:1224'), -45, 0.002)
+    return fade(fit(reverb(x, APT, wet=0.05, tail=0.1), 0.25), 0.001, 0.04)
+
+
+@sfx('spacebar', 'oneshot', -6.0, 0.45, 'space bar press: heavier thunk + stabiliser rattle')
+def spacebar():
+    x = seg(src('bank:1223'), 0.36, 0.8)                      # spacebar hit (CC0)
+    body = lp(from_onset(src('bank:1221'), -45, 0.002), 400)   # second spacebar: the low thunk only
+    x = hp(mix((x, 0, 1.0), (body, 0.003, 0.25)), 70, 2)
+    return fade(fit(reverb(x, APT, wet=0.05, tail=0.1), 0.45), 0.001, 0.06)
+
+
+@sfx('stylus_tap', 'oneshot', -10.0, 0.25, 'plastic stylus tip tapping a pen tablet')
+def stylus_tap():
+    x = from_onset(src('fsd:217389'), -45, 0.002)   # tapping plastic (CC0)
+    x = peq(hp(x, 250), 3500, 3, 1.2)               # small hard tip
+    return fade(fit(reverb(x, APT, wet=0.04, tail=0.1), 0.25), 0.001, 0.05)
+
+
+@sfx('pen_draw', 'oneshot', -1.0, 2.5, 'stylus dragged on a pen tablet: soft scratchy drawing strokes')
+def pen_draw():
+    r = rng(2501)
+    n = 2.5
+    buf = zeros(n + 0.5)
+    for t, d, p in [(0.0, 0.62, -0.1), (0.7, 0.48, 0.05), (1.25, 0.85, -0.05), (2.15, 0.33, 0.1)]:
+        k = _stroke([('fsd:321135', 1.0), ('fsd:321138', 0.6), ('fsd:387927', 0.35)], d, 1.0, r, 0.12, 0.2, 300)
+        place(buf, pan(k, p), t, db(float(r.uniform(-2, 0))))
+    x = lp(buf, 7000, 2)           # smooth plastic surface, softer than paper
+    x = peq(x, 1600, 2, 0.9)
+    x = reverb(x, APT, wet=0.06)
+    return fade(fit(x, n), 0.005, 0.15)
+
+
+@sfx('ui_error', 'oneshot', -10.0, 0.5, 'small soft UI error blip from the laptop speakers')
+def ui_error():
+    x = from_onset(src('bank:1181'), -45, 0.002)   # soft "deny" blip (CC0, GameAudio)
+    x = telephone_small(x)
+    return fade(fit(reverb(x, APT, wet=0.08, tail=0.15), 0.5), 0.002, 0.1)
+
+
+# ---------------------------------------------------------------- pencil in the walls
+def _pencil_wall(seed: int, n: float = 3.0) -> np.ndarray:
+    """A slow pencil dragged across a hard wall: three strokes, each continuous graphite shading +
+    close pencil detail + chalk-on-board grit, slowed (heavier, slower hand) with irregular pressure."""
+    r = rng(seed)
+    buf = zeros(n + 1)
+    for t, d, p in [(0.0, 1.05, -0.12), (1.02, 0.8, 0.08), (1.78, 1.15, -0.04)]:
+        ratio = float(r.uniform(0.72, 0.84))
+        k = _stroke([('fsd:387926', 1.0), ('fsd:387927', 0.7), ('fsd:376706', 0.45), ('fsd:398490', 0.3)], d, ratio, r, 0.18, 0.3)
+        place(buf, pan(k, p), t, db(float(r.uniform(-1.5, 0))))
+    x = hp(buf, 220, 2)
+    x = peq(x, 1100, 3.0, 1.0)    # the hollow body of the wall
+    x = peq(x, 4200, 2.0, 0.8)    # graphite bite
+    return x
+
+
+@sfx('pencil_scratch', 'oneshot', -1.0, 3.0, 'slow pencil dragged across a hard wall: dry, close, creepy')
+def pencil_scratch():
+    x = reverb(_pencil_wall(2601), 'closet', wet=0.12)   # dry: only the nearest surfaces
+    return fade(fit(x, 3.0), 0.01, 0.3)
+
+
+@sfx('pencil_scratch_far', 'oneshot', -1.0, 3.0, 'the pencil scratch heard through a closet door: muffled, low-passed, quieter')
+def pencil_scratch_far():
+    x = _pencil_wall(2601)
+    x = lp(lp(x, 1300, 2), 2400, 2)   # the door eats the graphite
+    x = peq(x, 260, 3.0, 1.0)         # door panel resonance
+    x = reverb(x, APT, wet=0.6, dry=0.6, pre_ms=5)
+    return fade(fit(width(x, 0.5), 3.0), 0.02, 0.4)
+
+
+@sfx('scratch_dry', 'oneshot', -1.0, 0.6, 'one single short dry pencil scratch (cut to black)')
+def scratch_dry():
+    r = rng(2611)
+    k = _stroke([('fsd:278159', 1.0), ('fsd:387927', 0.6), ('fsd:43674', 0.5)], 0.5, 0.85, r, 0.04, 0.45)
+    x = peq(peq(hp(k, 220, 2), 1100, 2.5, 1.0), 4200, 2.0, 0.8)
+    x = reverb(x, 'closet', wet=0.1, tail=0.1)
+    return fade(fit(x, 0.6), 0.003, 0.08)
+
+
+@sfx('scrape_long', 'oneshot', -1.0, 2.5, 'a long scrape across a wall')
+def scrape_long():
+    r = rng(2621)
+    n = 2.5
+    rock = vari(src('fsd:390858'), 0.7)                     # rock scraping (CC0), slowed: heavier
+    wood = _grab('fsd:104008', 1.3, 0.8, r)                 # wood scraping, close (CC0)
+    fric = vari(from_onset(src('bank:1431'), -45, 0.0), 0.75)  # rock movement friction (CC0)
+    grit = _stroke([('fsd:387926', 1.0), ('fsd:376706', 0.5)], 2.2, 0.8, r, 0.2, 0.3)
+    x = mix((_lv(rock, -24), 0.0, 1.0), (_lv(wood, -24), 0.35, 0.7), (_lv(fric, -24), 1.1, 0.6), (grit, 0.1, 0.35), length=n + 1)
+    x = _pressure(x, r, 5.0, 0.35)
+    x = peq(hp(x, 110, 2), 650, 2.0, 0.9)
+    x = reverb(x, APT, wet=0.15)
+    return fade(fit(x, n), 0.12, 0.45)
+
+
+# ---------------------------------------------------------------- desk / room foley
+@sfx('chair_creak', 'oneshot', -1.0, 1.3, 'office chair creak / swivel')
+def chair_creak():
+    a = lp(from_onset(src('bank:887'), -45, 0.003), 6000)            # hydraulic office chair moving (CC0)
+    b = vari(from_onset(src('fsd:117289'), -45, 0.003), 0.92)       # chair squeak (CC0)
+    c = loudest(src('fsd:371023'), 0.7)                             # squeaking chair (CC0): the creak
+    x = mix((_lv(a, -24), 0, 1.0), (_lv(b, -24), 0.22, 0.5), (fade(_lv(c, -24), 0.08, 0.25), 0.05, 0.7), length=1.6)
+    x = reverb(hp(x, 70), APT, wet=0.12)
+    return fade(fit(x, 1.3), 0.004, 0.3)
+
+
+@sfx('mug_set', 'oneshot', -1.0, 0.9, 'ceramic mug set down on a desk')
+def mug_set():
+    x = from_onset(src('fsd:272022'), -45, 0.003)   # cup set down (CC0)
+    x = mix((x, 0, 1.0), (lp(x, 300), 0, 0.4))       # the desk under it
+    return fade(fit(reverb(x, APT, wet=0.1, tail=0.3), 0.9), 0.002, 0.2)
+
+
+@sfx('keys_grab', 'oneshot', -1.0, 1.1, 'a ring of keys snatched off a desk')
+def keys_grab():
+    a = from_onset(src('bank:941'), -45, 0.003)                  # keys pickup (CC0)
+    b = from_onset(src('fsd:411179'), -45, 0.003)                # pick up key (CC0)
+    c = from_onset(src('fsd:156186'), -45, 0.003)                # keys, single jingle (CC0)
+    x = mix((a, 0.0, 1.0), (b, 0.0, 0.5), (c, 0.28, 0.35), length=1.4)
+    x = peq(lp(x, 14000), 3000, 3.0, 0.9)   # less fizz, more metal
+    return fade(fit(reverb(x, APT, wet=0.1), 1.1), 0.002, 0.25)
+
+
+@sfx('footsteps_carpet', 'oneshot', -1.0, 3.0, 'slow, soft footsteps on carpet indoors')
+def footsteps_carpet():
+    r = rng(2701)
+    n = 3.0
+    body = hits(src('fsd:371017'), -50, 0.25, 9, 1.1)            # footsteps on carpet (CC0)
+    scuff = [h for h in hits(src('fsd:271925'), -40, 0.25, 9, 0.6)]  # carpet, sneakers (CC0)
+    buf = zeros(n + 1.5)
+    for i, t in enumerate([0.02, 0.84, 1.62, 2.42]):
+        b = body[i % len(body)]
+        s = bp(scuff[int(r.integers(0, len(scuff)))], 250, 3500)
+        p = (-0.1 if i % 2 else 0.1)
+        g = db(float(r.uniform(-1.5, 0)))
+        place(buf, pan(_lv(b, -24), p), t, g)
+        place(buf, pan(_lv(s, -24), p), t + 0.01, g * 0.4)
+    x = peq(hp(buf, 45), 380, 3.0, 1.0)   # heel weight that small speakers can still hear
+    x = reverb(x, APT, wet=0.12)
+    return fade(fit(x, n), 0.004, 0.35)
+
+
+@sfx('running_carpet', 'oneshot', -1.0, 2.0, 'running on carpet indoors')
+def running_carpet():
+    r = rng(2711)
+    n = 2.0
+    heavy = [h for h in hits(src('fsd:140219'), -40, 0.15, 9, 0.5) if L.energy_above(h, 150) > 30]   # running on carpet (CC-BY)
+    soft = hits(src('fsd:272539'), -40, 0.15, 9, 0.35)                                                 # socks running (CC0)
+    buf = zeros(n + 1)
+    t, i = 0.02, 0
+    while t < n - 0.1:
+        p = (-0.12 if i % 2 else 0.12) + float(r.uniform(-0.05, 0.05))
+        g = db(float(r.uniform(-2.0, 0)) + (0 if i % 2 else -1.0))
+        place(buf, pan(_lv(heavy[int(r.integers(0, len(heavy)))], -24), p), t, g)
+        place(buf, pan(lp(_lv(soft[int(r.integers(0, len(soft)))], -24), 2500), p), t + 0.006, g * 0.6)
+        t += 0.29 + float(r.uniform(-0.025, 0.025))
+        i += 1
+    x = peq(hp(buf, 45), 420, 2.5, 1.0)
+    x = reverb(x, APT, wet=0.12)
+    return fade(fit(x, n), 0.004, 0.25)
+
+
+@sfx('flashlight_on', 'oneshot', -8.0, 0.35, 'phone flashlight switched on: small tap/click')
+def flashlight_on():
+    tap = lp(from_onset(src('fsd:217389'), -45, 0.002), 2800)                  # finger on the phone (CC0)
+    click = _hit_of('bank:1205', 0)                                             # small flashlight button (CC0)
+    x = mix((tap, 0, 0.6), (lp(click, 12000), 0.012, 0.9), length=0.45)
+    return fade(fit(reverb(x, APT, wet=0.06), 0.35), 0.001, 0.08)
+
+
+@sfx('cloth_rustle', 'oneshot', -1.0, 1.15, 'clothing rustle as someone turns')
+def cloth_rustle():
+    a = from_onset(src('bank:1681'), -50, 0.01)     # clothes rustling movement (CC0)
+    b = from_onset(src('bank:1230'), -50, 0.01)     # jacket rustle (CC0)
+    x = mix((a, 0, 1.0), (b, 0.12, 0.6), length=1.4)
+    x = lp(hp(x, 90), 9500)
+    return fade(fit(reverb(x, APT, wet=0.1), 1.15), 0.01, 0.25)
+
+
+@sfx('door_tap', 'oneshot', -1.0, 0.7, 'one gentle knuckle tap on a wooden interior door')
+def door_tap():
+    k = _hit_of('fsd:349287', 2)                  # knocking on a wooden door (CC0, Adam_N)
+    w = _hit_of('fsd:103998', 1)                  # wood knock: brighter grain (CC0)
+    x = mix((k, 0, 1.0), (hp(w, 600), 0.002, 0.25), length=0.9)
+    return fade(fit(reverb(x, APT, wet=0.15, tail=0.3), 0.7), 0.001, 0.2)
+
+
+@sfx('door_touch', 'oneshot', -1.0, 0.8, 'a very soft touch / press on a door, barely there')
+def door_touch():
+    hand = hp(_hit_of('fsd:430599', 3), 200, 2)          # a hand placed on a wall (CC0): skin on the surface
+    panel = bp(_hit_of('fsd:144943', 0), 70, 380)          # the door panel giving a little (CC0 knock, low only)
+    x = mix((_lv(hand, -24), 0.0, 1.0), (_lv(panel, -24), 0.01, 0.3), length=1.0)
+    x = lp(x, 6000)
+    return fade(fit(reverb(x, APT, wet=0.12), 0.8), 0.004, 0.25)
+
+
+@sfx('paper_drag', 'oneshot', -1.0, 2.0, 'a finger dragged slowly over paper')
+def paper_drag():
+    r = rng(2801)
+    n = 2.0
+    a = stretch(from_onset(src('fsd:82383'), -45, 0.0), 3.4, grain=0.09, seed=2802)   # paper scrape (CC0), slowed
+    b = vari(from_onset(src('bank:1871'), -45, 0.0), 0.6)                              # scratching paper (CC0), slower/lower
+    x = mix((_lv(a, -24), 0.0, 1.0), (_lv(b, -24), 0.15, 0.45), length=n + 0.5)
+    x = _pressure(x, r, 6.0, 0.4)
+    x = env(x, [(0, 0.0), (0.35, 0.9), (1.2, 1.0), (1.75, 0.6), (n, 0.0)])
+    x = lp(hp(x, 300), 9000)
+    return fade(fit(reverb(x, APT, wet=0.08), n), 0.02, 0.2)
+
+
+@sfx('paper_stretch', 'oneshot', -1.0, 2.0, 'paper stretched and strained slowly, as if something pushes through it')
+def paper_stretch():
+    r = rng(2811)
+    n = 2.0
+    crum = _grab('fsd:272015', 2.2, 0.75, r)                          # crumpling paper (CC0), slowed
+    strain = vari(from_onset(src('bank:1684'), -45, 0.0), 0.6)        # stretch (CC0)
+    pull = lp(from_onset(src('bank:1688'), -45, 0.0), 900)            # paper towel pulled: dull body (CC0)
+    x = mix((_lv(crum, -24), 0.0, 1.0), (_lv(strain, -24), 0.35, 0.7), (_lv(pull, -24), 0.9, 0.5), length=n + 0.5)
+    x = _pressure(x, r, 7.0, 0.5)
+    x = env(x, [(0, 0.0), (0.25, 0.35), (1.3, 1.0), (1.6, 0.8), (n, 0.0)])   # the strain builds
+    x = peq(hp(x, 120), 2500, 2.0, 0.9)
+    return fade(fit(reverb(x, APT, wet=0.1), n), 0.02, 0.2)
+
+
+@sfx('wet_peel', 'oneshot', -1.0, 1.8, 'slow wet peeling: tape pulled off + something wet letting go')
+def wet_peel():
+    r = rng(2821)
+    n = 1.8
+    tape = _grab('fsd:332225', n, 0.7, r)                             # tape pulled off a package (CC0), slowed
+    slime = vari(from_onset(src('bank:1539'), -45, 0.0), 0.8)         # slime (CC0)
+    squish = vari(from_onset(src('bank:799'), -45, 0.0), 0.85)        # squish (CC0)
+    squelch = from_onset(src('fsd:148972'), -45, 0.0)                 # squelch (CC0)
+    x = mix((_lv(tape, -24), 0.0, 1.0), (_lv(slime, -24), 0.25, 0.65), (_lv(squish, -24), 0.8, 0.45),
+            (_lv(squelch, -24), 1.25, 0.4), length=n + 0.5)
+    x = env(x, [(0, 0.0), (0.2, 0.7), (1.2, 1.0), (1.5, 0.7), (n, 0.0)])
+    x = peq(hp(x, 150, 2), 700, 2.0, 0.9)
+    return fade(fit(reverb(x, APT, wet=0.1), n), 0.02, 0.2)
+
+
+# ---------------------------------------------------------------- impacts
+@sfx('wall_thud', 'oneshot', -1.0, 2.0, 'a low heavy impact from inside the wall')
+def wall_thud():
+    fist = vari(_hit_of('fsd:369079', 0, max_len=2.0), 0.75)     # fist slam on a concrete wall, dry (CC0): pitched down
+    thud = vari(_hit_of('bank:1295', 0), 0.8)                     # thud (CC0): the 150-600 Hz knock you hear on laptops
+    thump = _hit_of('fsd:133282', 0)                              # thump (CC0): mid punch
+    knock = vari(_hit_of('fsd:349287', 0), 0.6)                    # door knock (CC0), lower: the stud answering
+    rattle = hp(fit(seg(src('fsd:51105'), 1.0, 3.0), 2.0), 900)   # things on a shelf answering (CC0)
+    x = mix((_lv(fist, -20), 0.0, 1.0), (_lv(thud, -20), 0.004, 1.0), (_lv(thump, -20), 0.002, 0.6),
+            (_lv(knock, -20), 0.003, 0.45), (fade(_lv(rattle, -20), 0.01, 0.8), 0.03, 0.06), length=2.6)
+    x = lp(x, 2200, 2)              # through plaster and studs
+    x = sat(x * 1.4, 1.3)           # a little harmonic weight so the low end reads on small speakers
+    x = peq(peq(x, 120, 2.0, 0.9), 420, 3.0, 0.8)
+    x = reverb(x, APT, wet=0.22)
+    return fade(fit(x, 2.0), 0.002, 0.6)
+
+
+@sfx('monitor_smash', 'oneshot', -1.0, 2.6, 'a computer monitor smashed on the floor: plastic crack + glass')
+def monitor_smash():
+    crack = _hit_of('fsd:369106', 0)                                  # plastic crack slam (CC0)
+    crack2 = _hit_of('fsd:369103', 0)                                 # plastic crack slam (CC0)
+    glass = from_onset(src('bank:910'), -45, 0.0)                     # glass shatter (CC0)
+    glass2 = from_onset(seg(src('fsd:115916'), 3.5), -40, 0.0)       # glass hits floor, breaks (CC0)
+    floor = _hit_of('fsd:133282', 0)                                  # thump on carpet (CC0)
+    body = lp(_hit_of('fsd:369079', 0, max_len=2.0), 300)             # weight
+    x = mix((_lv(crack, -20), 0.0, 1.0), (_lv(crack2, -20), 0.035, 0.6), (_lv(glass, -20), 0.008, 0.85),
+            (_lv(glass2, -20), 0.02, 0.6), (_lv(floor, -20), 0.0, 0.7), (_lv(body, -20), 0.0, 0.5), length=3.2)
+    x = reverb(hp(x, 60, 2), APT, wet=0.18)
+    return fade(fit(x, 2.6), 0.002, 0.6)
+
+
+@sfx('hand_slap', 'oneshot', -1.0, 0.9, 'a palm slapping flat against a smooth wall / door')
+def hand_slap():
+    palm = hp(_hit_of('fsd:430599', 1), 180, 2)          # hands on a wall (CC0): the skin crack
+    body = decay_env(lp(hp(_hit_of('fsd:369117', 0), 140, 2), 700), 0.02, 0.25)  # hand slap on concrete (CC0): weight
+    x = mix((norm(palm, -3), 0.0, 1.0), (norm(body, -3), 0.0, 0.2), length=1.1)   # peak-matched: the crack leads
+    x = peq(peq(x, 1800, 3.0, 1.0), 260, 2.0, 1.0)
+    return fade(fit(reverb(x, APT, wet=0.15), 0.9), 0.001, 0.25)
+
+
+# ---------------------------------------------------------------- phone
+@sfx('phone_ringback', 'oneshot', -1.0, 5.0, 'outgoing call ringback heard from the caller\'s phone: two rings')
+def phone_ringback():
+    # a real recording of a mobile phone ringing out (CC0, lauriemc); the ringback tone itself is
+    # an electronic network tone, i.e. partly synthetic by nature
+    x = seg(src('fsd:254186'), 0.45, 5.6)
+    x = lp(hp(x, 250, 2), 4500, 2)
+    x = reverb(x, APT, wet=0.05)
+    return fade(fit(x, 5.0), 0.02, 0.4)
+
+
+@sfx('phone_pickup', 'oneshot', -8.0, 0.6, 'the call connects: a soft click')
+def phone_pickup():
+    x = from_onset(src('fsd:422651'), -55, 0.002)   # phone pick up (CC0)
+    x = hp(x, 150)
+    return fade(fit(reverb(x, APT, wet=0.05, tail=0.1), 0.6), 0.001, 0.12)
+
+
+# Frame 240 (the default build): the files the timeline uses, in build order.
+FRAME240 = [
+    # beds
+    'computer_fan', 'rain_window', 'apartment_tone', 'light_buzz_bed', 'closet_tone', 'low_horror_drone', 'tension_pulse',
+    # computer / desk
+    'mouse_click', 'mouse_click_far', 'key_tap', 'spacebar', 'stylus_tap', 'pen_draw', 'ui_click', 'ui_refresh', 'ui_error',
+    'glitch', 'chair_creak', 'mug_set', 'keys_grab',
+    # the thing in the walls
+    'pencil_scratch', 'pencil_scratch_far', 'scratch_dry', 'scrape_long', 'paper_drag', 'paper_stretch', 'wet_peel',
+    'wall_thud', 'monitor_smash', 'hand_slap', 'door_tap', 'door_touch',
+    # people
+    'footsteps_carpet', 'running_carpet', 'cloth_rustle', 'breath_exhale_f',
+    # phone / light
+    'flashlight_on', 'phone_alert', 'phone_ringback', 'phone_pickup', 'light_flicker',
+    # cinematic (sparingly)
+    'bass_hit', 'boom_hit', 'sub_drop', 'stinger', 'riser_short', 'riser_long', 'whoosh_1', 'whoosh_2', 'whoosh_3',
+]
+
+# Sounds that contain an element no recording can supply (listed in CREDITS.md).
+SYNTHETIC = {
+    'light_flicker': 'mains/ballast hum partials under the real arcing recording',
+    'sub_drop': 'the falling sine sweep (under a real boom and gong)',
+    'phone_ringback': 'the ringback itself is an electronic network tone (a real recording of a phone ringing out)',
+    'phone_alert': 'notification melody played on recorded glockenspiel samples through a phone-speaker filter',
+    'ui_refresh': 'UI tick played on a recorded glockenspiel sample through a phone-speaker filter',
+}
+
+
+# ============================================================================
 # MAIN  (designs are registered above this line)
 # ============================================================================
 # Integrated-loudness targets for one-shots (LUFS). Chosen against the previous files so the
@@ -1423,6 +1890,11 @@ ONESHOT_LUFS = {
     'breath_shaky_inhale_m': -22.0, 'breath_shaky_inhale_f': -20.5, 'breath_exhale_m': -22.0, 'breath_exhale_f': -21.0,
     'breath_fast_m': -23.0, 'breath_fast_f': -22.5, 'breath_ragged_m': -24.5, 'breath_ragged_f': -23.5,
     'breath_crying_m': -26.0, 'breath_crying_f': -24.5,
+    # Frame 240 (short clicks/taps are peak-normalised to their registered level instead)
+    'pen_draw': -27.0, 'pencil_scratch': -19.0, 'pencil_scratch_far': -29.0, 'scratch_dry': -18.0, 'scrape_long': -20.0,
+    'chair_creak': -25.0, 'mug_set': -24.0, 'keys_grab': -22.0, 'footsteps_carpet': -27.0, 'running_carpet': -22.0,
+    'cloth_rustle': -27.0, 'door_tap': -23.0, 'door_touch': -34.0, 'paper_drag': -27.0, 'paper_stretch': -23.0,
+    'wet_peel': -23.0, 'wall_thud': -17.0, 'monitor_smash': -17.5, 'phone_ringback': -22.0,
 }
 
 
@@ -1476,12 +1948,12 @@ def build(names: list[str], out: Path) -> dict:
     return report
 
 
-def write_credits(out: Path) -> None:
+def write_credits(out: Path, names: list[str]) -> None:
     used = L.credits_used()
     lines = ['# Sound effect credits', '',
              'Every file in this folder is built by `scripts/sfx/build_real_sfx.py` from the recordings below',
              '(layered, filtered, pitched and convolved with recorded room impulses). Licences: CC0-1.0 (no attribution',
-             'required, listed for provenance) and CC-BY-3.0 (attribution required - keep this file with the project and',
+             'required, listed for provenance) and CC-BY (attribution required - keep this file with the project and',
              'credit these authors in the video description/credits).', '',
              'FSD50K: E. Fonseca, X. Favory, J. Pons, F. Font, X. Serra, "FSD50K: an Open Dataset of Human-Labeled Sound Events",',
              'IEEE/ACM TASLP 2022 - clips are Freesound uploads, each under its own licence (only CC0 and CC-BY clips are used).',
@@ -1489,9 +1961,10 @@ def write_credits(out: Path) -> None:
              'bank-sfx v1 (CC0 collection: Kenney.nl packs and CC0 Freesound uploads).', '']
     by = [(k, v) for k, v in sorted(L.SOURCES.items()) if k in used and v['license'].startswith('CC-BY')]
     if by:
-        lines += ['## Attribution required (CC-BY 3.0)', '']
+        lines += [f'## Attribution required (CC-BY): {len(by)} recordings', '']
         for k, v in by:
-            lines.append(f"- \"{v['title']}\" by {v['author']} - {v['url']} - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/)"
+            ver = v['license'].split('-')[-1]
+            lines.append(f"- \"{v['title']}\" by {v['author']} - {v['url']} - CC BY {ver} (https://creativecommons.org/licenses/by/{ver}/)"
                          f" - used in: {', '.join(used[k])}")
         lines.append('')
     lines += ['## All sources', '', '| source | title | author / origin | licence | used in |', '|---|---|---|---|---|']
@@ -1506,8 +1979,11 @@ def write_credits(out: Path) -> None:
             srcname = f"bank-sfx {v['file']}"
         title = v['title'].replace('|', '/')
         lines.append(f"| {srcname} | {title} | {who} | {v['license']} | {', '.join(used[k])} |")
-    lines += ['', 'Synthetic elements (no recording exists for them): mains/ballast hum partials, UI/phone tones are played on',
-              'recorded marimba/glockenspiel samples, radio squelch and static noise beds, the sine sweep in sub_drop.', '']
+    syn = [(n, SYNTHETIC[n]) for n in names if n in SYNTHETIC]
+    if syn:
+        lines += ['', 'Partly synthetic by nature (everything else is recorded sound):', '']
+        lines += [f'- {n}: {why}' for n, why in syn]
+    lines.append('')
     (out / 'CREDITS.md').write_text('\n'.join(lines))
 
 
@@ -1517,12 +1993,13 @@ def main() -> None:
     ap.add_argument('--out', default=str(OUT_DEFAULT))
     ap.add_argument('--list', action='store_true')
     ap.add_argument('--no-credits', action='store_true')
+    ap.add_argument('--all', action='store_true', help='build every registered builder (both films)')
     a = ap.parse_args()
     if a.list:
         for k, v in REGISTRY.items():
             print(f"{k:22s} {v['kind']:8s} {v['note']}")
         return
-    names = a.names or list(REGISTRY)
+    names = a.names or (list(REGISTRY) if a.all else FRAME240)
     bad = [n for n in names if n not in REGISTRY]
     if bad:
         sys.exit(f'unknown: {bad}')
@@ -1530,7 +2007,7 @@ def main() -> None:
     print(f'building {len(names)} sounds -> {out}')
     build(names, out)
     if not a.names and not a.no_credits:
-        write_credits(out)
+        write_credits(out, names)
         print(f'wrote {out / "CREDITS.md"}')
 
 

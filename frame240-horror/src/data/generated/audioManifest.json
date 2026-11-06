@@ -1,4 +1,255 @@
 {
- "generatedAt": "2026-11-06T10:42:21.672Z",
- "files": {}
+ "generatedAt": "2026-11-06T10:51:21.334Z",
+ "files": {
+  "sfx/apartment_tone.wav": {
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/bass_hit.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/boom_hit.wav": {
+   "duration": 3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/breath_exhale_f.wav": {
+   "duration": 0.85,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/chair_creak.wav": {
+   "duration": 1.3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/closet_tone.wav": {
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/cloth_rustle.wav": {
+   "duration": 1.15,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/computer_fan.wav": {
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_tap.wav": {
+   "duration": 0.7,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_touch.wav": {
+   "duration": 0.8,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/flashlight_on.wav": {
+   "duration": 0.35,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/footsteps_carpet.wav": {
+   "duration": 3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/glitch.wav": {
+   "duration": 0.55,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/hand_slap.wav": {
+   "duration": 0.9,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/key_tap.wav": {
+   "duration": 0.25,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/keys_grab.wav": {
+   "duration": 1.1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/light_buzz_bed.wav": {
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/light_flicker.wav": {
+   "duration": 0.9,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/low_horror_drone.wav": {
+   "duration": 60.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/monitor_smash.wav": {
+   "duration": 2.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/mouse_click.wav": {
+   "duration": 0.32,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/mouse_click_far.wav": {
+   "duration": 0.8,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/mug_set.wav": {
+   "duration": 0.9,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/paper_drag.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/paper_stretch.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/pen_draw.wav": {
+   "duration": 2.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/pencil_scratch.wav": {
+   "duration": 3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/pencil_scratch_far.wav": {
+   "duration": 3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/phone_alert.wav": {
+   "duration": 1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/phone_pickup.wav": {
+   "duration": 0.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/phone_ringback.wav": {
+   "duration": 5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/rain_window.wav": {
+   "duration": 30.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/riser_long.wav": {
+   "duration": 5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/riser_short.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/running_carpet.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/scrape_long.wav": {
+   "duration": 2.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/scratch_dry.wav": {
+   "duration": 0.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/spacebar.wav": {
+   "duration": 0.45,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/stinger.wav": {
+   "duration": 2.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/stylus_tap.wav": {
+   "duration": 0.25,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/sub_drop.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/tension_pulse.wav": {
+   "duration": 60.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/ui_click.wav": {
+   "duration": 0.12,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/ui_error.wav": {
+   "duration": 0.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/ui_refresh.wav": {
+   "duration": 0.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/wall_thud.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/wet_peel.wav": {
+   "duration": 1.8,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/whoosh_1.wav": {
+   "duration": 0.7,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/whoosh_2.wav": {
+   "duration": 0.95,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/whoosh_3.wav": {
+   "duration": 1.2,
+   "channels": 2,
+   "sampleRate": 48000
+  }
+ }
 }
