@@ -57,7 +57,9 @@ export const InsideWall: React.FC = () => (
 					chars: ['figure'],
 					loc: 'white',
 					mood: MOOD.white,
-					prompt: 'The white wall in flashlight. A raised human-shaped relief under the white surface, white on white, visible only by thin shadows at its edges. Keyframe 1: the shape on the left. Keyframe 2: the same shape has shifted to the right along the wall, the surface stretching.',
+					noPeople: true,
+					chainKeys: true,
+					prompt: 'An empty white wall in flashlight, filling the frame, nobody in front of it. A raised human-shaped relief under the white surface, white on white, visible only by thin shadows at its edges. Keyframe 1: the shape on the left. Keyframe 2: the same shape has shifted to the right along the wall, the surface stretching.',
 				},
 			},
 			// "Not like a person walking."
@@ -65,14 +67,14 @@ export const InsideWall: React.FC = () => (
 				id: 'iw_02_face',
 				at: 'narrator_115_not_walking',
 				render: ({f, d}) => <FaceClose f={f} d={d} b={{r: 260, cy: 470, expr: 'terrified', light: WL, gaze: [0.6, 0]}} bg="#cfcec9" />,
-				art: {kind: 'still', chars: ['mara'], loc: 'white', mood: MOOD.white, prompt: 'Close-up: Mara\'s face in her own flashlight, terrified, tracking something moving along the wall with her eyes. Pale white background.'},
+				art: {kind: 'still', chars: ['mara'], loc: 'white', mood: MOOD.white, prompt: 'Close-up: Mara\'s face lit by her PHONE\'s flashlight (she holds her smartphone, not a torch), terrified, tracking something moving along the wall with her eyes. Pale white background.'},
 			},
 			// "More like a drawing being stretched across paper."
-			{id: 'iw_03_stretched', at: 'narrator_116_stretched', render: wall('stretched', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, prompt: 'The white wall: the faint human outline is stretched sideways, long and thin and distorted, like a drawing being dragged across paper; the wall surface wrinkles slightly along it.'}},
+			{id: 'iw_03_stretched', at: 'narrator_116_stretched', render: wall('stretched', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame: the faint human outline is stretched sideways, long and thin and distorted, like a drawing being dragged across paper; the wall surface wrinkles slightly along it.'}},
 			// "The outline of a hand appeared near the ceiling." / elbow / head
-			{id: 'iw_04_hand', at: 'narrator_117_hand', render: wall('hand', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, prompt: 'High on the white wall, just below the ceiling: the outline of a long-fingered hand pressing out from inside the wall, white on white, only its edges and tiny shadows visible.'}},
-			{id: 'iw_05_elbow', at: 'narrator_118_elbow', render: wall('elbow', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, prompt: 'The white wall: the faint raised curve of a long bent elbow pushing out under the surface, white on white.'}},
-			{id: 'iw_06_head', at: 'narrator_119_head', render: wall('head', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, prompt: 'The white wall: the faint raised curve of a head, tilted and bent to one side, pressing out under the white surface; no face, just the shape and a thin shadow.'}},
+			{id: 'iw_04_hand', at: 'narrator_117_hand', render: wall('hand', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame, high up near the ceiling, just below the ceiling: the outline of a long-fingered hand pressing out from inside the wall, white on white, only its edges and tiny shadows visible.'}},
+			{id: 'iw_05_elbow', at: 'narrator_118_elbow', render: wall('elbow', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on an empty white wall filling the frame: the faint raised curve of a long bent elbow pushing out under the surface, white on white.'}},
+			{id: 'iw_06_head', at: 'narrator_119_head', render: wall('head', 0.6), art: {kind: 'still', chars: ['figure'], loc: 'white', mood: MOOD.white, move: {z0: 1.2, z1: 1.26}, prompt: 'The white wall: the faint raised curve of a head, tilted and bent to one side, pressing out under the white surface; no face, just the shape and a thin shadow.'}},
 			// "I could barely see it unless I tilted my phone flashlight sideways."
 			{
 				id: 'iw_07_rake',
@@ -88,7 +90,9 @@ export const InsideWall: React.FC = () => (
 					chars: ['figure'],
 					loc: 'white',
 					mood: MOOD.white,
-					prompt: 'The white wall. Keyframe 1: the flashlight shines straight on: the wall looks perfectly blank and flat. Keyframe 2: the flashlight is tilted sideways, raking across the surface - now the low light reveals the raised relief of a tall human body under the white, with long shadows along its edges.',
+					noPeople: true,
+					chainKeys: true,
+					prompt: 'Close on an empty white wall filling the frame, nobody in front of it. Keyframe 1: the flashlight (from off-camera) shines straight on: the wall looks perfectly blank and flat. Keyframe 2: the flashlight is tilted sideways, raking across the surface - now the low light reveals the raised relief of a tall human body under the white, with long shadows along its edges.',
 				},
 			},
 			// "And the worst part was how quietly it moved."
@@ -109,7 +113,7 @@ export const InsideWall: React.FC = () => (
 						<Hallway light="white" flat />
 					</Stage>
 				),
-				art: {kind: 'still', loc: 'white', mood: MOOD.white, prompt: 'Close on the hallway floor in the flashlight: the carpet runner drained to flat white, no footprints, no marks, nothing.'},
+				art: {kind: 'still', loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'Close on the empty hallway floor lit by a flashlight from off-camera: the carpet runner drained to flat white, no footprints, no marks, nothing. No hands, no people.'},
 			},
 			// "Just that horrible scratching sound."
 			{id: 'iw_11_scratch', at: 'narrator_124_scratching', render: wall('hand', 0.6), art: {kind: 'reuse', reuse: 'iw_04_hand', fx: 'tremble', move: {z0: 1.1, z1: 1.18}}},
@@ -152,7 +156,8 @@ export const InsideWall: React.FC = () => (
 					chars: ['mara'],
 					loc: ['workroom', 'white'],
 					mood: MOOD.drained,
-					prompt: 'In the drained white workroom. Keyframe 1: Mara lifts her monitor high above her head with both hands, screaming. Keyframe 2: she swings it down hard. Keyframe 3: the monitor lies face-up on the floor, its screen cracked into a spider web - but still glowing.',
+					chainKeys: true,
+					prompt: 'In the drained white workroom; Mara wears her BURNT-ORANGE sweatshirt in every keyframe. Keyframe 1: Mara lifts her monitor high above her head with both hands, screaming. Keyframe 2: she swings it down hard. Keyframe 3: the monitor lies face-up on the floor, its screen cracked into a spider web - but still glowing.',
 				},
 			},
 			// "But the image stayed there."
@@ -160,7 +165,7 @@ export const InsideWall: React.FC = () => (
 				id: 'iw_14_cracked_glow',
 				at: 'narrator_127_image_stayed',
 				render: ({f, d}) => <Room f={f} d={d} view="monitorAcross" screen="canvas_white" cracked />,
-				art: {kind: 'still', loc: 'workroom', fx: 'glitch', mood: 'Dark; only the cracked screen glows.', prompt: 'The smashed monitor lying on the floor, its screen cracked into a spider web, still glowing and still showing the painted hallway picture with a blank, flat white man-shaped space in it.'},
+				art: {kind: 'still', loc: ['white', 'workroom'], fx: 'glitch', mood: MOOD.drained, noPeople: true, prompt: 'In the same drained white workroom as before (pale flat walls, faint outlines): the smashed monitor lying face-up on the pale floor, its screen cracked into a spider web, still glowing and still showing the painted hallway picture with a blank, flat white man-shaped space in it. Nobody in the room.'},
 			},
 			// "The man was gone from the drawing."
 			{id: 'iw_15_gone', at: 'narrator_128_gone_from_drawing', render: ({f, d}) => <Room f={f} d={d} view="monitorAcross" screen="canvas_white" cracked />, art: {kind: 'reuse', reuse: 'iw_14_cracked_glow', move: {z0: 1.3, z1: 1.45, x0: 0.52, y0: 0.42}}},
@@ -196,9 +201,11 @@ export const InsideWall: React.FC = () => (
 					kind: 'action',
 					keys: 2,
 					chars: ['figure'],
-					loc: 'workroom',
-					mood: 'Dark room; the cracked screen glows white.',
-					prompt: 'Close on the cracked glowing screen lying on the floor. Keyframe 1: the blank white man-shaped space in the picture bulges outward through the cracked glass, as if something is pressing from inside. Keyframe 2: long thin white fingertips have pushed out through the cracks, just far enough to cast tiny shadows on the glass.',
+					loc: ['white', 'workroom'],
+					mood: MOOD.drained,
+					noPeople: true,
+					chainKeys: true,
+					prompt: 'Close on the cracked glowing monitor screen lying face-up on the pale floor of the drained white room - only the screen and the floor around it, nobody in the room. Keyframe 1: the blank white man-shaped space in the picture bulges outward through the cracked glass, as if something is pressing from inside. Keyframe 2: long thin WHITE fingertips have pushed out through the cracks, just far enough to cast tiny shadows on the glass. The tall man himself is NOT visible anywhere - only the white fingertips.',
 				},
 			},
 			// white fingers emerge, casting tiny shadows
@@ -259,7 +266,7 @@ export const InsideWall: React.FC = () => (
 						<Hallway light="white" flat noDoor />
 					</Stage>
 				),
-				art: {kind: 'still', loc: 'white', mood: MOOD.white, prompt: 'The left wall of the white hallway where the front door used to be: only a smooth blank white rectangle, the faintest outline of where a door once was, no handle, no hinges, no gap.'},
+				art: {kind: 'still', loc: 'white', mood: MOOD.white, noPeople: true, prompt: 'The empty white hallway, nobody in it: the left wall where the front door used to be: only a smooth blank white rectangle, the faintest outline of where a door once was, no handle, no hinges, no gap.'},
 			},
 			// "Just a smooth white rectangle where the entrance had been."
 			{

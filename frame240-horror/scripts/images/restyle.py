@@ -338,6 +338,8 @@ def resolve_ref(tag: str) -> tuple[Path, str]:
         return REFS / f'{name}.png', 'the LAYOUT GUIDE'
     if kind == 'pic':
         return PICS / f'{name}.jpg', 'the EXISTING FRAME to edit'
+    if kind == 'frame':
+        return OUT / name, 'the PREVIOUS KEYFRAME of this same shot (keep its camera, room, light and characters)'
     raise KeyError(tag)
 
 
@@ -450,7 +452,11 @@ def shot_prompt(p: dict, k: int) -> str:
                   'the other keyframes show the same place, camera and characters at other moments.')
     dark = ' This is a very dark frame: keep it just as dark, only the described light sources lit.' if art.get('dark') else ''
     talk = ' Her mouth is CLOSED in this frame.' if p['mode'] == 'talk' else ''
-    return (f'Draw one frame of the animated horror film "Frame 240". FRAME: {art.get("prompt", "")}{keytxt}{talk} '
+    nobody = ('THIS FRAME CONTAINS NO PEOPLE AT ALL: no man, no woman, no couple, no faces, no hands or arms - '
+              'do not copy the people of the style reference. ' if art.get('noPeople') else '')
+    chain = (' Another reference image is the PREVIOUS KEYFRAME of this same shot: keep exactly its camera, framing, room, light '
+             'and the look of everything in it; change only what this keyframe describes.' if art.get('chainKeys') and k > 0 else '')
+    return (f'{nobody}Draw one frame of the animated horror film "Frame 240". FRAME: {art.get("prompt", "")}{keytxt}{talk}{chain} '
             f'MOOD AND LIGHT: {art.get("mood", "")}{dark} '
             f'{who} SETTING: {where}')
 
@@ -540,7 +546,16 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
         if STYLE == 'stick':
             imgs, prompt = [png_bytes(frame_canvas(Image.open(j['src'])))], STICK_PROMPT
         else:
-            imgs, prompt = build_request(j['src'], j['p']['refs'], shot_prompt(j['p'], j['k']))
+            refs = list(j['p']['refs'])
+            art = j['p'].get('art') or {}
+            if art.get('chainKeys') and j['k'] > 0:
+                prev = OUT / f"{j['p']['id']}_k{j['k'] - 1}.jpg"
+                if not prev.exists():
+                    print(f'  ! {j["out"].name}: previous keyframe missing - run again after it exists')
+                    state['failed'] += 1
+                    return
+                refs.append(f'frame:{prev.name}')
+            imgs, prompt = build_request(j['src'], refs, shot_prompt(j['p'], j['k']))
         h = hashlib.sha1(b''.join(imgs) + prompt.encode()).hexdigest()
         if j['out'].exists() and cache_get().get(j['out'].name) == h:
             state['cached'] += 1
@@ -561,8 +576,11 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
         cache_put(j['out'].name, h)
         state['done'] += 1
 
-    with ThreadPoolExecutor(max_workers=workers) as ex:
-        list(ex.map(run, jobs))
+    for k in sorted({j['k'] for j in jobs}):
+        # keyframes in order, so a chained keyframe always finds the previous one
+        batch = [j for j in jobs if j['k'] == k]
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            list(ex.map(run, batch))
     print(f'frames: generated {state["done"]}, cached {state["cached"]}, failed {state["failed"]}; spent so far ${spent():.2f} of ${budget():.2f}')
 
 
@@ -592,7 +610,7 @@ def mouth_window(pid: str, shape: tuple[int, int]) -> tuple[int, int, int, int]:
     return int(W * 0.2), int(H * 0.15), int(W * 0.8), int(H * 0.9)
 
 
-def merge_mouth(base: Image.Image, var: Image.Image, win: tuple[int, int, int, int]) -> tuple[Image.Image, float]:
+def merge_mouth(base: Image.Image, var: Image.Image, win: tuple[int, int, int, int], max_box: tuple[int, int] | None = None) -> tuple[Image.Image, float]:
     """Paste the variant's mouth onto the base: the largest changed blob inside the window,
     feathered. Returns the merged image and the changed area (px) for QA."""
     import cv2
@@ -606,7 +624,10 @@ def merge_mouth(base: Image.Image, var: Image.Image, win: tuple[int, int, int, i
     n, lab, stats, _ = cv2.connectedComponentsWithStats(sub, 8)
     if n <= 1:
         return base, 0.0
-    i = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+    cand = [c for c in range(1, n) if not max_box or (stats[c, cv2.CC_STAT_WIDTH] <= max_box[0] and stats[c, cv2.CC_STAT_HEIGHT] <= max_box[1])]
+    if not cand:
+        return base, 0.0
+    i = max(cand, key=lambda c: stats[c, cv2.CC_STAT_AREA])
     mask[y0:y1, x0:x1] = (lab == i).astype(np.uint8)
     mask = cv2.dilate(mask, np.ones((15, 15), np.uint8))
     alpha = cv2.GaussianBlur(mask.astype(np.float32), (0, 0), 6)[..., None]
@@ -636,7 +657,11 @@ def cmd_mouths(only: set | None) -> None:
             raw.parent.mkdir(parents=True, exist_ok=True)
             var.save(raw, quality=95)
             cache_put('mouth_' + raw.name, h)
-        merged, area = merge_mouth(base, Image.open(raw), mouth_window(p['id'], (base.height, base.width)))
+        var_img = Image.open(raw)
+        merged, area = merge_mouth(base, var_img, mouth_window(p['id'], (base.height, base.width)))
+        if area < 200:
+            # the generated frame placed the face elsewhere than the layout: search the whole frame
+            merged, area = merge_mouth(base, var_img, (0, 0, base.width, base.height), max_box=(320, 260))
         merged.save(out, quality=92)
         report.append({'id': p['id'], 'changed_px': area})
         print(f'  {p["id"]}: mouth region {area:.0f} px' + ('  <- NO CHANGE, check' if area < 200 else ''))

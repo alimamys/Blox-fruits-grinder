@@ -42,4 +42,8 @@ export interface Art {
 	parallax?: boolean;
 	/** very dark frame - tell the model to keep it dark */
 	dark?: boolean;
+	/** the frame contains NO people (a strong rule at the top of the prompt) */
+	noPeople?: boolean;
+	/** action: each later keyframe is generated as an edit of the previous one (same camera) */
+	chainKeys?: boolean;
 }

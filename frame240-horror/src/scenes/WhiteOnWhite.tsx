@@ -227,7 +227,7 @@ export const WhiteOnWhite: React.FC = () => (
 				id: 'wh_20_eyes',
 				at: 'narrator_109_not_black',
 				render: ({f, d}) => <FaceClose f={f} d={d} b={{r: 520, cy: 560, expr: 'afraid', light: WL, gaze: [-0.6, 0]}} bg="#d9d8d3" />,
-				art: {kind: 'still', chars: ['mara'], loc: 'white', mood: MOOD.white, prompt: 'Extreme close-up of Mara\'s eyes in harsh white light, searching the wall to the side, pupils tiny, fear rising.'},
+				art: {kind: 'still', chars: ['mara'], loc: 'white', mood: MOOD.white, move: {z0: 1.32, z1: 1.38}, prompt: 'Extreme close-up of Mara\'s eyes in harsh white light, searching the wall to the side, pupils tiny, fear rising.'},
 			},
 			// "Not gray." / "White."
 			{id: 'wh_21_not_gray', at: 'narrator_110_not_gray', render: ({f, d}) => <Stage f={f} d={d}><WallClose tone="white" shape="body" outline={0.3} /></Stage>, art: {kind: 'reuse', reuse: 'wh_19_outline', move: {z0: 1.15, z1: 1.2, x0: 0.5, y0: 0.4}}},
@@ -247,7 +247,9 @@ export const WhiteOnWhite: React.FC = () => (
 					chars: ['figure'],
 					loc: 'white',
 					mood: MOOD.white,
-					prompt: 'Close on the white wall. Keyframe 1: a faint shoulder-shaped outline, white on white, flat in the wall. Keyframe 2: the white shoulder has begun to separate from the wall, standing out in relief with a thin crescent of shadow beneath it, as if peeling away from the paper.',
+					noPeople: true,
+					chainKeys: true,
+					prompt: 'Close on an empty white wall - only the wall fills the frame, nobody in front of it. Keyframe 1: a faint shoulder-shaped outline, white on white, flat in the wall. Keyframe 2: the white shoulder has begun to separate from the wall, standing out in relief with a thin crescent of shadow beneath it, as if peeling away from the paper. The shoulder belongs to the tall man painted WHITE (white on white, never dark).',
 				},
 			},
 			// MARA (breathless): "Oh God."

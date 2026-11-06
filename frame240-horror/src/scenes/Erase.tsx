@@ -108,6 +108,7 @@ export const Erase: React.FC = () => (
 					chars: ['mara'],
 					loc: ['hallway', 'workroom'],
 					mood: 'From the dark hallway towards the lit workroom.',
+					chainKeys: true,
 					prompt: 'From inside the dark hallway, looking through the doorway at Mara at her desk. Keyframe 1: her back to us, hunched over the glowing monitor. Keyframe 2: she has twisted round in her chair and looks straight towards us - towards the hallway - terrified.',
 				},
 			},

@@ -185,7 +185,7 @@ export const LastSelection: React.FC = () => (
 				id: 'ls_05_bulge',
 				at: 'bulge',
 				render: ({f, d}) => <InCloset f={f} d={d} view="door" bulge={0.8} />,
-				art: {kind: 'still', chars: ['figure'], loc: 'closet', fx: 'tremble', mood: MOOD.closet, prompt: 'The white closet door bulging inward towards the camera like stretched paper, a soft rounded swelling in the middle of the door, shadows around its edge.'},
+				art: {kind: 'still', loc: 'closet', fx: 'tremble', mood: MOOD.closet, noPeople: true, prompt: 'Close on the white closet door from inside, filling the frame: the door surface bulges inward towards the camera like stretched paper, a soft rounded swelling in the middle of the door, shadows around its edge. Nothing and nobody else is in the frame - whatever pushes is on the other side of the door, unseen.'},
 			},
 			// "Wait."
 			{id: 'ls_06_wait', at: 'mara_034_wait', render: angleF3(['mara_034_wait']), overlay: rec(78), art: {kind: 'reuse', reuse: 'ls_01_phone_terror', talk: ['mara_034_wait'], move: {z0: 1.1, z1: 1.12}}},

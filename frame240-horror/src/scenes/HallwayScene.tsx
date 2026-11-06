@@ -102,7 +102,7 @@ export const HallwayScene: React.FC = () => (
 				id: 'ha_05_doorframe',
 				at: 'narrator_063_crack',
 				render: ({f, d}) => <Hall f={f} d={d} h={{light: 'flash', flash: [960, 380], pencilCrack: true}} from={{z: 2.6, cx: 960, cy: 430}} />,
-				art: {kind: 'still', loc: 'hallway', mood: MOOD.flash, prompt: 'The flashlight finds the closed bedroom door at the end of the hallway and the wall above its frame.', dark: true},
+				art: {kind: 'still', loc: 'hallway', mood: MOOD.flash, noPeople: true, prompt: 'A white flashlight beam (from off-camera) finds the closed bedroom door at the end of the empty hallway and the wall above its frame. Nobody is in the frame.', dark: true},
 			},
 			// "It was a thin, black line. Almost like a pencil mark."
 			{
@@ -206,13 +206,16 @@ export const HallwayScene: React.FC = () => (
 						<WallClose tone="flash" fingertip />
 					</Stage>
 				),
-				overlay: ({f, d}) => <PencilTrail from={[700, 640]} to={[1180, 668]} t={prog(f, d, 0.05, 0.9)} width={6} />,
+				// the line grows along the wall up to her fingertip (measured in the generated frame:
+				// fingertip at 500,400 -> 472,392 on screen at the locked 1.06 zoom)
+				overlay: ({f, d}) => <PencilTrail from={[150, 322]} to={[468, 392]} t={prog(f, d, 0.05, 0.9)} width={5} />,
 				art: {
 					kind: 'still',
 					chars: ['mara'],
 					loc: 'hallway',
 					mood: MOOD.flash,
 					prompt: 'Close-up: Mara\'s index fingertip pressed against the flat wall in the flashlight, her hand coming in from the right. The wall is clean (no line yet). Natural hand, five fingers.',
+					move: {z0: 1.06, z1: 1.06, x0: 0.5, y0: 0.5},
 				},
 			},
 			// "Then, from behind the bedroom door, I heard a sound."
