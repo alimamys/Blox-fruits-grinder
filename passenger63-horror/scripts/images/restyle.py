@@ -199,6 +199,7 @@ def cmd_plan() -> None:
 # generation
 # ---------------------------------------------------------------------------
 _lock = threading.Lock()
+STOP = threading.Event()
 
 
 def load_env() -> None:
@@ -244,6 +245,9 @@ def openai_edit(png: bytes, prompt: str) -> Image.Image:
             return out.crop((0, 80, 1536, 944)).resize((1920, 1080), Image.LANCZOS)
         except urllib.error.HTTPError as e:
             msg = e.read()[:300].decode(errors='replace')
+            if 'credit_balance' in msg or 'insufficient_quota' in msg or 'billing' in msg:
+                STOP.set()  # out of credit: no point retrying, stop the whole run
+                raise RuntimeError(f'HTTP {e.code}: {msg}') from e
             if e.code in (429, 500, 502, 503, 504) and attempt < 6:
                 time.sleep(delay)
                 delay = min(120, delay * 2)
@@ -294,6 +298,8 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
     state = {'done': 0, 'failed': 0, 'skipped': 0}
 
     def run(j: dict) -> None:
+        if STOP.is_set():
+            return
         if not j['src'].exists():
             state['failed'] += 1
             return
