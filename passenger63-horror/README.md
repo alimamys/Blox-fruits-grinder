@@ -161,7 +161,16 @@ Sound effects and ambience automation use the same markers, for example `{sound:
 
 ### Which TTS provider is configured
 
-**[Fish Audio](https://fish.audio)** voices 316 of the 331 lines in `public/audio`, using the `s2.1-pro-free` model through `FishProvider` in `scripts/voice/providers.py`. Each character has a Fish voice model (`fish.referenceId` in `src/data/voiceConfig.ts`). The line's emotion is passed as a bracketed tag such as `[whispering]` or `[terrified]`. The narrator runs at speed 1.12, which keeps the short edit at about 10½ minutes. To audition other Fish voices for a character, use `scripts/voice/fish_cast.py`.
+**[Fish Audio](https://fish.audio)** voices 316 of the 331 lines in `public/audio`, through `FishProvider` in `scripts/voice/providers.py`. The 217 lines used in the 10‑minute edit are performed by **Drama 3**, Fish's most expressive model. It is paid from Fish API credit (about $10 per million characters, so roughly $0.08 for the whole edit). The lines that appear only in the full edit use the free `s2.1-pro-free` model.
+
+```bash
+FISH_MODEL=drama-3 npm run generate-voices -- --provider fish --only "$(cat build/short_edit_lines.txt)" --force --skip-crowd-bed --max-chars 9000
+.venv/bin/python scripts/voice/tighten.py --ids build/short_edit_lines.txt   # restore the edit's pacing
+node scripts/retime.mjs
+.venv-chatterbox/bin/python scripts/voice/speech_timing.py --only "$(cat build/short_edit_lines.txt)"
+```
+
+Drama 3 runs slower than the cut was built for: it leaves longer silences and pauses, and it ignores the narrator's speed setting. `tighten.py` keeps the performance and restores the pacing. It trims dead air, caps pauses inside a line at about 0.45 s, and where a line is still slower than its earlier take, time-stretches it with Rubber Band (pitch kept, at most 15 %). It always works from the untouched takes in `build/audio_drama3_raw/`. Each character has a Fish voice model (`fish.referenceId` in `src/data/voiceConfig.ts`). The line's emotion is passed as a bracketed tag such as `[whispering]` or `[terrified]`. The narrator runs at speed 1.12, which keeps the short edit at about 10½ minutes. To audition other Fish voices for a character, use `scripts/voice/fish_cast.py`.
 
 The 15 crowd and passenger murmurs are still **[Chatterbox](https://github.com/resemble-ai/chatterbox)** takes (Resemble AI, MIT licence, local). Every take was transcribed with Whisper and compared with the script (see [Voice QA](#voice-qa)). Flagged lines were re-rolled best-of-3.
 

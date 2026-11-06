@@ -1,8 +1,9 @@
 {
  "crew_002_maam": 4,
  "crew_004_who": 1,
+ "daniel_005_impossible": 1,
  "emma_013_daniel_2": 1,
- "narrator_052_laughed": 3,
+ "narrator_052_laughed": 4,
  "narrator_060_sick": 1,
  "narrator_069_flickered": 3,
  "narrator_115_womans_voice": 2,
@@ -18,6 +19,6 @@
  "pa_001_passenger37": 2,
  "pa_006_daniel_2": 2,
  "pa_007_daniel_3": 1,
- "pa_008_daniel_4": 1,
- "police_002_maam": 2
+ "pa_008_daniel_4": 2,
+ "police_002_maam": 3
 }

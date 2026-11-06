@@ -1,8 +1,8 @@
 {
- "generatedAt": "2026-11-05T20:21:26.255Z",
+ "generatedAt": "2026-11-06T06:59:05.472Z",
  "files": {
   "captain/captain_001_radio_call.wav": {
-   "duration": 5.69,
+   "duration": 4.63,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -14,55 +14,55 @@
    "provider": "fish"
   },
   "captain/captain_003_lost_nav.wav": {
-   "duration": 5.101,
+   "duration": 4.04,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "captain/captain_004_ns8.wav": {
-   "duration": 1.681,
+   "duration": 1.643,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "captain/captain_005_negative.wav": {
-   "duration": 3.049,
+   "duration": 2.96,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "crew/crew2_001_count.wav": {
-   "duration": 4.322,
+   "duration": 4.409,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "crew/crew_001_ticket.wav": {
-   "duration": 1.97,
+   "duration": 1.9,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "crew/crew_002_maam.wav": {
-   "duration": 0.75,
+   "duration": 0.61,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "crew/crew_003_why.wav": {
-   "duration": 1.645,
+   "duration": 1.54,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "crew/crew_004_who.wav": {
-   "duration": 0.716,
+   "duration": 0.59,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "crew/crew_005_sir.wav": {
-   "duration": 3.456,
+   "duration": 3.19,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -158,193 +158,193 @@
    "provider": "chatterbox"
   },
   "daniel/daniel_001_go_sleep.wav": {
-   "duration": 2.334,
+   "duration": 2.391,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "daniel/daniel_002_no.wav": {
-   "duration": 1.83,
+   "duration": 2.487,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "daniel/daniel_003_grandmother.wav": {
-   "duration": 2.031,
+   "duration": 1.93,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "daniel/daniel_004_died.wav": {
-   "duration": 2.173,
+   "duration": 2.443,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "daniel/daniel_005_impossible.wav": {
-   "duration": 1.378,
+   "duration": 1.383,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "daniel/daniel_006_used_to_say.wav": {
-   "duration": 1.32,
+   "duration": 2.8,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "daniel/daniel_007_exactly.wav": {
-   "duration": 1.685,
+   "duration": 2.278,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "daniel/daniel_008_i_know.wav": {
-   "duration": 1.302,
+   "duration": 1.148,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_001_wake_me.wav": {
-   "duration": 2.175,
+   "duration": 2.252,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_002_daniel.wav": {
-   "duration": 0.902,
+   "duration": 0.817,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_003_what_is_it.wav": {
-   "duration": 1.227,
+   "duration": 0.86,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_004_so.wav": {
-   "duration": 0.995,
+   "duration": 0.85,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_005_no.wav": {
-   "duration": 1.227,
+   "duration": 0.73,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_006_not_funny.wav": {
-   "duration": 1.374,
+   "duration": 1.357,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_007_no.wav": {
-   "duration": 0.995,
+   "duration": 1.087,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_008_where.wav": {
-   "duration": 1.138,
+   "duration": 1.026,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_009_stop.wav": {
-   "duration": 1.18,
+   "duration": 0.95,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_010_what.wav": {
-   "duration": 0.88,
+   "duration": 1.017,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_011_shes_dead.wav": {
-   "duration": 2.016,
+   "duration": 2.2,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_012_scream.wav": {
-   "duration": 0.995,
+   "duration": 0.913,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_013_daniel_2.wav": {
-   "duration": 1.227,
+   "duration": 1.03,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_014_husband.wav": {
-   "duration": 1.645,
+   "duration": 2.191,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "emma/emma_015_husbands.wav": {
-   "duration": 1.366,
+   "duration": 1.504,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "harbor/harbor_001_go_ahead.wav": {
-   "duration": 3.403,
+   "duration": 2.805,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "harbor/harbor_002_confirm.wav": {
-   "duration": 4.222,
+   "duration": 4.353,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "harbor/harbor_003_captain.wav": {
-   "duration": 1.12,
+   "duration": 1.152,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "harbor/harbor_004_docked.wav": {
-   "duration": 4.097,
+   "duration": 4.147,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "harbor/harbor_005_looking.wav": {
-   "duration": 3.311,
+   "duration": 3.416,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_001_hook.wav": {
-   "duration": 6.706,
+   "duration": 6.841,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_002_sixty_three.wav": {
-   "duration": 1.129,
+   "duration": 1.154,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_003_manifest.wav": {
-   "duration": 1.982,
+   "duration": 1.85,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_004_sixty_two_names.wav": {
-   "duration": 1.377,
+   "duration": 1.522,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -368,55 +368,55 @@
    "provider": "fish"
   },
   "narrator/narrator_008_one_conclusion.wav": {
-   "duration": 1.741,
+   "duration": 1.93,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_009_someone.wav": {
-   "duration": 3.368,
+   "duration": 3.504,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_010_found_her.wav": {
-   "duration": 2.966,
+   "duration": 2.93,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_011_old_woman.wav": {
-   "duration": 6.095,
+   "duration": 6.409,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_012_approached.wav": {
-   "duration": 1.654,
+   "duration": 1.57,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_013_didnt_move.wav": {
-   "duration": 0.999,
+   "duration": 1.062,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_014_turned.wav": {
-   "duration": 2.416,
+   "duration": 2.574,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_015_pale.wav": {
-   "duration": 3.599,
+   "duration": 3.791,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_016_smiled.wav": {
-   "duration": 2.083,
+   "duration": 2.02,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -434,7 +434,7 @@
    "provider": "fish"
   },
   "narrator/narrator_019_smile_gone.wav": {
-   "duration": 1.513,
+   "duration": 1.47,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -446,7 +446,7 @@
    "provider": "fish"
   },
   "narrator/narrator_021_daniel_clarke.wav": {
-   "duration": 4.979,
+   "duration": 4.679,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -464,13 +464,13 @@
    "provider": "fish"
   },
   "narrator/narrator_024_then_she_said.wav": {
-   "duration": 1.197,
+   "duration": 0.96,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_025_left.wav": {
-   "duration": 3.949,
+   "duration": 4.1,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -512,7 +512,7 @@
    "provider": "fish"
   },
   "narrator/narrator_032_window.wav": {
-   "duration": 3.934,
+   "duration": 4.111,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -578,19 +578,19 @@
    "provider": "fish"
   },
   "narrator/narrator_043_noticed.wav": {
-   "duration": 1.696,
+   "duration": 1.6,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_044_bench.wav": {
-   "duration": 4.277,
+   "duration": 3.95,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_045_nobody_remembered.wav": {
-   "duration": 2.013,
+   "duration": 2.089,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -620,31 +620,31 @@
    "provider": "fish"
   },
   "narrator/narrator_050_looking.wav": {
-   "duration": 2.31,
+   "duration": 2.35,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_051_found_daniel.wav": {
-   "duration": 2.353,
+   "duration": 2.678,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_052_laughed.wav": {
-   "duration": 1,
+   "duration": 1.07,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_053_saw_her.wav": {
-   "duration": 1.472,
+   "duration": 1.565,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_054_face_changed.wav": {
-   "duration": 3.054,
+   "duration": 3.19,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -656,13 +656,13 @@
    "provider": "fish"
   },
   "narrator/narrator_056_wave.wav": {
-   "duration": 4.129,
+   "duration": 4.254,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_057_stood.wav": {
-   "duration": 2.558,
+   "duration": 2.5,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -710,7 +710,7 @@
    "provider": "fish"
   },
   "narrator/narrator_065_only_difference.wav": {
-   "duration": 5.656,
+   "duration": 5.839,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -722,73 +722,73 @@
    "provider": "fish"
   },
   "narrator/narrator_067_step.wav": {
-   "duration": 3.771,
+   "duration": 3.9,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_068_smiled.wav": {
-   "duration": 1.772,
+   "duration": 1.845,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_069_flickered.wav": {
-   "duration": 2.31,
+   "duration": 2.843,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_070_once_twice.wav": {
-   "duration": 1.36,
+   "duration": 1.6,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_071_darkness.wav": {
-   "duration": 0.9,
+   "duration": 0.918,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_072_screamed.wav": {
-   "duration": 1.201,
+   "duration": 1.383,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_073_three_seconds.wav": {
-   "duration": 2.574,
+   "duration": 2.666,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_074_bench_empty.wav": {
-   "duration": 1.441,
+   "duration": 1.44,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_075_gone.wav": {
-   "duration": 1.472,
+   "duration": 1.36,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_076_rear_deck.wav": {
-   "duration": 2.511,
+   "duration": 2.557,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_077_bathrooms.wav": {
-   "duration": 1.78,
+   "duration": 1.848,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_078_storage.wav": {
-   "duration": 1.861,
+   "duration": 1.952,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -800,43 +800,43 @@
    "provider": "fish"
   },
   "narrator/narrator_080_another_count.wav": {
-   "duration": 2.229,
+   "duration": 2.335,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_081_sixty_two.wav": {
-   "duration": 1.024,
+   "duration": 1.098,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_082_relaxed.wav": {
-   "duration": 1.16,
+   "duration": 1.357,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_083_purser.wav": {
-   "duration": 4.464,
+   "duration": 4.656,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_084_sixty_one.wav": {
-   "duration": 2.41,
+   "duration": 3.2,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_085_daniel_gone.wav": {
-   "duration": 1.858,
+   "duration": 1.983,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_086_not_physically.wav": {
-   "duration": 3.176,
+   "duration": 3.25,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -866,13 +866,13 @@
    "provider": "fish"
   },
   "narrator/narrator_091_reservation.wav": {
-   "duration": 3.614,
+   "duration": 3.677,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_092_one_passenger.wav": {
-   "duration": 2.616,
+   "duration": 2.48,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -890,7 +890,7 @@
    "provider": "fish"
   },
   "narrator/narrator_095_license.wav": {
-   "duration": 2.446,
+   "duration": 2.35,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -902,25 +902,25 @@
    "provider": "fish"
   },
   "narrator/narrator_097_photo.wav": {
-   "duration": 1.605,
+   "duration": 1.93,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_098_name_said.wav": {
-   "duration": 0.999,
+   "duration": 1.04,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_099_unknown.wav": {
-   "duration": 0.808,
+   "duration": 0.86,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_100_grabbed.wav": {
-   "duration": 2.31,
+   "duration": 2.324,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -932,37 +932,37 @@
    "provider": "fish"
   },
   "narrator/narrator_102_nobody_laughing.wav": {
-   "duration": 1.317,
+   "duration": 1.661,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_103_hit.wav": {
-   "duration": 2.638,
+   "duration": 2.66,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_104_stopped.wav": {
-   "duration": 1.109,
+   "duration": 1.205,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_105_another.wav": {
-   "duration": 1.112,
+   "duration": 1.16,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_106_then_another.wav": {
-   "duration": 0.867,
+   "duration": 0.81,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_107_beneath.wav": {
-   "duration": 1.129,
+   "duration": 1.218,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -980,25 +980,25 @@
    "provider": "fish"
   },
   "narrator/narrator_110_knocking.wav": {
-   "duration": 1.531,
+   "duration": 1.939,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_111_not_one.wav": {
-   "duration": 3.603,
+   "duration": 3.728,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_112_moved_away.wav": {
-   "duration": 2.018,
+   "duration": 2.122,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_113_screamed.wav": {
-   "duration": 1.147,
+   "duration": 1.26,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1010,7 +1010,7 @@
    "provider": "fish"
   },
   "narrator/narrator_115_womans_voice.wav": {
-   "duration": 1.989,
+   "duration": 2.078,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1022,7 +1022,7 @@
    "provider": "fish"
   },
   "narrator/narrator_117_grabbed.wav": {
-   "duration": 1.064,
+   "duration": 1.14,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1040,25 +1040,25 @@
    "provider": "fish"
   },
   "narrator/narrator_120_turned_off.wav": {
-   "duration": 3.636,
+   "duration": 3.8,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_121_cable.wav": {
-   "duration": 2.601,
+   "duration": 2.957,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_122_every_speaker.wav": {
-   "duration": 5.534,
+   "duration": 5.669,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_123_phones.wav": {
-   "duration": 2.473,
+   "duration": 2.552,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1070,13 +1070,13 @@
    "provider": "fish"
   },
   "narrator/narrator_125_backed_away.wav": {
-   "duration": 2.396,
+   "duration": 2.44,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_126_engines.wav": {
-   "duration": 2.104,
+   "duration": 2.18,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1088,13 +1088,13 @@
    "provider": "fish"
   },
   "narrator/narrator_128_nav_blank.wav": {
-   "duration": 1.982,
+   "duration": 2.348,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_129_gps.wav": {
-   "duration": 3.76,
+   "duration": 4.043,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1106,19 +1106,19 @@
    "provider": "fish"
   },
   "narrator/narrator_131_no_coast.wav": {
-   "duration": 3.335,
+   "duration": 3.426,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_132_ten_minutes.wav": {
-   "duration": 2.244,
+   "duration": 2.326,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_133_instead.wav": {
-   "duration": 3.589,
+   "duration": 3.948,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1172,7 +1172,7 @@
    "provider": "fish"
   },
   "narrator/narrator_142_photograph.wav": {
-   "duration": 3.386,
+   "duration": 3.477,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1184,19 +1184,19 @@
    "provider": "fish"
   },
   "narrator/narrator_144_north_star.wav": {
-   "duration": 4.465,
+   "duration": 4.65,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_145_timestamp.wav": {
-   "duration": 2.599,
+   "duration": 2.685,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_146_current_time.wav": {
-   "duration": 2.558,
+   "duration": 2.611,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1208,7 +1208,7 @@
    "provider": "fish"
   },
   "narrator/narrator_148_there_he_was.wav": {
-   "duration": 5.328,
+   "duration": 5.456,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1232,13 +1232,13 @@
    "provider": "fish"
   },
   "narrator/narrator_152_alone.wav": {
-   "duration": 2.368,
+   "duration": 2.487,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_153_missing.wav": {
-   "duration": 1.424,
+   "duration": 1.38,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1250,25 +1250,25 @@
    "provider": "fish"
   },
   "narrator/narrator_155_end_gangway.wav": {
-   "duration": 3.855,
+   "duration": 3.955,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_156_watching.wav": {
-   "duration": 2.554,
+   "duration": 2.67,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_157_turned.wav": {
-   "duration": 4.196,
+   "duration": 4.06,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_158_didnt_answer.wav": {
-   "duration": 2.468,
+   "duration": 2.557,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1280,19 +1280,19 @@
    "provider": "fish"
   },
   "narrator/narrator_160_quiet.wav": {
-   "duration": 2.371,
+   "duration": 2.39,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_161_walking.wav": {
-   "duration": 2.695,
+   "duration": 2.801,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_162_looked_at_her.wav": {
-   "duration": 2.776,
+   "duration": 2.78,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1310,7 +1310,7 @@
    "provider": "fish"
   },
   "narrator/narrator_165_covered.wav": {
-   "duration": 1.327,
+   "duration": 1.351,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1328,49 +1328,49 @@
    "provider": "fish"
   },
   "narrator/narrator_168_slapped.wav": {
-   "duration": 1.983,
+   "duration": 2.019,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_169_blinked.wav": {
-   "duration": 3.356,
+   "duration": 3.514,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_170_screamed.wav": {
-   "duration": 2.303,
+   "duration": 2.455,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_171_back.wav": {
-   "duration": 3.061,
+   "duration": 3.202,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_172_not_alone.wav": {
-   "duration": 2.188,
+   "duration": 2.322,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_173_people.wav": {
-   "duration": 1.765,
+   "duration": 1.862,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_174_dozens.wav": {
-   "duration": 2.508,
+   "duration": 2.748,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_175_not_swimming.wav": {
-   "duration": 3.358,
+   "duration": 3.548,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1388,19 +1388,19 @@
    "provider": "fish"
   },
   "narrator/narrator_178_raised.wav": {
-   "duration": 2.036,
+   "duration": 1.87,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_179_another.wav": {
-   "duration": 1.221,
+   "duration": 0.97,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_180_all.wav": {
-   "duration": 2.557,
+   "duration": 1.77,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1412,7 +1412,7 @@
    "provider": "fish"
   },
   "narrator/narrator_182_smiled.wav": {
-   "duration": 1.327,
+   "duration": 1.386,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1424,73 +1424,73 @@
    "provider": "fish"
   },
   "narrator/narrator_184_lights_died.wav": {
-   "duration": 1.414,
+   "duration": 1.635,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_185_darkness.wav": {
-   "duration": 1.191,
+   "duration": 1.265,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_186_screamed.wav": {
-   "duration": 1.273,
+   "duration": 1.325,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_187_held.wav": {
-   "duration": 2.776,
+   "duration": 2.64,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_188_struck.wav": {
-   "duration": 3.003,
+   "duration": 3.002,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_189_another_impact.wav": {
-   "duration": 1.361,
+   "duration": 1.583,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_190_climbing.wav": {
-   "duration": 1.873,
+   "duration": 1.953,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_191_against.wav": {
-   "duration": 4.013,
+   "duration": 4.093,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_192_ran.wav": {
-   "duration": 0.887,
+   "duration": 0.957,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_193_emergency.wav": {
-   "duration": 2.759,
+   "duration": 2.76,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_194_gone.wav": {
-   "duration": 1.311,
+   "duration": 1.583,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_195_looked_down.wav": {
-   "duration": 2.47,
+   "duration": 2.593,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1502,37 +1502,37 @@
    "provider": "fish"
   },
   "narrator/narrator_197_no_answer.wav": {
-   "duration": 1.052,
+   "duration": 1.13,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_198_railing.wav": {
-   "duration": 1.521,
+   "duration": 1.5,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_199_gone_too.wav": {
-   "duration": 1.982,
+   "duration": 1.98,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_200_ocean_empty.wav": {
-   "duration": 5.071,
+   "duration": 5.522,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_201_nothing.wav": {
-   "duration": 0.716,
+   "duration": 0.757,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_202_engines.wav": {
-   "duration": 2.654,
+   "duration": 2.773,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1550,13 +1550,13 @@
    "provider": "fish"
   },
   "narrator/narrator_205_harbor_lights.wav": {
-   "duration": 2.918,
+   "duration": 3.078,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_206_police_waiting.wav": {
-   "duration": 2.432,
+   "duration": 2.37,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1586,19 +1586,19 @@
    "provider": "fish"
   },
   "narrator/narrator_211_photographs.wav": {
-   "duration": 5.425,
+   "duration": 5.568,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_212_every.wav": {
-   "duration": 2.55,
+   "duration": 3.026,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_213_wedding.wav": {
-   "duration": 3.482,
+   "duration": 3.633,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1610,7 +1610,7 @@
    "provider": "fish"
   },
   "narrator/narrator_215_christmas.wav": {
-   "duration": 2.971,
+   "duration": 3.209,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1628,13 +1628,13 @@
    "provider": "fish"
   },
   "narrator/narrator_218_record.wav": {
-   "duration": 4.582,
+   "duration": 4.689,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_219_ring.wav": {
-   "duration": 2.622,
+   "duration": 2.594,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1646,73 +1646,73 @@
    "provider": "fish"
   },
   "narrator/narrator_221_turned_ring.wav": {
-   "duration": 3.633,
+   "duration": 3.48,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_222_expected.wav": {
-   "duration": 3.157,
+   "duration": 3.286,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_223_instead.wav": {
-   "duration": 1.097,
+   "duration": 1.147,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_224_37.wav": {
-   "duration": 1.036,
+   "duration": 1.01,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_225_security.wav": {
-   "duration": 3.294,
+   "duration": 3.453,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_226_most.wav": {
-   "duration": 4.605,
+   "duration": 4.758,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_227_talking.wav": {
-   "duration": 4.314,
+   "duration": 4.409,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_228_1217.wav": {
-   "duration": 3.59,
+   "duration": 3.759,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_229_one_frame.wav": {
-   "duration": 2.187,
+   "duration": 2.245,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_230_appeared.wav": {
-   "duration": 3.746,
+   "duration": 3.983,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_231_behind.wav": {
-   "duration": 4.756,
+   "duration": 4.931,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_232_next_frame.wav": {
-   "duration": 2.5,
+   "duration": 2.6,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1742,19 +1742,19 @@
    "provider": "fish"
   },
   "narrator/narrator_237_year.wav": {
-   "duration": 2.349,
+   "duration": 2.539,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_238_afternoon.wav": {
-   "duration": 4.51,
+   "duration": 4.719,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_239_showed.wav": {
-   "duration": 4.19,
+   "duration": 4.25,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1766,19 +1766,19 @@
    "provider": "fish"
   },
   "narrator/narrator_241_zoomed.wav": {
-   "duration": 1.695,
+   "duration": 1.53,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_242_very_back.wav": {
-   "duration": 4.523,
+   "duration": 4.603,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_243_beside.wav": {
-   "duration": 2.463,
+   "duration": 2.49,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1790,25 +1790,25 @@
    "provider": "fish"
   },
   "narrator/narrator_245_staring.wav": {
-   "duration": 4.668,
+   "duration": 4.887,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_246_message.wav": {
-   "duration": 1.236,
+   "duration": 1.21,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_247_dont_let.wav": {
-   "duration": 1.467,
+   "duration": 1.607,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_248_rang.wav": {
-   "duration": 2.289,
+   "duration": 2.379,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
@@ -1832,157 +1832,157 @@
    "provider": "fish"
   },
   "narrator/narrator_252_switched_off.wav": {
-   "duration": 1.547,
+   "duration": 1.6,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_253_black.wav": {
-   "duration": 1.608,
+   "duration": 1.685,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_254_several.wav": {
-   "duration": 2.369,
+   "duration": 2.458,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_255_turned_on.wav": {
-   "duration": 2.308,
+   "duration": 2.22,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_256_no_call.wav": {
-   "duration": 3.552,
+   "duration": 3.739,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "narrator/narrator_257_behind.wav": {
-   "duration": 4.487,
+   "duration": 4.599,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_001_not_passenger.wav": {
-   "duration": 1.699,
+   "duration": 1.72,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_002_waiting.wav": {
-   "duration": 2.885,
+   "duration": 3.017,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_003_passenger37.wav": {
-   "duration": 1.811,
+   "duration": 1.91,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_004_shouldnt.wav": {
-   "duration": 1.775,
+   "duration": 1.991,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_005_daniel.wav": {
-   "duration": 1.539,
+   "duration": 1.58,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_006_daniel_2.wav": {
-   "duration": 1.595,
+   "duration": 1.682,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_007_sweetheart.wav": {
-   "duration": 1.539,
+   "duration": 1.41,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_008_see.wav": {
-   "duration": 0.567,
+   "duration": 0.685,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_009_everyone.wav": {
-   "duration": 1.675,
+   "duration": 1.974,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/oldwoman_final_64.wav": {
-   "duration": 1.574,
+   "duration": 1.478,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/pa_006_daniel_2.wav": {
-   "duration": 1.256,
+   "duration": 1,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/pa_007_daniel_3.wav": {
-   "duration": 1.236,
+   "duration": 1.025,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "old-woman/pa_008_daniel_4.wav": {
-   "duration": 1.362,
+   "duration": 1.33,
    "channels": 2,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "pa/pa_001_passenger37.wav": {
-   "duration": 2.319,
+   "duration": 2.114,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "pa/pa_002_proceed.wav": {
-   "duration": 2.806,
+   "duration": 2.51,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "pa/pa_003_passenger37_soft.wav": {
-   "duration": 2.471,
+   "duration": 2.14,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "pa/pa_004_daniel.wav": {
-   "duration": 1.356,
+   "duration": 1.35,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "pa/pa_005_family.wav": {
-   "duration": 2.527,
+   "duration": 2.144,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "police/police_001_whose.wav": {
-   "duration": 1.029,
+   "duration": 0.9,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
   },
   "police/police_002_maam.wav": {
-   "duration": 0.855,
+   "duration": 0.65,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"
