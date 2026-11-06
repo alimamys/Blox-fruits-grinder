@@ -569,7 +569,7 @@ const hit = (sound: string, at: string, offset = 0, volume = 0.4, extra: Partial
 const HITS: Record<string, SfxCue[]> = {
 	coldOpen: [
 		hit('sub_drop', 'narrator_003_extra_frame', 0.5, 0.3),
-		hit('sub_drop', 'figure_reveal', 0.0, 0.4),
+		hit('sub_drop', 'figure_reveal', 0.0, 0.4, {maxDuration: 1.45}), // ends with the cut: the black is silent until the scratch
 		hit('sub_drop', 'title', 0.15, 0.22),
 	],
 	normalNight: [hit('sub_drop', 'narrator_018_extra_frame', 1.0, 0.3)],
