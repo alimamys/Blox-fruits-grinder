@@ -311,7 +311,7 @@ const WHITE: VoiceLine[] = [
 	c8.n('narrator_108_faint_outline', 'For the first time, I noticed a faint outline.', {emotion: 'afraid', pauseAfter: 0.4}),
 	c8.n('narrator_109_not_black', 'Not black.', {emotion: 'afraid', pace: 0.92, pauseAfter: 0.25}),
 	c8.n('narrator_110_not_gray', 'Not gray.', {emotion: 'afraid', pace: 0.92, pauseAfter: 0.3}),
-	c8.n('narrator_111_white', 'White.', {emotion: 'whispering', fishTags: '[whispering]', pace: 0.88, pauseAfter: 0.5}),
+	c8.n('narrator_111_white', 'White.', {emotion: 'afraid', fishTags: '[quietly, breathless]', pace: 0.88, pauseAfter: 0.5, direction: 'Quiet but clearly articulated - the key word must be understood.'}),
 	c8.n('narrator_112_same_color', 'Almost the exact same color as the paint.', {emotion: 'afraid', pace: 0.95, pauseAfter: 0.4}),
 	c8.m('mara_011_oh_god', 'Oh God.', {
 		emotion: 'breathless',

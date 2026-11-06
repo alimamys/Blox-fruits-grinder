@@ -109,7 +109,7 @@ def stretch(a: np.ndarray, sr: int, tempo: float, subtype: str) -> np.ndarray:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--ids', required=True, help='file with comma separated line ids (or the list itself)')
-    ap.add_argument('--raw-dir', default=str(ROOT / 'build' / 'audio_drama3_raw'))
+    ap.add_argument('--raw-dir', default=str(ROOT / 'voice-takes' / 'drama3_raw'))  # untouched Drama 3 takes (committed)
     ap.add_argument('--ref-dir', default=str(ROOT / 'build' / 'audio_free_backup' / 'audio'), help='pacing reference: earlier takes of the same lines')
     ap.add_argument('--max-gap', type=float, default=0.45, help='longest pause kept inside a narrator line (s)')
     ap.add_argument('--max-gap-dialogue', type=float, default=0.5)

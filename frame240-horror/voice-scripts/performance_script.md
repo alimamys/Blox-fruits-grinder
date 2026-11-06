@@ -444,7 +444,8 @@ _Quietly. She understands before Mara does._
 <sub>`narrator/narrator_110_not_gray.wav` · afraid · intensity 0.40 · pace 0.92 · fear 3 · fx none</sub>  
 
 **MARA (NARRATION)** — "White."  
-<sub>`narrator/narrator_111_white.wav` · whispering · intensity 0.40 · pace 0.88 · fear 3 · fx none</sub>  
+<sub>`narrator/narrator_111_white.wav` · afraid · intensity 0.40 · pace 0.88 · fear 3 · fx none</sub>  
+_Quiet but clearly articulated - the key word must be understood._
 
 **MARA (NARRATION)** — "Almost the exact same color as the paint."  
 <sub>`narrator/narrator_112_same_color.wav` · afraid · intensity 0.40 · pace 0.95 · fear 3 · fx none</sub>  

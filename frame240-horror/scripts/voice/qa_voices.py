@@ -54,6 +54,7 @@ def num_words(n: int) -> str:
 CANON = {
     'than': 'then', 'mom': 'mum', 'moms': 'mums', 'clark': 'clarke', "who's": 'whose',
     'mam': "ma'am", 'madam': "ma'am", 'ok': 'okay', 'grey': 'gray', 'alright': 'all right',
+    'hannah': 'hana', 'hanna': 'hana', 'meter': 'metre',
 }
 
 

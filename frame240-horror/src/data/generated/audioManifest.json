@@ -1,6 +1,1158 @@
 {
- "generatedAt": "2026-11-06T10:56:41.394Z",
+ "generatedAt": "2026-11-06T13:12:29.624Z",
  "files": {
+  "hana/hana_001_three_am.wav": {
+   "duration": 3.09,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_002_whats_this.wav": {
+   "duration": 1.07,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_003_creepy.wav": {
+   "duration": 3.06,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_004_what_do_you_mean.wav": {
+   "duration": 1.386,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_005_stop_playing.wav": {
+   "duration": 3.124,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_006_get_out.wav": {
+   "duration": 3.7,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_007_what_did_you_do.wav": {
+   "duration": 1.57,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_008_listen.wav": {
+   "duration": 1.75,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_009_screenshot.wav": {
+   "duration": 2.54,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_010_zoomed.wav": {
+   "duration": 1.53,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_011_shadow.wav": {
+   "duration": 2.64,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_012_shadow_ends.wav": {
+   "duration": 1.98,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_013_against_wall.wav": {
+   "duration": 2.91,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "hana/hana_014_get_out.wav": {
+   "duration": 3.132,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_001_look_at_something.wav": {
+   "duration": 5.124,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_002_see_the_man.wav": {
+   "duration": 3.84,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_003_no.wav": {
+   "duration": 0.696,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_004_gets_closer.wav": {
+   "duration": 6.226,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_005_reopening.wav": {
+   "duration": 5.043,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_006_got_rid.wav": {
+   "duration": 2.65,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_007_painted_over.wav": {
+   "duration": 2.974,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_008_what.wav": {
+   "duration": 1.426,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_009_okay.wav": {
+   "duration": 0.974,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_010_so.wav": {
+   "duration": 1.383,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_011_oh_god.wav": {
+   "duration": 1.11,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_012_where_i_am.wav": {
+   "duration": 1.81,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_013_closet.wav": {
+   "duration": 2.243,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_014_recording.wav": {
+   "duration": 4.02,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_015_moving_outside.wav": {
+   "duration": 3.49,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_016_scratching_stops.wav": {
+   "duration": 2.426,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_017_even_worse.wav": {
+   "duration": 4.261,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_018_dragging.wav": {
+   "duration": 2.461,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_019_finger_paper.wav": {
+   "duration": 3.094,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_020_gap.wav": {
+   "duration": 3.911,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_021_no_shadow.wav": {
+   "duration": 2.282,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_022_not_once.wav": {
+   "duration": 1.983,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_023_understand.wav": {
+   "duration": 2.852,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_024_didnt_destroy.wav": {
+   "duration": 4.47,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_025_changed_color.wav": {
+   "duration": 1.9,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_026_invisible.wav": {
+   "duration": 4.104,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_027_every_wall.wav": {
+   "duration": 3.926,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_028_touching_door.wav": {
+   "duration": 2.704,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_029_a_face.wav": {
+   "duration": 1.765,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_030_see_it_now.wav": {
+   "duration": 2.617,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_031_pressed.wav": {
+   "duration": 2.706,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_032_not_coming_through.wav": {
+   "duration": 2.32,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_033_looking_at_me.wav": {
+   "duration": 3.009,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_034_wait.wav": {
+   "duration": 1.643,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_035_little_lines.wav": {
+   "duration": 3.097,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_036_floor.wav": {
+   "duration": 1.49,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_037_walls.wav": {
+   "duration": 1.477,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_038_moving.wav": {
+   "duration": 1.435,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_039_like.wav": {
+   "duration": 1.339,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_040_selection_box.wav": {
+   "duration": 2.043,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_041_oh_no.wav": {
+   "duration": 1.304,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_042_selecting_me.wav": {
+   "duration": 2.696,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mara/mara_043_not_drawing.wav": {
+   "duration": 2.49,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_001_239_frames.wav": {
+   "duration": 6.33,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_002_240.wav": {
+   "duration": 4.35,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_003_extra_frame.wav": {
+   "duration": 3.79,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_004_hadnt_drawn.wav": {
+   "duration": 1.85,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_005_closer.wav": {
+   "duration": 4.14,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_006_ridiculous.wav": {
+   "duration": 2.574,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_007_cant_move.wav": {
+   "duration": 4.967,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_008_believed.wav": {
+   "duration": 2.505,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_009_until_that_night.wav": {
+   "duration": 1.783,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_010_name_mara.wav": {
+   "duration": 2.91,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_011_most_nights.wav": {
+   "duration": 7.552,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_012_finishing.wav": {
+   "duration": 5.202,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_013_nothing_complicated.wav": {
+   "duration": 7.141,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_014_own_hallway.wav": {
+   "duration": 2.96,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_015_crack_carpet_stain.wav": {
+   "duration": 7.712,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_016_three_hours.wav": {
+   "duration": 5.552,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_017_saved.wav": {
+   "duration": 7.189,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_018_extra_frame.wav": {
+   "duration": 2.63,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_019_duplicated.wav": {
+   "duration": 3.346,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_020_clicked.wav": {
+   "duration": 2.49,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_021_man_standing.wav": {
+   "duration": 4.11,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_022_very_tall.wav": {
+   "duration": 3.342,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_023_arms_hung.wav": {
+   "duration": 8.077,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_024_face_hidden.wav": {
+   "duration": 2.854,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_025_bothered.wav": {
+   "duration": 2.882,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_026_my_style.wav": {
+   "duration": 2.6,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_027_same_brush.wav": {
+   "duration": 4.942,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_028_layers.wav": {
+   "duration": 1.831,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_029_background_door.wav": {
+   "duration": 4.2,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_030_no_layer.wav": {
+   "duration": 2.63,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_031_selecting.wav": {
+   "duration": 1.826,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_032_nothing.wav": {
+   "duration": 0.864,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_033_part_of_picture.wav": {
+   "duration": 2.06,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_034_pressed_play.wav": {
+   "duration": 1.63,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_035_he_had_moved.wav": {
+   "duration": 1.708,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_036_stared.wav": {
+   "duration": 2.92,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_037_played_again.wav": {
+   "duration": 2.03,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_038_man_closer.wav": {
+   "duration": 1.872,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_039_a_meter.wav": {
+   "duration": 2.35,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_040_third_time.wav": {
+   "duration": 2.1,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_041_closer.wav": {
+   "duration": 1.269,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_042_fourth_time.wav": {
+   "duration": 1.533,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_043_closer.wav": {
+   "duration": 1.034,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_044_didnt_walk.wav": {
+   "duration": 1.492,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_045_no_movement.wav": {
+   "duration": 2.722,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_046_appeared.wav": {
+   "duration": 6.282,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_047_drawing_him.wav": {
+   "duration": 3.886,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_048_stopped.wav": {
+   "duration": 1.825,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_049_didnt_move.wav": {
+   "duration": 2.876,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_050_heard_something.wav": {
+   "duration": 3.302,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_051_pencil_wall.wav": {
+   "duration": 4.4,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_052_turned_around.wav": {
+   "duration": 1.415,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_053_empty.wav": {
+   "duration": 2.296,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_054_flickering.wav": {
+   "duration": 2.61,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_055_like_my_animation.wav": {
+   "duration": 3.14,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_056_called_hana.wav": {
+   "duration": 1.475,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_057_hana_worked.wav": {
+   "duration": 5.959,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_058_keys.wav": {
+   "duration": 1.785,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_059_another_second.wav": {
+   "duration": 4.487,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_060_something_wrong.wav": {
+   "duration": 3.683,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_061_carpet.wav": {
+   "duration": 2.277,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_062_same_stain.wav": {
+   "duration": 5.642,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_063_crack.wav": {
+   "duration": 4.89,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_064_pencil_mark.wav": {
+   "duration": 5.627,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_065_moved_closer.wav": {
+   "duration": 1.948,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_066_wall_wrong.wav": {
+   "duration": 2.62,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_067_too_smooth.wav": {
+   "duration": 2.625,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_068_photograph.wav": {
+   "duration": 3.186,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_069_touched.wav": {
+   "duration": 2.889,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_070_paper.wav": {
+   "duration": 2.317,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_071_behind_door.wav": {
+   "duration": 4.158,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_072_three_taps.wav": {
+   "duration": 1.79,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_073_same_scratching.wav": {
+   "duration": 4.275,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_074_ran_back.wav": {
+   "duration": 2.03,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_075_understood.wav": {
+   "duration": 3.108,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_076_not_copying.wav": {
+   "duration": 2.974,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_077_copying_animation.wav": {
+   "duration": 2.783,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_078_change_it.wav": {
+   "duration": 3.498,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_079_red_line.wav": {
+   "duration": 6.797,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_080_scraping.wav": {
+   "duration": 3.633,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_081_looked_behind.wav": {
+   "duration": 1.784,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_082_real_wall.wav": {
+   "duration": 3.718,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_083_same_length.wav": {
+   "duration": 1.917,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_084_same_position.wav": {
+   "duration": 2.357,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_085_hands_shaking.wav": {
+   "duration": 1.948,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_086_stop_the_man.wav": {
+   "duration": 5.88,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_087_white_brush.wav": {
+   "duration": 2.733,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_088_painting_over.wav": {
+   "duration": 2.28,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_089_legs.wav": {
+   "duration": 2.308,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_090_arms.wav": {
+   "duration": 2.601,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_091_head.wav": {
+   "duration": 2.867,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_092_disappeared.wav": {
+   "duration": 4.869,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_093_flattened.wav": {
+   "duration": 1.806,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_094_saved.wav": {
+   "duration": 1.406,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_095_waited.wav": {
+   "duration": 1.167,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_096_nothing_happened.wav": {
+   "duration": 2.644,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_097_done_it.wav": {
+   "duration": 1.78,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_098_erased_him.wav": {
+   "duration": 1.86,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_099_hadnt_erased.wav": {
+   "duration": 2.341,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_100_worse_mistake.wav": {
+   "duration": 2.59,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_101_changes.wav": {
+   "duration": 2.569,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_102_wallpaper.wav": {
+   "duration": 2.567,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_103_shadows_gone.wav": {
+   "duration": 2.976,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_104_stains_gone.wav": {
+   "duration": 1.9,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_105_unfinished.wav": {
+   "duration": 3.217,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_106_called_again.wav": {
+   "duration": 1.819,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_107_turned_wall.wav": {
+   "duration": 2.683,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_108_faint_outline.wav": {
+   "duration": 4.192,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_109_not_black.wav": {
+   "duration": 1.625,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_110_not_gray.wav": {
+   "duration": 1.745,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_111_white.wav": {
+   "duration": 1.12,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_112_same_color.wav": {
+   "duration": 3.424,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_113_backed_away.wav": {
+   "duration": 1.552,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_114_shape_moved.wav": {
+   "duration": 1.931,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_115_not_walking.wav": {
+   "duration": 2.605,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_116_stretched.wav": {
+   "duration": 3.533,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_117_hand.wav": {
+   "duration": 3.31,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_118_elbow.wav": {
+   "duration": 1.456,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_119_head.wav": {
+   "duration": 2.244,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_120_flashlight.wav": {
+   "duration": 4.94,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_121_quietly.wav": {
+   "duration": 4.008,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_122_no_breathing.wav": {
+   "duration": 2.683,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_123_no_footsteps.wav": {
+   "duration": 1.444,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_124_scratching.wav": {
+   "duration": 2.829,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_125_inside_walls.wav": {
+   "duration": 3.28,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_126_smash.wav": {
+   "duration": 3.52,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_127_image_stayed.wav": {
+   "duration": 2.335,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_128_gone_from_drawing.wav": {
+   "duration": 2.98,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_129_blank_space.wav": {
+   "duration": 4.076,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_130_pushing_outward.wav": {
+   "duration": 5.2,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_131_hana_shouting.wav": {
+   "duration": 2.945,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_132_front_door.wav": {
+   "duration": 1.95,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_133_no_handle.wav": {
+   "duration": 2.033,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_134_no_door.wav": {
+   "duration": 2.539,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_135_white_rectangle.wav": {
+   "duration": 5.117,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
   "sfx/apartment_tone.wav": {
    "duration": 30.5,
    "channels": 2,

@@ -9,21 +9,28 @@
 export type EditMode = 'full' | 'short';
 
 /**
- * Voice lines dropped from the short edit. Empty while the voiced cut fits ~10 minutes.
- * First candidates if it runs past ~10:15 (approved in PLAN.md):
- *   'narrator_045_no_movement'      - repeats "He didn't walk."
- *   'narrator_059_another_second'
- *   'narrator_096_nothing_happened'
+ * Voice lines dropped from the short edit (the Drama 3 performance runs 11:29 uncut; this
+ * edit brings it to about 10:30). Shots cut on a dropped line fall away; the previous shot runs on.
  */
-export const CUT_IN_SHORT = new Set<string>([]);
+export const CUT_IN_SHORT = new Set<string>([
+	// approved candidates (PLAN.md)
+	'narrator_045_no_movement', // repeats "He didn't walk."
+	'narrator_059_another_second',
+	'narrator_096_nothing_happened',
+	// say what the picture already shows
+	'narrator_027_same_brush', // the zoomed brushwork follows "It matched my animation style perfectly."
+	'narrator_131_hana_shouting', // we hear Hana shout through the phone on the floor right after
+	'narrator_016_three_hours', // the shot already shows her exhausted at the screen
+	'narrator_049_didnt_move', // the hold on her frozen back says it
+]);
 
 /** Scenes left out of the short edit. */
 export const SCENES_CUT_IN_SHORT = new Set<string>([]);
 
 /** Silent beats held for a shorter time in the short edit (seconds). */
 export const SHORT_BEAT_HOLD: Record<string, number> = {
-	open_black: 2.2,
-	playback_1: 3.6,
+	open_black: 1.9,
+	playback_1: 3.2,
 	scratch_1: 1.4,
 	silence_call: 0.9,
 	finger_line: 1.6,
@@ -73,7 +80,7 @@ export const DRAMATIC_PAUSE = new Set<string>([
 ]);
 
 /** Pause after a line in the short edit. */
-export const shortPause = (id: string, pause: number) => (DRAMATIC_PAUSE.has(id) ? Math.min(pause, 0.9) : Math.min(pause, 0.32));
+export const shortPause = (id: string, pause: number) => (DRAMATIC_PAUSE.has(id) ? Math.min(pause, 0.75) : Math.min(pause, 0.25));
 
 /** Silence after a scene's last step in the short edit. */
 export const shortTail = (tail: number) => Math.min(tail, 0.2);
