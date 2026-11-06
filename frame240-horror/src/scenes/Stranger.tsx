@@ -1,7 +1,6 @@
 // 3. THE STRANGER - frame 240, the man in it, no layer, he moves.
 import React from 'react';
 import {EditorShot} from '../components/ui/Editor';
-import {manBox} from '../layout/Hallway';
 import {DeskInsert} from '../layout/Rooms';
 import type {PicId} from '../layout/pictures';
 import {Shots, Stage} from '../utils/scene';
@@ -10,7 +9,8 @@ import {FaceClose, FrontMara, FullPicture} from './frames';
 
 const STRIP: PicId[] = [...Array.from({length: 11}, () => 'canvas_empty' as PicId), 'canvas_man_far'];
 const E = {total: 240, strip: STRIP};
-const FAR = manBox(0.93);
+// measured on the generated canvas_man_far picture (layout manBox(0.93) differs)
+const FAR: [number, number, number, number] = [0.455, 0.15, 0.565, 0.71];
 
 export const Stranger: React.FC = () => (
 	<Shots
@@ -116,7 +116,7 @@ export const Stranger: React.FC = () => (
 			{
 				id: 'st_12_lasso',
 				at: 'narrator_031_selecting',
-				render: ({f, d}) => <EditorShot f={f} d={d} {...E} picture="canvas_man_far" frame={240} lasso={prog(f, d, 0.05, 0.9)} manBox={FAR} zoom={{z: 1.6, cx: 0.5, cy: 0.45}} zoomLabel="160%" push={[1.0, 1.06]} focus={[0.42, 0.4]} />,
+				render: ({f, d}) => <EditorShot f={f} d={d} {...E} picture="canvas_man_far" frame={240} lasso={prog(f, d, 0.05, 0.9)} manBox={FAR} zoom={{z: 1.4, cx: 0.51, cy: 0.43}} zoomLabel="140%" push={[1.0, 1.06]} focus={[0.42, 0.4]} />,
 			},
 			// "Nothing."
 			{
@@ -124,7 +124,7 @@ export const Stranger: React.FC = () => (
 				at: 'narrator_032_nothing',
 				off: -0.1,
 				render: ({f, d}) => (
-					<EditorShot f={f} d={d} {...E} picture="canvas_man_far" frame={240} lasso={1} lassoFail manBox={FAR} zoom={{z: 1.6, cx: 0.5, cy: 0.45}} zoomLabel="160%" toast={f > 3 ? 'No pixels selected' : null} push={[1.06, 1.08]} focus={[0.42, 0.4]} />
+					<EditorShot f={f} d={d} {...E} picture="canvas_man_far" frame={240} lasso={1} lassoFail manBox={FAR} zoom={{z: 1.4, cx: 0.51, cy: 0.43}} zoomLabel="140%" toast={f > 3 ? 'No pixels selected' : null} push={[1.06, 1.08]} focus={[0.42, 0.4]} />
 				),
 			},
 			// "He was part of the picture."

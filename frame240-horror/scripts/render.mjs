@@ -12,7 +12,7 @@
 //    resumes from the last finished segment.
 // 2) ffmpeg joins the parts (video stream copied, PCM audio sample-exact, so no
 //    seams) and masters the soundtrack in the same pass: two-pass loudnorm to
-//    -15 LUFS integrated, -1.5 dBTP, AAC 256k. Parts are deleted afterwards.
+//    -15 LUFS integrated, -1.5 dBTP (final limiter at -2.5 dBFS so AAC stays under -1.5 dBTP), AAC 256k. Parts are deleted afterwards.
 //
 // Any other flag is passed to `remotion render` (e.g. --concurrency=4, --crf=23).
 import {spawnSync} from 'node:child_process';
@@ -135,7 +135,7 @@ let filter = 'aresample=48000';
 try {
 	const m = JSON.parse(json);
 	console.log(`measured: ${m.input_i} LUFS, TP ${m.input_tp} dBTP, LRA ${m.input_lra}`);
-	filter = `${PRE},loudnorm=I=-15:TP=-1.5:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,alimiter=limit=0.84:attack=1:release=50:level=0,aresample=48000`;
+	filter = `${PRE},loudnorm=I=-15:TP=-1.5:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,alimiter=limit=0.75:attack=1:release=50:level=0,aresample=48000`;
 } catch {
 	console.warn('Could not measure loudness; joining without mastering.');
 }

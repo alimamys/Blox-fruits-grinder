@@ -3,7 +3,7 @@ import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {EditorShot} from '../components/ui/Editor';
 import {restyleSrc} from '../components/fx/Restyled';
-import {Hallway, manBox} from '../layout/Hallway';
+import {Hallway} from '../layout/Hallway';
 import {Mara} from '../layout/Mara';
 import {PictureBox, type PicId} from '../layout/pictures';
 import {Chair, DeskInsert} from '../layout/Rooms';
@@ -13,7 +13,8 @@ import {MOOD, prog} from './common';
 import {FaceClose, FrontMara, GLOW, Hall, Room} from './frames';
 
 const STRIP: PicId[] = [...Array.from({length: 11}, () => 'canvas_empty' as PicId), 'canvas_man_close'];
-const CLOSE = manBox(0.08);
+// measured on the generated canvas_man_close picture (layout manBox(0.08) differs)
+const CLOSE: [number, number, number, number] = [0.435, 0.01, 0.59, 1.0];
 const E = {total: 240, strip: STRIP, frame: 240};
 const paintShot = (a: number, b: number) => ({f, d}: {f: number; d: number}) => (
 	<EditorShot f={f} d={d} {...E} picture="canvas_man_close" paint={a + (b - a) * prog(f, d, 0, 0.95)} manBox={CLOSE} brushPanel push={[1.0, 1.04]} focus={[0.42, 0.42]} />
