@@ -23,4 +23,4 @@ Sound effects include the following recordings from Freesound.org, used under Cr
 - "Diesel engine boat 4 loop 100307.wav" by LG (https://freesound.org/s/91533/)
 
 Other sound effects: CC0 recordings from FSD50K / Freesound, VSCO-2 CE (Versilian Studios) and Kenney.nl.
-Voices: Chatterbox (Resemble AI, MIT). Fonts: SIL Open Font License.
+Voices: Fish Audio (Drama 3); crowd murmurs: Chatterbox (Resemble AI, MIT). Illustrations: redrawn with OpenAI gpt-image-2 from the film's own artwork. Fonts: SIL Open Font License.
