@@ -1,7 +1,15 @@
 {
  "pictures": {
   "canvas_empty": "pictures/canvas_empty.jpg",
+  "canvas_face": "pictures/canvas_face.jpg",
+  "canvas_man_1m": "pictures/canvas_man_1m.jpg",
+  "canvas_man_close": "pictures/canvas_man_close.jpg",
+  "canvas_man_detail": "pictures/canvas_man_detail.jpg",
   "canvas_man_far": "pictures/canvas_man_far.jpg",
-  "canvas_man_mid": "pictures/canvas_man_mid.jpg"
+  "canvas_man_mid": "pictures/canvas_man_mid.jpg",
+  "canvas_man_near": "pictures/canvas_man_near.jpg",
+  "canvas_pattern": "pictures/canvas_pattern.jpg",
+  "canvas_white": "pictures/canvas_white.jpg",
+  "screenshot_shadow": "pictures/screenshot_shadow.jpg"
  }
 }

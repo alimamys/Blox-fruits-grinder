@@ -92,7 +92,7 @@ export const RestyledStill: React.FC<{id: string; art: Art; f: number; d: number
 		height: '100%',
 		objectFit: 'cover',
 		opacity,
-		transform: `translate(${tx * extra}px, ${ty * extra}px) scale(${z * (extra > 1 ? 1.02 : 1)})`,
+		transform: `translate(${tx * extra}px, ${ty * extra}px) scale(${z * (extra > 1 ? 1 + (z - 1) * 0.12 : 1)})`,
 		filter: bright < 1 ? `brightness(${bright})` : undefined,
 	});
 	const white = art.fx === 'whiteout' ? Math.max(0, (t - 0.35) / 0.65) : 0;
@@ -100,7 +100,7 @@ export const RestyledStill: React.FC<{id: string; art: Art; f: number; d: number
 		<AbsoluteFill style={{background: '#000', overflow: 'hidden'}}>
 			{prev ? <Img src={staticFile(prev.src)} style={layer(prev.src)} /> : null}
 			<Img src={staticFile(src)} style={layer(src, 1, fade)} />
-			{frame.fg ? <Img src={staticFile(frame.fg)} style={layer(frame.fg, 1.7, fade)} /> : null}
+			{frame.fg ? <Img src={staticFile(frame.fg)} style={layer(frame.fg, 1.35, fade)} /> : null}
 			{glitch ? (
 				<>
 					<Img src={staticFile(src)} style={{...layer(src), mixBlendMode: 'screen', opacity: 0.5, transform: `translate(${tx + 14}px, ${ty}px) scale(${z})`, filter: 'hue-rotate(160deg) saturate(3)'}} />

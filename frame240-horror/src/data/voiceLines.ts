@@ -57,7 +57,8 @@ const line = (scene: string, character: CharacterId, id: string, text: string, o
 const scene = (s: string, d: Opts = {}) => ({
 	n: (id: string, text: string, o: Opts = {}) => line(s, 'narrator', id, text, {...d, ...o}),
 	m: (id: string, text: string, o: Opts = {}) => line(s, 'mara', id, text, o),
-	h: (id: string, text: string, o: Opts = {}) => line(s, 'hana', id, text, o),
+	// Hana is a phone voice: she sits a little under the narration in the mix
+	h: (id: string, text: string, o: Opts = {}) => line(s, 'hana', id, text, {volume: 0.7, ...o}),
 });
 
 // ---------------------------------------------------------------------------
@@ -351,6 +352,7 @@ const INSIDE: VoiceLine[] = [
 		emotion: 'screaming',
 		intensity: 0.9,
 		audioEffect: 'shout',
+		volume: 0.8,
 		pauseAfter: 0.35,
 		fishTags: '[screaming, panicked]',
 		direction: 'Screaming through a phone lying on the floor.',

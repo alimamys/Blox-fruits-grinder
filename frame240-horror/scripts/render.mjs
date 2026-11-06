@@ -126,13 +126,16 @@ const ff = (a, opts) => (hasSystemFfmpeg ? run('ffmpeg', a, opts) : run(npx, ['r
 const input = ['-f', 'concat', '-safe', '0', '-i', path.relative(root, list)];
 const final = path.join('out', audioOnly ? `${base}_audio_preview.wav` : `${base}.mp4`);
 
-const measure = ff(['-hide_banner', ...input, '-vn', '-af', 'loudnorm=I=-15:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'], {capture: true});
+// a transparent peak limiter first (only transients above about -7 dBFS: booms, the smash, phone
+// peaks), so the loudness gain afterwards can stay linear instead of pumping
+const PRE = 'alimiter=limit=0.4:attack=3:release=80:level=0';
+const measure = ff(['-hide_banner', ...input, '-vn', '-af', `${PRE},loudnorm=I=-15:TP=-1.5:LRA=11:print_format=json`, '-f', 'null', '-'], {capture: true});
 const json = (measure.stderr || '').slice((measure.stderr || '').lastIndexOf('{'));
 let filter = 'aresample=48000';
 try {
 	const m = JSON.parse(json);
 	console.log(`measured: ${m.input_i} LUFS, TP ${m.input_tp} dBTP, LRA ${m.input_lra}`);
-	filter = `loudnorm=I=-15:TP=-1.5:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,aresample=48000`;
+	filter = `${PRE},loudnorm=I=-15:TP=-1.5:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,alimiter=limit=0.84:attack=1:release=50:level=0,aresample=48000`;
 } catch {
 	console.warn('Could not measure loudness; joining without mastering.');
 }

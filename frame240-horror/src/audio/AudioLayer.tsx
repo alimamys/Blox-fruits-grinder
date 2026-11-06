@@ -111,8 +111,20 @@ const useDuck = (tl: Timeline) =>
 		return out;
 	}, [tl]);
 
+/** Everything stops dead at the final scene (the white hold is complete silence). */
+const silenceFrom = (tl: Timeline) => {
+	const end = tl.scenes.find((s) => s.id === 'end');
+	return end ? end.startFrame : tl.totalFrames;
+};
+
 export const AudioLayer: React.FC<{timeline: Timeline}> = ({timeline: tl}) => {
 	const duck = useDuck(tl);
+	const cut = silenceFrom(tl);
+	const tail = (from: number, f: number) => {
+		// 2-frame fade into the silence (no click), then nothing
+		const g = from + f;
+		return g >= cut ? 0 : g >= cut - 2 ? (cut - g) / 3 : 1;
+	};
 
 	const voices = tl.lines
 		.filter((l) => l.exists)
@@ -121,7 +133,7 @@ export const AudioLayer: React.FC<{timeline: Timeline}> = ({timeline: tl}) => {
 			const dur = Math.ceil((l.end - l.start) * FPS) + 2;
 			return (
 				<Sequence key={`v${i}`} from={from} durationInFrames={dur} name={`voice ${l.line.id}`} layout="none">
-					<Audio src={staticFile(`audio/${l.line.filename}`)} volume={l.volume * MIX.voice} />
+					<Audio src={staticFile(`audio/${l.line.filename}`)} volume={(f) => l.volume * MIX.voice * tail(from, f)} />
 				</Sequence>
 			);
 		});
@@ -134,21 +146,21 @@ export const AudioLayer: React.FC<{timeline: Timeline}> = ({timeline: tl}) => {
 			const play = Math.min(len, c.maxDuration ?? len);
 			const frames = Math.max(1, Math.ceil(play * FPS));
 			const from = Math.round(c.start * FPS);
-			if (from >= tl.totalFrames) return null;
+			if (from >= cut) return null;
 			const shown = Math.min(frames, tl.totalFrames - from);
 			// cut short by maxDuration (or by the end of the video): fade out instead of chopping.
 			// The fade is >= 0.25 s unless the cue itself is very short (then half of it).
 			const truncated = (c.maxDuration !== undefined && c.maxDuration < len - 0.02) || shown < frames;
 			const fadeFrames = truncated ? Math.max(1, Math.min(Math.round(MIX.sfxFadeOut * FPS), Math.floor(shown / 2))) : 0;
 			const volume = (f: number) => {
-				if (!fadeFrames) return c.volume * MIX.sfx;
+				if (!fadeFrames) return c.volume * MIX.sfx * tail(from, f);
 				// equal-power shaped fade reaching exactly 0 on the last frame
 				const rest = clamp01((shown - 1 - f) / fadeFrames);
-				return c.volume * MIX.sfx * Math.sin((rest * Math.PI) / 2);
+				return c.volume * MIX.sfx * Math.sin((rest * Math.PI) / 2) * tail(from, f);
 			};
 			return (
 				<Sequence key={`s${i}`} from={from} durationInFrames={shown} name={`sfx ${c.sound}`} layout="none">
-					<Audio src={staticFile(`audio/${file}`)} volume={fadeFrames ? volume : c.volume * MIX.sfx} />
+					<Audio src={staticFile(`audio/${file}`)} volume={volume} />
 				</Sequence>
 			);
 		})
@@ -184,7 +196,7 @@ export const AudioLayer: React.FC<{timeline: Timeline}> = ({timeline: tl}) => {
 							let xf = 1;
 							if (k > 0 && f < tailF) xf = (f + 0.5) / tailF;
 							else if (f >= loopF) xf = clamp01((loopF + tailF - f - 0.5) / tailF);
-							return Math.max(0, lvl * dk * MIX.bed * xf);
+							return Math.max(0, lvl * dk * MIX.bed * xf * tail(start, f));
 						}}
 					/>
 				</Sequence>,

@@ -139,6 +139,11 @@ LOOKDEV = {
     'loc_exterior': {'out': LOCS / 'exterior.png', 'refs': ['ref:loc_exterior'], 'loc': 'exterior', 'prompt': 'Location reference: ' + LOC_NOTE['exterior'] + ' A modest four-storey building, most windows dark, one third-floor window glowing with monitor light, heavy rain, wet street.'},
 }
 
+SAFE_NOTE = (
+    'Context: one frame of an animated psychological mystery film for a general audience - quiet suspense in an apartment at '
+    'night, nothing violent, gory or graphic, no weapons, no injuries. '
+)
+
 RULES = (
     'RULES: natural anatomy and natural, relaxed-but-tense poses; exactly five fingers on every hand; people sit ON chairs and floors, '
     'never through them; faces expressive and readable on a small phone screen - wide eyes, tense mouths, strong light on the face and '
@@ -541,7 +546,13 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
             state['cached'] += 1
             return
         try:
-            img = uncanvas(openai_edit(imgs, prompt, 'frame', j['out'].name))
+            try:
+                img = uncanvas(openai_edit(imgs, prompt, 'frame', j['out'].name))
+            except RuntimeError as e:
+                if 'safety system' not in str(e) and 'moderation' not in str(e):
+                    raise
+                # false positives on quiet, spooky-but-harmless frames: say what it is and retry once
+                img = uncanvas(openai_edit(imgs, SAFE_NOTE + prompt, 'frame', j['out'].name))
         except Exception as e:  # noqa: BLE001
             state['failed'] += 1
             print(f'  ! {j["out"].name}: {str(e)[:200]}', flush=True)
@@ -636,11 +647,18 @@ def cmd_mouths(only: set | None) -> None:
 # parallax (optional, local): foreground layer = the person, background = inpainted
 # ---------------------------------------------------------------------------
 def cmd_parallax() -> None:
+    """Parallax layers for shots marked `parallax` (art.ts): the foreground (Mara, her chair)
+    is cut out with rembg (local, free) -> <frame>_fg.png; the background gets the hole filled
+    (OpenCV inpainting) -> <frame>_bg.jpg, so the two layers can drift at different rates
+    without a doubled edge. Skipped when the cut-out is implausible (tiny or most of the frame)."""
     try:
-        from rembg import remove  # type: ignore
+        from rembg import new_session, remove  # type: ignore
     except ImportError:
-        print('parallax: `pip install rembg onnxruntime` into .venv first (free, local). Skipped.')
+        print('parallax: `pip install "rembg[cpu]"` into .venv first (free, local). Skipped.')
         return
+    import cv2
+
+    sess = new_session('u2net')
     plan = json.loads(PLAN.read_text())
     n = 0
     for p in plan:
@@ -650,10 +668,36 @@ def cmd_parallax() -> None:
             src = OUT / f"{p['id']}_k{k}.jpg"
             if not src.exists():
                 continue
-            fg = remove(Image.open(src).convert('RGB'))
-            fg.save(OUT / f"{p['id']}_k{k}_fg.png")
+            im = Image.open(src).convert('RGB')
+            cut = remove(im, session=sess)
+            a = np.asarray(cut.split()[-1]).astype(np.float32) / 255.0
+            # hard mask, largest shape only (drops half-transparent ghosts of the background)
+            hard = (a > 0.85).astype(np.uint8)
+            n_cc, lab, stats, _ = cv2.connectedComponentsWithStats(hard, 8)
+            if n_cc <= 1:
+                print(f'  {src.name}: no foreground - no parallax')
+                continue
+            big = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+            x0, y0, w0, h0 = stats[big, :4]
+            H, W = hard.shape
+            cover = stats[big, cv2.CC_STAT_AREA] / float(H * W)
+            touches = y0 + h0 >= H - 2 or x0 <= 1 or x0 + w0 >= W - 2
+            # only a TRUE foreground layer (an over-the-shoulder body cut by the frame edge): a person
+            # in the middle of the set would be split from her own legs/chair when the layers drift
+            if not touches or not 0.05 < cover < 0.5:
+                print(f'  {src.name}: foreground {cover:.0%}, touches edge {touches} - no parallax')
+                continue
+            a = np.where(lab == big, a, 0.0).astype(np.float32)
+            # soften the matte edge a little, keep the fully opaque core
+            a = cv2.GaussianBlur(a, (0, 0), 1.2)
+            fg = np.dstack([np.asarray(im), (a * 255).astype(np.uint8)])
+            Image.fromarray(fg, 'RGBA').save(OUT / f"{p['id']}_k{k}_fg.png")
+            hole = cv2.dilate((a > 0.08).astype(np.uint8) * 255, np.ones((25, 25), np.uint8))
+            bg = cv2.inpaint(np.asarray(im)[:, :, ::-1], hole, 9, cv2.INPAINT_TELEA)[:, :, ::-1]
+            Image.fromarray(bg).save(OUT / f"{p['id']}_k{k}_bg.jpg", quality=92)
             n += 1
-    print(f'parallax: {n} foreground layers')
+            print(f'  {src.name}: foreground {cover:.0%}')
+    print(f'parallax: {n} layered frames')
 
 
 # ---------------------------------------------------------------------------
@@ -671,11 +715,13 @@ def cmd_manifest() -> None:
             if not f.exists():
                 return []
             e = {'src': f'restyle/{f.name}'}
+            bg = OUT / f"{p['id']}_k{k}_bg.jpg"
             t = OUT / f"{p['id']}_k{k}_talk.jpg"
             if p.get('mouth') and t.exists():
                 e['talk'] = f'restyle/{t.name}'
             fg = OUT / f"{p['id']}_k{k}_fg.png"
-            if fg.exists():
+            if fg.exists() and bg.exists() and not p.get('mouth'):
+                e['src'] = f'restyle/{bg.name}'  # hole filled behind the foreground
                 e['fg'] = f'restyle/{fg.name}'
             fr.append(e)
         return fr

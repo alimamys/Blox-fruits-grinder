@@ -19,7 +19,8 @@ const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
 const inputProps = {audio: false, subtitles: false, grain: false, restyled: false, layoutKey: true};
 const puppeteerInstance = await openBrowser('chrome', {browserExecutable});
 const composition = await selectComposition({serveUrl, id: 'Frame240Horror', inputProps, browserExecutable, puppeteerInstance});
-const only = process.argv[2] ? new Set(process.argv[2].split(',')) : null;
+const ids = process.argv.slice(2).find((a) => !a.startsWith('--'));
+const only = ids ? new Set(ids.split(',')) : null;
 const force = process.argv.includes('--force');
 const jobs = [];
 for (const sh of map.shots) {
