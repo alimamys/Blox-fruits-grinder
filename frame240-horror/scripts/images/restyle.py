@@ -134,8 +134,8 @@ LOOKDEV = {
     },
     'loc_workroom': {'out': LOCS / 'workroom.png', 'refs': ['ref:loc_workroom'], 'loc': 'workroom', 'prompt': 'Location reference, empty of people: ' + LOC_NOTE['workroom'] + ' Night: cold blue moonlight through the rainy window against the cool glow of the monitor; deep shadows; the doorway to the hallway black.'},
     'loc_hallway': {'out': LOCS / 'hallway.png', 'refs': ['ref:loc_hallway'], 'loc': 'hallway', 'prompt': 'Location reference, empty of people: ' + LOC_NOTE['hallway'] + ' Night, the ceiling light off: cold blue moonlight, deep shadows.'},
-    'loc_closet': {'out': LOCS / 'closet.png', 'refs': ['ref:loc_closet'], 'loc': 'closet', 'prompt': 'Location reference, empty of people: ' + LOC_NOTE['closet'] + ' Dark; a cold phone light in the middle lights the white walls softly.'},
-    'loc_white': {'out': LOCS / 'white.png', 'refs': ['ref:loc_white', 'loc:hallway'], 'loc': 'white', 'prompt': 'Location reference, empty of people: the SAME hallway as the hallway reference image, but drained into an unfinished drawing: flat white walls, floor and ceiling, no textures, no stains, almost no shadows - only faint thin pencil-like outlines of the doors, the carpet runner and the ceiling light.'},
+    'loc_closet': {'out': LOCS / 'closet.png', 'refs': ['ref:loc_closet'], 'loc': 'closet', 'prompt': 'Location reference of an EMPTY room - there are NO PEOPLE in this image at all, nobody sitting or standing, no figures, no faces: ' + LOC_NOTE['closet'] + ' Seen from inside: shelves with boxes on the left, coats on hooks on the back wall, the vacuum cleaner, the white door on the right with a thin line of light under it. Dark; a soft cold light in the middle of the floor lights the white walls a little.'},
+    'loc_white': {'out': LOCS / 'white.png', 'refs': ['ref:loc_white', 'loc:hallway'], 'loc': 'white', 'prompt': 'Location reference of an EMPTY hallway, no people: the SAME hallway as the hallway location reference (same perspective, same doors), but drained into an UNFINISHED DRAWING ON WHITE PAPER: every surface - walls, doors, floor, carpet runner, ceiling - is flat, pure, cold white with no colour at all; no wallpaper texture, no stains, no warm light (the ceiling light is OFF), almost no shading or shadows; only thin, faint grey pencil-like outlines show the edges of the doors, the door frames, the carpet runner, the skirting boards and the ceiling light. Eerie, empty, like a page someone stopped drawing.'},
     'loc_exterior': {'out': LOCS / 'exterior.png', 'refs': ['ref:loc_exterior'], 'loc': 'exterior', 'prompt': 'Location reference: ' + LOC_NOTE['exterior'] + ' A modest four-storey building, most windows dark, one third-floor window glowing with monitor light, heavy rain, wet street.'},
 }
 
@@ -353,7 +353,8 @@ def build_request(layout: Path | None, refs: list[str], body: str, layout_is_fra
         imgs.append(png_bytes(ref_image(p)))
         names.append(label)
     imgs.append(png_bytes(ref_image(STYLE_REF)))
-    names.append(f'the STYLE REFERENCE - draw in exactly this style: {STYLE_TEXT}. Its people and setting are unrelated to this film: take ONLY the drawing style from it')
+    names.append(f'the STYLE REFERENCE - draw in exactly this style: {STYLE_TEXT}. It shows a ferry deck with a young couple and an old woman: '
+                 'they are NOT in this film and must NEVER appear; take ONLY the drawing style (line art, cel shading, painted light) from it')
     intro = ' '.join(f'Image {i + 1} is {n}.' for i, n in enumerate(names))
     return imgs, f'{intro}\n\n{body}\n\n{RULES}'
 

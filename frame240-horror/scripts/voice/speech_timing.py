@@ -131,9 +131,9 @@ def main() -> int:
     prev = json.loads(OUT.read_text()) if OUT.exists() else {}
     only = set(args.only.split(',')) if args.only else None
 
-    from transformers import pipeline  # type: ignore
+    from asr import load
 
-    asr = pipeline('automatic-speech-recognition', model=args.model, device='cpu')
+    asr = load(args.model)
     result = dict(prev)
     lines = [l for l in data['VOICE_LINES'] if not only or l['id'] in only]
     for n, line in enumerate(lines):

@@ -74,9 +74,9 @@ def main() -> int:
     data = json.loads((ROOT / 'build' / 'voice-data.json').read_text())
     lines = {l['id']: l for l in data['VOICE_LINES']}
     chars = sys.argv[1:] or list(CANDIDATES)
-    from transformers import pipeline  # type: ignore
+    from asr import load
 
-    asr = pipeline('automatic-speech-recognition', model='openai/whisper-base.en', device='cpu')
+    asr = load('openai/whisper-base.en')
     fish = FishProvider()
     OUT.mkdir(parents=True, exist_ok=True)
     for ch in chars:

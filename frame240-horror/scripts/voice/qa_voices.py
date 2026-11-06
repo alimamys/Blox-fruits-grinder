@@ -80,9 +80,9 @@ HEAVY = ('marineRadio', 'pa', 'paSoft', 'multiSpeaker', 'whisper', 'whisperClose
 
 
 def load_asr(model: str = 'openai/whisper-base.en'):
-    from transformers import pipeline  # type: ignore
+    from asr import load
 
-    return pipeline('automatic-speech-recognition', model=model, device='cpu')
+    return load(model)
 
 
 def assess(asr, line: dict, x: np.ndarray, sr: int, threshold: float = 0.72) -> dict:
