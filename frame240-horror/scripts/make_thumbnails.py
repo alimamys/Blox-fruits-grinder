@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""YouTube thumbnails (1280x720) from the film's own redrawn shots + bold text.
-    .venv/bin/python scripts/make_thumbnails.py   -> youtube/thumbnail_*.jpg"""
+"""YouTube thumbnails (1280x720) for "Frame 240": the scenes drawn in the film's 2D style by
+scripts/images/thumbnail_gen.py + crisp text (max 4 words) and one clear mystery mark.
+    .venv/bin/python scripts/make_thumbnails.py   -> youtube/thumbnail_*.jpg
+The circle/arrow positions are set per image after looking at the generated scene (MARKS)."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'youtube'
-FONT = '/usr/share/fonts/opentype/inter/InterDisplay-Black.otf'
+FONT = '/usr/share/fonts/opentype/inter/Inter-Black.otf'
 W, H = 1280, 720
 RED, WHITE = (255, 38, 38), (255, 255, 255)
 
@@ -75,43 +77,37 @@ def bottom_shade(im: Image.Image, start: float = 0.55, amount: float = 0.75) -> 
     return Image.composite(Image.new('RGB', (W, H), (0, 0, 0)), im, grad)
 
 
+# where the mystery is in each generated scene (canvas px): set after looking at youtube/gen_*.png
+MARKS = {
+    'doorway': {'circle': (300, 330, 95, 190)},
+    'screen': {'arrow': (520, 120, 330, 300)},
+    'wall': {'circle': (930, 380, 170, 250)},
+}
+
+
 def main() -> None:
     OUT.mkdir(exist_ok=True)
-    # A - her smile: "62 NAMES. 63 PEOPLE."
-    a = base('peopleInWater_08_k1', 1.0, 960, 470, (975, 330))
-    a = vignette(a, 0.6, side='left')
-    text(a, [('62 NAMES.', WHITE), ('63 PEOPLE.', RED)], 40, 175, 178, 700)
-    a.save(OUT / 'thumbnail_A_smile.jpg', quality=92)
-    # B - alone on the bench, seen from behind
-    b = base('hook_08_k1', 0.9, 960, 640, (640, 575))
-    b = vignette(b, 0.7)
-    text(b, [("SHE WASN'T", WHITE), ('ON THE LIST', RED)], 70, 22, 124, 1140)
-    b.save(OUT / 'thumbnail_B_bench.jpg', quality=92)
-    # C - the people standing in the sea
-    c = base('peopleInWater_10_k1', 1.1, 960, 520, (640, 430))
-    c = vignette(c, 0.65)
-    text(c, [('THEY ALL', WHITE), ('CAME BACK.', RED)], 60, 24, 140, 1160)
-    c.save(OUT / 'thumbnail_C_water.jpg', quality=92)
-    # D - the paused CCTV frame: who is she?
-    dd = base('cctv_08_k1', 1280 / 1920, 0, 0, (0, 0))
-    dd = ImageEnhance.Brightness(dd).enhance(1.18)
-    dd = ImageEnhance.Contrast(dd).enhance(1.1)
-    dd = bottom_shade(dd, 0.5, 0.8)
-    red_circle(dd, 444, 262, 112, 104)
-    red_arrow(dd, 760, 470, 560, 330)
-    text(dd, [('WHO IS SHE?', WHITE)], 600, 520, 150, 660)
-    dd.save(OUT / 'thumbnail_D_cctv.jpg', quality=92)
-    # E / F - scenes drawn for the thumbnail (scripts/images/thumbnail_gen.py)
-    if (OUT / 'gen_behind.png').exists():
-        e = Image.open(OUT / 'gen_behind.png').convert('RGB')
-        e = ImageEnhance.Brightness(e).enhance(1.06)
-        text(e, [("DON'T", WHITE), ('TURN', WHITE), ('AROUND.', RED)], 44, 110, 158, 560)
-        e.save(OUT / 'thumbnail_E_behind.jpg', quality=92)
-    if (OUT / 'gen_counter.png').exists():
-        f = Image.open(OUT / 'gen_counter.png').convert('RGB')
-        f = ImageEnhance.Brightness(f).enhance(1.05)
-        text(f, [('ONE TOO MANY.', RED)], 36, 22, 124, 760)
-        f.save(OUT / 'thumbnail_F_counter.jpg', quality=92)
+    jobs = [
+        ('doorway', 'thumbnail_A_doorway.jpg', [('WHO DREW', WHITE), ('HIM?', RED)], (40, 40, 150, 620)),
+        ('screen', 'thumbnail_B_frame240.jpg', [('FRAME', WHITE), ('240', RED)], (40, 30, 170, 560)),
+        ('wall', 'thumbnail_C_wall.jpg', [('LOOK', WHITE), ('CLOSER.', RED)], (700, 30, 150, 560)),
+    ]
+    for name, out, words, (x, y, size, max_w) in jobs:
+        src = OUT / f'gen_{name}.png'
+        if not src.exists():
+            print(f'  (no {src.name} yet - run scripts/images/thumbnail_gen.py)')
+            continue
+        im = Image.open(src).convert('RGB').resize((W, H))
+        im = ImageEnhance.Contrast(im).enhance(1.12)
+        im = ImageEnhance.Color(im).enhance(1.12)
+        im = ImageEnhance.Brightness(im).enhance(1.06)
+        mk = MARKS.get(name, {})
+        if 'circle' in mk:
+            red_circle(im, *mk['circle'])
+        if 'arrow' in mk:
+            red_arrow(im, *mk['arrow'])
+        text(im, words, x, y, size, max_w)
+        im.save(OUT / out, quality=92)
     for p in sorted(OUT.glob('thumbnail_*.jpg')):
         print(p.relative_to(ROOT), f'{p.stat().st_size / 1024:.0f} KB')
 
