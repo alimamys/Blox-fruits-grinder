@@ -1,9 +1,14 @@
-TITLE (recommended, pairs with thumbnail_A_smile.jpg)
+TITLE + THUMBNAIL (recommended)
 The Ferry Counted 62 Passengers. There Were 63. | Animated Horror Story
+  + thumbnail_E_behind.jpg   ("DON'T TURN AROUND." - the old woman smiling behind Daniel)
 
 Alternatives
 The 63rd Passenger | Animated Horror Story
-She Wasn't on the Passenger List | Animated Horror Story   (pairs with thumbnail_B_bench.jpg)
+  + thumbnail_F_counter.jpg  ("ONE TOO MANY." - tally counter reads 63, the old woman circled)
+She Wasn't on the Passenger List | Animated Horror Story
+  + thumbnail_D_cctv.jpg     ("WHO IS SHE?" - paused CCTV, red circle)
+
+Tip: YouTube's "Test & compare" (Studio > video > Thumbnail) can A/B test E, F and D.
 
 TAGS
 horror story, animated horror story, scary story, scary stories animated, horror animation, creepy story, ghost story, mystery story, ferry horror story, night ferry, the 63rd passenger, passenger 37, missing passenger, short horror film
