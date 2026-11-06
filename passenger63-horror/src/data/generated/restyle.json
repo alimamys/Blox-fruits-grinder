@@ -69,12 +69,12 @@
         "crew_001_ticket"
        ],
        "mouth": [
-        539.5,
-        654.5,
+        543.9,
+        658.0,
         32,
         20
        ],
-       "skin": "#e5ab7a"
+       "skin": "#e7ac7c"
       }
      ]
     }
@@ -105,12 +105,12 @@
         "crew_002_maam"
        ],
        "mouth": [
-        958.0,
-        586.0,
-        77,
+        956.3,
+        579.1,
+        78,
         49
        ],
-       "skin": "#d9a172"
+       "skin": "#d9a073"
       }
      ]
     }
@@ -163,12 +163,12 @@
         "oldwoman_001_not_passenger"
        ],
        "mouth": [
-        958.5,
-        579.5,
+        959.7,
+        571.8,
         104,
-        66
+        69
        ],
-       "skin": "#ddccbc"
+       "skin": "#decdbd"
       }
      ]
     }
@@ -188,8 +188,8 @@
         "crew_003_why"
        ],
        "mouth": [
-        382.5,
-        776.0,
+        383.1,
+        776.5,
         30,
         19
        ],
@@ -213,10 +213,10 @@
         "oldwoman_002_waiting"
        ],
        "mouth": [
-        963.5,
-        582.5,
-        104,
-        66
+        965.8,
+        584.0,
+        105,
+        67
        ],
        "skin": "#e0d4c8"
       }
@@ -238,12 +238,12 @@
         "crew_004_who"
        ],
        "mouth": [
-        960.0,
-        583.5,
+        960.5,
+        582.8,
         77,
         50
        ],
-       "skin": "#bc8560"
+       "skin": "#bc8660"
       }
      ]
     }
@@ -274,10 +274,10 @@
         "oldwoman_003_passenger37"
        ],
        "mouth": [
-        957.5,
-        580.0,
+        959.8,
+        586.2,
         128,
-        81
+        82
        ],
        "skin": "#d3c7bb"
       }
@@ -321,10 +321,10 @@
         "oldwoman_004_shouldnt"
        ],
        "mouth": [
-        957.5,
-        601.0,
-        164,
-        103
+        957.9,
+        602.0,
+        165,
+        104
        ],
        "skin": "#ded0c3"
       }
@@ -396,12 +396,12 @@
         "crew_005_sir"
        ],
        "mouth": [
-        1276.0,
-        717.5,
-        35,
-        22
+        1311.2,
+        739.6,
+        33,
+        23
        ],
-       "skin": "#e7bb8a"
+       "skin": "#eaba90"
       }
      ]
     }
@@ -422,7 +422,7 @@
        ],
        "mouth": [
         963.5,
-        577.0,
+        577.2,
         72,
         45
        ],
@@ -475,7 +475,7 @@
        ],
        "mouth": [
         960.5,
-        578.0,
+        578.6,
         72,
         45
        ],
@@ -499,12 +499,12 @@
         "emma_003_what_is_it"
        ],
        "mouth": [
-        963.5,
-        580.5,
+        963.4,
+        581.9,
         72,
         46
        ],
-       "skin": "#f9d3b4"
+       "skin": "#f8d3b5"
       }
      ]
     }
@@ -524,8 +524,8 @@
         "daniel_003_grandmother"
        ],
        "mouth": [
-        964.5,
-        575.0,
+        964.7,
+        575.8,
         74,
         47
        ],
@@ -549,12 +549,12 @@
         "emma_004_so"
        ],
        "mouth": [
-        962.0,
-        575.5,
-        71,
+        960.3,
+        572.1,
+        70,
         46
        ],
-       "skin": "#f2c8aa"
+       "skin": "#f3c9ab"
       }
      ]
     }
@@ -574,8 +574,8 @@
         "daniel_004_died"
        ],
        "mouth": [
-        958.0,
-        574.5,
+        957.3,
+        575.3,
         75,
         48
        ],
@@ -632,12 +632,12 @@
         "emma_005_no"
        ],
        "mouth": [
-        958.0,
-        575.0,
+        963.0,
+        576.6,
         73,
-        47
+        49
        ],
-       "skin": "#efc6ae"
+       "skin": "#eec5a8"
       }
      ]
     }
@@ -766,6 +766,28 @@
    "fx": null
   },
   {
+   "id": "hull_01",
+   "from": 6322,
+   "to": 6362,
+   "frames": [
+    {
+     "src": "restyle/hull_01_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_02",
+   "from": 6362,
+   "to": 6444,
+   "frames": [
+    {
+     "src": "restyle/hull_02_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
    "id": "hull_03",
    "from": 6444,
    "to": 6515,
@@ -783,6 +805,1278 @@
    "frames": [
     {
      "src": "restyle/hull_04_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_05",
+   "from": 6567,
+   "to": 6649,
+   "frames": [
+    {
+     "src": "restyle/hull_05_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_06",
+   "from": 6649,
+   "to": 6817,
+   "frames": [
+    {
+     "src": "restyle/hull_06_k1.jpg"
+    }
+   ],
+   "fx": "tremble"
+  },
+  {
+   "id": "hull_07",
+   "from": 6817,
+   "to": 6885,
+   "frames": [
+    {
+     "src": "restyle/hull_07_k1.jpg"
+    }
+   ],
+   "fx": "tremble"
+  },
+  {
+   "id": "hull_08",
+   "from": 6885,
+   "to": 6940,
+   "frames": [
+    {
+     "src": "restyle/hull_08_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_09",
+   "from": 6940,
+   "to": 7039,
+   "frames": [
+    {
+     "src": "restyle/hull_09_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_10",
+   "from": 7039,
+   "to": 7085,
+   "frames": [
+    {
+     "src": "restyle/hull_10_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_11",
+   "from": 7085,
+   "to": 7116,
+   "frames": [
+    {
+     "src": "restyle/hull_11_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_12",
+   "from": 7116,
+   "to": 7211,
+   "frames": [
+    {
+     "src": "restyle/hull_12_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_13",
+   "from": 7211,
+   "to": 7283,
+   "frames": [
+    {
+     "src": "restyle/hull_13_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_007_no"
+       ],
+       "mouth": [
+        962.4,
+        545.2,
+        74,
+        49
+       ],
+       "skin": "#fbe1c4"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_14",
+   "from": 7283,
+   "to": 7376,
+   "frames": [
+    {
+     "src": "restyle/hull_14_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_15",
+   "from": 7376,
+   "to": 7469,
+   "frames": [
+    {
+     "src": "restyle/hull_15_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_17",
+   "from": 7469,
+   "to": 7511,
+   "frames": [
+    {
+     "src": "restyle/hull_17_k0.jpg"
+    },
+    {
+     "src": "restyle/hull_17_k1.jpg"
+    },
+    {
+     "src": "restyle/hull_17_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_24",
+   "from": 8023,
+   "to": 8105,
+   "frames": [
+    {
+     "src": "restyle/hull_24_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "hull_26",
+   "from": 8177,
+   "to": 8261,
+   "frames": [
+    {
+     "src": "restyle/hull_26_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "navigation_00",
+   "from": 8261,
+   "to": 8350,
+   "frames": [
+    {
+     "src": "restyle/navigation_00_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "navigation_07",
+   "from": 8906,
+   "to": 9011,
+   "frames": [
+    {
+     "src": "restyle/navigation_07_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "captain_001_radio_call"
+       ],
+       "mouth": [
+        958.5,
+        567.9,
+        66,
+        43
+       ],
+       "skin": "#e9bb97"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "navigation_10",
+   "from": 9145,
+   "to": 9311,
+   "frames": [
+    {
+     "src": "restyle/navigation_10_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "captain_003_lost_nav"
+       ],
+       "mouth": [
+        958.9,
+        562.8,
+        66,
+        43
+       ],
+       "skin": "#f7c89d"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "navigation_13",
+   "from": 9401,
+   "to": 9472,
+   "frames": [
+    {
+     "src": "restyle/navigation_13_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "harbor_002_confirm"
+       ],
+       "mouth": [
+        958.7,
+        637.0,
+        52,
+        33
+       ],
+       "skin": "#b5865f"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "navigation_14",
+   "from": 9472,
+   "to": 9530,
+   "frames": [
+    {
+     "src": "restyle/navigation_14_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "captain_004_ns8"
+       ],
+       "mouth": [
+        956.3,
+        570.3,
+        69,
+        44
+       ],
+       "skin": "#e9c09a"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "navigation_17",
+   "from": 9721,
+   "to": 9823,
+   "frames": [
+    {
+     "src": "restyle/navigation_17_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "captain_005_negative"
+       ],
+       "mouth": [
+        964.9,
+        557.5,
+        67,
+        43
+       ],
+       "skin": "#ecbe97"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "navigation_19",
+   "from": 9926,
+   "to": 9957,
+   "frames": [
+    {
+     "src": "restyle/navigation_19_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "otherFerry_03",
+   "from": 10108,
+   "to": 10250,
+   "frames": [
+    {
+     "src": "restyle/otherFerry_03_k0.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_03_k1.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_03_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "otherFerry_05",
+   "from": 10335,
+   "to": 10419,
+   "frames": [
+    {
+     "src": "restyle/otherFerry_05_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "otherFerry_06",
+   "from": 10419,
+   "to": 10587,
+   "frames": [
+    {
+     "src": "restyle/otherFerry_06_k0.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_06_k1.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_06_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "otherFerry_08",
+   "from": 10665,
+   "to": 10732,
+   "frames": [
+    {
+     "src": "restyle/otherFerry_08_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "otherFerry_09",
+   "from": 10732,
+   "to": 10855,
+   "frames": [
+    {
+     "src": "restyle/otherFerry_09_k0.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_09_k1.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_09_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "otherFerry_10",
+   "from": 10855,
+   "to": 10963,
+   "frames": [
+    {
+     "src": "restyle/otherFerry_10_k0.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_10_k1.jpg"
+    },
+    {
+     "src": "restyle/otherFerry_10_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_00",
+   "from": 10963,
+   "to": 11090,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_00_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_01",
+   "from": 11090,
+   "to": 11135,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_01_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_008_where"
+       ],
+       "mouth": [
+        958.5,
+        576.5,
+        75,
+        47
+       ],
+       "skin": "#f8cbac"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_02",
+   "from": 11135,
+   "to": 11217,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_02_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_03",
+   "from": 11217,
+   "to": 11286,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_03_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_04",
+   "from": 11286,
+   "to": 11349,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_04_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_05",
+   "from": 11349,
+   "to": 11474,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_05_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_009_stop"
+       ],
+       "mouth": [
+        764.2,
+        898.5,
+        34,
+        23
+       ],
+       "skin": "#fbd3af"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_06",
+   "from": 11474,
+   "to": 11562,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_06_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_07",
+   "from": 11562,
+   "to": 11607,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_07_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "daniel_006_used_to_say"
+       ],
+       "mouth": [
+        956.8,
+        571.3,
+        75,
+        47
+       ],
+       "skin": "#f3c59b"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_08",
+   "from": 11607,
+   "to": 11640,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_08_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_010_what"
+       ],
+       "mouth": [
+        960.2,
+        575.9,
+        73,
+        47
+       ],
+       "skin": "#f9ceac"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_09",
+   "from": 11640,
+   "to": 11696,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_09_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "daniel_007_exactly"
+       ],
+       "mouth": [
+        963.1,
+        586.6,
+        96,
+        62
+       ],
+       "skin": "#eec49c"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_10",
+   "from": 11696,
+   "to": 11769,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_10_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_011_shes_dead"
+       ],
+       "mouth": [
+        950.6,
+        533.3,
+        76,
+        49
+       ],
+       "skin": "#f6d0af"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_11",
+   "from": 11769,
+   "to": 11812,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_11_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "daniel_008_i_know"
+       ],
+       "mouth": [
+        952.9,
+        549.4,
+        73,
+        51
+       ],
+       "skin": "#facda4"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_12",
+   "from": 11812,
+   "to": 11874,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_12_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_13",
+   "from": 11874,
+   "to": 11918,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_13_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_14",
+   "from": 11918,
+   "to": 11949,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_14_k0.jpg"
+    },
+    {
+     "src": "restyle/grandmotherCalls_14_k1.jpg"
+    },
+    {
+     "src": "restyle/grandmotherCalls_14_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_15",
+   "from": 11949,
+   "to": 11991,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_15_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_17",
+   "from": 12058,
+   "to": 12166,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_17_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_18",
+   "from": 12166,
+   "to": 12190,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_18_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "grandmotherCalls_19",
+   "from": 12190,
+   "to": 12272,
+   "frames": [
+    {
+     "src": "restyle/grandmotherCalls_19_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_00",
+   "from": 12272,
+   "to": 12371,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_00_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_01",
+   "from": 12371,
+   "to": 12444,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_01_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_02",
+   "from": 12444,
+   "to": 12565,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_02_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_03",
+   "from": 12565,
+   "to": 12648,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_03_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_04",
+   "from": 12648,
+   "to": 12756,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_04_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_05",
+   "from": 12756,
+   "to": 12792,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_05_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_06",
+   "from": 12792,
+   "to": 13027,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_06_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_07",
+   "from": 13027,
+   "to": 13050,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_07_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_08",
+   "from": 13050,
+   "to": 13113,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_08_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "oldwoman_008_see"
+       ],
+       "mouth": [
+        961.3,
+        577.4,
+        98,
+        63
+       ],
+       "skin": "#e4d8ca"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_09",
+   "from": 13113,
+   "to": 13116,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_09_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "peopleInWater_10",
+   "from": 13116,
+   "to": 13204,
+   "frames": [
+    {
+     "src": "restyle/peopleInWater_10_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_00",
+   "from": 13204,
+   "to": 13251,
+   "frames": [
+    {
+     "src": "restyle/vanish_00_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_03",
+   "from": 13383,
+   "to": 13474,
+   "frames": [
+    {
+     "src": "restyle/vanish_03_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_04",
+   "from": 13474,
+   "to": 13572,
+   "frames": [
+    {
+     "src": "restyle/vanish_04_k1.jpg"
+    }
+   ],
+   "fx": "shake"
+  },
+  {
+   "id": "vanish_05",
+   "from": 13572,
+   "to": 13620,
+   "frames": [
+    {
+     "src": "restyle/vanish_05_k1.jpg"
+    }
+   ],
+   "fx": "shake"
+  },
+  {
+   "id": "vanish_06",
+   "from": 13620,
+   "to": 13739,
+   "frames": [
+    {
+     "src": "restyle/vanish_06_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_09",
+   "from": 13919,
+   "to": 14009,
+   "frames": [
+    {
+     "src": "restyle/vanish_09_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_10",
+   "from": 14009,
+   "to": 14076,
+   "frames": [
+    {
+     "src": "restyle/vanish_10_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_11",
+   "from": 14076,
+   "to": 14154,
+   "frames": [
+    {
+     "src": "restyle/vanish_11_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_12",
+   "from": 14154,
+   "to": 14257,
+   "frames": [
+    {
+     "src": "restyle/vanish_12_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_13",
+   "from": 14257,
+   "to": 14296,
+   "frames": [
+    {
+     "src": "restyle/vanish_13_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_18",
+   "from": 14624,
+   "to": 14729,
+   "frames": [
+    {
+     "src": "restyle/vanish_18_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "vanish_19",
+   "from": 14729,
+   "to": 14829,
+   "frames": [
+    {
+     "src": "restyle/vanish_19_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "police_00",
+   "from": 14829,
+   "to": 14909,
+   "frames": [
+    {
+     "src": "restyle/police_00_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "police_02",
+   "from": 15080,
+   "to": 15177,
+   "frames": [
+    {
+     "src": "restyle/police_02_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "police_03",
+   "from": 15177,
+   "to": 15289,
+   "frames": [
+    {
+     "src": "restyle/police_03_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "police_04",
+   "from": 15289,
+   "to": 15443,
+   "frames": [
+    {
+     "src": "restyle/police_04_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "police_06",
+   "from": 15588,
+   "to": 15706,
+   "frames": [
+    {
+     "src": "restyle/police_06_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "police_07",
+   "from": 15706,
+   "to": 15755,
+   "frames": [
+    {
+     "src": "restyle/police_07_k1.jpg",
+     "talk": [
+      {
+       "lines": [
+        "emma_015_husbands"
+       ],
+       "mouth": [
+        970.3,
+        572.6,
+        77,
+        50
+       ],
+       "skin": "#ecc5a8"
+      }
+     ]
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "police_08",
+   "from": 15755,
+   "to": 15789,
+   "frames": [
+    {
+     "src": "restyle/police_08_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "cctv_05",
+   "from": 16667,
+   "to": 16740,
+   "frames": [
+    {
+     "src": "restyle/cctv_05_k1.jpg"
+    }
+   ],
+   "fx": "cctv"
+  },
+  {
+   "id": "cctv_06",
+   "from": 16740,
+   "to": 16767,
+   "frames": [
+    {
+     "src": "restyle/cctv_06_k1.jpg"
+    }
+   ],
+   "fx": "cctv"
+  },
+  {
+   "id": "cctv_07",
+   "from": 16767,
+   "to": 16887,
+   "frames": [
+    {
+     "src": "restyle/cctv_07_k0.jpg"
+    },
+    {
+     "src": "restyle/cctv_07_k1.jpg"
+    },
+    {
+     "src": "restyle/cctv_07_k2.jpg"
+    }
+   ],
+   "fx": "cctv"
+  },
+  {
+   "id": "cctv_08",
+   "from": 16887,
+   "to": 17037,
+   "frames": [
+    {
+     "src": "restyle/cctv_08_k0.jpg"
+    },
+    {
+     "src": "restyle/cctv_08_k1.jpg"
+    },
+    {
+     "src": "restyle/cctv_08_k2.jpg"
+    }
+   ],
+   "fx": "cctv"
+  },
+  {
+   "id": "cctv_09",
+   "from": 17037,
+   "to": 17144,
+   "frames": [
+    {
+     "src": "restyle/cctv_09_k1.jpg"
+    }
+   ],
+   "fx": "cctv"
+  },
+  {
+   "id": "finale_00",
+   "from": 17144,
+   "to": 17222,
+   "frames": [
+    {
+     "src": "restyle/finale_00_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_01",
+   "from": 17222,
+   "to": 17365,
+   "frames": [
+    {
+     "src": "restyle/finale_01_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_03",
+   "from": 17498,
+   "to": 17556,
+   "frames": [
+    {
+     "src": "restyle/finale_03_k0.jpg"
+    },
+    {
+     "src": "restyle/finale_03_k1.jpg"
+    },
+    {
+     "src": "restyle/finale_03_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_04",
+   "from": 17556,
+   "to": 17580,
+   "frames": [
+    {
+     "src": "restyle/finale_04_k0.jpg"
+    },
+    {
+     "src": "restyle/finale_04_k1.jpg"
+    },
+    {
+     "src": "restyle/finale_04_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_05",
+   "from": 17580,
+   "to": 17724,
+   "frames": [
+    {
+     "src": "restyle/finale_05_k0.jpg"
+    },
+    {
+     "src": "restyle/finale_05_k1.jpg"
+    },
+    {
+     "src": "restyle/finale_05_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_06",
+   "from": 17724,
+   "to": 17805,
+   "frames": [
+    {
+     "src": "restyle/finale_06_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_07",
+   "from": 17805,
+   "to": 17969,
+   "frames": [
+    {
+     "src": "restyle/finale_07_k0.jpg"
+    },
+    {
+     "src": "restyle/finale_07_k1.jpg"
+    },
+    {
+     "src": "restyle/finale_07_k2.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_17",
+   "from": 18702,
+   "to": 18836,
+   "frames": [
+    {
+     "src": "restyle/finale_17_k1.jpg"
+    }
+   ],
+   "fx": null
+  },
+  {
+   "id": "finale_18",
+   "from": 18836,
+   "to": 18890,
+   "frames": [
+    {
+     "src": "restyle/finale_18_k1.jpg"
     }
    ],
    "fx": null

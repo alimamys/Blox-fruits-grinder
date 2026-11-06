@@ -363,6 +363,52 @@ KEY_SEEDS = [37, 38, 63, 8, 11, 12, 21, 30, 13]
 CHAR_SEED = {'daniel': 37, 'emma': 38, 'oldWoman': 63, 'captain': 8, 'crew1': 11, 'crew2': 12, 'police': 21, 'harbor': 30}
 
 
+def mouth_blob(m: np.ndarray) -> tuple:
+    """Pixels of the mouth-key ellipse, ignoring other pure-red things in the frame
+    (police lights, warning lamps): the blob must be ellipse-shaped (w/h ~1.6, ~78% filled)."""
+    import cv2
+    n, lab, stats, _ = cv2.connectedComponentsWithStats(m.astype(np.uint8), connectivity=8)
+    best, best_area = None, 0
+    for i in range(1, n):
+        x, y, w, h, area = stats[i]
+        if area < 12 or h == 0:
+            continue
+        if 1.15 < w / h < 2.3 and 0.55 < area / (w * h) < 0.95 and area > best_area:
+            best, best_area = i, area
+    if best is None:
+        return np.array([]), np.array([])
+    return np.nonzero(lab == best)
+
+
+def track_into_redraw(shot: str, box: list) -> list:
+    """Map a box from the code-drawn keyframe into the redraw: register the two images
+    (ECC, scale + shift) in a window around the face and move/scale the box with it."""
+    import cv2
+    src_p, red_p = KEYS / f'{shot}_k1.png', OUT / f'{shot}_k1.jpg'
+    if not (src_p.exists() and red_p.exists()):
+        return box
+    src = np.asarray(Image.open(src_p).convert('RGB'))
+    red = np.asarray(Image.open(red_p).convert('RGB').resize((src.shape[1], src.shape[0]), Image.LANCZOS))
+    H, W = src.shape[:2]
+    cx, cy, w, h = box
+    r = max(140, 7 * w)  # the face and a bit around it
+    x0, x1, y0, y1 = int(max(0, cx - r)), int(min(W, cx + r)), int(max(0, cy - r * 1.2)), int(min(H, cy + r * 0.8))
+    a, b = _edges(src), _edges(red)
+    mask = np.zeros(a.shape, np.uint8)
+    mask[y0:y1, x0:x1] = 1
+    warp = np.eye(2, 3, dtype=np.float32)
+    try:
+        _, warp = cv2.findTransformECC(a, b, warp, cv2.MOTION_AFFINE, (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 200, 1e-6), mask, 5)
+    except cv2.error:
+        return box
+    sx, sy = float(warp[0, 0]), float(warp[1, 1])
+    nx = float(warp[0, 0] * cx + warp[0, 1] * cy + warp[0, 2])
+    ny = float(warp[1, 0] * cx + warp[1, 1] * cy + warp[1, 2])
+    if not (0.75 < sx < 1.35 and 0.75 < sy < 1.35) or abs(nx - cx) > 3 * r or abs(ny - cy) > 3 * r:
+        return box
+    return [round(nx, 1), round(ny, 1), max(4, int(round(w * sx))), max(3, int(round(h * sy)))]
+
+
 def cmd_mouths() -> None:
     plan = json.loads(PLAN.read_text())
     found = missing = 0
@@ -379,13 +425,15 @@ def cmd_mouths() -> None:
                 continue
             b = 24 * (KEY_SEEDS.index(seed) + 1)
             m = (np.abs(a[..., 0] - 255) < 40) & (a[..., 1] < 50) & (np.abs(a[..., 2] - b) < 8)
-            ys, xs = np.nonzero(m)
+            ys, xs = mouth_blob(m)
             if len(xs) < 12:
                 t.pop('mouth', None)
                 missing += 1
                 continue
             x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
-            t['mouth'] = [round((x0 + x1) / 2, 1), round((y0 + y1) / 2, 1), int(x1 - x0 + 1), int(y1 - y0 + 1)]
+            box = [round((x0 + x1) / 2, 1), round((y0 + y1) / 2, 1), int(x1 - x0 + 1), int(y1 - y0 + 1)]
+            # the redraw drifts a little from the code-drawn frame: follow the face into it
+            t['mouth'] = track_into_redraw(p['id'], box)
             found += 1
     PLAN.write_text(json.dumps(plan, indent=1))
     print(f'mouths: located {found}, not visible {missing}')
