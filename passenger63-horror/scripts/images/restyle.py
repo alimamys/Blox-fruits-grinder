@@ -153,7 +153,8 @@ def aligned_diff(a: np.ndarray, b: np.ndarray) -> float:
 
 
 # shots that stay code-rendered: small legal text, the title card, counters that tick in sync with the voice
-FORCE_SKIP = {'hook_00', 'hook_01', 'hook_26', 'departure_04', 'hull_25', 'otherFerry_04', 'otherFerry_07', 'vanish_07'}  # hull_25, otherFerry_04: the redraw invented people; otherFerry_07: it dropped the red evidence circle; vanish_07: hull scratches became ghost figures
+FORCE_SKIP = {'hook_00', 'hook_01', 'hook_26', 'departure_04', 'hull_25', 'otherFerry_04', 'otherFerry_07', 'vanish_07',
+              'cctv_00', 'cctv_01', 'cctv_02', 'cctv_03', 'cctv_04'}  # cctv_00-04: running clock / export bar must stay animated;  # hull_25, otherFerry_04: the redraw invented people; otherFerry_07: it dropped the red evidence circle; vanish_07: hull scratches became ghost figures
 # very dark shots that still matter (keep them dark - see DARK_NOTE)
 FORCE_INCLUDE = {'finale_17', 'finale_18', 'vanish_03'}
 DARK_NOTE = ' This is a very dark night scene: keep it just as dark and dim, only the faint light sources lit.'
