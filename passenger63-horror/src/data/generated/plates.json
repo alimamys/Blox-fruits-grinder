@@ -1,3 +1,13 @@
 {
- "plates": []
+ "plates": [
+  "cabin_fore_labels",
+  "cabinrow",
+  "deck_behind_empty",
+  "deck_behind_red",
+  "deck_behind_woman",
+  "deck_front_dark",
+  "room_cabin",
+  "storage",
+  "washroom"
+ ]
 }

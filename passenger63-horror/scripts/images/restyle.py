@@ -46,6 +46,17 @@ CACHE = OUT / '.cache.json'
 MANIFEST = ROOT / 'src' / 'data' / 'generated' / 'restyle.json'
 PLATE_SRC = ROOT / 'build' / 'plates'
 PLATE_OUT = ROOT / 'public' / 'plates'
+PLATE_RAW = ROOT / 'build' / 'plates_raw'
+# Where the animated characters touch the set (sit, stand, walk), in plate pixels (1920x1080).
+# The redraw is registered to the code-drawn plate inside this box, so a seat or bench in the
+# redraw lands exactly where the animated figure sits on it. None = the whole frame.
+PLATE_ROI = {
+    'cabinrow': (520, 600, 1400, 900),
+    'deck_front_dark': (640, 640, 1280, 920),
+    'deck_behind_woman': (640, 560, 1280, 900),
+    'deck_behind_empty': (160, 560, 1760, 960),
+    'deck_behind_red': (160, 560, 1760, 960),
+}
 PLATE_SHOTS = ROOT / 'build' / 'plate_shots.json'
 PLATE_MANIFEST = ROOT / 'src' / 'data' / 'generated' / 'plates.json'
 PLATE_NOTE = (
@@ -265,12 +276,12 @@ def openai_edit(png: bytes, prompt: str) -> Image.Image:
 def job_list(plan: list, only: set | None) -> list:
     jobs = []
     if PLATE_SRC.exists():
-        PLATE_OUT.mkdir(parents=True, exist_ok=True)
+        PLATE_RAW.mkdir(parents=True, exist_ok=True)
         for src in sorted(PLATE_SRC.glob('*.png')):
             if only and src.stem not in only:
                 continue
             dark = 'red' in src.stem or 'dark' in src.stem
-            jobs.append({'shot': src.stem, 'src': src, 'out': PLATE_OUT / f'{src.stem}.jpg', 'prompt': RESTYLE_PROMPT + PLATE_NOTE + (DARK_NOTE if dark else ''), 'kind': 'restyle'})
+            jobs.append({'shot': src.stem, 'src': src, 'out': PLATE_RAW / f'{src.stem}.jpg', 'prompt': RESTYLE_PROMPT + PLATE_NOTE + (DARK_NOTE if dark else ''), 'kind': 'restyle'})
     for p in plan:
         if only and p['id'] not in only:
             continue
@@ -385,6 +396,69 @@ FX = {
 }
 
 
+def _edges(im: np.ndarray) -> np.ndarray:
+    import cv2
+    g = cv2.GaussianBlur(cv2.cvtColor(im, cv2.COLOR_RGB2GRAY).astype(np.float32), (0, 0), 2.0)
+    gx = cv2.Sobel(g, cv2.CV_32F, 1, 0, ksize=3)
+    gy = cv2.Sobel(g, cv2.CV_32F, 0, 1, ksize=3)
+    m = cv2.magnitude(gx, gy)
+    m = cv2.GaussianBlur(m, (0, 0), 3.0)
+    return m / (m.max() + 1e-6)
+
+
+def align_plate(pid: str) -> dict:
+    """Register the redraw onto the code-drawn plate (scale + shift, per axis) around the
+    area the animated characters use, and write the aligned plate to public/plates/."""
+    import cv2
+    src = np.asarray(Image.open(PLATE_SRC / f'{pid}.png').convert('RGB'))
+    raw = np.asarray(Image.open(PLATE_RAW / f'{pid}.jpg').convert('RGB').resize((src.shape[1], src.shape[0]), Image.LANCZOS))
+    H, W = src.shape[:2]
+    x0, y0, x1, y1 = PLATE_ROI.get(pid) or (0, 0, W, H)
+    warp = np.eye(2, 3, dtype=np.float32)
+    # coarse to fine
+    for scale in (0.25, 0.5):
+        a = _edges(cv2.resize(src, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA))
+        b = _edges(cv2.resize(raw, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA))
+        mask = np.zeros(a.shape, np.uint8)
+        mask[int(y0 * scale): int(y1 * scale), int(x0 * scale): int(x1 * scale)] = 1
+        w = warp.copy()
+        w[:, 2] *= scale
+        try:
+            _, w = cv2.findTransformECC(a, b, w, cv2.MOTION_AFFINE, (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 300, 1e-6), mask, 5)
+        except cv2.error:
+            break
+        w[:, 2] /= scale
+        warp = w
+    # keep it to scale + shift per axis (no shear/rotation): the redraw only drifts and zooms
+    sx, sy, tx, ty = float(warp[0, 0]), float(warp[1, 1]), float(warp[0, 2]), float(warp[1, 2])
+    if not (0.8 < sx < 1.25 and 0.8 < sy < 1.25 and abs(tx) < 250 and abs(ty) < 250):
+        sx, sy, tx, ty = 1.0, 1.0, 0.0, 0.0  # implausible - keep the redraw as it is
+    def fit(sx_, sy_, tx_, ty_):
+        mm = np.array([[sx_, 0, tx_], [0, sy_, ty_]], np.float32)
+        o = cv2.warpAffine(raw, mm, (W, H), flags=cv2.INTER_LANCZOS4 | cv2.WARP_INVERSE_MAP, borderMode=cv2.BORDER_REPLICATE)
+        return o, float(np.abs(_edges(src)[y0:y1, x0:x1] - _edges(o)[y0:y1, x0:x1]).mean())
+    if fit(sx, sy, tx, ty)[1] >= fit(1.0, 1.0, 0.0, 0.0)[1]:
+        sx, sy, tx, ty = 1.0, 1.0, 0.0, 0.0  # registration did not help (very dark plates) - keep as drawn
+    m = np.array([[sx, 0, tx], [0, sy, ty]], np.float32)
+    out = cv2.warpAffine(raw, m, (W, H), flags=cv2.INTER_LANCZOS4 | cv2.WARP_INVERSE_MAP, borderMode=cv2.BORDER_REPLICATE)
+    PLATE_OUT.mkdir(parents=True, exist_ok=True)
+    Image.fromarray(out).save(PLATE_OUT / f'{pid}.jpg', 'JPEG', quality=92)
+    # residual misfit inside the box, before and after
+    ea, eb, ec = _edges(src), _edges(raw), _edges(out)
+    sl = (slice(y0, y1), slice(x0, x1))
+    before = float(np.abs(ea[sl] - eb[sl]).mean())
+    after = float(np.abs(ea[sl] - ec[sl]).mean())
+    return {'id': pid, 'sx': round(sx, 4), 'sy': round(sy, 4), 'tx': round(tx, 1), 'ty': round(ty, 1), 'misfit_before': round(before, 4), 'misfit_after': round(after, 4)}
+
+
+def cmd_align() -> None:
+    rows = [align_plate(p.stem) for p in sorted(PLATE_RAW.glob('*.jpg')) if (PLATE_SRC / f'{p.stem}.png').exists()]
+    for r in rows:
+        print(f"  {r['id']:<20} scale {r['sx']:.3f} x {r['sy']:.3f}  shift {r['tx']:+6.1f},{r['ty']:+6.1f}  misfit {r['misfit_before']:.4f} -> {r['misfit_after']:.4f}")
+    (ROOT / 'build' / 'plate_align.json').write_text(json.dumps(rows, indent=1))
+    print(f'align: {len(rows)} plates -> {PLATE_OUT.relative_to(ROOT)}')
+
+
 def cmd_manifest() -> None:
     plan = json.loads(PLAN.read_text())
     shots = []
@@ -434,7 +508,7 @@ def cmd_manifest() -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument('cmd', choices=['plan', 'gen', 'mouths', 'manifest'])
+    ap.add_argument('cmd', choices=['plan', 'gen', 'mouths', 'align', 'manifest'])
     ap.add_argument('--only')
     ap.add_argument('--limit', type=int, default=0)
     ap.add_argument('--workers', type=int, default=6)
@@ -445,6 +519,8 @@ def main() -> int:
         cmd_gen(set(a.only.split(',')) if a.only else None, a.limit, a.workers)
     elif a.cmd == 'mouths':
         cmd_mouths()
+    elif a.cmd == 'align':
+        cmd_align()
     else:
         cmd_manifest()
     return 0
