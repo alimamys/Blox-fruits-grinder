@@ -1,0 +1,35 @@
+There were 239 frames in my animation when I went to bed. When I opened it again, there were 240.
+In the extra frame, a man was standing in my hallway. I hadn't drawn him. And every time I pressed play, he was closer.
+
+A 10-minute animated horror story. Headphones recommended - and maybe leave a light on.
+
+CHAPTERS
+0:00 The extra frame
+0:42 A normal night
+1:28 The stranger
+2:23 One step closer
+3:16 The warning
+4:08 The hallway
+5:19 The white brush
+6:30 White on white
+7:35 Inside the walls
+8:54 The recording
+9:55 The last selection
+
+This story is fiction. All characters and events are invented; any resemblance to real people or events is coincidental.
+
+#horrorstory #animation #scary
+
+CREDITS
+Story, animation and sound design: Frame 240 production.
+Voices: Fish Audio (text-to-speech).
+Illustrations: generated with an image model from the film's own layouts and character designs.
+Fonts: Inter, IBM Plex Mono (SIL Open Font License).
+Sound effects: built from CC0 and CC-BY field recordings (FSD50K / Freesound, VSCO-2 CE, Kenney.nl).
+Sound effects used under Creative Commons Attribution (CC BY):
+• "sh_Man_Running_Footsteps_On_Carpet.wav" by shall555 - https://freesound.org/s/140219/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: running_carpet
+• "Staircase Impulse-Response long reverb 20m away clap" by jorickhoofd - https://freesound.org/s/160138/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: boom_hit, low_horror_drone, riser_long, riser_short, stinger, sub_drop, tension_pulse, whoosh_1, whoosh_2, whoosh_3
+• "Basement Impulse-Response reverb 6m away medium-pitched clap" by jorickhoofd - https://freesound.org/s/160143/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: bass_hit, breath_exhale_f, light_flicker, phone_alert, ui_click, ui_refresh
+• "CPU Fan and HDD atmosphere" by TRNGLE - https://freesound.org/s/378070/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: computer_fan
+• "Subway speaker malfunction.wav" by jobro - https://freesound.org/s/75131/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: glitch
+• "Windscape With Metal Scrape.wav" by Benboncan - https://freesound.org/s/78430/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: riser_long
