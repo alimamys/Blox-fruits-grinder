@@ -24,9 +24,13 @@ The plan is in [`PLAN.md`](PLAN.md) and was approved:
 - **Sound effects:** 50 files built from CC0 and CC-BY recordings (`verify_sfx.py`: 0 flagged). The 6 CC-BY recordings are listed in `public/audio/sfx/CREDITS.md`.
 - **First-minute animatic:** `previews/frame240_animatic_first_minute_720p.mp4` (layouts, scratch Kokoro voices, real SFX, −15 LUFS). With scratch voices the whole cut runs 9:04; Drama 3 is expected nearer 10:00. Rendering takes about 1:45 per minute at 1080p on 4 cores.
 
-## Blocked: needs keys
+## Done with the keys (stored in the git-ignored `.env`)
 
-`OPENAI_API_KEY` and `FISH_API_KEY` are not set in this environment. Add them in the environment settings (Network secrets, or environment variables). A new session picks them up.
+- **Checkpoint 2:** character sheets (`references/sheets/`) and location references (`references/locations/`), $2.40 (`logs/image_costs.jsonl`). The closet and white apartment were regenerated once: the first closet invented people, and the first white apartment was warm instead of drained. **Waiting for approval of the look before any frame is generated.**
+- **Voices:** Fish Drama 3, about 7,000 characters (about $0.07).
+  - Mara is "Female Voice"; Hana is "Yorkshire Woman".
+  - Whisper QA: 0 of 192 flagged after 5 best-of-3 re-rolls.
+  - The cut runs **10:40** after tightening and 7 cut lines.
 
 ## Resume (in order)
 
