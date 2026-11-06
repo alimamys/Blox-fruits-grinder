@@ -462,7 +462,9 @@ def clap_ir(key: str, length: float | None = None, stretch_f: float = 1.0) -> np
     return y / np.sqrt(np.sum(y ** 2))
 
 
-_IR_KEYS = {'hull': ('fsd:160135', 'fsd:160134'), 'hall': ('fsd:160138',), 'steel': ('fsd:160143',), 'cabin': ('fsd:160143',)}
+_IR_KEYS = {'hull': ('fsd:160135', 'fsd:160134'), 'hall': ('fsd:160138',), 'steel': ('fsd:160143',), 'cabin': ('fsd:160143',),
+            # Frame 240 (apartment): hand claps recorded in a real bedroom / landing (CC0, toiletrolltube)
+            'bedroom': ('fsd:180784', 'fsd:180760'), 'landing': ('fsd:180782', 'fsd:180759'), 'closet': ('fsd:180784',)}
 
 
 def room(kind: str) -> np.ndarray:
@@ -483,6 +485,15 @@ def room(kind: str) -> np.ndarray:
     elif kind == 'cabin':  # small steel room
         l = clap_ir('fsd:160143', 0.9, 0.55)
         r = clap_ir('fsd:160143', 0.9, 0.6)
+    elif kind == 'bedroom':  # Mara's small apartment room (two different clap takes = natural stereo)
+        l = clap_ir('fsd:180784', 0.9)
+        r = clap_ir('fsd:180760', 0.9)
+    elif kind == 'landing':  # the rest of the apartment / hallway, heard from another room
+        l = clap_ir('fsd:180782', 1.2, 1.15)
+        r = clap_ir('fsd:180759', 1.2, 1.2)
+    elif kind == 'closet':  # tiny storage closet: the bedroom response shrunk (smaller room = faster, denser)
+        l = clap_ir('fsd:180784', 0.18, 0.4)
+        r = clap_ir('fsd:180784', 0.18, 0.43)
     else:
         raise KeyError(kind)
     n = max(len(l), len(r))
