@@ -26,11 +26,17 @@ The plan is in [`PLAN.md`](PLAN.md) and was approved:
 
 ## Done with the keys (stored in the git-ignored `.env`)
 
-- **Checkpoint 2:** character sheets (`references/sheets/`) and location references (`references/locations/`), $2.40 (`logs/image_costs.jsonl`). The closet and white apartment were regenerated once: the first closet invented people, and the first white apartment was warm instead of drained. **Waiting for approval of the look before any frame is generated.**
-- **Voices:** Fish Drama 3, about 7,000 characters (about $0.07).
-  - Mara is "Female Voice"; Hana is "Yorkshire Woman".
-  - Whisper QA: 0 of 192 flagged after 5 best-of-3 re-rolls.
-  - The cut runs **10:40** after tightening and 7 cut lines.
+- **Look:** character sheets and locations approved; first minute approved.
+- **Art:** all 157 art shots have final frames (130 generated frames, 11 canvas pictures, 11 mouth variants).
+  - Every frame was reviewed against its layout and the sheets (`build/review/`).
+  - 24 frames were regenerated once with sharper prompts. The originals are kept in `build/rejected/`, with the reasons in the commit history.
+- **Spend:** images **$47.42 of $50**, including the sheets, locations, 3 thumbnails and the regenerations (`logs/image_costs.jsonl`). Fish Drama 3 voices: about $0.09.
+- **Voices:** Mara is "Female Voice"; Hana is "Yorkshire Woman". Whisper QA: 0 of 192 flagged. The cut runs **10:40**.
+- **Mix:**
+  - Mastered to −15 LUFS, with a pre-limiter so the gain stays linear and a −1.5 dBTP safety limiter.
+  - Hana sits under the narration.
+  - The final 3 s white hold is silent.
+- **YouTube:** `youtube/` holds `DESCRIPTION.txt`, `TITLE_AND_TAGS.txt` and three thumbnails (`thumbnail_A_doorway.jpg`, `thumbnail_B_frame240.jpg`, `thumbnail_C_wall.jpg`).
 
 ## Resume (in order)
 
