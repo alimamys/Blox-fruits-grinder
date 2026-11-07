@@ -1,0 +1,60 @@
+At 3:06 in the morning, every apartment door in my building opened.
+My neighbors stepped into the hallway and stood there - completely still, facing the stairs, not breathing. Then something started coming up.
+
+A 13-minute animated horror story. Headphones recommended - and maybe check that your door is locked.
+
+CHAPTERS
+0:00 Every door opened
+0:54 The new apartment
+2:11 The footsteps
+3:17 The neighbors
+4:38 The rule
+6:07 On the stairs
+7:36 The message
+8:52 A key in the lock
+10:12 The staircase
+12:05 The next tenant
+
+This story is fiction. All characters and events are invented; any resemblance to real people or events is coincidental.
+
+#horrorstory #animation #scary
+
+CREDITS
+Story, animation and sound design: Never Open Your Door at 3:06 AM production.
+Voices: Fish Audio (text-to-speech).
+Illustrations: generated with an image model from the film's own layouts and character designs, animated in code.
+Fonts: Inter, IBM Plex Mono, Patrick Hand (SIL Open Font License).
+Sound effects: built from CC0 and CC-BY field recordings (FSD50K / Freesound, VSCO-2 CE, Kenney.nl, bank-sfx).
+Sound effects used under Creative Commons Attribution (CC BY):
+• "wooden_door_close.wav" by joedeshon - https://freesound.org/s/117415/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_close, door_close_far, doors_cascade
+• "chaise_glisse1.wav" by MaxDemianAGL - https://freesound.org/s/120178/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_force, sofa_drag, table_drag
+• "light suburban ambiance.wav" by dkaufman - https://freesound.org/s/121287/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+• "sh_Man_Running_Footsteps_On_Carpet.wav" by shall555 - https://freesound.org/s/140219/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: running_carpet
+• "bedroom_door_at_home.wav" by bohara2000 - https://freesound.org/s/151293/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: doors_cascade
+• "Drawer-Wooden-Empty-Close-04.wav" by D W - https://freesound.org/s/152303/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: drawer_close
+• "Staircase Impulse-Response long reverb 15m away clap" by jorickhoofd - https://freesound.org/s/160137/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: cry_sharp_far_m, door_close_far, mailbox_label, railing_creak, sack_drag, sack_drag_wet, sack_move, scream_far_f, stairwell_tone, step_heavy_1, step_heavy_2, step_heavy_3, steps_heavy_climb, thud_heavy_far, wall_scrape
+• "Staircase Impulse-Response long reverb 20m away clap" by jorickhoofd - https://freesound.org/s/160138/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: boom_hit, cry_sharp_far_m, door_close_far, low_horror_drone, mailbox_label, railing_creak, riser_long, riser_short, sack_drag, sack_drag_wet, sack_move, scream_far_f, stairwell_tone, step_heavy_1, step_heavy_2, step_heavy_3, steps_heavy_climb, stinger, sub_drop, tension_pulse, thud_heavy_far, wall_scrape, whoosh_1, whoosh_2, whoosh_3
+• "Basement Impulse-Response reverb 6m away medium-pitched clap" by jorickhoofd - https://freesound.org/s/160143/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: bass_hit, breath_exhale_f, light_flicker, phone_alert, ui_click, ui_refresh
+• "Hotel_do_Mar_2012-16_Large_Triangular_Room_Clap_IR.wav" by AlienXXX - https://freesound.org/s/164887/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_open_far, doors_cascade, fluorescent_flicker
+• "Hotel_do_Mar_2012-17_Large_Triangular_Room_Clap_IR.wav" by AlienXXX - https://freesound.org/s/164888/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_open_far, doors_cascade, fluorescent_flicker
+• "Short scared scream 3" by jorickhoofd - https://freesound.org/s/180344/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: cry_sharp_far_m
+• "Small tin tap 7.wav" by S. Dedalus - https://freesound.org/s/194650/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: mailbox_label
+• "Unlocking Door Slowly" by qubodup - https://freesound.org/s/219563/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: lock_turn
+• "Heavy Impacts" by RICHERlandTV - https://freesound.org/s/232358/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: step_heavy_1, step_heavy_2, step_heavy_3, steps_heavy_climb, thud_heavy_far
+• "Pulsacions del cor.wav" by flosicalcat59 - https://freesound.org/s/238929/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: heartbeat_fast, heartbeat_loop
+• "Footsteps of soldier on ground.wav" by Iberian_Runa - https://freesound.org/s/243794/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: step_heavy_3, steps_heavy_climb
+• "Door handle spring" by Jagadamba - https://freesound.org/s/257052/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: doors_cascade
+• "Creak_12.wav" by HerbertBoland - https://freesound.org/s/29685/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_open, door_open_far, doors_cascade
+• "Chair_Screeching_Fx.wav" by YMB - https://freesound.org/s/325939/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: table_drag
+• "BS_Scrape_17.wav" by eardeer - https://freesound.org/s/337386/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: chain_slide
+• "door_three knocks_light.wav" by sjturia - https://freesound.org/s/370920/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: knock_soft
+• "Car in the Distance" by FairhavenCollection - https://freesound.org/s/376994/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+• "CPU Fan and HDD atmosphere" by TRNGLE - https://freesound.org/s/378070/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: computer_fan
+• "1ft dry 4 rings.flac" by billox30 - https://freesound.org/s/391978/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: phone_ring_old
+• "thrush_city.mp3" by dobroide - https://freesound.org/s/4250/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+• "20080505_1306playground01.wav" by Asparagus_P - https://freesound.org/s/52882/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+• "Subway speaker malfunction.wav" by jobro - https://freesound.org/s/75131/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: glitch
+• "Windscape With Metal Scrape.wav" by Benboncan - https://freesound.org/s/78430/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: riser_long
+• "Geology Bannister Squeak.wav" by Razzvio - https://freesound.org/s/78992/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: railing_creak
+• "turning stubborn lock.wav" by Wrylytucker - https://freesound.org/s/85128/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: lock_turn
+• "walk-mud01.wav" by JanKoehl - https://freesound.org/s/85604/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: sack_drag_wet

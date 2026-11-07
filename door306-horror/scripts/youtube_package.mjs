@@ -15,17 +15,16 @@ fs.mkdirSync(out, {recursive: true});
 
 // spoiler-free chapter titles (the scene names in the timeline give away twists)
 const CHAPTER = {
-	coldOpen: 'The extra frame',
-	normalNight: 'A normal night',
-	stranger: 'The stranger',
-	closer: 'One step closer',
-	warning: 'The warning',
-	hallway: 'The hallway',
-	erase: 'The white brush',
-	whiteOnWhite: 'White on white',
-	insideWall: 'Inside the walls',
-	recording: 'The recording',
-	lastSelection: 'The last selection',
+	doors: 'Every door opened',
+	newApartment: 'The new apartment',
+	footsteps: 'The footsteps',
+	neighbors: 'The neighbors',
+	rule: 'The rule',
+	creature: 'On the stairs',
+	realization: 'The message',
+	offering: 'A key in the lock',
+	staircase: 'The staircase',
+	nextTenant: 'The next tenant',
 };
 // same rounding as `npm run check` (scripts/check.mjs), so the chapters match its printout
 const ts = (s) => {
@@ -41,31 +40,31 @@ const ccby = credits
 	.filter((l) => /CC[- ]BY/i.test(l) && !/CC0/i.test(l) && l.trim().startsWith('-'))
 	.map((l) => l.replace(/^\s*-\s*/, '• ').replace(/\*\*/g, '').replace(/`/g, ''));
 
-const title = 'Frame 240 | Animated Horror Story';
-const alternatives = ["Frame 240 - There's a Frame in My Animation I Didn't Draw", 'Every Time I Pressed Play, He Was Closer | Animated Horror'];
+const title = 'Never Open Your Door at 3:06 AM | Animated Horror Story';
+const alternatives = ['My Rent Was Too Cheap... Now I Know Why | Animated Horror', 'My Neighbors Chose Me | Animated Horror Story'];
 const tags = [
 	'animated horror story',
 	'horror animation',
 	'scary story',
 	'creepypasta',
-	'animator horror',
-	'analog horror',
+	'apartment horror',
+	'3am horror story',
+	'neighbors horror story',
 	'2d animation',
 	'horror short film',
 	'scary animation',
-	'frame 240',
-	'paranormal story',
+	'landlord horror story',
 	'horror narration',
-	'mystery',
+	'creature horror',
 	'thriller',
 	'animated short',
 ];
 
 const description = [
-	'There were 239 frames in my animation when I went to bed. When I opened it again, there were 240.',
-	'In the extra frame, a man was standing in my hallway. I hadn\'t drawn him. And every time I pressed play, he was closer.',
+	'At 3:06 in the morning, every apartment door in my building opened.',
+	'My neighbors stepped into the hallway and stood there - completely still, facing the stairs, not breathing. Then something started coming up.',
 	'',
-	'A 10-minute animated horror story. Headphones recommended - and maybe leave a light on.',
+	'A 13-minute animated horror story. Headphones recommended - and maybe check that your door is locked.',
 	'',
 	'CHAPTERS',
 	...chapters,
@@ -75,11 +74,11 @@ const description = [
 	'#horrorstory #animation #scary',
 	'',
 	'CREDITS',
-	'Story, animation and sound design: Frame 240 production.',
+	'Story, animation and sound design: Never Open Your Door at 3:06 AM production.',
 	'Voices: Fish Audio (text-to-speech).',
-	'Illustrations: generated with an image model from the film\'s own layouts and character designs.',
-	'Fonts: Inter, IBM Plex Mono (SIL Open Font License).',
-	'Sound effects: built from CC0 and CC-BY field recordings (FSD50K / Freesound, VSCO-2 CE, Kenney.nl).',
+	'Illustrations: generated with an image model from the film\'s own layouts and character designs, animated in code.',
+	'Fonts: Inter, IBM Plex Mono, Patrick Hand (SIL Open Font License).',
+	'Sound effects: built from CC0 and CC-BY field recordings (FSD50K / Freesound, VSCO-2 CE, Kenney.nl, bank-sfx).',
 	...(ccby.length
 		? ['Sound effects used under Creative Commons Attribution (CC BY):', ...ccby]
 		: ['(CC-BY attributions: run the SFX build first - public/audio/sfx/CREDITS.md)']),

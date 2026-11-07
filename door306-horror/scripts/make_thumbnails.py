@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""YouTube thumbnails (1280x720) for "Frame 240": the scenes drawn in the film's 2D style by
-scripts/images/thumbnail_gen.py + crisp text (max 4 words) and one clear mystery mark.
+"""YouTube thumbnails (1280x720) for "Never Open Your Door at 3:06 AM": composed from the film's own
+frames (no extra image cost) + crisp text (max 4 words) and one clear mystery mark.
     .venv/bin/python scripts/make_thumbnails.py   -> youtube/thumbnail_*.jpg
 The circle/arrow positions are set per image after looking at the generated scene (MARKS)."""
 from pathlib import Path
@@ -77,49 +77,51 @@ def bottom_shade(im: Image.Image, start: float = 0.55, amount: float = 0.75) -> 
     return Image.composite(Image.new('RGB', (W, H), (0, 0, 0)), im, grad)
 
 
-# where the mystery is in each generated scene (1280x720 px), set after looking at youtube/gen_*.png
-MARKS = {
-    'doorway': {'circle': (300, 330, 105, 250), 'lift': (300, 330, 120, 270)},  # the figure in the doorway behind her
-    'screen': {'arrow': (640, 560, 430, 380)},  # the man on her monitor
-    'wall': {'circle': (880, 270, 190, 260)},  # the white figure in the wall
-}
+
+def frame(name: str, scale: float, cx: float, cy: float, at: tuple[int, int], canvas: Image.Image | None = None, box=None) -> Image.Image:
+    """Paste a film frame (public/restyle/<name>) so its point (cx, cy) (1920x1080) lands on `at`."""
+    im = Image.open(ROOT / 'public' / 'restyle' / name).convert('RGB')
+    im = im.resize((int(1920 * scale), int(1080 * scale)), Image.LANCZOS)
+    c = canvas if canvas is not None else Image.new('RGB', (W, H), (4, 6, 12))
+    layer = Image.new('RGB', (W, H), (4, 6, 12))
+    layer.paste(im, (int(at[0] - cx * scale), int(at[1] - cy * scale)))
+    if box is None:
+        return layer
+    mask = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(mask).rectangle(box, fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(28))
+    return Image.composite(layer, c, mask)
+
+
+def pop(im: Image.Image) -> Image.Image:
+    im = ImageEnhance.Brightness(im).enhance(1.18)
+    im = ImageEnhance.Contrast(im).enhance(1.22)
+    return ImageEnhance.Color(im).enhance(1.15)
 
 
 def main() -> None:
     OUT.mkdir(exist_ok=True)
-    # text in the bottom band, so it never covers the face or the mystery
-    jobs = [
-        ('doorway', 'thumbnail_A_doorway.jpg', [('WHO DREW HIM?', WHITE)], (40, 590, 112, 1180)),
-        ('screen', 'thumbnail_B_frame240.jpg', [('FRAME 240', RED)], (40, 580, 128, 700)),
-        ('wall', 'thumbnail_C_wall.jpg', [('LOOK CLOSER.', WHITE)], (40, 590, 112, 1180)),
-    ]
-    for name, out, words, (x, y, size, max_w) in jobs:
-        src = OUT / f'gen_{name}.png'
-        if not src.exists():
-            print(f'  (no {src.name} yet - run scripts/images/thumbnail_gen.py)')
-            continue
-        im = Image.open(src).convert('RGB').resize((W, H))
-        im = ImageEnhance.Contrast(im).enhance(1.12)
-        im = ImageEnhance.Color(im).enhance(1.12)
-        im = ImageEnhance.Brightness(im).enhance(1.06)
-        im = bottom_shade(im, 0.62, 0.7)
-        mk = MARKS.get(name, {})
-        if 'lift' in mk:
-            # lift the shadows inside the mark so the hidden figure is just visible
-            cx, cy, rx, ry = mk['lift']
-            mask = Image.new('L', (W, H), 0)
-            ImageDraw.Draw(mask).ellipse((cx - rx, cy - ry, cx + rx, cy + ry), fill=255)
-            mask = mask.filter(ImageFilter.GaussianBlur(40))
-            lifted = ImageEnhance.Contrast(im.point(lambda v: int(255 * (v / 255) ** 0.55))).enhance(1.15)
-            im = Image.composite(lifted, im, mask)
-        if 'circle' in mk:
-            red_circle(im, *mk['circle'])
-        if 'arrow' in mk:
-            red_arrow(im, *mk['arrow'])
-        text(im, words, x, y, size, max_w)
-        im.save(OUT / out, quality=92)
-    for p in sorted(OUT.glob('thumbnail_*.jpg')):
-        print(p.relative_to(ROOT), f'{p.stat().st_size / 1024:.0f} KB')
+    # A - THEY CHOSE ME: every neighbour staring through the peephole + Sarah's terrified face
+    a = frame('d_07_peephole_pov_k1_vturned_peep.jpg', 0.86, 960, 560, (860, 360))
+    a = frame('c_08_dread_k1.jpg', 0.78, 640, 470, (300, 400), canvas=a, box=(0, 0, 560, H))
+    a = pop(vignette(a, 0.55))
+    red_circle(a, 792, 128, 62, 80)  # Mr. Harris, crying, in the middle of them
+    a = bottom_shade(a, 0.6, 0.8)
+    text(a, [('THEY CHOSE', WHITE), ('ME', RED)], 600, 470, 118, 640, gap=0)
+    a.save(OUT / 'thumbnail_A_they_chose_me.jpg', quality=92)
+    # B - 3:06 AM: the creature looming behind Mr. Harris
+    b = pop(vignette(frame('h_17_creature_k1_vjaw.jpg', 1.05, 1050, 470, (760, 380)), 0.5))
+    red_arrow(b, 1210, 300, 965, 118)  # the creature's head
+    b = bottom_shade(b, 0.55, 0.85)
+    text(b, [('3:06 AM', RED)], 60, 520, 170, 620)
+    b.save(OUT / 'thumbnail_B_306am.jpg', quality=92)
+    # C - DON'T OPEN IT: her eye at the peephole, wide with terror
+    c = pop(vignette(frame('d_14_eye_wide_k1_vwide.jpg', 0.9, 1000, 520, (560, 360)), 0.45))
+    red_circle(c, 1010, 340, 70, 150)  # the light of the peephole
+    c = bottom_shade(c, 0.6, 0.85)
+    text(c, [("DON'T OPEN IT", WHITE)], 60, 560, 128, 1150)
+    c.save(OUT / 'thumbnail_C_dont_open.jpg', quality=92)
+    print('youtube/thumbnail_A_they_chose_me.jpg, thumbnail_B_306am.jpg, thumbnail_C_dont_open.jpg')
 
 
 if __name__ == '__main__':
