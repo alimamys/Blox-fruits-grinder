@@ -55,9 +55,26 @@ The plan is in [`PLAN.md`](PLAN.md) and the script, word for word, in [`SCRIPT.m
   - `DESCRIPTION.txt` (spoiler-free hook, 10 chapters, the fiction disclaimer, 3 hashtags, 32 CC-BY credits);
   - three thumbnails composed from film frames, at no image cost: `thumbnail_A_they_chose_me.jpg`, `thumbnail_B_306am.jpg`, `thumbnail_C_dont_open.jpg`.
 
+## Fixes after the user's review
+
+- **Doors:**
+  - Each door panel is cut from the shut frame and swings open in 3D on its hinge over 0.9 s.
+  - The hinge side is read from the doors-open drawing (the lit strip of the swung-back panel); a fully dark doorway falls back to the doorknob rule.
+  - The doors behind Sarah swing shut one by one (`doors.close`).
+- **Drawings:**
+  - They change on a clean cut, with no dissolve, because blended drawings ghosted (neighbours seemed to merge or vanish through the peephole).
+  - A drawing that changes more than 12% of the frame is used whole, never half-merged.
+- **Hands:** Sarah at the door now has exactly two hands. In the scream, the creature's hand is drawn long, thin and grey.
+- **Direction:**
+  - she is dragged out of the doorframe feet-first;
+  - she pulls the sofa toward the door;
+  - the old man by the stairs faces the staircase.
+- **Landlord:** a new composed, polite sheet. His key handover, mailbox, office and phone-call frames were redrawn, with at most a faint smile.
+- **Evidence:** `previews/check_fixes.jpg`.
+
 ## Cost
 
-- **Images:** $29.57 of the $40 cap, from 148 image requests (cost log at `logs/image_costs.jsonl`).
+- **Images:** $33.16 of the $40 cap, from 165 image requests including the review fixes (cost log at `logs/image_costs.jsonl`).
 - **Voices:** about $0.14.
 - **MiniMax:** $0.
 
