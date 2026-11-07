@@ -39,10 +39,25 @@ The plan is in [`PLAN.md`](PLAN.md) and the script, word for word, in [`SCRIPT.m
 - **Sound effects:** 42 new real-recording SFX (CC0/CC-BY, credits in `public/audio/sfx/CREDITS.md`) plus the 50 reused from Frame 240.
 - **First minute:** approved by the user (`previews/door306_first_minute_720p.mp4`, −15.2 LUFS).
 - **Scenes 2–10:** written. There are 282 shots: 69 new stills, 9 talking frames, 185 reuses and 19 code shots.
+- **Art:**
+  - 78 frames, 41 animation drawings and 9 lip-sync mouths, each reviewed against its layout and sheets.
+  - 3 frames were regenerated once with sharper prompts (Sarah's dread close-up, the head rising, the creature's face); the originals are in `build/rejected/`.
+- **Full film:** `out/door306_1080p_upload.mp4` (not committed, about 750 MB).
+  - 1920×1080, 24 fps, 19,073 frames, 13:14.7.
+  - −15.1 LUFS, LRA 5.4, true peak −1.9 dBTP; the final black hold is digital silence (−91 dB).
+  - A gentle shadow-lifting curve was applied so the night shots read on a phone (dark shots go from about 17 to 24 average brightness).
+- **Preview:** `previews/door306_full_720p.mp4` (49.5 MB).
+- **Checks:**
+  - contact sheets, one frame every 4 s: `previews/check_contact_*.jpg`;
+  - lip-sync sheet: `previews/check_lipsync.jpg`. 7 of 8 talking shots open on the words and close in the pauses; the eighth is a scream drawn with the mouth open.
+- **YouTube:** `youtube/` holds:
+  - `TITLE_AND_TAGS.txt` (title, 2 alternatives, 15 tags);
+  - `DESCRIPTION.txt` (spoiler-free hook, 10 chapters, the fiction disclaimer, 3 hashtags, 32 CC-BY credits);
+  - three thumbnails composed from film frames, at no image cost: `thumbnail_A_they_chose_me.jpg`, `thumbnail_B_306am.jpg`, `thumbnail_C_dont_open.jpg`.
 
 ## Cost
 
-- **Images:** cap $40, cost log at `logs/image_costs.jsonl`.
+- **Images:** $29.57 of the $40 cap, from 148 image requests (cost log at `logs/image_costs.jsonl`).
 - **Voices:** about $0.14.
 - **MiniMax:** $0.
 
