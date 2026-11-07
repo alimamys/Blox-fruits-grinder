@@ -60,9 +60,9 @@ export const Staircase: React.FC = () => (
 				chars: ['sarah'],
 				quality: 'high',
 				mood: 'Corridor light floods in through the wide-open front door; the flat dark around it.',
-				prompt: 'At her wide-open front door: Sarah, on her stomach on the floor, clings to the wooden doorframe with both hands, her body stretched out as she is being dragged backward out into the corridor; her face contorted with effort and terror.',
+				prompt: 'At her wide-open front door, seen from inside the flat: Sarah lies on her stomach across the threshold, being dragged OUT into the corridor by her ankle - her FEET and legs are already out through the doorway in the corridor light, her HEAD and arms are still inside the dark flat toward us, and both hands cling to the inside edge of the doorframe; her face contorted with effort and terror.',
 				move: push(1.03, 1.1),
-			}, {cam: {z: 1.7, cx: 920, cy: 560}, kids: <Person who="sarah" x={920} y={840} h={520} facing="front" pose="reach" tilt={70} />}),
+			}, {cam: {z: 1.7, cx: 920, cy: 560}, kids: <Person who="sarah" x={760} y={880} h={520} facing="front" pose="reach" tilt={-70} />}),
 			again('i_08_hold', 'narrator_187_hold_on', 'i_07_doorframe', {move: push(1.12, 1.2), fx: 'tremble'}),
 			again('i_09_harder', 'narrator_188_harder', 'i_07_doorframe', {fx: 'shake', move: push(1.2, 1.14)}),
 			// "I was dragged out into the corridor." - beat: dragged out
@@ -167,7 +167,7 @@ export const Staircase: React.FC = () => (
 			again('i_31_watching', 'narrator_207_watching', 'i_30_lookback', {move: push(1.1, 1.16)}),
 			again('i_32_word', 'narrator_208_not_a_word', 'd_08_still', {move: push(1.14, 1.2)}),
 			// "Then, slowly, they began closing their doors." / "One by one." + beat - the doors close
-			again('i_33_closing', 'narrator_209_closing_doors', 'i_30_lookback', {doors: {prompt: '', start: 0.35, stagger: 1.1, swing: 0.6}, move: push(1.06, 1.14)}),
+			again('i_33_closing', 'narrator_209_closing_doors', 'i_30_lookback', {doors: {prompt: '', start: 0.3, stagger: 0.7, swing: 0.9, close: true}, move: push(1.06, 1.14)}),
 			again('i_34_closed', 'narrator_210_one_by_one', 'i_30_lookback', {show: 'open', move: push(1.14, 1.2)}),
 			// "Until the only sounds left were my screams..." / "And the thing dragging me down the staircase." - into the dark
 			again('i_35_screams', 'narrator_211_my_screams', 'd_13_stairwell', {grade: 1.2, move: push(1.06, 1.3, 0.45, 0.65)}),

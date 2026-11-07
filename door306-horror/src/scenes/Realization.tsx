@@ -16,14 +16,14 @@ export const Realization: React.FC = () => (
 				chars: ['sarah'],
 				quality: 'medium',
 				mood: MOOD.flat,
-				prompt: 'The dark living room: Sarah, bent low and straining, drags the old mustard-yellow sofa across the floorboards toward the front door, the rug bunching up under it.',
+				prompt: 'The dark living room: Sarah, bent low and straining, walks backward toward the front door at the back of the room, pulling the old mustard-yellow sofa after her across the floorboards TOWARD the door; the rug bunching up under it.',
 				variants: [{name: 'pushed', prompt: 'The mustard sofa is now shoved right up against the front door, blocking it; Sarah stands beside it, out of breath. Nothing else changes.'}],
 				seq: [
 					['base', 0],
 					['pushed', 0.62],
 				],
 				move: push(1.02, 1.08),
-			}, {cam: {z: 1.3, cx: 760, cy: 560}, kids: <Person who="sarah" x={620} y={900} h={480} facing="right" pose="reach" />}),
+			}, {cam: {z: 1.3, cx: 760, cy: 560}, kids: <Person who="sarah" x={880} y={860} h={470} facing="left" pose="reach" />}),
 			// "Then a thought crossed my mind." / every floor / "Who was it supposed to take from mine?"
 			again('g_03_thought', 'narrator_132_thought', 'c_08_dread', {move: push(1.04, 1.1, 0.5, 0.42)}),
 			again('g_04_floors', 'narrator_133_every_floor', 'd_09_facing_stairs', {move: push(1.0, 1.08)}),

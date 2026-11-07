@@ -31,7 +31,7 @@ export const hasRestyle = (id: string, art: Art) => Boolean(SHOTS[id]?.frames?.l
 export const restyleSrc = (id: string, k = 0): string | null => SHOTS[id]?.frames?.[k]?.src ?? null;
 
 const XFADE = 5; // frames, between keyframes
-const DRAW_FADE = 2; // frames, between drawings of a limited-animation sequence
+const DRAW_FADE = 0; // drawings change on a clean cut (no dissolve: blended drawings ghost)
 
 /** Is any of `lines` loud at absolute time t? (smoothed over two frames so a mouth never pops for one frame) */
 const speaking = (scene: SceneTiming, lines: string[], t: number) => {
@@ -59,6 +59,32 @@ const blinking = (g: number, seed: number) => {
 };
 
 const easeInOut = (x: number) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+
+/** One door panel, cut from `panel` (the frame where this door is shut), turned in 3D around its
+ *  hinge. angle 0 = shut, ~85 = wide open (seen almost edge-on). It swings away from us, into the flat. */
+const SwingingDoor: React.FC<{panel: string; r: Door; angle: number}> = ({panel, r, angle}) => {
+	const [x0, y0, x1, y1, hinge] = r;
+	const w = x1 - x0;
+	const h = y1 - y0;
+	const k = Math.min(1, angle / 85);
+	return (
+		<div style={{position: 'absolute', left: x0, top: y0, width: w, height: h, perspective: `${Math.max(900, h * 2.4)}px`, perspectiveOrigin: hinge === 'l' ? '0% 50%' : '100% 50%'}}>
+			<div
+				style={{
+					position: 'absolute',
+					inset: 0,
+					overflow: 'hidden',
+					transformOrigin: `${hinge === 'l' ? 'left' : 'right'} center`,
+					transform: `rotateY(${hinge === 'l' ? angle : -angle}deg)`,
+					filter: `brightness(${1 - 0.6 * k})`,
+					boxShadow: k > 0.02 ? `${hinge === 'l' ? '' : '-'}12px 0 24px rgba(0,0,0,${0.5 * k})` : undefined,
+				}}
+			>
+				<Img src={staticFile(panel)} style={{position: 'absolute', left: -x0, top: -y0, width: 1920, height: 1080, maxWidth: 'none'}} />
+			</div>
+		</div>
+	);
+};
 
 export const RestyledStill: React.FC<{id: string; art: Art; f: number; d: number; sceneFrame: number; scene: SceneTiming}> = ({id, art, f, d, sceneFrame, scene}) => {
 	const entry = SHOTS[id];
@@ -143,24 +169,29 @@ export const RestyledStill: React.FC<{id: string; art: Art; f: number; d: number
 	if (doors) {
 		const start = Math.round((art.doors?.start ?? 0.05) * d);
 		const stagger = (art.doors?.stagger ?? 0.28) * FPS;
-		const swing = (art.doors?.swing ?? 0.55) * FPS;
+		const swing = (art.doors?.swing ?? 0.9) * FPS;
 		// a seeded opening order, so the doors do not open in a neat row
 		const order = doors.rects.map((_, i) => i).sort((a, b) => h01(a + 3, 17) - h01(b + 3, 17));
-		// each door: the dark gap opens at the latch edge and widens toward the hinge, revealing the
-		// doors-open drawing inside that door's area only
+		// each door: the panel from the shut frame swings open on its hinge (into the flat) over the
+		// doors-open drawing; with `close`, the shut panel swings closed over the open frame instead.
+		// Regions too wide to be one door (a doorway with people) fade instead of swinging.
+		const closing = Boolean(art.doors?.close);
+		const shut = closing ? doors.open : frame.src;
+		const under = closing ? frame.src : doors.open;
 		doorLayer = (
 			<>
-				<Img src={staticFile(frame.src)} style={full} />
+				<Img src={staticFile(under)} style={full} />
 				{order.map((i, k) => {
-					const r = easeInOut((f - start - k * stagger) / swing);
-					if (r <= 0) return null;
-					const [x0, y0, x1, y1, hinge] = doors.rects[i];
-					const w = x1 - x0;
-					const clip =
-						hinge === 'r'
-							? `inset(${y0}px ${1920 - (x0 + w * r)}px ${1080 - y1}px ${x0}px)`
-							: `inset(${y0}px ${1920 - x1}px ${1080 - y1}px ${x1 - w * r}px)`;
-					return <Img key={i} src={staticFile(doors.open)} style={{...full, clipPath: clip}} />;
+					const p = easeInOut((f - start - k * stagger) / swing);
+					const r = doors.rects[i];
+					const wide = r[2] - r[0] > 0.2 * 1920;
+					const openness = closing ? 1 - p : p; // 0 shut .. 1 open
+					if (wide) {
+						const [x0, y0, x1, y1] = r;
+						return <Img key={i} src={staticFile(shut)} style={{...full, clipPath: `inset(${y0}px ${1920 - x1}px ${1080 - y1}px ${x0}px)`, opacity: 1 - openness}} />;
+					}
+					if (openness >= 0.995) return null;
+					return <SwingingDoor key={i} panel={shut} r={r} angle={85 * openness} />;
 				})}
 			</>
 		);

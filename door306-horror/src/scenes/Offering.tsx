@@ -76,7 +76,7 @@ export const Offering: React.FC = () => (
 				quality: 'high',
 				talk: ['sarah_010_no_please', 'sarah_011_stop_please', 'sarah_012_dont_do_this'],
 				mood: GAP_LIGHT,
-				prompt: 'Close-up: Sarah in panic, leaning her whole weight against the barricade at her front door, eyes wide, mouth open pleading, tears; light from the corridor striping her face.',
+				prompt: 'Close-up from the waist up: Sarah in panic, leaning against her front door with EXACTLY TWO hands - both palms flat on the door - eyes wide, pleading, tears; light from the corridor striping her face. Nothing else in the foreground: no other hands, arms, feet or people anywhere in the frame.',
 				move: push(1.03, 1.08),
 			}, <Person who="sarah" x={960} y={1700} h={1500} facing="front" />),
 			// "The lock turned." / "The door began opening." / "The furniture scraped across the floor."
@@ -159,7 +159,7 @@ export const Offering: React.FC = () => (
 				quality: 'high',
 				fx: 'shake',
 				mood: GAP_LIGHT,
-				prompt: 'Close-up: Sarah screaming in pure terror, mouth wide open, eyes huge, hands raised, falling backward away from the reaching arm; corridor light slashing across her face.',
+				prompt: 'Close-up: Sarah screaming in pure terror, mouth wide open, eyes huge, her TWO hands raised, falling backward; from the right edge of the frame only the creature\'s impossibly long, thin, bony GREY fingers reach toward her (clearly grey and inhuman, not a human hand); corridor light slashing across her face.',
 				move: push(1.04, 1.12),
 			}, <Person who="sarah" x={960} y={1700} h={1500} facing="front" pose="coverMouth" />),
 			// "And ran." - she runs for the bedroom

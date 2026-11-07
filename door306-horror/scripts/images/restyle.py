@@ -93,7 +93,8 @@ RESIDENTS_SPEC = (
 LANDLORD_SPEC = (
     'The landlord: a man of about 55, broad and soft, a round clean-shaven friendly face with ruddy cheeks, thinning sandy-grey hair combed '
     'neatly to the side, small pale eyes; a GREY knitted SWEATER VEST over a light-blue shirt with the sleeves rolled up, brown trousers, '
-    'a gold wedding ring. His smile is warm but never reaches his eyes.'
+    'a gold wedding ring. His manner is composed, polite and businesslike; his face is calm and slightly tired, with guarded, '
+    'watchful eyes - at most a faint, thin, closed-mouth smile. He is NEVER cheerful, grinning or laughing.'
 )
 CREATURE_SPEC = (
     'The creature: nearly SEVEN FEET tall, an emaciated human-like body with GREY, waxy skin stretched tightly over its bones (ribs, knobbly '
@@ -113,8 +114,9 @@ CHAR_NOTE = {
     'residents': 'The other residents must be EXACTLY the five people of the residents sheet (the bald old man in grey pyjamas, the moustached '
                  'man in the navy bathrobe, the bearded man in the white T-shirt, the curly-haired woman in the cream blanket, the grey-haired '
                  'woman in the lilac dressing gown) - no other people.',
-    'landlord': 'The landlord must match his sheet EXACTLY: round ruddy friendly face, thinning sandy-grey hair combed to the side, grey '
-                'sweater vest over a light-blue shirt with rolled sleeves, wedding ring.',
+    'landlord': 'The landlord must match his sheet EXACTLY: round ruddy face, thinning sandy-grey hair combed to the side, grey sweater '
+                'vest over a light-blue shirt with rolled sleeves, wedding ring; composed and polite, guarded eyes, at most a faint thin smile - '
+                'never cheerful or grinning.',
     'creature': 'The creature must match its design sheet EXACTLY: nearly seven feet tall, grey skin tight over bone, head bent at an '
                 'impossible angle, arms hanging to its shins, impossibly long fingers, jaw hanging open far too wide; never cute, never '
                 'cartoonish, never gory.',
@@ -186,7 +188,8 @@ LOOKDEV = {
         'out': SHEETS / 'landlord.png', 'refs': [],
         'prompt': (f'Character model sheet for an animated horror film, in exactly the style of the style reference image. {LANDLORD_SPEC} '
                    'On a plain light-grey background: his full body in FRONT, THREE-QUARTER and SIDE view at the same scale, and two '
-                   'head-and-shoulders portraits: a warm FRIENDLY SMILE, and the same smile widening while his eyes stay cold.' + SHEET_TAIL),
+                   'head-and-shoulders portraits: CALM and NEUTRAL (polite, businesslike, guarded eyes, mouth closed), and a FAINT THIN closed-mouth smile '
+                   'that does not reach his tired, cold eyes. Never cheerful.' + SHEET_TAIL),
     },
     'creature': {
         'out': SHEETS / 'creature.png', 'refs': [],
@@ -814,6 +817,10 @@ def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac
         keep[lab == c] = 1
     keep = cv2.morphologyEx(keep, cv2.MORPH_CLOSE, np.ones((25, 25), np.uint8))
     keep = cv2.dilate(keep, np.ones((17, 17), np.uint8))
+    if not eyes_only and keep.mean() > 0.12:
+        # a big change (people turning, a pose change): take the whole drawing - a partial merge
+        # would cut people in half or leave ghosts
+        return Image.fromarray(v.clip(0, 255).astype(np.uint8)), np.ones_like(keep), 1.0
     alpha = cv2.GaussianBlur(keep.astype(np.float32), (0, 0), 7)[..., None]
     out = b * (1 - alpha) + v * alpha
     return Image.fromarray(out.clip(0, 255).astype(np.uint8)), keep, float(keep.mean())
@@ -868,7 +875,21 @@ def merge_doors(base: Image.Image, var: Image.Image, loose: bool = False) -> tup
     alpha = cv2.GaussianBlur(alpha, (0, 0), 3)[..., None]
     out = b * (1 - alpha) + v * alpha
     sx, sy = 1920 / W, 1080 / H
-    door_list = [[round(x0 * sx), round(y0 * sy), round(x1 * sx), round(y1 * sy), 'r' if (x0 + x1) / 2 < W / 2 else 'l'] for x0, y0, x1, y1 in rects]
+    vl = v.mean(axis=2)
+
+    def hinge(x0: int, y0: int, x1: int, y1: int) -> str:
+        # 1) read it from the doors-open drawing: the swung-back panel is the lit strip on the hinge
+        #    side, the dark gap is on the latch side
+        mid = (x0 + x1) // 2
+        left, right = vl[y0:y1, x0:mid].mean(), vl[y0:y1, mid:x1].mean()
+        if abs(left - right) > 0.15 * max(left, right, 1):
+            return 'l' if left > right else 'r'
+        # 2) a fully dark doorway: the doorknob is on the INNER edge in these corridors, so the hinge
+        #    is on the OUTER edge
+        c = (x0 + x1) / 2
+        return 'l' if c < W / 2 else 'r'
+
+    door_list = [[round(x0 * sx), round(y0 * sy), round(x1 * sx), round(y1 * sy), hinge(x0, y0, x1, y1)] for x0, y0, x1, y1 in rects]
     return Image.fromarray(out.clip(0, 255).astype(np.uint8)), door_list, float(alpha.mean())
 
 

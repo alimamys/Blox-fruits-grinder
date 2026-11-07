@@ -71,7 +71,7 @@
       252,
       1154,
       813,
-      "l"
+      "r"
      ]
     ]
    }
@@ -617,28 +617,28 @@
       0,
       347,
       1071,
-      "r"
+      "l"
      ],
      [
       458,
       82,
       681,
       949,
-      "r"
+      "l"
      ],
      [
       701,
       170,
       807,
       895,
-      "r"
+      "l"
      ],
      [
       829,
       167,
       1366,
       891,
-      "l"
+      "r"
      ],
      [
       1381,
@@ -722,6 +722,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2307,28 +2308,28 @@
       0,
       347,
       1071,
-      "r"
+      "l"
      ],
      [
       458,
       82,
       681,
       949,
-      "r"
+      "l"
      ],
      [
       701,
       170,
       807,
       895,
-      "r"
+      "l"
      ],
      [
       829,
       167,
       1366,
       891,
-      "l"
+      "r"
      ],
      [
       1381,
@@ -2361,28 +2362,28 @@
       0,
       347,
       1071,
-      "r"
+      "l"
      ],
      [
       458,
       82,
       681,
       949,
-      "r"
+      "l"
      ],
      [
       701,
       170,
       807,
       895,
-      "r"
+      "l"
      ],
      [
       829,
       167,
       1366,
       891,
-      "l"
+      "r"
      ],
      [
       1381,
@@ -2408,28 +2409,28 @@
       0,
       347,
       1071,
-      "r"
+      "l"
      ],
      [
       458,
       82,
       681,
       949,
-      "r"
+      "l"
      ],
      [
       701,
       170,
       807,
       895,
-      "r"
+      "l"
      ],
      [
       829,
       167,
       1366,
       891,
-      "l"
+      "r"
      ],
      [
       1381,
@@ -2456,6 +2457,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2467,6 +2469,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2478,6 +2481,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2489,6 +2493,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2500,6 +2505,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2511,6 +2517,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2522,6 +2529,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2533,6 +2541,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2544,6 +2553,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2555,6 +2565,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2566,6 +2577,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2577,6 +2589,7 @@
     }
    ],
    "variants": {
+    "smile": "restyle/j_13_call_k1_vsmile.jpg",
     "wide": "restyle/j_13_call_k1_vwide.jpg"
    }
   },
@@ -2601,7 +2614,7 @@
       252,
       1154,
       813,
-      "l"
+      "r"
      ]
     ]
    }
@@ -2627,7 +2640,7 @@
       252,
       1154,
       813,
-      "l"
+      "r"
      ]
     ]
    }

@@ -66,7 +66,7 @@ export interface Art {
 	/** blink: generate an eyes-closed drawing and blink every few seconds */
 	blink?: boolean;
 	/** doors: a doors-open drawing; doors swing open one after another from `start` (fraction) */
-	doors?: {prompt: string; start?: number; stagger?: number; swing?: number; loose?: boolean};
+	doors?: {prompt: string; start?: number; stagger?: number; swing?: number; loose?: boolean; close?: boolean};
 	/** the frame is seen through the peephole (fisheye + round vignette) */
 	peephole?: boolean;
 	/** reuse: show this drawing of the source shot ('open' = its doors-open drawing, or a variant name) */

@@ -24,9 +24,9 @@ export const Neighbors: React.FC = () => (
 				quality: 'high',
 				fx: 'tremble',
 				mood: MOOD.hall,
-				prompt: 'Medium shot near the stairwell at the left end of the corridor: the very old bald man in grey striped pyjamas, shaking so badly he can barely stand, one hand pressed flat against the wall beside the black stair railing, his knees buckling, eyes wide with terror, facing left toward the stairs.',
+				prompt: 'Medium shot near the stairwell at the left end of the corridor: ONLY the very old bald man in grey striped pyjamas, standing on the RIGHT half of the frame in strict side PROFILE, his face, nose and body pointing to the LEFT edge of the frame where the black stair railing and the stairs are (we see his right ear and right cheek), staring at the stairs, shaking so badly he can barely stand, one hand pressed flat against the wall, his knees buckling, eyes wide with terror. Nobody else in the frame.',
 				move: push(1.03, 1.1, 0.45, 0.45),
-			}, {cam: {z: 2.1, cx: 600, cy: 520}, kids: <Person who="oldman" x={600} y={885} h={470} facing="left" pose="handOnWall" />}),
+			}, {cam: {z: 2.1, cx: 640, cy: 520}, kids: <Person who="oldman" x={760} y={885} h={470} facing="left" />}),
 			// "But nobody moved." / "Nobody tried to escape."
 			again('c_06_nobody', 'narrator_069_nobody_moved', 'd_09_facing_stairs', {move: push(1.04, 1.1, 0.52, 0.47)}),
 			again('c_07_escape', 'narrator_070_nobody_escape', 'd_07_peephole_pov', {move: {z0: 1.25, z1: 1.3, x0: 0.33, y0: 0.5, x1: 0.3, y1: 0.5}}),

@@ -92,7 +92,7 @@ export const NewApartment: React.FC = () => (
 					quality: 'high',
 					blink: true,
 					mood: MOOD.day,
-					prompt: 'DAYTIME, three weeks earlier, inside Sarah\'s new flat (same room as the location reference, but in soft daylight through the blinds, still empty apart from the mustard sofa and the round table): the landlord, smiling warmly, holds out a single brass key on his open palm toward Sarah; she reaches for it, pleased and a little surprised. His smile does not quite reach his eyes.',
+					prompt: 'DAYTIME, three weeks earlier, inside Sarah\'s new flat (same room as the location reference, but in soft daylight through the blinds, still empty apart from the mustard sofa and the round table): the landlord, composed and polite with only a faint, thin, closed-mouth smile and watchful eyes, holds out a single brass key on his open palm toward Sarah; she reaches for it, pleased and a little surprised. He is businesslike, not cheerful.',
 					move: {z0: 1.03, z1: 1.09},
 				},
 			},
