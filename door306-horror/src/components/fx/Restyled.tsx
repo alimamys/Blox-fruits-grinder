@@ -23,7 +23,7 @@ import {h01} from '../../utils/rough';
 type Frame = {src: string; talk?: string};
 type Door = [number, number, number, number, 'l' | 'r']; // x0, y0, x1, y1 (pixels of 1920x1080), hinge side
 type Entry = {frames: Frame[]; variants?: Record<string, string>; blink?: string; doors?: {open: string; rects: Door[]}};
-const SHOTS = ((manifest as {shots?: Record<string, Entry>}).shots ?? {}) as Record<string, Entry>;
+const SHOTS = ((manifest as unknown as {shots?: Record<string, Entry>}).shots ?? {}) as Record<string, Entry>;
 
 export const hasRestyle = (id: string, art: Art) => Boolean(SHOTS[id]?.frames?.length) && Boolean(art);
 
