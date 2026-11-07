@@ -71,4 +71,6 @@ export interface Art {
 	peephole?: boolean;
 	/** reuse: show this drawing of the source shot ('open' = its doors-open drawing, or a variant name) */
 	show?: string;
+	/** brightness multiplier on the finished frame (lift a too-dark frame so it reads on a phone) */
+	grade?: number;
 }

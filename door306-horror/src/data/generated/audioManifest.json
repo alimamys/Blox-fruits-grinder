@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-07T11:15:12.583Z",
+ "generatedAt": "2026-11-07T11:43:34.043Z",
  "files": {
   "below/man3_001_children.wav": {
    "duration": 2.277,
@@ -1535,6 +1535,16 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/body_drag.wav": {
+   "duration": 3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/body_fall.wav": {
+   "duration": 1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/boom_hit.wav": {
    "duration": 3,
    "channels": 2,
@@ -1545,8 +1555,23 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/chain_slide.wav": {
+   "duration": 1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/chair_creak.wav": {
    "duration": 1.3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/clock_tick.wav": {
+   "duration": 0.2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/clock_ticks.wav": {
+   "duration": 40.5,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1565,6 +1590,46 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/creature_rasp.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/cry_sharp_far_m.wav": {
+   "duration": 1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_close.wav": {
+   "duration": 1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_close_far.wav": {
+   "duration": 2.2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_force.wav": {
+   "duration": 4,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_latch.wav": {
+   "duration": 0.4,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_open.wav": {
+   "duration": 1.3,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/door_open_far.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/door_tap.wav": {
    "duration": 0.7,
    "channels": 2,
@@ -1575,8 +1640,23 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/doors_cascade.wav": {
+   "duration": 4.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/drawer_close.wav": {
+   "duration": 0.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/flashlight_on.wav": {
    "duration": 0.35,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/fluorescent_flicker.wav": {
+   "duration": 2,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1595,6 +1675,21 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/heartbeat_fast.wav": {
+   "duration": 42.239,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/heartbeat_loop.wav": {
+   "duration": 41.643,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/key_insert.wav": {
+   "duration": 0.8,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/key_tap.wav": {
    "duration": 0.25,
    "channels": 2,
@@ -1602,6 +1697,11 @@
   },
   "sfx/keys_grab.wav": {
    "duration": 1.1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/knock_soft.wav": {
+   "duration": 1.5,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1615,13 +1715,28 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/lock_turn.wav": {
+   "duration": 0.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/low_horror_drone.wav": {
    "duration": 60.5,
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/mailbox_label.wav": {
+   "duration": 0.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/monitor_smash.wav": {
    "duration": 2.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/morning_street.wav": {
+   "duration": 48.5,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1637,6 +1752,16 @@
   },
   "sfx/mug_set.wav": {
    "duration": 0.9,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/nails_scrape.wav": {
+   "duration": 1.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/page_turn.wav": {
+   "duration": 0.8,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1675,8 +1800,23 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/phone_ring_old.wav": {
+   "duration": 4.9,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/phone_ringback.wav": {
    "duration": 5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/phone_vibrate.wav": {
+   "duration": 1.1,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/railing_creak.wav": {
+   "duration": 1.5,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1700,6 +1840,21 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/sack_drag.wav": {
+   "duration": 2.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/sack_drag_wet.wav": {
+   "duration": 4,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/sack_move.wav": {
+   "duration": 1.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/scrape_long.wav": {
    "duration": 2.5,
    "channels": 2,
@@ -1710,8 +1865,43 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/scream_far_f.wav": {
+   "duration": 2.9,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/sofa_drag.wav": {
+   "duration": 2.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/spacebar.wav": {
    "duration": 0.45,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/stairwell_tone.wav": {
+   "duration": 48.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/step_heavy_1.wav": {
+   "duration": 0.7,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/step_heavy_2.wav": {
+   "duration": 0.7,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/step_heavy_3.wav": {
+   "duration": 0.7,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/steps_heavy_climb.wav": {
+   "duration": 8,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1730,8 +1920,23 @@
    "channels": 2,
    "sampleRate": 48000
   },
+  "sfx/table_drag.wav": {
+   "duration": 2,
+   "channels": 2,
+   "sampleRate": 48000
+  },
   "sfx/tension_pulse.wav": {
    "duration": 60.5,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/thud_heavy_far.wav": {
+   "duration": 1.4,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/typing_laptop.wav": {
+   "duration": 3,
    "channels": 2,
    "sampleRate": 48000
   },
@@ -1747,6 +1952,11 @@
   },
   "sfx/ui_refresh.wav": {
    "duration": 0.6,
+   "channels": 2,
+   "sampleRate": 48000
+  },
+  "sfx/wall_scrape.wav": {
+   "duration": 2,
    "channels": 2,
    "sampleRate": 48000
   },

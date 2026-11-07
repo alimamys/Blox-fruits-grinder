@@ -120,8 +120,12 @@ export const RestyledStill: React.FC<{id: string; art: Art; f: number; d: number
 	// blinks (only on the base drawing - the eyes-closed drawing was made from it)
 	if (art.blink && entry.blink && src === frame.src && blinking(g, seed)) src = entry.blink;
 	const prev = idx > 0 && fade < 1 ? frames[idx - 1] : null;
-	const tx = (0.5 - cx) * 1920 * z + hx + sx;
-	const ty = (0.5 - cy) * 1080 * z + hy + sy;
+	// the picture must always cover the frame: an off-centre move at low zoom (plus the handheld
+	// drift and any shake) may never pull an edge into view
+	const zz = Math.max(z, 1.015);
+	const lim = (v: number, m: number) => Math.max(-m, Math.min(m, v));
+	const tx = lim((0.5 - cx) * 1920 * zz + hx + sx, (zz - 1) * 960);
+	const ty = lim((0.5 - cy) * 1080 * zz + hy + sy, (zz - 1) * 540);
 	const glitch = art.fx === 'glitch' && h01(Math.floor(f / 2), 5) > 0.55;
 	const plate: React.CSSProperties = {
 		position: 'absolute',
@@ -129,8 +133,8 @@ export const RestyledStill: React.FC<{id: string; art: Art; f: number; d: number
 		top: 0,
 		width: 1920,
 		height: 1080,
-		transform: `translate(${tx}px, ${ty}px) scale(${z})`,
-		filter: bright < 1 ? `brightness(${bright})` : undefined,
+		transform: `translate(${tx}px, ${ty}px) scale(${zz})`,
+		filter: bright * (art.grade ?? 1) !== 1 ? `brightness(${bright * (art.grade ?? 1)})` : undefined,
 	};
 	const full: React.CSSProperties = {position: 'absolute', left: 0, top: 0, width: 1920, height: 1080};
 	// doors: the open drawing underneath, each door swinging open on its own cue

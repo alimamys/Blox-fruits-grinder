@@ -269,6 +269,7 @@ export const Doors: React.FC = () => (
 					mood: MOOD.stair,
 					prompt: 'The stairwell from the fourth floor looking down the concrete flights, exactly as in the location reference. Dark; the caged bulb on the landing below barely lit. Empty.',
 					fx: 'flicker',
+					grade: 1.75,
 					move: {z0: 1.04, z1: 1.1, x0: 0.45, y0: 0.6},
 				},
 			},
