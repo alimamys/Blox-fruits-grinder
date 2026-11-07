@@ -1,0 +1,143 @@
+{
+ "total": 794.7083333333334,
+ "scenes": [
+  {
+   "id": "doors",
+   "name": "The doors",
+   "start": 0,
+   "duration": 54.083,
+   "narrationText": "I thought my neighbors were sleepwalking. It was exactly 3:06 in the morning when I heard every apartment door in my building open. Not one or two. All of them. I looked through my peephole and saw something I'll never forget. Every single neighbor was standing in the hallway. Completely still. Facing the staircase. Nobody was talking. Nobody was moving. And none of them seemed to be breathing. Then I heard something coming up the stairs. Something heavy. Something dragging. And when I finally saw what it was... I understood why everyone was so afraid.",
+   "dialogueIds": []
+  },
+  {
+   "id": "newApartment",
+   "name": "The new apartment",
+   "start": 54.083,
+   "duration": 77,
+   "narrationText": "I'd moved into the building three weeks earlier. It was an old, four-story apartment building on a quiet street. Nothing special. But the rent was unbelievably cheap. The landlord told me the previous tenant had moved out unexpectedly, and he wanted someone to take the apartment immediately. He even waived the security deposit. I thought I'd gotten lucky. I had no idea what happened to the woman who lived there before me. That night, I was asleep when a strange clicking noise woke me. I checked my phone. 3:06 AM. Then I heard a door opening. Followed by another. And another. I got out of bed and walked toward my front door. When I looked through the peephole, I saw my elderly neighbor, Mr. Harris, standing directly across the hallway. His apartment door was wide open. Behind him stood several other residents. All facing the stairs. I whispered through the door. He slowly turned his eyes toward my apartment. His face went pale. Then he raised a trembling finger to his lips. Telling me to be quiet.",
+   "dialogueIds": [
+    "sarah_001_is_everything_okay"
+   ]
+  },
+  {
+   "id": "footsteps",
+   "name": "The footsteps",
+   "start": 131.083,
+   "duration": 66.583,
+   "narrationText": "That's when I heard the footsteps. They were coming from downstairs. Slow. Heavy. Uneven. One step. Then another. And after every few steps, there was a horrible scraping sound. Like someone dragging something heavy across concrete. I pressed my ear against the door. The footsteps stopped. For a few seconds, there was complete silence. Then I heard a woman's voice from somewhere below. A man started whispering frantically. Then came a scream. A terrible, desperate scream. It lasted only a few seconds. Suddenly, it stopped. I heard something dragging across the floor. Then the sound of a door closing. And the footsteps started again. This time, they were closer. Whatever was down there was coming upstairs.",
+   "dialogueIds": [
+    "woman_001_dont_take_him",
+    "man_001_dont_look"
+   ]
+  },
+  {
+   "id": "neighbors",
+   "name": "The neighbors",
+   "start": 197.667,
+   "duration": 80.583,
+   "narrationText": "I looked through the peephole again. My neighbors were still standing in the exact same positions. A mother was holding her little boy against her chest. The boy was crying silently. When he tried to speak, she immediately covered his mouth. An old man near the staircase was shaking so badly that he could barely stand. But nobody moved. Nobody tried to escape. That's when something occurred to me. They weren't surprised by any of this. They were expecting it. Whatever was coming up those stairs, every person in that hallway knew exactly what it was. Except me. I grabbed my phone and called the police. No signal. I tried again. Nothing. My Wi-Fi was gone too. Then there were three very soft knocks on my door. I froze. I hesitated. Then I unlocked the chain and opened it barely an inch. Mr. Harris was trembling. He looked toward the staircase.",
+   "dialogueIds": [
+    "harris_001_its_me",
+    "sarah_002_whats_happening",
+    "harris_002_listen_carefully"
+   ]
+  },
+  {
+   "id": "rule",
+   "name": "The rule",
+   "start": 278.25,
+   "duration": 88.917,
+   "narrationText": "He swallowed. He stared at me. I laughed nervously. His eyes filled with tears. I stepped backward. A heavy thud echoed from downstairs. Mr. Harris flinched. He stepped away from the door. I closed it and turned the lock. My hands were shaking. I wanted to believe the old man had lost his mind. But another scream came from downstairs. Then a long, wet dragging sound. And I knew he was telling the truth.",
+   "dialogueIds": [
+    "sarah_003_what_reaches",
+    "harris_003_once_every_month",
+    "sarah_004_what_does",
+    "harris_004_dont_know",
+    "sarah_005_what_does_it_want",
+    "harris_005_one_person",
+    "sarah_006_what",
+    "harris_006_every_floor",
+    "sarah_007_what_agreement",
+    "harris_007_leaves_others",
+    "sarah_008_if_you_dont",
+    "harris_008_last_time",
+    "sarah_009_holding_breath",
+    "harris_009_hears_breathing",
+    "harris_010_stay_calm"
+   ]
+  },
+  {
+   "id": "creature",
+   "name": "The creature",
+   "start": 367.167,
+   "duration": 89.708,
+   "narrationText": "I went back to the peephole. The lights above the staircase began flickering. Then I saw something moving in the darkness. At first, it looked like a man's hand gripping the railing. Except the fingers were too long. They slowly curled around the metal. Then a head appeared. It was bent forward at an impossible angle. The thing had to be nearly seven feet tall. Its shoulders scraped against the walls as it climbed. Its arms hung so low that its fingers almost touched the steps. And behind it... It was dragging a large, stained sack. Something inside the sack moved. I covered my mouth. The creature climbed another step. Then another. Its skin looked grey and stretched tightly over its bones. Its mouth hung open. Far too wide for a human face. It stopped at the third-floor landing. A man began begging. There was a sharp cry. Then silence. The sack scraped across the concrete again. The creature continued climbing. Toward the fourth floor. Toward me.",
+   "dialogueIds": [
+    "man3_001_children"
+   ]
+  },
+  {
+   "id": "realization",
+   "name": "The realization",
+   "start": 456.875,
+   "duration": 76,
+   "narrationText": "I backed away from my door. My heart was pounding so hard that I could barely hear anything else. I started dragging my sofa toward the entrance. Then a thought crossed my mind. If the creature took one person from every floor... Who was it supposed to take from mine? I looked through the peephole again. Something had changed. My neighbors weren't facing the staircase anymore. They were facing my apartment. Every single one of them. Mr. Harris stood in the middle of the hallway with tears streaming down his cheeks. The woman with the child wouldn't look at me. I suddenly remembered the landlord. The cheap rent. The waived deposit. How quickly he'd wanted me to move in. I grabbed my phone. There was one message. From my landlord. I stared at those words. And everything finally made sense. The creature didn't randomly choose someone. The residents chose. And they had chosen me.",
+   "dialogueIds": []
+  },
+  {
+   "id": "offering",
+   "name": "The offering",
+   "start": 532.875,
+   "duration": 79.792,
+   "narrationText": "I pushed the sofa against the door. Then the dining table. I pulled as hard as I could on the handle to make sure it was locked. Outside, the footsteps stopped. The entire hallway went silent. Then I heard something that made my blood run cold. A key. Sliding into my lock. The lock turned. The door began opening. The furniture scraped across the floor. I pushed against it with everything I had. But the door continued opening. Through the gap, I saw Mr. Harris. He was holding a master key. Behind him stood the creature. Its head was bent sideways, almost touching its own shoulder. Its mouth slowly opened. And for the first time, it spoke. Mr. Harris began crying. He couldn't look at me. The creature bent down. Its impossibly long arm reached through the doorway. I screamed. And ran.",
+   "dialogueIds": [
+    "sarah_010_no_please",
+    "sarah_011_stop_please",
+    "creature_001_promised",
+    "sarah_012_dont_do_this",
+    "harris_011_shes_yours",
+    "sarah_013_scream"
+   ]
+  },
+  {
+   "id": "staircase",
+   "name": "The staircase",
+   "start": 612.667,
+   "duration": 113.083,
+   "narrationText": "I almost reached my bedroom. Then something wrapped around my ankle. The grip was ice cold. I fell so hard that the air left my lungs. I grabbed the edge of the carpet. The creature began pulling me backward. My fingernails scraped across the floor. I grabbed the doorframe. For one second, I thought I could hold on. Then it pulled harder. I was dragged out into the corridor. Every neighbor was watching. Nobody moved. The mother held her child against her chest. The old man stared at the floor. I reached toward Mr. Harris. He looked at me. And for one moment, I thought he might actually help. Then he stepped aside. The creature dragged me toward the stairs. I could hear the sack scraping behind it. Something inside was still moving. I tried to grab the railing. But its fingers tightened around my ankle. It pulled me down the first step. Then another. I looked back. My neighbors were still standing in the hallway. Watching. Not one of them said a word. Then, slowly, they began closing their doors. One by one. Until the only sounds left were my screams... And the thing dragging me down the staircase.",
+   "dialogueIds": [
+    "sarah_014_help_me",
+    "sarah_015_you_can_stop",
+    "harris_012_im_sorry",
+    "sarah_016_dont_want_to_die",
+    "sarah_017_screams_fade"
+   ]
+  },
+  {
+   "id": "nextTenant",
+   "name": "The next tenant",
+   "start": 725.75,
+   "duration": 65.958,
+   "narrationText": "",
+   "dialogueIds": [
+    "caller_001_still_available",
+    "landlord_001_of_course",
+    "caller_002_too_good",
+    "landlord_002_lovely_place",
+    "caller_003_neighbors",
+    "landlord_003_very_friendly",
+    "caller_004_noisy",
+    "landlord_004_not_at_all",
+    "landlord_005_quiet_building"
+   ]
+  },
+  {
+   "id": "end",
+   "name": "End",
+   "start": 791.708,
+   "duration": 3,
+   "narrationText": "",
+   "dialogueIds": []
+  }
+ ]
+}
