@@ -151,7 +151,14 @@ def generate(j: dict) -> None:
             'duration': dur, 'resolution': res, 'prompt_optimizer': False}
     if j.get('last_image'):
         body['last_frame_image'] = data_url(ROOT / j['last_image'])
-    d = call('POST', '/v1/video_generation', body)
+    try:
+        d = call('POST', '/v1/video_generation', body)
+    except RuntimeError as e:
+        if 'last_frame_image' not in body or not any(c in str(e) for c in (' 2013:', 'HTTP 400')):
+            raise
+        print(f'  {j["id"]}: end frame not accepted ({str(e)[:120]}) - retrying with the start frame only', flush=True)
+        body.pop('last_frame_image')
+        d = call('POST', '/v1/video_generation', body)
     task = d['task_id']
     with LEDGER.open('a') as f:  # billed per submitted task
         f.write(json.dumps({'t': time.strftime('%Y-%m-%dT%H:%M:%S'), 'id': j['id'], 'task': task, 'model': model, 'res': res, 'dur': dur, 'usd': usd}) + '\n')
