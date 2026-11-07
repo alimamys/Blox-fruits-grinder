@@ -1,9 +1,17 @@
-TITLE
+TITLE (55 chars)
 Never Open Your Door at 3:06 AM | Animated Horror Story
 
-ALTERNATIVE TITLES
+ALTERNATIVE TITLES (for a title test)
+- Every Door in My Building Opens at 3:06 AM | Horror Animation
 - My Rent Was Too Cheap... Now I Know Why | Animated Horror
-- My Neighbors Chose Me | Animated Horror Story
 
-TAGS (comma separated, 259 chars)
-animated horror story, horror animation, scary story, creepypasta, apartment horror, 3am horror story, neighbors horror story, 2d animation, horror short film, scary animation, landlord horror story, horror narration, creature horror, thriller, animated short
+THUMBNAILS (upload all three to Test & Compare in YouTube Studio)
+- thumbnail_A_they_chose_me.jpg - main: the door forced open, Mr. Harris with the master key, the creature behind him - "THEY CHOSE ME"
+- thumbnail_B_306am.jpg - test: through the peephole, every neighbour staring at her door, the creature at the stairs - "3:06 AM"
+- thumbnail_C_dont_open.jpg - test: Sarah against her door, hand over her mouth, feet in the light under the door - "DON'T OPEN IT"
+
+PINNED COMMENT
+Be honest - if your neighbor knocked at 3:06 AM and whispered your name... would you have opened the door?
+
+TAGS (comma separated, 313 chars)
+animated horror story, horror animation, scary story, creepypasta, apartment horror, 3am horror story, neighbors horror story, 2d animation, horror short film, scary animation, landlord horror story, horror narration, creature horror, thriller, animated short, never open your door, 3:06 am, scary apartment story

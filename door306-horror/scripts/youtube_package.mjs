@@ -38,10 +38,22 @@ const credits = fs.existsSync(creditsFile) ? fs.readFileSync(creditsFile, 'utf8'
 const ccby = credits
 	.split('\n')
 	.filter((l) => /CC[- ]BY/i.test(l) && !/CC0/i.test(l) && l.trim().startsWith('-'))
-	.map((l) => l.replace(/^\s*-\s*/, '• ').replace(/\*\*/g, '').replace(/`/g, ''));
+	.map((l) => l.replace(/^\s*-\s*/, '• ').replace(/\*\*/g, '').replace(/`/g, ''))
+	// short form for YouTube's 5,000-character limit: title, author, source and licence stay; the licence URL
+	// is given once below the list and the "used in" notes stay in CREDITS.md
+	.map((l) => l.replace(/ - used in:.*$/, '').replace(/https:\/\/freesound\.org\/s\//, 'freesound.org/s/').replace(/ \(https:\/\/creativecommons\.org\/licenses\/[^)]*\)/, ''));
+const licences = [...new Set(credits.match(/https:\/\/creativecommons\.org\/licenses\/by\/[0-9.]+\//g) || [])];
 
+// Title: a direct warning to the viewer + an oddly exact time (curiosity), under ~60 characters so it
+// is not cut off on phones. The thumbnail text adds the stakes instead of repeating the title.
 const title = 'Never Open Your Door at 3:06 AM | Animated Horror Story';
-const alternatives = ['My Rent Was Too Cheap... Now I Know Why | Animated Horror', 'My Neighbors Chose Me | Animated Horror Story'];
+const alternatives = ['Every Door in My Building Opens at 3:06 AM | Horror Animation', 'My Rent Was Too Cheap... Now I Know Why | Animated Horror'];
+const thumbnails = [
+	'thumbnail_A_they_chose_me.jpg - main: the door forced open, Mr. Harris with the master key, the creature behind him - "THEY CHOSE ME"',
+	'thumbnail_B_306am.jpg - test: through the peephole, every neighbour staring at her door, the creature at the stairs - "3:06 AM"',
+	'thumbnail_C_dont_open.jpg - test: Sarah against her door, hand over her mouth, feet in the light under the door - "DON\'T OPEN IT"',
+];
+const pinned = 'Be honest - if your neighbor knocked at 3:06 AM and whispered your name... would you have opened the door?';
 const tags = [
 	'animated horror story',
 	'horror animation',
@@ -58,20 +70,25 @@ const tags = [
 	'creature horror',
 	'thriller',
 	'animated short',
+	'never open your door',
+	'3:06 am',
+	'scary apartment story',
 ];
 
 const description = [
-	'At 3:06 in the morning, every apartment door in my building opened.',
-	'My neighbors stepped into the hallway and stood there - completely still, facing the stairs, not breathing. Then something started coming up.',
+	'At 3:06 AM, every door in my building opened - and my neighbors stepped into the hallway like they had done it a hundred times before.',
+	'They stood completely still, facing the stairs. Then something started coming up. And I was the only one who didn\'t know what it was.',
 	'',
-	'A 13-minute animated horror story. Headphones recommended - and maybe check that your door is locked.',
+	'A 13-minute animated horror story about a new apartment, a rent that was too cheap, and the one rule nobody told me. Watch it with headphones - and check that your door is locked.',
+	'',
+	'Would you have opened the door? Tell me in the comments.',
 	'',
 	'CHAPTERS',
 	...chapters,
 	'',
 	'This story is fiction. All characters and events are invented; any resemblance to real people or events is coincidental.',
 	'',
-	'#horrorstory #animation #scary',
+	'#horrorstory #animatedhorror #scarystories',
 	'',
 	'CREDITS',
 	'Story, animation and sound design: Never Open Your Door at 3:06 AM production.',
@@ -80,7 +97,7 @@ const description = [
 	'Fonts: Inter, IBM Plex Mono, Patrick Hand (SIL Open Font License).',
 	'Sound effects: built from CC0 and CC-BY field recordings (FSD50K / Freesound, VSCO-2 CE, Kenney.nl, bank-sfx).',
 	...(ccby.length
-		? ['Sound effects used under Creative Commons Attribution (CC BY):', ...ccby]
+		? ['Sound effects used under Creative Commons Attribution (CC BY):', ...ccby, `Licence: ${licences.join(' ')}`]
 		: ['(CC-BY attributions: run the SFX build first - public/audio/sfx/CREDITS.md)']),
 	'',
 ].join('\n');
@@ -88,6 +105,14 @@ const description = [
 fs.writeFileSync(path.join(out, 'DESCRIPTION.txt'), description);
 fs.writeFileSync(
 	path.join(out, 'TITLE_AND_TAGS.txt'),
-	[`TITLE\n${title}`, `\nALTERNATIVE TITLES\n${alternatives.map((a) => `- ${a}`).join('\n')}`, `\nTAGS (comma separated, ${tags.join(', ').length} chars)\n${tags.join(', ')}`, ''].join('\n'),
+	[
+		`TITLE (${title.length} chars)\n${title}`,
+		`\nALTERNATIVE TITLES (for a title test)\n${alternatives.map((a) => `- ${a}`).join('\n')}`,
+		`\nTHUMBNAILS (upload all three to Test & Compare in YouTube Studio)\n${thumbnails.map((a) => `- ${a}`).join('\n')}`,
+		`\nPINNED COMMENT\n${pinned}`,
+		`\nTAGS (comma separated, ${tags.join(', ').length} chars)\n${tags.join(', ')}`,
+		'',
+	].join('\n'),
 );
-console.log(`youtube/DESCRIPTION.txt (${chapters.length} chapters, ${ccby.length} CC-BY credits), youtube/TITLE_AND_TAGS.txt`);
+if (description.length > 5000) throw new Error(`description is ${description.length} characters - YouTube allows 5,000`);
+console.log(`youtube/DESCRIPTION.txt (${description.length} chars, ${chapters.length} chapters, ${ccby.length} CC-BY credits), youtube/TITLE_AND_TAGS.txt`);

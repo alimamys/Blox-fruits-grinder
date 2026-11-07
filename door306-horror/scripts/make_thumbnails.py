@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""YouTube thumbnails (1280x720) for "Never Open Your Door at 3:06 AM": composed from the film's own
-frames (no extra image cost) + crisp text (max 4 words) and one clear mystery mark.
+"""YouTube thumbnails (1280x720) for "Never Open Your Door at 3:06 AM": purpose-drawn art (made by
+scripts/images/thumbart.py from the film's own character sheets and locations, each a real moment of the
+film) + crisp text in code (max 3 words) and at most one red mark.
     .venv/bin/python scripts/make_thumbnails.py   -> youtube/thumbnail_*.jpg
 The circle/arrow positions are set per image after looking at the generated scene (MARKS)."""
 from pathlib import Path
@@ -99,27 +100,53 @@ def pop(im: Image.Image) -> Image.Image:
     return ImageEnhance.Color(im).enhance(1.15)
 
 
+def art(name: str) -> Image.Image:
+    """Purpose-drawn thumbnail art (scripts/images/thumbart.py -> youtube/art/<name>.jpg), 1280x720."""
+    return Image.open(ROOT / 'youtube' / 'art' / f'{name}.jpg').convert('RGB').resize((W, H), Image.LANCZOS)
+
+
+def lift(im: Image.Image, gamma: float = 0.82, contrast: float = 1.18, color: float = 1.2) -> Image.Image:
+    """Brighter mid-tones (thumbnails are seen small, often on a dark page), more contrast and colour."""
+    lut = [int(255 * (v / 255) ** gamma) for v in range(256)]
+    im = im.point(lut * 3)
+    im = ImageEnhance.Contrast(im).enhance(contrast)
+    return ImageEnhance.Color(im).enhance(color)
+
+
+def side_shade(im: Image.Image, until: float, amount: float = 0.7) -> Image.Image:
+    """Darken the left part of the frame (0 -> until*W) so the title reads over it."""
+    grad = Image.linear_gradient('L').rotate(90).resize((W, H))  # 255 at left -> 0 at right
+    grad = grad.point(lambda v: int(min(255, max(0, (v - 255 * (1 - until)) / (255 * until) * 255)) * amount))
+    return Image.composite(Image.new('RGB', (W, H), (0, 0, 0)), im, grad)
+
+
+def glow(im: Image.Image, box: tuple[int, int, int, int], gain: float = 1.6) -> Image.Image:
+    """Brighten one region with a soft edge (the light under the door)."""
+    bright = ImageEnhance.Brightness(im).enhance(gain)
+    mask = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(mask).rectangle(box, fill=255)
+    return Image.composite(bright, im, mask.filter(ImageFilter.GaussianBlur(14)))
+
+
 def main() -> None:
     OUT.mkdir(exist_ok=True)
-    # A - THEY CHOSE ME: every neighbour staring through the peephole + Sarah's terrified face
-    a = frame('d_07_peephole_pov_k1_vturned_peep.jpg', 0.86, 960, 560, (860, 360))
-    a = frame('c_08_dread_k1.jpg', 0.78, 640, 470, (300, 400), canvas=a, box=(0, 0, 560, H))
-    a = pop(vignette(a, 0.55))
-    red_circle(a, 792, 128, 62, 80)  # Mr. Harris, crying, in the middle of them
-    a = bottom_shade(a, 0.6, 0.8)
-    text(a, [('THEY CHOSE', WHITE), ('ME', RED)], 600, 470, 118, 640, gap=0)
+    # A - THEY CHOSE ME: the door forced open; Mr. Harris with the master key, the creature towering behind him
+    a = lift(art('key'))
+    a = side_shade(a, 0.42, 0.55)
+    text(a, [('THEY', WHITE), ('CHOSE', WHITE), ('ME', RED)], 30, 170, 136, 350, gap=-4)
     a.save(OUT / 'thumbnail_A_they_chose_me.jpg', quality=92)
-    # B - 3:06 AM: the creature looming behind Mr. Harris
-    b = pop(vignette(frame('h_17_creature_k1_vjaw.jpg', 1.05, 1050, 470, (760, 380)), 0.5))
-    red_arrow(b, 1210, 300, 965, 118)  # the creature's head
-    b = bottom_shade(b, 0.55, 0.85)
-    text(b, [('3:06 AM', RED)], 60, 520, 170, 620)
+    # B - 3:06 AM: through the peephole, every neighbour staring at her door; the creature at the top of the stairs
+    b = lift(art('peep'), gamma=0.86)
+    red_circle(b, 618, 158, 34, 72, width=9)  # the creature at the end of the corridor
+    b = bottom_shade(b, 0.62, 0.85)
+    f = ImageFont.truetype(FONT, 150)
+    text(b, [('3:06 AM', RED)], int((W - ImageDraw.Draw(b).textlength('3:06 AM', font=f)) / 2), 548, 150, 900)
     b.save(OUT / 'thumbnail_B_306am.jpg', quality=92)
-    # C - DON'T OPEN IT: her eye at the peephole, wide with terror
-    c = pop(vignette(frame('d_14_eye_wide_k1_vwide.jpg', 0.9, 1000, 520, (560, 360)), 0.45))
-    red_circle(c, 1010, 340, 70, 150)  # the light of the peephole
-    c = bottom_shade(c, 0.6, 0.85)
-    text(c, [("DON'T OPEN IT", WHITE)], 60, 560, 128, 1150)
+    # C - DON'T OPEN IT: Sarah against her door, hand over her mouth; feet in the light under the door
+    c = lift(art('door'), gamma=0.8)
+    c = glow(c, (205, 632, 420, 720), 1.7)
+    red_arrow(c, 470, 520, 330, 640, width=12)
+    text(c, [("DON'T", WHITE), ('OPEN IT', RED)], 40, 70, 140, 470, gap=-4)
     c.save(OUT / 'thumbnail_C_dont_open.jpg', quality=92)
     print('youtube/thumbnail_A_they_chose_me.jpg, thumbnail_B_306am.jpg, thumbnail_C_dont_open.jpg')
 

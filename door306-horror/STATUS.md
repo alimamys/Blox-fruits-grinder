@@ -51,9 +51,20 @@ The plan is in [`PLAN.md`](PLAN.md) and the script, word for word, in [`SCRIPT.m
   - contact sheets, one frame every 4 s: `previews/check_contact_*.jpg`;
   - lip-sync sheet: `previews/check_lipsync.jpg`. 7 of 8 talking shots open on the words and close in the pauses; the eighth is a scream drawn with the mouth open.
 - **YouTube:** `youtube/` holds:
-  - `TITLE_AND_TAGS.txt` (title, 2 alternatives, 15 tags);
-  - `DESCRIPTION.txt` (spoiler-free hook, 10 chapters, the fiction disclaimer, 3 hashtags, 32 CC-BY credits);
-  - three thumbnails composed from film frames, at no image cost: `thumbnail_A_they_chose_me.jpg`, `thumbnail_B_306am.jpg`, `thumbnail_C_dont_open.jpg`.
+  - `TITLE_AND_TAGS.txt`:
+    - title (55 characters, fits on a phone) and 2 alternatives for a title test;
+    - the thumbnail plan for Test & Compare;
+    - a pinned comment;
+    - 18 tags.
+  - `DESCRIPTION.txt`, 4,102 characters (YouTube's limit is 5,000):
+    - a hook in the first two lines and a comment prompt;
+    - 10 spoiler-free chapters and the fiction disclaimer;
+    - 3 hashtags and 32 short CC-BY credits.
+  - Three thumbnails with purpose-drawn art (`scripts/images/thumbart.py`, $0.77; raw art without text in `youtube/art/`). Each shows a real moment of the film, and the text is added in code (`scripts/make_thumbnails.py`):
+    - **A, main:** "THEY CHOSE ME". The door is forced open; Mr. Harris holds the master key, with the creature behind him.
+    - **B, test:** "3:06 AM". Through the peephole, every neighbour stares at her door, with the creature at the stairs.
+    - **C, test:** "DON'T OPEN IT". Sarah presses against her door with a hand over her mouth; feet show in the light under the door.
+  - `feed_preview.jpg`: the three thumbnails at phone home-feed size and search-result size.
 
 ## Fixes after the user's review
 
@@ -74,7 +85,7 @@ The plan is in [`PLAN.md`](PLAN.md) and the script, word for word, in [`SCRIPT.m
 
 ## Cost
 
-- **Images:** $33.16 of the $40 cap, from 165 image requests including the review fixes (cost log at `logs/image_costs.jsonl`).
+- **Images:** $33.93 of the $40 cap, from 168 image requests, including the review fixes and the 3 thumbnail artworks (cost log at `logs/image_costs.jsonl`).
 - **Voices:** about $0.14.
 - **MiniMax:** $0.
 
