@@ -10,7 +10,7 @@ import {renderFrames, selectComposition} from '@remotion/renderer';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [every = '120', scale = '0.25', from = '0', to = ''] = process.argv.slice(2);
-const compId = process.env.COMP || 'Frame240Horror';
+const compId = process.env.COMP || 'Door306Horror';
 const out = path.join(root, 'out', 'contact');
 fs.rmSync(out, {recursive: true, force: true});
 fs.mkdirSync(path.join(out, 'frames'), {recursive: true});

@@ -332,7 +332,7 @@ def ref_image(path: Path, long_side: int = 1024) -> Image.Image:
 _fidelity_ok = [True]
 
 
-def openai_edit(images: list[bytes], prompt: str, kind: str, out_name: str) -> Image.Image:
+def openai_edit(images: list[bytes], prompt: str, kind: str, out_name: str, quality: str | None = None) -> Image.Image:
     """POST /v1/images/edits with one or more input images (image[] fields)."""
     key = os.environ['OPENAI_API_KEY']
     if STOP.is_set():
@@ -341,7 +341,7 @@ def openai_edit(images: list[bytes], prompt: str, kind: str, out_name: str) -> I
         STOP.set()
         raise RuntimeError(f'budget reached (${spent():.2f} of ${budget():.2f}) - stopping')
     model = os.environ.get('IMAGE_MODEL', 'gpt-image-2')
-    fields = [('model', model), ('prompt', prompt), ('size', '1536x1024'), ('quality', os.environ.get('IMAGE_QUALITY', 'high')), ('n', '1')]
+    fields = [('model', model), ('prompt', prompt), ('size', '1536x1024'), ('quality', quality or os.environ.get('IMAGE_QUALITY', 'high')), ('n', '1')]
     fid = os.environ.get('IMAGE_INPUT_FIDELITY', 'high')
     delay = 10.0
     for attempt in range(7):
@@ -650,18 +650,19 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
                     return
                 refs.append(f'frame:{prev.name}')
             imgs, prompt = build_request(j['src'], refs, shot_prompt(j['p'], j['k']))
-        h = hashlib.sha1(b''.join(imgs) + prompt.encode()).hexdigest()
+        q = (j['p'].get('art') or {}).get('quality') or os.environ.get('IMAGE_QUALITY', 'high')
+        h = hashlib.sha1(b''.join(imgs) + prompt.encode() + q.encode()).hexdigest()
         if j['out'].exists() and cache_get().get(j['out'].name) == h:
             state['cached'] += 1
             return
         try:
             try:
-                img = uncanvas(openai_edit(imgs, prompt, 'frame', j['out'].name))
+                img = uncanvas(openai_edit(imgs, prompt, 'frame', j['out'].name, quality=q))
             except RuntimeError as e:
                 if 'safety system' not in str(e) and 'moderation' not in str(e):
                     raise
                 # false positives on quiet, spooky-but-harmless frames: say what it is and retry once
-                img = uncanvas(openai_edit(imgs, SAFE_NOTE + prompt, 'frame', j['out'].name))
+                img = uncanvas(openai_edit(imgs, SAFE_NOTE + prompt, 'frame', j['out'].name, quality=q))
         except Exception as e:  # noqa: BLE001
             state['failed'] += 1
             print(f'  ! {j["out"].name}: {str(e)[:200]}', flush=True)
@@ -682,9 +683,9 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
 # mouth-open variants (lip sync): only the mouth region is taken from the variant
 # ---------------------------------------------------------------------------
 MOUTH_PROMPT = (
-    'Edit this image: Mara is talking (whispering). Change ONLY her mouth: open it slightly, mid-word, a small natural opening with '
-    'the teeth barely visible. Do not change anything else at all - same face, eyes, expression, hair, pencil, clothes, hands, '
-    'background, framing, light and colours, pixel for pixel.'
+    'Edit this image: the person in the middle of the frame is talking. Change ONLY their mouth: open it slightly, mid-word, a small '
+    'natural opening with the teeth barely visible. Do not change anything else at all - same face, eyes, expression, hair, clothes, '
+    'hands, background, framing, light and colours, pixel for pixel.'
 )
 
 
@@ -760,6 +761,217 @@ def cmd_mouths(only: set | None) -> None:
         report.append({'id': p['id'], 'changed_px': area})
         print(f'  {p["id"]}: mouth region {area:.0f} px' + ('  <- NO CHANGE, check' if area < 200 else ''))
     (ROOT / 'build' / 'mouths.json').write_text(json.dumps(report, indent=1))
+
+
+# ---------------------------------------------------------------------------
+# animation drawings (limited animation): edits of the finished frame, merged back onto it
+# ---------------------------------------------------------------------------
+EDIT_RULE = (
+    'EDIT THIS EXACT IMAGE (image 1 is the finished frame). Change ONLY what is described below and keep everything else '
+    'IDENTICAL, pixel for pixel: the camera, framing, composition, background, light, colours, and every person\'s face, hair, '
+    'clothes and pose. Same drawing style. No text, no new people. CHANGE: '
+)
+BLINK_PROMPT = ('The main person\'s eyes are CLOSED, as in the middle of a blink: eyelids fully down, lashes visible, the brows and the '
+                'rest of the face unchanged. Nothing else changes.')
+
+
+def edit_request(base: Image.Image, chars: list, body: str) -> tuple[list[bytes], str]:
+    imgs = [png_bytes(frame_canvas(base))]
+    names = ['the FINISHED FRAME to edit']
+    for c in chars:
+        pth, label = resolve_ref(f'char:{c}')
+        imgs.append(png_bytes(ref_image(pth)))
+        names.append(label + ' (for reference only)')
+    intro = ' '.join(f'Image {i + 1} is {n}.' for i, n in enumerate(names))
+    return imgs, f'{intro}\n\n{EDIT_RULE}{body}'
+
+
+def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac: float = 0.00012, eyes_only: bool = False) -> tuple[Image.Image, np.ndarray, float]:
+    """Keep the base frame and take from the variant only what really changed (so the
+    background never boils between drawings). Returns merged image, mask (0/1) and the
+    changed fraction of the frame."""
+    import cv2
+
+    b = np.asarray(base.convert('RGB')).astype(np.float32)
+    v = np.asarray(var.convert('RGB').resize(base.size, Image.LANCZOS)).astype(np.float32)
+    d = cv2.GaussianBlur(np.abs(b - v).mean(axis=2), (0, 0), 4)
+    m = (d > thr).astype(np.uint8)
+    m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
+    n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
+    keep = np.zeros_like(m)
+    area_min = min_frac * m.size
+    comps = [c for c in range(1, n) if st[c, cv2.CC_STAT_AREA] >= area_min]
+    if eyes_only and comps:
+        # a blink: keep only the eye pair - the strongest change and anything level with it
+        H, W = m.shape
+        score = {c: st[c, cv2.CC_STAT_AREA] * float(d[lab == c].mean()) for c in comps}
+        top = max(comps, key=lambda c: score[c])
+        ty = st[top, cv2.CC_STAT_TOP] + st[top, cv2.CC_STAT_HEIGHT] / 2
+        tx = st[top, cv2.CC_STAT_LEFT] + st[top, cv2.CC_STAT_WIDTH] / 2
+        comps = [c for c in comps if abs(st[c, cv2.CC_STAT_TOP] + st[c, cv2.CC_STAT_HEIGHT] / 2 - ty) < 0.035 * H
+                 and abs(st[c, cv2.CC_STAT_LEFT] + st[c, cv2.CC_STAT_WIDTH] / 2 - tx) < 0.2 * W and st[c, cv2.CC_STAT_HEIGHT] < 0.12 * H]
+    for c in comps:
+        keep[lab == c] = 1
+    keep = cv2.morphologyEx(keep, cv2.MORPH_CLOSE, np.ones((25, 25), np.uint8))
+    keep = cv2.dilate(keep, np.ones((17, 17), np.uint8))
+    alpha = cv2.GaussianBlur(keep.astype(np.float32), (0, 0), 7)[..., None]
+    out = b * (1 - alpha) + v * alpha
+    return Image.fromarray(out.clip(0, 255).astype(np.uint8)), keep, float(keep.mean())
+
+
+def merge_doors(base: Image.Image, var: Image.Image) -> tuple[Image.Image, list, float]:
+    """Doors: the open doorway is nearly as dark as the closed wood, so a pixel diff only finds
+    patches. Find each changed DOOR as a whole (tall blob after a generous close), take its full
+    rectangle from the doors-open drawing, and paste that onto the base."""
+    import cv2
+
+    b = np.asarray(base.convert('RGB')).astype(np.float32)
+    v = np.asarray(var.convert('RGB').resize(base.size, Image.LANCZOS)).astype(np.float32)
+    H, W = b.shape[:2]
+    d = cv2.GaussianBlur(np.abs(b - v).mean(axis=2), (0, 0), 4)
+    m = (d > 10).astype(np.uint8)
+    m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
+    m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((45, 45), np.uint8))
+    n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
+    rects = []
+    for c in range(1, n):
+        x, y, w, h, a = st[c]
+        if h < 0.18 * H or h < 1.1 * w or a < 0.004 * H * W or y > 0.45 * H:  # a door reaches up the wall
+            continue
+        rects.append([max(0, x - 6), max(0, y - 6), min(W, x + w + 6), min(H, y + h + 6)])
+    alpha = np.zeros((H, W), np.float32)
+    for x0, y0, x1, y1 in rects:
+        alpha[y0:y1, x0:x1] = 1
+    alpha = cv2.GaussianBlur(alpha, (0, 0), 3)[..., None]
+    out = b * (1 - alpha) + v * alpha
+    sx, sy = 1920 / W, 1080 / H
+    door_list = [[round(x0 * sx), round(y0 * sy), round(x1 * sx), round(y1 * sy), 'r' if (x0 + x1) / 2 < W / 2 else 'l'] for x0, y0, x1, y1 in rects]
+    return Image.fromarray(out.clip(0, 255).astype(np.uint8)), door_list, float(alpha.mean())
+
+
+def door_rects(mask: np.ndarray) -> list:
+    """Doors = tall changed blobs in the doors-open edit. Hinge on the side nearer the frame
+    centre, so each door swings away from us into its flat."""
+    import cv2
+
+    H, W = mask.shape
+    n, lab, st, _ = cv2.connectedComponentsWithStats(mask.astype(np.uint8), 8)
+    out = []
+    for c in range(1, n):
+        x, y, w, h, a = st[c]
+        if h < 0.18 * H or h < 1.15 * w or a < 0.004 * H * W:
+            continue
+        sx, sy = 1920 / W, 1080 / H
+        hinge = 'r' if x + w / 2 < W / 2 else 'l'
+        out.append([round(x * sx), round(y * sy), round((x + w) * sx), round((y + h) * sy), hinge])
+    return out
+
+
+def anim_jobs(plan: list, only: set | None) -> list:
+    jobs = []
+    for p in plan:
+        art = p.get('art') or {}
+        if p['mode'] not in ('still', 'talk') or (only and p['id'] not in only):
+            continue
+        base = OUT / f"{p['id']}_k1.jpg"
+        chars = as_list(art.get('chars'))
+        for v in art.get('variants') or []:
+            jobs.append({'p': p, 'base': base, 'kind': 'variant', 'name': v['name'], 'body': v['prompt'], 'chars': chars,
+                         'out': OUT / f"{p['id']}_k1_v{v['name']}.jpg"})
+        if art.get('blink'):
+            jobs.append({'p': p, 'base': base, 'kind': 'blink', 'name': 'blink', 'body': BLINK_PROMPT, 'chars': [], 'out': OUT / f"{p['id']}_k1_blink.jpg"})
+        if art.get('doors'):
+            jobs.append({'p': p, 'base': base, 'kind': 'doors', 'name': 'open', 'body': art['doors']['prompt'], 'chars': [],
+                         'out': OUT / f"{p['id']}_k1_open.jpg"})
+    return jobs
+
+
+def cmd_anim(only: set | None, workers: int) -> None:
+    load_env()
+    require_key()
+    plan = json.loads(PLAN.read_text())
+    jobs = anim_jobs(plan, only)
+    raw_dir = ROOT / 'build' / 'anim_raw'
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    report = []
+
+    def run(j: dict) -> None:
+        if STOP.is_set():
+            return
+        if not j['base'].exists():
+            print(f'  ! {j["out"].name}: base frame missing')
+            return
+        base = Image.open(j['base']).convert('RGB')
+        imgs, prompt = edit_request(base, j['chars'], j['body'])
+        q = (j['p'].get('art') or {}).get('quality') or 'high'
+        h = hashlib.sha1(b''.join(imgs) + prompt.encode() + q.encode()).hexdigest()
+        raw = raw_dir / j['out'].name
+        if not (raw.exists() and cache_get().get('anim_' + raw.name) == h):
+            try:
+                try:
+                    var = uncanvas(openai_edit(imgs, prompt, 'anim', j['out'].name, quality=q))
+                except RuntimeError as e:
+                    if 'safety system' not in str(e) and 'moderation' not in str(e):
+                        raise
+                    var = uncanvas(openai_edit(imgs, SAFE_NOTE + prompt, 'anim', j['out'].name, quality=q))
+            except Exception as e:  # noqa: BLE001
+                print(f'  ! {j["out"].name}: {str(e)[:200]}', flush=True)
+                return
+            var.save(raw, quality=95)
+            cache_put('anim_' + raw.name, h)
+        var = Image.open(raw).convert('RGB')
+        row = {'id': j['p']['id'], 'drawing': j['name']}
+        if j['kind'] == 'doors':
+            merged, rects, frac = merge_doors(base, var)
+            (OUT / f"{j['p']['id']}_doors.json").write_text(json.dumps(rects))
+            row['doors'] = len(rects)
+        else:
+            merged, mask, frac = merge_variant(base, var, eyes_only=j['kind'] == 'blink')
+        merged.save(j['out'], quality=92)
+        row['changed'] = round(frac, 4)
+        flag = '  <- NO CHANGE' if frac < 0.0003 else '  <- REDRAWN (>55% changed), check' if frac > 0.55 else ''
+        print(f'  {j["out"].name}: {frac * 100:.1f}% of the frame changed{" , doors " + str(row.get("doors")) if "doors" in row else ""}{flag}', flush=True)
+        report.append(row)
+
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        list(ex.map(run, jobs))
+    (ROOT / 'build' / 'anim_report.json').write_text(json.dumps(report, indent=1))
+    print(f'animation drawings: {len(report)} of {len(jobs)}; spent so far ${spent():.2f} of ${budget():.2f}')
+
+
+# ---------------------------------------------------------------------------
+# peephole: a door viewer's fisheye lens + round vignette, baked into the frame files
+# ---------------------------------------------------------------------------
+def peephole(img: Image.Image) -> Image.Image:
+    import cv2
+
+    a = np.asarray(img.convert('RGB')).astype(np.float32)
+    H, W = a.shape[:2]
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    cx, cy = W / 2, H / 2
+    R = 0.62 * H  # radius of the viewer's circle
+    dx, dy = (xx - cx) / R, (yy - cy) / R
+    r = np.sqrt(dx * dx + dy * dy)
+    k = 0.70 + 0.55 * r * r  # magnified centre, squeezed rim
+    mx = cx + dx * k * R * 1.12
+    my = cy + dy * k * R * 1.12
+    out = cv2.remap(a, mx, my, interpolation=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0)
+    # glass: slight softness and darkening toward the rim, black outside the circle
+    soft = cv2.GaussianBlur(out, (0, 0), 2.2)
+    edge = np.clip((r - 0.72) / 0.28, 0, 1)[..., None]
+    out = out * (1 - edge) + soft * edge
+    vign = np.clip(1 - (r - 0.80) / 0.2, 0, 1) ** 1.5
+    out = out * (vign[..., None] * (1 - 0.35 * edge))
+    return Image.fromarray(out.clip(0, 255).astype(np.uint8))
+
+
+def peep_file(name: str) -> str:
+    """restyle/<x>.jpg -> restyle/<x>_peep.jpg (made once per source file)."""
+    src = OUT / Path(name).name
+    dst = OUT / (src.stem + '_peep.jpg')
+    if not dst.exists() or dst.stat().st_mtime < src.stat().st_mtime:
+        peephole(Image.open(src)).save(dst, quality=92)
+    return f'restyle/{dst.name}'
 
 
 # ---------------------------------------------------------------------------
@@ -845,11 +1057,39 @@ def cmd_manifest() -> None:
             fr.append(e)
         return fr
 
+    def extras(p: dict) -> dict:
+        art = p.get('art') or {}
+        e: dict = {}
+        vs = {}
+        for v in art.get('variants') or []:
+            f = OUT / f"{p['id']}_k1_v{v['name']}.jpg"
+            if f.exists():
+                vs[v['name']] = f'restyle/{f.name}'
+        if vs:
+            e['variants'] = vs
+        b = OUT / f"{p['id']}_k1_blink.jpg"
+        if art.get('blink') and b.exists():
+            e['blink'] = f'restyle/{b.name}'
+        o, r = OUT / f"{p['id']}_k1_open.jpg", OUT / f"{p['id']}_doors.json"
+        if art.get('doors') and o.exists() and r.exists():
+            e['doors'] = {'open': f'restyle/{o.name}', 'rects': json.loads(r.read_text())}
+        if art.get('peephole'):
+            for fr in e.get('variants', {}):
+                e['variants'][fr] = peep_file(e['variants'][fr])
+            if 'blink' in e:
+                e['blink'] = peep_file(e['blink'])
+        return e
+
+    def peep(p: dict, fr: list) -> list:
+        if not (p.get('art') or {}).get('peephole'):
+            return fr
+        return [{**x, 'src': peep_file(x['src']), **({'talk': peep_file(x['talk'])} if x.get('talk') else {})} for x in fr]
+
     for p in plan:
         if p['mode'] in ('still', 'action', 'talk'):
             fr = frames_of(p)
             if fr:
-                shots[p['id']] = {'frames': fr}
+                shots[p['id']] = {'frames': peep(p, fr), **extras(p)}
     for p in plan:
         if p['mode'] == 'reuse':
             src = by_id.get(p['art']['reuse'])
@@ -860,9 +1100,8 @@ def cmd_manifest() -> None:
                     fr = [fr[k]]
                 elif len(fr) > 1 and k is None:
                     fr = [fr[len(fr) // 2]]
-                shots[p['id']] = {'frames': fr}
+                shots[p['id']] = {'frames': peep(src, fr), **extras(src)}
     MANIFEST.write_text(json.dumps({'shots': shots}, indent=1))
-    write_pic_manifest()
     want = sum(1 for p in plan if p['mode'] in ('still', 'action', 'talk', 'reuse'))
     print(f'manifest: {len(shots)} of {want} art shots have frames -> {MANIFEST.relative_to(ROOT)}')
 
@@ -882,7 +1121,7 @@ def cmd_cost() -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument('cmd', choices=['lookdev', 'plan', 'pictures', 'gen', 'mouths', 'parallax', 'manifest', 'cost'])
+    ap.add_argument('cmd', choices=['lookdev', 'plan', 'pictures', 'gen', 'anim', 'mouths', 'parallax', 'manifest', 'cost'])
     ap.add_argument('--only')
     ap.add_argument('--limit', type=int, default=0)
     ap.add_argument('--workers', type=int, default=4)
@@ -893,6 +1132,7 @@ def main() -> int:
         'plan': cmd_plan,
         'pictures': lambda: cmd_pictures(only),
         'gen': lambda: cmd_gen(only, a.limit, a.workers),
+        'anim': lambda: cmd_anim(only, a.workers),
         'mouths': lambda: cmd_mouths(only),
         'parallax': cmd_parallax,
         'manifest': cmd_manifest,

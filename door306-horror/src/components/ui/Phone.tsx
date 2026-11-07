@@ -3,7 +3,6 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {FONT} from '../../utils/fonts';
-import {PictureBox, type PicId} from '../../layout/pictures';
 import {clamp} from '../../utils/anim';
 
 const W = 560;
@@ -67,42 +66,54 @@ export const CallScreen: React.FC<{f: number; name?: string; connected?: number 
 	);
 };
 
-/** Message thread with the screenshot Mara sent. `zoom` pinch-zooms into the screenshot. */
-export const ThreadScreen: React.FC<{
-	f: number;
-	picture?: PicId;
-	sent?: number;
-	delivered?: boolean;
-	reply?: string | null;
-	typing?: boolean;
-	time?: string;
-}> = ({f, picture = 'canvas_man_1m', sent = 1, delivered = true, reply = null, typing = false, time = '2:48'}) => (
-	<div style={{position: 'absolute', inset: 0, background: '#0f1115', fontFamily: FONT.ui, color: '#fff'}}>
-		<StatusBar time={time} />
-		<div style={{position: 'absolute', top: 70, left: 0, right: 0, height: 110, borderBottom: '1px solid #262a31', display: 'flex', alignItems: 'center', gap: 18, padding: '0 34px'}}>
-			<div style={{width: 64, height: 64, borderRadius: 32, background: '#5b6b8c', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 32, fontWeight: 600}}>H</div>
-			<div style={{fontSize: 32, fontWeight: 600}}>Hana</div>
-		</div>
-		<div style={{position: 'absolute', top: 210, right: 30, width: 400, opacity: clamp(sent), transform: `translateY(${(1 - clamp(sent)) * 40}px)`}}>
-			<div style={{borderRadius: 26, overflow: 'hidden', border: '3px solid #2f6df6', height: 225}}>
-				<PictureBox id={picture} />
-			</div>
-			<div style={{textAlign: 'right', fontSize: 20, color: '#8b93a1', marginTop: 8}}>{delivered ? 'Delivered' : 'Sending…'}</div>
-		</div>
-		{typing ? (
-			<div style={{position: 'absolute', top: 520, left: 30, padding: '18px 26px', borderRadius: 30, background: '#262a31', fontSize: 34, letterSpacing: 6}}>{'•••'.slice(0, 1 + (Math.floor(f / 6) % 3))}</div>
-		) : null}
-		{reply ? <div style={{position: 'absolute', top: 520, left: 30, maxWidth: 380, padding: '18px 26px', borderRadius: 30, background: '#262a31', fontSize: 30}}>{reply}</div> : null}
+/** Lock screen: the time, big. `glow` 0..1 fades the screen on. */
+export const LockScreen: React.FC<{time: string; date?: string; glow?: number}> = ({time, date = 'Saturday, November 3', glow = 1}) => (
+	<div style={{position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #1b2236 0%, #0c0f18 100%)', fontFamily: FONT.ui, color: '#fff', textAlign: 'center', opacity: glow}}>
+		<StatusBar time="" />
+		<div style={{marginTop: 150, fontSize: 30, color: '#c8d0e4'}}>{date}</div>
+		<div style={{fontSize: 190, fontWeight: 300, letterSpacing: -4, lineHeight: 1.05}}>{time}</div>
+		<div style={{position: 'absolute', bottom: 70, left: 0, right: 0, fontSize: 24, color: '#9aa4bd'}}>Swipe up to open</div>
 	</div>
 );
 
-/** The screenshot opened full-screen on the phone, pinch-zoomed (z) into (cx, cy). */
-export const ScreenshotView: React.FC<{picture: PicId; z?: number; cx?: number; cy?: number}> = ({picture, z = 1, cx = 0.5, cy = 0.5}) => (
-	<div style={{position: 'absolute', inset: 0, background: '#000'}}>
-		<div style={{position: 'absolute', left: 0, right: 0, top: '50%', height: (W - 32) * (9 / 16) * 2.1, marginTop: -((W - 32) * (9 / 16) * 2.1) / 2, overflow: 'hidden'}}>
-			<div style={{position: 'absolute', inset: 0, transformOrigin: `${cx * 100}% ${cy * 100}%`, transform: `scale(${z})`}}>
-				<PictureBox id={picture} />
+/** Emergency call that will not go through: "No service". */
+export const NoSignalScreen: React.FC<{f: number; attempt?: number}> = ({f, attempt = 1}) => (
+	<div style={{position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #2b3a55 0%, #121a28 100%)', fontFamily: FONT.ui, color: '#fff', textAlign: 'center'}}>
+		<div style={{position: 'absolute', top: 18, left: 40, right: 40, display: 'flex', justifyContent: 'space-between', fontWeight: 600, fontSize: 24}}>
+			<span>3:08</span>
+			<span style={{fontSize: 22, color: '#ff8a80'}}>No Service</span>
+		</div>
+		<div style={{marginTop: 200, fontSize: 64, fontWeight: 600}}>911</div>
+		<div style={{fontSize: 32, marginTop: 22, color: f % 24 < 14 ? '#ff6b60' : '#c3cde0'}}>{attempt > 1 ? 'Call failed' : 'No signal'}</div>
+		<div style={{fontSize: 24, marginTop: 14, color: '#9aa4bd'}}>Wi-Fi: not connected</div>
+		<div style={{position: 'absolute', bottom: 190, left: '50%', marginLeft: -52, width: 104, height: 104, borderRadius: 52, background: '#ff3b30'}} />
+	</div>
+);
+
+/** One new text message on the lock screen, sliding in. */
+export const MessageScreen: React.FC<{from: string; text: string; time?: string; t?: number}> = ({from, text, time = '3:11', t = 1}) => (
+	<div style={{position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #1b2236 0%, #0c0f18 100%)', fontFamily: FONT.ui, color: '#fff'}}>
+		<div style={{marginTop: 120, textAlign: 'center', fontSize: 150, fontWeight: 300}}>{time}</div>
+		<div
+			style={{
+				position: 'absolute',
+				top: 420,
+				left: 22,
+				right: 22,
+				padding: '26px 28px',
+				borderRadius: 30,
+				background: 'rgba(235,238,245,0.16)',
+				backdropFilter: 'blur(8px)',
+				opacity: clamp(t),
+				transform: `translateY(${(1 - clamp(t)) * -40}px)`,
+			}}
+		>
+			<div style={{display: 'flex', justifyContent: 'space-between', fontSize: 22, color: '#c8d0e4'}}>
+				<span style={{fontWeight: 700, letterSpacing: 1}}>MESSAGES</span>
+				<span>now</span>
 			</div>
+			<div style={{fontSize: 30, fontWeight: 700, marginTop: 12}}>{from}</div>
+			<div style={{fontSize: 32, marginTop: 8, lineHeight: 1.3}}>{text}</div>
 		</div>
 	</div>
 );

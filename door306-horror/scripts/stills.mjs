@@ -12,7 +12,7 @@ import {execFileSync} from 'node:child_process';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
-const compId = process.env.COMP || 'Frame240Horror';
+const compId = process.env.COMP || 'Door306Horror';
 const scale = Number(process.env.SCALE || 0.5);
 execFileSync(process.execPath, [path.join(root, 'scripts/check.mjs')], {stdio: 'ignore'});
 const require = createRequire(import.meta.url);

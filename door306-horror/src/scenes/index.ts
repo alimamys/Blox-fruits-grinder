@@ -1,27 +1,11 @@
-// Scene id (src/data/timeline.ts) -> component.
+// Scene id (src/data/timeline.ts) -> component. Scenes without a component yet render black.
 import type React from 'react';
-import {End, LastSelection, Recording} from './Closet';
-import {Closer} from './Closer';
-import {ColdOpen} from './ColdOpen';
-import {Erase} from './Erase';
-import {HallwayScene} from './HallwayScene';
-import {InsideWall} from './InsideWall';
-import {NormalNight} from './NormalNight';
-import {Stranger} from './Stranger';
-import {Warning} from './Warning';
-import {WhiteOnWhite} from './WhiteOnWhite';
+import {Doors} from './Doors';
+import {NewApartment} from './NewApartment';
+import {Black} from './common';
 
 export const SCENE_COMPONENTS: Record<string, React.FC> = {
-	coldOpen: ColdOpen,
-	normalNight: NormalNight,
-	stranger: Stranger,
-	closer: Closer,
-	warning: Warning,
-	hallway: HallwayScene,
-	erase: Erase,
-	whiteOnWhite: WhiteOnWhite,
-	insideWall: InsideWall,
-	recording: Recording,
-	lastSelection: LastSelection,
-	end: End,
+	doors: Doors,
+	newApartment: NewApartment,
+	end: Black,
 };

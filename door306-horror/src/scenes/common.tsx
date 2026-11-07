@@ -44,16 +44,16 @@ export const S: React.FC<{f: number; d: number; from?: CamPos; to?: CamPos; bg?:
 	</Stage>
 );
 
-/** Colour moods per scene (sent with every image request of the scene). */
+/** Colour moods (sent with every image request of the scene). */
 export const MOOD = {
-	open: 'Night. Near-black room, cold monitor blue on her face, deep shadows.',
-	night: 'Night, rain on the window: cold blue moonlight against the warm-white glow of the monitor on her face.',
-	cold: 'Cold blue night; the monitor is the only light on her face, deep shadows around her.',
-	phone: 'Dark room; the glow of her phone and the monitor on her face.',
-	flash: 'Darkness; the only light is the white cone of her phone flashlight, hard shadows.',
-	red: 'Cold blue night with one vivid red accent; the monitor light on her face.',
-	whiteGlow: 'The monitor is a bright white rectangle that lights her face pure white; everything else dark.',
-	drained: 'Colours drained to pale greys and whites, almost no shadows - like an unfinished drawing; soft flat light.',
-	white: 'Harsh white flashlight on flat white walls; almost no shadows; cold and empty.',
-	closet: 'A dark closet; her phone screen is the only light, cold white-blue on her face, deep black around her.',
+	hall: 'Night, 3:06 am: the corridor\'s fluorescent tubes give a sickly yellow-green light; cold blue shadows; the stairwell opening black.',
+	hallDark: 'Near darkness: one flickering fluorescent tube, sickly yellow-green light in short bursts, deep blue-black shadows.',
+	flat: 'Night inside Sarah\'s flat, lights off: deep blue shadows, orange streetlight in stripes through the blinds, a thin yellow-green line of corridor light under the front door.',
+	peep: 'Seen through a door peephole: the corridor\'s yellow-green fluorescent light, cold shadows.',
+	bedroom: 'Night, dark blue bedroom, orange stripes of streetlight across the bed.',
+	stair: 'The dark stairwell: one dim caged bulb flickering, sickly green-grey light, the lower flights fading into black.',
+	day: 'Three weeks earlier, a calm overcast afternoon: soft daylight, muted warm colours - ordinary and safe.',
+	night: 'Night, about 3 am: deep blue, one sodium streetlight, every window dark.',
+	morning: 'The following morning: clean warm sunlight, birds, an ordinary bright day.',
+	office: 'Morning in the landlord\'s office: warm daylight through dusty blinds, the green desk lamp on.',
 };
