@@ -28,22 +28,28 @@ export const Creature: React.FC = () => (
 			again('f_05_curled', 'narrator_106_curled', 'd_18_fingers', {seq: [['f1', 0], ['f2', 0.45]], move: push(1.15, 1.22, 0.6, 0.45)}),
 			again('f_06_grip', 'fingers_curl', 'd_18_fingers', {show: 'f2', fx: 'flicker', move: push(1.3, 1.4, 0.62, 0.42)}),
 			// "Then a head appeared." - rising above the top step (through the peephole)
-			shot('f_07_head', 'narrator_107_head_appeared', 'hallway_cross', {
+			close('f_07_head', 'narrator_107_head_appeared', {
 				chars: ['creature'],
+				loc: 'stairwell',
 				quality: 'high',
-				peephole: true,
 				mood: MOOD.hallDark,
-				prompt: 'The stairwell opening at the left end of the corridor in flickering light: the top of a grey, bony, hairless-patched head is just rising above the top step beside the railing, bent forward at an impossible angle. Only the top of the head is visible.',
-				variants: [{name: 'up', prompt: 'The creature\'s head and its bony grey shoulders have now risen fully above the top step, the head bent forward and sideways at an impossible angle, its face in shadow. Nothing else changes.'}],
+				prompt: 'Close-up at the top of the dark stairwell in a burst of flickering light: beside the black metal railing, just above the edge of the top concrete step, the crown of the creature\'s grey, bony head with sparse lank dark hair is rising into view, bent forward at an impossible angle. Only the top of the head is visible.',
+				variants: [{name: 'up', prompt: 'The creature\'s head and bony grey shoulders have now risen above the top step, the head bent forward and sideways at an impossible angle, one small sunken pale eye catching the light. Nothing else changes.'}],
 				seq: [
 					['base', 0],
 					['up', 0.6],
 				],
 				fx: 'flicker',
-				move: push(1.04, 1.12, 0.42, 0.5),
-			}, {cam: {z: 1.8, cx: 560, cy: 470}, kids: <ellipse cx={600} cy={700} rx={40} ry={26} fill="#8d8f8a" />}),
+				grade: 1.4,
+				move: push(1.03, 1.1, 0.5, 0.55),
+			}, <>
+				<rect x={0} y={0} width={1920} height={1080} fill="#1d2620" />
+				<rect x={0} y={760} width={1920} height={320} fill="#3a3f3a" />
+				<path d="M1300,300 L1300,1080 M1600,300 L1600,1080 M1100,300 L1900,300" stroke="#4a514a" strokeWidth={26} />
+				<ellipse cx={800} cy={770} rx={150} ry={70} fill="#8d8f8a" />
+			</>),
 			// "It was bent forward at an impossible angle."
-			again('f_08_bent', 'narrator_108_bent_forward', 'f_07_head', {show: 'up', move: push(1.15, 1.28, 0.42, 0.45)}),
+			again('f_08_bent', 'narrator_108_bent_forward', 'f_07_head', {show: 'up', grade: 1.4, move: push(1.15, 1.32, 0.45, 0.72)}),
 			// "The thing had to be nearly seven feet tall." - the full figure at the end of the corridor, beyond the frozen neighbours
 			shot('f_09_full', 'narrator_109_seven_feet', 'hallway', {
 				chars: ['creature', 'mother', 'residents'],
@@ -104,12 +110,12 @@ export const Creature: React.FC = () => (
 				loc: 'stairwell',
 				quality: 'high',
 				mood: MOOD.hallDark,
-				prompt: 'Close-up in profile in the flickering dark: the creature\'s head bent forward and to one side, grey waxy skin stretched tight over the skull and the bones of its jaw and neck, a small sunken pale eye, sparse lank dark hair; its jaw closed for now. Frightening, not gory.',
+				prompt: 'EXTREME CLOSE-UP of the creature\'s head only, filling the frame, in profile in the flickering dark: its head bent forward and to one side, grey waxy skin stretched tight over the skull and the bones of its jaw and neck, a small sunken pale eye, sparse lank dark hair; its jaw closed for now. Frightening, not gory.',
 				variants: [{name: 'jaw', prompt: 'The creature\'s jaw has dropped open FAR too wide - a dark, hollow, toothless mouth hanging down past where any human jaw could go. Nothing else changes. No blood.'}],
 				move: push(1.03, 1.1),
 			}, <>
 				<rect x={0} y={0} width={1920} height={1080} fill="#1d2620" />
-				<ellipse cx={960} cy={480} rx={260} ry={330} fill="#8d8f8a" transform="rotate(-40 960 480)" />
+				<ellipse cx={960} cy={540} rx={520} ry={640} fill="#8d8f8a" transform="rotate(-40 960 540)" />
 			</>),
 			again('f_19_mouth', 'narrator_119_mouth_open', 'f_18_face', {seq: [['base', 0], ['jaw', 0.35]], fx: 'flicker', move: push(1.1, 1.16)}),
 			again('f_20_wide', 'narrator_120_too_wide', 'f_18_face', {show: 'jaw', move: push(1.18, 1.32, 0.52, 0.58)}),

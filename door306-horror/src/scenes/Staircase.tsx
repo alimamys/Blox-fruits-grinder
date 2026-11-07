@@ -154,7 +154,7 @@ export const Staircase: React.FC = () => (
 				quality: 'high',
 				mood: CORRIDOR,
 				prompt: 'From the top of the stairs looking back up the long corridor: the residents and Mr. Harris stand in the open doorways of their flats along both walls, all watching us in silence, expressionless; every door wide open.',
-				doors: {prompt: 'Every door along the corridor is now CLOSED and nobody is visible - the corridor is empty and silent. Nothing else changes.', start: 99},
+				doors: {prompt: 'Every door along the corridor is now CLOSED and nobody is visible - the corridor is empty and silent. Nothing else changes.', start: 99, loose: true},
 				move: push(1.02, 1.06),
 			}, {kids: <>
 				<Person who="oldman" x={795} y={765} h={300} facing="front" />

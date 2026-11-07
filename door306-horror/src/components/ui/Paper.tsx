@@ -6,7 +6,7 @@ import {clamp} from '../../utils/anim';
 import {FONT} from '../../utils/fonts';
 import {h01} from '../../utils/rough';
 
-const HAND = "'Segoe Print', 'Bradley Hand', 'Comic Neue', cursive";
+const HAND = FONT.hand;
 
 /** Invented first names only (no surnames, nobody real). */
 const NAMES = [
@@ -21,11 +21,11 @@ const Page: React.FC<{children: React.ReactNode; z?: number}> = ({children, z = 
 			style={{
 				width: 1180,
 				height: 1500,
-				background: 'linear-gradient(180deg, #efe6cf 0%, #e6dbbf 100%)',
+				// ruled lines ON TOP of the paper colour (both in one background-image list)
+				backgroundImage: 'repeating-linear-gradient(180deg, transparent 0, transparent 61px, rgba(80,110,160,0.35) 62px), linear-gradient(180deg, #efe6cf 0%, #e6dbbf 100%)',
 				boxShadow: '0 40px 120px rgba(0,0,0,0.7)',
 				transform: `rotate(-2deg) scale(${z})`,
 				position: 'relative',
-				backgroundImage: 'repeating-linear-gradient(180deg, transparent 0, transparent 61px, rgba(80,110,160,0.35) 62px)',
 			}}
 		>
 			<div style={{position: 'absolute', left: 120, top: 0, bottom: 0, width: 2, background: 'rgba(190,60,60,0.45)'}} />
@@ -44,7 +44,7 @@ export const NamesPage: React.FC<{f: number; d: number; strike?: number}> = ({f,
 				const last = i === rows.length - 1;
 				const k = last ? strike : 1;
 				return (
-					<div key={i} style={{position: 'absolute', left: 150, top: 54 + i * 54, fontFamily: HAND, fontSize: 34, color: '#2a2f45', whiteSpace: 'nowrap'}}>
+					<div key={i} style={{position: 'absolute', left: 150, top: 54 + i * 54, fontFamily: HAND, fontSize: 38, color: '#2a2f45', whiteSpace: 'nowrap'}}>
 						{month} {3 + (i % 3)} - {['2nd', '3rd', '4th', '2nd', '1st'][i % 5]} floor - {n}
 						<div style={{position: 'absolute', left: -10, top: 22 + (h01(i, 3) - 0.5) * 6, height: 4, width: `${(420 + h01(i, 5) * 160) * k}px`, background: '#1b1b22', transform: `rotate(${(h01(i, 7) - 0.5) * 3}deg)`}} />
 					</div>

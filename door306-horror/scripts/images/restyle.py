@@ -819,7 +819,7 @@ def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac
     return Image.fromarray(out.clip(0, 255).astype(np.uint8)), keep, float(keep.mean())
 
 
-def merge_doors(base: Image.Image, var: Image.Image) -> tuple[Image.Image, list, float]:
+def merge_doors(base: Image.Image, var: Image.Image, loose: bool = False) -> tuple[Image.Image, list, float]:
     """Doors: the open doorway is nearly as dark as the closed wood, so a pixel diff only finds
     patches. Find each changed DOOR as a whole (tall blob after a generous close), take its full
     rectangle from the doors-open drawing, and paste that onto the base."""
@@ -834,9 +834,32 @@ def merge_doors(base: Image.Image, var: Image.Image) -> tuple[Image.Image, list,
     m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, np.ones((45, 45), np.uint8))
     n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
     rects = []
+    if loose:
+        # doorways with people in them run together into one wide region: split it into vertical
+        # bands wherever a column of the change mask thins out (the gaps between people/doors)
+        m2 = (d > 10).astype(np.uint8)
+        m2 = cv2.morphologyEx(m2, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
+        col = cv2.GaussianBlur(m2[: int(0.85 * H)].mean(axis=0).astype(np.float32).reshape(1, -1), (0, 0), 6).ravel()
+        on = col > 0.22
+        x = 0
+        while x < W:
+            if not on[x]:
+                x += 1
+                continue
+            x0 = x
+            while x < W and on[x]:
+                x += 1
+            if x - x0 >= 0.035 * W:
+                ys = np.nonzero(m2[:, x0:x].mean(axis=1) > 0.15)[0]
+                if len(ys) and (ys[-1] - ys[0]) > 0.3 * H:
+                    rects.append([max(0, x0 - 4), max(0, int(ys[0]) - 6), min(W, x + 4), min(H, int(ys[-1]) + 6)])
+        n = 1  # skip the blob pass below
     for c in range(1, n):
         x, y, w, h, a = st[c]
-        if h < 0.18 * H or h < 1.1 * w or a < 0.004 * H * W or y > 0.45 * H:  # a door reaches up the wall
+        if loose:  # doorways with people in them: any big changed region that reaches up the wall
+            if h < 0.15 * H or a < 0.004 * H * W or y > 0.45 * H:
+                continue
+        elif h < 0.18 * H or h < 1.1 * w or a < 0.004 * H * W or y > 0.45 * H:  # a door reaches up the wall
             continue
         rects.append([max(0, x - 6), max(0, y - 6), min(W, x + w + 6), min(H, y + h + 6)])
     alpha = np.zeros((H, W), np.float32)
@@ -922,7 +945,7 @@ def cmd_anim(only: set | None, workers: int) -> None:
         var = Image.open(raw).convert('RGB')
         row = {'id': j['p']['id'], 'drawing': j['name']}
         if j['kind'] == 'doors':
-            merged, rects, frac = merge_doors(base, var)
+            merged, rects, frac = merge_doors(base, var, loose=bool(((j['p'].get('art') or {}).get('doors') or {}).get('loose')))
             (OUT / f"{j['p']['id']}_doors.json").write_text(json.dumps(rects))
             row['doors'] = len(rects)
         else:

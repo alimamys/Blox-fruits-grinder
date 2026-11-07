@@ -7,7 +7,7 @@ import {MOOD} from './common';
 import {again, close, phone, push, shot} from './kit';
 
 /** Sarah's face close to the door in the dark - reused whenever she realises something. */
-const SARAH_DREAD = 'Close-up in the dark flat: Sarah stands with her back against her front door, staring into the darkness, her face pale, eyes wide and glassy as a terrible thought dawns on her; faint yellow-green light from under the door on her chin.';
+const SARAH_DREAD = 'EXTREME CLOSE-UP of Sarah\'s face only - forehead to chin filling the frame - in the dark flat, her back against her front door, staring into the darkness, her face pale, eyes wide and glassy as a terrible thought dawns on her; faint yellow-green light from under the door on her chin.';
 
 export const Neighbors: React.FC = () => (
 	<Shots
@@ -38,7 +38,7 @@ export const Neighbors: React.FC = () => (
 				mood: MOOD.flat,
 				prompt: SARAH_DREAD,
 				move: push(1.03, 1.08, 0.5, 0.42),
-			}, {cam: {z: 2.4, cx: 920, cy: 360}, kids: <Person who="sarah" x={920} y={780} h={600} facing="front" />}),
+			}, {cam: {z: 5.0, cx: 920, cy: 250}, kids: <Person who="sarah" x={920} y={780} h={600} facing="front" />}),
 			// "They weren't surprised by any of this." / "They were expecting it."
 			again('c_09_not_surprised', 'narrator_072_not_surprised', 'd_08_still', {move: push(1.06, 1.14)}),
 			again('c_10_expecting', 'narrator_073_expecting', 'd_10_harris_frozen', {move: push(1.12, 1.2, 0.45, 0.42)}),
@@ -74,7 +74,6 @@ export const Neighbors: React.FC = () => (
 				chars: ['harris'],
 				loc: 'hallway_cross',
 				quality: 'high',
-				peephole: true,
 				talk: ['harris_001_its_me'],
 				mood: MOOD.peep,
 				prompt: 'Seen through the door peephole: Mr. Harris\'s frightened old face very close to the door, filling the middle of the view, eyes wet and wide, whispering; the yellow-green corridor behind him.',
