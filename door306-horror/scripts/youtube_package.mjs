@@ -49,9 +49,14 @@ const licences = [...new Set(credits.match(/https:\/\/creativecommons\.org\/lice
 const title = 'Never Open Your Door at 3:06 AM | Animated Horror Story';
 const alternatives = ['Every Door in My Building Opens at 3:06 AM | Horror Animation', 'My Rent Was Too Cheap... Now I Know Why | Animated Horror'];
 const thumbnails = [
-	'thumbnail_A_they_chose_me.jpg - main: the door forced open, Mr. Harris with the master key, the creature behind him - "THEY CHOSE ME"',
-	'thumbnail_B_306am.jpg - test: through the peephole, every neighbour staring at her door, the creature at the stairs - "3:06 AM"',
-	'thumbnail_C_dont_open.jpg - test: Sarah against her door, hand over her mouth, feet in the light under the door - "DON\'T OPEN IT"',
+	'MYSTERY SET (shows nothing of what happens - upload these three to Test & Compare in YouTube Studio):',
+	'thumbnail_D_every_door.jpg - the empty corridor at 3 a.m., every door open onto black rooms except one (circled) - "EVERY DOOR OPENED..."',
+	'thumbnail_E_whos_there.jpg - from inside, only the light under her door and the shadows of two long feet - "WHO\'S THERE?"',
+	'thumbnail_F_dont_make_a_sound.jpg - the neighbours from behind, facing a pitch-black stairwell; Mr. Harris looks back, finger on his lips - "DON\'T MAKE A SOUND"',
+	'REVEAL SET (shows the creature / the twist - keep as a fallback):',
+	'thumbnail_A_they_chose_me.jpg - Mr. Harris with the master key, the creature behind him - "THEY CHOSE ME"',
+	'thumbnail_B_306am.jpg - through the peephole, every neighbour staring, the creature at the stairs - "3:06 AM"',
+	'thumbnail_C_dont_open.jpg - Sarah against her door, hand over her mouth, feet under the door - "DON\'T OPEN IT"',
 ];
 const pinned = 'Be honest - if your neighbor knocked at 3:06 AM and whispered your name... would you have opened the door?';
 const tags = [
@@ -108,7 +113,7 @@ fs.writeFileSync(
 	[
 		`TITLE (${title.length} chars)\n${title}`,
 		`\nALTERNATIVE TITLES (for a title test)\n${alternatives.map((a) => `- ${a}`).join('\n')}`,
-		`\nTHUMBNAILS (upload all three to Test & Compare in YouTube Studio)\n${thumbnails.map((a) => `- ${a}`).join('\n')}`,
+		`\nTHUMBNAILS\n${thumbnails.map((a) => (a.endsWith(':') ? a : `- ${a}`)).join('\n')}`,
 		`\nPINNED COMMENT\n${pinned}`,
 		`\nTAGS (comma separated, ${tags.join(', ').length} chars)\n${tags.join(', ')}`,
 		'',

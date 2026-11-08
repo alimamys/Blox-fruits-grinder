@@ -65,6 +65,11 @@ The plan is in [`PLAN.md`](PLAN.md) and the script, word for word, in [`SCRIPT.m
     - **B, test:** "3:06 AM". Through the peephole, every neighbour stares at her door, with the creature at the stairs.
     - **C, test:** "DON'T OPEN IT". Sarah presses against her door with a hand over her mouth; feet show in the light under the door.
   - `feed_preview.jpg`: the three thumbnails at phone home-feed size and search-result size.
+  - A **mystery set** that shows nothing of what happens, at the user's request ($0.73; this is now the set to test):
+    - **D:** "EVERY DOOR OPENED...". The empty corridor, every door open onto black rooms except the one circled.
+    - **E:** "WHO'S THERE?". Only the light under her door and the shadows of two long feet.
+    - **F:** "DON'T MAKE A SOUND". The neighbours from behind, facing a pitch-black stairwell, while Mr. Harris looks back with a finger on his lips.
+    - The phone-size check is in `feed_preview_mystery.jpg`.
 
 ## Fixes after the user's review
 
@@ -85,7 +90,7 @@ The plan is in [`PLAN.md`](PLAN.md) and the script, word for word, in [`SCRIPT.m
 
 ## Cost
 
-- **Images:** $33.93 of the $40 cap, from 168 image requests, including the review fixes and the 3 thumbnail artworks (cost log at `logs/image_costs.jsonl`).
+- **Images:** $34.66 of the $40 cap, from 171 image requests, including the review fixes and 6 thumbnail artworks (cost log at `logs/image_costs.jsonl`).
 - **Voices:** about $0.14.
 - **MiniMax:** $0.
 

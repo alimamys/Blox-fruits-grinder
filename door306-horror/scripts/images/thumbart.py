@@ -73,6 +73,52 @@ CONCEPTS = {
         ),
         'mood': 'Near darkness; a cold blue rim light on Sarah\'s face and hair; the yellow-green strip of corridor light under the door.',
     },
+    # --- mystery set: nothing is shown, only the question (no creature, no faces of what is coming) ---
+    # Scene 1: 3:06 AM - every door on the floor stands open; the corridor is empty; one door stays shut.
+    'doors': {
+        'refs': ['loc:hallway'],
+        'chars': [],
+        'loc': 'hallway',
+        'nobody': True,
+        'prompt': (
+            'The fourth-floor corridor at 3 a.m., one-point perspective from the window end, looking down the corridor to the stairwell. '
+            'EVERY apartment door on both sides stands wide OPEN onto pitch-black rooms - except ONE door, the second door on the RIGHT, '
+            'which is firmly CLOSED, a thin line of warm light under it. The corridor is completely EMPTY and still: nobody anywhere, no '
+            'shapes, no shadows of people. At the far end the stairwell opening is pure black. One fluorescent tube flickers. Silent, '
+            'eerie, wrong. Keep the lower quarter of the frame (the carpet runner) simple and calm for a title.'
+        ),
+        'mood': 'Sickly yellow-green fluorescent light, deep black inside every open doorway and in the stairwell.',
+    },
+    # Scene 4: three soft knocks - from inside, only the light under the door and the shadows of two feet.
+    'under': {
+        'refs': ['loc:flat'],
+        'chars': [],
+        'loc': 'flat',
+        'nobody': True,
+        'prompt': (
+            'Extreme close-up at floor level inside a pitch-dark apartment, looking at the BOTTOM of the closed dark wooden front door. '
+            'The thin gap under the door glows bright, sickly yellow-green with corridor light, spilling a fan of light across the dark '
+            'floorboards toward the camera. In the middle of that strip, the light is broken by the dark SHADOWS of two feet standing right '
+            'outside the door - unnaturally long and thin. We see ONLY the two shadows, nothing else of whoever stands there. The rest of the '
+            'frame is near-black dark wood. Keep the TOP half of the frame dark and empty for a title.'
+        ),
+        'mood': 'Near-total darkness; the only light is the glowing strip under the door.',
+    },
+    # Scenes 3-4: the neighbours from behind, facing the black stairwell; Mr. Harris turns back - "shh".
+    'shh': {
+        'refs': ['char:harris', 'char:mother', 'char:residents', 'loc:hallway'],
+        'chars': ['harris', 'mother', 'residents'],
+        'loc': 'hallway',
+        'prompt': (
+            'The yellow-green fourth-floor corridor at 3 a.m., seen from BEHIND the neighbours: they stand perfectly still in a loose line in '
+            'their night clothes, their BACKS to the camera, all facing the far end of the corridor, where the stairwell opening is PURE '
+            'BLACK - nothing at all is visible in it. We do NOT see their faces (the little boy\'s face is hidden against his mother\'s '
+            'shoulder). Only Mr. Harris, in the RIGHT foreground and large in frame (head and shoulders), has turned his head back over his '
+            'shoulder toward the viewer, his eyes wide and wet with fear, pressing one finger to his lips: "shh". Keep the LEFT third of '
+            'the frame (the wall and the backs of the neighbours) simple for a title.'
+        ),
+        'mood': 'Sickly yellow-green fluorescent light; the stairwell at the end is an absolute black hole; Mr. Harris\'s face is clearly lit.',
+    },
 }
 
 
@@ -87,7 +133,9 @@ def main(names: list[str]) -> int:
             print(f'  {dst.name} exists - skipped')
             continue
         who = ' '.join(R.CHAR_NOTE[x] for x in c['chars'])
-        body = (f'{R.SAFE_NOTE}{THUMB} FRAME: {c["prompt"]} MOOD AND LIGHT: {c["mood"]} {who} SETTING: {R.LOC_NOTE[c["loc"]]}')
+        nobody = ('THIS IMAGE CONTAINS NO PEOPLE AT ALL: no man, no woman, no faces, no hands - do not copy the people of the style '
+                  'reference. ' if c.get('nobody') else '')
+        body = (f'{nobody}{R.SAFE_NOTE}{THUMB} FRAME: {c["prompt"]} MOOD AND LIGHT: {c["mood"]} {who} SETTING: {R.LOC_NOTE[c["loc"]]}')
         imgs, prompt = R.build_request(None, c['refs'], body)
         img = R.openai_edit(imgs, prompt, 'thumb', f'thumb_{name}.jpg', quality='high')
         R.uncanvas(img).save(dst, quality=94)

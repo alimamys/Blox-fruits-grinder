@@ -128,6 +128,11 @@ def glow(im: Image.Image, box: tuple[int, int, int, int], gain: float = 1.6) -> 
     return Image.composite(bright, im, mask.filter(ImageFilter.GaussianBlur(14)))
 
 
+def centered(im: Image.Image, words: str, size: int) -> int:
+    """x that centres one line of title text at this size."""
+    return int((W - ImageDraw.Draw(im).textlength(words, font=ImageFont.truetype(FONT, size))) / 2)
+
+
 def main() -> None:
     OUT.mkdir(exist_ok=True)
     # A - THEY CHOSE ME: the door forced open; Mr. Harris with the master key, the creature towering behind him
@@ -149,6 +154,26 @@ def main() -> None:
     text(c, [("DON'T", WHITE), ('OPEN IT', RED)], 40, 70, 140, 470, gap=-4)
     c.save(OUT / 'thumbnail_C_dont_open.jpg', quality=92)
     print('youtube/thumbnail_A_they_chose_me.jpg, thumbnail_B_306am.jpg, thumbnail_C_dont_open.jpg')
+
+    # ---- mystery set: shows nothing of what is happening, only the question ----
+    # D - EVERY DOOR OPENED: the empty corridor at 3:06, every door open onto black rooms - except one
+    d = lift(art('doors'), gamma=0.85)
+    red_circle(d, 862, 372, 62, 300, width=10)  # the one door that stayed shut
+    d = bottom_shade(d, 0.55, 0.8)
+    # bottom-left, two lines: clear of the circled door and of YouTube's duration badge (bottom-right)
+    text(d, [('EVERY DOOR', WHITE), ('OPENED...', RED)], 34, 452, 118, 720, gap=-2)
+    d.save(OUT / 'thumbnail_D_every_door.jpg', quality=92)
+    # E - WHO'S THERE?: from inside, only the light under her door and the shadows of two feet
+    e = lift(art('under'), gamma=0.72, contrast=1.15, color=1.25)
+    e = glow(e, (280, 430, 1080, 720), 1.25)
+    text(e, [("WHO'S THERE?", WHITE)], centered(e, "WHO'S THERE?", 150), 70, 150, 1200)
+    e.save(OUT / 'thumbnail_E_whos_there.jpg', quality=92)
+    # F - DON'T MAKE A SOUND: the neighbours from behind, facing the black stairwell; Mr. Harris turns back - "shh"
+    f = lift(art('shh'), gamma=0.86)
+    f = bottom_shade(f, 0.55, 0.8)
+    text(f, [("DON'T MAKE", WHITE), ('A SOUND', RED)], 34, 476, 112, 640, gap=-2)
+    f.save(OUT / 'thumbnail_F_dont_make_a_sound.jpg', quality=92)
+    print('youtube/thumbnail_D_every_door.jpg, thumbnail_E_whos_there.jpg, thumbnail_F_dont_make_a_sound.jpg')
 
 
 if __name__ == '__main__':
