@@ -33,18 +33,24 @@ The plan is in [`PLAN.md`](PLAN.md); the script, in our own words, is in [`SCRIP
   - Beds: woods by day and night, campfire, creek, trailer, city.
   - Rifle shot with a forest echo, the trailer's metal door, gibbering, an animal scream, and more.
 - **Length:** 10:46 with the whole script.
-- **Art:** 102 frames, 20 animation drawings and 10 lip-sync mouths, each reviewed.
-  - 9 frames were redrawn for story logic or continuity: Cole kept appearing beside Mr. Dawes; a second Nia; crowds where only six remain; the wrong Nia's face too small; the trail silhouette lost.
+- **Art:** 105 frames, 20 animation drawings and 10 lip-sync mouths, each reviewed.
+  - 12 frames were redrawn for story logic or continuity: Cole kept appearing beside Mr. Dawes; a second Nia; crowds where only six remain; the wrong Nia's face too small; the trail silhouette lost.
   - Fix after review: animation drawings are merged as whole areas, so Ray's turn at the pot no longer shows two faces.
   - The trailer bathroom door opening is drawn in code.
 - **Motif:** each count (12, 11, 6, 8, 9, 7, 8) is scratched onto the frame.
+- **Full film:** `out/goatman_1080p_upload.mp4` (not committed, about 600 MB).
+  - 1920×1080, 24 fps, 15,513 frames, 10:46.4.
+  - −15.3 LUFS, LRA 7.4, true peak −2.5 dBFS, with the same shadow-lifting curve as the 3:06 film.
+  - Preview: `previews/goatman_full_720p.mp4` (43.5 MB, −15.4 LUFS).
+  - Contact sheets, one frame every 4 s: `previews/check_contact_*.jpg`.
+  - After the first full render, 3 crowd frames were redrawn so the picture matches the count, and the trail silhouette was lifted.
 - **YouTube:** `youtube/` holds:
   - title and alternatives, 9 chapters, the description with the story credit (4,287 characters), tags and a pinned comment;
   - 3 mystery thumbnails: "COUNT THEM", "DON'T TURN AROUND", "WHO ATE IT?" ($0.74), and the phone-feed check `feed_preview.jpg`.
 
 ## Cost
 
-- **Images:** $27.60 of the $30 cap: lookdev $3.21, frames $17.03, drawings $4.27, mouths $2.35, thumbnails $0.74.
+- **Images:** $28.12 of the $30 cap: lookdev $3.21, frames $17.55, drawings $4.27, mouths $2.35, thumbnails $0.74.
 - **Voices:** Fish, about 23,000 characters across all takes and auditions (well under $1).
 
 ## Resume
