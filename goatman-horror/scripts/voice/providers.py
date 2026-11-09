@@ -486,6 +486,11 @@ class FishProvider:
             'latency': 'normal',
             'prosody': {'speed': round(float(np.clip(job['perceivedSpeed'] * cfg.get('speed', 1.0), 0.8, 1.25)), 2)},
         }
+        # sampling: higher temperature / top_p = a livelier, less monotone read (voiceConfig fish.temperature / topP)
+        if cfg.get('temperature') is not None:
+            body['temperature'] = float(cfg['temperature'])
+        if cfg.get('topP') is not None:
+            body['top_p'] = float(cfg['topP'])
         headers = {'Authorization': f'Bearer {self.key}', 'Content-Type': 'application/json', 'model': cfg.get('model') or self.model}
         delay = 2.0
         for attempt in range(6):

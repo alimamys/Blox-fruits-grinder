@@ -44,7 +44,7 @@ export interface CharacterVoice {
 		chatterbox: {reference: string; exaggeration: number; model?: 'standard' | 'turbo'};
 		/** Fish Audio (https://fish.audio): a public library voice id (cast with
 		 *  scripts/voice/fish_cast.py). `speed` multiplies the line pace. Key: FISH_API_KEY. */
-		fish: {referenceId: string; voiceName: string; speed?: number; model?: string};
+		fish: {referenceId: string; voiceName: string; speed?: number; model?: string; temperature?: number; topP?: number};
 		elevenlabs: {voiceName: string; voiceId?: string; model: string};
 		openai: {voice: string; model: string};
 		azure: {voice: string};
@@ -63,14 +63,19 @@ const OPENAI_MODEL = 'gpt-4o-mini-tts';
 // reference), broken up by the 'thing' post effect. Fish voices are generic public-library voices
 // (no celebrity or film-character clones), auditioned with scripts/voice/fish_cast.py
 // (build/fish_cast/*_reel.wav) and chosen in CAST below.
+// Every voice uses Fish's Drama 3 model (the expressive acting model of "Never Open Your Door at 3:06
+// AM"); the narrator also samples a little wider (temperature / top_p 0.9) so his read never goes flat.
+// The narrator was re-cast after the first-minute review ("monotone"): 22 auditions across Drama 3 and
+// s2.1-pro, measured by how much the pitch moves (build/narrator_audition, previews/voice_audition).
+const DRAMA = 'drama-3';
 const CAST = {
-	narrator: {referenceId: 'f547497123684d1b8f9f23ebbc915015', voiceName: 'Black (young man, deep, smooth)'},
-	marcus: {referenceId: 'b841aacef7dc48f9b18b6e89bf573e80', voiceName: 'Young teenager (boy, deep)'},
-	wyatt: {referenceId: '4fbed27c40e3465f98bc777fd0cc35ff', voiceName: 'boy (young)'},
-	ray: {referenceId: 'd9ce1833c191476db346efb50aa20722', voiceName: 'boy (young, relaxed)'},
-	nia: {referenceId: 'ffd05ab81f184e10b6767e52342dd244', voiceName: 'black girl talking'},
-	dawes: {referenceId: 'fee420f4813d4318bfea84f8f6cac53f', voiceName: 'redneck (old, Southern)'},
-	cole: {referenceId: '061d766c12fb468ba644fda015e237fc', voiceName: 'HillBilly (Southern)'},
+	narrator: {referenceId: '0327fdb5da9e4fd782899a8058c8ae2b', voiceName: 'Narrator (young male)', model: DRAMA, temperature: 0.9, topP: 0.9},
+	marcus: {referenceId: 'b841aacef7dc48f9b18b6e89bf573e80', voiceName: 'Young teenager (boy, deep)', model: DRAMA},
+	wyatt: {referenceId: '4fbed27c40e3465f98bc777fd0cc35ff', voiceName: 'boy (young)', model: DRAMA},
+	ray: {referenceId: 'd9ce1833c191476db346efb50aa20722', voiceName: 'boy (young, relaxed)', model: DRAMA},
+	nia: {referenceId: 'ffd05ab81f184e10b6767e52342dd244', voiceName: 'black girl talking', model: DRAMA},
+	dawes: {referenceId: 'fee420f4813d4318bfea84f8f6cac53f', voiceName: 'redneck (old, Southern)', model: DRAMA},
+	cole: {referenceId: '061d766c12fb468ba644fda015e237fc', voiceName: 'HillBilly (Southern)', model: DRAMA},
 };
 
 /** Shared fallbacks for the providers this film does not use (Fish is the cast). */
@@ -88,7 +93,7 @@ const v = (
 	displayName: string,
 	folder: string,
 	description: string,
-	fish: {referenceId: string; voiceName: string; speed?: number},
+	fish: {referenceId: string; voiceName: string; speed?: number; model?: string; temperature?: number; topP?: number},
 	post: Partial<CharacterVoice['post']>,
 	fb: ReturnType<typeof fallback>,
 ): CharacterVoice => ({

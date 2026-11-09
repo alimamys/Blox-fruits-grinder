@@ -808,11 +808,21 @@ def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac
         keep[lab == c] = 1
     keep = cv2.morphologyEx(keep, cv2.MORPH_CLOSE, np.ones((25, 25), np.uint8))
     keep = cv2.dilate(keep, np.ones((17, 17), np.uint8))
+    if not eyes_only:
+        # a pose change (a head turning, shoulders rising): take each changed area WHOLE - its filled
+        # convex outline plus a margin - from the new drawing. A per-pixel merge keeps the old drawing
+        # wherever old and new happen to match (skin on skin, dark on dark) and shows two faces / two
+        # pairs of glasses at once.
+        cnts, _ = cv2.findContours(keep, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        hull = np.zeros_like(keep)
+        for c in cnts:
+            cv2.fillConvexPoly(hull, cv2.convexHull(c), 1)
+        keep = cv2.dilate(hull, np.ones((31, 31), np.uint8))
     if not eyes_only and keep.mean() > 0.12:
         # a big change (people turning, a pose change): take the whole drawing - a partial merge
         # would cut people in half or leave ghosts
         return Image.fromarray(v.clip(0, 255).astype(np.uint8)), np.ones_like(keep), 1.0
-    alpha = cv2.GaussianBlur(keep.astype(np.float32), (0, 0), 7)[..., None]
+    alpha = cv2.GaussianBlur(keep.astype(np.float32), (0, 0), 7 if eyes_only else 11)[..., None]
     out = b * (1 - alpha) + v * alpha
     return Image.fromarray(out.clip(0, 255).astype(np.uint8)), keep, float(keep.mean())
 
