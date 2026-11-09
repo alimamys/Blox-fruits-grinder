@@ -1,8 +1,8 @@
 # ELEVEN OF US WENT CAMPING. TWELVE CAME BACK.
 
-10-Minute Animated Horror Story — Full Script
+10-Minute Animated Horror Story — Full Script (about 10:45)
 
-A new retelling, in our own words, of the key events of "Anansi's Goatman Story" (an anonymous post on 4chan /x/, 2012, as archived on the Creepypasta Wiki). The characters are renamed, the order is restructured around a cold-open hook, and the language is cleaned up for YouTube.
+A new retelling, in our own words, of the key events of "Anansi's Goatman Story" (an anonymous post on 4chan /x/, 2012, as archived on the Creepypasta Wiki). The characters are renamed, the order is restructured around a cold-open hook, the language is cleaned up for YouTube, and the present-day epilogue (Scene 9) is new.
 
 ## Scene 1 — Twelve (0:00–0:40)
 
@@ -32,13 +32,13 @@ For a whole day.
 
 And not one of us could tell you whose face it was wearing.
 
-## Scene 2 — The Woods (0:40–1:55)
+## Scene 2 — The Woods (0:40–1:50)
 
 MARCUS (Narration):
 
 I was sixteen the summer my mom sent me down from Chicago to stay with family in Alabama.
 
-My uncle owned a lot of land out there. Miles of pine woods, and two old camping trailers parked deep in the trees.
+My uncle owned miles of pine woods out there, with two old camping trailers parked deep in the trees.
 
 My cousins couldn't wait to drag the city boy out into the wilderness.
 
@@ -64,7 +64,7 @@ By sunset, there were eleven of us.
 
 Remember that number.
 
-## Scene 3 — Facing Away (1:55–3:40)
+## Scene 3 — Facing Away (1:50–3:25)
 
 MARCUS (Narration):
 
@@ -92,8 +92,6 @@ WYATT (Terrified, out of breath):
 
 MARCUS (Narration):
 
-It took a while to get the story out of them.
-
 A few days earlier, one of Wyatt's pigs had been torn open in his yard.
 
 Tonight, halfway back through the woods, Nia's flashlight had caught a man standing in the trees.
@@ -102,7 +100,7 @@ Just standing there.
 
 With his back to them.
 
-A little further on, there was another one on the other side of the trail.
+Then another, on the other side of the trail.
 
 Closer.
 
@@ -114,7 +112,7 @@ Nia swung her light toward it and saw something jerking itself between the trees
 
 And when they finally saw our campfire, something stepped out onto the trail behind them.
 
-## Scene 4 — The Goatman (3:40–4:30)
+## Scene 4 — The Goatman (3:25–4:20)
 
 MARCUS (Narration):
 
@@ -150,15 +148,13 @@ The next day was perfectly normal.
 
 That was the worst part.
 
-## Scene 5 — One Too Many (4:30–5:45)
+## Scene 5 — One Too Many (4:20–5:25)
 
 MARCUS (Narration):
 
 The second night, around one in the morning, we were telling ghost stories by the fire.
 
 The smell came back so thick that one of the girls started gagging.
-
-The air turned cold and wet against my skin.
 
 We crowded into the trailer and nobody wanted to go back out.
 
@@ -202,7 +198,7 @@ We went back in with sticks and flashlights.
 
 The trailer was empty.
 
-Later, Nia told us that when she'd started to figure it out, the person beside her had grabbed her knee, hard, leaned close, and whispered something into her ear.
+Nia told us that just before she screamed, the person beside her had grabbed her knee and whispered into her ear.
 
 It wasn't words.
 
@@ -210,15 +206,13 @@ She couldn't remember its face.
 
 Neither could any of us.
 
-## Scene 6 — Seven (5:45–7:45)
+## Scene 6 — Seven (5:25–7:15)
 
 MARCUS (Narration):
 
 At sunrise, Nia and three others walked out of those woods and went home.
 
-I couldn't. I had my uncle's keys, and somebody had to lock up.
-
-The rest still thought it was a prank, and they wanted to stay.
+I had my uncle's keys, so I had to stay. The others still thought it was a prank.
 
 Wyatt went home to get his rifle.
 
@@ -290,7 +284,7 @@ It had been inside with us again.
 
 And none of us had noticed when it left.
 
-## Scene 7 — Let Me In (7:45–9:10)
+## Scene 7 — Let Me In (7:15–8:35)
 
 MARCUS (Narration):
 
@@ -326,7 +320,7 @@ Wyatt's words.
 
 But wrong.
 
-Every person alive talks with some kind of rhythm. This had none. Like something that had listened to people talk for a very long time but had never been one.
+It had no rhythm at all. Like something that had listened to people for a very long time, but had never been one.
 
 At two in the morning, Cole kicked the door open and fired into the sky.
 
@@ -350,27 +344,33 @@ It screamed until almost dawn.
 
 But it never came back to the door.
 
-## Scene 8 — Nine (9:10–10:20)
+## Scene 8 — Nine (8:35–10:05)
 
 MARCUS (Narration):
 
-We left at sunrise.
+We walked out at sunrise.
 
-Wyatt stayed behind to lock up. When he caught up with us, he wouldn't look at anyone.
+Wyatt stayed behind to lock up. When he caught up with us, he was white as a sheet, and he wouldn't look at any of us.
 
-Two days later, he finally told me why.
+Two days later, he told me why.
 
-Around four in the morning, he'd been nodding off in the chair by the door when the bathroom door opened.
+Around four that morning, he was fighting sleep in the chair by the door.
 
-Someone walked out, lay down on the floor between us, and closed its eyes.
+Then the bathroom door creaked open.
+
+Someone stepped out, picked its way between the sleeping bodies, and lay down right next to me.
+
+And closed its eyes.
 
 Wyatt counted.
 
-There were eight of us in that trailer.
+Eight of us in that trailer.
 
-There were nine bodies on the floor.
+Nine on the floor.
 
-He sat in that chair until morning, pretending to sleep, while every now and then it sat up and shook with that silent laugh.
+He didn't scream. In a trailer that small, in the dark, he could have shot any one of us.
+
+So he sat there until morning, pretending to sleep, while every so often the thing beside me sat up, looked around at each of us... and shook with that silent laugh.
 
 When he went back to lock up, the bathroom window was wide open.
 
@@ -378,18 +378,48 @@ No screen.
 
 It never had to break in.
 
-And that morning, it walked out of the woods with us.
+And when we walked out of those woods, it walked out with us.
 
-All the way to Wyatt's house.
-
-Right at the back of the group.
+Right at the back of the line. All the way to Wyatt's house.
 
 Then it stopped, looked Wyatt dead in the eyes...
 
-and walked back into the trees.
+and stepped back into the trees.
 
-So the next time you're out there with your friends...
+## Scene 9 — Plates (10:05–10:45)
+
+MARCUS (Narration — present day, very quiet):
+
+That was twelve years ago.
+
+I live in Chicago now. No woods. No trailers.
+
+Last weekend, I had six friends over to watch the game.
+
+I ordered pizza and set out the paper plates myself.
+
+When the game ended, I started cleaning up.
+
+Seven of us on the couch.
+
+Eight greasy plates on the table.
+
+I counted again.
+
+Eight.
+
+And from down the hall, behind the bathroom door I always keep shut...
+
+came that smell.
+
+Like the air right before lightning.
+
+[CUT TO BLACK]
+
+MARCUS (Narration — over black):
+
+So the next time you eat with your friends...
 
 count them.
 
-Then count them again.
+Then count the plates.

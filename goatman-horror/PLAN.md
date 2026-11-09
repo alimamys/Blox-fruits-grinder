@@ -1,6 +1,6 @@
 # "11 of Us Went Camping. 12 Came Back." — production plan
 
-The script, in our own words, is in [`SCRIPT.md`](SCRIPT.md): about 1,380 spoken words, roughly 10:20.
+The script, in our own words, is in [`SCRIPT.md`](SCRIPT.md): about 1,445 spoken words, roughly 10:45.
 
 ## Source and credit
 
@@ -8,6 +8,7 @@ The script, in our own words, is in [`SCRIPT.md`](SCRIPT.md): about 1,380 spoken
 - **What changed:**
   - characters renamed;
   - restructured around a cold-open hook;
+  - a new present-day epilogue that echoes the hook (counting food, then counting plates);
   - rewritten in our own words;
   - cleaned up for YouTube (no drinking, light language).
 - **Credit (on screen and in the description):**
@@ -51,6 +52,7 @@ The script, in our own words, is in [`SCRIPT.md`](SCRIPT.md): about 1,380 spoken
 3. The forest trail at night, seen by flashlight.
 4. The creek by day.
 5. The Dawes farmyard: a pigpen with a broken fence. The pig is implied, never shown.
+6. Marcus's Chicago apartment, years later (the epilogue): the couch, the coffee table with paper plates, the hallway to the bathroom door.
 
 ## Voices (Fish Drama 3)
 
