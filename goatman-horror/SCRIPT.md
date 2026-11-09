@@ -188,7 +188,7 @@ That's when Nia started screaming.
 
 NIA (Hysterical):
 
-"Get it out! Oh God, get it out!"
+"Get it out! Get it out of here!"
 
 MARCUS (Narration):
 
@@ -332,7 +332,7 @@ At two in the morning, Cole kicked the door open and fired into the sky.
 
 COLE (Shouting):
 
-"In the name of Jesus, get gone!"
+"Whatever you are... get gone!"
 
 MARCUS (Narration):
 
