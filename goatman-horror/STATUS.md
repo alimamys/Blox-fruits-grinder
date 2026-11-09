@@ -23,33 +23,29 @@ The plan is in [`PLAN.md`](PLAN.md); the script, in our own words, is in [`SCRIP
   - The look bible, voice effects and timeline are new.
 - **Lookdev:** 9 character sheets and 6 locations, $3.21.
   - Board: `previews/goatman_cast_and_locations.jpg`.
-- **Voices:** 167 lines, Fish Drama 3, 7,549 characters (under $1).
-  - Casting:
-    - narrator "Black (young man, deep, smooth)";
-    - Marcus "Young teenager (boy, deep)";
-    - Wyatt "boy (young)"; the thing uses Wyatt's voice;
-    - Ray "boy (young, relaxed)";
-    - Nia "black girl talking";
-    - Mr. Dawes "redneck (old, Southern)";
-    - Cole "HillBilly".
-  - Whisper QA: unclear takes re-recorded. The remaining flags are Whisper mishearing the names Dez and Wyatt.
+- **Voices:** 167 lines, all on Fish **Drama 3**.
+  - The narrator was re-cast after the first-minute review ("monotone"). 22 auditions across Drama 3 and s2.1-pro were measured by how much the pitch moves (`scripts/voice/narrator_audition.py`, reels in `previews/voice_audition/`).
+  - The user chose A: Drama 3 "Narrator" (young male), sampled a little wider, with a direction on every line.
+  - Takes were tightened (the earlier takes set the pace, up to 1.25×, gaps inside lines up to 0.3 s): 10.5 → 9.0 minutes of speech.
+  - Whisper QA: the 3 remaining flags are near-homophones and the name Wyatt.
   - New effects: `outdoor`, `trailer`, and `thing` (the voice at the door, re-timed syllable by syllable with no human rhythm).
 - **Sound:** 23 new sounds from real recordings (CC0 and CC-BY), built by `scripts/sfx/build_goatman_sfx.py`, with credits in `public/audio/sfx/CREDITS.md`.
   - Beds: woods by day and night, campfire, creek, trailer, city.
   - Rifle shot with a forest echo, the trailer's metal door, gibbering, an animal scream, and more.
-- **Length:** 10:14 with the whole script.
-  - Pauses between lines run at 60%, and dramatic holds are kept up to 0.75 s.
-- **Scenes 1–2 (the hook, the title, the woods):** in final art.
-  - 20 frames, 9 animation drawings and 1 lip-sync mouth.
-  - Preview: `previews/goatman_scenes1-2_720p.mp4` (1:49.7, −15.0 LUFS).
-- **Scenes 3–9:** written and laid out (160 shots in all).
-  - 72 new frames, 8 mouths and about 9 drawings are left to generate.
+- **Length:** 10:46 with the whole script.
+- **Art:** 102 frames, 20 animation drawings and 10 lip-sync mouths, each reviewed.
+  - 9 frames were redrawn for story logic or continuity: Cole kept appearing beside Mr. Dawes; a second Nia; crowds where only six remain; the wrong Nia's face too small; the trail silhouette lost.
+  - Fix after review: animation drawings are merged as whole areas, so Ray's turn at the pot no longer shows two faces.
+  - The trailer bathroom door opening is drawn in code.
+- **Motif:** each count (12, 11, 6, 8, 9, 7, 8) is scratched onto the frame.
+- **YouTube:** `youtube/` holds:
+  - title and alternatives, 9 chapters, the description with the story credit (4,287 characters), tags and a pinned comment;
+  - 3 mystery thumbnails: "COUNT THEM", "DON'T TURN AROUND", "WHO ATE IT?" ($0.74), and the phone-feed check `feed_preview.jpg`.
 
 ## Cost
 
-- **Images:** $11.24 of the $30 cap so far.
-- **Estimate for the rest:** about $15. Thumbnails are about $0.75.
-- **Voices:** under $1.
+- **Images:** $27.60 of the $30 cap: lookdev $3.21, frames $17.03, drawings $4.27, mouths $2.35, thumbnails $0.74.
+- **Voices:** Fish, about 23,000 characters across all takes and auditions (well under $1).
 
 ## Resume
 
