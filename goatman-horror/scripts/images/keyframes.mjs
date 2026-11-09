@@ -18,7 +18,7 @@ fs.mkdirSync(outDir, {recursive: true});
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
 const inputProps = {audio: false, subtitles: false, grain: false, restyled: false, layoutKey: true};
 const puppeteerInstance = await openBrowser('chrome', {browserExecutable});
-const composition = await selectComposition({serveUrl, id: 'Door306Horror', inputProps, browserExecutable, puppeteerInstance});
+const composition = await selectComposition({serveUrl, id: 'GoatmanHorror', inputProps, browserExecutable, puppeteerInstance});
 const ids = process.argv.slice(2).find((a) => !a.startsWith('--'));
 const only = ids ? new Set(ids.split(',')) : null;
 const force = process.argv.includes('--force');

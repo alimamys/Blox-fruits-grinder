@@ -15,7 +15,7 @@ const map = JSON.parse(fs.readFileSync(path.join(root, 'build', 'shotmap.json'),
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
 const inputProps = {audio: false, subtitles: false, grain: false, restyled: false, layoutKey: true, mouthKey: true};
 const puppeteerInstance = await openBrowser('chrome', {browserExecutable});
-const composition = await selectComposition({serveUrl, id: 'Door306Horror', inputProps, browserExecutable, puppeteerInstance});
+const composition = await selectComposition({serveUrl, id: 'GoatmanHorror', inputProps, browserExecutable, puppeteerInstance});
 const jobs = map.shots.filter((s) => s.art && s.art.kind === 'talk');
 fs.mkdirSync(path.join(root, 'build', 'keyframes'), {recursive: true});
 for (const p of jobs) {

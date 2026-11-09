@@ -44,19 +44,20 @@ export const MIX = {
 const BED_TAIL = 0.5;
 
 const BED_FILES: Record<BedName, string> = {
-	room: 'sfx/apartment_tone.wav',
-	hum: 'sfx/light_buzz_bed.wav', // the corridor's fluorescent tubes
-	stair: 'sfx/stairwell_tone.wav',
+	day: 'sfx/woods_day.wav', // pine woods in the afternoon: birds, wind in the needles, insects
+	night: 'sfx/woods_night.wav', // crickets, katydids, far frogs - it STOPS when the thing is near
+	fire: 'sfx/campfire.wav',
+	creek: 'sfx/creek_flow.wav',
+	trailer: 'sfx/trailer_tone.wav', // inside the trailer: dead air, the night through thin walls
 	drone: 'sfx/low_horror_drone.wav',
 	tension: 'sfx/tension_pulse.wav',
 	heart: 'sfx/heartbeat_loop.wav',
 	heartFast: 'sfx/heartbeat_fast.wav',
-	street: 'sfx/morning_street.wav',
-	clock: 'sfx/clock_ticks.wav',
+	city: 'sfx/city_night.wav', // his Chicago apartment: the game on TV, traffic far below
 };
 
 /** Beds that are never ducked under dialogue. */
-const UNDUCKED = new Set<BedName>(['tension', 'heart', 'heartFast', 'clock']);
+const UNDUCKED = new Set<BedName>(['tension', 'heart', 'heartFast']);
 
 const levelAt = (keys: BedKey[], t: number) => {
 	if (!keys.length) return 0;

@@ -1,6 +1,6 @@
 // Render-time switches. They are also exposed as Remotion input props, so they can
 // be toggled in the Studio's props panel or from the CLI:
-//   npx remotion render Door306Horror out/x.mp4 --props='{"evidenceInserts":false}'
+//   npx remotion render GoatmanHorror out/x.mp4 --props='{"evidenceInserts":false}'
 import React, {createContext, useContext} from 'react';
 
 export type VideoSettings = {

@@ -1,0 +1,200 @@
+{
+ "shots": {
+  "t_01_packs": {
+   "frames": [
+    {
+     "src": "restyle/t_01_packs_k1.jpg"
+    }
+   ],
+   "variants": {
+    "steam": "restyle/t_01_packs_k1_vsteam.jpg"
+   }
+  },
+  "t_03_stove": {
+   "frames": [
+    {
+     "src": "restyle/t_03_stove_k1.jpg"
+    }
+   ],
+   "blink": "restyle/t_03_stove_k1_blink.jpg"
+  },
+  "t_04_plates": {
+   "frames": [
+    {
+     "src": "restyle/t_04_plates_k1.jpg"
+    }
+   ]
+  },
+  "t_05_ray_pot": {
+   "frames": [
+    {
+     "src": "restyle/t_05_ray_pot_k1.jpg"
+    }
+   ],
+   "variants": {
+    "turn": "restyle/t_05_ray_pot_k1_vturn.jpg"
+   },
+   "blink": "restyle/t_05_ray_pot_k1_blink.jpg"
+  },
+  "t_06_hadnt": {
+   "frames": [
+    {
+     "src": "restyle/t_06_hadnt_k1.jpg"
+    }
+   ],
+   "blink": "restyle/t_06_hadnt_k1_blink.jpg"
+  },
+  "t_07_crowd": {
+   "frames": [
+    {
+     "src": "restyle/t_07_crowd_k1.jpg"
+    }
+   ]
+  },
+  "t_08_empty_pot": {
+   "frames": [
+    {
+     "src": "restyle/t_08_empty_pot_k1.jpg"
+    }
+   ]
+  },
+  "t_09_bench": {
+   "frames": [
+    {
+     "src": "restyle/t_09_bench_k1.jpg"
+    }
+   ]
+  },
+  "t_10_hand": {
+   "frames": [
+    {
+     "src": "restyle/t_10_hand_k1.jpg"
+    }
+   ]
+  },
+  "t_12_face": {
+   "frames": [
+    {
+     "src": "restyle/t_12_face_k1.jpg"
+    }
+   ]
+  },
+  "w_00_arrive": {
+   "frames": [
+    {
+     "src": "restyle/w_00_arrive_k1.jpg"
+    }
+   ]
+  },
+  "w_01_marcus": {
+   "frames": [
+    {
+     "src": "restyle/w_01_marcus_k1.jpg"
+    }
+   ],
+   "blink": "restyle/w_01_marcus_k1_blink.jpg"
+  },
+  "w_03_cousins": {
+   "frames": [
+    {
+     "src": "restyle/w_03_cousins_k1.jpg"
+    }
+   ]
+  },
+  "w_04_smell": {
+   "frames": [
+    {
+     "src": "restyle/w_04_smell_k1.jpg"
+    }
+   ],
+   "blink": "restyle/w_04_smell_k1_blink.jpg"
+  },
+  "w_05_air": {
+   "frames": [
+    {
+     "src": "restyle/w_05_air_k1.jpg"
+    }
+   ]
+  },
+  "w_06_unload": {
+   "frames": [
+    {
+     "src": "restyle/w_06_unload_k1.jpg"
+    }
+   ]
+  },
+  "w_07_creek": {
+   "frames": [
+    {
+     "src": "restyle/w_07_creek_k1.jpg"
+    }
+   ]
+  },
+  "w_09_dawes": {
+   "frames": [
+    {
+     "src": "restyle/w_09_dawes_k1.jpg"
+    }
+   ]
+  },
+  "w_10_dawes_talk": {
+   "frames": [
+    {
+     "src": "restyle/w_10_dawes_talk_k1.jpg",
+     "talk": "restyle/w_10_dawes_talk_k1_talk.jpg"
+    }
+   ],
+   "blink": "restyle/w_10_dawes_talk_k1_blink.jpg"
+  },
+  "w_11_wyatt": {
+   "frames": [
+    {
+     "src": "restyle/w_11_wyatt_k1.jpg"
+    }
+   ],
+   "blink": "restyle/w_11_wyatt_k1_blink.jpg"
+  },
+  "w_12_sunset": {
+   "frames": [
+    {
+     "src": "restyle/w_12_sunset_k1.jpg"
+    }
+   ]
+  },
+  "t_11_day": {
+   "frames": [
+    {
+     "src": "restyle/t_07_crowd_k1.jpg"
+    }
+   ]
+  },
+  "t_13_faces": {
+   "frames": [
+    {
+     "src": "restyle/t_09_bench_k1.jpg"
+    }
+   ]
+  },
+  "w_02_land": {
+   "frames": [
+    {
+     "src": "restyle/w_00_arrive_k1.jpg"
+    }
+   ]
+  },
+  "w_13_remember": {
+   "frames": [
+    {
+     "src": "restyle/w_12_sunset_k1.jpg"
+    }
+   ]
+  },
+  "w_14_dark": {
+   "frames": [
+    {
+     "src": "restyle/w_12_sunset_k1.jpg"
+    }
+   ]
+  }
+ }
+}

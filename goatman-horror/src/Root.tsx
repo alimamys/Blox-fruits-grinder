@@ -2,14 +2,14 @@ import React from 'react';
 import {Composition} from 'remotion';
 import {FPS, HEIGHT, TIMELINE, TIMELINE_FULL, WIDTH} from './data/timeline';
 import {DEFAULT_SETTINGS} from './data/settings';
-import {Door306Horror} from './Door306Horror';
+import {GoatmanHorror} from './GoatmanHorror';
 
 export const RemotionRoot: React.FC = () => (
 	<>
-		{/* Main composition: the whole script (12-13 min), timed from the real voice files. */}
+		{/* Main composition: the whole script (about 10:45), timed from the real voice files. */}
 		<Composition
-			id="Door306Horror"
-			component={Door306Horror}
+			id="GoatmanHorror"
+			component={GoatmanHorror}
 			durationInFrames={TIMELINE.totalFrames}
 			fps={FPS}
 			width={WIDTH}
@@ -18,8 +18,8 @@ export const RemotionRoot: React.FC = () => (
 		/>
 		{/* Identical edit (kept for the shared tooling). */}
 		<Composition
-			id="Door306HorrorFull"
-			component={Door306Horror}
+			id="GoatmanHorrorFull"
+			component={GoatmanHorror}
 			durationInFrames={TIMELINE_FULL.totalFrames}
 			fps={FPS}
 			width={WIDTH}

@@ -8,14 +8,13 @@ import {FPS, type Timeline} from '../../data/timeline';
 import {FONT} from '../../utils/fonts';
 
 const SPEAKER: Record<string, {name: string; color: string}> = {
-	sarah: {name: 'SARAH', color: '#ffb27a'},
-	harris: {name: 'MR. HARRIS', color: '#cfd8a8'},
-	creature: {name: 'IT', color: '#ff5a4e'},
-	landlord: {name: 'LANDLORD', color: '#e8c58a'},
-	caller: {name: 'CALLER (PHONE)', color: '#9fd3ff'},
-	womanBelow: {name: 'WOMAN (DOWNSTAIRS)', color: '#c9c9d6'},
-	manBelow: {name: 'MAN (DOWNSTAIRS)', color: '#c9c9d6'},
-	manThird: {name: 'MAN (THIRD FLOOR)', color: '#c9c9d6'},
+	marcus: {name: 'MARCUS', color: '#ff9a8a'},
+	wyatt: {name: 'WYATT', color: '#d8d39a'},
+	ray: {name: 'RAY', color: '#ffd166'},
+	nia: {name: 'NIA', color: '#c9b6f0'},
+	dawes: {name: 'MR. DAWES', color: '#c8b89a'},
+	cole: {name: 'COLE', color: '#ff8f6b'},
+	thing: {name: '???', color: '#ff5a4e'},
 };
 
 /** Lines whose words are already shown big on screen. */

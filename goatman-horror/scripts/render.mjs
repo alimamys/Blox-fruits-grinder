@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// npm run render                 -> out/door306.mp4   (render + loudness master)
-// npm run render -- --full       -> out/door306_full.mp4 (every line at its written pacing)
-// npm run audio-preview          -> out/door306_audio_preview.wav (audio only, mastered)
+// npm run render                 -> out/goatman.mp4   (render + loudness master)
+// npm run render -- --full       -> out/goatman_full.mp4 (every line at its written pacing)
+// npm run audio-preview          -> out/goatman_audio_preview.wav (audio only, mastered)
 // npm run render -- --segments=1 -> one single Remotion pass (needs ~15 GB of temp space)
 //
 // 1) The project is bundled once, then Remotion renders the film in N consecutive
@@ -27,8 +27,8 @@ const full = args.includes('--full');
 const audioOnly = args.includes('--audio-only');
 const segArg = args.find((a) => a.startsWith('--segments='));
 const segments = Math.max(1, parseInt(segArg ? segArg.split('=')[1] : '6', 10) || 6);
-const comp = full ? 'Door306HorrorFull' : 'Door306Horror';
-const base = full ? 'door306_full' : 'door306';
+const comp = full ? 'GoatmanHorrorFull' : 'GoatmanHorror';
+const base = full ? 'goatman_full' : 'goatman';
 const extra = args.filter((a) => !['--full', '--audio-only'].includes(a) && !a.startsWith('--segments='));
 const outDir = path.join(root, 'out');
 const partsDir = path.join(outDir, `.parts-${base}${audioOnly ? '-audio' : ''}`);

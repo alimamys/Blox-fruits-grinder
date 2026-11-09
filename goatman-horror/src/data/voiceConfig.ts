@@ -66,8 +66,8 @@ const OPENAI_MODEL = 'gpt-4o-mini-tts';
 const CAST = {
 	narrator: {referenceId: 'f547497123684d1b8f9f23ebbc915015', voiceName: 'Black (young man, deep, smooth)'},
 	marcus: {referenceId: 'b841aacef7dc48f9b18b6e89bf573e80', voiceName: 'Young teenager (boy, deep)'},
-	wyatt: {referenceId: '17079d6adb8b4ecc8e42c8e6f489492b', voiceName: 'Chill southern child'},
-	ray: {referenceId: '829184c635314c9485e48690116ff8ad', voiceName: 'Child voice boy'},
+	wyatt: {referenceId: '4fbed27c40e3465f98bc777fd0cc35ff', voiceName: 'boy (young)'},
+	ray: {referenceId: 'd9ce1833c191476db346efb50aa20722', voiceName: 'boy (young, relaxed)'},
 	nia: {referenceId: 'ffd05ab81f184e10b6767e52342dd244', voiceName: 'black girl talking'},
 	dawes: {referenceId: 'fee420f4813d4318bfea84f8f6cac53f', voiceName: 'redneck (old, Southern)'},
 	cole: {referenceId: '061d766c12fb468ba644fda015e237fc', voiceName: 'HillBilly (Southern)'},

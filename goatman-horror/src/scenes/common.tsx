@@ -46,14 +46,14 @@ export const S: React.FC<{f: number; d: number; from?: CamPos; to?: CamPos; bg?:
 
 /** Colour moods (sent with every image request of the scene). */
 export const MOOD = {
-	hall: 'Night, 3:06 am: the corridor\'s fluorescent tubes give a sickly yellow-green light; cold blue shadows; the stairwell opening black.',
-	hallDark: 'Near darkness: one flickering fluorescent tube, sickly yellow-green light in short bursts, deep blue-black shadows.',
-	flat: 'Night inside Sarah\'s flat, lights off: deep blue shadows, orange streetlight in stripes through the blinds, a thin yellow-green line of corridor light under the front door.',
-	peep: 'Seen through a door peephole: the corridor\'s yellow-green fluorescent light, cold shadows.',
-	bedroom: 'Night, dark blue bedroom, orange stripes of streetlight across the bed.',
-	stair: 'The dark stairwell: one dim caged bulb flickering, sickly green-grey light, the lower flights fading into black.',
-	day: 'Three weeks earlier, a calm overcast afternoon: soft daylight, muted warm colours - ordinary and safe.',
-	night: 'Night, about 3 am: deep blue, one sodium streetlight, every window dark.',
-	morning: 'The following morning: clean warm sunlight, birds, an ordinary bright day.',
-	office: 'Morning in the landlord\'s office: warm daylight through dusty blinds, the green desk lamp on.',
+	trailerNight: 'Night inside the old camping trailer: one weak, warm ceiling light, deep brown shadows in the corners, pitch-black night outside the small windows.',
+	trailerDark: 'Inside the trailer in near darkness: only a thin grey-blue glow from the window blind; deep black shadows.',
+	day: 'A hot late-summer afternoon in the Alabama pine woods: warm golden sunlight slanting through the trunks, long shadows, dust in the air.',
+	creek: 'A hot afternoon at the creek: dappled green-gold sunlight on the water, shade under the leaning trees.',
+	dusk: 'Dusk in the pine woods: deep blue sky between the trunks, the last orange light, the woods turning black.',
+	fire: 'Night in the clearing: the campfire throws warm orange light on faces and the trailer sides; beyond its circle the pine woods are pitch black.',
+	trailNight: 'Night on the forest trail: black woods, only the hard white cones of flashlights picking out tree trunks and ferns.',
+	morning: 'Early morning in the clearing: pale mist between the pines, cool grey-gold light.',
+	afternoonStill: 'Late afternoon in the clearing, the light going amber and flat, the woods unnaturally still.',
+	apartment: 'Night in a small Chicago apartment: the cold blue glow of the TV, one warm lamp, city lights through the window.',
 };

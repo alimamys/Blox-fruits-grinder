@@ -1,27 +1,23 @@
 // Scene id (src/data/timeline.ts) -> component.
 import type React from 'react';
-import {Creature} from './Creature';
-import {Doors} from './Doors';
-import {Footsteps} from './Footsteps';
-import {Neighbors} from './Neighbors';
-import {NewApartment} from './NewApartment';
-import {NextTenant} from './NextTenant';
-import {Offering} from './Offering';
-import {Realization} from './Realization';
-import {Rule} from './Rule';
-import {Staircase} from './Staircase';
-import {Black} from './common';
+import {FacingAway} from './FacingAway';
+import {Goatman} from './Goatman';
+import {LetMeIn} from './LetMeIn';
+import {Nine} from './Nine';
+import {OneTooMany} from './OneTooMany';
+import {Plates} from './Plates';
+import {Seven} from './Seven';
+import {Twelve} from './Twelve';
+import {Woods} from './Woods';
 
 export const SCENE_COMPONENTS: Record<string, React.FC> = {
-	doors: Doors,
-	newApartment: NewApartment,
-	footsteps: Footsteps,
-	neighbors: Neighbors,
-	rule: Rule,
-	creature: Creature,
-	realization: Realization,
-	offering: Offering,
-	staircase: Staircase,
-	nextTenant: NextTenant,
-	end: Black,
+	twelve: Twelve,
+	woods: Woods,
+	facingAway: FacingAway,
+	goatman: Goatman,
+	oneTooMany: OneTooMany,
+	seven: Seven,
+	letMeIn: LetMeIn,
+	nine: Nine,
+	plates: Plates,
 };

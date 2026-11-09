@@ -156,6 +156,76 @@ def fx_creature(x, seed=21):
     return dsp.reverb(y, DIST_IR, wet=0.18)
 
 
+def fx_outdoor(x):
+    """Outside at night in the pines: open air, a soft slap-back off the tree line, no room."""
+    _irs()
+    y = dsp.hp(x, 90, SR, 2)
+    y = dsp.lp(y, 7500, SR, 2)
+    slap = dsp.lp(_delay(y, 0.072), 2600, SR, 2) * dsp.db(-17)
+    a, b = _align(y, slap)
+    return dsp.reverb(a + b, DIST_IR, wet=0.07)
+
+
+def fx_trailer(x):
+    """Inside the small camping trailer: tight, boxy, a little thin-walled resonance."""
+    _irs()
+    y = dsp.biquad(x, 'peak', 650, 1.5, 1.1)  # thin panelled walls
+    return dsp.reverb(y, ROOM_IR, wet=0.07)
+
+
+def _syllables(x: np.ndarray, min_len=0.07) -> list[tuple[int, int]]:
+    """Voiced chunks split at the energy valleys (roughly syllables)."""
+    hop = int(0.01 * SR)
+    n = len(x) // hop
+    e = np.sqrt(np.mean(x[: n * hop].reshape(n, hop) ** 2, axis=1) + 1e-12)
+    e = np.convolve(e, np.ones(5) / 5, mode='same')
+    on = e > 0.08 * e.max()
+    cuts = []
+    i = 0
+    while i < n:
+        if not on[i]:
+            i += 1
+            continue
+        j = i
+        while j < n and on[j]:
+            j += 1
+        # split long voiced runs at their deepest local valley (one cut per ~0.3 s)
+        seg = list(range(i, j))
+        parts = [(i, j)]
+        if (j - i) * hop / SR > 0.34:
+            k = i + 8 + int(np.argmin(e[i + 8:j - 8])) if j - i > 18 else (i + j) // 2
+            parts = [(i, k), (k, j)]
+        for a, b in parts:
+            if (b - a) * hop / SR >= min_len:
+                cuts.append((a * hop, b * hop))
+        i = j
+        del seg
+    return cuts
+
+
+def fx_thing(x, seed=31):
+    """The voice at the door: Wyatt's own words with every human rhythm taken out. The line is cut
+    into syllables; each is re-timed with uneven, unnatural gaps, nudged off pitch and level, and
+    the whole thing is heard through the trailer's metal door."""
+    rng = np.random.default_rng(seed)
+    out = [np.zeros(int(0.05 * SR))]
+    for k, (a, b) in enumerate(_syllables(x)):
+        syl = x[max(0, a - int(0.01 * SR)): b + int(0.02 * SR)].copy()
+        syl = dsp.pitch_shift_resample(syl, float(rng.uniform(-0.9, 0.7)))
+        ramp = min(len(syl) // 4, int(0.012 * SR))
+        if ramp > 0:
+            syl[:ramp] *= np.linspace(0, 1, ramp)
+            syl[-ramp:] *= np.linspace(1, 0, ramp)
+        out.append(syl * dsp.db(float(rng.uniform(-3.5, 1.5))))
+        out.append(np.zeros(int(float(rng.choice([0.06, 0.11, 0.19, 0.33, 0.52]) + rng.uniform(0, 0.08)) * SR)))
+    y = np.concatenate(out)
+    y = dsp.hp(y, 160, SR, 2)
+    y = dsp.lp(y, 1700, SR, 4)
+    y = dsp.biquad(y, 'peak', 330, 3.0, 1.4)   # the thin metal door rings a little
+    _irs()
+    return dsp.reverb(y, ROOM_IR, wet=0.12)
+
+
 def fx_whisper(x, voiced=0.36, seed=5):
     v = dsp.noise_vocoder(x, SR, seed=seed)
     y = v * (1 - voiced) + x * voiced * 0.85
@@ -243,6 +313,12 @@ def apply_effect(x: np.ndarray, effect: str, seed: int, whisper_native: bool = F
         return fx_door_gap(x)
     if effect == 'creature':
         return fx_creature(x, seed)
+    if effect == 'outdoor':
+        return fx_outdoor(x)
+    if effect == 'trailer':
+        return fx_trailer(x)
+    if effect == 'thing':
+        return fx_thing(x, seed)
     raise ValueError(f'unknown effect {effect}')
 
 
@@ -256,6 +332,7 @@ EFFECT_LUFS_OFFSET = {
     'closet': -2.0,
     'door': -3.0,
     'doorGap': -1.5,
+    'thing': -2.0,
 }
 
 

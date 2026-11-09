@@ -24,9 +24,10 @@ export const Plate: React.FC<{loc: LocRef; cam?: PlateCam; dim?: number; tint?: 
 	flip = false,
 	children,
 }) => {
-	const z = cam.z ?? 1;
-	const cx = cam.cx ?? 960;
-	const cy = cam.cy ?? 540;
+	const z = Math.max(1, cam.z ?? 1);
+	// keep the view inside the reference: a layout must never show the plate's edge (the model copies black bars)
+	const cx = Math.min(1920 - 960 / z, Math.max(960 / z, cam.cx ?? 960));
+	const cy = Math.min(1080 - 540 / z, Math.max(540 / z, cam.cy ?? 540));
 	const tx = 960 - cx * z;
 	const ty = 540 - cy * z;
 	return (

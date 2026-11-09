@@ -211,10 +211,26 @@ export const TitleCard: React.FC<{f: number; d: number}> = ({f, d}) => {
 	return (
 		<AbsoluteFill style={{background: '#000', alignItems: 'center', justifyContent: 'center'}}>
 			<div style={{opacity: o, textAlign: 'center', fontFamily: FONT.ui, color: '#ece9df', textShadow: '0 0 24px rgba(214,232,170,0.25)'}}>
-				<div style={{fontSize: 104, fontWeight: 800, letterSpacing: 14, lineHeight: 1.05}}>NEVER OPEN YOUR DOOR</div>
-				<div style={{fontSize: 104, fontWeight: 800, letterSpacing: 14, marginTop: 18}}>
-					AT <span style={{color: '#ff3b30'}}>3:06</span> AM
+				<div style={{fontSize: 92, fontWeight: 800, letterSpacing: 12, lineHeight: 1.05}}>
+					<span style={{color: '#ece9df'}}>11</span> OF US WENT CAMPING.
 				</div>
+				<div style={{fontSize: 92, fontWeight: 800, letterSpacing: 12, marginTop: 22}}>
+					<span style={{color: '#ff3b30'}}>12</span> CAME BACK.
+				</div>
+			</div>
+		</AbsoluteFill>
+	);
+};
+
+/** End card: the credit for the story this film retells. */
+export const CreditCard: React.FC<{f: number; d: number}> = ({f, d}) => {
+	const o = clamp((f - 6) / 14) * clamp((d - f) / 12);
+	return (
+		<AbsoluteFill style={{background: '#000', alignItems: 'center', justifyContent: 'center'}}>
+			<div style={{opacity: o, textAlign: 'center', fontFamily: FONT.ui, color: 'rgba(236,233,223,0.9)'}}>
+				<div style={{fontSize: 30, letterSpacing: 3, color: 'rgba(236,233,223,0.6)'}}>BASED ON</div>
+				<div style={{fontSize: 52, fontWeight: 700, marginTop: 14}}>"Anansi's Goatman Story"</div>
+				<div style={{fontSize: 30, marginTop: 14, color: 'rgba(236,233,223,0.7)'}}>by Anansi (4chan /x/, 2012) · Creepypasta Wiki</div>
 			</div>
 		</AbsoluteFill>
 	);

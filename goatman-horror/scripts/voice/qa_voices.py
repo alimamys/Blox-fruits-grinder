@@ -55,7 +55,8 @@ CANON = {
     'than': 'then', 'mom': 'mum', 'moms': 'mums', 'clark': 'clarke', "who's": 'whose',
     'mam': "ma'am", 'madam': "ma'am", 'ok': 'okay', 'grey': 'gray', 'alright': 'all right',
     'hannah': 'hana', 'hanna': 'hana', 'meter': 'metre',
-    'neighbours': 'neighbors', 'neighbour': 'neighbor', 'wifi': 'wi fi', 'harrison': 'harris', 'storey': 'story', 'doorframe': 'door frame', 'waved': 'waived',
+    'neighbours': 'neighbors', 'neighbour': 'neighbor', 'wifi': 'wi fi', 'storey': 'story', 'goatman': 'goat man', 'firepit': 'fire pit',
+    'treeline': 'tree line', 'nosebleed': 'nose bleed', 'fivethirty': 'five thirty', 'okay': 'ok',
 }
 
 
@@ -78,7 +79,7 @@ def similarity(a: list[str], b: list[str]) -> float:
     return difflib.SequenceMatcher(None, a, b).ratio()
 
 
-HEAVY = ('marineRadio', 'pa', 'paSoft', 'multiSpeaker', 'whisper', 'whisperClose', 'distant', 'crowdRoom', 'phone', 'closet', 'shout', 'door', 'doorGap', 'creature')
+HEAVY = ('marineRadio', 'pa', 'paSoft', 'multiSpeaker', 'whisper', 'whisperClose', 'distant', 'crowdRoom', 'phone', 'closet', 'shout', 'door', 'doorGap', 'creature', 'thing')
 
 
 def load_asr(model: str = 'openai/whisper-base.en'):

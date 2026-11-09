@@ -1,0 +1,48 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'out/scenes12_raw.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf61.7.100
+    comment         : Made with Remotion 4.0.537
+  Duration: 00:01:49.72, start: 0.000000, bitrate: 12523 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 12264 kb/s, 24 fps, 24 tbr, 90k tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      vendor_id       : [0][0][0][0]
+    Side data:
+      ICC Profile
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 253 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:1 -> #0:0 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    comment         : Made with Remotion 4.0.537
+    encoder         : Lavf60.16.100
+  Stream #0:0(und): Audio: pcm_s16le, 192000 Hz, stereo, s16, 6144 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      vendor_id       : [0][0][0][0]
+      encoder         : Lavc60.31.102 pcm_s16le
+[out#0/null @ 0x55b07f525140] video:0kB audio:82288kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+size=N/A time=00:01:46.90 bitrate=N/A speed=35.5x    
+[Parsed_loudnorm_1 @ 0x55b07f66d600] 
+{
+	"input_i" : "-19.24",
+	"input_tp" : "-7.96",
+	"input_lra" : "4.20",
+	"input_thresh" : "-30.53",
+	"output_i" : "-14.85",
+	"output_tp" : "-1.70",
+	"output_lra" : "3.30",
+	"output_thresh" : "-26.03",
+	"normalization_type" : "dynamic",
+	"target_offset" : "-0.15"
+}

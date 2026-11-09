@@ -316,7 +316,7 @@ THE VOICE (Wrong, halting, no rhythm):
 
 MARCUS (Narration):
 
-Wyatt's words.
+Wyatt's own words.
 
 But wrong.
 
