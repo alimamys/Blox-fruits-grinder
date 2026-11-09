@@ -161,6 +161,532 @@
     }
    ]
   },
+  "f_00_leave": {
+   "frames": [
+    {
+     "src": "restyle/f_00_leave_k1.jpg"
+    }
+   ]
+  },
+  "f_02_fire": {
+   "frames": [
+    {
+     "src": "restyle/f_02_fire_k1.jpg"
+    }
+   ]
+  },
+  "f_03_smell": {
+   "frames": [
+    {
+     "src": "restyle/f_03_smell_k1.jpg"
+    }
+   ],
+   "blink": "restyle/f_03_smell_k1_blink.jpg"
+  },
+  "f_04_copper": {
+   "frames": [
+    {
+     "src": "restyle/f_04_copper_k1.jpg"
+    }
+   ]
+  },
+  "f_06_beams": {
+   "frames": [
+    {
+     "src": "restyle/f_06_beams_k1.jpg"
+    }
+   ]
+  },
+  "f_07_burst": {
+   "frames": [
+    {
+     "src": "restyle/f_07_burst_k1.jpg"
+    }
+   ]
+  },
+  "f_08_dez": {
+   "frames": [
+    {
+     "src": "restyle/f_08_dez_k1.jpg"
+    }
+   ]
+  },
+  "f_09_wyatt_talk": {
+   "frames": [
+    {
+     "src": "restyle/f_09_wyatt_talk_k1.jpg",
+     "talk": "restyle/f_09_wyatt_talk_k1_talk.jpg"
+    }
+   ]
+  },
+  "f_10_lock": {
+   "frames": [
+    {
+     "src": "restyle/f_10_lock_k1.jpg"
+    }
+   ]
+  },
+  "f_11_pig": {
+   "frames": [
+    {
+     "src": "restyle/f_11_pig_k1.jpg"
+    }
+   ]
+  },
+  "f_12_figure": {
+   "frames": [
+    {
+     "src": "restyle/f_12_figure_k1.jpg"
+    }
+   ]
+  },
+  "f_14_another": {
+   "frames": [
+    {
+     "src": "restyle/f_14_another_k1.jpg"
+    }
+   ]
+  },
+  "f_16_frozen": {
+   "frames": [
+    {
+     "src": "restyle/f_16_frozen_k1.jpg"
+    }
+   ]
+  },
+  "f_17_jerk": {
+   "frames": [
+    {
+     "src": "restyle/f_17_jerk_k1.jpg"
+    }
+   ]
+  },
+  "f_18_behind": {
+   "frames": [
+    {
+     "src": "restyle/f_18_behind_k1.jpg"
+    }
+   ]
+  },
+  "g_00_ray_quiet": {
+   "frames": [
+    {
+     "src": "restyle/g_00_ray_quiet_k1.jpg",
+     "talk": "restyle/g_00_ray_quiet_k1_talk.jpg"
+    }
+   ]
+  },
+  "g_03_legend": {
+   "frames": [
+    {
+     "src": "restyle/g_03_legend_k1.jpg"
+    }
+   ]
+  },
+  "g_08_morning": {
+   "frames": [
+    {
+     "src": "restyle/g_08_morning_k1.jpg"
+    }
+   ]
+  },
+  "g_10_football": {
+   "frames": [
+    {
+     "src": "restyle/g_10_football_k1.jpg"
+    }
+   ]
+  },
+  "o_00_ghost": {
+   "frames": [
+    {
+     "src": "restyle/o_00_ghost_k1.jpg"
+    }
+   ]
+  },
+  "o_02_gag": {
+   "frames": [
+    {
+     "src": "restyle/o_02_gag_k1.jpg"
+    }
+   ]
+  },
+  "o_03_crowd_in": {
+   "frames": [
+    {
+     "src": "restyle/o_03_crowd_in_k1.jpg"
+    }
+   ]
+  },
+  "o_07_ray_talk": {
+   "frames": [
+    {
+     "src": "restyle/o_07_ray_talk_k1.jpg",
+     "talk": "restyle/o_07_ray_talk_k1_talk.jpg"
+    }
+   ]
+  },
+  "o_08_marcus_talk": {
+   "frames": [
+    {
+     "src": "restyle/o_08_marcus_talk_k1.jpg",
+     "talk": "restyle/o_08_marcus_talk_k1_talk.jpg"
+    }
+   ]
+  },
+  "o_12_nia_scream": {
+   "frames": [
+    {
+     "src": "restyle/o_12_nia_scream_k1.jpg"
+    }
+   ]
+  },
+  "o_14_burst": {
+   "frames": [
+    {
+     "src": "restyle/o_14_burst_k1.jpg"
+    }
+   ]
+  },
+  "o_15_count_out": {
+   "frames": [
+    {
+     "src": "restyle/o_15_count_out_k1.jpg"
+    }
+   ]
+  },
+  "o_16_sticks": {
+   "frames": [
+    {
+     "src": "restyle/o_16_sticks_k1.jpg"
+    }
+   ]
+  },
+  "o_17_empty": {
+   "frames": [
+    {
+     "src": "restyle/o_17_empty_k1.jpg"
+    }
+   ]
+  },
+  "o_18_nia_tells": {
+   "frames": [
+    {
+     "src": "restyle/o_18_nia_tells_k1.jpg"
+    }
+   ],
+   "blink": "restyle/o_18_nia_tells_k1_blink.jpg"
+  },
+  "o_19_whisper": {
+   "frames": [
+    {
+     "src": "restyle/o_19_whisper_k1.jpg"
+    }
+   ]
+  },
+  "s_00_leave": {
+   "frames": [
+    {
+     "src": "restyle/s_00_leave_k1.jpg"
+    }
+   ]
+  },
+  "s_01_keys": {
+   "frames": [
+    {
+     "src": "restyle/s_01_keys_k1.jpg"
+    }
+   ]
+  },
+  "s_02_wyatt_goes": {
+   "frames": [
+    {
+     "src": "restyle/s_02_wyatt_goes_k1.jpg"
+    }
+   ]
+  },
+  "s_03_seven": {
+   "frames": [
+    {
+     "src": "restyle/s_03_seven_k1.jpg"
+    }
+   ]
+  },
+  "s_05_pit": {
+   "frames": [
+    {
+     "src": "restyle/s_05_pit_k1.jpg"
+    }
+   ]
+  },
+  "s_06_nia_back": {
+   "frames": [
+    {
+     "src": "restyle/s_06_nia_back_k1.jpg"
+    }
+   ],
+   "variants": {
+    "hitch": "restyle/s_06_nia_back_k1_vhitch.jpg"
+   }
+  },
+  "s_10_froze": {
+   "frames": [
+    {
+     "src": "restyle/s_10_froze_k1.jpg"
+    }
+   ]
+  },
+  "s_11_marcus_shout": {
+   "frames": [
+    {
+     "src": "restyle/s_11_marcus_shout_k1.jpg",
+     "talk": "restyle/s_11_marcus_shout_k1_talk.jpg"
+    }
+   ]
+  },
+  "s_12_blinds": {
+   "frames": [
+    {
+     "src": "restyle/s_12_blinds_k1.jpg"
+    }
+   ]
+  },
+  "s_14_door": {
+   "frames": [
+    {
+     "src": "restyle/s_14_door_k1.jpg"
+    }
+   ]
+  },
+  "s_15_wyatt_in": {
+   "frames": [
+    {
+     "src": "restyle/s_15_wyatt_in_k1.jpg"
+    }
+   ]
+  },
+  "s_16_closer": {
+   "frames": [
+    {
+     "src": "restyle/s_16_closer_k1.jpg"
+    }
+   ],
+   "variants": {
+    "closer": "restyle/s_16_closer_k1_vcloser.jpg"
+   }
+  },
+  "s_17_pale": {
+   "frames": [
+    {
+     "src": "restyle/s_17_pale_k1.jpg"
+    }
+   ],
+   "blink": "restyle/s_17_pale_k1_blink.jpg"
+  },
+  "s_18_wyatt_whisper": {
+   "frames": [
+    {
+     "src": "restyle/s_18_wyatt_whisper_k1.jpg",
+     "talk": "restyle/s_18_wyatt_whisper_k1_talk.jpg"
+    }
+   ]
+  },
+  "l_00_cole": {
+   "frames": [
+    {
+     "src": "restyle/l_00_cole_k1.jpg"
+    }
+   ]
+  },
+  "l_02_cole_talk": {
+   "frames": [
+    {
+     "src": "restyle/l_02_cole_talk_k1.jpg",
+     "talk": "restyle/l_02_cole_talk_k1_talk.jpg"
+    }
+   ]
+  },
+  "l_03_reach": {
+   "frames": [
+    {
+     "src": "restyle/l_03_reach_k1.jpg"
+    }
+   ]
+  },
+  "l_06_wait": {
+   "frames": [
+    {
+     "src": "restyle/l_06_wait_k1.jpg"
+    }
+   ]
+  },
+  "l_08_knob": {
+   "frames": [
+    {
+     "src": "restyle/l_08_knob_k1.jpg"
+    }
+   ]
+  },
+  "l_13_shot": {
+   "frames": [
+    {
+     "src": "restyle/l_13_shot_k1.jpg"
+    }
+   ]
+  },
+  "l_14_cole_shout": {
+   "frames": [
+    {
+     "src": "restyle/l_14_cole_shout_k1.jpg",
+     "talk": "restyle/l_14_cole_shout_k1_talk.jpg"
+    }
+   ]
+  },
+  "l_15_treeline": {
+   "frames": [
+    {
+     "src": "restyle/l_15_treeline_k1.jpg"
+    }
+   ]
+  },
+  "l_18_crawl": {
+   "frames": [
+    {
+     "src": "restyle/l_18_crawl_k1.jpg"
+    }
+   ]
+  },
+  "n_00_walk": {
+   "frames": [
+    {
+     "src": "restyle/n_00_walk_k1.jpg"
+    }
+   ]
+  },
+  "n_02_porch": {
+   "frames": [
+    {
+     "src": "restyle/n_02_porch_k1.jpg"
+    }
+   ]
+  },
+  "n_03_four": {
+   "frames": [
+    {
+     "src": "restyle/n_03_four_k1.jpg"
+    }
+   ]
+  },
+  "n_05_bathroom": {
+   "frames": [
+    {
+     "src": "restyle/n_05_bathroom_k1.jpg"
+    }
+   ]
+  },
+  "n_06_lies": {
+   "frames": [
+    {
+     "src": "restyle/n_06_lies_k1.jpg"
+    }
+   ]
+  },
+  "n_08_counts": {
+   "frames": [
+    {
+     "src": "restyle/n_08_counts_k1.jpg"
+    }
+   ]
+  },
+  "n_12_sits_up": {
+   "frames": [
+    {
+     "src": "restyle/n_12_sits_up_k1.jpg"
+    }
+   ]
+  },
+  "n_13_window": {
+   "frames": [
+    {
+     "src": "restyle/n_13_window_k1.jpg"
+    }
+   ]
+  },
+  "n_15_line": {
+   "frames": [
+    {
+     "src": "restyle/n_15_line_k1.jpg"
+    }
+   ]
+  },
+  "n_17_looks": {
+   "frames": [
+    {
+     "src": "restyle/n_17_looks_k1.jpg"
+    }
+   ]
+  },
+  "n_18_trees": {
+   "frames": [
+    {
+     "src": "restyle/n_18_trees_k1.jpg"
+    }
+   ]
+  },
+  "p_00_city": {
+   "frames": [
+    {
+     "src": "restyle/p_00_city_k1.jpg"
+    }
+   ]
+  },
+  "p_01_marcus": {
+   "frames": [
+    {
+     "src": "restyle/p_01_marcus_k1.jpg"
+    }
+   ],
+   "blink": "restyle/p_01_marcus_k1_blink.jpg"
+  },
+  "p_02_party": {
+   "frames": [
+    {
+     "src": "restyle/p_02_party_k1.jpg"
+    }
+   ]
+  },
+  "p_04_clean": {
+   "frames": [
+    {
+     "src": "restyle/p_04_clean_k1.jpg"
+    }
+   ]
+  },
+  "p_06_eight": {
+   "frames": [
+    {
+     "src": "restyle/p_06_eight_k1.jpg"
+    }
+   ]
+  },
+  "p_07_frozen": {
+   "frames": [
+    {
+     "src": "restyle/p_07_frozen_k1.jpg"
+    }
+   ],
+   "blink": "restyle/p_07_frozen_k1_blink.jpg"
+  },
+  "p_09_door": {
+   "frames": [
+    {
+     "src": "restyle/p_09_door_k1.jpg"
+    }
+   ],
+   "variants": {
+    "shadow": "restyle/p_09_door_k1_vshadow.jpg"
+   }
+  },
   "t_11_day": {
    "frames": [
     {
@@ -195,6 +721,428 @@
      "src": "restyle/w_12_sunset_k1.jpg"
     }
    ]
+  },
+  "f_01_seven": {
+   "frames": [
+    {
+     "src": "restyle/f_00_leave_k1.jpg"
+    }
+   ]
+  },
+  "f_05_stoves": {
+   "frames": [
+    {
+     "src": "restyle/t_08_empty_pot_k1.jpg"
+    }
+   ]
+  },
+  "f_13_back": {
+   "frames": [
+    {
+     "src": "restyle/f_12_figure_k1.jpg"
+    }
+   ]
+  },
+  "f_15_closer": {
+   "frames": [
+    {
+     "src": "restyle/f_14_another_k1.jpg"
+    }
+   ]
+  },
+  "f_19_out": {
+   "frames": [
+    {
+     "src": "restyle/f_18_behind_k1.jpg"
+    }
+   ]
+  },
+  "g_01_ray_talk": {
+   "frames": [
+    {
+     "src": "restyle/g_00_ray_quiet_k1.jpg",
+     "talk": "restyle/g_00_ray_quiet_k1_talk.jpg"
+    }
+   ]
+  },
+  "g_02_shut_up": {
+   "frames": [
+    {
+     "src": "restyle/t_07_crowd_k1.jpg"
+    }
+   ]
+  },
+  "g_04_never": {
+   "frames": [
+    {
+     "src": "restyle/g_03_legend_k1.jpg"
+    }
+   ]
+  },
+  "g_05_faces": {
+   "frames": [
+    {
+     "src": "restyle/t_12_face_k1.jpg"
+    }
+   ]
+  },
+  "g_06_group": {
+   "frames": [
+    {
+     "src": "restyle/t_09_bench_k1.jpg"
+    }
+   ]
+  },
+  "g_07_stopped": {
+   "frames": [
+    {
+     "src": "restyle/t_06_hadnt_k1.jpg"
+    }
+   ],
+   "blink": "restyle/t_06_hadnt_k1_blink.jpg"
+  },
+  "g_09_laugh": {
+   "frames": [
+    {
+     "src": "restyle/g_08_morning_k1.jpg"
+    }
+   ]
+  },
+  "g_11_worst": {
+   "frames": [
+    {
+     "src": "restyle/g_10_football_k1.jpg"
+    }
+   ]
+  },
+  "o_01_night": {
+   "frames": [
+    {
+     "src": "restyle/o_00_ghost_k1.jpg"
+    }
+   ]
+  },
+  "o_04_cook": {
+   "frames": [
+    {
+     "src": "restyle/t_01_packs_k1.jpg"
+    }
+   ],
+   "variants": {
+    "steam": "restyle/t_01_packs_k1_vsteam.jpg"
+   }
+  },
+  "o_05_packs": {
+   "frames": [
+    {
+     "src": "restyle/t_03_stove_k1.jpg"
+    }
+   ],
+   "blink": "restyle/t_03_stove_k1_blink.jpg"
+  },
+  "o_06_know": {
+   "frames": [
+    {
+     "src": "restyle/t_04_plates_k1.jpg"
+    }
+   ]
+  },
+  "o_09_stopped": {
+   "frames": [
+    {
+     "src": "restyle/t_06_hadnt_k1.jpg"
+    }
+   ],
+   "blink": "restyle/t_06_hadnt_k1_blink.jpg"
+  },
+  "o_10_counting": {
+   "frames": [
+    {
+     "src": "restyle/t_09_bench_k1.jpg"
+    }
+   ]
+  },
+  "o_11_eleven": {
+   "frames": [
+    {
+     "src": "restyle/t_07_crowd_k1.jpg"
+    }
+   ]
+  },
+  "o_13_nia": {
+   "frames": [
+    {
+     "src": "restyle/o_12_nia_scream_k1.jpg"
+    }
+   ]
+  },
+  "o_20_face": {
+   "frames": [
+    {
+     "src": "restyle/o_18_nia_tells_k1.jpg"
+    }
+   ],
+   "blink": "restyle/o_18_nia_tells_k1_blink.jpg"
+  },
+  "s_04_said": {
+   "frames": [
+    {
+     "src": "restyle/s_03_seven_k1.jpg"
+    }
+   ]
+  },
+  "s_07_still": {
+   "frames": [
+    {
+     "src": "restyle/s_06_nia_back_k1.jpg"
+    }
+   ],
+   "variants": {
+    "hitch": "restyle/s_06_nia_back_k1_vhitch.jpg"
+   }
+  },
+  "s_08_silent": {
+   "frames": [
+    {
+     "src": "restyle/s_05_pit_k1.jpg"
+    }
+   ]
+  },
+  "s_09_shake": {
+   "frames": [
+    {
+     "src": "restyle/s_06_nia_back_k1.jpg"
+    }
+   ],
+   "variants": {
+    "hitch": "restyle/s_06_nia_back_k1_vhitch.jpg"
+   }
+  },
+  "s_13_twenty": {
+   "frames": [
+    {
+     "src": "restyle/s_06_nia_back_k1.jpg"
+    }
+   ],
+   "variants": {
+    "hitch": "restyle/s_06_nia_back_k1_vhitch.jpg"
+   }
+  },
+  "s_19_six": {
+   "frames": [
+    {
+     "src": "restyle/s_03_seven_k1.jpg"
+    }
+   ]
+  },
+  "s_20_were_seven": {
+   "frames": [
+    {
+     "src": "restyle/s_03_seven_k1.jpg"
+    }
+   ]
+  },
+  "s_21_left": {
+   "frames": [
+    {
+     "src": "restyle/s_17_pale_k1.jpg"
+    }
+   ],
+   "blink": "restyle/s_17_pale_k1_blink.jpg"
+  },
+  "l_01_cole2": {
+   "frames": [
+    {
+     "src": "restyle/l_00_cole_k1.jpg"
+    }
+   ]
+  },
+  "l_04_air": {
+   "frames": [
+    {
+     "src": "restyle/l_03_reach_k1.jpg"
+    }
+   ]
+  },
+  "l_05_left": {
+   "frames": [
+    {
+     "src": "restyle/l_03_reach_k1.jpg"
+    }
+   ]
+  },
+  "l_07_smell": {
+   "frames": [
+    {
+     "src": "restyle/l_06_wait_k1.jpg"
+    }
+   ]
+  },
+  "l_09_voice": {
+   "frames": [
+    {
+     "src": "restyle/l_08_knob_k1.jpg"
+    }
+   ]
+  },
+  "l_10_thing": {
+   "frames": [
+    {
+     "src": "restyle/l_06_wait_k1.jpg"
+    }
+   ]
+  },
+  "l_11_words": {
+   "frames": [
+    {
+     "src": "restyle/s_17_pale_k1.jpg"
+    }
+   ],
+   "blink": "restyle/s_17_pale_k1_blink.jpg"
+  },
+  "l_12_rhythm": {
+   "frames": [
+    {
+     "src": "restyle/l_08_knob_k1.jpg"
+    }
+   ]
+  },
+  "l_16_hoot": {
+   "frames": [
+    {
+     "src": "restyle/l_15_treeline_k1.jpg"
+    }
+   ]
+  },
+  "l_17_scream": {
+   "frames": [
+    {
+     "src": "restyle/l_15_treeline_k1.jpg"
+    }
+   ]
+  },
+  "l_19_fire2": {
+   "frames": [
+    {
+     "src": "restyle/l_13_shot_k1.jpg"
+    }
+   ]
+  },
+  "l_20_dawn": {
+   "frames": [
+    {
+     "src": "restyle/l_06_wait_k1.jpg"
+    }
+   ]
+  },
+  "l_21_door": {
+   "frames": [
+    {
+     "src": "restyle/l_08_knob_k1.jpg"
+    }
+   ]
+  },
+  "l_22_dawn": {
+   "frames": [
+    {
+     "src": "restyle/l_06_wait_k1.jpg"
+    }
+   ]
+  },
+  "n_01_look": {
+   "frames": [
+    {
+     "src": "restyle/n_00_walk_k1.jpg"
+    }
+   ]
+  },
+  "n_04_fight": {
+   "frames": [
+    {
+     "src": "restyle/n_03_four_k1.jpg"
+    }
+   ]
+  },
+  "n_07_eyes": {
+   "frames": [
+    {
+     "src": "restyle/n_06_lies_k1.jpg"
+    }
+   ]
+  },
+  "n_09_eight": {
+   "frames": [
+    {
+     "src": "restyle/n_03_four_k1.jpg"
+    }
+   ]
+  },
+  "n_10_nine": {
+   "frames": [
+    {
+     "src": "restyle/n_06_lies_k1.jpg"
+    }
+   ]
+  },
+  "n_11_rifle": {
+   "frames": [
+    {
+     "src": "restyle/n_08_counts_k1.jpg"
+    }
+   ]
+  },
+  "n_14_screen": {
+   "frames": [
+    {
+     "src": "restyle/n_13_window_k1.jpg"
+    }
+   ]
+  },
+  "n_16_back": {
+   "frames": [
+    {
+     "src": "restyle/n_15_line_k1.jpg"
+    }
+   ]
+  },
+  "p_03_plates": {
+   "frames": [
+    {
+     "src": "restyle/p_02_party_k1.jpg"
+    }
+   ]
+  },
+  "p_05_seven": {
+   "frames": [
+    {
+     "src": "restyle/p_02_party_k1.jpg"
+    }
+   ]
+  },
+  "p_08_eight": {
+   "frames": [
+    {
+     "src": "restyle/p_06_eight_k1.jpg"
+    }
+   ]
+  },
+  "p_10_smell": {
+   "frames": [
+    {
+     "src": "restyle/p_09_door_k1.jpg"
+    }
+   ],
+   "variants": {
+    "shadow": "restyle/p_09_door_k1_vshadow.jpg"
+   }
+  },
+  "p_11_lightning": {
+   "frames": [
+    {
+     "src": "restyle/p_07_frozen_k1.jpg"
+    }
+   ],
+   "blink": "restyle/p_07_frozen_k1_blink.jpg"
   }
  }
 }

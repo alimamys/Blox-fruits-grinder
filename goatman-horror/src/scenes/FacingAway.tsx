@@ -110,7 +110,7 @@ export const FacingAway: React.FC = () => (
 				chars: ['adults', 'wyatt'],
 				quality: 'medium',
 				mood: 'Overcast grey late afternoon at the farm, a few days earlier; flies in the air.',
-				prompt: 'The Dawes farmyard: MR. DAWES and WYATT stand at the pig pen with the broken fence rail, staring down at something on the ground that the fence hides from us - we never see it. Grim faces, flies circling.',
+				prompt: 'ONLY TWO PEOPLE: Mr. Dawes and Wyatt (Cole, the young man in the red check flannel with the lantern, is NOT here). The Dawes farmyard: MR. DAWES and WYATT stand at the pig pen with the broken fence rail, staring down at something on the ground that the fence hides from us - we never see it. Grim faces, flies circling.',
 				move: push(1.02, 1.08, 0.4, 0.55),
 			}, {cam: {z: 1.4, cx: 700, cy: 640}, kids: <>
 				<Person who="dawes" x={560} y={900} h={420} facing="right" />
@@ -151,14 +151,14 @@ export const FacingAway: React.FC = () => (
 				prompt: 'Night: a flashlight beam catches a pale, blurred shape jerking itself between two tree trunks - too fast to see, limbs at wrong angles, smeared with motion blur. Unclear and wrong. Black woods.',
 				move: push(1.04, 1.12),
 			}, {cam: {z: 1.4, cx: 1000, cy: 520}, kids: <Person who="figure" x={1000} y={700} h={380} facing="left" tilt={-25} />}),
-			shot('f_18_behind', 'narrator_042_stepped_out', 'clearing', {
+			shot('f_18_behind', 'narrator_042_stepped_out', 'trail', {
 				chars: ['thing'],
 				quality: 'medium',
 				dark: true,
-				mood: MOOD.fire,
-				prompt: 'Night, looking back down the dark dirt track from the edge of the campfire light: far down the path, where the firelight dies, a tall thin silhouette stands in the middle of the track, motionless. No details, only its shape.',
-				move: push(1.0, 1.1, 0.55, 0.5),
-			}, {cam: {z: 2.4, cx: 1080, cy: 520}, kids: <Person who="figure" x={1080} y={600} h={200} facing="front" />}),
+				mood: 'Night: the very last orange glow of a campfire behind the camera reaches a few metres up the path, then black.',
+				prompt: 'NOBODY in the foreground. Looking straight up the narrow dirt path into the black woods at night: the faint orange firelight dies a few metres up the path, and right there, in the MIDDLE of the path at the edge of the light, stands a tall, thin, dark human SILHOUETTE, perfectly still, arms hanging a little too long. No face, no detail - only its black shape against the darker woods.',
+				move: push(1.0, 1.12, 0.5, 0.48),
+			}, {kids: <Person who="figure" x={960} y={760} h={420} facing="front" />}),
 			again('f_19_out', 'stepped_out', 'f_18_behind', {move: push(1.14, 1.3, 0.56, 0.48)}),
 		]}
 	/>

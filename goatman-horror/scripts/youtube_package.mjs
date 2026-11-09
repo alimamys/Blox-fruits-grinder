@@ -15,16 +15,15 @@ fs.mkdirSync(out, {recursive: true});
 
 // spoiler-free chapter titles (the scene names in the timeline give away twists)
 const CHAPTER = {
-	doors: 'Every door opened',
-	newApartment: 'The new apartment',
-	footsteps: 'The footsteps',
-	neighbors: 'The neighbors',
-	rule: 'The rule',
-	creature: 'On the stairs',
-	realization: 'The message',
-	offering: 'A key in the lock',
-	staircase: 'The staircase',
-	nextTenant: 'The next tenant',
+	twelve: 'Twelve hot dogs',
+	woods: 'The woods',
+	facingAway: 'Facing away',
+	goatman: 'The legend',
+	oneTooMany: 'One too many',
+	seven: 'Seven',
+	letMeIn: 'Let me in',
+	nine: 'Nine',
+	plates: 'Twelve years later',
 };
 // same rounding as `npm run check` (scripts/check.mjs), so the chapters match its printout
 const ts = (s) => {
@@ -46,57 +45,53 @@ const licences = [...new Set(credits.match(/https:\/\/creativecommons\.org\/lice
 
 // Title: a direct warning to the viewer + an oddly exact time (curiosity), under ~60 characters so it
 // is not cut off on phones. The thumbnail text adds the stakes instead of repeating the title.
-const title = 'Never Open Your Door at 3:06 AM | Animated Horror Story';
-const alternatives = ['Every Door in My Building Opens at 3:06 AM | Horror Animation', 'My Rent Was Too Cheap... Now I Know Why | Animated Horror'];
+// Title: a count that does not add up (curiosity) and is literally true by the end; under ~60 characters.
+const title = '11 of Us Went Camping. 12 Came Back. | Animated Horror Story';
+const alternatives = ['Something Ate Dinner With Us in the Woods | Animated Horror', 'Count Your Friends Before You Fall Asleep | Animated Horror Story'];
 const thumbnails = [
 	'MYSTERY SET (shows nothing of what happens - upload these three to Test & Compare in YouTube Studio):',
-	'thumbnail_D_every_door.jpg - the empty corridor at 3 a.m., every door open onto black rooms except one (circled) - "EVERY DOOR OPENED..."',
-	'thumbnail_E_whos_there.jpg - from inside, only the light under her door and the shadows of two long feet - "WHO\'S THERE?"',
-	'thumbnail_F_dont_make_a_sound.jpg - the neighbours from behind, facing a pitch-black stairwell; Mr. Harris looks back, finger on his lips - "DON\'T MAKE A SOUND"',
-	'REVEAL SET (shows the creature / the twist - keep as a fallback):',
-	'thumbnail_A_they_chose_me.jpg - Mr. Harris with the master key, the creature behind him - "THEY CHOSE ME"',
-	'thumbnail_B_306am.jpg - through the peephole, every neighbour staring, the creature at the stairs - "3:06 AM"',
-	'thumbnail_C_dont_open.jpg - Sarah against her door, hand over her mouth, feet under the door - "DON\'T OPEN IT"',
+	'thumbnail_A_count_them.jpg - the trailer packed with teenagers at night; one face at the end of the bench lost in shadow (circled) - "COUNT THEM"',
+	'thumbnail_B_facing_away.jpg - a flashlight beam in black woods finds a man standing still with his back turned - "DON\'T LOOK BACK"',
+	'thumbnail_C_twelve.jpg - a paper plate with one hot dog; a grey hand with too-long fingers reaching for it - "WHO ATE IT?"',
 ];
-const pinned = 'Be honest - if your neighbor knocked at 3:06 AM and whispered your name... would you have opened the door?';
+const pinned = 'Be honest - would YOU have noticed the extra one? How many people were really in that trailer?';
 const tags = [
 	'animated horror story',
 	'horror animation',
 	'scary story',
 	'creepypasta',
-	'apartment horror',
-	'3am horror story',
-	'neighbors horror story',
+	'goatman',
+	'anansi goatman story',
+	'camping horror story',
+	'woods horror story',
+	'scary camping story',
+	'cryptid horror',
 	'2d animation',
 	'horror short film',
 	'scary animation',
-	'landlord horror story',
 	'horror narration',
-	'creature horror',
 	'thriller',
 	'animated short',
-	'never open your door',
-	'3:06 am',
-	'scary apartment story',
 ];
 
 const description = [
-	'At 3:06 AM, every door in my building opened - and my neighbors stepped into the hallway like they had done it a hundred times before.',
-	'They stood completely still, facing the stairs. Then something started coming up. And I was the only one who didn\'t know what it was.',
+	'There were eleven of us in that trailer. Twelve hot dogs were gone.',
+	'Something had been sitting with us - eating with us - for a whole day. And not one of us could tell you whose face it was wearing.',
 	'',
-	'A 13-minute animated horror story about a new apartment, a rent that was too cheap, and the one rule nobody told me. Watch it with headphones - and check that your door is locked.',
+	'A 10-minute animated horror story about a camping trip in the Alabama woods, a legend nobody wanted to hear, and the night we finally counted. Watch it with headphones.',
 	'',
-	'Would you have opened the door? Tell me in the comments.',
+	'Would you have noticed the extra one? Tell me in the comments.',
 	'',
 	'CHAPTERS',
 	...chapters,
 	'',
 	'This story is fiction. All characters and events are invented; any resemblance to real people or events is coincidental.',
 	'',
-	'#horrorstory #animatedhorror #scarystories',
+	'#horrorstory #animatedhorror #goatman',
 	'',
 	'CREDITS',
-	'Story, animation and sound design: Never Open Your Door at 3:06 AM production.',
+	'Based on "Anansi\'s Goatman Story" by Anansi (4chan /x/, 2012), as archived on the Creepypasta Wiki: https://creepypasta.fandom.com/wiki/Anansi%27s_Goatman_Story - retold in our own words, characters renamed. Creepypasta Wiki text is available under CC BY-SA 3.0.',
+	'Animation and sound design: 11 of Us Went Camping production.',
 	'Voices: Fish Audio (text-to-speech).',
 	'Illustrations: generated with an image model from the film\'s own layouts and character designs, animated in code.',
 	'Fonts: Inter, IBM Plex Mono, Patrick Hand (SIL Open Font License).',

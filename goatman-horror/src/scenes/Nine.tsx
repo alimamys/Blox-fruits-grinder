@@ -2,9 +2,29 @@
 import React from 'react';
 import {CountMark} from '../components/ui/Count';
 import {Person} from '../layout/Person';
-import {Shots} from '../utils/scene';
+import {Shots, type ShotProps} from '../utils/scene';
 import {MOOD} from './common';
 import {again, close, push, shot} from './kit';
+
+/** The bathroom door at the back of the dark trailer swings inward onto blackness (drawn in code over the
+ *  frame: the door in n_05 is at x 537-693, y 84-795, knob on the left; the frame is shown at the camera
+ *  clamp's 1.015 zoom, so the door rectangle is mapped the same way). */
+const BathroomDoorOpens: React.FC<ShotProps> = ({f, d}) => {
+	const k = (x: number, c: number) => c + (x - c) * 1.015;
+	const t = Math.min(1, Math.max(0, (f - d * 0.18) / (24 * 0.9)));
+	const open = t * t * (3 - 2 * t) * 0.8;
+	const x0 = k(537, 960);
+	const x1 = k(693, 960);
+	const y0 = k(84, 540);
+	const y1 = k(795, 540);
+	const xe = x0 + (x1 - x0) * open;
+	return (
+		<svg width={1920} height={1080} style={{position: 'absolute', inset: 0}}>
+			<polygon points={`${x0},${y0} ${xe},${y0 + 10 * open} ${xe},${y1 - 6 * open} ${x0},${y1}`} fill="#010102" opacity={0.96} />
+			{open > 0.02 ? <line x1={xe} y1={y0 + 10 * open} x2={xe} y2={y1 - 6 * open} stroke="#4a4c55" strokeWidth={3} opacity={0.7} /> : null}
+		</svg>
+	);
+};
 
 export const Nine: React.FC = () => (
 	<Shots
@@ -51,10 +71,8 @@ export const Nine: React.FC = () => (
 				dark: true,
 				mood: MOOD.trailerDark,
 				prompt: 'The narrow bathroom door at the end of the dark trailer, closed. Grey-blue darkness, the floor in shadow. Nobody visible.',
-				variants: [{name: 'open', prompt: 'The narrow bathroom door now stands half OPEN onto pitch blackness inside. Nothing else changes.'}],
-				seq: [['base', 0], ['open', 0.45]],
-				move: push(1.02, 1.12, 0.3, 0.45),
-			}, {cam: {z: 2.0, cx: 560, cy: 400}}),
+				move: {z0: 1.0, z1: 1.0, x0: 0.5, y0: 0.5},
+			}, {cam: {z: 2.0, cx: 560, cy: 400}, overlay: (p) => <BathroomDoorOpens {...p} />}),
 			shot('n_06_lies', 'narrator_127_lay_down', 'trailer', {
 				chars: ['thing', 'marcus'],
 				quality: 'medium',

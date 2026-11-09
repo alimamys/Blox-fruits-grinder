@@ -71,7 +71,7 @@ export const Seven: React.FC = () => (
 				chars: ['cousins'],
 				quality: 'high',
 				mood: MOOD.afternoonStill,
-				prompt: 'Seen through the trailer\'s doorway from inside: in the empty clearing, a girl with long box braids in a lavender hoodie - NIA - stands perfectly still beside the dead fire pit with her BACK to the trailer, arms hanging at her sides. Amber flat light. Wrong somehow.',
+				prompt: 'NOBODY in the foreground - only the dark edges of the trailer\'s open doorway framing the view. Outside, in the otherwise EMPTY clearing, ONE girl with long box braids in a lavender hoodie - NIA - stands perfectly still beside the dead fire pit, medium size in frame, with her BACK to us, arms hanging at her sides. Amber flat light. Wrong somehow.',
 				variants: [{name: 'hitch', prompt: 'Her shoulders are now hunched up high and her head tipped slightly forward, as if shaking with silent laughter. Nothing else changes.'}],
 				move: push(1.02, 1.1, 0.5, 0.55),
 			}, {cam: {z: 1.5, cx: 900, cy: 700}, kids: <Person who="nia" x={900} y={880} h={420} facing="back" />}),
@@ -79,13 +79,14 @@ export const Seven: React.FC = () => (
 			again('s_08_silent', 'narrator_084_silent', 's_05_pit', {move: push(1.06, 1.14, 0.5, 0.65), grade: 0.85}),
 			again('s_09_shake', 'narrator_085_shoulders', 's_06_nia_back', {
 				seq: [['base', 0], ['hitch', 0.18], ['base', 0.3], ['hitch', 0.44], ['base', 0.56], ['hitch', 0.7], ['base', 0.82], ['hitch', 0.92]],
+				fx: 'tremble',
 				move: push(1.16, 1.3, 0.5, 0.5),
 			}),
 			shot('s_10_froze', 'narrator_088_froze', 'clearing', {
 				chars: ['others', 'cousins'],
 				quality: 'medium',
 				mood: MOOD.afternoonStill,
-				prompt: 'The empty clearing in amber light: KAYLA (green flannel, ponytail) has walked halfway across toward the girl standing by the fire pit with her back turned - and has frozen mid-step, one hand half raised, afraid.',
+				prompt: 'ONLY TWO PEOPLE in the whole frame. The empty clearing in amber light: KAYLA (green flannel, ponytail) has walked halfway across toward the girl with box braids and a lavender hoodie who stands by the fire pit with her back turned - and Kayla has frozen mid-step, one hand half raised, afraid. Nobody else anywhere.',
 				move: push(1.02, 1.08),
 			}, {cam: {z: 1.4, cx: 900, cy: 700}, kids: <>
 				<Person who="kayla" x={620} y={900} h={420} facing="right" pose="reach" />
@@ -105,11 +106,11 @@ export const Seven: React.FC = () => (
 				chars: ['cousins', 'others'],
 				quality: 'medium',
 				mood: 'Dusk inside the trailer, the blinds coming down, the light going grey-blue.',
-				prompt: 'Inside the trailer at dusk: DEZ yanks a yellowed roll-down blind down over the window; TREY sits on a chair at the one window left uncovered, peering out through the gap. Tense, silent.',
+				prompt: 'ONLY TWO PEOPLE in frame, close: inside the trailer at dusk, DEZ yanks a yellowed roll-down blind down over the window; TREY (flat-top, charcoal hoodie) sits on a chair at the one window left uncovered, peering out through the gap. Tense, silent.',
 				move: push(1.02, 1.08, 0.65, 0.45),
-			}, {cam: {z: 1.3, cx: 1300, cy: 560}, kids: <>
-				<Person who="dez" x={1500} y={850} h={600} facing="right" pose="reach" />
-				<Person who="trey" x={1200} y={900} h={520} facing="right" />
+			}, {cam: {z: 1.8, cx: 1400, cy: 520}, kids: <>
+				<Person who="dez" x={1560} y={850} h={640} facing="right" pose="reach" />
+				<Person who="trey" x={1240} y={900} h={560} facing="right" />
 			</>}),
 			again('s_13_twenty', 'narrator_090_twenty', 's_06_nia_back', {move: push(1.24, 1.3, 0.5, 0.5), grade: 0.75}),
 			shot('s_14_door', 'narrator_091_slammed', 'trailer', {
@@ -134,11 +135,11 @@ export const Seven: React.FC = () => (
 				chars: ['thing'],
 				quality: 'high',
 				mood: MOOD.afternoonStill,
-				prompt: 'Wyatt\'s view crossing the clearing at dusk: the girl by the dead fire pit has turned her head to watch him - it is NIA\'s face but wrong: skin a shade too grey, eyes fixed and unblinking, jaw hanging slack. She stands perfectly still.',
+				prompt: 'Medium close shot at dusk in the clearing: a girl stands a few metres away by the dead fire pit, FACING THE CAMERA, her face large and clearly visible - it is NIA (long box braids, lavender hoodie) but WRONG: skin a shade too grey, eyes fixed, glassy and unblinking, jaw hanging slack. She stands perfectly still. Nobody else in frame.',
 				variants: [{name: 'closer', prompt: 'The same girl now stands much CLOSER to the camera, larger in frame, in exactly the same pose and with the same fixed stare - as if she moved without anyone seeing. Nothing else changes.'}],
 				seq: [['base', 0], ['closer', 0.66]],
 				move: push(1.02, 1.08, 0.5, 0.45),
-			}, {cam: {z: 1.5, cx: 940, cy: 650}, kids: <Person who="wrongNia" x={940} y={860} h={380} facing="front" />}),
+			}, {cam: {z: 2.4, cx: 940, cy: 560}, kids: <Person who="wrongNia" x={940} y={900} h={560} facing="front" />}),
 			close('s_17_pale', 'narrator_096_went_pale', {
 				chars: ['wyatt'],
 				loc: 'trailer',

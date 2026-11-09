@@ -47,7 +47,7 @@ export const Plates: React.FC = () => (
 				quality: 'medium',
 				mood: 'Close on the coffee table under the cold TV light.',
 				prompt: 'Close-up on the low wooden coffee table at night: a row of used, greasy paper plates laid out side by side, crusts and grease stains on each, beside empty pizza boxes. No people, no hands.',
-				move: push(1.04, 1.12, 0.5, 0.5),
+				move: {z0: 1.6, z1: 1.6, x0: 0.3, y0: 0.6, x1: 0.7, y1: 0.55},
 			}, <>
 				<rect x={0} y={0} width={1920} height={1080} fill="#3a2a1c" />
 				<ellipse cx={960} cy={620} rx={760} ry={180} fill="#e9e4d6" />
@@ -61,7 +61,7 @@ export const Plates: React.FC = () => (
 				prompt: 'Close-up: ADULT MARCUS holding a stack of greasy paper plates, frozen, his eyes moving across the couch, counting, the blood draining from his face in the cold TV light.',
 				move: push(1.03, 1.12, 0.5, 0.42),
 			}, <Person who="marcusAdult" x={960} y={1900} h={1700} facing="front" />, {bg: '#1c2230'}),
-			again('p_08_eight', 'narrator_149_eight', 'p_06_eight', {move: push(1.12, 1.2), fx: 'pulse'}, {overlay: (p) => <CountMark {...p} n="8" red x={0.5} y={0.3} size={380} />}),
+			again('p_08_eight', 'narrator_149_eight', 'p_06_eight', {move: {z0: 1.7, z1: 1.8, x0: 0.62, y0: 0.58, x1: 0.68, y1: 0.55}, fx: 'pulse'}, {overlay: (p) => <CountMark {...p} n="8" red x={0.5} y={0.3} size={380} />}),
 			shot('p_09_door', 'narrator_150_bathroom', 'apartment', {
 				noPeople: true,
 				quality: 'medium',

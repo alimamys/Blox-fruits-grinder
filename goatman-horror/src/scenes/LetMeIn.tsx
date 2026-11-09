@@ -74,7 +74,7 @@ export const LetMeIn: React.FC = () => (
 				chars: ['adults'],
 				quality: 'medium',
 				mood: 'Two in the morning in the clearing: pitch black, the only light the lantern on the trailer steps and a muzzle flash.',
-				prompt: 'ONLY COLE (not Mr. Dawes): two in the morning, COLE stands on the trailer steps with the door kicked open behind him, firing his hunting rifle STRAIGHT UP INTO THE SKY - a bright muzzle flash lights his face and the pine trunks; the lantern on the step throws long shadows. He is aiming at nobody, only the sky.',
+				prompt: 'ONLY ONE PERSON in the whole frame: COLE (red-and-black check flannel). Mr. Dawes and everyone else are NOT here. Two in the morning, COLE stands on the trailer steps with the door kicked open behind him, firing his hunting rifle STRAIGHT UP INTO THE SKY - a bright muzzle flash lights his face and the pine trunks; the lantern on the step throws long shadows. He is aiming at nobody, only the sky.',
 				move: push(1.02, 1.08, 0.4, 0.45),
 			}, {cam: {z: 1.7, cx: 520, cy: 520}, kids: <Person who="cole" x={520} y={720} h={420} facing="right" />}),
 			close('l_14_cole_shout', 'cole_002_get_gone', {
