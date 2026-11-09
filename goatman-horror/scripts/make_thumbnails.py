@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YouTube thumbnails (1280x720) for "Never Open Your Door at 3:06 AM": purpose-drawn art (made by
+"""YouTube thumbnails (1280x720) for "11 of Us Went Camping. 12 Came Back.": purpose-drawn art (made by
 scripts/images/thumbart.py from the film's own character sheets and locations, each a real moment of the
 film) + crisp text in code (max 3 words) and at most one red mark.
     .venv/bin/python scripts/make_thumbnails.py   -> youtube/thumbnail_*.jpg
@@ -135,45 +135,20 @@ def centered(im: Image.Image, words: str, size: int) -> int:
 
 def main() -> None:
     OUT.mkdir(exist_ok=True)
-    # A - THEY CHOSE ME: the door forced open; Mr. Harris with the master key, the creature towering behind him
-    a = lift(art('key'))
-    a = side_shade(a, 0.42, 0.55)
-    text(a, [('THEY', WHITE), ('CHOSE', WHITE), ('ME', RED)], 30, 170, 136, 350, gap=-4)
-    a.save(OUT / 'thumbnail_A_they_chose_me.jpg', quality=92)
-    # B - 3:06 AM: through the peephole, every neighbour staring at her door; the creature at the top of the stairs
-    b = lift(art('peep'), gamma=0.86)
-    red_circle(b, 618, 158, 34, 72, width=9)  # the creature at the end of the corridor
-    b = bottom_shade(b, 0.62, 0.85)
-    f = ImageFont.truetype(FONT, 150)
-    text(b, [('3:06 AM', RED)], int((W - ImageDraw.Draw(b).textlength('3:06 AM', font=f)) / 2), 548, 150, 900)
-    b.save(OUT / 'thumbnail_B_306am.jpg', quality=92)
-    # C - DON'T OPEN IT: Sarah against her door, hand over her mouth; feet in the light under the door
-    c = lift(art('door'), gamma=0.8)
-    c = glow(c, (205, 632, 420, 720), 1.7)
-    red_arrow(c, 470, 520, 330, 640, width=12)
-    text(c, [("DON'T", WHITE), ('OPEN IT', RED)], 40, 70, 140, 470, gap=-4)
-    c.save(OUT / 'thumbnail_C_dont_open.jpg', quality=92)
-    print('youtube/thumbnail_A_they_chose_me.jpg, thumbnail_B_306am.jpg, thumbnail_C_dont_open.jpg')
-
-    # ---- mystery set: shows nothing of what is happening, only the question ----
-    # D - EVERY DOOR OPENED: the empty corridor at 3:06, every door open onto black rooms - except one
-    d = lift(art('doors'), gamma=0.85)
-    red_circle(d, 862, 372, 62, 300, width=10)  # the one door that stayed shut
-    d = bottom_shade(d, 0.55, 0.8)
-    # bottom-left, two lines: clear of the circled door and of YouTube's duration badge (bottom-right)
-    text(d, [('EVERY DOOR', WHITE), ('OPENED...', RED)], 34, 452, 118, 720, gap=-2)
-    d.save(OUT / 'thumbnail_D_every_door.jpg', quality=92)
-    # E - WHO'S THERE?: from inside, only the light under her door and the shadows of two feet
-    e = lift(art('under'), gamma=0.72, contrast=1.15, color=1.25)
-    e = glow(e, (280, 430, 1080, 720), 1.25)
-    text(e, [("WHO'S THERE?", WHITE)], centered(e, "WHO'S THERE?", 150), 70, 150, 1200)
-    e.save(OUT / 'thumbnail_E_whos_there.jpg', quality=92)
-    # F - DON'T MAKE A SOUND: the neighbours from behind, facing the black stairwell; Mr. Harris turns back - "shh"
-    f = lift(art('shh'), gamma=0.86)
-    f = bottom_shade(f, 0.55, 0.8)
-    text(f, [("DON'T MAKE", WHITE), ('A SOUND', RED)], 34, 476, 112, 640, gap=-2)
-    f.save(OUT / 'thumbnail_F_dont_make_a_sound.jpg', quality=92)
-    print('youtube/thumbnail_D_every_door.jpg, thumbnail_E_whos_there.jpg, thumbnail_F_dont_make_a_sound.jpg')
+    # A - COUNT THEM: the trailer bench at night; one more at the end, face lost in shadow (circled)
+    a = lift(art('count'), gamma=0.8)
+    red_circle(a, 1085, 410, 100, 200, width=10)
+    text(a, [('COUNT THEM', WHITE)], 40, 40, 128, 760)
+    a.save(OUT / 'thumbnail_A_count_them.jpg', quality=92)
+    # B - DON'T TURN AROUND: the flashlight finds a man in the trees, his back to us
+    b = lift(art('facing'), gamma=0.8)
+    text(b, [("DON'T", WHITE), ('TURN', WHITE), ('AROUND', RED)], 40, 150, 136, 520, gap=-6)
+    b.save(OUT / 'thumbnail_B_facing_away.jpg', quality=92)
+    # C - WHO ATE IT?: one hot dog left; a grey hand with too-long fingers reaching for it
+    c = lift(art('plate'), gamma=0.8)
+    text(c, [('WHO ATE IT?', WHITE)], centered(c, 'WHO ATE IT?', 140), 36, 140, 1200)
+    c.save(OUT / 'thumbnail_C_twelve.jpg', quality=92)
+    print('youtube/thumbnail_A_count_them.jpg, thumbnail_B_facing_away.jpg, thumbnail_C_twelve.jpg')
 
 
 if __name__ == '__main__':

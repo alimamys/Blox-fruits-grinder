@@ -51,7 +51,7 @@ const alternatives = ['Something Ate Dinner With Us in the Woods | Animated Horr
 const thumbnails = [
 	'MYSTERY SET (shows nothing of what happens - upload these three to Test & Compare in YouTube Studio):',
 	'thumbnail_A_count_them.jpg - the trailer packed with teenagers at night; one face at the end of the bench lost in shadow (circled) - "COUNT THEM"',
-	'thumbnail_B_facing_away.jpg - a flashlight beam in black woods finds a man standing still with his back turned - "DON\'T LOOK BACK"',
+	'thumbnail_B_facing_away.jpg - a flashlight beam in black woods finds a man standing still with his back turned - "DON\'T TURN AROUND"',
 	'thumbnail_C_twelve.jpg - a paper plate with one hot dog; a grey hand with too-long fingers reaching for it - "WHO ATE IT?"',
 ];
 const pinned = 'Be honest - would YOU have noticed the extra one? How many people were really in that trailer?';
