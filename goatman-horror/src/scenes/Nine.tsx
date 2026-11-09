@@ -30,10 +30,10 @@ export const Nine: React.FC = () => (
 	<Shots
 		shots={[
 			shot('n_00_walk', 'walk_out', 'trail', {
-				chars: ['marcus', 'cousins', 'others', 'wyatt'],
+				chars: ['marcus', 'cousins', 'others', 'wyatt', 'adults'],
 				quality: 'medium',
 				mood: 'Early morning on the forest trail: pale grey-gold light, mist between the trunks.',
-				prompt: 'Early morning on the forest trail: the exhausted teenagers - Marcus, Dez, Ray, Tasha, Kayla, Trey - walk up the path in a ragged line with their bags; WYATT trails at the very back with his rifle pointing at the ground, white as a sheet, staring at nobody.',
+				prompt: 'EXACTLY EIGHT people. Early morning on the forest trail: a short ragged line walks up the path with their bags - Marcus, Dez, Ray, Tasha, Kayla, Trey and COLE (red-and-black check flannel, lantern) - and WYATT trails at the very back with his rifle pointing at the ground, white as a sheet, staring at nobody. NOT in this frame: Nia (lavender hoodie, braids), Jada (pink sweatshirt), Andre (red cap, white tee), Jamal (blue jersey). Mr. Dawes is not here.',
 				move: push(1.0, 1.08, 0.5, 0.5),
 			}, {kids: <>
 				<Person who="dez" x={980} y={640} h={200} facing="back" />
@@ -118,7 +118,7 @@ export const Nine: React.FC = () => (
 				chars: ['marcus', 'cousins', 'others', 'thing'],
 				quality: 'medium',
 				mood: 'Morning on the forest trail, mist, pale light.',
-				prompt: 'Morning on the forest trail, seen from behind: the line of teenagers walking away up the path - and at the very BACK of the line, a little apart, one more figure in dark clothes walking with them, head slightly bowed. Nobody has noticed it.',
+				prompt: 'Morning on the forest trail, seen from behind: a SHORT line of about seven people walking away up the path - Marcus (dark-red hoodie), Dez, Ray (yellow T-shirt), Tasha, Kayla, Trey, Cole (red check flannel) - and at the very BACK of the line, a little apart, one more figure in plain dark clothes walking with them, head slightly bowed. Nobody has noticed it. NOT in this frame: Nia (lavender hoodie, braids), Jada (pink sweatshirt), Andre (red cap, white tee), Jamal (blue jersey).',
 				move: push(1.0, 1.08, 0.5, 0.6),
 			}, {kids: <>
 				<Person who="dez" x={980} y={640} h={200} facing="back" />

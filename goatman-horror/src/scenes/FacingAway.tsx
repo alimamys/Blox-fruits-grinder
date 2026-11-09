@@ -158,8 +158,9 @@ export const FacingAway: React.FC = () => (
 				mood: 'Night: the very last orange glow of a campfire behind the camera reaches a few metres up the path, then black.',
 				prompt: 'NOBODY in the foreground. Looking straight up the narrow dirt path into the black woods at night: the faint orange firelight dies a few metres up the path, and right there, in the MIDDLE of the path at the edge of the light, stands a tall, thin, dark human SILHOUETTE, perfectly still, arms hanging a little too long. No face, no detail - only its black shape against the darker woods.',
 				move: push(1.0, 1.12, 0.5, 0.48),
+				grade: 1.6,
 			}, {kids: <Person who="figure" x={960} y={760} h={420} facing="front" />}),
-			again('f_19_out', 'stepped_out', 'f_18_behind', {move: push(1.14, 1.3, 0.56, 0.48)}),
+			again('f_19_out', 'stepped_out', 'f_18_behind', {move: push(1.14, 1.3, 0.5, 0.45), grade: 1.7}),
 		]}
 	/>
 );

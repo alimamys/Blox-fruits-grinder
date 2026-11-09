@@ -56,7 +56,7 @@ export const Seven: React.FC = () => (
 				chars: ['marcus', 'cousins', 'others', 'thing'],
 				quality: 'high',
 				mood: 'Midday in the clearing, flat bright light.',
-				prompt: 'The teenagers who stayed stand in a loose group by the trailer steps in flat midday light: MARCUS, DEZ, RAY, TASHA, KAYLA and TREY, arguing and laughing - and at the right edge of the group, a little apart, ONE MORE person with their face turned away from us, standing too still. Nobody looks at them.',
+				prompt: 'EXACTLY SEVEN people, in a loose row by the trailer steps in flat midday light: MARCUS (dark-red hoodie), DEZ (grey sleeveless top), RAY (mustard T-shirt, round glasses), TASHA (orange tank top), KAYLA (green flannel, ponytail) and TREY (charcoal hoodie, flat-top), arguing and laughing - and at the RIGHT edge, a little apart, ONE MORE person in plain dark clothes with their face turned away from us, standing too still. Nobody looks at them. NOT in this frame: Nia (lavender hoodie, braids), Jada (pink sweatshirt), Andre (red cap, white tee), Jamal (blue jersey). Wyatt is not here either.',
 				move: push(1.02, 1.07, 0.55, 0.55),
 			}, {cam: {z: 1.25, cx: 1050, cy: 640}, kids: <Stayed />}),
 			again('s_04_said', 'narrator_079_at_least', 's_03_seven', {move: push(1.1, 1.2, 0.8, 0.5), grade: 0.9}),
