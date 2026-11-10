@@ -23,6 +23,9 @@ export const WindowFig: React.FC<{arm?: 'wave' | 'none'}> = ({arm = 'none'}) => 
 		<line x1={960} y1={150} x2={960} y2={930} stroke="#e8e6df" strokeWidth={14} />
 		<line x1={640} y1={540} x2={1280} y2={540} stroke="#e8e6df" strokeWidth={14} />
 		<WideFig x={960} y={900} h={520} arm={arm} />
+		{/* the steak knife in his other hand, point down */}
+		<rect x={1036} y={770} width={20} height={60} fill="#5a3a22" />
+		<polygon points="1036,830 1056,830 1048,960" fill="#d8dde2" />
 	</>
 );
 
@@ -76,10 +79,10 @@ export const Wave: React.FC = () => (
 				quality: 'high',
 				dark: true,
 				mood: 'Night outside an upstairs window of the farmhouse: the window glass lit a dim warm amber from a lamp deep inside the room, the white clapboards around it blue-grey in the dark.',
-				prompt: 'An upstairs window of the old farmhouse seen from outside at night, straight on: standing on the inside windowsill behind the glass is MR. WIDEMOUTH - a small cat-sized creature with ash-grey fur, a huge round head, glossy black eyes, crooked ears and a wide closed-mouth smile from ear to ear. He stands perfectly still, arms at his sides, looking straight down at the camera. His LEFT hand hangs low in shadow by his side.',
+				prompt: 'An upstairs window of the old farmhouse seen from outside at night, straight on. MR. WIDEMOUTH - a small cat-sized creature with ash-grey fur, a huge round head, glossy black eyes, crooked ears (the LEFT one bent over at the tip like a folded ear, never cut off flat) and a wide closed-mouth smile from ear to ear - stands INSIDE the dark bedroom on the windowsill, a hand\'s width BEHIND the glass. A dim amber lamp deep in the room behind him rims his fur with warm light, so his shape stands out with depth against the shadowy room behind (wallpaper, the corner of a moving box) - he is clearly a creature in the room, not a picture on the glass; faint reflections of the night sky lie on the glass in front of him. He stands perfectly still, looking straight down at the camera, arms at his sides, and in his LEFT hand (on the RIGHT side of the image) he holds a large kitchen steak knife with a wooden handle, point down, the clean blade catching the lamp light. No blood.',
 				variants: [
-					{name: 'up', prompt: 'Mr. Widemouth has now lifted his RIGHT hand up beside his head, small palm open toward the camera, in a little goodbye wave. His smile and everything else stay exactly the same.'},
-					{name: 'tilt', prompt: 'Mr. Widemouth has lifted his RIGHT hand up beside his head in a little goodbye wave, the small palm tilted the other way, mid-wave. His smile and everything else stay exactly the same.'},
+					{name: 'up', prompt: 'Mr. Widemouth has now lifted his RIGHT hand (on the left side of the image) up beside his head, small palm open toward the camera, in a little goodbye wave. The steak knife stays in his other hand, point down. His smile and everything else stay exactly the same.'},
+					{name: 'tilt', prompt: 'Mr. Widemouth has lifted his RIGHT hand (on the left side of the image) up beside his head in a little goodbye wave, the small palm tilted the other way, mid-wave. The steak knife stays in his other hand, point down. His smile and everything else stay exactly the same.'},
 				],
 				seq: [
 					['base', 0],
@@ -89,7 +92,7 @@ export const Wave: React.FC = () => (
 					['tilt', 0.82],
 					['up', 0.92],
 				],
-				move: push(1.02, 1.12, 0.5, 0.48),
+				move: push(1.32, 1.5, 0.5, 0.37),
 			}, <WindowFig />, {bg: '#0d1220'}),
 			// "In his other hand, he was holding a steak knife."
 			close('w_06_knife', 'narrator_006_knife', {

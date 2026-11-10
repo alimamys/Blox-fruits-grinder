@@ -85,9 +85,9 @@ export const FourAm: React.FC = () => (
 			// "And there he was. In my window."
 			again('f_10_there', 'narrator_073_there_he_was', 'w_03_window', {move: push(1.0, 1.3, 0.64, 0.24)}),
 			// "You already know the rest."
-			again('f_11_rest', 'narrator_074_you_know', 'w_04_still', {move: push(1.0, 1.06, 0.5, 0.48)}),
+			again('f_11_rest', 'narrator_074_you_know', 'w_04_still', {move: push(1.25, 1.34, 0.5, 0.37)}),
 			// "The little wave."
-			again('f_12_wave', 'narrator_075_little_wave', 'w_04_still', {show: 'up', move: push(1.06, 1.14, 0.55, 0.42)}),
+			again('f_12_wave', 'narrator_075_little_wave', 'w_04_still', {show: 'up', move: push(1.45, 1.6, 0.5, 0.35)}),
 			// "The steak knife."
 			again('f_13_knife', 'narrator_076_the_knife', 'w_06_knife', {move: push(1.1, 1.2, 0.5, 0.55)}),
 		]}

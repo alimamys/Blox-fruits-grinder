@@ -392,7 +392,8 @@ const HITS: Record<string, SfxCue[]> = {
 	nights: [hit('bass_hit', 'narrator_056_not_in_bed', 0.0, 0.35), hit('riser_short', 'widemouth_011_almost', -1.2, 0.25), hit('boom_hit', 'widemouth_011_almost', 0.0, 0.5)],
 	trail: [hit('sub_drop', 'widemouth_014_not_ready', 0.5, 0.35)],
 	fourAm: [hit('bass_hit', 'narrator_069_nobody', 0.0, 0.3), hit('boom_hit', 'narrator_073_there_he_was', 0.1, 0.45), hit('sub_drop', 'narrator_076_the_knife', 0.2, 0.35)],
-	end: [hit('boom_hit', 'narrator_084_children', 0.1, 0.45), hit('boom_hit', 'cut_black_end', 0.0, 0.4), hit('riser_short', 'last_look', -1.6, 0.2), hit('boom_hit', 'last_look', 0.0, 0.5)],
+	// the cut to the son is quiet on purpose: no boom, just the black - the story carries it
+	end: [hit('boom_hit', 'narrator_084_children', 0.1, 0.4), hit('sub_drop', 'last_look', 0.0, 0.18)],
 };
 
 // ---------------------------------------------------------------------------

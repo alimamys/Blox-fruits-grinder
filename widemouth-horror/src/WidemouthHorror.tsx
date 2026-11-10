@@ -41,7 +41,9 @@ const GlobalFx: React.FC<{end: number}> = ({end}) => {
 
 export const WidemouthHorror: React.FC<VideoSettings> = (settings) => {
 	const tl = settings.edit === 'full' ? TIMELINE_FULL : TIMELINE;
-	const endScene = tl.scenes[tl.scenes.length - 1];
+	// Subtitles and grain run to the very end. (The earlier films stopped them at their last scene, a silent
+	// black hold - here the last scene is the whole present-day ending, so they must not stop.)
+	const fxEnd = tl.totalFrames;
 	return (
 		<SettingsProvider value={settings}>
 			<AbsoluteFill style={{background: '#000'}}>
@@ -58,8 +60,8 @@ export const WidemouthHorror: React.FC<VideoSettings> = (settings) => {
 						</Sequence>
 					);
 				})}
-				<GlobalFx end={endScene.startFrame} />
-				{settings.subtitles !== false ? <Subtitles timeline={tl} until={endScene.startFrame} /> : null}
+				<GlobalFx end={fxEnd} />
+				{settings.subtitles !== false ? <Subtitles timeline={tl} until={fxEnd} /> : null}
 				{settings.audio ? <AudioLayer timeline={tl} /> : null}
 			</AbsoluteFill>
 		</SettingsProvider>

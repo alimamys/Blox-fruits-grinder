@@ -15,6 +15,7 @@ No image-model call, no cost. The lip lines were measured on gridded crops of ea
 """
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -80,12 +81,18 @@ def open_mouth(img: np.ndarray, pts, A: float, k: float, down: float, up: float,
 
 def main(names: list[str]) -> int:
     for shot in names or list(MOUTHS):
-        g = MOUTHS[shot]
+        g = dict(MOUTHS[shot])
+        warp = ROOT / 'build' / 'pov_fix' / f'{shot}_warp.json'
+        if warp.exists():
+            # the frame's background was repainted (scripts/images/fix_pov.py) and he moved a little with it
+            M = np.array(json.loads(warp.read_text()), np.float32)
+            g['pts'] = [tuple((M[:, :2] @ np.array(p, np.float32) + M[:, 2]).tolist()) for p in g['pts']]
+            g['A'] = g['A'] * float(np.sqrt(abs(np.linalg.det(M[:, :2]))))
         base = np.asarray(Image.open(OUT / f'{shot}_k1.jpg').convert('RGB'))
         for amount, suffix in ((0.5, '_talk_half'), (1.0, '_talk')):
             im = open_mouth(base, g['pts'], g['A'], g['k'], g['down'], g['up'], amount)
             Image.fromarray(im).save(OUT / f'{shot}_k1{suffix}.jpg', quality=93)
-        print(f'  {shot}: mouth opened along {g["pts"][-1][0] - g["pts"][0][0]} px (full {g["A"]} px, half {g["A"] / 2:.0f} px)')
+        print(f'  {shot}: mouth opened along {g["pts"][-1][0] - g["pts"][0][0]:.0f} px (full {g["A"]:.0f} px, half {g["A"] / 2:.0f} px)')
     return 0
 
 
