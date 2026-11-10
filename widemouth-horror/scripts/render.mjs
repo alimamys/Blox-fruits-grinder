@@ -29,7 +29,8 @@ const segArg = args.find((a) => a.startsWith('--segments='));
 const segments = Math.max(1, parseInt(segArg ? segArg.split('=')[1] : '6', 10) || 6);
 const comp = full ? 'WidemouthHorrorFull' : 'WidemouthHorror';
 const base = full ? 'widemouth_full' : 'widemouth';
-const extra = args.filter((a) => !['--full', '--audio-only'].includes(a) && !a.startsWith('--segments='));
+const keepParts = args.includes('--keep-parts'); // targeted re-render: keep finished segments, delete the stale part_NNN.*.done by hand
+const extra = args.filter((a) => !['--full', '--audio-only', '--keep-parts'].includes(a) && !a.startsWith('--segments='));
 const outDir = path.join(root, 'out');
 const partsDir = path.join(outDir, `.parts-${base}${audioOnly ? '-audio' : ''}`);
 const bundleDir = path.join(root, 'build', 'bundle');
@@ -76,7 +77,7 @@ listPublic(path.join(root, 'public'));
 hash.update(JSON.stringify({comp, audioOnly, segments, extra}));
 const fingerprint = hash.digest('hex').slice(0, 16);
 const stampFile = path.join(partsDir, 'fingerprint');
-if (!fs.existsSync(stampFile) || fs.readFileSync(stampFile, 'utf8') !== fingerprint) {
+if (!keepParts && (!fs.existsSync(stampFile) || fs.readFileSync(stampFile, 'utf8') !== fingerprint)) {
 	fs.rmSync(partsDir, {recursive: true, force: true});
 	fs.mkdirSync(partsDir, {recursive: true});
 	fs.writeFileSync(stampFile, fingerprint);
@@ -144,5 +145,5 @@ if (audioOnly) {
 } else {
 	ff(['-hide_banner', '-y', ...input, '-c:v', 'copy', '-af', filter, '-c:a', 'aac', '-b:a', '256k', '-video_track_timescale', '24000', '-movflags', '+faststart', final]);
 }
-fs.rmSync(partsDir, {recursive: true, force: true});
+if (!keepParts) fs.rmSync(partsDir, {recursive: true, force: true});
 console.log(`\nDone -> ${final}`);

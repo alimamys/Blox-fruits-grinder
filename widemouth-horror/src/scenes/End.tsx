@@ -37,12 +37,11 @@ export const End: React.FC = () => (
 			// "Part of me expected him to jump out from behind a tree..."
 			close('e_03_walk', 'narrator_080_expected', {
 				chars: ['adult'],
-				loc: 'woods',
 				quality: 'high',
 				blink: true,
 				mood: MOOD.trail,
-				prompt: 'ADULT ELI walking slowly along the leaf-covered deer trail deep in the grey woods, seen from the front, his eyes searching the tree trunks on either side, tense and wary, hands in his jacket pockets. ONLY adult Eli.',
-				move: {z0: 1.45, z1: 1.52, x0: 0.62, y0: 0.45, x1: 0.63, y1: 0.4}, // crop out the old porch
+				prompt: 'Deep in the woods, far from any house: ADULT ELI walking slowly along a narrow leaf-covered deer trail between bare birches and dark pines, seen from the front, his eyes searching the tree trunks on either side, tense and wary, hands in his jacket pockets. ONLY adult Eli. NO buildings, NO porch, NO steps, NO structures anywhere - only trees, dead leaves and the trail.',
+				move: push(1.02, 1.08, 0.5, 0.4),
 			}, <>
 				<rect x={0} y={0} width={1920} height={1080} fill="#3a3a2a" />
 				<Person who="eliAdult" x={960} y={1500} h={1200} facing="front" />
