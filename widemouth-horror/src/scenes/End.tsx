@@ -32,7 +32,7 @@ export const End: React.FC = () => (
 				quality: 'medium',
 				mood: MOOD.present,
 				prompt: 'The edge of the woods, twenty-five years later, no house any more: ADULT ELI stands with his back to us in the dry autumn grass, facing the narrow deer trail that still disappears between the bare birches and pines. ONLY adult Eli.',
-				move: push(1.0, 1.1, 0.6, 0.5),
+				move: {z0: 1.55, z1: 1.62, x0: 0.66, y0: 0.5, x1: 0.68, y1: 0.48}, // crop out the old porch (the house is gone)
 			}, {cam: {z: 1.3, cx: 1200, cy: 600}, kids: <Person who="eliAdult" x={1050} y={860} h={380} facing="back" />}),
 			// "Part of me expected him to jump out from behind a tree..."
 			close('e_03_walk', 'narrator_080_expected', {
@@ -42,13 +42,13 @@ export const End: React.FC = () => (
 				blink: true,
 				mood: MOOD.trail,
 				prompt: 'ADULT ELI walking slowly along the leaf-covered deer trail deep in the grey woods, seen from the front, his eyes searching the tree trunks on either side, tense and wary, hands in his jacket pockets. ONLY adult Eli.',
-				move: push(1.02, 1.08, 0.5, 0.4),
+				move: {z0: 1.45, z1: 1.52, x0: 0.62, y0: 0.45, x1: 0.63, y1: 0.4}, // crop out the old porch
 			}, <>
 				<rect x={0} y={0} width={1920} height={1080} fill="#3a3a2a" />
 				<Person who="eliAdult" x={960} y={1500} h={1200} facing="front" />
 			</>),
 			// "The trail went deeper into the woods than I remembered."
-			again('e_04_deeper', 'narrator_081_deeper', 'r_08_trail', {move: push(1.14, 1.3, 0.6, 0.5), grade: 0.8}),
+			again('e_04_deeper', 'narrator_081_deeper', 'r_08_trail', {move: push(1.6, 1.78, 0.68, 0.5), grade: 0.8}), // tight: no porch
 			// "It ended at a cemetery."
 			shot('e_05_cemetery', 'narrator_082_cemetery', 'cemetery', {
 				chars: ['adult'],

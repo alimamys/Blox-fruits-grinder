@@ -22,7 +22,7 @@ export const Nights: React.FC = () => (
 					['base', 0],
 					['open', 0.55],
 				],
-				move: push(1.03, 1.1, 0.55, 0.45),
+				move: push(1.7, 1.85, 0.3, 0.33), // tight on his face so the eyes opening read
 			}, <>
 				<rect x={0} y={0} width={1920} height={1080} fill="#0f1626" />
 				<ellipse cx={960} cy={760} rx={900} ry={240} fill="#c8ccd4" />
@@ -125,9 +125,9 @@ export const Nights: React.FC = () => (
 				quality: 'medium',
 				dark: true,
 				mood: MOOD.bedNight,
-				prompt: 'Eli\'s bed at night: a small trembling lump under the patchwork quilt pulled completely over his head, not a hair showing, the white bed skirt hanging to the floor below. Cold blue moonlight.',
+				prompt: 'Eli\'s bed at night, seen from the side: little ELI is hiding COMPLETELY under the patchwork quilt, pulled right over his head - the quilt bulges clearly over a small curled-up child-sized body from the pillow to the knees, one small hand clutching its edge from inside, a few strands of light-brown hair at the top. The white bed skirt hangs to the floor below. Cold blue moonlight.',
 				fx: 'tremble',
-				move: push(1.02, 1.1, 0.3, 0.5),
+				move: push(1.3, 1.45, 0.42, 0.38),
 			}, {cam: {z: 1.6, cx: 520, cy: 560}, kids: <rect x={300} y={450} width={500} height={110} rx={50} fill="#9a6a5a" />}),
 		]}
 	/>
