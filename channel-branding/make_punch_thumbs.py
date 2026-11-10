@@ -144,8 +144,94 @@ LAYOUT = {
     # her face is top-centre and the feet are at the bottom: the words go on the dark wall above the lamp
     'door306': dict(text=['ALL OF', 'THEM.'], font='black', xy=(40, 28), max_w=440, fill=(255, 255, 255), glow=(255, 40, 40)),
     'goatman': dict(text='WHO IS HE?', font='black_i', xy=(0, 26), max_w=1140, fill=(255, 236, 190), glow=(255, 120, 20), align='center'),
-    'widemouth': dict(text='HELLO AGAIN.', font='serif', xy=(0, 22), max_w=1160, fill=(244, 238, 222), glow=(40, 110, 255), align='center'),
+    'widemouth': dict(text='HELLO AGAIN.', font='serif', xy=(0, 14), max_w=1020, fill=(244, 238, 222), glow=(40, 110, 255), align='center'),
 }
+
+
+# ---------------------------------------------------------------------------
+# v4 "bright": a strong grade, glowing light sources, backlights and glowing / sparkling eyes
+# (positions in 1280x720 thumbnail pixels, measured on a gridded copy of each artwork)
+# ---------------------------------------------------------------------------
+import cv2  # noqa: E402
+
+FX = {
+    'frame240': dict(halos=[((1170, 110), 330, (60, 190, 255), 0.75), ((150, 360), 420, (70, 160, 255), 0.45)],
+                     sparkle=[((860, 213), 7), ((980, 213), 7)], glow_eyes=[]),
+    'door306': dict(halos=[((690, 230), 300, (80, 255, 120), 0.45), ((160, 500), 260, (255, 40, 30), 0.55),
+                           ((710, 690), 380, (140, 255, 60), 0.6)],
+                    sparkle=[((671, 52), 3), ((705, 52), 3)], glow_eyes=[]),
+    'goatman': dict(halos=[((520, 330), 430, (255, 150, 40), 0.55), ((220, 133), 160, (170, 200, 255), 0.6)],
+                    sparkle=[], glow_eyes=[((772, 297), 4, (255, 60, 40)), ((787, 301), 4, (255, 60, 40))]),
+    'widemouth': dict(halos=[((520, 110), 330, (60, 150, 255), 0.65), ((1040, 613), 260, (70, 140, 255), 0.6),
+                             ((820, 470), 300, (140, 200, 255), 0.35)],
+                      sparkle=[((428, 160), 4), ((484, 169), 4)],
+                      glow_eyes=[((747, 453), 22, (170, 220, 255)), ((900, 453), 22, (170, 220, 255))]),
+}
+
+
+def grade(im: Image.Image) -> Image.Image:
+    """Much brighter exposure, more contrast (globally and locally) and saturation."""
+    a = np.asarray(im).astype(np.float32) / 255
+    a = a ** 0.72                                     # exposure: lift the darks and mids
+    a = np.clip(0.5 + (a - 0.5) * 1.22, 0, 1)         # contrast
+    lab = cv2.cvtColor((a * 255).astype(np.uint8), cv2.COLOR_RGB2LAB)
+    lab[..., 0] = cv2.createCLAHE(clipLimit=2.2, tileGridSize=(8, 8)).apply(lab[..., 0])  # local contrast
+    im = Image.fromarray(cv2.cvtColor(lab, cv2.COLOR_LAB2RGB))
+    return ImageEnhance.Color(im).enhance(1.45)       # saturation
+
+
+def add_light(a: np.ndarray, layer: np.ndarray) -> np.ndarray:
+    """Screen blend: light adds without blowing everything to white."""
+    return 1 - (1 - a) * (1 - np.clip(layer, 0, 1))
+
+
+def bloom(a: np.ndarray, thr=0.72, sigma=28, k=0.9) -> np.ndarray:
+    lum = a.max(axis=2, keepdims=True)
+    hi = a * np.clip((lum - thr) / (1 - thr), 0, 1)
+    return add_light(a, cv2.GaussianBlur(hi, (0, 0), sigma) * k)
+
+
+def halo(a, c, r, col, k):
+    yy, xx = np.indices(a.shape[:2])
+    d = np.sqrt((xx - c[0]) ** 2 + (yy - c[1]) ** 2) / r
+    g = np.clip(1 - d, 0, 1) ** 2
+    return add_light(a, g[..., None] * np.array(col, np.float32)[None, None] / 255 * k)
+
+
+def glow_eye(a, c, r, col):
+    """An eye that gives off light: a hot core and a coloured bloom around it."""
+    yy, xx = np.indices(a.shape[:2])
+    d = np.sqrt((xx - c[0]) ** 2 + (yy - c[1]) ** 2)
+    core = np.clip(1 - d / (r * 0.55), 0, 1)
+    ring = np.exp(-(d / (r * 2.6)) ** 2)
+    col = np.array(col, np.float32) / 255
+    a = add_light(a, ring[..., None] * col * 0.9)
+    return add_light(a, core[..., None] * np.array([1, 1, 1], np.float32))
+
+
+def sparkle(a, c, r):
+    """A bright catchlight that makes a face's eyes read."""
+    yy, xx = np.indices(a.shape[:2])
+    d = np.sqrt((xx - c[0]) ** 2 + (yy - c[1]) ** 2)
+    dot = np.clip(1 - d / r, 0, 1) ** 0.6
+    soft = np.exp(-(d / (r * 4)) ** 2) * 0.35
+    return add_light(a, (dot + soft)[..., None] * np.ones(3, np.float32))
+
+
+def bright(name: str, im: Image.Image) -> Image.Image:
+    fx = FX[name]
+    a = np.asarray(grade(im)).astype(np.float32) / 255
+    a = bloom(a)
+    for c, r, col, k in fx['halos']:
+        a = halo(a, c, r, col, k)
+    for c, r, col in fx['glow_eyes']:
+        a = glow_eye(a, c, r, col)
+    for c, r in fx['sparkle']:
+        a = sparkle(a, c, r)
+    return Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8))
+
+
+BRIGHT = '--v3' not in sys.argv  # v4 (bright) by default; --v3 rebuilds the earlier, darker set
 
 
 def main() -> int:
@@ -159,19 +245,19 @@ def main() -> int:
     for name, L in LAYOUT.items():
         if not (ART / f'{name}.jpg').exists():
             continue
-        im = base(name)
+        im = bright(name, base(name)) if BRIGHT else base(name)
         lines = L['text'] if isinstance(L['text'], list) else [L['text']]
         x, y = L['xy']
         for ln in lines:
             im = punch(im, ln, L['font'], (x, y), L['max_w'], L['fill'], L['glow'], align=L.get('align', 'left'))
             y += 128
-        out = OUT / f'{name}_thumbnail_v3.jpg'
+        out = OUT / f'{name}_thumbnail_{"v4" if BRIGHT else "v3"}.jpg'
         im.save(out, quality=93)
         made.append(im)
     S = Image.new('RGB', (W, H), (0, 0, 0))
     for k, im in enumerate(made):
         S.paste(im.resize((W // 2, H // 2), Image.LANCZOS), ((k % 2) * W // 2, (k // 2) * H // 2))
-    S.save(OUT / 'preview_all.jpg', quality=88)
+    S.save(OUT / ('preview_all_v4.jpg' if BRIGHT else 'preview_all.jpg'), quality=88)
     print(f'{len(made)} thumbnails -> punch/')
     return 0
 
