@@ -753,8 +753,8 @@ def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac
     v = np.asarray(var.convert('RGB').resize(base.size, Image.LANCZOS)).astype(np.float32)
     if not eyes_only:
         # darker frames, lower threshold: a whole arm moving at night is dark-on-dark and stays under
-        # the daylight threshold (20 at mean brightness 90+, down to 7 for a night frame)
-        thr = thr * float(np.clip(b.mean() / 90.0, 0.35, 1.0))
+        # the daylight threshold (20 at mean brightness 45+, down to ~8 for a night frame)
+        thr = thr * float(np.clip(b.mean() / 45.0, 0.35, 1.0))
     d = cv2.GaussianBlur(np.abs(b - v).mean(axis=2), (0, 0), 4)
     m = (d > thr).astype(np.uint8)
     m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
