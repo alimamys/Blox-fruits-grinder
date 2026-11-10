@@ -1,10 +1,11 @@
-SHORTS - UPLOAD PLAN (one per day, never on the same day as a long video)
+SHORTS - UPLOAD PLAN (at most one Short a day; a Short on the same day as a long video is fine)
 =========================================================================
 
 WHEN
-- Tue 11 Nov  ->  short_A_widemouth_wave.mp4
-- Wed 12 Nov  ->  short_B_camping_hotdogs.mp4
-- Thu 13 Nov  ->  short_C_widemouth_son.mp4   (it shows the film's ending - post it last)
+- Mon 10 Nov (today, same day as the Widemouth long video) ->  short_A_widemouth_wave.mp4
+- Tue 11 Nov  ->  short_B_camping_hotdogs.mp4
+- Thu 13 Nov  ->  short_C_widemouth_son.mp4   (it shows the film's ending - post it last, a day apart from A)
+- Avoid: two Shorts on the same day, or two Shorts from the same film on consecutive days.
 - Time of day: YouTube Studio > Analytics > Audience > "When your viewers are on YouTube" - schedule
   each one for the start of the darkest block. If that card is empty: 6 PM New York time
   (that is 3 AM in the UAE - use Studio's Schedule button so you don't have to be awake).
