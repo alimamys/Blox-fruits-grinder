@@ -1,0 +1,37 @@
+SHORTS - UPLOAD PLAN (one per day, never on the same day as a long video)
+=========================================================================
+
+WHEN
+- Tue 11 Nov  ->  short_A_widemouth_wave.mp4
+- Wed 12 Nov  ->  short_B_camping_hotdogs.mp4
+- Thu 13 Nov  ->  short_C_widemouth_son.mp4   (it shows the film's ending - post it last)
+- Time of day: YouTube Studio > Analytics > Audience > "When your viewers are on YouTube" - schedule
+  each one for the start of the darkest block. If that card is empty: 6 PM New York time
+  (that is 3 AM in the UAE - use Studio's Schedule button so you don't have to be awake).
+- No new long video before Mon 17 Nov. Then one long video a week, with 2-3 Shorts from it on the
+  following days.
+
+FOR EACH SHORT
+- Upload as a Short (vertical, under 60 s - all three are).
+- "Related video": pick the long film it comes from. This puts a tappable link to the full film on the
+  Short - much better than "see the full video in my profile".
+- Audience: "No, it's not made for kids".
+
+A  short_A_widemouth_wave.mp4  (41 s)
+   Title:        He Waved Goodbye From My Window. He Had a Knife.
+   Description:  He was my best friend for two weeks. Full story: the related video below. #horror #shorts
+   Related:      My Imaginary Friend Lived Under My Bed
+
+B  short_B_camping_hotdogs.mp4  (45 s)
+   Title:        There Were 11 of Us. 12 Hot Dogs Were Gone.
+   Description:  Something ate dinner with us at camp. Full story: the related video below. #creepypasta #shorts
+   Related:      11 of Us Went Camping. 12 Came Back.
+
+C  short_C_widemouth_son.mp4  (32 s)
+   Title:        My Son's New Friend Lives Under His Bed
+   Description:  I asked him who told him about trampolines. Full story: the related video below. #scarystories #shorts
+   Related:      My Imaginary Friend Lived Under My Bed
+
+CHECK AFTER 48 HOURS (Studio > the Short > Analytics)
+- "Viewed vs swiped away": above 70 % viewed is good. If most people swipe in the first second,
+  tell me and I'll re-cut it to open on a stronger frame.
