@@ -343,8 +343,10 @@ export const SCENES: SceneDef[] = [
 			'narrator_089_who_told',
 			'leo_001_new_friend',
 			'leo_002_under_bed',
-			b('last_look', 3.2, 'under Leo\'s bed: the eyes and the grin'),
-			b('credit', 4.6, 'black; the credit for the original story'),
+			b('last_look', 1.2, 'under Leo\'s bed: the eyes and the grin'),
+			'widemouth_015_hello_again',
+			b('last_hold', 1.6, 'hold on the grin as the music box runs down'),
+			b('credit', 5.0, 'black; the credit for the original story, the music box winding down'),
 		],
 		tail: 0.6,
 		beds: {wind: 0.08, truck: 0, drone: 0},
@@ -356,12 +358,16 @@ export const SCENES: SceneDef[] = [
 			{at: 'cut_black_end', fade: 0.05, set: {wind: 0, drone: 0, tension: 0}},
 			{at: 'narrator_087_son_five', fade: 1.0, set: {house: 0.03}},
 			{at: 'leo_001_new_friend', fade: 0.6, set: {musicbox: 0.06}},
-			{at: 'last_look', fade: 0.3, set: {musicbox: 0.02, drone: 0.05}},
-			{at: 'credit', offset: 1.0, fade: 3.0, set: {musicbox: 0, house: 0, drone: 0}},
+			{at: 'last_look', fade: 0.4, set: {musicbox: 0.075, drone: 0.05}},
+			{at: 'widemouth_015_hello_again', fade: 0.3, set: {musicbox: 0.045}},
+			{at: 'last_hold', fade: 0.5, set: {musicbox: 0}},
+			{at: 'credit', offset: 0.5, fade: 3.5, set: {house: 0, drone: 0}},
 		],
 		sfx: [
 			{sound: 'footsteps_leaves', at: 'narrator_079_found_trail', offset: 0.2, volume: 0.3, maxDuration: 3},
 			{sound: 'crow_caw', at: 'narrator_082_cemetery', offset: 0.8, volume: 0.35},
+			// the theme runs down for the last time, under the hold and the credit card
+			{sound: 'musicbox_winddown', at: 'last_hold', offset: 0.0, volume: 0.45},
 		],
 		overlays: [],
 	},
@@ -386,7 +392,7 @@ const HITS: Record<string, SfxCue[]> = {
 	nights: [hit('bass_hit', 'narrator_056_not_in_bed', 0.0, 0.35), hit('riser_short', 'widemouth_011_almost', -1.2, 0.25), hit('boom_hit', 'widemouth_011_almost', 0.0, 0.5)],
 	trail: [hit('sub_drop', 'widemouth_014_not_ready', 0.5, 0.35)],
 	fourAm: [hit('bass_hit', 'narrator_069_nobody', 0.0, 0.3), hit('boom_hit', 'narrator_073_there_he_was', 0.1, 0.45), hit('sub_drop', 'narrator_076_the_knife', 0.2, 0.35)],
-	end: [hit('boom_hit', 'narrator_084_children', 0.1, 0.45), hit('boom_hit', 'cut_black_end', 0.0, 0.4), hit('riser_short', 'leo_002_under_bed', -1.0, 0.2), hit('boom_hit', 'leo_002_under_bed', 0.2, 0.5)],
+	end: [hit('boom_hit', 'narrator_084_children', 0.1, 0.45), hit('boom_hit', 'cut_black_end', 0.0, 0.4), hit('riser_short', 'last_look', -1.6, 0.2), hit('boom_hit', 'last_look', 0.0, 0.5)],
 };
 
 // ---------------------------------------------------------------------------

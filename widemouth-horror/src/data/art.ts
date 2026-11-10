@@ -65,6 +65,8 @@ export interface Art {
 	seq?: Array<[string, number]>;
 	/** blink: generate an eyes-closed drawing and blink every few seconds */
 	blink?: boolean;
+	/** blink: where the eyes are (0..1 of the frame) when the face is small, so the merge ignores changes elsewhere */
+	eyes?: [number, number];
 	/** doors: a doors-open drawing; doors swing open one after another from `start` (fraction) */
 	doors?: {prompt: string; start?: number; stagger?: number; swing?: number; loose?: boolean; close?: boolean};
 	/** the frame is seen through the peephole (fisheye + round vignette) */

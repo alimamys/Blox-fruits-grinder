@@ -1,5 +1,5 @@
 {
- "total": 618.9166666666666,
+ "total": 622.6666666666666,
  "scenes": [
   {
    "id": "wave",
@@ -97,11 +97,12 @@
    "id": "end",
    "name": "The end of the trail",
    "start": 543.042,
-   "duration": 75.875,
+   "duration": 79.625,
    "narrationText": "Twenty-five years later, I drove back. The house was gone. It had burned down a few years after we left. Only the stone foundation was still there, half buried in weeds. I found the deer trail. Part of me expected him to jump out from behind a tree. But I knew he was gone. Somehow, he had belonged to that house. The trail went deeper into the woods than I remembered. It ended at a cemetery. Rows and rows of small, old headstones. Most of them belonged to children. He'd told me I wasn't ready. Every one of them had been ready. Last week, my son turned five. This morning, he asked me if we could get a trampoline. I asked him who told him about trampolines.",
    "dialogueIds": [
     "leo_001_new_friend",
-    "leo_002_under_bed"
+    "leo_002_under_bed",
+    "widemouth_015_hello_again"
    ]
   }
  ]

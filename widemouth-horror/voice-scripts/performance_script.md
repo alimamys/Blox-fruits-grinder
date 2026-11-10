@@ -376,3 +376,6 @@ Use it for human voice actors or as a reference when re-voicing with another pro
 
 **LEO (5)** — "The one who lives under my bed."  
 <sub>`leo/leo_002_under_bed.wav` · casual · intensity 0.40 · pace 1.00 · fear 0 · fx room</sub>  
+
+**MR. WIDEMOUTH** — "Hello again, Eli."  
+<sub>`widemouth/widemouth_015_hello_again.wav` · warm · intensity 0.40 · pace 1.00 · fear 0 · fx room</sub>  

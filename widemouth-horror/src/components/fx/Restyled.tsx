@@ -16,7 +16,7 @@ import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
 import manifest from '../../data/generated/restyle.json';
 import type {Art} from '../../data/art';
-import {envelopeAt} from '../../data/speech';
+import {envelopeAt, wordsOf} from '../../data/speech';
 import {FPS, type SceneTiming} from '../../data/timeline';
 import {h01} from '../../utils/rough';
 
@@ -33,15 +33,36 @@ export const restyleSrc = (id: string, k = 0): string | null => SHOTS[id]?.frame
 const XFADE = 5; // frames, between keyframes
 const DRAW_FADE = 0; // drawings change on a clean cut (no dissolve: blended drawings ghost)
 
-/** Is any of `lines` loud at absolute time t? (smoothed over two frames so a mouth never pops for one frame) */
+const syllables = (w: string) => Math.max(1, (w.toLowerCase().replace(/[^a-z]/g, '').match(/[aeiouy]+/g) ?? []).length);
+
+/**
+ * Is the mouth open at absolute time t? Talking animation on twos, like TV animation: the mouth
+ * opens once per syllable (from the measured word timings), for the middle ~60 % of it, and stays
+ * shut between words and through pauses. A word's syllables are never shorter than 0.2 s, so the
+ * mouth never pops open for a single frame; a quiet stretch inside a word (a whisper tail, a pause
+ * the aligner swallowed) keeps it shut. Without word timings it falls back to the loudness.
+ */
 const speaking = (scene: SceneTiming, lines: string[], t: number) => {
+	const tq = (Math.floor((t * FPS) / 2) * 2) / FPS; // on twos
 	for (const id of lines) {
 		const m = scene.markers[id];
-		if (!m || t < m.start || t >= m.end) continue;
-		const a = envelopeAt(id, t - m.start);
-		const b = envelopeAt(id, Math.max(0, t - m.start - 1 / FPS));
-		const e = a === null ? 0.5 + 0.5 * Math.sin(t * 19) : (a + (b ?? a)) / 2;
-		if (e > 0.24) return true;
+		if (!m || tq < m.start || tq >= m.end) continue;
+		const lt = tq - m.start;
+		const words = wordsOf(id);
+		if (!words.length) {
+			const e = envelopeAt(id, lt);
+			return e === null ? Math.sin(lt * 19) > 0 : e > 0.24;
+		}
+		for (const [w, a, b] of words) {
+			if (lt < a || lt >= b) continue;
+			const e = envelopeAt(id, lt);
+			if (e !== null && e < 0.1) return false;
+			const n = Math.max(1, Math.min(syllables(w), Math.floor((b - a) / 0.2)));
+			const sd = (b - a) / n;
+			const ph = ((lt - a) % sd) / sd;
+			return ph >= 0.12 && ph < 0.72;
+		}
+		return false;
 	}
 	return false;
 };

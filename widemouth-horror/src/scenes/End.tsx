@@ -39,6 +39,7 @@ export const End: React.FC = () => (
 				chars: ['adult'],
 				quality: 'high',
 				blink: true,
+				eyes: [0.51, 0.09],
 				mood: MOOD.trail,
 				prompt: 'Deep in the woods, far from any house: ADULT ELI walking slowly along a narrow leaf-covered deer trail between bare birches and dark pines, seen from the front, his eyes searching the tree trunks on either side, tense and wary, hands in his jacket pockets. ONLY adult Eli. NO buildings, NO porch, NO steps, NO structures anywhere - only trees, dead leaves and the trail.',
 				move: push(1.02, 1.08, 0.5, 0.4),

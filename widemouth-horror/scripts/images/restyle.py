@@ -639,6 +639,13 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
 # ---------------------------------------------------------------------------
 # mouth-open variants (lip sync): only the mouth region is taken from the variant
 # ---------------------------------------------------------------------------
+CREATURE_MOUTH_PROMPT = (
+    'Edit this image: the small grey furry creature is talking. Change ONLY his mouth: his long, thin, ear-to-ear mouth opens a '
+    'little along its WHOLE width - the same wide curved line parts into a narrow dark gap with a hint of small teeth at top and '
+    'bottom, as if mid-word. It stays ONE wide mouth in the same place: do NOT add a second, smaller or rounder mouth. Do not change '
+    'anything else at all - same eyes, fur, ears, body, background, framing, light and colours, pixel for pixel.'
+)
+
 MOUTH_PROMPT = (
     'Edit this image: the person in the middle of the frame is talking. Change ONLY their mouth: open it slightly, mid-word, a small '
     'natural opening with the teeth barely visible. Do not change anything else at all - same face, eyes, expression, hair, clothes, '
@@ -703,9 +710,10 @@ def cmd_mouths(only: set | None) -> None:
             continue
         base = Image.open(base_p).convert('RGB')
         imgs = [png_bytes(frame_canvas(base))]
-        h = hashlib.sha1(imgs[0] + MOUTH_PROMPT.encode()).hexdigest()
+        prompt = CREATURE_MOUTH_PROMPT if 'widemouth' in ((p.get('art') or {}).get('chars') or []) else MOUTH_PROMPT
+        h = hashlib.sha1(imgs[0] + prompt.encode()).hexdigest()
         if not (raw.exists() and cache_get().get('mouth_' + raw.name) == h):
-            var = uncanvas(openai_edit(imgs, MOUTH_PROMPT, 'mouth', out.name))
+            var = uncanvas(openai_edit(imgs, prompt, 'mouth', out.name))
             raw.parent.mkdir(parents=True, exist_ok=True)
             var.save(raw, quality=95)
             cache_put('mouth_' + raw.name, h)
@@ -743,7 +751,7 @@ def edit_request(base: Image.Image, chars: list, body: str) -> tuple[list[bytes]
     return imgs, f'{intro}\n\n{EDIT_RULE}{body}'
 
 
-def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac: float = 0.00012, eyes_only: bool = False) -> tuple[Image.Image, np.ndarray, float]:
+def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac: float = 0.00012, eyes_only: bool = False, eyes_at: tuple[float, float] | None = None) -> tuple[Image.Image, np.ndarray, float]:
     """Keep the base frame and take from the variant only what really changed (so the
     background never boils between drawings). Returns merged image, mask (0/1) and the
     changed fraction of the frame."""
@@ -756,21 +764,36 @@ def merge_variant(base: Image.Image, var: Image.Image, thr: float = 20, min_frac
         # the daylight threshold (20 at mean brightness 45+, down to ~8 for a night frame)
         thr = thr * float(np.clip(b.mean() / 45.0, 0.35, 1.0))
     d = cv2.GaussianBlur(np.abs(b - v).mean(axis=2), (0, 0), 4)
-    m = (d > thr).astype(np.uint8)
-    m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
-    n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
-    keep = np.zeros_like(m)
-    area_min = min_frac * m.size
-    comps = [c for c in range(1, n) if st[c, cv2.CC_STAT_AREA] >= area_min]
-    if eyes_only and comps:
-        # a blink: keep only the eye pair - the strongest change and anything level with it
-        H, W = m.shape
-        score = {c: st[c, cv2.CC_STAT_AREA] * float(d[lab == c].mean()) for c in comps}
-        top = max(comps, key=lambda c: score[c])
-        ty = st[top, cv2.CC_STAT_TOP] + st[top, cv2.CC_STAT_HEIGHT] / 2
-        tx = st[top, cv2.CC_STAT_LEFT] + st[top, cv2.CC_STAT_WIDTH] / 2
-        comps = [c for c in comps if abs(st[c, cv2.CC_STAT_TOP] + st[c, cv2.CC_STAT_HEIGHT] / 2 - ty) < 0.035 * H
-                 and abs(st[c, cv2.CC_STAT_LEFT] + st[c, cv2.CC_STAT_WIDTH] / 2 - tx) < 0.2 * W and st[c, cv2.CC_STAT_HEIGHT] < 0.12 * H]
+    if eyes_only and eyes_at:
+        # the shot says where the eyes are (art.eyes): ignore changes anywhere else (leaves, fabric boil)
+        H0, W0 = d.shape
+        ex, ey = int(eyes_at[0] * W0), int(eyes_at[1] * H0)
+        win = np.zeros_like(d)
+        win[max(0, ey - int(0.09 * H0)):ey + int(0.09 * H0), max(0, ex - int(0.1 * W0)):ex + int(0.1 * W0)] = 1
+        d = d * win
+    # a blink must close BOTH eyes: if only one eye passes the threshold (a tilted head, one eye in
+    # shadow), look again at a lower threshold for its partner before giving up
+    for t in ((thr, thr * 0.6, thr * 0.4) if eyes_only else (thr,)):
+        m = (d > t).astype(np.uint8)
+        m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
+        n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
+        keep = np.zeros_like(m)
+        area_min = min_frac * m.size
+        comps = [c for c in range(1, n) if st[c, cv2.CC_STAT_AREA] >= area_min]
+        if eyes_only and comps:
+            # a blink: keep only the eye pair - the strongest change and the other eye beside it. The
+            # head can be tilted (lying on a pillow, looking aside), so the second eye may sit a good
+            # way higher or lower than the first.
+            H, W = m.shape
+            score = {c: st[c, cv2.CC_STAT_AREA] * float(d[lab == c].mean()) for c in comps}
+            top = max(comps, key=lambda c: score[c])
+            ty = st[top, cv2.CC_STAT_TOP] + st[top, cv2.CC_STAT_HEIGHT] / 2
+            tx = st[top, cv2.CC_STAT_LEFT] + st[top, cv2.CC_STAT_WIDTH] / 2
+            comps = [c for c in comps if abs(st[c, cv2.CC_STAT_TOP] + st[c, cv2.CC_STAT_HEIGHT] / 2 - ty) < 0.09 * H
+                     and abs(st[c, cv2.CC_STAT_LEFT] + st[c, cv2.CC_STAT_WIDTH] / 2 - tx) < 0.25 * W and st[c, cv2.CC_STAT_HEIGHT] < 0.12 * H]
+            xs = [st[c, cv2.CC_STAT_LEFT] + st[c, cv2.CC_STAT_WIDTH] / 2 for c in comps]
+            if max(xs) - min(xs) > 0.015 * W:  # two separate eyes found
+                break
     for c in comps:
         keep[lab == c] = 1
     keep = cv2.morphologyEx(keep, cv2.MORPH_CLOSE, np.ones((25, 25), np.uint8))
@@ -938,7 +961,7 @@ def cmd_anim(only: set | None, workers: int) -> None:
             (OUT / f"{j['p']['id']}_doors.json").write_text(json.dumps(rects))
             row['doors'] = len(rects)
         else:
-            merged, mask, frac = merge_variant(base, var, eyes_only=j['kind'] == 'blink')
+            merged, mask, frac = merge_variant(base, var, eyes_only=j['kind'] == 'blink', eyes_at=((j['p'].get('art') or {}).get('eyes')))
         merged.save(j['out'], quality=92)
         row['changed'] = round(frac, 4)
         flag = '  <- NO CHANGE' if frac < 0.0003 else '  <- REDRAWN (>55% changed), check' if frac > 0.55 else ''

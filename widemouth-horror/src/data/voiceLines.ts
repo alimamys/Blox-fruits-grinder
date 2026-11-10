@@ -225,6 +225,8 @@ const END: VoiceLine[] = [
 	s9.n('narrator_089_who_told', 'I asked him who told him about trampolines.', '[whispering, afraid]', 0.5),
 	s9.l('leo_001_new_friend', 'My new friend. The one with the big smile.', {fishTags: '[happy, chatty]', pauseAfter: 0.5}),
 	s9.l('leo_002_under_bed', 'The one who lives under my bed.', {fishTags: '[whispering, delighted]', pauseAfter: 1.0}),
+	// the last shot: under Leo's bed, the eyes and the grin - and the voice we know
+	s9.w('widemouth_015_hello_again', 'Hello again, Eli.', {fishTags: '[whispering, sweet, pleased, clearly]', pauseAfter: 1.0}),
 ];
 
 export const VOICE_LINES: VoiceLine[] = [...WAVE, ...HOUSE, ...UNDER_BED, ...TRAMPOLINE, ...BOX, ...NIGHTS, ...TRAIL, ...FOUR_AM, ...END];
