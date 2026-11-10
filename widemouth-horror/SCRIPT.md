@@ -342,6 +342,6 @@ LEO (Age 5, happy):
 
 "My new friend. The one with the big smile."
 
-ELI (Narration — whispering):
+LEO (Age 5, whispering, delighted):
 
 "The one who lives under my bed."
