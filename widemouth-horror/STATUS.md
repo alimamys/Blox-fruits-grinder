@@ -13,7 +13,7 @@
 | Frame review | `previews/check_contact_01-07.jpg` (one frame every 4 s) |
 | YouTube package | `youtube/` - title, alternatives, tags, pinned comment, description (4,373 chars, 9 chapters, credit to PerfectCircle35), 3 mystery thumbnails |
 
-Image spend: $23.92 of the $30 cap (ledger `logs/image_costs.jsonl`).
+Image spend: $25.64 of the $30 cap (ledger `logs/image_costs.jsonl`).
 
 Fixes made during review: the birthday cake's sixth candle painted out; the wave drawings re-merged for a dark frame;
 the porch removed from the present-day trail shots (cropped, and one frame redrawn); the hiding-under-the-blanket shot redrawn.
@@ -28,3 +28,8 @@ Third review (user): his mouth opened only on one side / half -> opened in code 
 the end title MR. WIDEMOUTH (credit stays in the YouTube description); his cut-off-looking left ear in the
 window shot redrawn and patched (scripts/images/fix_ear.py). Re-rendered: 10:22.7, 14,944 frames, -15.0 LUFS,
 no silent second.
+
+Fourth review (user): face-to-camera bedroom shots repainted so the bed/stool no longer appear across the room
+(POV from the bed; scripts/images/fix_pov.py); window shot redrawn with depth and the knife from the first frame;
+subtitles + grain now run to the end; quieter cut to the son (no boom; Leo and the last whisper at the narration's
+level); "Mr. Widemouth" kept on one subtitle line. Re-rendered: 14,944 frames, -15.0 LUFS, no silent second.
