@@ -1,0 +1,32 @@
+THUMBNAILS v3 (high impact) + TITLES
+====================================
+Built from your three hints: saturated light against the dark, a face/reaction as the focus, and a huge
+punch of at most three words that adds a second mystery to the title. Each film keeps its own palette and
+type so the four never look like one template.
+
+1. FRAME 240                                  -> frame240_thumbnail_v3.jpg
+   Title:     There's a Frame in My Animation That I Never Drew
+   Picture:   Mara's terrified face in extreme close-up; a long distorted hand reaches out of her glowing
+              electric-blue monitor toward her
+   Punch:     NOT MINE.    (white, blue glow, top-left)
+
+2. AT 3:06 AM, EVERY DOOR OPENED              -> door306_thumbnail_v3.jpg
+   Title:     At 3:06 AM, Every Door in My Building Opened
+   Picture:   Sarah pressed against her door, hand over her mouth, lit by the neon-red clock; under the door,
+              in acid-green hallway light, the shadows of many feet standing outside
+   Punch:     ALL OF / THEM.    (white, red glow, on the wall above the lamp)
+
+3. THE CAMPING TRIP (GOATMAN)                 -> goatman_thumbnail_v3.jpg
+   Title:     Something Ate Dinner With Us at Camp
+   Picture:   the trailer in the night woods, its blind glowing hot orange; the teenagers' silhouettes on the
+              blind - and one far too tall, neck too long, head bent sideways (the story has a trailer, not a tent)
+   Punch:     WHO IS HE?    (warm cream italic, orange glow)
+
+4. MR. WIDEMOUTH                              -> widemouth_thumbnail_v3.jpg
+   Title:     My Imaginary Friend Lived Under My Bed
+   Picture:   grown-up Eli frozen beside his son's bed in cobalt night-light; under the bed, the huge white
+              grin and black eyes
+   Punch:     HELLO AGAIN.    (book serif, cream, blue glow) - his last line in the film
+
+The earlier set (refresh/*_v2.jpg, quieter "found object" looks) is kept: upload v3 as the main thumbnail and
+use v2 as the B/C option in YouTube Studio's Test & Compare.
