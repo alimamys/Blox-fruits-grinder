@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Thumbnail artwork for "11 of Us Went Camping. 12 Came Back.", drawn on purpose for small-screen clicks.
+"""Thumbnail artwork for "Mr. Widemouth", drawn on purpose for small-screen clicks.
 
 Each concept is a real moment of the film. It is drawn tighter, brighter and simpler than the film
 frame, with big readable faces and an empty area kept for the title text (added later in code by
@@ -26,44 +26,48 @@ THUMB = (
 )
 
 CONCEPTS = {
-    # mystery set: nothing of the thing is shown, only the question
-    # Scene 1: the trailer at night - everyone eating; one more at the end of the bench, face in shadow.
-    'count': {
-        'refs': ['char:cousins', 'char:others', 'char:thing', 'loc:trailer'],
-        'chars': ['cousins', 'others', 'thing'],
-        'loc': 'trailer',
+    # mystery set: nothing of what happens is shown, only the question
+    # The bed skirt and the dark under the bed - two tiny glints, nothing else.
+    'under': {
+        'refs': ['loc:bedroom'],
+        'chars': [],
+        'loc': 'bedroom',
+        'nobody': True,
         'prompt': (
-            'Inside the cramped old camping trailer at night: the back bench is packed shoulder to shoulder with teenagers eating from '
-            'paper plates on their knees - NIA, TASHA, KAYLA and JAMAL, their faces large, clear and warmly lit, glancing nervously at '
-            'each other - and at the very RIGHT end of the bench sits ONE MORE figure whose face is completely lost in black shadow. '
-            'Nobody looks at it. Keep the LEFT third of the frame (the dark wood-panelled wall) simple and dark for a title.'
+            'Low, close to the floorboards of a child\'s bedroom at night: the white ruffled bed skirt of a small bed hangs almost to the '
+            'floor, lifted a little at one spot, and in the pitch-black gap beneath the bed two tiny round points of light catch the '
+            'moonlight, close together - like eyes. Nothing else is visible under the bed. A child\'s sock lies on the floor in front of '
+            'it. Cold blue moonlight across the floorboards. Keep the TOP third of the frame (the quilt and the wall) simple and dark '
+            'for a title.'
         ),
-        'mood': 'Night inside the trailer: one weak warm ceiling light, deep brown shadows, the windows black.',
+        'mood': 'Night in a child\'s bedroom: cold blue moonlight on the floor, pitch black under the bed.',
     },
-    # Scene 3: the flashlight finds a man in the trees, his back turned.
-    'facing': {
-        'refs': ['char:thing', 'loc:trail'],
-        'chars': ['thing'],
-        'loc': 'trail',
+    # The upstairs window of the farmhouse at night - a tiny silhouette in it, one small hand raised.
+    'window': {
+        'refs': ['char:widemouth', 'loc:farmhouse'],
+        'chars': ['widemouth'],
+        'loc': 'farmhouse',
         'prompt': (
-            'Night in the black pine woods: one hard white flashlight beam enters from the lower RIGHT and lands on a tall, thin man '
-            'standing perfectly still among the trunks with his BACK to the viewer, arms a little too long, head at a slightly wrong '
-            'tilt. No face. Everything outside the beam is pitch black. Keep the LEFT half of the frame dark for a title.'
+            'Night: the white clapboard farmhouse seen from below, dark against a deep blue sky with a thin moon; ONE upstairs window glows '
+            'warm amber, and standing in it is a small black SILHOUETTE only - a huge round head with two crooked ears, a tiny body, one '
+            'small hand raised in a wave. No features visible, just the shape against the glow. Keep the LEFT half of the frame (dark '
+            'sky and pines) simple for a title.'
         ),
-        'mood': 'Night on the forest trail: black woods, only the cold white cone of the flashlight.',
+        'mood': 'Deep blue night, one warm amber window, strong contrast.',
     },
-    # Scene 1/5: one hot dog left - and a grey hand reaching for it.
-    'plate': {
-        'refs': ['char:thing', 'loc:trailer'],
-        'chars': ['thing'],
-        'loc': 'trailer',
-        'nobody': False,
+    # The deer trail into the woods - a child's sneaker prints beside tiny clawed prints, leading in.
+    'trail': {
+        'refs': ['loc:woods'],
+        'chars': [],
+        'loc': 'woods',
+        'nobody': True,
         'prompt': (
-            'Extreme close-up in the dim trailer: a white paper plate with ONE hot dog in a bun on a scuffed wooden table, warmly lit; '
-            'from the dark right edge of the frame a GREY hand with impossibly long, thin fingers reaches slowly toward it. No face, no '
-            'blood. Keep the TOP half of the frame dark for a title.'
+            'Ground-level view of a narrow deer trail leading into dark, still woods: in the soft mud between the dead leaves, a small '
+            'child\'s sneaker prints walk INTO the woods side by side with a line of tiny clawed footprints, and the trail ahead disappears '
+            'into black shadow between the trunks. No people, no animals. Cold grey-green light. Keep the TOP third of the frame simple '
+            'and dark for a title.'
         ),
-        'mood': 'Near darkness: one warm pool of light on the plate, deep shadow all around.',
+        'mood': 'Cold grey-green light in still woods, the trail ahead swallowed by shadow.',
     },
 }
 

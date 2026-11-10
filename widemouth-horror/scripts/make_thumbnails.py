@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""YouTube thumbnails (1280x720) for "11 of Us Went Camping. 12 Came Back.": purpose-drawn art (made by
+"""YouTube thumbnails (1280x720) for "Mr. Widemouth": purpose-drawn art (made by
 scripts/images/thumbart.py from the film's own character sheets and locations, each a real moment of the
 film) + crisp text in code (max 3 words) and at most one red mark.
     .venv/bin/python scripts/make_thumbnails.py   -> youtube/thumbnail_*.jpg
@@ -135,21 +135,19 @@ def centered(im: Image.Image, words: str, size: int) -> int:
 
 def main() -> None:
     OUT.mkdir(exist_ok=True)
-    # A - COUNT THEM: the trailer bench at night; one more at the end, face lost in shadow (circled)
-    a = lift(art('count'), gamma=0.8)
-    red_circle(a, 1085, 410, 100, 200, width=10)
-    text(a, [('COUNT THEM', WHITE)], 40, 40, 128, 760)
-    a.save(OUT / 'thumbnail_A_count_them.jpg', quality=92)
-    # B - DON'T TURN AROUND: the flashlight finds a man in the trees, his back to us
-    b = lift(art('facing'), gamma=0.8)
-    text(b, [("DON'T", WHITE), ('TURN', WHITE), ('AROUND', RED)], 40, 150, 136, 520, gap=-6)
-    b.save(OUT / 'thumbnail_B_facing_away.jpg', quality=92)
-    # C - WHO ATE IT?: one hot dog left; a grey hand with too-long fingers reaching for it
-    c = lift(art('plate'), gamma=0.8)
-    text(c, [('WHO ATE IT?', WHITE)], centered(c, 'WHO ATE IT?', 140), 36, 140, 1200)
-    c.save(OUT / 'thumbnail_C_twelve.jpg', quality=92)
-    print('youtube/thumbnail_A_count_them.jpg, thumbnail_B_facing_away.jpg, thumbnail_C_twelve.jpg')
-
+    # A - HE NEVER LEFT: the bed skirt at night, two tiny glints in the dark underneath
+    a = lift(art('under'), gamma=0.8)
+    text(a, [('HE NEVER', WHITE), ('LEFT', RED)], centered(a, 'HE NEVER', 150), 30, 150, 1200, gap=-8)
+    a.save(OUT / 'thumbnail_A_never_left.jpg', quality=92)
+    # B - HE WAVED GOODBYE: a tiny silhouette in the lit upstairs window
+    b = lift(art('window'), gamma=0.82)
+    text(b, [('HE WAVED', WHITE), ('GOODBYE', RED)], 40, 170, 140, 640, gap=-6)
+    b.save(OUT / 'thumbnail_B_waved.jpg', quality=92)
+    # C - WHERE DOES IT GO?: a child's prints and tiny clawed prints, side by side into the woods
+    c = lift(art('trail'), gamma=0.82)
+    text(c, [('WHERE DOES', WHITE), ('IT GO?', RED)], centered(c, 'WHERE DOES', 140), 30, 140, 1200, gap=-8)
+    c.save(OUT / 'thumbnail_C_trail.jpg', quality=92)
+    print('youtube/thumbnail_A_never_left.jpg, thumbnail_B_waved.jpg, thumbnail_C_trail.jpg')
 
 if __name__ == '__main__':
     main()

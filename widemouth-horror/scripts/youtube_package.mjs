@@ -15,15 +15,15 @@ fs.mkdirSync(out, {recursive: true});
 
 // spoiler-free chapter titles (the scene names in the timeline give away twists)
 const CHAPTER = {
-	twelve: 'Twelve hot dogs',
-	woods: 'The woods',
-	facingAway: 'Facing away',
-	goatman: 'The legend',
-	oneTooMany: 'One too many',
-	seven: 'Seven',
-	letMeIn: 'Let me in',
-	nine: 'Nine',
-	plates: 'Twelve years later',
+	wave: 'The wave',
+	house: 'The house on the hill',
+	underBed: 'Under the bed',
+	trampoline: 'The secret game',
+	box: 'The box',
+	nights: 'The nights',
+	trail: 'The trail',
+	fourAm: 'Moving day',
+	end: 'Twenty-five years later',
 };
 // same rounding as `npm run check` (scripts/check.mjs), so the chapters match its printout
 const ts = (s) => {
@@ -43,55 +43,54 @@ const ccby = credits
 	.map((l) => l.replace(/ - used in:.*$/, '').replace(/https:\/\/freesound\.org\/s\//, 'freesound.org/s/').replace(/ \(https:\/\/creativecommons\.org\/licenses\/[^)]*\)/, ''));
 const licences = [...new Set(credits.match(/https:\/\/creativecommons\.org\/licenses\/by\/[0-9.]+\//g) || [])];
 
-// Title: a direct warning to the viewer + an oddly exact time (curiosity), under ~60 characters so it
-// is not cut off on phones. The thumbnail text adds the stakes instead of repeating the title.
-// Title: a count that does not add up (curiosity) and is literally true by the end; under ~60 characters.
-const title = '11 of Us Went Camping. 12 Came Back. | Animated Horror Story';
-const alternatives = ['Something Ate Dinner With Us in the Woods | Animated Horror', 'Count Your Friends Before You Fall Asleep | Animated Horror Story'];
+// Title: a curiosity hook that is literally true (the trampoline game), then the classic's name for search;
+// under ~60 characters so it is not cut off on phones.
+const title = 'My Imaginary Friend Wanted Me to Jump | Mr. Widemouth';
+const alternatives = ['My Imaginary Friend Brought Me a Box of Knives | Animated Horror', 'Mr. Widemouth | Animated Horror Story'];
 const thumbnails = [
 	'MYSTERY SET (shows nothing of what happens - upload these three to Test & Compare in YouTube Studio):',
-	'thumbnail_A_count_them.jpg - the trailer packed with teenagers at night; one face at the end of the bench lost in shadow (circled) - "COUNT THEM"',
-	'thumbnail_B_facing_away.jpg - a flashlight beam in black woods finds a man standing still with his back turned - "DON\'T TURN AROUND"',
-	'thumbnail_C_twelve.jpg - a paper plate with one hot dog; a grey hand with too-long fingers reaching for it - "WHO ATE IT?"',
+	'thumbnail_A_never_left.jpg - the bed skirt at night, two tiny glints in the dark underneath - "HE NEVER LEFT"',
+	'thumbnail_B_waved.jpg - the farmhouse at night, a tiny silhouette with crooked ears in the lit upstairs window - "HE WAVED GOODBYE"',
+	'thumbnail_C_trail.jpg - a child\'s sneaker prints and tiny clawed prints side by side, into the dark woods - "WHERE DOES IT GO?"',
 ];
-const pinned = 'Be honest - would YOU have noticed the extra one? How many people were really in that trailer?';
+const pinned = 'Did you have an imaginary friend when you were little? Be honest - do you remember where it went?';
 const tags = [
+	'mr widemouth',
+	'mr. widemouth',
 	'animated horror story',
 	'horror animation',
 	'scary story',
 	'creepypasta',
-	'goatman',
-	'anansi goatman story',
-	'camping horror story',
-	'woods horror story',
-	'scary camping story',
-	'cryptid horror',
+	'creepypasta animated',
+	'imaginary friend horror story',
+	'imaginary friend',
+	'under the bed',
+	'monster under the bed',
 	'2d animation',
 	'horror short film',
 	'scary animation',
 	'horror narration',
-	'thriller',
 	'animated short',
 ];
 
 const description = [
-	'There were eleven of us in that trailer. Twelve hot dogs were gone.',
-	'Something had been sitting with us - eating with us - for a whole day. And not one of us could tell you whose face it was wearing.',
+	'The last time I saw him, it was four in the morning. He was standing in my bedroom window, waving goodbye.',
+	'In his other hand, he was holding a steak knife. He had been my best friend for two weeks.',
 	'',
-	'A 10-minute animated horror story about a camping trip in the Alabama woods, a legend nobody wanted to hear, and the night we finally counted. Watch it with headphones.',
+	'A 10-minute animated horror story about a sick little boy, an empty farmhouse on a hill, and the friend who lived under his bed - and the games he wanted to play. Watch it with headphones.',
 	'',
-	'Would you have noticed the extra one? Tell me in the comments.',
+	'Did you have an imaginary friend? Tell me in the comments.',
 	'',
 	'CHAPTERS',
 	...chapters,
 	'',
 	'This story is fiction. All characters and events are invented; any resemblance to real people or events is coincidental.',
 	'',
-	'#horrorstory #animatedhorror #goatman',
+	'#horrorstory #animatedhorror #creepypasta',
 	'',
 	'CREDITS',
-	'Based on "Anansi\'s Goatman Story" by Anansi (4chan /x/, 2012), as archived on the Creepypasta Wiki: https://creepypasta.fandom.com/wiki/Anansi%27s_Goatman_Story - retold in our own words, characters renamed. Creepypasta Wiki text is available under CC BY-SA 3.0.',
-	'Animation and sound design: 11 of Us Went Camping production.',
+	'Based on "Mr. Widemouth" by PerfectCircle35 (Creepypasta.com, 2010), as archived on the Creepypasta Wiki: https://creepypasta.fandom.com/wiki/Mr._Widemouth - retold in our own words, with the family named, a new cold open and a new ending.',
+	'Animation and sound design: Mr. Widemouth production. Music box theme: an original waltz composed and synthesised for this film.',
 	'Voices: Fish Audio (text-to-speech).',
 	'Illustrations: generated with an image model from the film\'s own layouts and character designs, animated in code.',
 	'Fonts: Inter, IBM Plex Mono, Patrick Hand (SIL Open Font License).',
