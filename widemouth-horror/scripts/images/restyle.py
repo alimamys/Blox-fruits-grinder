@@ -639,6 +639,10 @@ def cmd_gen(only: set | None, limit: int, workers: int) -> None:
 # ---------------------------------------------------------------------------
 # mouth-open variants (lip sync): only the mouth region is taken from the variant
 # ---------------------------------------------------------------------------
+# Mr. Widemouth's talking shots: his ear-to-ear mouth is opened in code along its whole width
+# (scripts/images/open_mouth.py) - the model's drawings opened it only partly.
+CODE_MOUTHS = {'u_02_wm', 'r_05_path', 't_06_play', 'n_02_grin'}
+
 CREATURE_MOUTH_PROMPT = (
     'Edit this image: the small grey furry creature is talking. Change ONLY his mouth: his long, thin, ear-to-ear mouth opens a '
     'little along its WHOLE width - the same wide curved line parts into a narrow dark gap with a hint of small teeth at top and '
@@ -705,6 +709,9 @@ def cmd_mouths(only: set | None) -> None:
         base_p = OUT / f"{p['id']}_k1.jpg"
         out = OUT / f"{p['id']}_k1_talk.jpg"
         raw = ROOT / 'build' / 'mouth_raw' / f"{p['id']}.jpg"
+        if p['id'] in CODE_MOUTHS:
+            print(f"  {p['id']}: mouth opened in code (scripts/images/open_mouth.py) - skipped")
+            continue
         if not base_p.exists():
             print(f'  ! no base frame for {p["id"]}')
             continue
@@ -1085,6 +1092,9 @@ def cmd_manifest() -> None:
             t = OUT / f"{p['id']}_k{k}_talk.jpg"
             if p.get('mouth') and t.exists():
                 e['talk'] = f'restyle/{t.name}'
+                th = OUT / f"{p['id']}_k{k}_talk_half.jpg"  # a half-open mouth (scripts/images/open_mouth.py)
+                if th.exists():
+                    e['talkHalf'] = f'restyle/{th.name}'
             fg = OUT / f"{p['id']}_k{k}_fg.png"
             if fg.exists() and bg.exists() and not p.get('mouth'):
                 e['src'] = f'restyle/{bg.name}'  # hole filled behind the foreground

@@ -346,7 +346,7 @@ export const SCENES: SceneDef[] = [
 			b('last_look', 1.2, 'under Leo\'s bed: the eyes and the grin'),
 			'widemouth_015_hello_again',
 			b('last_hold', 1.6, 'hold on the grin as the music box runs down'),
-			b('credit', 5.0, 'black; the credit for the original story, the music box winding down'),
+			b('end_title', 5.0, 'the end title MR. WIDEMOUTH, the music box winding down'),
 		],
 		tail: 0.6,
 		beds: {wind: 0.08, truck: 0, drone: 0},
@@ -361,7 +361,7 @@ export const SCENES: SceneDef[] = [
 			{at: 'last_look', fade: 0.4, set: {musicbox: 0.075, drone: 0.05}},
 			{at: 'widemouth_015_hello_again', fade: 0.3, set: {musicbox: 0.045}},
 			{at: 'last_hold', fade: 0.5, set: {musicbox: 0}},
-			{at: 'credit', offset: 0.5, fade: 3.5, set: {house: 0, drone: 0}},
+			{at: 'end_title', offset: 0.5, fade: 3.5, set: {house: 0, drone: 0}},
 		],
 		sfx: [
 			{sound: 'footsteps_leaves', at: 'narrator_079_found_trail', offset: 0.2, volume: 0.3, maxDuration: 3},

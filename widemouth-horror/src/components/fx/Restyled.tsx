@@ -20,7 +20,7 @@ import {envelopeAt, wordsOf} from '../../data/speech';
 import {FPS, type SceneTiming} from '../../data/timeline';
 import {h01} from '../../utils/rough';
 
-type Frame = {src: string; talk?: string};
+type Frame = {src: string; talk?: string; talkHalf?: string};
 type Door = [number, number, number, number, 'l' | 'r']; // x0, y0, x1, y1 (pixels of 1920x1080), hinge side
 type Entry = {frames: Frame[]; variants?: Record<string, string>; blink?: string; doors?: {open: string; rects: Door[]}};
 const SHOTS = ((manifest as unknown as {shots?: Record<string, Entry>}).shots ?? {}) as Record<string, Entry>;
@@ -36,13 +36,13 @@ const DRAW_FADE = 0; // drawings change on a clean cut (no dissolve: blended dra
 const syllables = (w: string) => Math.max(1, (w.toLowerCase().replace(/[^a-z]/g, '').match(/[aeiouy]+/g) ?? []).length);
 
 /**
- * Is the mouth open at absolute time t? Talking animation on twos, like TV animation: the mouth
- * opens once per syllable (from the measured word timings), for the middle ~60 % of it, and stays
- * shut between words and through pauses. A word's syllables are never shorter than 0.2 s, so the
- * mouth never pops open for a single frame; a quiet stretch inside a word (a whisper tail, a pause
- * the aligner swallowed) keeps it shut. Without word timings it falls back to the loudness.
+ * How open is the mouth at absolute time t: 0 shut, 1 half, 2 open. Talking animation on twos, like
+ * TV animation: once per syllable (from the measured word timings) the mouth goes half - open - half,
+ * and it stays shut between words and through pauses. A word's syllables are never shorter than 0.2 s,
+ * so nothing pops for a single frame; a quiet stretch inside a word (a whisper tail, a pause the
+ * aligner swallowed) keeps it shut. Without word timings it falls back to the loudness.
  */
-const speaking = (scene: SceneTiming, lines: string[], t: number) => {
+const mouthLevel = (scene: SceneTiming, lines: string[], t: number): 0 | 1 | 2 => {
 	const tq = (Math.floor((t * FPS) / 2) * 2) / FPS; // on twos
 	for (const id of lines) {
 		const m = scene.markers[id];
@@ -51,20 +51,20 @@ const speaking = (scene: SceneTiming, lines: string[], t: number) => {
 		const words = wordsOf(id);
 		if (!words.length) {
 			const e = envelopeAt(id, lt);
-			return e === null ? Math.sin(lt * 19) > 0 : e > 0.24;
+			return (e === null ? Math.sin(lt * 19) > 0 : e > 0.24) ? 2 : 0;
 		}
 		for (const [w, a, b] of words) {
 			if (lt < a || lt >= b) continue;
 			const e = envelopeAt(id, lt);
-			if (e !== null && e < 0.1) return false;
+			if (e !== null && e < 0.1) return 0;
 			const n = Math.max(1, Math.min(syllables(w), Math.floor((b - a) / 0.2)));
 			const sd = (b - a) / n;
 			const ph = ((lt - a) % sd) / sd;
-			return ph >= 0.12 && ph < 0.72;
+			return ph < 0.12 || ph >= 0.72 ? 0 : ph < 0.27 || ph >= 0.57 ? 1 : 2;
 		}
-		return false;
+		return 0;
 	}
-	return false;
+	return 0;
 };
 
 /** Seeded natural blinking: true while the eyes are closed (3 frames every 2.5-4.5 s). */
@@ -163,7 +163,11 @@ export const RestyledStill: React.FC<{id: string; art: Art; f: number; d: number
 		src = drawing(art.show);
 	}
 	// lip sync: the lines are this shot's own (a reused talking frame can speak other lines)
-	if (frame.talk && art.talk?.length && speaking(scene, art.talk, tt) && src === frame.src) src = frame.talk;
+	if (frame.talk && art.talk?.length && src === frame.src) {
+		const lv = mouthLevel(scene, art.talk, tt);
+		if (lv === 2) src = frame.talk;
+		else if (lv === 1) src = frame.talkHalf ?? frame.talk; // no half drawing (the people): open as before
+	}
 	// blinks (only on the base drawing - the eyes-closed drawing was made from it)
 	if (art.blink && entry.blink && src === frame.src && blinking(g, seed)) src = entry.blink;
 	const prev = idx > 0 && fade < 1 ? frames[idx - 1] : null;

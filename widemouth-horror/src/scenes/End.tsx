@@ -1,7 +1,7 @@
 // 9. THE END OF THE TRAIL - twenty-five years later: the burned house, the trail, the children's
 // cemetery. Then home: my son turned five. "The one who lives under my bed."
 import React from 'react';
-import {CreditCard} from '../components/ui/Phone';
+import {TitleCard} from '../components/ui/Phone';
 import {Person, WideFig} from '../layout/Person';
 import {Shots} from '../utils/scene';
 import {Black, MOOD} from './common';
@@ -158,7 +158,8 @@ export const End: React.FC = () => (
 				prompt: 'Low by the floor in Leo\'s bedroom in the dim amber evening: the blue bed skirt of the dinosaur bed hangs to the floor, a toy dinosaur lying on its side on the rug, and in the pitch-black gap under the bed, two big glossy black eyes and a long, pale, ear-to-ear GRIN look out at us. Only the eyes and the grin are visible.',
 				move: push(1.04, 1.2, 0.5, 0.78),
 			}, {cam: {z: 2.4, cx: 960, cy: 820}, kids: <WideFig x={980} y={1100} h={300} mouth="grin" peek />}),
-			code('e_17_credit', 'credit', ({f, d}) => <CreditCard f={f} d={d} />),
+			// the end title (the credit for the original story is in the video description)
+			code('e_17_end_title', 'end_title', ({f, d}) => <TitleCard f={f} d={d} />),
 		]}
 	/>
 );
