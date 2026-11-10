@@ -1,0 +1,34 @@
+NEW TITLES AND THUMBNAILS - one distinct look per film, made from frames of that film
+=====================================================================================
+
+1. FRAME 240
+   Title:        There's a Frame in My Animation That I Never Drew          (50 chars)
+   Alternative:  My Animation Had 239 Frames. Now It Has 240.               (45 chars)
+   Thumbnail:    frame240_thumbnail_v2.jpg - a screen grab of the animation app: the figure in the
+                 hallway, a hand-written note "I didn't draw this.", frame 240 lit on the timeline
+
+2. NEVER OPEN YOUR DOOR AT 3:06 AM
+   Title:        At 3:06 AM, Every Door in My Building Opened                (44 chars)
+   Alternative:  My Neighbors Were All Standing in the Hallway at 3:06 AM    (56 chars)
+   Thumbnail:    door306_thumbnail_v2.jpg - the corridor through the peephole, every door open, a red
+                 bedside clock reading 3:06, typewriter text "every door opened."
+
+3. 11 OF US WENT CAMPING (GOATMAN)
+   Title:        Something Ate Dinner With Us at Camp                        (36 chars)
+   Alternative:  We Counted Heads at Camp. There Was One Extra.              (46 chars)
+   Thumbnail:    goatman_thumbnail_v2.jpg - an old instant photo of the bench on a wooden table,
+                 "camp, night 2 - all 11 of us" written on it, a sticky note: "count again."
+
+4. MR. WIDEMOUTH
+   Title:        My Imaginary Friend Lived Under My Bed                      (38 chars)
+   Alternative:  Mr. Widemouth: The Friend Under My Bed                      (38 chars)
+   Thumbnail:    widemouth_thumbnail_v2.jpg - the cover of an old children's book: "Mr. Widemouth,
+                 a bedtime story", his toothy grin as the illustration plate
+   Note:         the earlier title "My Imaginary Friend Wanted Me to Jump" puts a child and a jump in
+                 the title; the new one keeps the hook without it (safer with YouTube's child-safety review).
+
+Why they no longer look alike: each has its own layout, typography (UI sans / LED clock + typewriter /
+handwriting / book serif), colours and "object" (a screen, a door, a photo, a book), made from the film's
+own frames with a softer printed or photographed finish - no shared template, no red circles or arrows,
+no new generated art. Titles each use a different sentence shape and none ends in "| Animated Horror Story"
+(keep "animated horror story" in the tags and the first line of each description instead).
