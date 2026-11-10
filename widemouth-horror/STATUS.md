@@ -13,7 +13,7 @@
 | Frame review | `previews/check_contact_01-07.jpg` (one frame every 4 s) |
 | YouTube package | `youtube/` - title, alternatives, tags, pinned comment, description (4,373 chars, 9 chapters, credit to PerfectCircle35), 3 mystery thumbnails |
 
-Image spend: $23.68 of the $30 cap (ledger `logs/image_costs.jsonl`).
+Image spend: $23.92 of the $30 cap (ledger `logs/image_costs.jsonl`).
 
 Fixes made during review: the birthday cake's sixth candle painted out; the wave drawings re-merged for a dark frame;
 the porch removed from the present-day trail shots (cropped, and one frame redrawn); the hiding-under-the-blanket shot redrawn.
@@ -22,3 +22,9 @@ Second review (user): the final scene (9:03 on) had no sound at all - a rule lef
 scene called 'end'; now opt-in and off. Lip sync now per syllable (on twos) instead of 'open while loud'; two
 creature mouths redrawn; blinks always close both eyes. New last beat: Mr. Widemouth whispers "Hello again, Eli."
 over the shot under Leo's bed, his music box running down under the credit (verified by transcription).
+
+Third review (user): his mouth opened only on one side / half -> opened in code along his whole lip line
+(scripts/images/open_mouth.py; half and full drawings, per syllable); the credit card at the end replaced by
+the end title MR. WIDEMOUTH (credit stays in the YouTube description); his cut-off-looking left ear in the
+window shot redrawn and patched (scripts/images/fix_ear.py). Re-rendered: 10:22.7, 14,944 frames, -15.0 LUFS,
+no silent second.
