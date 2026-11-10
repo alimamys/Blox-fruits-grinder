@@ -3,29 +3,16 @@
 // from their character sheets. Colours follow the sheets so the model can tell them apart.
 import React from 'react';
 
-export type Who =
-	| 'marcus' | 'marcusAdult' | 'wyatt' | 'dez' | 'ray' | 'nia' | 'wrongNia'
-	| 'tasha' | 'jada' | 'kayla' | 'andre' | 'jamal' | 'trey' | 'dawes' | 'cole' | 'figure';
+export type Who = 'eli' | 'eliAdult' | 'mom' | 'dad' | 'leo';
 type Facing = 'front' | 'back' | 'left' | 'right';
 export type Pose = 'stand' | 'holdChild' | 'fingerLips' | 'coverMouth' | 'handOnWall' | 'carryBox' | 'reach';
 
 const PAL: Record<Who, {hair: string; skin: string; top: string; bottom: string; long?: boolean; bald?: boolean}> = {
-	marcus: {hair: '#141414', skin: '#6e4630', top: '#8a1f22', bottom: '#1f2b4d'},
-	marcusAdult: {hair: '#141414', skin: '#6e4630', top: '#9a9a9a', bottom: '#1f2b4d'},
-	wyatt: {hair: '#c8a65a', skin: '#efc9ad', top: '#6b6f3a', bottom: '#8aa0b8'},
-	dez: {hair: '#141414', skin: '#5a3a28', top: '#9a9a9a', bottom: '#151515'},
-	ray: {hair: '#141414', skin: '#6e4630', top: '#d9a521', bottom: '#b8a479'},
-	nia: {hair: '#141414', skin: '#5f3c2a', top: '#b7a4d6', bottom: '#151515', long: true},
-	wrongNia: {hair: '#141414', skin: '#6a6a66', top: '#a49cb3', bottom: '#151515', long: true},
-	tasha: {hair: '#141414', skin: '#6e4630', top: '#e07a2a', bottom: '#6d8fb4'},
-	jada: {hair: '#141414', skin: '#5f3c2a', top: '#e48aa0', bottom: '#2b2b2b'},
-	kayla: {hair: '#121212', skin: '#c8956b', top: '#2f6b3a', bottom: '#2b2b2b', long: true},
-	andre: {hair: '#141414', skin: '#5f3c2a', top: '#f0ece0', bottom: '#2b2b2b'},
-	jamal: {hair: '#141414', skin: '#5a3a28', top: '#2a4b9a', bottom: '#2b2b2b'},
-	trey: {hair: '#141414', skin: '#9a6a48', top: '#3a3a3e', bottom: '#2b2b2b'},
-	dawes: {hair: '#7a7a72', skin: '#d9a982', top: '#6b4a2b', bottom: '#2f4a6b'},
-	cole: {hair: '#5a4030', skin: '#e7bfa0', top: '#9a2020', bottom: '#2f4a6b'},
-	figure: {hair: '#0d0d0f', skin: '#2a2a2e', top: '#1a1a1e', bottom: '#1a1a1e'},
+	eli: {hair: '#8a6a40', skin: '#efcfb4', top: '#7f9cc0', bottom: '#7f9cc0'},
+	eliAdult: {hair: '#7a5a34', skin: '#e9c4a4', top: '#2f4a32', bottom: '#1f2b3d'},
+	mom: {hair: '#9a4a24', skin: '#efcfb4', top: '#e4d8bf', bottom: '#3b5a86', long: true},
+	dad: {hair: '#3a2a1c', skin: '#e2b896', top: '#22314f', bottom: '#3b5a86'},
+	leo: {hair: '#8a6a40', skin: '#f0d2b8', top: '#e6dcbc', bottom: '#e6dcbc'},
 };
 
 /**
@@ -133,19 +120,63 @@ export const Person: React.FC<{who: Who; x: number; y: number; h: number; facing
 	);
 };
 
-/** The creature mannequin: nearly seven feet, grey, head bent hard to one side, arms to the shins. */
-export const CreatureFig: React.FC<{x: number; y: number; h: number; lean?: number; opacity?: number}> = ({x, y, h, lean = 0, opacity = 1}) => {
+/**
+ * Mr. Widemouth's mannequin: cat-sized, a huge round head on a small furry body, two big black
+ * eyes, crooked ears (the left one bent), and the mouth line from ear to ear.
+ * (x, y) = between the feet, h = total height in pixels. `mouth`: 'smile' | 'grin' | 'snarl'.
+ * `peek`: only the head, cut off at the bottom (peeking from under the bed).
+ */
+export const WideFig: React.FC<{x: number; y: number; h: number; facing?: 'front' | 'left' | 'right' | 'back'; mouth?: 'smile' | 'grin' | 'snarl'; peek?: boolean; arm?: 'wave' | 'tug' | 'none'; opacity?: number}> = ({
+	x,
+	y,
+	h,
+	facing = 'front',
+	mouth = 'smile',
+	peek = false,
+	arm = 'none',
+	opacity = 1,
+}) => {
 	const u = h / 100;
-	const g = '#8d8f8a';
+	const fur = '#8e8c88';
+	const headR = 30 * u;
+	const hy = y - 64 * u;
+	const side = facing === 'left' || facing === 'right';
+	const dir = facing === 'left' ? -1 : 1;
+	const ex = side ? dir * 10 * u : 0;
 	return (
-		<g opacity={opacity} transform={`rotate(${lean}, ${x}, ${y})`} fill={g} stroke={g}>
-			<rect x={x - 5 * u} y={y - 52 * u} width={3.5 * u} height={52 * u} />
-			<rect x={x + 1.5 * u} y={y - 52 * u} width={3.5 * u} height={52 * u} />
-			<rect x={x - 7 * u} y={y - 86 * u} width={14 * u} height={36 * u} rx={3 * u} />
-			<path d={`M${x - 7 * u},${y - 84 * u} L${x - 11 * u},${y - 12 * u}`} strokeWidth={2.6 * u} strokeLinecap="round" fill="none" />
-			<path d={`M${x + 7 * u},${y - 84 * u} L${x + 11 * u},${y - 12 * u}`} strokeWidth={2.6 * u} strokeLinecap="round" fill="none" />
-			<ellipse cx={x + 9 * u} cy={y - 86 * u} rx={5 * u} ry={6.5 * u} transform={`rotate(-55, ${x + 9 * u}, ${y - 86 * u})`} />
-			<ellipse cx={x + 11 * u} cy={y - 84 * u} rx={1.6 * u} ry={2.6 * u} fill="#111" stroke="none" />
+		<g opacity={opacity}>
+			{peek ? null : (
+				<>
+					<ellipse cx={x} cy={y - 22 * u} rx={15 * u} ry={20 * u} fill={fur} />
+					<rect x={x - 10 * u} y={y - 10 * u} width={7 * u} height={10 * u} rx={3 * u} fill={fur} />
+					<rect x={x + 3 * u} y={y - 10 * u} width={7 * u} height={10 * u} rx={3 * u} fill={fur} />
+					{arm === 'wave' ? (
+						<path d={`M${x + 13 * u},${y - 32 * u} L${x + 26 * u},${y - 52 * u}`} stroke={fur} strokeWidth={6 * u} strokeLinecap="round" />
+					) : arm === 'tug' ? (
+						<path d={`M${x + dir * 13 * u},${y - 30 * u} L${x + dir * 30 * u},${y - 34 * u}`} stroke={fur} strokeWidth={6 * u} strokeLinecap="round" />
+					) : (
+						<>
+							<path d={`M${x - 13 * u},${y - 32 * u} L${x - 17 * u},${y - 14 * u}`} stroke={fur} strokeWidth={6 * u} strokeLinecap="round" />
+							<path d={`M${x + 13 * u},${y - 32 * u} L${x + 17 * u},${y - 14 * u}`} stroke={fur} strokeWidth={6 * u} strokeLinecap="round" />
+						</>
+					)}
+				</>
+			)}
+			{/* ears: right one up, left one bent over */}
+			<path d={`M${x + 16 * u},${hy - 20 * u} L${x + 26 * u},${hy - 46 * u} L${x + 28 * u},${hy - 14 * u} Z`} fill={fur} />
+			<path d={`M${x - 16 * u},${hy - 20 * u} L${x - 22 * u},${hy - 40 * u} L${x - 38 * u},${hy - 30 * u} L${x - 28 * u},${hy - 14 * u} Z`} fill={fur} />
+			<circle cx={x} cy={hy} r={headR} fill={fur} />
+			{facing === 'back' ? null : (
+				<>
+					<circle cx={x + ex - (side ? 0 : 11 * u)} cy={hy - 6 * u} r={6.5 * u} fill="#050505" />
+					{side ? null : <circle cx={x + 11 * u} cy={hy - 6 * u} r={6.5 * u} fill="#050505" />}
+					{mouth === 'smile' ? (
+						<path d={`M${x - 24 * u + ex},${hy + 8 * u} Q${x + ex},${hy + 18 * u} ${x + 24 * u + ex},${hy + 8 * u}`} stroke="#2a2522" strokeWidth={1.6 * u} fill="none" />
+					) : (
+						<path d={`M${x - 25 * u + ex},${hy + 6 * u} Q${x + ex},${hy + (mouth === 'grin' ? 30 : 22) * u} ${x + 25 * u + ex},${hy + 6 * u} Q${x + ex},${hy + 12 * u} ${x - 25 * u + ex},${hy + 6 * u} Z`} fill="#1c1210" stroke="#efe8d8" strokeWidth={1.2 * u} />
+					)}
+				</>
+			)}
 		</g>
 	);
 };

@@ -17,8 +17,8 @@
 //   - `fx`: flicker / shake / tremble / glitch / pulse / whiteout
 //   - `talk`: mouth-open drawing swapped in time with the voice (lip sync)
 //   - `clip`: a MiniMax image-to-video clip made from the approved frame (when available)
-export type CharRef = 'marcus' | 'marcusAdult' | 'wyatt' | 'cousins' | 'others' | 'adults' | 'thing';
-export type LocRef = 'clearing' | 'trailer' | 'trail' | 'creek' | 'farm' | 'apartment';
+export type CharRef = 'eli' | 'widemouth' | 'parents' | 'adult';
+export type LocRef = 'farmhouse' | 'bedroom' | 'emptyroom' | 'hallway' | 'woods' | 'cemetery' | 'truck' | 'ruins' | 'leoroom';
 export type ShotFx = 'flicker' | 'shake' | 'tremble' | 'glitch' | 'pulse' | 'whiteout';
 
 export interface Variant {

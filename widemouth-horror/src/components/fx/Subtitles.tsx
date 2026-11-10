@@ -8,13 +8,11 @@ import {FPS, type Timeline} from '../../data/timeline';
 import {FONT} from '../../utils/fonts';
 
 const SPEAKER: Record<string, {name: string; color: string}> = {
-	marcus: {name: 'MARCUS', color: '#ff9a8a'},
-	wyatt: {name: 'WYATT', color: '#d8d39a'},
-	ray: {name: 'RAY', color: '#ffd166'},
-	nia: {name: 'NIA', color: '#c9b6f0'},
-	dawes: {name: 'MR. DAWES', color: '#c8b89a'},
-	cole: {name: 'COLE', color: '#ff8f6b'},
-	thing: {name: '???', color: '#ff5a4e'},
+	eli: {name: 'ELI', color: '#a9c4ea'},
+	widemouth: {name: 'MR. WIDEMOUTH', color: '#ff8a7a'},
+	mom: {name: 'MOM', color: '#f0c49a'},
+	dad: {name: 'DAD', color: '#c8b89a'},
+	leo: {name: 'LEO', color: '#d8d39a'},
 };
 
 /** Lines whose words are already shown big on screen. */

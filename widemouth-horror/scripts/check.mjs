@@ -24,7 +24,7 @@ const {TIMELINE, TIMELINE_FULL, SCENES, FPS} = require(path.join(out, 'timeline.
 const {VOICE_LINES} = require(path.join(out, 'voiceLines.cjs'));
 
 const fmt = (s) => `${Math.floor(s / 60)}:${(s % 60).toFixed(1).padStart(4, '0')}`;
-console.log('\nFRAME 240 - timeline report\n');
+console.log('\nMR. WIDEMOUTH - timeline report\n');
 console.log('  #  scene              start    length  lines  missing');
 let warnings = 0;
 for (const s of TIMELINE.scenes) {

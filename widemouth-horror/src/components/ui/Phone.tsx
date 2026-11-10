@@ -203,20 +203,18 @@ export const PencilTrail: React.FC<{from: [number, number]; to: [number, number]
 	</svg>
 );
 
-/** Title card: NEVER OPEN YOUR DOOR / AT 3:06 AM, over black. The fluorescent tube
- *  flickers the words on; "3:06" is red. */
+/** Title card: MR. WIDEMOUTH over black. The words flicker on with the music box, and the
+ *  letters of WIDEMOUTH slowly spread apart, like a smile getting wider than it should. */
 export const TitleCard: React.FC<{f: number; d: number}> = ({f, d}) => {
 	const on = f < 4 ? 0 : f < 6 ? 1 : f < 8 ? 0.15 : f < 10 ? 1 : f < 11 ? 0.4 : 1;
 	const o = on * clamp((d - f) / 8);
+	const t = clamp((f - 10) / Math.max(1, d - 18));
+	const spread = 14 + 26 * t * t;
 	return (
 		<AbsoluteFill style={{background: '#000', alignItems: 'center', justifyContent: 'center'}}>
-			<div style={{opacity: o, textAlign: 'center', fontFamily: FONT.ui, color: '#ece9df', textShadow: '0 0 24px rgba(214,232,170,0.25)'}}>
-				<div style={{fontSize: 92, fontWeight: 800, letterSpacing: 12, lineHeight: 1.05}}>
-					<span style={{color: '#ece9df'}}>11</span> OF US WENT CAMPING.
-				</div>
-				<div style={{fontSize: 92, fontWeight: 800, letterSpacing: 12, marginTop: 22}}>
-					<span style={{color: '#ff3b30'}}>12</span> CAME BACK.
-				</div>
+			<div style={{opacity: o, textAlign: 'center', fontFamily: FONT.ui, color: '#ece9df', textShadow: '0 0 24px rgba(214,200,170,0.22)'}}>
+				<div style={{fontSize: 44, fontWeight: 700, letterSpacing: 18, color: 'rgba(236,233,223,0.75)'}}>MR.</div>
+				<div style={{fontSize: 128, fontWeight: 800, letterSpacing: spread, marginTop: 6, marginRight: -spread}}>WIDEMOUTH</div>
 			</div>
 		</AbsoluteFill>
 	);
@@ -229,8 +227,8 @@ export const CreditCard: React.FC<{f: number; d: number}> = ({f, d}) => {
 		<AbsoluteFill style={{background: '#000', alignItems: 'center', justifyContent: 'center'}}>
 			<div style={{opacity: o, textAlign: 'center', fontFamily: FONT.ui, color: 'rgba(236,233,223,0.9)'}}>
 				<div style={{fontSize: 30, letterSpacing: 3, color: 'rgba(236,233,223,0.6)'}}>BASED ON</div>
-				<div style={{fontSize: 52, fontWeight: 700, marginTop: 14}}>"Anansi's Goatman Story"</div>
-				<div style={{fontSize: 30, marginTop: 14, color: 'rgba(236,233,223,0.7)'}}>by Anansi (4chan /x/, 2012) · Creepypasta Wiki</div>
+				<div style={{fontSize: 52, fontWeight: 700, marginTop: 14}}>"Mr. Widemouth"</div>
+				<div style={{fontSize: 30, marginTop: 14, color: 'rgba(236,233,223,0.7)'}}>by PerfectCircle35 (Creepypasta.com, 2010)</div>
 			</div>
 		</AbsoluteFill>
 	);

@@ -17,7 +17,7 @@ const require = createRequire(import.meta.url);
 const {TIMELINE, FPS} = require(path.join(root, 'build/timeline-cjs/timeline.cjs'));
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts')});
 const inputProps = {audio: false, logShots: true, subtitles: false, restyled: false};
-const composition = await selectComposition({serveUrl, id: 'GoatmanHorror', inputProps, browserExecutable});
+const composition = await selectComposition({serveUrl, id: 'WidemouthHorror', inputProps, browserExecutable});
 const byScene = {};
 for (const s of TIMELINE.scenes) {
 	await renderStill({

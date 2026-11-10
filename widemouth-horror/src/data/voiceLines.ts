@@ -97,7 +97,7 @@ const HOUSE: VoiceLine[] = [
 const s3 = scene('underBed');
 const UNDER_BED: VoiceLine[] = [
 	s3.n('narrator_021_first_time', "I don't remember the first time I saw him. I only remember asking his name.", '[quietly, remembering]', 0.4),
-	s3.w('widemouth_001_call_me', 'Call me Mr. Widemouth.', {fishTags: '[sweet, sing-song]', pauseAfter: 0.5}),
+	s3.w('widemouth_001_call_me', 'Call me Mr. Widemouth.', {fishTags: '[sweet, sing-song, clearly]', pauseAfter: 0.5, spokenText: 'Call me Mister Wide Mouth.'}),
 	s3.n('narrator_022_suited', 'It suited him.', '[wry]', 0.4),
 	s3.n('narrator_023_size_of_cat', 'He was about the size of a cat. Everything about him was too big for his body: his round head, his shiny black eyes, his crooked ears.', '[descriptive, uneasy]'),
 	s3.n('narrator_024_mouth', 'But his mouth was the biggest thing of all. It stretched almost from one ear to the other.', '[low voice, creeped out]', 0.5),
@@ -217,7 +217,7 @@ const END: VoiceLine[] = [
 	s9.n('narrator_081_deeper', 'The trail went deeper into the woods than I remembered.', '[uneasy]', 0.5),
 	s9.n('narrator_082_cemetery', 'It ended at a cemetery.', '[low voice, tense]', 0.7),
 	s9.n('narrator_083_headstones', 'Rows and rows of small, old headstones.', '[slowly, uneasy]', 0.6),
-	s9.n('narrator_084_children', 'Most of them belonged to children.', '[whispering, horrified]', 0.9),
+	s9.n('narrator_084_children', 'Most of them belonged to children.', '[whispering, horrified, clearly]', 0.9, {spokenText: 'Most of them belonged... to children.'}),
 	s9.n('narrator_085_not_ready', "He'd told me I wasn't ready.", '[quietly, haunted]', 0.6),
 	s9.n('narrator_086_had_been', 'Every one of them had been ready.', '[whispering, haunted]', 1.2),
 	s9.n('narrator_087_son_five', 'Last week, my son turned five.', '[very quietly, calm]', 0.6),

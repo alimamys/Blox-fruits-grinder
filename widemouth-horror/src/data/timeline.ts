@@ -57,6 +57,7 @@ export const SCENES: SceneDef[] = [
 		],
 		sfx: [
 			{sound: 'gravel_roll', at: 'narrator_005_waved', offset: 0.2, volume: 0.35, maxDuration: 4},
+			{sound: 'musicbox_windup', at: 'title', offset: 0.0, volume: 0.5},
 		],
 		overlays: [],
 	},
@@ -175,6 +176,7 @@ export const SCENES: SceneDef[] = [
 			{sound: 'small_feet', at: 'narrator_032_hall', offset: 2.4, volume: 0.35, maxDuration: 3},
 			{sound: 'small_feet', at: 'narrator_035_pushed_open', offset: 0.2, volume: 0.4, maxDuration: 1.2},
 			{sound: 'sash_window', at: 'narrator_035_pushed_open', offset: 1.4, volume: 0.6},
+			{sound: 'musicbox_winddown', at: 'narrator_038_face_changed', offset: -0.1, volume: 0.4},
 			{sound: 'creature_rasp', at: 'narrator_039_snarled', offset: 2.6, volume: 0.35, maxDuration: 1.2},
 			{sound: 'scurry', at: 'narrator_041_rest_of_day', offset: 1.0, volume: 0.35},
 		],
@@ -279,7 +281,7 @@ export const SCENES: SceneDef[] = [
 		sfx: [
 			{sound: 'door_close', at: 'narrator_061_better', offset: 2.6, volume: 0.25},
 			{sound: 'footsteps_leaves', at: 'narrator_063_deer_trail', offset: 0.6, volume: 0.3, maxDuration: 3},
-			{sound: 'small_feet', at: 'narrator_064_silent', offset: 2.2, volume: 0.3, maxDuration: 2},
+			{sound: 'small_feet_leaves', at: 'narrator_064_silent', offset: 2.2, volume: 0.35, maxDuration: 2.6},
 		],
 		overlays: [],
 	},
@@ -341,6 +343,7 @@ export const SCENES: SceneDef[] = [
 			'narrator_089_who_told',
 			'leo_001_new_friend',
 			'leo_002_under_bed',
+			b('last_look', 3.2, 'under Leo\'s bed: the eyes and the grin'),
 			b('credit', 4.6, 'black; the credit for the original story'),
 		],
 		tail: 0.6,
@@ -353,7 +356,8 @@ export const SCENES: SceneDef[] = [
 			{at: 'cut_black_end', fade: 0.05, set: {wind: 0, drone: 0, tension: 0}},
 			{at: 'narrator_087_son_five', fade: 1.0, set: {house: 0.03}},
 			{at: 'leo_001_new_friend', fade: 0.6, set: {musicbox: 0.06}},
-			{at: 'credit', offset: 1.0, fade: 3.0, set: {musicbox: 0, house: 0}},
+			{at: 'last_look', fade: 0.3, set: {musicbox: 0.02, drone: 0.05}},
+			{at: 'credit', offset: 1.0, fade: 3.0, set: {musicbox: 0, house: 0, drone: 0}},
 		],
 		sfx: [
 			{sound: 'footsteps_leaves', at: 'narrator_079_found_trail', offset: 0.2, volume: 0.3, maxDuration: 3},
@@ -607,9 +611,9 @@ export const buildTimeline = (mode: EditMode = 'short'): Timeline => {
 	return {scenes, totalSeconds: cursor, totalFrames, lines: allLines, sfx: allSfx, beds, markers: globalMarkers};
 };
 
-/** The main composition's edit (GoatmanHorror): the whole script, as written. */
+/** The main composition's edit (WidemouthHorror): the whole script, as written. */
 export const TIMELINE: Timeline = buildTimeline('short');
-/** Identical to TIMELINE (composition GoatmanHorrorFull). */
+/** Identical to TIMELINE (composition WidemouthHorrorFull). */
 export const TIMELINE_FULL: Timeline = buildTimeline('full');
 
 export const sceneById = (id: string, tl: Timeline = TIMELINE): SceneTiming => {

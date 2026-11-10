@@ -618,6 +618,15 @@
   "title": "Wood_Scraping_Close_1.aif",
   "url": "https://freesound.org/s/104008/"
  },
+ "fsd:104078": {
+  "author": "RutgerMuller",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 104078,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Wind Low Short.aif",
+  "url": "https://freesound.org/s/104078/"
+ },
  "fsd:104364": {
   "author": "RutgerMuller",
   "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
@@ -644,6 +653,33 @@
   "split": "dev",
   "title": "leafpilehit.wav",
   "url": "https://freesound.org/s/106130/"
+ },
+ "fsd:106135": {
+  "author": "j1987",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 106135,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "woodstairwalking.wav",
+  "url": "https://freesound.org/s/106135/"
+ },
+ "fsd:108474": {
+  "author": "rpew1",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 108474,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "drawer close.WAV",
+  "url": "https://freesound.org/s/108474/"
+ },
+ "fsd:108475": {
+  "author": "rpew1",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 108475,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "drawer open.WAV",
+  "url": "https://freesound.org/s/108475/"
  },
  "fsd:109578": {
   "author": "vinjatovix",
@@ -680,6 +716,24 @@
   "split": "dev",
   "title": "FrontDoor18.wav",
   "url": "https://freesound.org/s/113131/"
+ },
+ "fsd:113173": {
+  "author": "Fasolt",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 113173,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "wind_howling_01.wav",
+  "url": "https://freesound.org/s/113173/"
+ },
+ "fsd:113175": {
+  "author": "Fasolt",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 113175,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "wind_howling_03.wav",
+  "url": "https://freesound.org/s/113175/"
  },
  "fsd:115916": {
   "author": "issalcake",
@@ -753,6 +807,24 @@
   "title": "alabamaFrogs.wav",
   "url": "https://freesound.org/s/121556/"
  },
+ "fsd:125169": {
+  "author": "alienistcog",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 125169,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "truck-idle.aif",
+  "url": "https://freesound.org/s/125169/"
+ },
+ "fsd:126036": {
+  "author": "mhtaylor67",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 126036,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "Car Starting And Idling",
+  "url": "https://freesound.org/s/126036/"
+ },
  "fsd:128296": {
   "author": "Xenonn",
   "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
@@ -798,6 +870,24 @@
   "title": "CricketFallEveningNov2011.wav",
   "url": "https://freesound.org/s/134772/"
  },
+ "fsd:134791": {
+  "author": "Sycoraxi",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 134791,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Rats.mp3",
+  "url": "https://freesound.org/s/134791/"
+ },
+ "fsd:134848": {
+  "author": "Dlenti1",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 134848,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "366-silverware.mp3",
+  "url": "https://freesound.org/s/134848/"
+ },
  "fsd:135866": {
   "author": "martats",
   "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
@@ -842,6 +932,15 @@
   "split": "eval",
   "title": "14_playing_water.aiff",
   "url": "https://freesound.org/s/137749/"
+ },
+ "fsd:138344": {
+  "author": "UncleSigmund",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 138344,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "crow.wav",
+  "url": "https://freesound.org/s/138344/"
  },
  "fsd:140219": {
   "author": "shall555",
@@ -933,6 +1032,15 @@
   "title": "Medium Splash 1.aif",
   "url": "https://freesound.org/s/148317/"
  },
+ "fsd:148948": {
+  "author": "Adam_N",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 148948,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Squeak_window_2.wav",
+  "url": "https://freesound.org/s/148948/"
+ },
  "fsd:148972": {
   "author": "Adam_N",
   "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
@@ -986,6 +1094,15 @@
   "split": "dev",
   "title": "Light Hollow Wooden Door Open Close.wav",
   "url": "https://freesound.org/s/153558/"
+ },
+ "fsd:154675": {
+  "author": "crcavol",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 154675,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Sliding_Window.aif",
+  "url": "https://freesound.org/s/154675/"
  },
  "fsd:155575": {
   "author": "BigKahuna360",
@@ -1131,6 +1248,15 @@
   "title": "Crackle (fire).wav",
   "url": "https://freesound.org/s/164471/"
  },
+ "fsd:164494": {
+  "author": "Adam_N",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 164494,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Creak_floorboard 01.wav",
+  "url": "https://freesound.org/s/164494/"
+ },
  "fsd:164566": {
   "author": "Adam_N",
   "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
@@ -1220,6 +1346,15 @@
   "split": "eval",
   "title": "The Rustle of a Bush",
   "url": "https://freesound.org/s/178615/"
+ },
+ "fsd:17923": {
+  "author": "cognito perceptu",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 17923,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "bicycle gravel.wav",
+  "url": "https://freesound.org/s/17923/"
  },
  "fsd:179339": {
   "author": "lolamadeus",
@@ -1319,6 +1454,15 @@
   "split": "eval",
   "title": "Birds Chirping 02",
   "url": "https://freesound.org/s/182502/"
+ },
+ "fsd:182694": {
+  "author": "kingsrow",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 182694,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "Knife Blades.mp3",
+  "url": "https://freesound.org/s/182694/"
  },
  "fsd:182912": {
   "author": "toiletrolltube",
@@ -1635,6 +1779,15 @@
   "title": "coyote boi.mp3",
   "url": "https://freesound.org/s/244456/"
  },
+ "fsd:248258": {
+  "author": "stondi",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 248258,
+  "license": "CC0-1.0",
+  "split": "eval",
+  "title": "floorboards creaking",
+  "url": "https://freesound.org/s/248258/"
+ },
  "fsd:254186": {
   "author": "lauriemc",
   "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
@@ -1733,6 +1886,15 @@
   "split": "dev",
   "title": "lino_02c_socks_run.wav",
   "url": "https://freesound.org/s/272539/"
+ },
+ "fsd:273395": {
+  "author": "sturmankin",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 273395,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "wood_01c_barefeet_run.wav",
+  "url": "https://freesound.org/s/273395/"
  },
  "fsd:275617": {
   "author": "Chernoby",
@@ -1886,6 +2048,15 @@
   "split": "dev",
   "title": "door_close.wav",
   "url": "https://freesound.org/s/335754/"
+ },
+ "fsd:336606": {
+  "author": "Anthousai",
+  "dataset": "FSD50K (Fonseca et al. 2022), file mirror huggingface.co/datasets/Fhrozen/FSD50k",
+  "freesound_id": 336606,
+  "license": "CC0-1.0",
+  "split": "dev",
+  "title": "music box - wind up 03.wav",
+  "url": "https://freesound.org/s/336606/"
  },
  "fsd:337386": {
   "author": "eardeer",

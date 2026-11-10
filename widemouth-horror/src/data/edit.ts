@@ -3,7 +3,7 @@
 // The whole script is kept: the main edit ('short') only tightens the gaps between lines so the
 // film lands at about 10 minutes; 'full' keeps the written pauses (about 10:45).
 //
-// Compositions: GoatmanHorror (main) and GoatmanHorrorFull.
+// Compositions: WidemouthHorror (main) and WidemouthHorrorFull.
 export type EditMode = 'full' | 'short';
 
 /** Voice lines dropped from the main edit: none. */

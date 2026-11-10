@@ -49,10 +49,40 @@
   "provider": "fish",
   "seconds": 3.362
  },
+ "dad/dad_001_last_move.wav": {
+  "hash": "08e8acf3bdd3e61b28b9aa3cb7ea509b",
+  "provider": "fish",
+  "seconds": 6.019
+ },
  "dawes/dawes_001_stick_together.wav": {
   "hash": "eaa4924497b65efb2c78412da8e0385b",
   "provider": "fish",
   "seconds": 14.296
+ },
+ "eli/eli_001_a_toy.wav": {
+  "hash": "dcc1f0f9b7674b6db8fe2538b353a32a",
+  "provider": "fish",
+  "seconds": 1.742
+ },
+ "eli/eli_002_move.wav": {
+  "hash": "cd5eddc5bc2d00a77c5c1e15ef2ddd05",
+  "provider": "fish",
+  "seconds": 2.392
+ },
+ "eli/eli_003_nobody.wav": {
+  "hash": "356ef4a7f08d5ff532852e9867fb155a",
+  "provider": "fish",
+  "seconds": 1.505
+ },
+ "eli/eli_004_far_down.wav": {
+  "hash": "dcc89b28551cf7d33bb66673ae8dcdeb",
+  "provider": "fish",
+  "seconds": 3.987
+ },
+ "eli/eli_005_mom_kill_me.wav": {
+  "hash": "af6fe4a3c617e102b649f7a4528fb792",
+  "provider": "fish",
+  "seconds": 3.152
  },
  "hana/hana_001_three_am.wav": {
   "hash": "bffd0fad6211c97206522dd6103740b8",
@@ -208,6 +238,16 @@
   "hash": "d26ee18b4ed593ce4036c2642f81353d",
   "provider": "fish",
   "seconds": 2.696
+ },
+ "leo/leo_001_new_friend.wav": {
+  "hash": "739db4392fc0a2cf862372b88addd768",
+  "provider": "fish",
+  "seconds": 3.369
+ },
+ "leo/leo_002_under_bed.wav": {
+  "hash": "56be0ac2b45ed6e1ff1bc433e500cc13",
+  "provider": "fish",
+  "seconds": 2.834
  },
  "mara/mara_001_look_at_something.wav": {
   "hash": "cfb2c164798c6fd656d46b05b1c4cc4e",
@@ -434,10 +474,25 @@
   "provider": "fish",
   "seconds": 3.647
  },
+ "mom/mom_001_who.wav": {
+  "hash": "ad95ee741f431b84765262ec1f8a9a16",
+  "provider": "fish",
+  "seconds": 2.286
+ },
+ "mom/mom_002_steak_knife.wav": {
+  "hash": "f6201b6dc340edc569c6ea273b2f42b3",
+  "provider": "fish",
+  "seconds": 6.027
+ },
  "narrator/narrator_001_239_frames.wav": {
   "hash": "d0fdc2f588ae9eee5c4744d58653cc17",
   "provider": "fish",
   "seconds": 6.351
+ },
+ "narrator/narrator_001_four_am.wav": {
+  "hash": "97994ba1250620cd94485960d8c85cac",
+  "provider": "fish",
+  "seconds": 3.953
  },
  "narrator/narrator_001_sleepwalking.wav": {
   "hash": "f145b208c5abe9cbca1c2e60a54cfc47",
@@ -459,6 +514,11 @@
   "provider": "fish",
   "seconds": 7.7
  },
+ "narrator/narrator_002_truck.wav": {
+  "hash": "4953a9e7c9edfdf5cf691d695b62ccdd",
+  "provider": "fish",
+  "seconds": 7.12
+ },
  "narrator/narrator_002_twelve.wav": {
   "hash": "a9f56e90c59594354b3c98e49e6b806a",
   "provider": "fish",
@@ -479,6 +539,11 @@
   "provider": "fish",
   "seconds": 2.87
  },
+ "narrator/narrator_003_window.wav": {
+  "hash": "409cc5d0ed94e358bdbfcdfcc19b663b",
+  "provider": "fish",
+  "seconds": 3.034
+ },
  "narrator/narrator_004_all_of_them.wav": {
   "hash": "61a76717a6b0efca646ba519cab973d8",
   "provider": "fish",
@@ -493,6 +558,11 @@
   "hash": "d0dcc4e59849057fa54b7c475578276d",
   "provider": "fish",
   "seconds": 1.859
+ },
+ "narrator/narrator_004_still.wav": {
+  "hash": "2d013da92e066691b965c9fe5fe7be01",
+  "provider": "fish",
+  "seconds": 3.768
  },
  "narrator/narrator_005_closer.wav": {
   "hash": "a5fd4b1cce489d727fa42e8e1601fea6",
@@ -509,6 +579,11 @@
   "provider": "fish",
   "seconds": 8.421
  },
+ "narrator/narrator_005_waved.wav": {
+  "hash": "64c9bee520848a832af1b330328d5294",
+  "provider": "fish",
+  "seconds": 5.634
+ },
  "narrator/narrator_006_every_neighbor.wav": {
   "hash": "84f9ea7bef6f2dcddb73fd447e27d067",
   "provider": "fish",
@@ -519,6 +594,11 @@
   "provider": "fish",
   "seconds": 1.723
  },
+ "narrator/narrator_006_knife.wav": {
+  "hash": "20805e63caffc9ebaf3ebe7676a50080",
+  "provider": "fish",
+  "seconds": 4.009
+ },
  "narrator/narrator_006_ridiculous.wav": {
   "hash": "863b9419e20fe4e7443befed400eac2f",
   "provider": "fish",
@@ -528,6 +608,11 @@
   "hash": "09f317ffed6df15f817a0bef37144e63",
   "provider": "fish",
   "seconds": 5.979
+ },
+ "narrator/narrator_007_didnt_wave.wav": {
+  "hash": "b217ec5f356db4037956b3a41622533d",
+  "provider": "fish",
+  "seconds": 1.919
  },
  "narrator/narrator_007_eleven_of_us.wav": {
   "hash": "10b1eafaf6f7768e02f5fba3d22eaee9",
@@ -544,6 +629,11 @@
   "provider": "fish",
   "seconds": 2.894
  },
+ "narrator/narrator_008_best_friend.wav": {
+  "hash": "bad3d9acc6af2c96a8c830d03bdf1bc6",
+  "provider": "fish",
+  "seconds": 3.359
+ },
  "narrator/narrator_008_facing_stairs.wav": {
   "hash": "c495f88d349a5b619649ed4f3a2e225c",
   "provider": "fish",
@@ -553,6 +643,11 @@
   "hash": "b07492a8ac2b92025842f9c3c7c7e03d",
   "provider": "fish",
   "seconds": 2.801
+ },
+ "narrator/narrator_009_never_stayed.wav": {
+  "hash": "a4cac83d36bb143e9ffde286a49b30ff",
+  "provider": "fish",
+  "seconds": 4.195
  },
  "narrator/narrator_009_nobody_talking.wav": {
   "hash": "74ac1250c0339afcbc02b2b765994491",
@@ -574,6 +669,11 @@
   "provider": "fish",
   "seconds": 2.638
  },
+ "narrator/narrator_010_chased_jobs.wav": {
+  "hash": "4bba1e9f4447311f99f553bbee8ec4b7",
+  "provider": "fish",
+  "seconds": 5.82
+ },
  "narrator/narrator_010_eating_with_us.wav": {
   "hash": "01895c0d6bd80685b4d9a65ff4d2e530",
   "provider": "fish",
@@ -588,6 +688,11 @@
   "hash": "d06c7cecb81e9bc4e61cb620889cf559",
   "provider": "fish",
   "seconds": 3.08
+ },
+ "narrator/narrator_011_farmhouse.wav": {
+  "hash": "f9d8978ac7f25b5ace1af85047f48a36",
+  "provider": "fish",
+  "seconds": 5.681
  },
  "narrator/narrator_011_most_nights.wav": {
   "hash": "ccab966726828dc9d4179ff78420dd7f",
@@ -609,6 +714,11 @@
   "provider": "fish",
   "seconds": 2.127
  },
+ "narrator/narrator_012_too_big.wav": {
+  "hash": "8f7a1f899e454ebd4c9cc78e22b17cca",
+  "provider": "fish",
+  "seconds": 6.572
+ },
  "narrator/narrator_012_whose_face.wav": {
   "hash": "7e4f255d2c42800115523eed111063fe",
   "provider": "fish",
@@ -618,6 +728,11 @@
   "hash": "5e0ba332489d83b637d195652c3c6be4",
   "provider": "fish",
   "seconds": 1.756
+ },
+ "narrator/narrator_013_noises.wav": {
+  "hash": "846dce81990b2949777d564c853e0064",
+  "provider": "fish",
+  "seconds": 7.77
  },
  "narrator/narrator_013_nothing_complicated.wav": {
   "hash": "dcfa87d1d129791418c203754f5d5de3",
@@ -644,6 +759,11 @@
   "provider": "fish",
   "seconds": 2.995
  },
+ "narrator/narrator_014_settle.wav": {
+  "hash": "dd51d3058b39c34d12d39282a1bd81d5",
+  "provider": "fish",
+  "seconds": 6.192
+ },
  "narrator/narrator_015_city_boy.wav": {
   "hash": "44213c30d435b157139887017317aba3",
   "provider": "fish",
@@ -654,10 +774,20 @@
   "provider": "fish",
   "seconds": 7.926
  },
+ "narrator/narrator_015_sick.wav": {
+  "hash": "879b60c90909328bd86a5e285339646a",
+  "provider": "fish",
+  "seconds": 3.777
+ },
  "narrator/narrator_015_so_afraid.wav": {
   "hash": "ebc2501b11a78ec3103ac356e11292d1",
   "provider": "fish",
   "seconds": 3.219
+ },
+ "narrator/narrator_016_fever.wav": {
+  "hash": "b9c779ce62db8f86ac422719d38f705e",
+  "provider": "fish",
+  "seconds": 6.702
  },
  "narrator/narrator_016_moved_in.wav": {
   "hash": "944c14179b6d43102e6351662cfc6d68",
@@ -671,6 +801,11 @@
  },
  "narrator/narrator_016_three_hours.wav": {
   "hash": "8698bfccf1afcbb0d6cdf75c9d7b9ae2",
+  "provider": "fish",
+  "seconds": 6.517
+ },
+ "narrator/narrator_017_boxes.wav": {
+  "hash": "ea74adeea3df0188d731744f1b85439f",
   "provider": "fish",
   "seconds": 6.517
  },
@@ -689,6 +824,11 @@
   "provider": "fish",
   "seconds": 7.354
  },
+ "narrator/narrator_018_empty_room.wav": {
+  "hash": "7393698d22ccdceb87942ad1b957b31d",
+  "provider": "fish",
+  "seconds": 8.212
+ },
  "narrator/narrator_018_extra_frame.wav": {
   "hash": "ba4e1bbf321ba84935cc273cdcea8b74",
   "provider": "fish",
@@ -703,6 +843,11 @@
   "hash": "b783a9193bd3345d0988169a49d0c1f8",
   "provider": "fish",
   "seconds": 1.082
+ },
+ "narrator/narrator_019_bored.wav": {
+  "hash": "c4c7479f266b9546e2b6f810e90f5512",
+  "provider": "fish",
+  "seconds": 3.637
  },
  "narrator/narrator_019_creek.wav": {
   "hash": "f4ef95e90f164bc6d15f111b0c986990",
@@ -734,6 +879,16 @@
   "provider": "fish",
   "seconds": 7.884
  },
+ "narrator/narrator_020_showed_up.wav": {
+  "hash": "1e99f19c4d53780dd4db6248a5239e7b",
+  "provider": "fish",
+  "seconds": 2.198
+ },
+ "narrator/narrator_021_first_time.wav": {
+  "hash": "7b14772ab7eb7297298eebb6f5810e12",
+  "provider": "fish",
+  "seconds": 5.541
+ },
  "narrator/narrator_021_hang_out.wav": {
   "hash": "5516aae66aa3016628b9410763e58a39",
   "provider": "fish",
@@ -759,6 +914,11 @@
   "provider": "fish",
   "seconds": 1.643
  },
+ "narrator/narrator_022_suited.wav": {
+  "hash": "4f8962adab53e88e3866c099e7ab06e1",
+  "provider": "fish",
+  "seconds": 1.13
+ },
  "narrator/narrator_022_very_tall.wav": {
   "hash": "1ea1ed30a1c7af2a1795fc934c928333",
   "provider": "fish",
@@ -779,6 +939,11 @@
   "provider": "fish",
   "seconds": 1.826
  },
+ "narrator/narrator_023_size_of_cat.wav": {
+  "hash": "0670650cc5fd94eb98f5fddd26ace884",
+  "provider": "fish",
+  "seconds": 10.259
+ },
  "narrator/narrator_024_around_seven.wav": {
   "hash": "813bbc2da0caa49933fed133149d522e",
   "provider": "fish",
@@ -793,6 +958,11 @@
   "hash": "44bd7daeb42c926969d91dcfebc4d161",
   "provider": "fish",
   "seconds": 3.445
+ },
+ "narrator/narrator_024_mouth.wav": {
+  "hash": "222cbc9fc766f018d55260b0460523b5",
+  "provider": "fish",
+  "seconds": 6.749
  },
  "narrator/narrator_025_bothered.wav": {
   "hash": "294945aafecf8119ee693c2d00af3f84",
@@ -809,6 +979,11 @@
   "provider": "fish",
   "seconds": 6.244
  },
+ "narrator/narrator_025_toy_pets.wav": {
+  "hash": "05b385bae1f0fbb020f6c6d2e811b003",
+  "provider": "fish",
+  "seconds": 4.605
+ },
  "narrator/narrator_026_306.wav": {
   "hash": "bf7711aebebf7e623ae6736bcdc6048b",
   "provider": "fish",
@@ -823,6 +998,16 @@
   "hash": "8abb2ad769ceb4e080e30e55e950a12f",
   "provider": "fish",
   "seconds": 3.186
+ },
+ "narrator/narrator_026_slid.wav": {
+  "hash": "11b6114ae4350a887bf3aeef63295b0e",
+  "provider": "fish",
+  "seconds": 5.588
+ },
+ "narrator/narrator_027_books.wav": {
+  "hash": "b140db0fb4aa2f09aa2d3a61d2de4513",
+  "provider": "fish",
+  "seconds": 4.933
  },
  "narrator/narrator_027_copper.wav": {
   "hash": "31e2a1e4cbe0fc32158a83360702da4e",
@@ -849,6 +1034,11 @@
   "provider": "fish",
   "seconds": 2.198
  },
+ "narrator/narrator_028_pages.wav": {
+  "hash": "39d770875836d51da5581540613c751a",
+  "provider": "fish",
+  "seconds": 6.981
+ },
  "narrator/narrator_028_stoves.wav": {
   "hash": "145e91fe14a32e79a5101479a08a144d",
   "provider": "fish",
@@ -869,6 +1059,11 @@
   "provider": "fish",
   "seconds": 1.919
  },
+ "narrator/narrator_029_too_fast.wav": {
+  "hash": "00faea5e54d04e3f769608c5d50f803e",
+  "provider": "fish",
+  "seconds": 6.609
+ },
  "narrator/narrator_030_burst_out.wav": {
   "hash": "f320b6c61f056cd7e22dfe0c040ced85",
   "provider": "fish",
@@ -879,6 +1074,11 @@
   "provider": "fish",
   "seconds": 3.382
  },
+ "narrator/narrator_030_lied.wav": {
+  "hash": "db41793a2114b409b405bf29f22f1415",
+  "provider": "fish",
+  "seconds": 4.933
+ },
  "narrator/narrator_030_no_layer.wav": {
   "hash": "11530b41c5ef30129164364f99497d29",
   "provider": "fish",
@@ -888,6 +1088,11 @@
   "hash": "76a3da6a8d07a83c732e375ef105735b",
   "provider": "fish",
   "seconds": 1.965
+ },
+ "narrator/narrator_031_huge_smile.wav": {
+  "hash": "ea423d97769578e33247e01dfc4747cf",
+  "provider": "fish",
+  "seconds": 4.705
  },
  "narrator/narrator_031_mr_harris.wav": {
   "hash": "d63cfa2268598c826bd24e1af3db4a64",
@@ -904,6 +1109,11 @@
   "provider": "fish",
   "seconds": 2.428
  },
+ "narrator/narrator_032_hall.wav": {
+  "hash": "112b44e90d2943d5e39d1a74a135d9a4",
+  "provider": "fish",
+  "seconds": 8.867
+ },
  "narrator/narrator_032_nothing.wav": {
   "hash": "d93f14f0c1c05c327f858bd6c18d0ffc",
   "provider": "fish",
@@ -913,6 +1123,11 @@
   "hash": "f8d08ab09eb9a60c2ed339293dd17214",
   "provider": "fish",
   "seconds": 4.195
+ },
+ "narrator/narrator_033_not_allowed.wav": {
+  "hash": "bf12f5650afc82f21348cba3e702f529",
+  "provider": "fish",
+  "seconds": 4.984
  },
  "narrator/narrator_033_part_of_picture.wav": {
   "hash": "431d816db85e8b5e31f8cac933433616",
@@ -944,6 +1159,11 @@
   "provider": "fish",
   "seconds": 1.653
  },
+ "narrator/narrator_034_room_empty.wav": {
+  "hash": "44efd97f714d34ef4e0c5b5e32dae328",
+  "provider": "fish",
+  "seconds": 7.074
+ },
  "narrator/narrator_035_he_had_moved.wav": {
   "hash": "ae25b662351331b77e4b32e2ce5de378",
   "provider": "fish",
@@ -953,6 +1173,11 @@
   "hash": "3353153e8290cb734a4e9caacbe10911",
   "provider": "fish",
   "seconds": 1.64
+ },
+ "narrator/narrator_035_pushed_open.wav": {
+  "hash": "175cf30fc3297a13b599f539b82774a1",
+  "provider": "fish",
+  "seconds": 3.452
  },
  "narrator/narrator_035_whispered.wav": {
   "hash": "41f68805852ba1a85c29ad12639fe04c",
@@ -964,6 +1189,11 @@
   "provider": "fish",
   "seconds": 1.951
  },
+ "narrator/narrator_036_long_way.wav": {
+  "hash": "e975146db26ca9e3b5c2e5e09d5ccd95",
+  "provider": "fish",
+  "seconds": 6.888
+ },
  "narrator/narrator_036_stared.wav": {
   "hash": "4f794c071e2006c5f9246566911fb2cd",
   "provider": "fish",
@@ -973,6 +1203,11 @@
   "hash": "354b69f6e541499e0e491d523733049c",
   "provider": "fish",
   "seconds": 3.137
+ },
+ "narrator/narrator_037_almost_see.wav": {
+  "hash": "0d89c505100bed3ca831d856ce420878",
+  "provider": "fish",
+  "seconds": 6.842
  },
  "narrator/narrator_037_another.wav": {
   "hash": "383767ff3c0bceafb50f78a5e82335ae",
@@ -993,6 +1228,11 @@
   "hash": "2f17f089938d1b22718a75df1cf9ad7e",
   "provider": "fish",
   "seconds": 1.269
+ },
+ "narrator/narrator_038_face_changed.wav": {
+  "hash": "9de68297a13302a4f6c2f439e915d423",
+  "provider": "fish",
+  "seconds": 2.012
  },
  "narrator/narrator_038_finger_lips.wav": {
   "hash": "ac471bf23745951855b42a8df62511eb",
@@ -1018,6 +1258,16 @@
   "hash": "68e9c3a2cd60a642fb97bf7a7f6c85e9",
   "provider": "fish",
   "seconds": 2.383
+ },
+ "narrator/narrator_039_snarled.wav": {
+  "hash": "38894eaff65d26283527bcafa778bb0f",
+  "provider": "fish",
+  "seconds": 7.724
+ },
+ "narrator/narrator_040_disappointed.wav": {
+  "hash": "3e1900756ef433349f9608a3a17b1c2d",
+  "provider": "fish",
+  "seconds": 4.659
  },
  "narrator/narrator_040_footsteps.wav": {
   "hash": "0e373d29fcdea69dc79d837ee4ed783b",
@@ -1049,6 +1299,16 @@
   "provider": "fish",
   "seconds": 5.077
  },
+ "narrator/narrator_041_rest_of_day.wav": {
+  "hash": "2249c772250d1d64f01dda4219f4988d",
+  "provider": "fish",
+  "seconds": 5.123
+ },
+ "narrator/narrator_042_cardboard_box.wav": {
+  "hash": "4d1f096a477c4bc595e5c55430e4e7fc",
+  "provider": "fish",
+  "seconds": 4.195
+ },
  "narrator/narrator_042_fourth_time.wav": {
   "hash": "c53baa639884496f6bf58fcac2e0f9f0",
   "provider": "fish",
@@ -1074,6 +1334,11 @@
   "provider": "fish",
   "seconds": 2.292
  },
+ "narrator/narrator_043_looked_inside.wav": {
+  "hash": "1a8ca87459876345e87a3e902979e75b",
+  "provider": "fish",
+  "seconds": 2.337
+ },
  "narrator/narrator_043_ray_quiet.wav": {
   "hash": "4ea71b479eaf1b796d240375ac61e854",
   "provider": "fish",
@@ -1083,6 +1348,11 @@
   "hash": "a7323ae59f67f50abc5545a1f174c058",
   "provider": "fish",
   "seconds": 1.808
+ },
+ "narrator/narrator_044_knives.wav": {
+  "hash": "fe39625b7d3b40771af4c8400c1d771a",
+  "provider": "fish",
+  "seconds": 2.662
  },
  "narrator/narrator_044_shut_up.wav": {
   "hash": "66ba20e75bf8fa55a067cf8952d6a812",
@@ -1109,10 +1379,20 @@
   "provider": "fish",
   "seconds": 1.906
  },
+ "narrator/narrator_045_smile_gone.wav": {
+  "hash": "1833b3666368200e06baed0c003125dc",
+  "provider": "fish",
+  "seconds": 4.195
+ },
  "narrator/narrator_046_appeared.wav": {
   "hash": "daaf465710b2668a773608a561a05930",
   "provider": "fish",
   "seconds": 7.538
+ },
+ "narrator/narrator_046_slid_back.wav": {
+  "hash": "15ef6a709ccedc2c9255851e69405152",
+  "provider": "fish",
+  "seconds": 3.823
  },
  "narrator/narrator_046_stories.wav": {
   "hash": "d5d22987849ebf5f72e852da27419086",
@@ -1139,6 +1419,11 @@
   "provider": "fish",
   "seconds": 4.886
  },
+ "narrator/narrator_047_wondering.wav": {
+  "hash": "fed265b35e1d400114d51e421b2220e8",
+  "provider": "fish",
+  "seconds": 5.261
+ },
  "narrator/narrator_048_dragging_concrete.wav": {
   "hash": "041ebe5cfa127d4fc5f4903251d295db",
   "provider": "fish",
@@ -1148,6 +1433,11 @@
   "hash": "51d1559aa5402541144298b977418bff",
   "provider": "fish",
   "seconds": 1.992
+ },
+ "narrator/narrator_048_underneath.wav": {
+  "hash": "bf4a5d8adc0d32865e5ad0583a5e90dd",
+  "provider": "fish",
+  "seconds": 1.733
  },
  "narrator/narrator_048_wears_faces.wav": {
   "hash": "e21cd7edcea4a149aabae3c3af1a85ba",
@@ -1168,6 +1458,16 @@
   "hash": "77e6e4db229ba372ad8b0969481dbde5",
   "provider": "fish",
   "seconds": 8.142
+ },
+ "narrator/narrator_049_woke_me.wav": {
+  "hash": "7dd9afc7e0dc6dbcd068ec818466fd99",
+  "provider": "fish",
+  "seconds": 2.987
+ },
+ "narrator/narrator_050_grin.wav": {
+  "hash": "2f672baa29c63c21bfbdaef3cea8498a",
+  "provider": "fish",
+  "seconds": 7.492
  },
  "narrator/narrator_050_heard_something.wav": {
   "hash": "5658714ace02bd4cdcd1994f2a3cff26",
@@ -1199,6 +1499,16 @@
   "provider": "fish",
   "seconds": 4.386
  },
+ "narrator/narrator_051_squeeze.wav": {
+  "hash": "2f3e8ca26073783b99094f67a623d646",
+  "provider": "fish",
+  "seconds": 4.009
+ },
+ "narrator/narrator_052_didnt_leave.wav": {
+  "hash": "6585acd217732ad03aec05c089da54f0",
+  "provider": "fish",
+  "seconds": 2.058
+ },
  "narrator/narrator_052_gone.wav": {
   "hash": "95486626ac5a0a84cea308035009aba6",
   "provider": "fish",
@@ -1229,6 +1539,11 @@
   "provider": "fish",
   "seconds": 3.08
  },
+ "narrator/narrator_053_until_grey.wav": {
+  "hash": "e5e1d72da9e6267a95609f2417d040a6",
+  "provider": "fish",
+  "seconds": 6.284
+ },
  "narrator/narrator_054_flickering.wav": {
   "hash": "03fbef6a3642ebf187fab04c657a6076",
   "provider": "fish",
@@ -1238,6 +1553,11 @@
   "hash": "61e0b2ec3b1791b13deacf9840d2b6f8",
   "provider": "fish",
   "seconds": 2.755
+ },
+ "narrator/narrator_054_not_fun.wav": {
+  "hash": "7bcd3967f76c08821132c2d6503a98bf",
+  "provider": "fish",
+  "seconds": 1.64
  },
  "narrator/narrator_054_scream.wav": {
   "hash": "91b61ba01bee2cc2a7258353cf827f6d",
@@ -1254,6 +1574,11 @@
   "provider": "fish",
   "seconds": 2.923
  },
+ "narrator/narrator_055_woke_cold.wav": {
+  "hash": "639139eed4c60e762dba91fe9f1d129d",
+  "provider": "fish",
+  "seconds": 4.473
+ },
  "narrator/narrator_055_worst_part.wav": {
   "hash": "ab4db0a5ea45300bc48eb7aa83c48b43",
   "provider": "fish",
@@ -1268,6 +1593,11 @@
   "hash": "225c0d1d625d26edf72177bd49de5b73",
   "provider": "fish",
   "seconds": 3.093
+ },
+ "narrator/narrator_056_not_in_bed.wav": {
+  "hash": "b75aae60eff48c5df930bb42286bba28",
+  "provider": "fish",
+  "seconds": 2.291
  },
  "narrator/narrator_056_second_night.wav": {
   "hash": "8a0b1e8b98417a0b431b8c7d5b96ac62",
@@ -1284,6 +1614,11 @@
   "provider": "fish",
   "seconds": 5.959
  },
+ "narrator/narrator_057_sill.wav": {
+  "hash": "88f1b5b12cc4784e7e02d6be24efb551",
+  "provider": "fish",
+  "seconds": 13.111
+ },
  "narrator/narrator_057_stopped.wav": {
   "hash": "a28f265dd7ac8741bea071fdc92ddb24",
   "provider": "fish",
@@ -1293,6 +1628,11 @@
   "hash": "16531e32c07bc44b56ad808b9565f115",
   "provider": "fish",
   "seconds": 4.38
+ },
+ "narrator/narrator_058_dont_know.wav": {
+  "hash": "5827df10cf34925e4d00007a77df0222",
+  "provider": "fish",
+  "seconds": 2.31
  },
  "narrator/narrator_058_dragging_floor.wav": {
   "hash": "6a4e1e8086a009dbe89c62e43b7f6f0c",
@@ -1319,6 +1659,16 @@
   "provider": "fish",
   "seconds": 1.548
  },
+ "narrator/narrator_059_whispered.wav": {
+  "hash": "374a17841d7da819361bfde084ed1f9b",
+  "provider": "fish",
+  "seconds": 4.473
+ },
+ "narrator/narrator_060_ran_back.wav": {
+  "hash": "80badebf7b4158bcf661116bac454087",
+  "provider": "fish",
+  "seconds": 6.572
+ },
  "narrator/narrator_060_something_wrong.wav": {
   "hash": "bb4837e98c91890544993334403b201a",
   "provider": "fish",
@@ -1333,6 +1683,11 @@
   "hash": "df633752b7fbb2044e465c662e6f9925",
   "provider": "fish",
   "seconds": 3.637
+ },
+ "narrator/narrator_061_better.wav": {
+  "hash": "aafc04b3c2f6eee74c06ef848aef6c1c",
+  "provider": "fish",
+  "seconds": 4.222
  },
  "narrator/narrator_061_carpet.wav": {
   "hash": "29826dff037b623292b4d156ceaa74c1",
@@ -1354,6 +1709,11 @@
   "provider": "fish",
   "seconds": 3.406
  },
+ "narrator/narrator_062_porch.wav": {
+  "hash": "3ede8f46106622cdbcd063a105fd8912",
+  "provider": "fish",
+  "seconds": 2.966
+ },
  "narrator/narrator_062_same_stain.wav": {
   "hash": "00cfb49ccc50140539a1b234c05ab11a",
   "provider": "fish",
@@ -1374,6 +1734,11 @@
   "provider": "fish",
   "seconds": 4.9
  },
+ "narrator/narrator_063_deer_trail.wav": {
+  "hash": "1412646d766cd536d3c92d77c6a50d01",
+  "provider": "fish",
+  "seconds": 6.935
+ },
  "narrator/narrator_063_peephole_again.wav": {
   "hash": "c845112df3a2a5b6a0a68645b7cacebd",
   "provider": "fish",
@@ -1393,6 +1758,16 @@
   "hash": "fbbffe05c94cb548a221e9f288b6068d",
   "provider": "fish",
   "seconds": 4.254
+ },
+ "narrator/narrator_064_silent.wav": {
+  "hash": "018e8be81d5ca9a36bc05e3c342d3269",
+  "provider": "fish",
+  "seconds": 8.188
+ },
+ "narrator/narrator_065_black_eyes.wav": {
+  "hash": "5365d20ae7a3c592778c93b8722cdf8e",
+  "provider": "fish",
+  "seconds": 3.294
  },
  "narrator/narrator_065_mother.wav": {
   "hash": "706d1b03e5f532a8fed881013b0f5411",
@@ -1419,6 +1794,11 @@
   "provider": "fish",
   "seconds": 2.436
  },
+ "narrator/narrator_066_moving_day.wav": {
+  "hash": "e8ee621238838c3614139a22304faca6",
+  "provider": "fish",
+  "seconds": 3.034
+ },
  "narrator/narrator_066_wall_wrong.wav": {
   "hash": "8f9b9b07bb32d53c8f5a5eeab0b5666b",
   "provider": "fish",
@@ -1433,6 +1813,11 @@
   "hash": "ca09901f7a815f9bbe2e8047360e8b72",
   "provider": "fish",
   "seconds": 3.797
+ },
+ "narrator/narrator_067_didnt_tell.wav": {
+  "hash": "0c24107ed93ee5468c3eea4129af7a19",
+  "provider": "fish",
+  "seconds": 8.096
  },
  "narrator/narrator_067_too_smooth.wav": {
   "hash": "ffebc0731c45a169e4e3c14d99ae3b57",
@@ -1454,6 +1839,16 @@
   "provider": "fish",
   "seconds": 3.823
  },
+ "narrator/narrator_068_searched.wav": {
+  "hash": "ded0e477dd151c334d5f63d889d1409e",
+  "provider": "fish",
+  "seconds": 4.334
+ },
+ "narrator/narrator_069_nobody.wav": {
+  "hash": "f71bb1ff82f2486be207fdcb2cba8d7f",
+  "provider": "fish",
+  "seconds": 1.919
+ },
  "narrator/narrator_069_nobody_moved.wav": {
   "hash": "67298d51e19cfbe791b2608c22d6ff07",
   "provider": "fish",
@@ -1474,6 +1869,11 @@
   "provider": "fish",
   "seconds": 1.965
  },
+ "narrator/narrator_070_lay_awake.wav": {
+  "hash": "5d01a4aff0f4bf6ddcd9f449bcddb3d9",
+  "provider": "fish",
+  "seconds": 9.496
+ },
  "narrator/narrator_070_nobody_escape.wav": {
   "hash": "b1357daf4a036aa1be8d28df655b7cf8",
   "provider": "fish",
@@ -1489,6 +1889,11 @@
   "provider": "fish",
   "seconds": 5.021
  },
+ "narrator/narrator_071_four_am.wav": {
+  "hash": "75024127b2198319151e2c2811f0c0e1",
+  "provider": "fish",
+  "seconds": 5.261
+ },
  "narrator/narrator_071_knee.wav": {
   "hash": "9e34084d884b64303fa1472f2451b3f6",
   "provider": "fish",
@@ -1498,6 +1903,11 @@
   "hash": "7693610362610d1123f099e768f530dc",
   "provider": "fish",
   "seconds": 2.169
+ },
+ "narrator/narrator_072_backed_out.wav": {
+  "hash": "7541a3edd72c8b18a5361e8a80627613",
+  "provider": "fish",
+  "seconds": 4.125
  },
  "narrator/narrator_072_not_surprised.wav": {
   "hash": "873e3787e9c5213a6da882e1b8df6990",
@@ -1529,6 +1939,11 @@
   "provider": "fish",
   "seconds": 5.154
  },
+ "narrator/narrator_073_there_he_was.wav": {
+  "hash": "71d0abf193a640eae4a53723ec73c23a",
+  "provider": "fish",
+  "seconds": 3.73
+ },
  "narrator/narrator_074_knew_exactly.wav": {
   "hash": "13ec18df967805d89e1ae3c1e2ee8d2b",
   "provider": "fish",
@@ -1544,10 +1959,20 @@
   "provider": "fish",
   "seconds": 2.049
  },
+ "narrator/narrator_074_you_know.wav": {
+  "hash": "4487471c22a223b9febfb3301b2553f5",
+  "provider": "fish",
+  "seconds": 1.919
+ },
  "narrator/narrator_075_except_me.wav": {
   "hash": "b243d18c9cccc9aa3e385dd3ecc89d12",
   "provider": "fish",
   "seconds": 1.54
+ },
+ "narrator/narrator_075_little_wave.wav": {
+  "hash": "aa01b6802527784aa33bd845a8a47aa3",
+  "provider": "fish",
+  "seconds": 1.78
  },
  "narrator/narrator_075_sunrise.wav": {
   "hash": "e57f2d02a141905ed689459ce24fa585",
@@ -1574,10 +1999,20 @@
   "provider": "fish",
   "seconds": 3.171
  },
+ "narrator/narrator_076_the_knife.wav": {
+  "hash": "00aa4dbbe9d439cbf8fa18b1c976de07",
+  "provider": "fish",
+  "seconds": 1.965
+ },
  "narrator/narrator_077_copying_animation.wav": {
   "hash": "63fa6915d206ff354c677ecb42861f23",
   "provider": "fish",
   "seconds": 3.367
+ },
+ "narrator/narrator_077_drove_back.wav": {
+  "hash": "a1f9c8bafb3e55912d52525ce99d6ff8",
+  "provider": "fish",
+  "seconds": 3.359
  },
  "narrator/narrator_077_no_signal.wav": {
   "hash": "ac49719ad0f75fd12058722b5925dcda",
@@ -1594,6 +2029,11 @@
   "provider": "fish",
   "seconds": 3.498
  },
+ "narrator/narrator_078_house_gone.wav": {
+  "hash": "777e74e982bebad79b71ded94ff498a9",
+  "provider": "fish",
+  "seconds": 9.423
+ },
  "narrator/narrator_078_seven_left.wav": {
   "hash": "c36906cba9702760810294d9cdacf4c4",
   "provider": "fish",
@@ -1609,6 +2049,11 @@
   "provider": "fish",
   "seconds": 3.034
  },
+ "narrator/narrator_079_found_trail.wav": {
+  "hash": "652528da8658d5f187701abb0db45307",
+  "provider": "fish",
+  "seconds": 1.919
+ },
  "narrator/narrator_079_nothing.wav": {
   "hash": "a53b334dd8cf7f5f068ba2e6f38321ea",
   "provider": "fish",
@@ -1618,6 +2063,11 @@
   "hash": "3befaab870c67930df28da3c5ff9e7b3",
   "provider": "fish",
   "seconds": 6.957
+ },
+ "narrator/narrator_080_expected.wav": {
+  "hash": "b2df7080104a692cac01bd5a726d5067",
+  "provider": "fish",
+  "seconds": 8.746
  },
  "narrator/narrator_080_nia_back.wav": {
   "hash": "ac08dec01554a14746f2f8237f45ab3b",
@@ -1633,6 +2083,11 @@
   "hash": "9903cab71818cf380a3c62a1d9397a4d",
   "provider": "fish",
   "seconds": 2.298
+ },
+ "narrator/narrator_081_deeper.wav": {
+  "hash": "a50733b5e92736e1488cbceb34969365",
+  "provider": "fish",
+  "seconds": 3.312
  },
  "narrator/narrator_081_fire_pit.wav": {
   "hash": "290c81dd2a1d5764759a40ecadeb62e3",
@@ -1654,6 +2109,11 @@
   "provider": "fish",
   "seconds": 1.965
  },
+ "narrator/narrator_082_cemetery.wav": {
+  "hash": "80deb708adce8b675e12361dbb047f6f",
+  "provider": "fish",
+  "seconds": 2.432
+ },
  "narrator/narrator_082_froze.wav": {
   "hash": "ac3ba7525c1aad207fed56e7dbb561bc",
   "provider": "fish",
@@ -1668,6 +2128,11 @@
   "hash": "b0deb60e639ba8945d9cf5b92537bed4",
   "provider": "fish",
   "seconds": 3.266
+ },
+ "narrator/narrator_083_headstones.wav": {
+  "hash": "592aea757ba598a9e54e827be5007c4e",
+  "provider": "fish",
+  "seconds": 4.086
  },
  "narrator/narrator_083_hesitated.wav": {
   "hash": "b94d38d0af112c8f8f756a48d296b084",
@@ -1684,6 +2149,11 @@
   "provider": "fish",
   "seconds": 4.076
  },
+ "narrator/narrator_084_children.wav": {
+  "hash": "6f7ca62ef62e7a6a659f1bb522e80180",
+  "provider": "fish",
+  "seconds": 3.591
+ },
  "narrator/narrator_084_same_position.wav": {
   "hash": "77a707b3a6958eae4a5bb8a7be659c00",
   "provider": "fish",
@@ -1699,6 +2169,11 @@
   "provider": "fish",
   "seconds": 2.337
  },
+ "narrator/narrator_085_not_ready.wav": {
+  "hash": "ac373b52600c4851305c3c71589a5c84",
+  "provider": "fish",
+  "seconds": 2.383
+ },
  "narrator/narrator_085_shoulders.wav": {
   "hash": "0437c08be2263de457661d7d5f120c59",
   "provider": "fish",
@@ -1708,6 +2183,11 @@
   "hash": "3a0802efaadb41f8bcfad46c1447de5f",
   "provider": "fish",
   "seconds": 2.583
+ },
+ "narrator/narrator_086_had_been.wav": {
+  "hash": "12d37a3c30e46d41c3eb2f5058624d6c",
+  "provider": "fish",
+  "seconds": 2.43
  },
  "narrator/narrator_086_laughing.wav": {
   "hash": "2331d0e73adcb72c708605787d35af88",
@@ -1728,6 +2208,11 @@
   "hash": "feb9c6a2925fd952861a087108299dc0",
   "provider": "fish",
   "seconds": 2.291
+ },
+ "narrator/narrator_087_son_five.wav": {
+  "hash": "a7f1c19361d07bc3d4ae169f2b2c617b",
+  "provider": "fish",
+  "seconds": 3.312
  },
  "narrator/narrator_087_swallowed.wav": {
   "hash": "0bdb8cae30050e96cfcbcfaf3fb25696",
@@ -1754,6 +2239,11 @@
   "provider": "fish",
   "seconds": 1.512
  },
+ "narrator/narrator_088_trampoline.wav": {
+  "hash": "ae7605306a1315a2f2fc327b37622bfc",
+  "provider": "fish",
+  "seconds": 3.684
+ },
  "narrator/narrator_089_blinds.wav": {
   "hash": "2cb9623e2ce352bec08f75ede679078e",
   "provider": "fish",
@@ -1768,6 +2258,11 @@
   "hash": "bc7d7e703444a460f24410b821ae5876",
   "provider": "fish",
   "seconds": 2.803
+ },
+ "narrator/narrator_089_who_told.wav": {
+  "hash": "49ac7a4af942495a37e2b32c6f6d0f3a",
+  "provider": "fish",
+  "seconds": 3.916
  },
  "narrator/narrator_090_arms.wav": {
   "hash": "d329909ec68d9cd94ce509f2b8ee5be1",
@@ -3048,6 +3543,76 @@
   "hash": "90df3d63cf1042314a1908da97362a53",
   "provider": "fish",
   "seconds": 3.497
+ },
+ "widemouth/widemouth_001_call_me.wav": {
+  "hash": "a353335e64b6753d72d2b44c4799a1a6",
+  "provider": "fish",
+  "seconds": 4.179
+ },
+ "widemouth/widemouth_002_friend.wav": {
+  "hash": "36d8b3a582e096822cc7b2db399222b7",
+  "provider": "fish",
+  "seconds": 5.26
+ },
+ "widemouth/widemouth_003_other_friends.wav": {
+  "hash": "ece93522bfd1a4e1339e587f89e2afb6",
+  "provider": "fish",
+  "seconds": 2.629
+ },
+ "widemouth/widemouth_004_good.wav": {
+  "hash": "5e3070bb6f2f89df74051f59042bf8fe",
+  "provider": "fish",
+  "seconds": 5.042
+ },
+ "widemouth/widemouth_005_parents.wav": {
+  "hash": "ef834aecf3616f433c03e08cc1421bd7",
+  "provider": "fish",
+  "seconds": 5.433
+ },
+ "widemouth/widemouth_006_secret_game.wav": {
+  "hash": "01010d50777903943630a90eacc94c2f",
+  "provider": "fish",
+  "seconds": 5.718
+ },
+ "widemouth/widemouth_007_how_to_play.wav": {
+  "hash": "3ad2f8e25836ca57e8c2eaaf9ee46d46",
+  "provider": "fish",
+  "seconds": 19.292
+ },
+ "widemouth/widemouth_008_juggle.wav": {
+  "hash": "d2d68f36e6d4638a1ada9591cd4d18be",
+  "provider": "fish",
+  "seconds": 2.814
+ },
+ "widemouth/widemouth_009_more_fun.wav": {
+  "hash": "6860a1393d0b974019415c9f9240b52a",
+  "provider": "fish",
+  "seconds": 2.695
+ },
+ "widemouth/widemouth_010_real_trampoline.wav": {
+  "hash": "6e60a63146e4fd901a8985ba32e9b0a4",
+  "provider": "fish",
+  "seconds": 10.211
+ },
+ "widemouth/widemouth_011_almost.wav": {
+  "hash": "9f9b4c444c1bd2f0649c5507e3469db4",
+  "provider": "fish",
+  "seconds": 2.234
+ },
+ "widemouth/widemouth_012_show_you.wav": {
+  "hash": "f994888dc4a6bab76a2b6939869a65c0",
+  "provider": "fish",
+  "seconds": 6.732
+ },
+ "widemouth/widemouth_013_important_path.wav": {
+  "hash": "761c0d96f70640a74d4f5a6196f2efd3",
+  "provider": "fish",
+  "seconds": 15.06
+ },
+ "widemouth/widemouth_014_not_ready.wav": {
+  "hash": "daee9d55585b356d4d3cba9ec92effde",
+  "provider": "fish",
+  "seconds": 6.014
  },
  "wyatt/wyatt_001_lock_door.wav": {
   "hash": "1b64aa9715e243e29796454275cd7837",
