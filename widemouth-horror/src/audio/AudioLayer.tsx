@@ -114,10 +114,15 @@ const useDuck = (tl: Timeline) =>
 		return out;
 	}, [tl]);
 
-/** Everything stops dead at the final scene (the white hold is complete silence). */
+/**
+ * Optional dead silence from the start of one scene to the end of the film (Frame 240's white hold).
+ * OFF in this film: it used to trigger on any scene called 'end', which silenced this film's whole final
+ * scene (narration, beds and music from 9:03 on).
+ */
+const SILENT_FROM_SCENE: string | null = null;
 const silenceFrom = (tl: Timeline) => {
-	const end = tl.scenes.find((s) => s.id === 'end');
-	return end ? end.startFrame : tl.totalFrames;
+	const s = SILENT_FROM_SCENE ? tl.scenes.find((x) => x.id === SILENT_FROM_SCENE) : undefined;
+	return s ? s.startFrame : tl.totalFrames;
 };
 
 export const AudioLayer: React.FC<{timeline: Timeline}> = ({timeline: tl}) => {
