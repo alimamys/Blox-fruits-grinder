@@ -52,7 +52,8 @@ const buildChunks = (tl: Timeline): Chunk[] => {
 			if (cur.length && (chars > MAX_CHARS || cur.length >= MAX_WORDS)) flush();
 			cur.push(w);
 			const t = w.text;
-			if (/[.?!:…]$/.test(t) || t === '—' || (/,$/.test(t) && chars > 18)) flush();
+			const abbrev = /^(Mr|Mrs|Ms|Dr|St)\.$/.test(t); // "Mr. Widemouth" stays on one line
+			if ((/[.?!:…]$/.test(t) && !abbrev) || t === '—' || (/,$/.test(t) && chars > 18)) flush();
 		}
 		flush();
 	}
