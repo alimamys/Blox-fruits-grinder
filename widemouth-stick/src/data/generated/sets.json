@@ -1,0 +1,138 @@
+{
+ "driveway_night": {
+  "ground": 975,
+  "window": [
+   1528,
+   276,
+   1582,
+   342
+  ],
+  "night": true
+ },
+ "window_out_night": {
+  "pane": [
+   672,
+   532,
+   1248,
+   852
+  ],
+  "sill": 852,
+  "night": true
+ },
+ "farmhouse_day": {
+  "ground": 930,
+  "door": [
+   1150,
+   560
+  ],
+  "night": false
+ },
+ "road_day": {
+  "ground": 905,
+  "night": false
+ },
+ "porch_day": {
+  "deck": 622,
+  "ground": 950,
+  "stepsX": [
+   830,
+   1150
+  ],
+  "night": false
+ },
+ "woods_edge": {
+  "ground": 950,
+  "trail": [
+   960,
+   780
+  ],
+  "night": false
+ },
+ "woods_trail": {
+  "ground": 920,
+  "night": false
+ },
+ "ruins_day": {
+  "ground": 950,
+  "night": false
+ },
+ "cemetery_day": {
+  "ground": 1000,
+  "night": false
+ },
+ "leoroom_day": {
+  "floor": 760,
+  "bed_x0": 150,
+  "bed_x1": 990,
+  "mattress": 610,
+  "skirt_bottom": 868,
+  "feet": 880,
+  "night": false
+ },
+ "hallway": {
+  "horizon": 520,
+  "near": 1060,
+  "far": 660,
+  "endDoor": [
+   905,
+   440,
+   1015,
+   660
+  ],
+  "night": false
+ },
+ "emptyroom": {
+  "opening": [
+   760,
+   180,
+   1160,
+   700
+  ],
+  "sill": 700,
+  "floor": 760,
+  "ground": 960,
+  "night": false
+ },
+ "window_down": {
+  "ground": [
+   1060,
+   520
+  ],
+  "sill": 900,
+  "night": false
+ },
+ "kitchen_night": {
+  "ground": 930,
+  "drawer": [
+   1320,
+   605,
+   1490,
+   650
+  ],
+  "table": [
+   300,
+   680,
+   900,
+   710
+  ],
+  "night": true
+ },
+ "bedroom_night": {
+  "floor": 760,
+  "bed_x0": 150,
+  "bed_x1": 990,
+  "mattress": 610,
+  "skirt_bottom": 868,
+  "feet": 880,
+  "night": true
+ },
+ "bedroom_day": {
+  "floor": 760,
+  "bed_x0": 150,
+  "bed_x1": 990,
+  "mattress": 610,
+  "skirt_bottom": 868,
+  "feet": 880,
+  "night": false
+ }
+}

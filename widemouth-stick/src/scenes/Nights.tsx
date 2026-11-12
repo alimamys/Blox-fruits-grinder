@@ -1,134 +1,171 @@
-// 6. THE NIGHTS - the grin at the edge of the mattress, the whispering until dawn, waking at the
-// open window. "Almost."
+// 6. THE NIGHTS - the grin at the edge of the mattress, whispering until dawn; then waking up cold on the
+// sill of the empty room, the window wide open. "Almost."
 import React from 'react';
-import {Person, WideFig} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {MOOD} from './common';
-import {again, close, push, shot} from './kit';
+import {Eli} from '../components/characters/Cast';
+import {Widemouth} from '../components/characters/Widemouth';
+import {BEDS, GEO, hallScale, INK, lerp, ramp, Sash, shot, Shots, Tint, useStick} from '../stick/kit';
+import {BedScene, EmptyBed, KID_S, WM_S} from '../stick/rooms';
 
-export const Nights: React.FC = () => (
-	<Shots
-		shots={[
-			// "After that, he woke me up at night."
-			close('n_01_wake', 'narrator_049_woke_me', {
-				chars: ['eli'],
-				loc: 'bedroom',
-				quality: 'high',
-				dark: true,
-				mood: MOOD.bedNight,
-				prompt: 'Close-up at night: little ELI asleep on his pillow, seen from the side, his eyes CLOSED, the quilt up to his chin, cold blue moonlight across his face.',
-				variants: [{name: 'open', prompt: 'His eyes are now OPEN wide, staring sideways toward the edge of the mattress, frightened. Everything else stays identical.'}],
-				seq: [
-					['base', 0],
-					['open', 0.55],
-				],
-				move: push(1.7, 1.85, 0.3, 0.33), // tight on his face so the eyes opening read
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#0f1626" />
-				<ellipse cx={960} cy={760} rx={900} ry={240} fill="#c8ccd4" />
-				<circle cx={900} cy={560} r={220} fill="#efcfb4" />
-			</>),
-			// "...that wide grin would be right at the edge of my mattress."
-			close('n_02_grin', 'narrator_050_grin', {
-				kind: 'talk',
-				chars: ['widemouth'],
-				loc: 'bedroom',
-				quality: 'high',
-				dark: true,
-				mood: MOOD.bedNight,
-				prompt: 'In the dark, at the very edge of the mattress, seen from Eli\'s pillow: only the upper half of MR. WIDEMOUTH\'s round head rises above the quilt edge - two huge glossy black eyes catching the moonlight and an enormous ear-to-ear GRIN, inches away. Everything else is blue-black shadow.',
-				talk: ['widemouth_010_real_trampoline'],
-				move: push(1.03, 1.12, 0.5, 0.5),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#070a12" />
-				<WideFig x={960} y={1300} h={1100} mouth="grin" />
-				<rect x={0} y={880} width={1920} height={200} fill="#2a3a5a" />
-			</>),
-			// "I put a real trampoline under the window..."
-			again('n_03_whisper', 'widemouth_010_real_trampoline', 'n_02_grin', {talk: ['widemouth_010_real_trampoline'], move: push(1.12, 1.2, 0.5, 0.5)}),
-			// "I'd tell him no and squeeze my eyes shut."
-			close('n_04_shut', 'narrator_051_squeeze', {
-				chars: ['eli'],
-				loc: 'bedroom',
-				quality: 'high',
-				dark: true,
-				mood: MOOD.bedNight,
-				prompt: 'Close-up at night: little ELI with the quilt pulled up over his nose, his eyes SQUEEZED tightly shut, brows knotted, small fingers gripping the quilt edge. Cold blue moonlight.',
-				fx: 'tremble',
-				move: push(1.04, 1.1, 0.5, 0.45),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#0f1626" />
-				<circle cx={960} cy={480} r={300} fill="#efcfb4" />
-				<rect x={0} y={560} width={1920} height={520} fill="#9a6a5a" />
-			</>),
-			// "But he didn't leave."
-			again('n_05_stay', 'narrator_052_didnt_leave', 'n_02_grin', {move: push(1.0, 1.06, 0.5, 0.5), grade: 0.85}),
-			// "He'd stay there, whispering about the window, until the sky outside turned grey."
-			shot('n_06_dawn', 'narrator_053_until_grey', 'bedroom', {
-				noPeople: true,
-				quality: 'medium',
-				mood: 'Just before dawn: the window turning a cold pale grey, the room still dark blue.',
-				prompt: 'Eli\'s bedroom window just before dawn: the sky outside turning cold pale grey behind the thin curtains, the stacked boxes and the room still in dark blue shadow. No people.',
-				move: push(1.0, 1.08, 0.75, 0.3),
-			}, {cam: {z: 1.8, cx: 1400, cy: 340}}),
-			// "He wasn't fun anymore."
-			again('n_07_notfun', 'narrator_054_not_fun', 'n_04_shut', {move: push(1.1, 1.16, 0.5, 0.42)}),
-			// the dark bedroom - "Then, one night, I woke up cold." / "I wasn't in my bed."
-			shot('n_08_empty_bed', 'night_room', 'bedroom', {
-				noPeople: true,
-				quality: 'medium',
-				dark: true,
-				mood: MOOD.bedNight,
-				prompt: 'Eli\'s bedroom at night: the bed is EMPTY, the quilt thrown back, the pillow dented, the thin curtains lifting in a cold draught. Cold blue moonlight. No people.',
-				move: push(1.0, 1.1, 0.3, 0.45),
-			}, {cam: {z: 1.4, cx: 600, cy: 520}}),
-			again('n_09_not_in_bed', 'narrator_056_not_in_bed', 'n_08_empty_bed', {move: push(1.1, 1.2, 0.25, 0.45)}),
-			// "I was standing in the empty room at the end of the hall. The window was wide open..."
-			shot('n_10_sill', 'narrator_057_sill', 'emptyroom', {
-				chars: ['eli'],
-				quality: 'high',
-				dark: true,
-				mood: MOOD.emptyNight,
-				prompt: 'The empty room at night, seen from the doorway behind him: little ELI in striped pyjamas stands at the WIDE-OPEN tall window with his back to us, his small hands at his sides, his bare feet right at the low windowsill, the night wind lifting his hair and the edges of his pyjamas. Black sky and cold moonlight beyond the window. He is perfectly still.',
-				move: push(1.0, 1.12, 0.5, 0.45),
-			}, {kids: <Person who="eli" x={950} y={700} h={300} facing="back" />}),
-			// "I don't know how I got there."
-			close('n_11_toes', 'narrator_058_dont_know', {
-				chars: ['eli'],
-				loc: 'emptyroom',
-				quality: 'medium',
-				dark: true,
-				mood: MOOD.emptyNight,
-				prompt: 'Close-up at floor level by the open window at night: a little boy\'s bare feet and the hems of striped pyjama trousers standing on the bare floorboards right at the low wooden windowsill, the toes curled tight against the cold. Beyond the sill only black night air. Cold moonlight.',
-				move: push(1.03, 1.1, 0.5, 0.6),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#0b0f1a" />
-				<rect x={0} y={700} width={1920} height={380} fill="#3a2a1c" />
-				<rect x={0} y={640} width={1920} height={60} fill="#cfd3d6" />
-				<ellipse cx={860} cy={820} rx={90} ry={50} fill="#efcfb4" />
-				<ellipse cx={1060} cy={820} rx={90} ry={50} fill="#efcfb4" />
-			</>),
-			// "Behind me, in the dark, something whispered."
-			shot('n_12_behind', 'narrator_059_whispered', 'emptyroom', {
-				chars: ['widemouth'],
-				quality: 'high',
-				dark: true,
-				mood: MOOD.emptyNight,
-				prompt: 'The empty room at night, looking back from the open window toward the dark doorway on the LEFT: in the black doorway, low to the floor, two glossy black eyes and a long pale ear-to-ear GRIN are faintly visible, the rest of MR. WIDEMOUTH lost in shadow. Moonlight across the bare floor.',
-				move: push(1.02, 1.12, 0.22, 0.6),
-			}, {kids: <WideFig x={300} y={900} h={220} mouth="grin" />}),
-			// "Almost."
-			again('n_13_almost', 'widemouth_011_almost', 'n_12_behind', {move: push(1.5, 1.7, 0.2, 0.62), fx: 'pulse'}),
-			// "I ran back to my bed and pulled the blanket over my head..."
-			shot('n_14_blanket', 'narrator_060_ran_back', 'bedroom', {
-				chars: ['eli'],
-				quality: 'medium',
-				dark: true,
-				mood: MOOD.bedNight,
-				prompt: 'Eli\'s bed at night, seen from the side: little ELI is hiding COMPLETELY under the patchwork quilt, pulled right over his head - the quilt bulges clearly over a small curled-up child-sized body from the pillow to the knees, one small hand clutching its edge from inside, a few strands of light-brown hair at the top. The white bed skirt hangs to the floor below. Cold blue moonlight.',
-				fx: 'tremble',
-				move: push(1.3, 1.45, 0.42, 0.38),
-			}, {cam: {z: 1.6, cx: 520, cy: 560}, kids: <rect x={300} y={450} width={500} height={110} rx={50} fill="#9a6a5a" />}),
-		]}
-	/>
-);
+const bn = BEDS.bedroom_night;
+
+export const Nights: React.FC = () => {
+	const {f, t, at, end, word, talk} = useStick();
+	const t49 = at('narrator_049_woke_me');
+	const tWoke = word('narrator_049_woke_me', 'woke', 0.4);
+	const t50 = at('narrator_050_grin');
+	const w10 = at('widemouth_010_real_trampoline');
+	const t51 = at('narrator_051_squeeze');
+	const t52 = at('narrator_052_didnt_leave');
+	const t53 = at('narrator_053_until_grey');
+	const t54 = at('narrator_054_not_fun');
+	const tNR = at('night_room');
+	const t55 = at('narrator_055_woke_cold');
+	const t56 = at('narrator_056_not_in_bed');
+	const t57 = at('narrator_057_sill');
+	const tToes = word('narrator_057_sill', 'toes', 0.7);
+	const t58 = at('narrator_058_dont_know');
+	const t59 = at('narrator_059_whispered');
+	const w11 = at('widemouth_011_almost');
+	const t60 = at('narrator_060_ran_back');
+	const tBed = word('narrator_060_ran_back', 'pulled', 0.35);
+	const wmT = talk('widemouth');
+
+	const er = GEO.emptyroom;
+	const sillX = (er.opening[0] + er.opening[2]) / 2;
+	const wmBedX = bn.pillow[1] + 70;
+	const wmBedY = bn.quilt + 30;
+	const fakeWhisper = t >= t52 && t < end('narrator_053_until_grey') ? Math.max(0, Math.sin(t * 11)) * 0.35 : 0;
+	const dawn = ramp(t, t53 + 0.5, end('narrator_053_until_grey'));
+	const cornerX = 330;
+	const shots = [
+		shot(t49, 'bedroom_night', 1.5, 1.6, [520, 560], [500, 560]),
+		shot(t50, 'bedroom_night', 2.5, 2.8, [430, 560], [440, 560]),
+		shot(w10, 'bedroom_night', 3.0, 3.3, [wmBedX - 20, wmBedY - 130], [wmBedX - 20, wmBedY - 125]),
+		shot(t51, 'bedroom_night', 3.0, 3.2, [330, 560]),
+		shot(t52, 'bedroom_night', 1.6, 1.7, [520, 580]),
+		shot(t53, 'bedroom_night', 1.0, 1.04, [900, 560]),
+		shot(t54, 'bedroom_night', 2.2, 2.3, [370, 560], [370, 560], {light: 'dawn'}),
+		shot(tNR, 'bedroom_night', 1.0, 1.05, [960, 540]),
+		shot(t55, 'black', 1.0, 1.0, [960, 540]),
+		shot(t56, 'bedroom_night', 1.1, 1.15, [600, 600]),
+		shot(t57, 'emptyroom', 1.0, 1.35, [960, 560], [sillX, 520], {light: 'dark'}),
+		shot(tToes - 0.2, 'window_down', 1.0, 1.1, [960, 640], [960, 660], {light: 'dark'}),
+		shot(t58, 'emptyroom', 1.5, 1.6, [sillX, 560], [sillX, 560], {light: 'dark'}),
+		shot(t59, 'emptyroom', 1.3, 1.4, [700, 620], [600, 640], {light: 'dark'}),
+		shot(w11 - 0.2, 'emptyroom', 3.2, 3.6, [cornerX, er.ground - 120], [cornerX, er.ground - 115], {light: 'dark'}),
+		shot(t60, 'emptyroom', 1.0, 1.0, [960, 540], [960, 540], {light: 'dark'}),
+		shot(t60 + 1.3, 'hallway', 1.0, 1.0, [960, 560], [960, 560], {light: 'dark'}),
+		shot(tBed - 0.1, 'bedroom_night', 1.4, 1.5, [560, 560]),
+	];
+
+	const world = (set: string) => {
+		if (set === 'black') {
+			const open = ramp(t, t55 + 0.6, t55 + 1.0);
+			return (
+				<g>
+					<rect width={1920} height={1080} fill="#05070c" />
+					<g opacity={0.9}>
+						<Tint light="dark">
+							<Eli x={960} y={1240} s={4.2} frame={f} eyes={open > 0.5 ? 'wide' : 'closed'} brows="worried" mouth="o" pale={0.35} look={[0, 0.2]} />
+						</Tint>
+					</g>
+				</g>
+			);
+		}
+		if (set === 'bedroom_night') {
+			if (t >= t56 && t < t57) {
+				return (
+					<g>
+						<EmptyBed b={bn} light="night" id="ne" />
+					</g>
+				);
+			}
+			if (t >= t60) return <BedScene set="bedroom_night" light="night" frame={f} bed={{mode: 'hide', shiver: 1}} id="nh" />;
+			const wmOn = t >= t50 && t < end('narrator_053_until_grey') - 0.3;
+			const eyesOpen = t > tWoke && !(t >= t51 && t < t54);
+			const sleep = t >= tNR;
+			return (
+				<g>
+					<BedScene
+						set="bedroom_night"
+						light={t >= t54 && t < tNR ? 'dawn' : 'night'}
+						frame={f}
+						id="nb"
+						bed={{mode: 'lie', p: {eyes: sleep ? 'closed' : eyesOpen ? 'wide' : 'closed', brows: t > tWoke && !sleep ? 'worried' : 'none', look: [1, 0.1], mouth: 'flat', pale: t >= t54 && t < tNR ? 0.3 : 0}}}
+						front={wmOn ? (
+							<g>
+								<Tint light="night">
+									<Widemouth x={wmBedX} y={wmBedY} s={WM_S} frame={f} mouth="grin" talk={wmT.talk + fakeWhisper} flip look={[1, 0.3]} glow />
+								</Tint>
+							</g>
+						) : null}
+					/>
+					{dawn > 0 && t < tNR ? <rect width={1920} height={1080} fill="#7d8aa6" opacity={dawn * 0.45} style={{mixBlendMode: 'screen'}} /> : null}
+				</g>
+			);
+		}
+		if (set === 'window_down') {
+			// his bare toes over the edge of the sill, the drop below in the dark
+			return (
+				<Tint light="dark">
+					{[-1, 1].map((sg) => (
+						<g key={sg} transform={`translate(${960 + sg * 120} 930) scale(1.7)`}>
+							<path d="M-38,80 L-34,0 C-30,-18 30,-18 34,0 L38,80 Z" fill="#e9c9ae" stroke={INK} strokeWidth={5} />
+							{[-22, -8, 6, 20].map((tx) => (
+								<ellipse key={tx} cx={tx * (sg > 0 ? 1 : -1)} cy={-10} rx={7} ry={9} fill="#e9c9ae" stroke={INK} strokeWidth={3} />
+							))}
+						</g>
+					))}
+				</Tint>
+			);
+		}
+		if (set === 'hallway') {
+			const k = ramp(t, t60 + 1.3, tBed - 0.1);
+			const y = lerp(760, 1180, k);
+			return (
+				<Tint light="dark">
+					<Eli x={960} y={y} s={KID_S * 1.25 * hallScale(Math.min(y, 1065)) * 1.1} frame={f} pose="run" phase={k * 30} eyes="wide" brows="worried" mouth="o" />
+				</Tint>
+			);
+		}
+		// the empty room at night: Eli on the sill, the window open; something in the dark corner
+		const jump = t >= t60 ? ramp(t, t60 + 0.1, t60 + 0.4) : 0;
+		const runX = t >= t60 ? lerp(sillX, -300, ramp(t, t60 + 0.35, t60 + 1.3)) : sillX;
+		const onSill = jump < 1;
+		const ey = onSill ? lerp(er.sill, er.ground, jump) - Math.sin(jump * Math.PI) * 40 : er.ground;
+		const shiver = t >= t58 ? 1.2 : 0.4;
+		const cornerOn = t >= t59 - 0.2 && t < t60 + 0.3;
+		return (
+			<g>
+				<Sash up={1} />
+				<Tint light="dark">
+					<Eli
+						x={runX}
+						y={ey}
+						s={KID_S}
+						frame={f}
+						back={t < t60}
+						shiver={shiver}
+						{...(t >= t60 + 0.35 ? {pose: 'run' as const, turn: -0.8, phase: (sillX - runX) / (46 * KID_S)} : {})}
+						eyes="wide"
+						mouth="o"
+						brows="worried"
+					/>
+				</Tint>
+				{cornerOn ? (
+					<g opacity={ramp(t, t59 - 0.2, t59 + 0.6)}>
+						<g filter="url(#ch_dark)">
+							<g style={{filter: 'brightness(0.32)'}}>
+								<Widemouth x={cornerX} y={er.ground} s={WM_S} frame={f} mouth="grin" talk={wmT.talk} look={[1, -0.5]} />
+							</g>
+						</g>
+						{[-1, 1].map((sg) => (
+							<circle key={sg} cx={cornerX + (sg * 24 + 5) * WM_S} cy={er.ground - 155 * WM_S} r={4.4 * WM_S} fill="#e9eeff" />
+						))}
+					</g>
+				) : null}
+			</g>
+		);
+	};
+	return <Shots shots={shots} world={(s) => world(s.set)} />;
+};

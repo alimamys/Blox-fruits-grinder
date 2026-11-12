@@ -1,165 +1,135 @@
-// 9. THE END OF THE TRAIL - twenty-five years later: the burned house, the trail, the children's
-// cemetery. Then home: my son turned five. "The one who lives under my bed."
+// 9. THE END OF THE TRAIL - twenty-five years later: the burned foundation, the deer trail, the cemetery of
+// children. Then his son, five, and the friend with the big smile who lives under his bed.
 import React from 'react';
-import {TitleCard} from '../components/ui/Phone';
-import {Person, WideFig} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {Black, MOOD} from './common';
-import {again, close, code, push, shot} from './kit';
+import {AbsoluteFill} from 'remotion';
+import {EliAdult, Leo} from '../components/characters/Cast';
+import {BEDS, Cake, Car, GEO, gait, lerp, ramp, shot, Shots, TitleCardStick, Tint, useStick, walk} from '../stick/kit';
+import {ADULT_S, BedScene, KID_S, WM_S} from '../stick/rooms';
 
-export const End: React.FC = () => (
-	<Shots
-		shots={[
-			// "Twenty-five years later, I drove back."
-			shot('e_00_back', 'ruins', 'ruins', {
-				chars: ['adult'],
-				quality: 'medium',
-				mood: MOOD.present,
-				prompt: 'Twenty-five years later: ADULT ELI (30, short beard, dark-green flannel shirt) stands alone at the bottom of the overgrown hill beside his parked car on the old dirt track, looking up the slope toward the burned ruins at the top. ONLY adult Eli - the boy Leo is NOT here. Wind in the dry grass.',
-				move: push(1.0, 1.08, 0.45, 0.6),
-			}, {kids: <Person who="eliAdult" x={720} y={1000} h={300} facing="back" />}),
-			// "The house was gone. It had burned down a few years after we left..."
-			shot('e_01_ruins', 'narrator_078_house_gone', 'ruins', {
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.present,
-				prompt: 'The top of the hill: the burned-out stone foundation of the old farmhouse, half buried in weeds and young birches, charred beams fallen across it, the lone brick chimney still standing. No people.',
-				move: {z0: 1.2, z1: 1.3, x0: 0.45, y0: 0.55, x1: 0.6, y1: 0.5},
-			}),
-			// "I found the deer trail."
-			shot('e_02_trail', 'narrator_079_found_trail', 'woods', {
-				chars: ['adult'],
-				quality: 'medium',
-				mood: MOOD.present,
-				prompt: 'The edge of the woods, twenty-five years later, no house any more: ADULT ELI stands with his back to us in the dry autumn grass, facing the narrow deer trail that still disappears between the bare birches and pines. ONLY adult Eli.',
-				move: {z0: 1.55, z1: 1.62, x0: 0.66, y0: 0.5, x1: 0.68, y1: 0.48}, // crop out the old porch (the house is gone)
-			}, {cam: {z: 1.3, cx: 1200, cy: 600}, kids: <Person who="eliAdult" x={1050} y={860} h={380} facing="back" />}),
-			// "Part of me expected him to jump out from behind a tree..."
-			close('e_03_walk', 'narrator_080_expected', {
-				chars: ['adult'],
-				quality: 'high',
-				blink: true,
-				eyes: [0.51, 0.09],
-				mood: MOOD.trail,
-				prompt: 'Deep in the woods, far from any house: ADULT ELI walking slowly along a narrow leaf-covered deer trail between bare birches and dark pines, seen from the front, his eyes searching the tree trunks on either side, tense and wary, hands in his jacket pockets. ONLY adult Eli. NO buildings, NO porch, NO steps, NO structures anywhere - only trees, dead leaves and the trail.',
-				move: push(1.02, 1.08, 0.5, 0.4),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#3a3a2a" />
-				<Person who="eliAdult" x={960} y={1500} h={1200} facing="front" />
-			</>),
-			// "The trail went deeper into the woods than I remembered."
-			again('e_04_deeper', 'narrator_081_deeper', 'r_08_trail', {move: push(1.6, 1.78, 0.68, 0.5), grade: 0.8}), // tight: no porch
-			// "It ended at a cemetery."
-			shot('e_05_cemetery', 'narrator_082_cemetery', 'cemetery', {
-				chars: ['adult'],
-				quality: 'medium',
-				mood: MOOD.cemetery,
-				prompt: 'A small forgotten cemetery deep in the pine woods, inside a rusted iron fence: rows and rows of SMALL, old, mossy headstones, all of them low and child-sized. ADULT ELI stands at the near edge with his back to us, very small, looking at them. ONLY adult Eli. No readable writing.',
-				move: push(1.0, 1.1, 0.5, 0.5),
-			}, {kids: <Person who="eliAdult" x={960} y={1060} h={420} facing="back" />}),
-			// "Rows and rows of small, old headstones."
-			close('e_06_rows', 'narrator_083_headstones', {
-				loc: 'cemetery',
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.cemetery,
-				prompt: 'Low, close along a row of small, old, weathered headstones in the pine needles, each one barely knee-high, covered in moss and lichen, the row receding into the grey woods. No readable writing. No people.',
-				move: {z0: 1.08, z1: 1.08, x0: 0.35, y0: 0.5, x1: 0.65, y1: 0.5},
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#2f3a2c" />
-				<rect x={200} y={500} width={220} height={320} rx={60} fill="#8a8a80" />
-				<rect x={700} y={540} width={180} height={260} rx={50} fill="#8a8a80" />
-				<rect x={1100} y={570} width={150} height={220} rx={40} fill="#8a8a80" />
-				<rect x={1450} y={590} width={120} height={180} rx={30} fill="#8a8a80" />
-			</>),
-			// "Most of them belonged to children."
-			close('e_07_lamb', 'narrator_084_children', {
-				loc: 'cemetery',
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.cemetery,
-				prompt: 'Close-up on one tiny, old child\'s headstone sunk into the moss and pine needles: a small carved lamb lying on top of it, worn smooth by a hundred years of rain, lichen in the grooves. No readable writing. No people.',
-				move: push(1.04, 1.12, 0.5, 0.45),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#2f3a2c" />
-				<rect x={700} y={360} width={520} height={600} rx={60} fill="#8a8a80" />
-				<ellipse cx={960} cy={340} rx={200} ry={80} fill="#a8a89c" />
-			</>),
-			// "He'd told me I wasn't ready."
-			close('e_08_face', 'narrator_085_not_ready', {
-				chars: ['adult'],
-				loc: 'cemetery',
-				quality: 'high',
-				blink: true,
-				mood: MOOD.cemetery,
-				prompt: 'Close-up of ADULT ELI among the pines, staring down at the small headstones, his face drained of colour, the horror slowly dawning in his eyes, his jaw tight. ONLY adult Eli.',
-				move: push(1.03, 1.12, 0.5, 0.42),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#2f3a2c" />
-				<Person who="eliAdult" x={960} y={1900} h={1700} facing="front" />
-			</>),
-			// "Every one of them had been ready."
-			again('e_09_every', 'narrator_086_had_been', 'e_05_cemetery', {move: {z0: 1.2, z1: 1.0, x0: 0.5, y0: 0.5, x1: 0.5, y1: 0.5}}),
-			code('e_10_black', 'cut_black_end', () => <Black />),
-			// "Last week, my son turned five."
-			shot('e_11_leo', 'narrator_087_son_five', 'leoroom', {
-				chars: ['adult'],
-				quality: 'medium',
-				mood: MOOD.leoRoom,
-				prompt: 'Leo\'s bedroom today, on a sunny morning: LEO (5, curly light-brown hair, dinosaur-print pyjamas) sits on the round rug playing with toy dinosaurs, a shiny silver number-5 birthday balloon tied to the bedpost. ONLY Leo - adult Eli is NOT in this frame.',
-				move: push(1.02, 1.08, 0.45, 0.6),
-			}, {kids: <Person who="leo" x={760} y={1000} h={260} facing="right" />}),
-			// "This morning, he asked me if we could get a trampoline."
-			shot('e_12_ask', 'narrator_088_trampoline', 'leoroom', {
-				chars: ['adult'],
-				quality: 'high',
-				mood: MOOD.leoRoom,
-				prompt: 'Leo\'s sunny bedroom: ADULT ELI kneels on the rug at eye level with LEO, who bounces up on his toes, chattering excitedly with his hands spread wide; Eli smiles at him, amused. Both of them, side by side in profile.',
-				move: push(1.02, 1.08, 0.5, 0.55),
-			}, {cam: {z: 1.3, cx: 900, cy: 640}, kids: <>
-				<Person who="leo" x={720} y={980} h={300} facing="right" />
-				<Person who="eliAdult" x={1080} y={1000} h={360} facing="left" />
-			</>}),
-			// "I asked him who told him about trampolines."
-			close('e_13_dad', 'narrator_089_who_told', {
-				chars: ['adult'],
-				loc: 'leoroom',
-				quality: 'high',
-				blink: true,
-				mood: MOOD.leoRoom,
-				prompt: 'Close-up of ADULT ELI kneeling in his son\'s sunny bedroom, his smile slowly fading, a flicker of unease in his eyes as he asks a question. ONLY adult Eli in frame.',
-				move: push(1.03, 1.1, 0.5, 0.42),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#3a5a7a" />
-				<Person who="eliAdult" x={960} y={1900} h={1700} facing="front" />
-			</>),
-			// "My new friend. The one with the big smile."
-			close('e_14_leo_talk', 'leo_001_new_friend', {
-				kind: 'talk',
-				chars: ['adult'],
-				loc: 'leoroom',
-				quality: 'high',
-				mood: MOOD.leoRoom,
-				prompt: 'Close-up of LEO (5, curly light-brown hair, big hazel eyes, dinosaur-print pyjamas) in his sunny bedroom, beaming, chatting happily and proudly about his new friend. ONLY Leo in frame.',
-				talk: ['leo_001_new_friend', 'leo_002_under_bed'],
-				move: push(1.02, 1.08, 0.5, 0.42),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#3a5a7a" />
-				<Person who="leo" x={960} y={1900} h={1700} facing="front" />
-			</>),
-			// "The one who lives under my bed."
-			again('e_15_leo_whisper', 'leo_002_under_bed', 'e_14_leo_talk', {talk: ['leo_001_new_friend', 'leo_002_under_bed'], move: push(1.1, 1.2, 0.5, 0.4), grade: 0.9}),
-			// the last look: under Leo's bed
-			shot('e_16_last', 'last_look', 'leoroom', {
-				chars: ['widemouth'],
-				quality: 'high',
-				dark: true,
-				mood: MOOD.leoDim,
-				prompt: 'Low by the floor in Leo\'s bedroom in the dim amber evening: the blue bed skirt of the dinosaur bed hangs to the floor, a toy dinosaur lying on its side on the rug, and in the pitch-black gap under the bed, two big glossy black eyes and a long, pale, ear-to-ear GRIN look out at us. Only the eyes and the grin are visible.',
-				move: push(1.04, 1.2, 0.5, 0.78),
-			}, {cam: {z: 2.4, cx: 960, cy: 820}, kids: <WideFig x={980} y={1100} h={300} mouth="grin" peek />}),
-			// the end title (the credit for the original story is in the video description)
-			code('e_17_end_title', 'end_title', ({f, d}) => <TitleCard f={f} d={d} />),
-		]}
-	/>
-);
+export const End: React.FC = () => {
+	const {f, t, at, end, word, talk, total} = useStick();
+	const t77 = at('narrator_077_drove_back');
+	const t78 = at('narrator_078_house_gone');
+	const t79 = at('narrator_079_found_trail');
+	const t80 = at('narrator_080_expected');
+	const t81 = at('narrator_081_deeper');
+	const t82 = at('narrator_082_cemetery');
+	const t83 = at('narrator_083_headstones');
+	const t84 = at('narrator_084_children');
+	const t85 = at('narrator_085_not_ready');
+	const t86 = at('narrator_086_had_been');
+	const tCB = at('cut_black_end');
+	const t87 = at('narrator_087_son_five');
+	const t88 = at('narrator_088_trampoline');
+	const t89 = at('narrator_089_who_told');
+	const l01 = at('leo_001_new_friend');
+	const l02 = at('leo_002_under_bed');
+	const tLL = at('last_look');
+	const w15 = at('widemouth_015_hello_again');
+	const tLH = at('last_hold');
+	const tET = at('end_title');
+	const leoT = talk('leo');
+	const wmT = talk('widemouth');
+
+	if (t >= tET) return <TitleCardStick f={f - Math.round(tET * 24)} d={Math.round((total - tET) * 24)} />;
+	if (t >= tCB && t < t87) return <AbsoluteFill style={{background: '#000'}} />;
+
+	const car = {x: 2400 - ((t - t77) / (t78 - t77 + 0.4)) * 3000, dist: (t - t77) * 200};
+	const ruinsW = walk(t, t78 + 0.3, t78 + 4.2, -120, 560, ADULT_S * 0.75);
+	const edgeK = ramp(t, t79 + 0.2, t80 - 0.1);
+	const trW = walk(t, t80, t82 - 0.2, 200, 1400, ADULT_S * 0.8);
+	const cemW = walk(t, t82 + 0.2, t82 + 2.4, -150, 380, ADULT_S * 0.8);
+	const lb = BEDS.leoroom_day;
+	const fadeEnd = 1 - ramp(t, end('last_hold') - 0.9, end('last_hold'));
+
+	const shots = [
+		shot(0, 'ruins_day', 1.0, 1.04, [960, 540], [960, 540], {light: 'grey'}),
+		shot(t77, 'road_day', 1.0, 1.03, [960, 560], [960, 560], {light: 'grey'}),
+		shot(t78, 'ruins_day', 1.0, 1.12, [800, 600], [900, 640], {light: 'grey'}),
+		shot(t79, 'woods_edge', 1.0, 1.12, [960, 600], [960, 560], {light: 'grey'}),
+		shot(t80, 'woods_trail', 1.15, 1.2, [0, 0], [0, 0], {light: 'grey', track: () => [trW.x + 40, 600]}),
+		shot(t82, 'cemetery_day', 1.0, 1.04, [960, 540], [960, 540], {light: 'grey'}),
+		shot(t83, 'cemetery_day', 1.6, 1.6, [520, 760], [1400, 760], {light: 'grey'}),
+		shot(t84, 'cemetery_day', 2.3, 2.6, [960, 930], [960, 940], {light: 'grey'}),
+		shot(t85, 'cemetery_day', 2.4, 2.6, [400, 640], [400, 650], {light: 'grey'}),
+		shot(t86, 'cemetery_day', 1.8, 1.0, [400, 700], [960, 540], {light: 'grey'}),
+		shot(t87, 'leoroom_day', 1.0, 1.05, [1100, 560], [1080, 560]),
+		shot(t88, 'leoroom_day', 1.1, 1.15, [800, 560], [780, 560]),
+		shot(t89, 'leoroom_day', 1.5, 1.6, [700, 600], [720, 600]),
+		shot(l01 - 0.2, 'leoroom_day', 2.3, 2.5, [400, 560], [400, 560]),
+		shot(l02 - 0.2, 'leoroom_day', 2.4, 2.8, [430, 580], [450, 620]),
+		shot(tLL, 'leoroom_day', 2.6, 3.0, [665, 830], [665, 840], {light: 'dark'}),
+		shot(w15 - 0.2, 'leoroom_day', 3.3, 3.8, [665, 845], [665, 850], {light: 'dark'}),
+	];
+	const world = (set: string) => {
+		if (set === 'road_day') {
+			return (
+				<g>
+					<rect width={1920} height={1080} fill="#8e959c" opacity={0.32} />
+					<Car x={car.x} y={GEO.road_day.ground} s={0.9} frame={f} dist={car.dist} inside={<EliAdult x={-40} y={-112} s={0.36} frame={f} pose="sit" look={[-1, 0]} mouth="flat" />} />
+				</g>
+			);
+		}
+		if (set === 'ruins_day') {
+			if (t < t78) return null;
+			return <EliAdult x={ruinsW.x} y={GEO.ruins_day.ground + 20} s={ADULT_S * 0.75} frame={f} {...gait(ruinsW)} look={[1, 0.3]} mouth="flat" brows={ruinsW.moving ? 'none' : 'sad'} />;
+		}
+		if (set === 'woods_edge') {
+			const y = lerp(1100, 820, edgeK);
+			const s = lerp(ADULT_S * 0.9, ADULT_S * 0.3, edgeK);
+			return <EliAdult x={lerp(1060, 975, edgeK)} y={y} s={s} frame={f} back pose={edgeK > 0 && edgeK < 1 ? 'walk' : 'stand'} phase={edgeK * 22} />;
+		}
+		if (set === 'woods_trail') {
+			const darker = ramp(t, t81, t82);
+			const glance = t > word('narrator_080_expected', 'tree', 0.3) && t < t81 ? [-1, -0.6] : [1, 0];
+			return (
+				<g>
+					<EliAdult x={trW.x} y={GEO.woods_trail.ground + 8} s={ADULT_S * 0.8} frame={f} {...gait(trW)} look={glance as [number, number]} mouth="flat" />
+					<rect width={1920} height={1080} fill="#0d1210" opacity={darker * 0.35} />
+				</g>
+			);
+		}
+		if (set === 'cemetery_day') {
+			if (t >= t84 && t < t85) return null;
+			const head = t >= t84 ? [0.2, 1] : [1, 0.2];
+			return <EliAdult x={cemW.x} y={GEO.cemetery_day.ground} s={ADULT_S * 0.8} frame={f} {...gait(cemW)} look={head as [number, number]} brows={t >= t83 ? 'sad' : 'none'} mouth="flat" pale={t >= t84 ? 0.2 : 0} />;
+		}
+		// Leo's room
+		if (t >= tLL) {
+			const h = 58 * ramp(t, tLL + 0.2, tLL + 0.8);
+			return (
+				<g>
+					<BedScene set="leoroom_day" light="dark" frame={f} id="ll" who="leo" bed={{mode: 'lie', p: {eyes: 'closed'}}} skirt={{cx: 665, h}} wm={{x: 665, y: lb.gap - 22, under: 0.72, dark: 0.55, mouth: 'grin', talk: wmT.talk, look: [0, 0.2]}} />
+					<rect x={-50} y={-50} width={2020} height={1180} fill="#000" opacity={1 - fadeEnd} />
+				</g>
+			);
+		}
+		const bounce = t >= t88 && t < t89 ? Math.abs(Math.sin((t - t88) * 5)) * 110 : 0;
+		const leoOnBed = t >= t88 && t < t89;
+		const sitBed = t >= t89;
+		const adultX = t < t89 ? 1600 : 1180;
+		return (
+			<BedScene
+				set="leoroom_day"
+				light="day"
+				frame={f}
+				id="lr"
+				who="leo"
+				bed={sitBed ? {mode: 'sit', p: {mouth: leoT.talk > 0 ? 'open' : 'smile', talk: leoT.talk, viseme: leoT.viseme, look: t >= l02 ? [0.5, 1] : [1, 0], eyes: t >= l02 ? 'squint' : 'dot', brows: t >= l02 ? 'raised' : 'none'}} : {mode: 'none'}}
+				front={
+					<>
+						{!sitBed && !leoOnBed ? (
+							<>
+								<Cake x={1560} y={lb.front - 20} s={0.7} frame={f} />
+								<Leo x={1330} y={lb.front + 20} s={KID_S} frame={f} mouth="grin" arms="armsUp" look={[1, 0.4]} />
+							</>
+						) : null}
+						{leoOnBed ? <Leo x={600} y={lb.quilt + 20 - bounce} s={KID_S} frame={f} mouth="laugh" arms="armsUp" /> : null}
+						<EliAdult x={adultX} y={sitBed ? lb.front - 10 : lb.front + 14} s={ADULT_S} frame={f} pose={sitBed ? 'sit' : 'stand'} look={sitBed ? [-1, -0.2] : [-1, 0.3]} mouth={t >= t88 ? 'flat' : 'smile'} brows={t >= t88 ? 'worried' : 'none'} pale={t >= l02 ? 0.3 : 0} flip={sitBed} />
+					</>
+				}
+			/>
+		);
+	};
+	return <Shots shots={shots} world={(s) => world(s.set)} />;
+};

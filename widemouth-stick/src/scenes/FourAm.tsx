@@ -1,95 +1,126 @@
-// 8. FOUR A.M. - moving day. The missing steak knife. The truck, the window - the opening again.
+// 8. FOUR A.M. - moving day; the missing steak knife; the quiet underneath; Dad carries him to the truck;
+// "This is the last move, buddy."; and there he was, in my window.
 import React from 'react';
-import {Person} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {MOOD} from './common';
-import {again, close, push, shot} from './kit';
+import {AbsoluteFill} from 'remotion';
+import {Dad, Eli, Mom, PALETTES} from '../components/characters/Cast';
+import {DrivewayWorld, TRUCK, truckWindow, WindowWorld} from '../stick/exteriors';
+import {BEDS, GEO, gait, MovingBox, OpenDrawer, ramp, shot, Shots, Tint, useStick, walk} from '../stick/kit';
+import {ADULT_S, BedScene, KID_S} from '../stick/rooms';
 
-export const FourAm: React.FC = () => (
-	<Shots
-		shots={[
-			// "Moving day came two weeks after I met him."
-			shot('f_01_loading', 'narrator_066_moving_day', 'farmhouse', {
-				chars: ['parents'],
-				quality: 'medium',
-				mood: MOOD.grey,
-				prompt: 'Moving day at the farmhouse on the hill: a big rented moving truck backed up to the porch, its rear door open, DAD carrying a cardboard box up the ramp and MOM handing down a lamp from the porch. Grey afternoon.',
-				move: push(1.02, 1.1, 0.62, 0.35),
-			}, {cam: {z: 2.2, cx: 1240, cy: 320}, kids: <>
-				<rect x={900} y={300} width={260} height={160} fill="#e8e6df" />
-				<Person who="dad" x={1160} y={440} h={150} facing="left" pose="carryBox" />
-				<Person who="mom" x={1300} y={420} h={140} facing="left" />
-			</>}),
-			// "I didn't tell him we were leaving..."
-			shot('f_02_secret', 'narrator_067_didnt_tell', 'bedroom', {
-				chars: ['eli'],
-				quality: 'high',
-				blink: true,
-				mood: MOOD.sickroom,
-				prompt: 'Little ELI (healthy now, in a blue T-shirt and jeans) sits very still on the edge of his bed in the stripped bedroom, hands in his lap, his eyes turned DOWN and sideways toward the bed skirt by his feet, wary, keeping a secret. Taped moving boxes everywhere.',
-				move: push(1.02, 1.1, 0.4, 0.45),
-			}, {cam: {z: 1.6, cx: 560, cy: 540}, kids: <Person who="eli" x={560} y={760} h={300} facing="front" />}),
-			// "The night before we left, my mom searched the whole kitchen."
-			close('f_03_kitchen', 'narrator_068_searched', {
-				chars: ['parents'],
-				quality: 'medium',
-				mood: MOOD.kitchenNight,
-				prompt: 'The farmhouse kitchen late at night, half packed: MOM pulls open drawer after drawer along the counter, searching, a puzzled frown, packed boxes stacked on the counters and table. ONLY Mom - Dad is not here.',
-				move: push(1.02, 1.08, 0.45, 0.45),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#5a4a32" />
-				<rect x={0} y={620} width={1920} height={460} fill="#8a6a44" />
-				<Person who="mom" x={760} y={1000} h={700} facing="right" />
-			</>),
-			// "Has anyone seen the big steak knife? It was right here in the drawer."
-			close('f_04_drawer', 'mom_002_steak_knife', {
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.kitchenNight,
-				prompt: 'Looking down into an open kitchen drawer under a warm yellow bulb: a wooden cutlery tray with forks, spoons and small knives in neat rows - and one long EMPTY slot where a big steak knife should be, its outline faintly pressed into the felt. No people.',
-				move: push(1.04, 1.16, 0.5, 0.5),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#6b4a2b" />
-				<rect x={360} y={200} width={1200} height={700} fill="#8a6a44" />
-				<rect x={1200} y={260} width={120} height={580} fill="#3a2a1c" />
-			</>),
-			// "Nobody had."
-			again('f_05_nobody', 'narrator_069_nobody', 'f_04_drawer', {move: push(1.16, 1.3, 0.62, 0.5), grade: 0.85}),
-			// "That night I lay awake, listening to the quiet underneath me..."
-			again('f_06_awake', 'narrator_070_lay_awake', 'h_04_listen', {move: push(1.0, 1.08, 0.3, 0.45), grade: 0.9}),
-			// "My dad woke me at four in the morning and carried me out to the truck."
-			shot('f_07_carry', 'narrator_071_four_am', 'farmhouse', {
-				chars: ['parents', 'eli'],
-				quality: 'high',
-				dark: true,
-				mood: MOOD.houseNight,
-				prompt: 'Before dawn at the farmhouse: DAD walks down the porch steps toward the waiting moving truck, carrying little ELI asleep against his shoulder, wrapped in a knitted blanket. The porch light is a small warm pool in the blue-black dark. ONLY Dad and Eli.',
-				move: push(1.02, 1.1, 0.6, 0.35),
-			}, {cam: {z: 2.4, cx: 1240, cy: 300}, kids: <Person who="dad" x={1200} y={440} h={160} facing="left" pose="holdChild" />}),
-			// "This is the last move, buddy. I promise. Then you can make some real friends."
-			close('f_08_dad', 'dad_001_last_move', {
-				chars: ['parents', 'eli'],
-				loc: 'truck',
-				quality: 'high',
-				dark: true,
-				mood: MOOD.truckNight,
-				prompt: 'Inside the dark truck cab before dawn: DAD at the wheel (wire glasses, navy work jacket) turns to little ELI on the seat beside him with a tired, warm smile, one big hand resting on the boy\'s blanket-wrapped shoulder. Faint green dashboard glow on their faces. ONLY Dad and Eli.',
-				move: push(1.02, 1.08, 0.42, 0.45),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#121722" />
-				<Person who="dad" x={700} y={1500} h={1300} facing="right" />
-				<Person who="eli" x={1300} y={1400} h={800} facing="left" />
-			</>),
-			// "I looked up at the house as we backed out of the driveway."
-			again('f_09_look', 'narrator_072_backed_out', 'w_01_truck', {move: push(1.06, 1.14, 0.62, 0.42)}),
-			// "And there he was. In my window."
-			again('f_10_there', 'narrator_073_there_he_was', 'w_03_window', {move: push(1.0, 1.3, 0.64, 0.24)}),
-			// "You already know the rest."
-			again('f_11_rest', 'narrator_074_you_know', 'w_04_still', {move: push(1.25, 1.34, 0.5, 0.37)}),
-			// "The little wave."
-			again('f_12_wave', 'narrator_075_little_wave', 'w_04_still', {show: 'up', move: push(1.45, 1.6, 0.5, 0.35)}),
-			// "The steak knife."
-			again('f_13_knife', 'narrator_076_the_knife', 'w_06_knife', {move: push(1.1, 1.2, 0.5, 0.55)}),
-		]}
-	/>
-);
+export const FourAm: React.FC = () => {
+	const {f, t, at, end, word, talk, total} = useStick();
+	const t66 = at('narrator_066_moving_day');
+	const t67 = at('narrator_067_didnt_tell');
+	const t68 = at('narrator_068_searched');
+	const m02 = at('mom_002_steak_knife');
+	const t69 = at('narrator_069_nobody');
+	const t70 = at('narrator_070_lay_awake');
+	const t71 = at('narrator_071_four_am');
+	const d01 = at('dad_001_last_move');
+	const t72 = at('narrator_072_backed_out');
+	const t73 = at('narrator_073_there_he_was');
+	const t74 = at('narrator_074_you_know');
+	const t75 = at('narrator_075_little_wave');
+	const t76 = at('narrator_076_the_knife');
+	const momT = talk('mom');
+	const dadT = talk('dad');
+	const g = GEO.driveway_night.ground;
+
+	const go = t72 + 0.3;
+	const distAt = (tt: number) => (tt > go ? 20 * (tt - go) + 1.2 * (tt - go) ** 2 : 0);
+	const dist = distAt(t);
+	const truckX = TRUCK.x - dist * TRUCK.s;
+	const [wx, wy] = truckWindow(TRUCK.x, g);
+	const carry = walk(t, t71 + 0.2, d01 - 0.3, 2050, wx + 60, 1.55);
+	const doorX = wx - 250;
+	const kd = GEO.kitchen_night;
+	const fade = 1 - ramp(t, total - 0.6, total - 0.05);
+
+	const shots = [
+		shot(t66, 'bedroom_day', 1.0, 1.06, [960, 560]),
+		shot(t67, 'bedroom_day', 1.8, 2.5, [480, 600], [420, 560]),
+		shot(t68, 'kitchen_night', 1.0, 1.05, [1100, 560], [1150, 560], {light: 'warm'}),
+		shot(m02 - 0.2, 'kitchen_night', 1.7, 1.8, [1380, 520], {light: 'warm'} as never),
+		shot(t69, 'kitchen_night', 1.25, 1.3, [700, 600], [680, 600], {light: 'warm'}),
+		shot(t70, 'bedroom_night', 1.3, 2.2, [520, 600], [640, 780]),
+		shot(t71, 'driveway_night', 1.05, 1.1, [1100, 640], [900, 660]),
+		shot(d01 - 0.2, 'driveway_night', 1.9, 2.05, [wx - 120, wy + 40], [wx - 120, wy + 30]),
+		shot(t72, 'driveway_night', 2.6, 2.6, [0, 0], [0, 0], {track: (tt) => truckWindow(TRUCK.x - distAt(tt) * TRUCK.s, g)}),
+		shot(t73, 'window_out_night', 1.3, 1.45, [963, 700], [963, 690]),
+		shot(t74, 'driveway_night', 1.0, 1.08, [900, 600], [1000, 560]),
+		shot(t75, 'window_out_night', 1.5, 1.7, [963, 690], [963, 670]),
+		shot(t76, 'window_out_night', 2.0, 3.2, [930, 760], [884, 820]),
+	];
+	shots[3] = shot(m02 - 0.2, 'kitchen_night', 1.7, 1.8, [1380, 520], [1380, 520], {light: 'warm'});
+
+	const world = (set: string) => {
+		if (set === 'window_out_night') return <WindowWorld frame={f} still={t < t75} wave={t >= t75} />;
+		if (set === 'driveway_night') {
+			const inCab = t >= d01 - 0.3;
+			const dadOn = t < t72;
+			const dad = dadOn
+				? inCab
+					? {x: doorX, pose: 'stand' as const, look: [1, -0.3] as [number, number], mouth: (dadT.talk > 0 ? 'open' : 'smile') as 'open' | 'smile', talk: dadT.talk, viseme: dadT.viseme, turn: 0.35, tilt: 6}
+					: {x: carry.x, ...gait(carry), arms: 'hold' as const, mouth: 'flat' as const}
+				: undefined;
+			return (
+				<g>
+					<DrivewayWorld frame={f} truckX={truckX} dist={dist} eliInCab={inCab} eli={{eyes: t >= t72 ? 'wide' : 'squint', look: t >= t72 ? [1, -0.8] : [-0.4, 0.4], brows: t >= t73 ? 'worried' : 'sad', mouth: 'flat'}} still={t < t75} wave={t >= t75} dad={dad} />
+					{!inCab && dad ? (
+						<Tint light="night">
+							<Eli x={carry.x + 18} y={g + 10 - 175} s={1.0} frame={f} pose="sit" eyes="closed" tilt={14} arms="lap" />
+						</Tint>
+					) : null}
+				</g>
+			);
+		}
+		if (set === 'kitchen_night') {
+			const open1 = ramp(t, t68 + 0.6, t68 + 1.0);
+			const searching = t < m02;
+			const momW = walk(t, t68 + 0.2, t68 + 0.6, 1600, 1410, 1);
+			return (
+				<Tint light="warm">
+					<OpenDrawer x0={kd.drawer[0]} y0={kd.drawer[1]} x1={kd.drawer[2]} y1={kd.drawer[3]} open={open1} />
+					<Mom x={momW.x} y={kd.ground} s={ADULT_S} frame={f} {...(searching ? {back: true, arms: 'grabLeft' as const} : {arms: 'hipsHands' as const, look: [-1, 0] as [number, number]})} mouth={momT.talk > 0 ? 'open' : 'flat'} talk={momT.talk} viseme={momT.viseme} brows={searching ? 'none' : 'raised'} />
+					{t >= t69 ? (
+						<>
+							<Dad x={420} y={kd.ground} s={ADULT_S} frame={f} arms="shrug" mouth="flat" look={[1, 0]} />
+							<Eli x={700} y={kd.ground + 30} s={KID_S} frame={f} palette={PALETTES.eli} pale={0.35} eyes="wide" brows="worried" mouth="flat" look={[0.3, 1]} />
+						</>
+					) : null}
+				</Tint>
+			);
+		}
+		if (set === 'bedroom_night') {
+			return <BedScene set="bedroom_night" light="night" frame={f} bed={{mode: 'lie', p: {eyes: 'wide', look: [0.7, 1], brows: 'worried'}}} id="fa" />;
+		}
+		// bedroom_day: the boxes go out
+		const b = BEDS.bedroom_day;
+		const dadW = walk(t, t66 + 0.3, t66 + 3.2, 1350, 2150, 1);
+		const momW = walk(t, t66 + 1.6, t66 + 4.6, 1250, 2150, 1);
+		return (
+			<BedScene
+				set="bedroom_day"
+				light="day"
+				frame={f}
+				id="fd"
+				bed={{mode: 'sit', p: {look: t >= t67 ? [0.8, 1] : [1, 0], mouth: 'flat', brows: t >= t67 ? 'worried' : 'none', palette: PALETTES.eliDay}}}
+				front={
+					t < t67 ? (
+						<>
+							<Dad x={dadW.x} y={b.front + 14} s={ADULT_S} frame={f} {...gait(dadW)} arms="hold" />
+							<MovingBox x={dadW.x + (dadW.moving ? 10 : 0)} y={b.front + 14 - 236} w={150} h={110} frame={f} seed={4} />
+							<Mom x={momW.x} y={b.front + 10} s={ADULT_S} frame={f} {...gait(momW)} arms="hold" />
+							<MovingBox x={momW.x + (momW.moving ? 10 : 0)} y={b.front + 10 - 226} w={120} h={90} frame={f} seed={5} />
+						</>
+					) : null
+				}
+			/>
+		);
+	};
+	return (
+		<AbsoluteFill style={{opacity: fade}}>
+			<Shots shots={shots} world={(s) => world(s.set)} />
+		</AbsoluteFill>
+	);
+};

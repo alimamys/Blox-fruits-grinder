@@ -1,121 +1,158 @@
-// 4. TRAMPOLINE - the empty room at the end of the hall, the open window, the long drop. The snarl.
+// 4. TRAMPOLINE - down the hall to the empty room; he pushes the window open; the long way down;
+// the game; "Maybe another time."; the snarl; disappointment.
 import React from 'react';
-import {Person, WideFig} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {MOOD} from './common';
-import {again, close, push, shot} from './kit';
+import {Eli} from '../components/characters/Cast';
+import {Widemouth} from '../components/characters/Widemouth';
+import {BEDS, GEO, gait, hallScale, lerp, ramp, Sash, shot, Shots, Trampoline as Tramp, useStick, walk} from '../stick/kit';
+import {BedScene, KID_S, WM_S} from '../stick/rooms';
 
-export const Trampoline: React.FC = () => (
-	<Shots
-		shots={[
-			// "...he tugged my hand and led me down the hall, to the room at the very end."
-			shot('t_01_hall', 'narrator_032_hall', 'hallway', {
-				chars: ['eli', 'widemouth'],
-				quality: 'high',
-				mood: MOOD.hallDay,
-				prompt: 'The long upstairs hallway seen from behind: little ELI in striped pyjamas and socks walks away from the camera down the hall, being led by the hand by MR. WIDEMOUTH, the small ash-grey creature walking ahead of him and tugging his fingers, toward the half-open door at the far end with grey light behind it. Dim, brown, quiet.',
-				move: push(1.0, 1.1, 0.5, 0.5),
-			}, {kids: <>
-				<Person who="eli" x={900} y={860} h={300} facing="back" />
-				<WideFig x={1010} y={860} h={110} facing="back" />
-			</>}),
-			// "I wasn't allowed out of bed. He kept tugging until I went anyway."
-			close('t_02_tug', 'narrator_033_not_allowed', {
-				chars: ['eli', 'widemouth'],
-				loc: 'hallway',
-				quality: 'medium',
-				mood: MOOD.hallDay,
-				prompt: 'Close-up at knee height in the dim hallway: a small ash-grey furry hand with short dark claws firmly gripping two of little Eli\'s fingers and pulling, Eli\'s striped pyjama sleeve and his socked feet half a step behind, hesitating. Worn floor runner below.',
-				move: {z0: 1.06, z1: 1.1, x0: 0.45, y0: 0.5, x1: 0.55, y1: 0.5},
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#4a3a2c" />
-				<rect x={300} y={300} width={600} height={140} fill="#7f9cc0" />
-				<circle cx={980} cy={380} r={80} fill="#efcfb4" />
-				<ellipse cx={1250} cy={420} rx={260} ry={110} fill="#8e8c88" />
-			</>),
-			// "The room was completely empty. Bare floorboards. No furniture. Just one window."
-			shot('t_03_room', 'narrator_034_room_empty', 'emptyroom', {
-				chars: ['eli'],
-				quality: 'medium',
-				mood: MOOD.emptyDay,
-				prompt: 'The empty room at the end of the hall: bare dusty floorboards, peeling wallpaper, no furniture at all, a single tall window in the far wall full of white sky. Little ELI in striped pyjamas stands just inside the doorway on the LEFT, small in the big bare room.',
-				move: push(1.0, 1.08, 0.5, 0.45),
-			}, {kids: <Person who="eli" x={520} y={960} h={360} facing="right" />}),
-			// "He ran across the room and pushed it wide open."
-			shot('t_04_window', 'narrator_035_pushed_open', 'emptyroom', {
-				chars: ['widemouth'],
-				quality: 'high',
-				mood: MOOD.emptyDay,
-				prompt: 'MR. WIDEMOUTH stands on the windowsill of the tall window in the empty room, seen from behind, his little arms pushing up the bottom sash; the window is still closed, white sky and the hillside beyond the glass.',
-				variants: [{name: 'open', prompt: 'The bottom sash is now pushed all the way up - the window is WIDE OPEN, wind blowing in and lifting the dust, the ash-grey fur ruffling. Everything else stays identical.'}],
-				seq: [
-					['base', 0],
-					['open', 0.42],
-				],
-				move: push(1.02, 1.12, 0.5, 0.35),
-			}, {cam: {z: 1.7, cx: 960, cy: 420}, kids: <WideFig x={950} y={560} h={200} facing="back" />}),
-			// "The house sat on a hill, so the ground below that window was a long, long way down."
-			close('t_05_drop', 'narrator_036_long_way', {
-				loc: 'farmhouse',
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.grey,
-				prompt: 'Looking straight DOWN from a high open window: the white clapboard wall of the farmhouse falling away below the windowsill, and far, far below, the steep rocky hillside dropping away, grey stones and dry grass. Dizzying height. No people.',
-				move: {z0: 1.0, z1: 1.18, x0: 0.5, y0: 0.6, x1: 0.5, y1: 0.75},
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#5a6a4a" />
-				<rect x={0} y={0} width={1920} height={140} fill="#e8e6df" />
-				<polygon points="0,140 1920,140 1400,1080 520,1080" fill="#cfd3d6" />
-			</>),
-			// "Here's how you play..."
-			shot('t_06_play', 'widemouth_007_how_to_play', 'emptyroom', {
-				kind: 'talk',
-				chars: ['widemouth'],
-				quality: 'high',
-				mood: MOOD.emptyDay,
-				prompt: 'MR. WIDEMOUTH stands on the sill of the WIDE-OPEN window in the empty room, turned around to face the camera, his small arms spread out in invitation, his black eyes shining and his ear-to-ear smile sweet and eager, the white sky and the long drop behind him. Wind ruffles his ash-grey fur.',
-				talk: ['widemouth_007_how_to_play'],
-				move: push(1.06, 1.16, 0.5, 0.35),
-			}, {cam: {z: 2.0, cx: 960, cy: 400}, kids: <WideFig x={950} y={560} h={220} />}),
-			// "I was five. I had a fever. For one second, I could almost see it."
-			close('t_07_dream', 'narrator_037_almost_see', {
-				loc: 'farmhouse',
-				noPeople: true,
-				quality: 'medium',
-				mood: 'A hazy, overexposed fever-dream light, soft and glowing at the edges.',
-				prompt: 'A fever-dream vision looking down from the high window: far below on the grassy hillside, a big round soft blue trampoline glows softly in the grass, hazy and too bright, like something half-imagined, the edges of the picture blurred and glowing. No people.',
-				fx: 'pulse',
-				move: push(1.04, 1.12, 0.5, 0.7),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#7a8a6a" />
-				<ellipse cx={960} cy={760} rx={300} ry={110} fill="#3a6aa8" />
-			</>),
-			// "It's really far down. Maybe another time."
-			again('t_08_far', 'eli_004_far_down', 't_03_room', {move: push(1.3, 1.42, 0.28, 0.62)}),
-			// "His face changed." / "His lips peeled back..."
-			close('t_09_face', 'narrator_038_face_changed', {
-				chars: ['widemouth'],
-				loc: 'emptyroom',
-				quality: 'high',
-				mood: MOOD.emptyDay,
-				prompt: 'Close-up of MR. WIDEMOUTH\'s face against the bright open window: the sweet smile has gone completely flat, his black eyes fixed and cold, the fur on his round head bristling slightly. Backlit by white sky.',
-				variants: [
-					{name: 'snarl', prompt: 'He now SNARLS: his lips peeled far back over the enormous ear-to-ear mouth, showing rows of small sharp teeth, the black eyes narrowed, ears flattened. Creepy, not gory. Everything else stays identical.'},
-					{name: 'sad', prompt: 'The snarl is gone: his mouth is closed in a small drooping line, the crooked ears hang down, the black eyes look down and away - disappointed, sulking. Everything else stays identical.'},
-				],
-				seq: [
-					['base', 0],
-					['snarl', 0.32],
-				],
-				move: push(1.04, 1.14, 0.5, 0.5),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#d8dcdf" />
-				<WideFig x={960} y={1700} h={2400} mouth="snarl" />
-			</>),
-			// "Then it was gone. He just looked... disappointed."
-			again('t_10_sad', 'narrator_040_disappointed', 't_09_face', {show: 'sad', move: push(1.1, 1.06, 0.5, 0.5)}),
-			// "He spent the rest of the day under my bed, without making a sound."
-			again('t_11_quiet', 'narrator_041_rest_of_day', 'h_11_skirt', {move: push(1.0, 1.08, 0.45, 0.68), grade: 0.82}),
-		]}
-	/>
-);
+export const Trampoline: React.FC = () => {
+	const {f, t, at, end, word, talk} = useStick();
+	const t32 = at('narrator_032_hall');
+	const t33 = at('narrator_033_not_allowed');
+	const t34 = at('narrator_034_room_empty');
+	const tWin = word('narrator_034_room_empty', 'window', 0.85);
+	const t35 = at('narrator_035_pushed_open');
+	const tPush = word('narrator_035_pushed_open', 'pushed', 0.55);
+	const t36 = at('narrator_036_long_way');
+	const w07 = at('widemouth_007_how_to_play');
+	const wTramp = word('widemouth_007_how_to_play', 'trampoline', 0.25);
+	const wJump = word('widemouth_007_how_to_play', 'jump', 0.45);
+	const wBounce = word('widemouth_007_how_to_play', 'bounce', 0.75);
+	const t37 = at('narrator_037_almost_see');
+	const e04 = at('eli_004_far_down');
+	const t38 = at('narrator_038_face_changed');
+	const t39 = at('narrator_039_snarled');
+	const t40 = at('narrator_040_disappointed');
+	const t41 = at('narrator_041_rest_of_day');
+	const wmT = talk('widemouth');
+	const eliT = talk('eli');
+
+	const er = GEO.emptyroom;
+	const sillX = (er.opening[0] + er.opening[2]) / 2;
+	// empty room: they come in from the left; he runs to the window and climbs onto the sill
+	const eliW = walk(t, tWin - 0.2, t35 + 0.6, -160, 560, KID_S);
+	const wmIn = walk(t, tWin - 0.5, t35 - 0.1, -80, 700, WM_S);
+	const wmRun = walk(t, t35 + 0.1, t35 + 1.0, 700, sillX - 60, WM_S);
+	const climb = ramp(t, t35 + 1.0, t35 + 1.4);
+	const onSill = t > t35 + 1.0;
+	const wmX = t < t35 + 0.1 ? wmIn.x : onSill ? lerp(sillX - 60, sillX, climb) : wmRun.x;
+	const wmY = onSill ? lerp(er.ground, er.sill, climb) - Math.sin(climb * Math.PI) * 60 : er.ground;
+	const up = ramp(t, tPush, tPush + 0.8);
+	const bounce = t > wBounce && t < end('widemouth_007_how_to_play') ? Math.abs(Math.sin((t - wBounce) * 6)) * 34 : 0;
+	const back = t > e04 ? ramp(t, e04, e04 + 1.2) : 0;
+	const eliX = t < t36 ? eliW.x : lerp(560, 470, back);
+	const snarl = t >= t39 && t < t40;
+	const wmMouth = t >= t38 && t < t39 ? 'flat' : snarl ? 'snarl' : t >= t40 ? 'sad' : 'smile';
+
+	const hallK = (t - t32) / (t33 - t32);
+	const hallY = lerp(1060, 870, Math.min(1, hallK));
+	const tug = Math.max(0, Math.sin((t - t33) * 5));
+
+	const shots = [
+		shot(t32, 'hallway', 1.0, 1.1, [960, 560], [960, 600]),
+		shot(t33, 'hallway', 1.9, 2.0, [960, 720], [960, 730]),
+		shot(t34, 'emptyroom', 1.0, 1.04, [960, 540]),
+		shot(t35, 'emptyroom', 1.05, 1.25, [900, 560], [960, 520]),
+		shot(t36, 'window_down', 1.0, 1.18, [960, 540], [1040, 560]),
+		shot(w07, 'emptyroom', 1.7, 1.85, [sillX - 60, 560], [sillX - 60, 560]),
+		shot(wTramp - 0.2, 'window_down', 1.15, 1.25, [1040, 560]),
+		shot(wJump - 0.15, 'emptyroom', 1.9, 2.1, [sillX, 560], [sillX, 540]),
+		shot(t37, 'window_down', 1.1, 1.45, [1060, 560], GEO.window_down.target as unknown as [number, number]),
+		shot(e04 - 0.2, 'emptyroom', 1.6, 1.7, [620, 600], [600, 600]),
+		shot(t38, 'emptyroom', 3.0, 3.3, [sillX, er.sill - 128 * WM_S], [sillX, er.sill - 128 * WM_S]),
+		shot(t39, 'emptyroom', 3.4, 3.9, [sillX, er.sill - 128 * WM_S], [sillX, er.sill - 128 * WM_S], {shake: 7}),
+		shot(t40, 'emptyroom', 2.4, 2.6, [sillX, er.sill - 110 * WM_S]),
+		shot(t41, 'bedroom_day', 1.0, 1.08, [800, 580], [700, 640]),
+	];
+
+	const world = (set: string) => {
+		if (set === 'hallway') {
+			if (t < t33) {
+				const s = hallScale(hallY);
+				const wY = hallY - 60;
+				const ws = hallScale(wY);
+				const ph = (hallK * 260) / 30;
+				return (
+					<g>
+						<Widemouth x={900} y={wY} s={WM_S * 1.25 * ws * 1.9} frame={f} walking phase={ph * 1.6} arms="reach" flip look={[0, 0]} />
+						<Eli x={990} y={hallY} s={KID_S * 1.25 * s} frame={f} back pose="walk" phase={ph} />
+					</g>
+				);
+			}
+			const y = 900;
+			const s = hallScale(y);
+			return (
+				<g>
+					<Eli x={1010} y={y} s={KID_S * 1.25 * s} frame={f} lean={-6 + tug * 5} brows="worried" mouth="frown" look={[-0.8, 0.5]} arms={{l: [60 + tug * 10, -10], r: [10, 0]}} />
+					<Widemouth x={870 - tug * 6} y={y - 6} s={WM_S * 1.25 * s * 1.6} frame={f} arms="reach" mouth="smile" look={[1, -0.6]} />
+				</g>
+			);
+		}
+		if (set === 'window_down') {
+			const imagined = t >= wTramp - 0.2 && t < t37 ? 0.45 : t >= t37 ? ramp(t, t37 + 0.5, t37 + 2.5) : 0;
+			const [x, y] = GEO.window_down.target;
+			return (
+				<g>
+					{imagined > 0 ? (
+						<g style={{filter: t >= t37 ? `blur(${(1 - imagined) * 4}px)` : undefined}}>
+							<Tramp x={x} y={y + Math.sin(t * 2) * 4} s={0.9} opacity={imagined} frame={f} />
+						</g>
+					) : null}
+				</g>
+			);
+		}
+		if (set === 'emptyroom') {
+			const showEli = t >= tWin - 0.2;
+			return (
+				<g>
+					<Sash up={up} />
+					{t >= tWin - 0.5 ? (
+						<Widemouth
+							x={wmX}
+							y={wmY - bounce}
+							s={WM_S}
+							frame={f}
+							walking={(wmIn.moving && t < t35) || wmRun.moving}
+							phase={wmX / (14 * WM_S)}
+							mouth={wmMouth as 'flat' | 'snarl' | 'sad' | 'smile'}
+							talk={wmT.talk}
+							earsBack={snarl}
+							arms={t >= w07 && t < end('widemouth_007_how_to_play') ? (bounce ? 'up' : 'reach') : onSill && t < t36 ? 'up' : 'down'}
+							flip={t >= w07 && t < wBounce}
+							look={onSill ? [-0.9, 0.3] : [1, 0]}
+						/>
+					) : null}
+					{showEli ? (
+						<Eli
+							x={eliX}
+							y={er.ground}
+							s={KID_S}
+							frame={f}
+							{...(t < t36 ? gait(eliW) : back > 0 && back < 1 ? {pose: 'walk' as const, turn: -0.6, phase: (560 - eliX) / (30 * KID_S)} : {pose: 'stand' as const})}
+							look={[1, -0.4]}
+							eyes={snarl ? 'wide' : t > t37 && t < e04 ? 'squint' : 'dot'}
+							brows={snarl || t >= e04 ? 'worried' : 'none'}
+							mouth={eliT.talk > 0 ? 'open' : snarl ? 'o' : 'flat'}
+							talk={eliT.talk}
+							viseme={eliT.viseme}
+							pale={t > t37 ? 0.25 : 0}
+							sweat={t > t37 && t < t41}
+						/>
+					) : null}
+				</g>
+			);
+		}
+		// the rest of the day: Eli in bed, nothing moves, the light fades
+		const dusk = ramp(t, t41 + 0.5, end('narrator_041_rest_of_day') + 0.8);
+		const b = BEDS.bedroom_day;
+		return (
+			<g>
+				<BedScene set="bedroom_day" light="day" frame={f} bed={{mode: 'sit', p: {mouth: 'flat', brows: 'sad', look: [0.6, 0.9]}}} id="tr" skirt={{cx: 665, h: 0}} />
+				<rect x={0} y={0} width={1920} height={1080} fill="#1b2340" opacity={dusk * 0.55} />
+				<rect x={b.x0} y={b.skirtBottom} width={b.x1 - b.x0} height={b.gap - b.skirtBottom + 4} fill="#000" opacity={0.5} />
+			</g>
+		);
+	};
+	return <Shots shots={shots} world={(s) => world(s.set)} />;
+};

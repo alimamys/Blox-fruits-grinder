@@ -103,15 +103,17 @@ export const Widemouth: React.FC<WidemouthProps> = ({
 		const w = Math.sin(fr / 24 * 2 * Math.PI * 1.6);
 		const R: Pt =
 			arms === 'wave' || arms === 'waveB' ? [92 + w * 6, -128 + bob - Math.abs(w) * 6] : arms === 'reach' ? [70, -86 + bob] : arms === 'up' ? [86, -140 + bob] : [34, -36 + bob];
-		const L: Pt = arms === 'up' ? [-86, -140 + bob] : arms === 'hold' ? [-30, -70 + bob] : [-34, -36 + bob];
+		const L: Pt = arms === 'up' ? [-86, -140 + bob] : arms === 'hold' ? [-30, -70 + bob] : knife ? [-62, -84 + bob] : [-34, -36 + bob];
 		parts.push(arm(-1, L, 1));
 		if (knife) {
-			// a big kitchen knife in his left hand, point down
+			// a big steak knife in his left hand, point down and a little out
 			const [kx, ky] = L;
 			parts.push(
-				<g key="knife">
-					<path d={`M${kx - 6},${ky - 4} L${kx + 6},${ky - 4} L${kx + 5},${ky + 18} L${kx - 5},${ky + 18} Z`} fill="#6b4a2b" stroke={INK} strokeWidth={3} />
-					<path d={`M${kx - 7},${ky + 18} L${kx + 8},${ky + 18} L${kx + 2},${ky + 92} Z`} fill="#dfe4e8" stroke={INK} strokeWidth={3.5} strokeLinejoin="round" />
+				<g key="knife" transform={`rotate(14 ${kx} ${ky})`}>
+					<path d={`M${kx - 6},${ky - 6} L${kx + 6},${ky - 6} L${kx + 5},${ky + 14} L${kx - 5},${ky + 14} Z`} fill="#4a2f1a" stroke={INK} strokeWidth={3} />
+					<circle cx={kx} cy={ky + 2} r={1.8} fill="#d8d8d8" />
+					<path d={`M${kx - 7},${ky + 14} L${kx + 7},${ky + 14} L${kx + 6},${ky + 62} L${kx - 2},${ky + 84} Z`} fill="#dfe4e8" stroke={INK} strokeWidth={3.5} strokeLinejoin="round" />
+					<path d={`M${kx + 2},${ky + 18} L${kx + 2},${ky + 60}`} stroke="#fff" strokeOpacity={0.7} strokeWidth={2} />
 				</g>,
 			);
 		}
