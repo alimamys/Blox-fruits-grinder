@@ -40,15 +40,15 @@ export const Thumb: React.FC<{v: 'A' | 'B' | 'C'}> = ({v}) => {
 		return (
 			<AbsoluteFill style={{background: '#000'}}>
 				<AbsoluteFill style={pop}>
-					<Stage set="bedroom_night" z={1.75} f={[560, 760]} t={0}>
-						<BedScene set="bedroom_night" light="night" frame={30} id="ta" bed={{mode: 'none'}} skirt={{cx: 640, h: 92, w: 250}} wm={{x: 640, y: b.gap - 22, under: 0.62, dark: 0.15, mouth: 'grin', look: [-0.4, -0.6], glow: true}} />
+					<Stage set="bedroom_night" z={2.5} f={[600, 790]} t={0}>
+						<BedScene set="bedroom_night" light="night" frame={30} id="ta" bed={{mode: 'none'}} skirt={{cx: 640, h: 100, w: 260}} wm={{x: 640, y: b.gap - 22, under: 0.62, dark: 0.15, mouth: 'grin', look: [-0.4, -0.6], glow: true}} />
 					</Stage>
 				</AbsoluteFill>
-				<Glow x={1150} y={790} r={330} />
+				<Glow x={1060} y={700} r={360} />
 				<svg viewBox="0 0 1920 1080" width={1920} height={1080} style={{position: 'absolute', left: 0, top: 0}}>
-					<Eli x={330} y={1580} s={4.0} frame={null} eyes="wide" brows="worried" mouth="scream" pale={0.15} look={[1, 0.8]} sweat />
+					<Eli x={330} y={1330} s={3.6} frame={null} eyes="wide" brows="worried" mouth="scream" pale={0.15} look={[1, 0.8]} sweat />
 				</svg>
-				<Arrow x={760} y={520} rot={28} s={1.15} />
+				<Arrow x={700} y={470} rot={30} s={1.1} />
 				<Words x={70} y={56} align="right" rot={-3} lines={[{t: 'UNDER', c: '#ffffff', size: 190}, {t: 'MY BED', c: '#ffd21a', size: 190}]} />
 			</AbsoluteFill>
 		);
@@ -77,11 +77,11 @@ export const Thumb: React.FC<{v: 'A' | 'B' | 'C'}> = ({v}) => {
 	return (
 		<AbsoluteFill style={{background: '#000'}}>
 			<AbsoluteFill style={{filter: 'brightness(1.2) contrast(1.2) saturate(1.3)'}}>
-				<Stage set="leoroom_day" z={2.1} f={[665, 790]} t={0} light="dark">
+				<Stage set="leoroom_day" z={3.0} f={[665, 805]} t={0} light="dark">
 					<BedScene set="leoroom_day" light="dark" frame={30} id="tc" who="leo" bed={{mode: 'none'}} skirt={{cx: 665, h: 96, w: 260}} wm={{x: 665, y: lb.gap - 22, under: 0.58, dark: 0.05, mouth: 'grin', look: [0, -0.3], glow: true}} />
 				</Stage>
 			</AbsoluteFill>
-			<Glow x={960} y={760} r={360} c="220,230,255" o={0.45} />
+			<Glow x={960} y={760} r={420} c="220,230,255" o={0.45} />
 			<Words x={0} y={60} rot={0} lines={[{t: 'HELLO AGAIN.', c: '#ffffff', size: 200}]} />
 		</AbsoluteFill>
 	);
