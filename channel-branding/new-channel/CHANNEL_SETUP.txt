@@ -1,0 +1,65 @@
+PAST BEDTIME TALES - channel setup
+==================================
+
+NAME AND HANDLE
+- Channel name:  Past Bedtime Tales
+- Handle:        @PastBedtimeTales      (no channel had it when checked on 12 Nov 2026 - claim it soon)
+- Backups (also free when checked): Wrong Hour Tales (@WrongHourTales), Unslept Tales (@UnsleptTales)
+  Note: a small channel called "Past Bedtime Stories" (9 subscribers) exists; Wrong Hour Tales has no lookalike.
+
+FILES
+- past_bedtime_tales_icon_800.png         -> Customization > Branding > Picture
+- past_bedtime_tales_banner_2560x1440.jpg -> Customization > Branding > Banner image (the name sits inside the
+                                             area every device shows; see preview_banner_safe_area.jpg)
+- past_bedtime_tales_watermark_150.png    -> Customization > Branding > Video watermark (optional)
+
+
+CHANNEL DESCRIPTION (Customization > Basic info > Description)
+--------------------------------------------------------------
+Some stories are meant for after bedtime.
+
+Past Bedtime Tales is animated horror for the hours when the house goes quiet. A knock on the door at exactly 3:06 a.m. An imaginary friend who lives under the bed. A camping trip where the headcount stops adding up. A frame in an animation that nobody drew.
+
+Every story is told in the first person and animated scene by scene, with sound built for headphones. Some are originals; some are classic creepypastas retold in our own words, always credited to their writers.
+
+A new story every week, with short scares in between.
+
+Headphones on. Lights off. Don't look under the bed.
+
+All stories are fiction, made for teens and adults - not for young children.
+
+Business inquiries: [your email]
+
+
+KEYWORDS (Settings > Channel > Basic info > Keywords)
+----------------------------------------------------
+past bedtime tales, animated horror stories, horror animation, scary stories, creepypasta, creepypasta animated, bedtime horror stories, horror stories animated, scary animation, horror narration, horror shorts
+
+
+TAGLINE (links, socials)
+------------------------
+Animated horror stories, for after lights out.
+
+
+VIDEO DESCRIPTION TEMPLATE (keep it short; at most 1-2 links; write each one fresh)
+-----------------------------------------------------------------------------------
+[Two sentences in the narrator's voice - the hook.]
+
+[One line on what the story is about.]
+
+Chapters
+0:00 ...
+
+[If retold: Based on "Title" by Author (year) - retold in our own words.]
+[Sound credits as plain text, no links.]
+
+#horrorstory #[one tag for this story]
+
+
+SETTINGS TO DO ONCE
+-------------------
+1. Settings > Upload defaults > Advanced settings: Audience = "No, it's not made for kids";
+   Category = Film & Animation; Video language = English.
+2. If you move the films from Daddy Tales: upload each one here and make the old copy Private (or delete
+   it). The same video on two channels can be treated as reused content.
+3. Shorts: set "Related video" on each Short to its full story.
