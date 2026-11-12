@@ -1,0 +1,7 @@
+# Voice pipeline (local Kokoro TTS + DSP post-processing)
+kokoro-onnx==0.6.1
+numpy>=1.26
+scipy>=1.11
+pyloudnorm>=0.1.1
+# Optional providers
+# boto3>=1.34        # Amazon Polly

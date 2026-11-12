@@ -1,0 +1,109 @@
+{
+ "total": 622.6666666666666,
+ "scenes": [
+  {
+   "id": "wave",
+   "name": "The wave",
+   "start": 0,
+   "duration": 42.708,
+   "narrationText": "The last time I saw him, it was four in the morning. I was five years old, sitting in the cab of my dad's moving truck with my face against the cold glass. And he was standing in my bedroom window. Small. Perfectly still. As we pulled away, he lifted one tiny hand and waved goodbye. In his other hand, he was holding a steak knife. I didn't wave back. He had been my best friend for two weeks.",
+   "dialogueIds": []
+  },
+  {
+   "id": "house",
+   "name": "The empty house",
+   "start": 42.708,
+   "duration": 73.833,
+   "narrationText": "When I was little, my family never stayed anywhere for long. My dad chased jobs, and we followed him, from one rented house to the next. That spring, it was a big old farmhouse on a hill outside a tiny town in Maine. It was far too big for the three of us. There were rooms in that house I never even saw. At night, the house made noises. Long creaks in the hallway. Little taps inside the walls. My dad said old houses settle. My mom said I had a big imagination. The day after my fifth birthday, I got sick. A fever that wouldn't break. The doctor said weeks in bed, no running, no playing. And we were already packing for the next move, so everything I owned was taped up in cardboard boxes. My room was empty except for my bed, a stack of picture books, and the ginger ale my mom brought me three times a day. I had never been so bored in my life. That's when he showed up.",
+   "dialogueIds": []
+  },
+  {
+   "id": "underBed",
+   "name": "Under the bed",
+   "start": 116.542,
+   "duration": 104.208,
+   "narrationText": "I don't remember the first time I saw him. I only remember asking his name. It suited him. He was about the size of a cat. Everything about him was too big for his body: his round head, his shiny black eyes, his crooked ears. But his mouth was the biggest thing of all. It stretched almost from one ear to the other. He looked like one of those talking toy pets every kid wanted that year. Whenever my mom came up the stairs, he slid under my bed. Fast. For the first few days, all he wanted to do was look at my books. He turned the pages slowly, staring at every picture, like he had never seen a story before. Once, my mom came in a little too fast. The bed skirt was still swinging when she opened the door. It was the first time I ever lied to her. He had asked me to. Then, one morning, he was waiting for me with a huge smile.",
+   "dialogueIds": [
+    "widemouth_001_call_me",
+    "eli_001_a_toy",
+    "widemouth_002_friend",
+    "widemouth_003_other_friends",
+    "eli_002_move",
+    "widemouth_004_good",
+    "widemouth_005_parents",
+    "mom_001_who",
+    "eli_003_nobody",
+    "widemouth_006_secret_game"
+   ]
+  },
+  {
+   "id": "trampoline",
+   "name": "Trampoline",
+   "start": 220.75,
+   "duration": 85.375,
+   "narrationText": "He waited until my mom had come and gone. Then he tugged my hand and led me down the hall, to the room at the very end. I wasn't allowed out of bed. He kept tugging until I went anyway. The room was completely empty. Bare floorboards. No furniture. Just one window. He ran across the room and pushed it wide open. The house sat on a hill, so the ground below that window was a long, long way down. I was five. I had a fever. For one second, I could almost see it. His face changed. His lips peeled back over that enormous mouth, and for just a moment, my friend snarled at me. Then it was gone. He just looked... disappointed. He spent the rest of the day under my bed, without making a sound.",
+   "dialogueIds": [
+    "widemouth_007_how_to_play",
+    "eli_004_far_down"
+   ]
+  },
+  {
+   "id": "box",
+   "name": "The box",
+   "start": 306.125,
+   "duration": 38.458,
+   "narrationText": "The next morning, he came back with a little cardboard box. I looked inside. It was full of knives. When I pushed the box away, the smile was gone. He took his knives and slid back under my bed. That was the night I started wondering how much of his time he spent down there. Right underneath me.",
+   "dialogueIds": [
+    "widemouth_008_juggle",
+    "eli_005_mom_kill_me",
+    "widemouth_009_more_fun"
+   ]
+  },
+  {
+   "id": "nights",
+   "name": "The nights",
+   "start": 344.583,
+   "duration": 77.167,
+   "narrationText": "After that, he woke me up at night. I'd open my eyes in the dark, and that wide grin would be right at the edge of my mattress. I'd tell him no and squeeze my eyes shut. But he didn't leave. He'd stay there, whispering about the window, until the sky outside turned grey. He wasn't fun anymore. Then, one night, I woke up cold. I wasn't in my bed. I was standing in the empty room at the end of the hall. The window was wide open. The night air was on my face, and my bare toes were curled over the edge of the sill. I don't know how I got there. Behind me, in the dark, something whispered. I ran back to my bed and pulled the blanket over my head, and I didn't sleep again until morning.",
+   "dialogueIds": [
+    "widemouth_010_real_trampoline",
+    "widemouth_011_almost"
+   ]
+  },
+  {
+   "id": "trail",
+   "name": "The trail",
+   "start": 421.75,
+   "duration": 58.625,
+   "narrationText": "When I finally got better, my mom said I could go outside. He was waiting for me on the back porch. He led me to the edge of the woods behind the house, where a narrow deer trail disappeared into the trees. The woods were completely silent. No birds. Just the sound of his little feet on the dead leaves. He looked up at me with those shiny black eyes.",
+   "dialogueIds": [
+    "widemouth_012_show_you",
+    "widemouth_013_important_path",
+    "widemouth_014_not_ready"
+   ]
+  },
+  {
+   "id": "fourAm",
+   "name": "Four A.M.",
+   "start": 480.375,
+   "duration": 62.667,
+   "narrationText": "Moving day came two weeks after I met him. I didn't tell him we were leaving. Even at five, I'd figured out that the things he wanted for me were not good things. The night before we left, my mom searched the whole kitchen. Nobody had. That night I lay awake, listening to the quiet underneath me. For the first time, he didn't say a word. My dad woke me at four in the morning and carried me out to the truck. I looked up at the house as we backed out of the driveway. And there he was. In my window. You already know the rest. The little wave. The steak knife.",
+   "dialogueIds": [
+    "mom_002_steak_knife",
+    "dad_001_last_move"
+   ]
+  },
+  {
+   "id": "end",
+   "name": "The end of the trail",
+   "start": 543.042,
+   "duration": 79.625,
+   "narrationText": "Twenty-five years later, I drove back. The house was gone. It had burned down a few years after we left. Only the stone foundation was still there, half buried in weeds. I found the deer trail. Part of me expected him to jump out from behind a tree. But I knew he was gone. Somehow, he had belonged to that house. The trail went deeper into the woods than I remembered. It ended at a cemetery. Rows and rows of small, old headstones. Most of them belonged to children. He'd told me I wasn't ready. Every one of them had been ready. Last week, my son turned five. This morning, he asked me if we could get a trampoline. I asked him who told him about trampolines.",
+   "dialogueIds": [
+    "leo_001_new_friend",
+    "leo_002_under_bed",
+    "widemouth_015_hello_again"
+   ]
+  }
+ ]
+}
