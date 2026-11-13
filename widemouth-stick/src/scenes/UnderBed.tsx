@@ -9,7 +9,7 @@ import {ADULT_S, BedScene, KID_S, WM_S} from '../stick/rooms';
 const b = BEDS.bedroom_day;
 const CX = 665;
 const ROOM_X = 1300;
-const ELI_HEAD: [number, number] = [(b.pillow[0] + b.pillow[1]) / 2 + 22, b.quilt + 120 - 209 * 0.62 * KID_S];
+const ELI_HEAD: [number, number] = [(b.pillow[0] + b.pillow[1]) / 2 + 22, b.quilt + 100 - 209 * 0.62 * KID_S];
 
 /** "one of those talking toy pets every kid wanted that year": an old TV advert. */
 const TvAdvert: React.FC<{f: number}> = ({f}) => {

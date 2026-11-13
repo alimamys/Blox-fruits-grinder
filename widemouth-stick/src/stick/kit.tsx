@@ -75,11 +75,11 @@ export type SetId =
 	| 'kitchen_night'
 	| 'black';
 
-export type BedGeo = {x0: number; x1: number; pillow: [number, number]; quilt: number; skirtTop: number; skirtBottom: number; gap: number; floor: number; front: number; quiltCols: string[]; hem: string};
+export type BedGeo = {x0: number; x1: number; pillow: [number, number]; quilt: number; edge: number; skirtTop: number; skirtBottom: number; gap: number; floor: number; front: number; quiltCols: string[]; hem: string};
 export const BEDS: Record<'bedroom_night' | 'bedroom_day' | 'leoroom_day', BedGeo> = {
-	bedroom_night: {x0: 228, x1: 985, pillow: [232, 405], quilt: 608, skirtTop: 698, skirtBottom: 866, gap: 884, floor: 818, front: 960, quiltCols: ['#3b2c4f', '#4a3156', '#2e2c47', '#3a3550'], hem: '#8a93ad'},
-	bedroom_day: {x0: 182, x1: 988, pillow: [182, 424], quilt: 612, skirtTop: 710, skirtBottom: 888, gap: 900, floor: 840, front: 975, quiltCols: ['#92503c', '#a78660', '#6e7682', '#87503a'], hem: '#ece6d6'},
-	leoroom_day: {x0: 178, x1: 990, pillow: [180, 383], quilt: 630, skirtTop: 728, skirtBottom: 884, gap: 895, floor: 848, front: 980, quiltCols: ['#2f6fc0', '#3a7dd0', '#2f6fc0', '#3a7dd0'], hem: '#9cc3ee'},
+	bedroom_night: {x0: 228, x1: 985, pillow: [232, 405], quilt: 608, edge: 610, skirtTop: 698, skirtBottom: 866, gap: 884, floor: 818, front: 960, quiltCols: ['#3b2c4f', '#4a3156', '#2e2c47', '#3a3550'], hem: '#8a93ad'},
+	bedroom_day: {x0: 182, x1: 988, pillow: [182, 424], quilt: 612, edge: 604, skirtTop: 710, skirtBottom: 888, gap: 900, floor: 840, front: 975, quiltCols: ['#92503c', '#a78660', '#6e7682', '#87503a'], hem: '#ece6d6'},
+	leoroom_day: {x0: 178, x1: 990, pillow: [180, 383], quilt: 630, edge: 629, skirtTop: 728, skirtBottom: 884, gap: 895, floor: 848, front: 980, quiltCols: ['#2f6fc0', '#3a7dd0', '#2f6fc0', '#3a7dd0'], hem: '#9cc3ee'},
 };
 export const GEO = {
 	window_out_night: {pane: [690, 524, 1236, 896] as const, sill: 892},

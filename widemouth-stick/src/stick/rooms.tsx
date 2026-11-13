@@ -19,22 +19,21 @@ export type InBed =
 /** Mr. Widemouth's state in a bedroom: `under` 0 = standing out in the room, 1 = crouched under the bed (seen only through the gap). */
 export type WMIn = Partial<WidemouthProps> & {x: number; y?: number; under?: number; dark?: number; show?: boolean};
 
-/** Eli (or Leo) sitting up in bed, the blanket over his legs. */
+/** Eli (or Leo) sitting up in bed: he rises out of the painted quilt (cut along its top edge, so the plate's own
+ *  quilt covers him from the waist down), hands resting on it, a soft shadow where he meets it. */
 export const SitInBed: React.FC<{b: BedGeo; light: Light; frame: number; p?: Partial<KidProps>; id: string; who?: 'eli' | 'leo'}> = ({b, light, frame, p = {}, id, who = 'eli'}) => {
 	const x = (b.pillow[0] + b.pillow[1]) / 2 + 22;
-	const y = b.quilt + 120;
+	const y = b.quilt + 100;
 	const Kid = who === 'leo' ? Leo : Eli;
 	return (
 		<g>
-			<Clip id={`${id}_waist`} d={`M0,0 H1920 V${b.quilt + 80} H0 Z`} />
+			<ellipse cx={x} cy={b.edge + 3} rx={58} ry={8} fill="#000" opacity={0.22} />
+			<Clip id={`${id}_waist`} d={`M0,0 H1920 V${b.edge + 1} H0 Z`} />
 			<g clipPath={`url(#${id}_waist)`}>
 				<Tint light={light}>
-					<Kid x={x} y={y} s={KID_S} frame={frame} pose="sit" arms={{l: [34, -26], r: [34, -26]}} {...p} />
+					<Kid x={x} y={y} s={KID_S} frame={frame} pose="sit" arms={{l: [25, -96], r: [25, -96]}} {...p} />
 				</Tint>
 			</g>
-			<Tint light={light}>
-				<Quilt id={`${id}_q`} cols={b.quiltCols} d={lapBlanket(b, b.x0 - 4, x + 300, b.quilt + 58)} />
-			</Tint>
 		</g>
 	);
 };
