@@ -1,5 +1,6 @@
 import React from 'react';
 import {Composition} from 'remotion';
+import {Thumb} from './dev/Thumbs';
 import {FPS, HEIGHT, TIMELINE, TIMELINE_FULL, WIDTH} from './data/timeline';
 import {DEFAULT_SETTINGS} from './data/settings';
 import {GoatmanHorror} from './GoatmanHorror';
@@ -26,5 +27,8 @@ export const RemotionRoot: React.FC = () => (
 			height={HEIGHT}
 			defaultProps={{...DEFAULT_SETTINGS, edit: 'full' as const}}
 		/>
+		{(['A', 'B', 'C'] as const).map((v) => (
+			<Composition key={v} id={`Thumb${v}`} component={Thumb} durationInFrames={1} fps={24} width={1920} height={1080} defaultProps={{v}} />
+		))}
 	</>
 );
