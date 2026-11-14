@@ -32,13 +32,13 @@ export const Thumb: React.FC<{v: 'A' | 'B' | 'C'}> = ({v}) => {
 		return (
 			<AbsoluteFill style={{background: '#000'}}>
 				<AbsoluteFill style={pop}>
-					<Stage set="trailer_night" z={1.75} f={[990, 640]} t={0} light="warm">
+					<Stage set="trailer_night" z={1.55} f={[1180, 620]} t={0} light="warm">
 						<Group people={ppl} />
 						<Counts heads={heads} t0={0} t={10} s={1.1} />
 						<circle cx={th[0]} cy={th[1] + 70} r={110} fill="none" stroke="#e3261b" strokeWidth={12} />
 					</Stage>
 				</AbsoluteFill>
-				<Words x={70} y={50} align="right" rot={-3} lines={[{t: 'COUNT', c: '#ffffff', size: 180}, {t: 'THEM.', c: '#ffd21a', size: 180}]} />
+				<Words x={50} y={300} align="right" rot={-3} lines={[{t: "COUNT", c: "#ffffff", size: 170}, {t: "THEM.", c: "#ffd21a", size: 170}]} />
 			</AbsoluteFill>
 		);
 	}
