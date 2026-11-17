@@ -1,0 +1,94 @@
+{
+ "sarah": {
+  "head": {
+   "src": "puppets/sarah_head.png",
+   "w": 385,
+   "h": 409,
+   "face": {
+    "x": 200.05082112738572,
+    "y": 228.68786063027076,
+    "r": 111.28130037025176,
+    "chin": 338.0
+   },
+   "skin": "#f1c596"
+  },
+  "headSide": {
+   "src": "puppets/sarah_headSide.png",
+   "w": 375,
+   "h": 406,
+   "face": {
+    "x": 234.9319928069315,
+    "y": 227.72564165440576,
+    "r": 103.50995492679144,
+    "chin": 332.0
+   },
+   "skin": "#f1c494"
+  },
+  "headBack": {
+   "src": "puppets/sarah_headBack.png",
+   "w": 374,
+   "h": 410
+  },
+  "torso": {
+   "src": "puppets/sarah_torso.png",
+   "w": 372,
+   "h": 392
+  },
+  "torsoSide": {
+   "src": "puppets/sarah_torsoSide.png",
+   "w": 212,
+   "h": 399
+  },
+  "torsoBack": {
+   "src": "puppets/sarah_torsoBack.png",
+   "w": 360,
+   "h": 390
+  }
+ },
+ "harris": {
+  "head": {
+   "src": "puppets/harris_head.png",
+   "w": 331,
+   "h": 403,
+   "face": {
+    "x": 165.87437277620654,
+    "y": 213.64693002463278,
+    "r": 148.50944547032182,
+    "chin": 363.0
+   },
+   "skin": "#e9c6a6"
+  },
+  "headSide": {
+   "src": "puppets/harris_headSide.png",
+   "w": 325,
+   "h": 402,
+   "face": {
+    "x": 193.65623339724192,
+    "y": 217.34739322260978,
+    "r": 148.63263783844255,
+    "chin": 363.0
+   },
+   "skin": "#e9c6a6"
+  },
+  "headBack": {
+   "src": "puppets/harris_headBack.png",
+   "w": 315,
+   "h": 397
+  },
+  "torso": {
+   "src": "puppets/harris_torso.png",
+   "w": 376,
+   "h": 433
+  },
+  "torsoSide": {
+   "src": "puppets/harris_torsoSide.png",
+   "w": 260,
+   "h": 434
+  },
+  "torsoBack": {
+   "src": "puppets/harris_torsoBack.png",
+   "w": 414,
+   "h": 444
+  }
+ }
+}
