@@ -49,7 +49,7 @@ export const TikTokPart: React.FC<TikTokProps> = ({part, total, from, to}) => {
 			</div>
 			{/* the film's own captions, bigger, under the picture (kept left of TikTok's buttons) */}
 			<Sequence from={-fromF} durationInFrames={fromF + len}>
-				<div style={{position: 'absolute', left: 40, top: VIDEO_TOP + VIDEO_H + 16, width: 688, height: 300, transform: 'scale(1.25)', transformOrigin: '0 0'}}>
+				<div style={{position: 'absolute', left: (1080 - 688 * 1.25) / 2, top: VIDEO_TOP + VIDEO_H + 16, width: 688, height: 300, transform: 'scale(1.25)', transformOrigin: '0 0'}}>
 					<Subtitles timeline={TIMELINE} />
 				</div>
 			</Sequence>
