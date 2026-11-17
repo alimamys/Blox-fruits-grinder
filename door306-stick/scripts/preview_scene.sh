@@ -16,7 +16,7 @@ A=${RANGE% *}; Z=${RANGE#* }
 npx remotion bundle src/index.ts --out-dir=build/bundle --log=error > /dev/null
 mkdir -p previews/scenes
 if [ "$3" != "--no-video" ]; then
-  npx remotion render build/bundle GoatmanHorror previews/scenes/$SC.mp4 --frames=$A-$Z --scale=0.5 --concurrency=4 --browser-executable=$B --log=error
+  npx remotion render build/bundle Door306Horror previews/scenes/$SC.mp4 --frames=$A-$Z --scale=0.5 --concurrency=4 --browser-executable=$B --log=error
   .venv/bin/python scripts/contact.py previews/scenes/$SC.mp4 $EVERY
 fi
 REMOTION_BROWSER_EXECUTABLE=$B node scripts/qa.mjs --from=$A --to=$Z --every=3 2>&1 | grep -v "^$" | tail -40

@@ -280,7 +280,7 @@ def spent() -> float:
 
 
 def budget() -> float:
-    return float(os.environ.get('IMAGE_BUDGET_USD', 0.30))  # approved cap: the puppet test ($0.30)
+    return float(os.environ.get('IMAGE_BUDGET_USD', 1.50))  # approved cap for the whole stick film ($1.50, low quality)
 
 
 def log_cost(kind: str, out: str, usage: dict) -> float:

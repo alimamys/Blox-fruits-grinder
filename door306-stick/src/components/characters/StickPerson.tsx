@@ -59,7 +59,7 @@ export interface Palette {
 }
 
 /** A painted puppet part (public/puppets/*.png, cut out by scripts/images/puppets.py). */
-export type PaintPart = {src: string; w: number; h: number; face?: {x: number; y: number; r: number; chin?: number}; skin?: string};
+export type PaintPart = {src: string; w: number; h: number; face?: {x: number; y: number; r: number; chin?: number; w?: number}; skin?: string};
 export type Paint = {head: PaintPart; headSide: PaintPart; headBack: PaintPart; torso: PaintPart; torsoSide: PaintPart; torsoBack: PaintPart; headScale?: number; faceDy?: number};
 
 export interface StickProps {
@@ -869,7 +869,8 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 						const P = p.paint;
 						const part = back ? P.headBack : side ? P.headSide : P.head;
 						// size from the front head's width, so every view has the same scale
-						const sc = (hr * 2.55 * (P.headScale ?? 1)) / P.head.w;
+						// the same face width for every character (long curly hair or bald), from the front head
+						const sc = P.head.face?.w ? (hr * 1.45 * (P.headScale ?? 1)) / P.head.face.w : (hr * 2.55 * (P.headScale ?? 1)) / P.head.w;
 						const face = part.face ?? {x: part.w / 2, y: (P.head.face?.y ?? P.head.h * 0.55) * (part.h / P.head.h), r: 1};
 						const fx = cx + (side ? 0 : faceDX * 0.35);
 						const fy = cy + 4 + (P.faceDy ?? 0) * hr;

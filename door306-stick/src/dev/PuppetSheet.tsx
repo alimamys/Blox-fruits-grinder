@@ -1,28 +1,25 @@
-// Puppet check: every view and pose of the painted puppets.
+// Puppet check: the whole cast, the creature's poses and the props.
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
-import {Harris, Sarah} from '../components/characters/Cast';
-import {walkPhase} from '../components/characters/StickPerson';
+import {Boy, Harris, Landlord, Mother, OldMan, RobeMan, RobeWoman, Sarah, Shawl, TShirt} from '../components/characters/Cast';
+import {Creature, Prop, Sack} from '../components/characters/Creature';
 
 export const PuppetSheet: React.FC = () => {
 	const f = useCurrentFrame();
-	const row = (C: typeof Sarah, y: number) => (
-		<g>
-			<C x={160} y={y} s={1.15} frame={f} />
-			<C x={400} y={y} s={1.15} frame={f} mouth="open" talk={0.8} eyes="wide" brows="worried" />
-			<C x={640} y={y} s={1.15} frame={f} turn={0.8} pose="walk" phase={walkPhase(f * 6, 1.15)} />
-			<C x={880} y={y} s={1.15} frame={f} turn={-0.8} />
-			<C x={1120} y={y} s={1.15} frame={f} back />
-			<C x={1360} y={y} s={1.15} frame={f} pose="sit" mouth="smile" />
-			<C x={1600} y={y} s={1.15} frame={f} arms="fingerLips" eyes="squint" />
-			<C x={1800} y={y} s={1.15} frame={f} arms="armsUp" mouth="scream" eyes="wide" />
-		</g>
-	);
+	const cast = [Sarah, Harris, Mother, Boy, OldMan, RobeMan, TShirt, Shawl, RobeWoman, Landlord];
 	return (
 		<AbsoluteFill style={{background: '#d9d4c6'}}>
 			<svg viewBox="0 0 1920 1080" width={1920} height={1080}>
-				{row(Sarah, 500)}
-				{row(Harris, 1040)}
+				{cast.map((C, i) => (
+					<C key={i} x={110 + i * 185} y={430} s={1.0} frame={f} mouth={i % 3 === 0 ? 'open' : 'flat'} talk={0.6} idle={false} />
+				))}
+				<Creature x={200} y={1060} s={1.4} frame={f} view="front" />
+				<Creature x={520} y={1060} s={1.4} frame={f} view="side" walking phase={f / 4} grip={[-120, -40]} />
+				<Sack x={290} y={1060} s={0.9} frame={f} />
+				<Creature x={900} y={1060} s={1.4} frame={f} view="front" reach={[230, -200]} tilt={60} talk={0.8} />
+				<Creature x={1280} y={1060} s={1.4} frame={f} view="back" />
+				<Prop name="sofa" x={1600} y={1060} w={340} />
+				<Prop name="table" x={1820} y={800} w={180} />
 			</svg>
 		</AbsoluteFill>
 	);

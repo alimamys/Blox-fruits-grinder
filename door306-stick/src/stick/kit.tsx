@@ -56,17 +56,38 @@ export const useStick = () => {
 };
 
 // ---------------------------------------------------------------- sets (measured on the repainted plates)
-export type SetId = 'flat_night' | 'hallway_night' | 'black';
+export type SetId =
+	| 'flat_night'
+	| 'flat_night_bare'
+	| 'flat_day_bare'
+	| 'hallway_night'
+	| 'hallway_day'
+	| 'hallway_persp_night'
+	| 'stairwell_night'
+	| 'exterior_night'
+	| 'exterior_day'
+	| 'lobby_day'
+	| 'office_day'
+	| 'black';
 
+/** measured on the painted plates */
 export const GEO = {
-	trailer: {floor: 965, seat: 740, stove: [265, 520] as Pt, pot: [262, 530] as Pt, door: [1410, 230, 1660, 850] as const, bath: [1720, 256, 1880, 850] as const, blinds: [760, 236, 1210, 530] as const, counter: 580},
-	clearing: {door: [1120, 414, 1260, 720] as const, steps: [1100, 720, 1270, 800] as const, fire: [830, 925] as Pt, ground: 985, logL: [270, 990] as Pt, logR: [1060, 1000] as Pt, trailer: [900, 300, 1720, 750] as const},
-	trail: {ground: 965},
-	creek: {water: 760, bushes: [1140, 480, 1920, 660] as const, bank: 1000},
-	farm: {door: [1536, 500, 1610, 660] as const, pen: [160, 720, 960, 880] as const, ground: 985},
-	bathroom: {window: [740, 200, 1200, 610] as const, floor: 920},
-	apartment: {couchSeat: 750, couchX: [490, 1370] as const, table: [590, 850, 1240, 870] as const, bathDoor: [1560, 300, 1660, 760] as const, floor: 960},
+	flat: {door: [1450, 240, 1760, 810] as const, lock: [1460, 470] as Pt, bedroom: [80, 250, 320, 800] as const, floor: 960, rug: [440, 870, 1370, 1000] as const, window: [610, 210, 1000, 580] as const},
+	hall: {doors: [[130, 300, 410, 822], [740, 300, 1010, 822], [1220, 300, 1500, 822]] as const, floor: 955, stairs: 1640},
+	hallDay: {doors: [[140, 280, 420, 830], [760, 280, 1030, 830], [1240, 280, 1510, 830]] as const, floor: 960, stairs: 1630},
+	persp: {vp: [950, 530] as Pt, stairs: [820, 430, 1080, 660] as const, far: 660, near: 1080},
+	stair: {bottom: [680, 900] as Pt, top: [1360, 400] as Pt, landing3: 900, landing4: 400, door3: [190, 390, 430, 900] as const, light: [1500, 50, 1760, 70] as const},
+	ext: {window: [910, 160, 1010, 290] as const, door: [890, 740, 1030, 900] as const, ground: 960},
+	lobby: {boxes: [304, 260, 1124, 710] as const, door: [1440, 180, 1770, 910] as const, floor: 1000},
+	office: {desk: [410, 630, 1260, 920] as const, laptop: [620, 480, 880, 630] as const, clock: [730, 120, 880, 270] as const, floor: 1000},
 };
+/** scale of a person standing at floor height y in the perspective hallway (2.0 near the camera) */
+export const perspS = (y: number) => (2.0 * (y - GEO.persp.vp[1])) / 460;
+/** x of a point a fraction k (-1 left wall .. 1 right wall) across the corridor floor at height y */
+export const perspX = (y: number, k: number) => GEO.persp.vp[0] + k * (y - GEO.persp.vp[1]) * 1.55;
+/** a point on the stairs (k 0 = 3rd-floor landing, 1 = 4th-floor landing) */
+export const stairPt = (k: number): Pt => [GEO.stair.bottom[0] + (GEO.stair.top[0] - GEO.stair.bottom[0]) * k, GEO.stair.bottom[1] + (GEO.stair.top[1] - GEO.stair.bottom[1]) * k];
+
 
 // ---------------------------------------------------------------- camera
 export type Shot = {t: number; set: SetId; z0: number; z1: number; f0: Pt; f1: Pt; light?: Light; shake?: number; track?: (t: number) => Pt; tag?: string};
@@ -90,7 +111,7 @@ export const camOf = (z: number, f: Pt, t = 0, shake = 0) => {
 };
 
 // ---------------------------------------------------------------- light
-export type Light = 'day' | 'night' | 'dark' | 'grey' | 'warm' | 'dawn' | 'dusk' | 'torch' | 'dim';
+export type Light = 'day' | 'night' | 'dark' | 'grey' | 'warm' | 'dawn' | 'dusk' | 'torch' | 'dim' | 'fluoro';
 /** colour matrices: [plate, characters] */
 const MATS: Record<Light, [string | null, string | null]> = {
 	day: [null, null],
@@ -102,6 +123,8 @@ const MATS: Record<Light, [string | null, string | null]> = {
 	grey: ['0.9 0.06 0.04 0 0  0.05 0.9 0.05 0 0  0.04 0.06 0.92 0 0.01  0 0 0 1 0', '0.92 0.04 0.04 0 0  0.04 0.92 0.04 0 0  0.04 0.04 0.94 0 0.01  0 0 0 1 0'],
 	// lamp-lit kitchen
 	warm: [null, '0.95 0 0 0 0.02  0 0.86 0 0 0.01  0 0 0.7 0 0  0 0 0 1 0'],
+	// the hallway at 3:06: sickly yellow-green fluorescent light on the people
+	fluoro: [null, '0.9 0 0 0 0.01  0 0.95 0 0 0.03  0 0 0.74 0 0  0 0 0 1 0'],
 	// the trailer at four in the morning: lamp off, but readable
 	dim: ['0.5 0 0 0 0  0 0.52 0 0 0.01  0 0 0.68 0 0.04  0 0 0 1 0', '0.72 0 0 0 0  0 0.74 0 0 0.01  0 0 0.88 0 0.04  0 0 0 1 0'],
 	// sunset in the clearing
@@ -183,6 +206,7 @@ const QAReport: React.FC<{scene: string}> = ({scene}) => {
 		const w = r.x1 - r.x0;
 		const hh = r.head - r.y0;
 		if (r.y0 < -0.3 * hh && r.head > 0) out.push(`${b.name}: head cut by the top edge`);
+		if (r.head > 1080 + 0.25 * hh && r.y0 < 1080) out.push(`${b.name}: head cut by the bottom edge`);
 		const outL = Math.max(0, -r.x0);
 		const outR = Math.max(0, r.x1 - 1920);
 		const outF = Math.max(outL, outR) / w;
@@ -211,7 +235,7 @@ const QAReport: React.FC<{scene: string}> = ({scene}) => {
 
 /** One shot: the plate (an <Img>, so the render waits for it to load) and the drawing on top, under one camera. */
 export const Stage: React.FC<{set: SetId; z: number; f: Pt; t: number; light?: Light; shake?: number; children?: React.ReactNode; over?: React.ReactNode; qaScene?: string}> = ({set, z, f, t, light, shake = 0, children, over, qaScene = ''}) => {
-	const lt: Light = light ?? (set.endsWith('_night') ? 'night' : 'day');
+	const lt: Light = light ?? (set.startsWith('hallway') || set.startsWith('stairwell') ? (set.endsWith('_night') ? 'fluoro' : 'day') : set.endsWith('_night') ? 'night' : 'day');
 	const pf = MATS[lt][0];
 	const c = camNums(z, f, t, shake);
 	return (
@@ -237,13 +261,13 @@ export const Stage: React.FC<{set: SetId; z: number; f: Pt; t: number; light?: L
 };
 
 /** Draw a scene from its shot list: picks the shot, frames it, calls world(set, t, shot). */
-export const Shots: React.FC<{shots: Shot[]; world: (s: Shot, local: number) => React.ReactNode; over?: (s: Shot) => React.ReactNode}> = ({shots, world, over}) => {
+export const Shots: React.FC<{shots: Shot[]; world: (s: Shot, local: number) => React.ReactNode; over?: (s: Shot) => React.ReactNode; overlay?: (s: Shot) => React.ReactNode}> = ({shots, world, over, overlay}) => {
 	const {t, total, api} = useStick();
 	const p = pickShot(shots, t, total);
 	const z = lerp(p.s.z0, p.s.z1, p.k);
 	const fp = p.s.track ? p.s.track(t) : lerpPt(p.s.f0, p.s.f1, p.k);
 	return (
-		<Stage set={p.s.set} z={z} f={fp} t={t} light={p.s.light} shake={p.s.shake} qaScene={api.scene.id}>
+		<Stage set={p.s.set} z={z} f={fp} t={t} light={p.s.light} shake={p.s.shake} qaScene={api.scene.id} over={overlay ? overlay(p.s) : undefined}>
 			{world(p.s, p.local)}
 			{over ? over(p.s) : null}
 		</Stage>

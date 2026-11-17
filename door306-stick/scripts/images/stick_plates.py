@@ -40,6 +40,37 @@ SETS = {
                      'old yellowed wallpaper, a worn green carpet runner on the floor, buzzing fluorescent tube lights on the ceiling giving a sickly '
                      'yellow-green light with cold blue shadows; at the far RIGHT the dark opening of the staircase with a grey metal railing going down. '
                      'Eerie and silent.' + EMPTY,
+    'flat_night_bare': 'The same small, slightly shabby studio apartment in an old city building at three in the morning, seen straight-on like a stage set, '
+                       'with NO furniture except a worn rug: on the far LEFT an open doorway into a dark bedroom (the corner of a bed just visible inside); '
+                       'in the middle-left a window with closed horizontal blinds striped by orange streetlight; a worn red rug in the middle of the floorboards; '
+                       'on the RIGHT the apartment front door (plain wood) with a tiny round peephole at eye height, a door chain and a brass deadbolt. '
+                       'Dark blue night light with warm orange stripes from the blinds, deep shadows.' + EMPTY,
+    'flat_day_bare': 'The same small studio apartment on a bright, calm morning, seen straight-on like a stage set, with NO furniture except a worn red rug: '
+                     'on the far LEFT an open doorway into a bedroom (the corner of a made bed inside); in the middle-left a window with the blinds raised '
+                     'and soft morning sunlight streaming in; on the RIGHT the apartment front door (plain wood) with a tiny peephole and a door chain. '
+                     'Warm, clean sunlight, which makes it feel even emptier.' + EMPTY,
+    'hallway_persp_night': 'The 4th-floor hallway of an old apartment building at three in the morning, seen from one apartment door looking straight down '
+                           'the long narrow corridor in one-point perspective: worn green carpet, yellowed walls, plain wooden apartment doors along both '
+                           'walls, buzzing fluorescent tubes on the ceiling with a sickly yellow-green light, and at the far end the dark opening of the '
+                           'staircase with a grey metal railing. Cold blue shadows. Eerie and silent.' + EMPTY,
+    'hallway_day': 'The 4th-floor hallway of an old apartment building on a bright ordinary morning, seen straight-on from the side like a stage set: '
+                   'a long wall with THREE plain wooden apartment doors in a row, each with a tiny peephole, a brass knob and a small BLANK number plate; '
+                   'yellowed wallpaper, a worn green carpet runner, ceiling lights off, warm daylight from a window off to the side; at the far RIGHT '
+                   'the staircase opening with a grey metal railing going down. Calm and ordinary.' + EMPTY,
+    'stairwell_night': 'The concrete stairwell of an old apartment building at three in the morning, seen from the side like a stage set: a straight '
+                       'flight of grey concrete steps rising from the 3rd-floor landing at the bottom LEFT up to the 4th-floor landing at the top RIGHT, '
+                       'with a grey metal railing along the steps; a plain wooden apartment door on the 3rd-floor landing; a single flickering '
+                       'fluorescent light; grey-green painted walls with grime. Cold and sinister.' + EMPTY,
+    'exterior_night': 'An old four-storey red-brick apartment building on a quiet city street at three in the morning, seen straight-on: rows of dark '
+                      'windows, only ONE window lit on the top floor, a plain entrance door at street level, an empty sidewalk, a single street lamp '
+                      'on the left, deep blue night sky. Lonely and quiet.' + EMPTY,
+    'exterior_day': 'The same old four-storey red-brick apartment building on a quiet street on a bright sunny morning, seen straight-on: rows of '
+                    'windows, a plain entrance door, an empty sidewalk, a street lamp on the left, clear blue sky. Calm and ordinary.' + EMPTY,
+    'lobby_day': 'The small entrance lobby of an old apartment building in the morning, seen straight-on: a wall of small metal mailboxes in rows, '
+                 'each with a BLANK little name slot, a tiled floor, a glass entrance door on the right with daylight. Plain and quiet.' + EMPTY,
+    'office_day': 'A small, cosy landlord\'s office in the morning, seen straight-on: a wooden desk in the middle with a closed laptop and a brass '
+                  'desk lamp, a grey filing cabinet on the left, a window on the right with daylight, a round wall clock with a BLANK face. '
+                  'Warm and tidy.' + EMPTY,
 }
 
 

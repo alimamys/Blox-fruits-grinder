@@ -1,144 +1,163 @@
-// 4. THE NEIGHBORS - they are expecting it. No signal. Three soft knocks.
+// 4. THE NEIGHBORS - the same positions; the mother covering her boy's mouth; the old man shaking by the stairs;
+// they were expecting it. No signal. Then three soft knocks: Mr. Harris at the door.
 import React from 'react';
-import {NoSignalScreen} from '../components/ui/Phone';
-import {Person} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {MOOD} from './common';
-import {again, close, phone, push, shot} from './kit';
+import {Boy, Mother, OldMan, RobeMan, RobeWoman, Sarah, Shawl, TShirt} from '../components/characters/Cast';
+import {Prop} from '../components/characters/Creature';
+import {CallScreen, NoSignalScreen, PhoneFrame} from '../components/ui/Phone';
+import {FPS} from '../data/timeline';
+import {HallDoor, HarrisAtGap, peepOverlay, residentsPersp, SarahAtGap} from '../stick/d306';
+import {Person, PlateShake} from '../stick/goat';
+import {fshot, GEO, ramp, shot, Shots, useStick, walk} from '../stick/kit';
+import {boxesOf, Group, type Spec} from '../stick/places';
+import {FLAT_PROPS} from './NewApartment';
 
-/** Sarah's face close to the door in the dark - reused whenever she realises something. */
-const SARAH_DREAD = 'EXTREME CLOSE-UP of Sarah\'s face only - forehead to chin filling the frame - in the dark flat, her back against her front door, staring into the darkness, her face pale, eyes wide and glassy as a terrible thought dawns on her; faint yellow-green light from under the door on her chin.';
-
-export const Neighbors: React.FC = () => (
-	<Shots
-		shots={[
-			again('c_00_peephole', 'narrator_063_peephole_again', 'd_06_eye_peephole', {move: push(1.04, 1.1, 0.55, 0.45), blink: true}),
-			again('c_01_same', 'narrator_064_same_positions', 'd_07_peephole_pov', {move: push(1.0, 1.08)}),
-			// "A mother was holding her little boy against her chest." / crying silently / covered his mouth
-			again('c_02_mother', 'narrator_065_mother', 'd_11_mother', {move: push(1.02, 1.08)}),
-			again('c_03_crying', 'narrator_066_crying_silently', 'd_11_mother', {show: 'cry', move: push(1.08, 1.14, 0.55, 0.45)}),
-			again('c_04_cover', 'narrator_067_covered_mouth', 'd_11_mother', {seq: [['cry', 0], ['cover', 0.38]], move: push(1.12, 1.2, 0.55, 0.45)}),
-			// "An old man near the staircase was shaking so badly that he could barely stand."
-			shot('c_05_oldman', 'narrator_068_old_man', 'hallway_cross', {
-				chars: ['residents'],
-				quality: 'high',
-				fx: 'tremble',
-				mood: MOOD.hall,
-				prompt: 'Medium shot near the stairwell at the left end of the corridor: ONLY the very old bald man in grey striped pyjamas, standing on the RIGHT half of the frame in strict side PROFILE, his face, nose and body pointing to the LEFT edge of the frame where the black stair railing and the stairs are (we see his right ear and right cheek), staring at the stairs, shaking so badly he can barely stand, one hand pressed flat against the wall, his knees buckling, eyes wide with terror. Nobody else in the frame.',
-				move: push(1.03, 1.1, 0.45, 0.45),
-			}, {cam: {z: 2.1, cx: 640, cy: 520}, kids: <Person who="oldman" x={760} y={885} h={470} facing="left" />}),
-			// "But nobody moved." / "Nobody tried to escape."
-			again('c_06_nobody', 'narrator_069_nobody_moved', 'd_09_facing_stairs', {move: push(1.04, 1.1, 0.52, 0.47)}),
-			again('c_07_escape', 'narrator_070_nobody_escape', 'd_07_peephole_pov', {move: {z0: 1.25, z1: 1.3, x0: 0.33, y0: 0.5, x1: 0.3, y1: 0.5}}),
-			// "That's when something occurred to me."
-			shot('c_08_dread', 'narrator_071_occurred', 'flat', {
-				chars: ['sarah'],
-				quality: 'high',
-				blink: true,
-				mood: MOOD.flat,
-				prompt: SARAH_DREAD,
-				move: push(1.03, 1.08, 0.5, 0.42),
-			}, {cam: {z: 5.0, cx: 920, cy: 250}, kids: <Person who="sarah" x={920} y={780} h={600} facing="front" />}),
-			// "They weren't surprised by any of this." / "They were expecting it."
-			again('c_09_not_surprised', 'narrator_072_not_surprised', 'd_08_still', {move: push(1.06, 1.14)}),
-			again('c_10_expecting', 'narrator_073_expecting', 'd_10_harris_frozen', {move: push(1.12, 1.2, 0.45, 0.42)}),
-			// "Whatever was coming up those stairs, every person in that hallway knew exactly what it was."
-			again('c_11_knew', 'narrator_074_knew_exactly', 'd_07_peephole_pov', {move: push(1.0, 1.16)}),
-			// "Except me."
-			again('c_12_except', 'narrator_075_except_me', 'c_08_dread', {move: push(1.2, 1.3, 0.5, 0.4), blink: true}),
-			// "I grabbed my phone and called the police."
-			shot('c_13_call', 'narrator_076_called_police', 'flat', {
-				chars: ['sarah'],
-				quality: 'high',
-				blink: true,
-				mood: 'Darkness; her phone screen lights her face cold blue-white from below.',
-				prompt: 'Medium close-up in the dark living room: Sarah holds her phone to her ear with a trembling hand, her face lit cold blue-white by the screen, eyes darting toward the front door, whispering into the phone.',
-				move: push(1.03, 1.08, 0.5, 0.45),
-			}, {cam: {z: 2.0, cx: 760, cy: 420}, kids: <Person who="sarah" x={760} y={860} h={620} facing="front" pose="fingerLips" />}),
-			phone('c_14_no_signal', 'narrator_077_no_signal', ({f}) => <NoSignalScreen f={f} />),
-			again('c_15_again', 'narrator_078_tried_again', 'c_13_call', {move: push(1.1, 1.16, 0.5, 0.42), blink: true}),
-			phone('c_16_nothing', 'narrator_079_nothing', ({f}) => <NoSignalScreen f={f} attempt={2} />, {tilt: 3}),
-			// "Then there were three very soft knocks on my door." - the door from inside
-			shot('c_17_door', 'narrator_081_three_knocks', 'flat', {
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.flat,
-				prompt: 'Sarah\'s front door from inside in the dark: the dark wood, the brass peephole glowing faintly yellow-green, the brass security chain fastened, the deadbolt, and the thin yellow-green line of corridor light under the door. Nobody visible.',
-				move: push(1.02, 1.1, 0.5, 0.48),
-			}, {cam: {z: 1.9, cx: 920, cy: 400}}),
-			again('c_18_knocks', 'knocks', 'c_17_door', {fx: 'shake', move: push(1.12, 1.14, 0.5, 0.45)}),
-			again('c_19_froze', 'narrator_082_froze', 'c_08_dread', {move: push(1.12, 1.16, 0.5, 0.42)}),
-			// MR. HARRIS (whispering): "Sarah. It's me. Open the door just a little." - his face at the peephole
-			close('c_20_harris_peep', 'harris_001_its_me', {
-				kind: 'talk',
-				chars: ['harris'],
-				loc: 'hallway_cross',
-				quality: 'high',
-				talk: ['harris_001_its_me'],
-				mood: MOOD.peep,
-				prompt: 'Seen through the door peephole: Mr. Harris\'s frightened old face very close to the door, filling the middle of the view, eyes wet and wide, whispering; the yellow-green corridor behind him.',
-				move: push(1.0, 1.05),
-			}, <Person who="harris" x={960} y={2100} h={2000} facing="front" />, {bg: '#5b5a3c'}),
-			again('c_21_hesitated', 'narrator_083_hesitated', 'c_17_door', {move: push(1.14, 1.2, 0.5, 0.42)}),
-			// "Then I unlocked the chain and opened it barely an inch."
-			close('c_22_chain', 'narrator_084_chain', {
-				chars: ['sarah'],
-				loc: 'flat',
-				quality: 'medium',
-				dark: true,
-				mood: MOOD.flat,
-				prompt: 'Close-up in the dark: Sarah\'s hand slides the brass security chain off its track on the inside of her dark front door; the door is still closed.',
-				variants: [{name: 'gap', prompt: 'The door is now open about an inch: a thin vertical sliver of yellow-green corridor light shines through the gap along the door\'s edge, and the chain hangs loose. Nothing else changes.'}],
-				seq: [
-					['base', 0],
-					['gap', 0.55],
-				],
-				move: push(1.03, 1.08),
-			}, <>
-				<rect x={700} y={0} width={560} height={1080} fill="#3a2a1f" />
-				<rect x={1000} y={380} width={200} height={20} fill="#b8902e" />
-				<circle cx={980} cy={430} r={40} fill="#f0cdb4" />
-			</>),
-			// "Mr. Harris was trembling." - through the one-inch gap (the conversation frame)
-			close('c_23_gap_harris', 'narrator_085_trembling', {
-				kind: 'talk',
-				chars: ['harris'],
-				loc: 'hallway_cross',
-				quality: 'high',
-				fx: 'tremble',
-				talk: ['harris_002_listen_carefully'],
-				mood: 'Inside the dark flat; the corridor\'s yellow-green light comes only through a one-inch gap in the door.',
-				prompt: 'Through a narrow vertical gap of a barely opened door, seen from the dark inside of the flat: Mr. Harris\'s frightened face in the sliver of yellow-green corridor light, eyes wet, trembling, whispering close to the gap. Dark wood fills the rest of the frame.',
-				variants: [
-					{name: 'look', prompt: 'Mr. Harris now looks to his left, toward the stairs down the corridor, terrified. Nothing else changes.'},
-					{name: 'tears', prompt: 'Mr. Harris\'s eyes have filled with tears that run down his cheeks. Nothing else changes.'},
-				],
-				move: push(1.02, 1.06),
-			}, <>
-				<rect x={0} y={0} width={820} height={1080} fill="#2a1d14" />
-				<rect x={1100} y={0} width={820} height={1080} fill="#2a1d14" />
-				<rect x={820} y={0} width={280} height={1080} fill="#8b8c5a" />
-				<Person who="harris" x={960} y={1700} h={1500} facing="front" />
-			</>),
-			// SARAH: "What's happening? What was that scream?" - her face at the gap
-			close('c_24_gap_sarah', 'sarah_002_whats_happening', {
-				kind: 'talk',
-				chars: ['sarah'],
-				loc: 'flat',
-				quality: 'high',
-				talk: ['sarah_002_whats_happening'],
-				mood: 'Darkness inside the flat; a vertical sliver of yellow-green light from the door gap falls across one side of her face.',
-				prompt: 'Close-up: Sarah\'s face pressed close to the one-inch gap of her barely opened front door, whispering urgently through it, frightened; a vertical stripe of yellow-green corridor light across her eye and mouth, the rest in darkness.',
-				move: push(1.02, 1.06),
-			}, <>
-				<rect x={1150} y={0} width={770} height={1080} fill="#2a1d14" />
-				<rect x={1110} y={0} width={40} height={1080} fill="#cfd59a" />
-				<Person who="sarah" x={900} y={1750} h={1600} facing="right" />
-			</>),
-			// "He looked toward the staircase."
-			again('c_25_look', 'narrator_086_looked_staircase', 'c_23_gap_harris', {show: 'look', move: push(1.06, 1.1)}),
-			// MR. HARRIS: "Listen carefully. Whatever you do, don't make a sound when it reaches this floor."
-			again('c_26_listen', 'harris_002_listen_carefully', 'c_23_gap_harris', {talk: ['harris_002_listen_carefully'], move: push(1.08, 1.16)}),
-		]}
-	/>
-);
+export const Neighbors: React.FC = () => {
+	const {f, t, at, word, talk} = useStick();
+	const t63 = at('narrator_063_peephole_again');
+	const t64 = at('narrator_064_same_positions');
+	const t65 = at('narrator_065_mother');
+	const t66 = at('narrator_066_crying_silently');
+	const t67 = at('narrator_067_covered_mouth');
+	const t68 = at('narrator_068_old_man');
+	const t69 = at('narrator_069_nobody_moved');
+	const t71 = at('narrator_071_occurred');
+	const t75 = at('narrator_075_except_me');
+	const t76 = at('narrator_076_called_police');
+	const t77 = at('narrator_077_no_signal');
+	const t78 = at('narrator_078_tried_again');
+	const t79 = at('narrator_079_nothing');
+	const t80 = at('narrator_080_wifi');
+	const t81 = at('narrator_081_three_knocks');
+	const tK = at('knocks');
+	const t82 = at('narrator_082_froze');
+	const h1 = at('harris_001_its_me');
+	const t83 = at('narrator_083_hesitated');
+	const t84 = at('narrator_084_chain');
+	const tOpen = word('narrator_084_chain', 'opened', 0.6);
+	const t85 = at('narrator_085_trembling');
+	const s2 = at('sarah_002_whats_happening');
+	const t86 = at('narrator_086_looked_staircase');
+	const h2 = at('harris_002_listen_carefully');
+	const sar = talk('sarah');
+	const har = talk('harris');
+	// the phone
+	if (t >= t76 && t < t81) {
+		const lf = f - Math.round(t76 * FPS);
+		const d = Math.round((t81 - t76) * FPS);
+		const scr = t < t77 ? <CallScreen f={lf} name="911" /> : <NoSignalScreen f={lf} attempt={t >= t78 ? 2 : 1} />;
+		return <PhoneFrame f={lf} d={d} tilt={t >= t78 ? 3 : -3}>{scr}</PhoneFrame>;
+	}
+	const H = GEO.hall;
+	const F = GEO.flat;
+	// side hallway close-ups: the mother and her boy; the old man by the stairs; the row of calm faces
+	const covering = t >= t67 && t < t68;
+	const mother: Spec = {is: Mother, name: 'mother', x: 560, y: H.floor + 30, s: 1.6, frame: f, arms: 'hug', look: [1, 0.2], eyes: 'dot', brows: 'sad', mouth: 'flat', overlapOk: true};
+	const boy: Spec = {is: Boy, name: 'boy', x: 560, y: H.floor + 45, s: 1.6, frame: f, tears: t >= t66 ? 1 : 0, eyes: 'squint', brows: 'sad', mouth: covering ? 'flat' : t >= t66 + 1 ? 'wobbly' : 'flat', look: [0, 0], overlapOk: true};
+	const oldman: Spec = {is: OldMan, name: 'oldman', x: 1500, y: H.floor + 30, s: 1.6, frame: f, shiver: 2.2, lean: -6, arms: {l: [10, 0], r: [70, -20]}, look: [1, 0.4], eyes: 'wide', brows: 'worried', mouth: 'wobbly', pale: 0.3};
+	const row: Spec[] = [
+		{is: RobeMan, name: 'robeman', x: 300, y: H.floor + 30, s: 1.55, frame: f},
+		{is: Shawl, name: 'shawl', x: 640, y: H.floor + 30, s: 1.55, frame: f},
+		{is: TShirt, name: 'tshirt', x: 1000, y: H.floor + 30, s: 1.55, frame: f},
+		{is: RobeWoman, name: 'robewoman', x: 1360, y: H.floor + 30, s: 1.55, frame: f},
+	].map((p) => ({...p, turn: 0.4, look: [1, 0], eyes: 'dot', mouth: 'flat', brows: 'flat', idle: false}));
+	const res = residentsPersp(f, 'stairs').map((p) => ({...p, idle: false}));
+	// the knock, the walk to the door, the chain
+	const knocks = [tK + 0.05, tK + 0.45, tK + 0.85];
+	const knocking = knocks.some((k) => t >= k && t < k + 0.12);
+	const frozen = t >= tK;
+	const sw = walk(t, t83 + 0.2, t84 + 1.0, 960, 1392, 1.6);
+	const gap = ramp(t, tOpen, tOpen + 0.6);
+	const lookStairs = t >= t86 + 0.4 && t < h2 + 0.2;
+	const shots = [
+		shot(t63, 'flat_night_bare', 2.4, 2.5, [1530, 540], [1530, 530]),
+		shot(t64, 'hallway_persp_night', 1.0, 1.06, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t65, 'hallway_night', 1.75, 1.8, [560, 720], [560, 720]),
+		fshot(boxesOf([oldman]), t68, 'hallway_night', 2.2, [1500, 560]),
+		shot(t69, 'hallway_persp_night', 1.0, 1.04, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t71, 'hallway_night', 1.0, 1.04, [960, 540], [880, 540]),
+		shot(t75, 'flat_night_bare', 2.8, 2.9, [1530, 525], [1530, 520]),
+		shot(t81, 'flat_night_bare', 1.0, 1.0, [960, 540]),
+		shot(t82, 'flat_night_bare', 2.3, 2.4, [960, 560], [960, 560]),
+		shot(h1 - 0.2, 'flat_night_bare', 1.7, 1.7, [1450, 580], [1450, 580]),
+		shot(t83, 'flat_night_bare', 1.15, 1.15, [1250, 560], [1250, 560]),
+		shot(tOpen - 0.2, 'flat_night_bare', 2.2, 2.2, [1460, 560], [1460, 560]),
+		shot(t85, 'hallway_night', 1.25, 1.25, [1000, 560], [1000, 560]),
+		shot(s2, 'hallway_night', 2.1, 2.1, [1020, 560], [1020, 560]),
+		shot(t86, 'hallway_night', 1.15, 1.15, [1200, 560], [1200, 560]),
+		shot(h2 - 0.15, 'hallway_night', 2.2, 2.2, [1080, 560], [1080, 560]),
+	];
+	const world = (set: string) => {
+		if (set === 'hallway_persp_night') return <Group people={res} />;
+		if (set === 'hallway_night') {
+			const doors = H.doors.map((d, i) => <HallDoor key={i} r={d} open={i === 1 ? 0 : 1} />);
+			if (t < t68) {
+				return (
+					<g>
+						{doors}
+						<Group people={[mother, boy]} />
+						{covering ? <circle cx={560} cy={H.floor + 45 - 1.6 * 0.62 * 262 + 14} r={16} fill="#ebbe89" stroke="#141414" strokeWidth={4} /> : null}
+					</g>
+				);
+			}
+			if (t < t69) return <g>{doors}<Group people={[oldman]} /></g>;
+			if (t < t75) return <g>{doors}<Group people={row} /></g>;
+			// Mr. Harris at Sarah's door
+			return (
+				<g>
+					<HallDoor r={H.doors[0]} open={1} />
+					<HallDoor r={H.doors[2]} open={1} />
+					<HarrisAtGap f={f} gap={1} p={{turn: lookStairs ? 0.7 : -0.25, look: lookStairs ? [1, 0] : [-1, 0], arms: t >= h2 + 0.3 && t < h2 + 2.6 ? 'fingerLips' : 'down', mouth: har.talk > 0 ? 'open' : 'frown', talk: har.talk, viseme: har.viseme}} />
+				</g>
+			);
+		}
+		// the flat
+		const props = (
+			<g>
+				<Prop name="table" x={FLAT_PROPS.table.x} y={FLAT_PROPS.table.y} w={FLAT_PROPS.table.w} />
+				<Prop name="sofa" x={FLAT_PROPS.sofa.x} y={FLAT_PROPS.sofa.y} w={FLAT_PROPS.sofa.w} />
+			</g>
+		);
+		if (t < t81) {
+			return (
+				<g>
+					{props}
+					<Person is={Sarah} name="sarah" x={1540} y={F.floor} s={1.6} frame={f} turn={0.75} lean={8} look={[1, -0.2]} eyes="wide" brows="worried" mouth={t >= t75 ? 'o' : 'flat'} />
+				</g>
+			);
+		}
+		if (t >= tOpen - 0.2) {
+			return (
+				<g>
+					{props}
+					<SarahAtGap f={f} gap={gap} p={{mouth: sar.talk > 0 ? 'open' : 'o', talk: sar.talk, viseme: sar.viseme}} />
+				</g>
+			);
+		}
+		return (
+			<g>
+				<PlateShake plate="flat_night_bare" x0={F.door[0] - 10} y0={F.door[1] - 10} x1={F.door[2] + 10} y1={F.door[3] + 10} k={knocking ? 0.5 : 0} frame={f} />
+				{props}
+				<Person
+					is={Sarah}
+					name="sarah"
+					x={sw.x}
+					y={F.floor}
+					s={1.6}
+					frame={f}
+					{...(sw.moving ? {pose: 'walk', turn: 0.8, phase: sw.phase} : {turn: 0})}
+					prop={t < t82 + 1.2 ? 'phone' : 'none'}
+					propGlow="#9fc3ff"
+					arms={t < t82 + 1.2 ? 'phoneEar' : 'down'}
+					look={frozen ? [1, -0.1] : [0.3, 0.6]}
+					eyes={frozen ? 'wide' : 'dot'}
+					brows={frozen ? 'worried' : 'none'}
+					mouth={frozen ? 'o' : 'flat'}
+					shiver={frozen && t < t83 ? 0.8 : 0}
+				/>
+			</g>
+		);
+	};
+	void t79;
+	void t80;
+	return <Shots shots={shots} world={(s) => world(s.set)} overlay={peepOverlay} />;
+};

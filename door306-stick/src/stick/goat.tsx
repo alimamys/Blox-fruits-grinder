@@ -19,7 +19,7 @@ export const Person: React.FC<AnyP & {is: React.FC<any>; name: string; edge?: bo
 	const k = p.child ? 0.62 : 1;
 	const headR = 36 * (p.child ? 1.08 : 1) * s;
 	const top = y - (sit ? 209 : 262) * k * s - headR - 6 * s;
-	qaAdd(ctx, {name, x0: x - 52 * s, x1: x + 52 * s, y0: top, y1: y, head: top + 2 * headR + 6 * s, edge, overlapOk, small});
+	qaAdd(ctx, {name, x0: x - 52 * s * k, x1: x + 52 * s * k, y0: top, y1: y, head: top + 2 * headR + 6 * s, edge, overlapOk, small});
 	return (
 		<Tint>
 			<C {...p} />

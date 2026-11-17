@@ -1,398 +1,157 @@
-// 1. THE DOORS - cold open. 3:06 am: every door in the building opens.
+// 1. THE DOORS - cold open. 3:06 a.m.: every door in the building opens; the neighbours stand in the hallway,
+// still, facing the stairs; something heavy comes up, dragging something; the first glimpse; the title.
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
+import {Harris, RobeWoman, Sarah, TShirt} from '../components/characters/Cast';
+import {Creature} from '../components/characters/Creature';
 import {Disclaimer, LockScreen, PhoneFrame, TitleCard} from '../components/ui/Phone';
-import {Person} from '../layout/Person';
-import {DarkStage, Plate} from '../layout/Plate';
-import {Shots, type ShotProps} from '../utils/scene';
-import {Black, MOOD, prog} from './common';
+import {FPS} from '../data/timeline';
+import {Flicker, HallDoor, peepOverlay, residentsPersp} from '../stick/d306';
+import {Person} from '../stick/goat';
+import {fshot, GEO, lerp, ramp, shot, Shots, stairPt, useStick, walk} from '../stick/kit';
+import {boxesOf, Group, type Spec} from '../stick/places';
 
-/** Everyone in the corridor, seen from Sarah's door (the peephole view) - reused all film long. */
-export const CrossCrowd: React.FC<{facing?: 'left' | 'front'}> = ({facing = 'left'}) => (
-	<>
-		<Person who="lilac" x={1165} y={830} h={430} facing={facing} />
-		<Person who="harris" x={968} y={800} h={455} facing={facing} />
-		<Person who="robe" x={745} y={860} h={520} facing={facing} />
-		<Person who="oldman" x={590} y={885} h={470} facing={facing} pose="handOnWall" />
-		<Person who="mother" x={1290} y={870} h={490} facing={facing} pose="holdChild" />
-		<Person who="beard" x={1440} y={895} h={560} facing={facing} />
-		<Person who="blanket" x={1600} y={915} h={510} facing={facing} />
-	</>
-);
-
-/** The residents from behind, in the long corridor, facing the stairwell at the far end. */
-export const BackCrowd: React.FC = () => (
-	<>
-		<Person who="oldman" x={1255} y={745} h={300} facing="back" pose="handOnWall" />
-		<Person who="lilac" x={1130} y={770} h={330} facing="back" />
-		<Person who="mother" x={860} y={790} h={370} facing="back" pose="holdChild" />
-		<Person who="blanket" x={1010} y={830} h={430} facing="back" />
-		<Person who="robe" x={720} y={905} h={560} facing="back" />
-		<Person who="beard" x={1210} y={935} h={610} facing="back" />
-	</>
-);
-
-const LightSlit: React.FC<ShotProps> = ({f}) => {
-	// black; at 0.5 s a latch clicks and a door opens a crack: a blade of yellow-green light widens
-	const open = Math.max(0, (f - 12) / 30);
-	const w = 4 + 220 * Math.min(1, open * open);
-	return (
-		<AbsoluteFill style={{background: '#000'}}>
-			{f >= 12 ? (
-				<div style={{position: 'absolute', left: 960 - w / 2, top: 140, width: w, height: 800, background: 'linear-gradient(90deg, rgba(150,170,90,0) 0%, rgba(214,226,150,0.85) 50%, rgba(150,170,90,0) 100%)', filter: 'blur(6px)', opacity: Math.min(1, (f - 12) / 4)}} />
-			) : null}
-		</AbsoluteFill>
+export const Doors: React.FC = () => {
+	const {f, t, at, end, word, total} = useStick();
+	const t01 = at('narrator_001_sleepwalking');
+	const t02 = at('narrator_002_exactly_306');
+	const tOpen = word('narrator_002_exactly_306', 'heard', 0.6);
+	const t03 = at('narrator_003_not_one_or_two');
+	const t04 = at('narrator_004_all_of_them');
+	const tW = at('doors_wide');
+	const t05 = at('narrator_005_peephole');
+	const t06 = at('narrator_006_every_neighbor');
+	const t09 = at('narrator_009_nobody_talking');
+	const tH = at('held_breath');
+	const t11 = at('narrator_011_coming_up');
+	const t14 = at('narrator_014_finally_saw');
+	const t15 = at('narrator_015_so_afraid');
+	const tG = at('creature_glimpse');
+	const tB = at('cut_black');
+	const tT = at('title');
+	if (t < t01) {
+		return (
+			<AbsoluteFill style={{background: '#000'}}>
+				<Disclaimer f={f} d={Math.round(t01 * FPS)} />
+			</AbsoluteFill>
+		);
+	}
+	if (t >= tT) return <TitleCard f={f - Math.round(tT * FPS)} d={Math.round((total - tT) * FPS)} />;
+	if (t >= tB) return <AbsoluteFill style={{background: '#000'}} />;
+	if (t >= t02 && t < tOpen) {
+		const lf = f - Math.round(t02 * FPS);
+		return (
+			<PhoneFrame f={lf} d={Math.round((tOpen - t02) * FPS)}>
+				<LockScreen time="3:06" glow={Math.min(1, lf / 6)} />
+			</PhoneFrame>
+		);
+	}
+	const H = GEO.hall;
+	// side hallway: doors swing open one after another; people step out and stand facing the stairs (right)
+	const open = (i: number, t0: number) => ramp(t, t0 + i * 0.55, t0 + i * 0.55 + 0.5);
+	const step = (i: number, t0: number, d: readonly [number, number, number, number], C: React.FC<Record<string, unknown>>, name: string) => {
+		const ts = t0 + i * 0.55 + 0.6;
+		const k = ramp(t, ts, ts + 0.9);
+		if (t < ts) return null;
+		const x = (d[0] + d[2]) / 2 + k * 40;
+		return <Person key={name} is={C} name={name} x={x} y={lerp(H.floor - 30, H.floor + 30, k)} s={1.5} frame={f} turn={0.7} look={[1, 0]} eyes="dot" mouth="flat" idle={false} />;
+	};
+	const sideWorld = (
+		<g>
+			<HallDoor r={H.doors[0]} open={open(0, tOpen)} />
+			<HallDoor r={H.doors[2]} open={open(1, tOpen)} />
+			<HallDoor r={H.doors[1]} open={t >= t03 ? open(0, t03 + 0.2) : 0} />
+			{step(0, tOpen, H.doors[0], Harris as never, 'harris')}
+			{step(1, tOpen, H.doors[2], RobeWoman as never, 'robewoman')}
+			{t >= t03 ? step(0, t03 + 0.2, H.doors[1], TShirt as never, 'tshirt') : null}
+		</g>
 	);
+	// the peephole view: everybody, backs to us, facing the stairs; the head rising at the far end
+	const res: Spec[] = residentsPersp(f, 'stairs', {}, []).map((p) => ({...p, idle: false}));
+	const st = GEO.persp.stairs;
+	const headK = ramp(t, t14 + 0.3, t15 + 0.4);
+	const glimpse = t >= t14;
+	// the stairwell: a long shadow climbing the wall
+	const shadowK = (t - t11) / Math.max(1, t14 - t11);
+	const [sx, sy] = stairPt(Math.min(0.55, shadowK * 0.6));
+	const stillBoxes = boxesOf([330, 915, 1400].map((x) => ({is: Harris, name: 'p', x, y: H.floor + 30, s: 1.5})));
+	const shots = [
+		shot(t01, 'exterior_night', 1.0, 1.55, [960, 540], [960, 300]),
+		shot(tOpen, 'hallway_night', 1.0, 1.0, [960, 540]),
+		shot(t04, 'hallway_persp_night', 1.0, 1.04, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t05, 'flat_night_bare', 2.4, 2.5, [1530, 540], [1530, 530]),
+		shot(t06, 'hallway_persp_night', 1.0, 1.1, [950, 560], [950, 560], {tag: 'peep'}),
+		fshot(stillBoxes, t09, 'hallway_night', 2.0, [915, 600]),
+		shot(tH, 'hallway_persp_night', 1.1, 1.12, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t11, 'stairwell_night', 1.0, 1.1, [960, 540], [900, 560]),
+		shot(t14, 'hallway_persp_night', 1.3, 2.4, [950, 560], [950, 540], {tag: 'peep'}),
+		shot(t15, 'flat_night_bare', 3.0, 3.2, [1530, 520], [1530, 515]),
+		shot(tG, 'stairwell_night', 2.6, 2.9, [1180, 300], [1180, 290]),
+	];
+	const world = (set: string) => {
+		if (set === 'exterior_night') return null;
+		if (set === 'hallway_night') {
+			if (t >= t09) {
+				// still, facing the stairs; nobody breathing
+				const still: Spec[] = [
+					{is: Harris, name: 'harris', x: 330, y: H.floor + 30, s: 1.5, frame: f, turn: 0.7, look: [1, 0], idle: false},
+					{is: TShirt, name: 'tshirt', x: 915, y: H.floor + 30, s: 1.5, frame: f, turn: 0.7, look: [1, 0], idle: false},
+					{is: RobeWoman, name: 'robewoman', x: 1400, y: H.floor + 30, s: 1.5, frame: f, turn: 0.7, look: [1, 0], idle: false},
+				];
+				return (
+					<g>
+						{H.doors.map((d, i) => <HallDoor key={i} r={d} open={1} />)}
+						<Group people={still} />
+					</g>
+				);
+			}
+			return sideWorld;
+		}
+		if (set === 'flat_night_bare') {
+			return (
+				<Person is={Sarah} name="sarah" x={1540} y={GEO.flat.floor} s={1.6} frame={f} turn={0.75} lean={8} look={[1, -0.2]} eyes={t >= t15 ? 'wide' : 'dot'} brows="worried" mouth={t >= t15 ? 'o' : 'flat'} />
+			);
+		}
+		if (set === 'stairwell_night') {
+			if (t >= tG) {
+				return (
+					<g>
+						<Creature x={1150} y={GEO.stair.landing4 + 30} s={1.25} frame={f} view="front" tilt={48} />
+						<Flicker f={f} k={1} />
+					</g>
+				);
+			}
+			return (
+				<g>
+					{/* the shadow on the wall: something tall, bent, an arm hanging low */}
+					<g opacity={0.55} transform={`translate(${sx + 120} ${sy - 40}) scale(1.4 1.7) skewX(-18)`}>
+						<path d="M0,0 C-10,-120 10,-230 -10,-300 C-40,-330 -60,-300 -50,-270 C-80,-200 -60,-80 -70,0 Z M-50,-230 C-90,-160 -100,-60 -110,10 L-96,12 C-80,-60 -66,-150 -40,-210 Z" fill="#05070a" />
+					</g>
+					<Flicker f={f} k={0.6} />
+				</g>
+			);
+		}
+		// the peephole hallway
+		return (
+			<g>
+				{glimpse ? (
+					<g>
+						<defs>
+							<clipPath id="stairsClip">
+								<rect x={st[0]} y={st[1] - 200} width={st[2] - st[0]} height={st[3] - st[1] + 200} />
+							</clipPath>
+						</defs>
+						<g clipPath="url(#stairsClip)">
+							<Creature x={(st[0] + st[2]) / 2} y={st[3] + lerp(330, 40, headK)} s={0.52} frame={f} view="front" tilt={40} />
+						</g>
+					</g>
+				) : null}
+				<Group people={res} />
+				{glimpse ? <Flicker f={f} k={0.35} /> : null}
+			</g>
+		);
+	};
+	void end;
+	void walk;
+	return <Shots shots={shots} world={(s) => world(s.set)} overlay={peepOverlay} />;
 };
-
-export const Doors: React.FC = () => (
-	<Shots
-		shots={[
-			// black; CLICK; one door opens a crack, then doors open all down the corridor; disclaimer
-			{id: 'd_00_black', at: 0, render: LightSlit, overlay: ({f, d}) => <Disclaimer f={f} d={d} />},
-			// "I thought my neighbors were sleepwalking." - the corridor: every door swings open, one after another
-			{
-				id: 'd_01_corridor_doors',
-				at: 'narrator_001_sleepwalking',
-				render: () => <Plate loc="hallway" />,
-				art: {
-					kind: 'still',
-					loc: 'hallway',
-					noPeople: true,
-					quality: 'medium',
-					mood: MOOD.hall,
-					prompt: 'The fourth-floor corridor exactly as in the location reference, one-point perspective toward the black stairwell opening at the far end. Every apartment door is CLOSED. Empty, still, wrong.',
-					doors: {prompt: 'Every apartment door along both walls now stands WIDE OPEN, swung inward into the dark flats; behind each doorway only darkness and the faint shape of a dark room. Nobody is visible.', start: 0.04, stagger: 0.24},
-					move: {z0: 1.02, z1: 1.09, x0: 0.52, y0: 0.47},
-				},
-			},
-			// "It was exactly 3:06 in the morning..." - Sarah's eyes snap open in the dark
-			{
-				id: 'd_02_wakes',
-				at: 'narrator_002_exactly_306',
-				render: () => (
-					<Plate loc="bedroom" cam={{z: 1.9, cx: 560, cy: 620}}>
-						<ellipse cx={560} cy={598} rx={34} ry={40} fill="#f0cdb4" />
-						<path d="M520,590 Q560,540 600,590 L612,640 L508,640 Z" fill="#9a4a22" />
-						<rect x={430} y={652} width={330} height={150} rx={30} fill="#e9e6df" />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['sarah'],
-					loc: 'bedroom',
-					quality: 'high',
-					mood: MOOD.bedroom,
-					prompt: 'Close shot from above the bed: Sarah lies on her back under the white duvet, her head on the pillow, auburn hair spread out; her eyes have just snapped OPEN, staring up into the dark, frightened and listening. Orange streetlight stripes across the duvet.',
-					variants: [{name: 'closed', prompt: 'Her eyes are CLOSED - she is asleep, her face relaxed. Nothing else changes.'}],
-					seq: [
-						['closed', 0],
-						['base', 0.28],
-					],
-					move: {z0: 1.04, z1: 1.12, y0: 0.45},
-				},
-			},
-			// her phone on the nightstand: 3:06
-			{
-				id: 'd_03_phone',
-				at: 'narrator_002_exactly_306',
-				frac: 0.5,
-				render: ({f, d}) => (
-					<PhoneFrame f={f} d={d} tilt={-6}>
-						<LockScreen time="3:06" glow={Math.min(1, f / 6)} />
-					</PhoneFrame>
-				),
-			},
-			// "Not one or two." - across the corridor two doors open
-			{
-				id: 'd_04_cross_doors',
-				at: 'narrator_003_not_one_or_two',
-				render: () => <Plate loc="hallway_cross" />,
-				art: {
-					kind: 'still',
-					loc: 'hallway_cross',
-					noPeople: true,
-					quality: 'medium',
-					mood: MOOD.hall,
-					prompt: 'The corridor seen straight across from Sarah\'s door, exactly as in the location reference: Mr. Harris\'s closed door straight ahead, the stairwell with its railing at the left end. Every door CLOSED. Empty.',
-					doors: {prompt: 'Mr. Harris\'s door straight ahead and the door at the right edge now stand WIDE OPEN, swung inward; darkness inside. Nobody is visible.', start: 0.12, stagger: 0.5},
-					move: {z0: 1.04, z1: 1.08},
-				},
-			},
-			// "All of them." + the beat: the long corridor, every door standing open
-			{
-				id: 'd_05_all_open',
-				at: 'narrator_004_all_of_them',
-				render: () => <Plate loc="hallway" />,
-				art: {kind: 'reuse', reuse: 'd_01_corridor_doors', show: 'open', move: {z0: 1.1, z1: 1.22, x0: 0.52, y0: 0.46}, fx: 'flicker'},
-			},
-			// "I looked through my peephole..." - her eye to the peephole
-			{
-				id: 'd_06_eye_peephole',
-				at: 'narrator_005_peephole',
-				render: () => (
-					<DarkStage bg="#0c1018">
-						<rect x={1080} y={0} width={840} height={1080} fill="#3a2a1f" />
-						<circle cx={1090} cy={470} r={10} fill="#d8e2a0" />
-						<Person who="sarah" x={930} y={1600} h={1500} facing="right" pose="reach" />
-					</DarkStage>
-				),
-				art: {
-					kind: 'still',
-					chars: ['sarah'],
-					loc: 'flat',
-					quality: 'high',
-					blink: true,
-					mood: MOOD.flat,
-					prompt: 'Close-up from the side inside her dark flat: Sarah, in profile facing right, presses her face to the inside of her dark wooden front door, her right eye at the small brass peephole, her fingertips flat on the wood. A tiny point of yellow-green corridor light from the peephole lights her eye and cheek; everything else is dark blue. Frightened, holding her breath.',
-					move: {z0: 1.03, z1: 1.1, x0: 0.55, y0: 0.45},
-				},
-			},
-			// "Every single neighbor was standing in the hallway." - THROUGH THE PEEPHOLE
-			{
-				id: 'd_07_peephole_pov',
-				at: 'narrator_006_every_neighbor',
-				render: () => (
-					<Plate loc="hallway_cross">
-						<CrossCrowd />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['harris', 'mother', 'residents'],
-					loc: 'hallway_cross',
-					quality: 'high',
-					peephole: true,
-					variants: [{name: 'turned', prompt: 'Every one of the people now faces straight toward the camera - toward Sarah\'s door - all staring directly at us, completely still and expressionless; Mr. Harris in the middle has tears on his cheeks; the mother holds her boy and looks down. Nothing else changes.'}],
-					mood: MOOD.peep,
-					prompt: 'Straight across the corridor from Sarah\'s door: Mr. Harris stands in his OPEN doorway in the middle (his dark flat behind him); the five residents from the residents sheet and the mother holding her boy stand along the corridor in front of the doors exactly where the layout puts them. ALL of them stand completely still and ALL face LEFT toward the stairwell at the left end - faces in profile, eyes wide, mouths shut. Nobody looks at the camera.',
-					move: {z0: 1.0, z1: 1.04},
-				},
-			},
-			// "Completely still." - two of them, frozen
-			{
-				id: 'd_08_still',
-				at: 'narrator_007_still',
-				render: () => (
-					<Plate loc="hallway_cross" cam={{z: 2.3, cx: 700, cy: 520}}>
-						<Person who="oldman" x={610} y={885} h={470} facing="left" pose="handOnWall" />
-						<Person who="lilac" x={800} y={880} h={440} facing="left" />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['residents'],
-					loc: 'hallway_cross',
-					quality: 'high',
-					mood: MOOD.hall,
-					prompt: 'Medium close-up in the corridor: the bald very old man (one hand flat against the wall) and the grey-haired woman in the lilac dressing gown stand side by side in profile, facing LEFT toward the stairs, utterly frozen - wide unblinking eyes, mouths shut, not breathing. Fluorescent light from above.',
-					move: {z0: 1.06, z1: 1.1},
-				},
-			},
-			// "Facing the staircase." - from behind them, the black stairwell at the end
-			{
-				id: 'd_09_facing_stairs',
-				at: 'narrator_008_facing_stairs',
-				render: () => (
-					<Plate loc="hallway">
-						<BackCrowd />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['mother', 'residents'],
-					loc: 'hallway',
-					quality: 'medium',
-					mood: MOOD.hall,
-					prompt: 'The long corridor from the window end, one-point perspective: the residents (the five from the residents sheet and the mother holding her boy) stand spread along the corridor where the layout puts them, their BACKS to us, all facing the black stairwell opening at the far end, completely still. Every apartment door stands open.',
-					move: {z0: 1.02, z1: 1.08, x0: 0.52, y0: 0.47},
-				},
-			},
-			// "Nobody was talking. Nobody was moving." - Mr. Harris, frozen in his doorway
-			{
-				id: 'd_10_harris_frozen',
-				at: 'narrator_009_nobody_talking',
-				render: () => (
-					<Plate loc="hallway_cross" cam={{z: 2.6, cx: 968, cy: 450}}>
-						<Person who="harris" x={968} y={800} h={455} facing="left" />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['harris'],
-					loc: 'hallway_cross',
-					quality: 'high',
-					mood: MOOD.hall,
-					prompt: 'Close-up: Mr. Harris in his open doorway, three-quarter profile facing LEFT toward the stairs, frozen - pale, eyes wide and wet, lips pressed tightly shut, not breathing. His dark flat behind him. Harsh fluorescent light from above.',
-					variants: [
-						{name: 'eyes', prompt: 'Mr. Harris\'s eyes slide toward the camera - he now looks straight at us, his face pale with fear. Nothing else changes.'},
-						{name: 'finger', prompt: 'Mr. Harris now looks straight at us and raises one trembling index finger to his lips, telling us to be quiet. Nothing else changes.'},
-						{name: 'tears', prompt: 'Mr. Harris has turned his face toward the camera; tears stream down his cheeks; he looks guilty and broken. Nothing else changes.'},
-					],
-					move: {z0: 1.04, z1: 1.1, y0: 0.45},
-				},
-			},
-			// "And none of them seemed to be breathing." - the mother and her boy
-			{
-				id: 'd_11_mother',
-				at: 'narrator_010_breathing',
-				render: () => (
-					<Plate loc="hallway_cross" cam={{z: 2.4, cx: 1290, cy: 520}}>
-						<Person who="mother" x={1290} y={870} h={490} facing="left" pose="holdChild" />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['mother'],
-					loc: 'hallway_cross',
-					quality: 'high',
-					mood: MOOD.hall,
-					prompt: 'Close-up in the corridor: the mother holds her little boy tight against her chest, both facing LEFT toward the stairs, frozen; her lips pressed together, not breathing; the boy\'s face pressed into her shoulder, eyes squeezed shut.',
-					variants: [
-						{name: 'cry', prompt: 'The little boy has lifted his face from her shoulder: he is crying silently, tears on his round cheeks, his mouth trembling. Nothing else changes.'},
-						{name: 'cover', prompt: 'The boy opens his mouth to speak and the mother presses her hand firmly over his mouth, her eyes wide with fear. Nothing else changes.'},
-						{name: 'away', prompt: 'The mother now faces the camera but looks down and away, refusing to meet our eyes, holding the boy tight against her chest. Nothing else changes.'},
-					],
-					move: {z0: 1.04, z1: 1.09},
-				},
-			},
-			// held breath: the peephole view again, total silence
-			{id: 'd_12_held', at: 'held_breath', render: () => <Plate loc="hallway_cross" />, art: {kind: 'reuse', reuse: 'd_07_peephole_pov', move: {z0: 1.05, z1: 1.08}}},
-			// "Then I heard something coming up the stairs." - a shadow climbs the stairwell wall
-			{
-				id: 'd_13_stairwell',
-				at: 'narrator_011_coming_up',
-				render: () => <Plate loc="stairwell" />,
-				overlay: ({f, d}) => {
-					const t = prog(f, d, 0.15, 1);
-					return (
-						<AbsoluteFill style={{pointerEvents: 'none'}}>
-							<div style={{position: 'absolute', left: 260 + 120 * t, top: 760 - 330 * t, width: 260, height: 620, borderRadius: '45% 45% 30% 30%', background: 'rgba(0,0,0,0.62)', filter: 'blur(28px)', transform: 'skewX(-12deg) rotate(-8deg)', opacity: Math.min(1, t * 3)}} />
-						</AbsoluteFill>
-					);
-				},
-				art: {
-					kind: 'still',
-					loc: 'stairwell',
-					noPeople: true,
-					dark: true,
-					quality: 'medium',
-					mood: MOOD.stair,
-					prompt: 'The stairwell from the fourth floor looking down the concrete flights, exactly as in the location reference. Dark; the caged bulb on the landing below barely lit. Empty.',
-					fx: 'flicker',
-					grade: 1.75,
-					move: {z0: 1.04, z1: 1.1, x0: 0.45, y0: 0.6},
-				},
-			},
-			// "Something heavy." - her eye at the peephole widens
-			{
-				id: 'd_14_eye_wide',
-				at: 'narrator_012_heavy',
-				render: () => (
-					<DarkStage bg="#120f0c">
-						<ellipse cx={960} cy={540} rx={300} ry={130} fill="#f0cdb4" />
-						<circle cx={960} cy={540} r={95} fill="#6f8a73" />
-						<circle cx={960} cy={540} r={40} fill="#0b0b0b" />
-						<path d="M600,380 Q960,250 1320,380" stroke="#9a4a22" strokeWidth={40} fill="none" />
-					</DarkStage>
-				),
-				art: {
-					kind: 'still',
-					chars: ['sarah'],
-					quality: 'high',
-					mood: 'Darkness; one small point of yellow-green light from the peephole falls on her eye.',
-					prompt: 'Extreme close-up of Sarah\'s green-grey eye right next to the brass peephole of her door, a few auburn hair strands, faint freckles; the yellow-green light from the peephole glints in her iris. Frightened.',
-					variants: [{name: 'wide', prompt: 'Her eye opens much WIDER in terror: the lids pull far apart, the pupil shrinks to a pinpoint, the brow lifts. Nothing else changes.'}],
-					seq: [
-						['base', 0],
-						['wide', 0.4],
-					],
-					move: {z0: 1.02, z1: 1.07},
-				},
-			},
-			// "Something dragging." - on the landing below, a stained sack slides into view
-			{
-				id: 'd_15_sack',
-				at: 'narrator_013_dragging',
-				render: () => <Plate loc="stairwell" cam={{z: 2.0, cx: 760, cy: 780}} />,
-				art: {
-					kind: 'still',
-					loc: 'stairwell',
-					noPeople: true,
-					dark: true,
-					quality: 'medium',
-					mood: MOOD.stair,
-					prompt: 'Close on the bottom of a concrete flight and the landing below it, dim flickering green-grey light. Empty.',
-					variants: [
-						{name: 'sack1', prompt: 'At the edge of the landing, the corner of a large, coarse, grimy, darkly stained burlap sack has slid into the light, dragged by something unseen. Nothing else changes.'},
-						{name: 'sack2', prompt: 'More of the large grimy, darkly stained burlap sack has been dragged into view across the landing toward the steps, its rope-tied neck trailing. Nothing else changes.'},
-					],
-					seq: [
-						['base', 0],
-						['sack1', 0.3],
-						['sack2', 0.68],
-					],
-					fx: 'flicker',
-					move: {z0: 1.03, z1: 1.08},
-				},
-			},
-			// "And when I finally saw what it was..." - push into the black stairwell at the end of the corridor
-			{id: 'd_16_push_stairs', at: 'narrator_014_finally_saw', render: () => <Plate loc="hallway" />, art: {kind: 'reuse', reuse: 'd_09_facing_stairs', move: {z0: 1.08, z1: 1.55, x0: 0.52, y0: 0.42}}},
-			// "I understood why everyone was so afraid." - Sarah, back to her door, hand over her mouth
-			{
-				id: 'd_17_sarah_afraid',
-				at: 'narrator_015_so_afraid',
-				render: () => (
-					<Plate loc="flat" cam={{z: 2.1, cx: 920, cy: 420}}>
-						<Person who="sarah" x={920} y={780} h={600} facing="front" pose="coverMouth" />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['sarah'],
-					loc: 'flat',
-					quality: 'high',
-					blink: true,
-					fx: 'tremble',
-					mood: MOOD.flat,
-					prompt: 'Medium close-up: Sarah stands with her back pressed against the inside of her front door, one hand clamped over her mouth, eyes wide with terror, trembling; the thin yellow-green line of corridor light under the door behind her feet.',
-					move: {z0: 1.05, z1: 1.12, y0: 0.42},
-				},
-			},
-			// creature glimpse: long grey fingers curl over the railing
-			{
-				id: 'd_18_fingers',
-				at: 'creature_glimpse',
-				render: () => (
-					<DarkStage bg="#0d120f">
-						<path d="M0,820 L1920,300" stroke="#4a514a" strokeWidth={46} />
-						<path d="M300,760 L300,1080 M800,620 L800,1080 M1300,480 L1300,1080" stroke="#4a514a" strokeWidth={22} />
-					</DarkStage>
-				),
-				art: {
-					kind: 'still',
-					chars: ['creature'],
-					loc: 'stairwell',
-					quality: 'high',
-					dark: true,
-					noPeople: true,
-					mood: MOOD.hallDark,
-					prompt: 'Close-up in the dark stairwell: the black metal stair railing runs diagonally across the frame, lit in a short burst of flickering green-grey light. Nothing else.',
-					variants: [
-						{name: 'f1', prompt: 'Four impossibly long, thin, grey fingers - the creature\'s, as on its design sheet - have appeared over the top of the railing from below, their tips just curling over the metal. Nothing else changes.'},
-						{name: 'f2', prompt: 'The impossibly long grey fingers (as on the creature\'s design sheet) now curl tightly all the way around the railing, gripping it; part of the bony grey hand is visible. Nothing else changes.'},
-					],
-					seq: [
-						['base', 0],
-						['f1', 0.22],
-						['f2', 0.55],
-					],
-					fx: 'flicker',
-					move: {z0: 1.02, z1: 1.1},
-				},
-			},
-			{id: 'd_19_black', at: 'cut_black', render: () => <Black />},
-			{id: 'd_20_title', at: 'title', render: ({f, d}) => <TitleCard f={f} d={d} />},
-		]}
-	/>
-);

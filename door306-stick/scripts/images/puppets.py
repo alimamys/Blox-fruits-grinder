@@ -31,19 +31,20 @@ MANIFEST = ROOT / 'src' / 'data' / 'generated' / 'puppets.json'
 STYLE_REF = ROOT / 'references' / 'stick' / 'style_room.jpg'
 PARTS = ['head', 'headSide', 'headBack', 'torso', 'torsoSide', 'torsoBack']
 
+S = ROOT / 'references' / 'sheets'
 CHARS = {
-    'sarah': (
-        ROOT / 'references' / 'sheets' / 'sarah_turnaround.png',
-        'SARAH, a woman in her late twenties: shoulder-length wavy auburn hair, pale skin with a few freckles; '
-        'a faded sage-green long-sleeve pyjama top with small buttons down the front.',
-    ),
-    'harris': (
-        ROOT / 'references' / 'sheets' / 'harris.png',
-        'MR. HARRIS, a thin old man of about 75: thin white hair on a mostly bald head, white stubble; '
-        'a long dark-brown cardigan worn open over a cream vest, reading glasses hanging on a cord on his chest.',
-    ),
+    'sarah': (S / 'sarah_turnaround.png', 'SARAH, a woman in her late twenties: shoulder-length wavy auburn hair, pale skin with a few freckles; a faded sage-green long-sleeve pyjama top with small buttons down the front.'),
+    'harris': (S / 'harris.png', 'MR. HARRIS, a thin old man of about 75: thin white hair on a mostly bald head, white stubble; a long dark-brown cardigan worn open over a cream vest, reading glasses hanging on a cord on his chest.'),
+    'mother': (S / 'mother_boy.png', 'THE MOTHER, a woman in her thirties: black hair in a neat bob with a fringe; a light-blue nightgown with a grey cardigan over it.'),
+    'boy': (S / 'mother_boy.png', 'THE BOY, about six years old: short black hair with a fringe; navy-blue pyjamas with little yellow stars. A small child.'),
+    'oldman': (S / 'residents.png', 'THE VERY OLD MAN (the leftmost person in image 1): about 85, bald with a fringe of white hair, frail; white-and-grey striped pyjamas.'),
+    'robeman': (S / 'residents.png', 'THE HEAVY MAN (second from the left in image 1): about 60, balding with grey hair at the sides and a thick grey moustache, heavy-set; a dark navy bathrobe.'),
+    'tshirt': (S / 'residents.png', 'THE YOUNG MAN (in the middle of image 1): about 25, Black, short dark hair and a short beard; a plain white T-shirt.'),
+    'shawl': (S / 'residents.png', 'THE YOUNG WOMAN (second from the right in image 1): about 30, long curly dark-brown hair, light brown skin; a cream knitted blanket wrapped around her shoulders over a white nightdress.'),
+    'robewoman': (S / 'residents.png', 'THE OLD WOMAN (the rightmost person in image 1): about 70, short curly grey hair; a lilac dressing gown.'),
+    'landlord': (S / 'landlord.png', 'THE LANDLORD, a man of about 55: short neat grey-brown hair, a friendly round face; a light-blue shirt with rolled sleeves under a dark-grey knitted sweater vest.'),
 }
-
+CHILD = {'boy'}
 PROMPT = (
     'Image 1 shows the CHARACTER DESIGN (who they are, hair, colours, clothes). Image 2 is the ART STYLE reference. '
     'Draw a CUT-OUT PUPPET PARTS SHEET for a 2D cartoon in the art style of image 2: thick clean dark outlines, flat colours '
@@ -62,12 +63,41 @@ PROMPT = (
 )
 
 
+CREATURE_PROMPT = (
+    'Image 1 shows the MONSTER DESIGN. Image 2 is the ART STYLE reference. Draw a CUT-OUT PUPPET PARTS SHEET of this monster for a 2D cartoon in the art '
+    'style of image 2 (thick clean dark outlines, flat colours with soft cel shading, a creepy but simple cartoon, NOT realistic, no gore, no blood): '
+    'a seven-foot-tall emaciated thing with grey skin stretched tightly over its bones. '
+    'Draw exactly SIX separate pieces in a neat 3 x 2 grid on a plain flat pure WHITE background with wide empty space between them, nothing touching, '
+    'no labels, no text. TOP ROW: (1) its HEAD from the front: a long, bald grey skull, deep black empty eye sockets, and a dark mouth hanging open far '
+    'too wide, (2) the same HEAD in three-quarter view facing RIGHT, mouth hanging open, (3) the BACK of the bald grey head. Each head with a short neck stub. '
+    'BOTTOM ROW: (4) its TORSO from the front: narrow, skeletal, ribs showing under grey skin, from the shoulders to the hips, (5) the TORSO from the side '
+    'facing right, hunched, spine curved, (6) the TORSO from the back, spine and shoulder blades showing. NO arms, NO hands, NO legs on any piece.'
+)
+PROPS_PROMPT = (
+    'Image 2 is the ART STYLE reference (thick clean dark outlines, flat colours with soft cel shading). Draw a sheet of SIX separate PROPS for a 2D cartoon '
+    'in that style, in a neat 3 x 2 grid on a plain flat pure WHITE background with wide empty space between them, nothing touching, no labels, no text, '
+    'no shadows on the ground, all seen straight from the FRONT at the same scale: '
+    'TOP ROW: (1) a worn purple-grey two-seat SOFA, (2) a small plain wooden DINING TABLE, (3) a plain wooden dining CHAIR. '
+    'BOTTOM ROW: (4) a large dirty burlap SACK lying on its side, tied at the neck, dark stains on it, (5) the same SACK with a lumpy bulge as if something '
+    'inside is moving, (6) an old brown leather NOTEBOOK lying closed.'
+)
+PROP_PARTS = ['sofa', 'table', 'chair', 'sack', 'sackMove', 'notebook']
+
+
 def gen(who: str) -> None:
-    sheet, desc = CHARS[who]
     os.environ['IMAGE_MODEL'] = os.environ.get('IMAGE_MODEL', 'gpt-image-2')
     os.environ['IMAGE_INPUT_FIDELITY'] = ''
-    imgs = [R.png_bytes(R.ref_image(sheet)), R.png_bytes(R.ref_image(STYLE_REF))]
-    img = R.openai_edit(imgs, PROMPT.format(desc=desc), 'puppet', f'{who}_puppet', quality='low')
+    style = R.png_bytes(R.ref_image(STYLE_REF))
+    if who == 'creature':
+        imgs, prompt = [R.png_bytes(R.ref_image(S / 'creature.png')), style], CREATURE_PROMPT
+    elif who == 'props':
+        imgs, prompt = [style, style], PROPS_PROMPT.replace('Image 2 is', 'Image 1 is')
+        imgs = [style]
+    else:
+        sheet, desc = CHARS[who]
+        extra = ' A small CHILD: the head is big and round, the torso small and short.' if who in CHILD else ''
+        imgs, prompt = [R.png_bytes(R.ref_image(sheet)), style], PROMPT.format(desc=desc + extra)
+    img = R.openai_edit(imgs, prompt, 'puppet', f'{who}_puppet', quality='low')
     RAW.mkdir(parents=True, exist_ok=True)
     img.save(RAW / f'{who}.png')
     print('painted', RAW / f'{who}.png', img.size)
@@ -97,7 +127,7 @@ def cut(who: str) -> dict:
     OUT.mkdir(parents=True, exist_ok=True)
     rgba = np.dstack([a, np.zeros(a.shape[:2], int)]).astype(np.uint8)
     info = {}
-    for part, (k, x0, y0, x1, y1) in zip(PARTS, top + bottom):
+    for part, (k, x0, y0, x1, y1) in zip(PROP_PARTS if who == 'props' else PARTS, top + bottom):
         mask = ndimage.binary_fill_holes(flab == k)
         alpha = Image.fromarray((mask * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.6))
         rgba[..., 3] = np.asarray(alpha)
@@ -107,7 +137,7 @@ def cut(who: str) -> dict:
         crop.save(path)
         w, h = crop.size
         entry = {'src': f'puppets/{who}_{part}.png', 'w': w, 'h': h}
-        if part.startswith('head') and part != 'headBack':
+        if part.startswith('head') and part != 'headBack' and who != 'creature':
             # the face: the largest region of skin colour inside the head (skin = the colour around the middle of the face)
             ca = np.asarray(crop).astype(int)
             cx, cy = int(w * (0.45 if part == 'headSide' else 0.5)), int(h * 0.55)
@@ -120,7 +150,10 @@ def cut(who: str) -> dict:
                 # the face proper: skin below the top 30% of the head (a bald scalp is skin too) and above the neck
                 top, bot = ys.min(), ys.max()
                 sel = (ys > top + 0.3 * (bot - top)) & (ys < top + 0.85 * (bot - top))
-                entry['face'] = {'x': float(xs[sel].mean()), 'y': float(ys[sel].mean()), 'r': float(np.sqrt(len(xs) / np.pi)), 'chin': float(bot)}
+                fy_ = int(ys[sel].mean())
+                row = np.where(sl[fy_] == big)[0]
+                fw = float(row.max() - row.min()) if len(row) else float(np.sqrt(len(xs) / np.pi) * 2)
+                entry['face'] = {'x': float(xs[sel].mean()), 'y': float(ys[sel].mean()), 'r': float(np.sqrt(len(xs) / np.pi)), 'chin': float(bot), 'w': fw}
                 entry['skin'] = '#%02x%02x%02x' % tuple(int(v) for v in ref)
         info[part] = entry
     print(who, {p: (e['w'], e['h'], e.get('face')) for p, e in info.items()})

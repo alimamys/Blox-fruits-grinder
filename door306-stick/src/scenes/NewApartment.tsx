@@ -1,165 +1,164 @@
-// 2. THE NEW APARTMENT - three weeks earlier; then the night it started.
+// 2. THE NEW APARTMENT - three weeks earlier: the old building, the cheap rent, the friendly landlord, the
+// waived deposit. Then 3:06: clicking, doors opening; Mr. Harris in the hallway, finger to his lips.
 import React from 'react';
-import {LockScreen} from '../components/ui/Phone';
-import {Person} from '../layout/Person';
-import {Plate} from '../layout/Plate';
-import {Shots} from '../utils/scene';
-import {MOOD} from './common';
-import {again, close, phone, push, shot} from './kit';
+import {AbsoluteFill} from 'remotion';
+import {Harris, Landlord, Sarah} from '../components/characters/Cast';
+import {Prop} from '../components/characters/Creature';
+import {LockScreen, PhoneFrame} from '../components/ui/Phone';
+import {FPS} from '../data/timeline';
+import {HallDoor, peepOverlay, residentsPersp} from '../stick/d306';
+import {Person} from '../stick/goat';
+import {fshot, GEO, gait, lerp, MovingBox, ramp, shot, Shots, useStick, walk} from '../stick/kit';
+import {boxesOf, Group, type Spec} from '../stick/places';
 
-export const NewApartment: React.FC = () => (
-	<Shots
-		shots={[
-			// the old brick building at night
-			{
-				id: 'a_00_exterior',
-				at: 'exterior',
-				render: () => <Plate loc="exterior" />,
-				art: {
-					kind: 'still',
-					loc: 'exterior',
-					noPeople: true,
-					quality: 'medium',
-					mood: MOOD.night,
-					prompt: 'The old four-storey red-brick apartment building on its quiet street at night, exactly as in the location reference: bare trees, one sodium streetlight, every window dark except a faint yellow-green glow in the fourth-floor stairwell window. Empty street.',
-					move: {z0: 1.0, z1: 1.08, x0: 0.5, y0: 0.5, x1: 0.55, y1: 0.45},
-				},
-			},
-			// "I'd moved into the building three weeks earlier." - daytime: Sarah carries a box up the front steps; the landlord holds the door
-			{
-				id: 'a_01_moving_in',
-				at: 'narrator_016_moved_in',
-				render: () => (
-					<Plate loc="exterior" cam={{z: 3.2, cx: 990, cy: 930}}>
-						<Person who="landlord" x={1035} y={1040} h={150} facing="left" />
-						<Person who="sarah" x={965} y={1060} h={140} facing="right" pose="carryBox" />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['sarah', 'landlord'],
-					loc: 'exterior',
-					quality: 'medium',
-					mood: MOOD.day,
-					prompt: 'DAYTIME, three weeks earlier (not night): at the entrance of the old red-brick building, Sarah climbs the three front steps carrying a big cardboard moving box, smiling a little; the landlord holds the glass entrance door open for her with a broad friendly smile. Soft overcast daylight, ordinary and calm.',
-					move: {z0: 1.02, z1: 1.08},
-				},
-			},
-			// "It was an old, four-story apartment building on a quiet street." - the building by day
-			{
-				id: 'a_02_day_wide',
-				at: 'narrator_017_old_building',
-				render: () => <Plate loc="exterior" />,
-				art: {
-					kind: 'still',
-					loc: 'exterior',
-					noPeople: true,
-					quality: 'medium',
-					mood: MOOD.day,
-					prompt: 'DAYTIME (not night): the same old four-storey red-brick apartment building on its quiet residential street, seen in soft overcast afternoon light - bare trees, a grey-blue sky, the streetlight off, curtains in the windows. Ordinary, a little tired, nothing special. Nobody on the street.',
-					move: {z0: 1.0, z1: 1.06, x0: 0.5, y0: 0.52},
-				},
-			},
-			// "Nothing special." - the lobby
-			{
-				id: 'a_03_lobby',
-				at: 'narrator_018_nothing_special',
-				render: () => <Plate loc="lobby" />,
-				art: {
-					kind: 'still',
-					loc: 'lobby',
-					noPeople: true,
-					quality: 'medium',
-					mood: MOOD.day,
-					prompt: 'The small ground-floor lobby exactly as in the location reference: the wall of old brass mailboxes with blank name cards, the chipped black-and-white tiles, the foot of the stairs, daylight through the glass entrance door. Empty.',
-					move: {z0: 1.03, z1: 1.08},
-				},
-			},
-			// "But the rent was unbelievably cheap." - the landlord hands her the key in the empty flat
-			{
-				id: 'a_04_keys',
-				at: 'narrator_019_rent_cheap',
-				render: () => (
-					<Plate loc="flat" cam={{z: 1.6, cx: 960, cy: 600}}>
-						<Person who="landlord" x={760} y={1010} h={640} facing="right" pose="reach" />
-						<Person who="sarah" x={1170} y={1020} h={600} facing="left" pose="reach" />
-					</Plate>
-				),
-				art: {
-					kind: 'still',
-					chars: ['landlord', 'sarah'],
-					loc: 'flat',
-					quality: 'high',
-					blink: true,
-					mood: MOOD.day,
-					prompt: 'DAYTIME, three weeks earlier, inside Sarah\'s new flat (same room as the location reference, but in soft daylight through the blinds, still empty apart from the mustard sofa and the round table): the landlord, composed and polite with only a faint, thin, closed-mouth smile and watchful eyes, holds out a single brass key on his open palm toward Sarah; she reaches for it, pleased and a little surprised. He is businesslike, not cheerful.',
-					move: {z0: 1.03, z1: 1.09},
-				},
-			},
-			// "The landlord told me the previous tenant had moved out unexpectedly..." - push in on his smile
-			again('a_05_landlord_smile', 'narrator_020_previous_tenant', 'a_04_keys', {move: push(1.12, 1.45, 0.36, 0.38)}),
-			// "He even waived the security deposit." - the key in his open palm
-			again('a_06_key_palm', 'narrator_021_waived_deposit', 'a_04_keys', {move: push(1.5, 1.7, 0.5, 0.55)}),
-			// "I thought I'd gotten lucky." - Sarah, pleased
-			again('a_07_lucky', 'narrator_022_lucky', 'a_04_keys', {move: push(1.35, 1.45, 0.66, 0.4), blink: true}),
-			// "I had no idea what happened to the woman who lived there before me." - what she left behind
-			shot('a_08_left_behind', 'narrator_023_no_idea', 'flat', {
-				noPeople: true,
-				quality: 'medium',
-				mood: 'Night, the flat dark, one stripe of orange streetlight across the shelf.',
-				prompt: 'Close on a dusty shelf in a dark corner of the flat: a woman\'s hairbrush with long dark hairs caught in it and a small picture frame lying face down, forgotten. Still and ominous.',
-				move: push(1.04, 1.14),
-			}, {cam: {z: 2.6, cx: 1390, cy: 420}}),
-			// asleep, then the clicking: her eyes open in the dark
-			again('a_09_asleep', 'asleep', 'd_02_wakes', {seq: [['closed', 0], ['base', 0.55]], move: push(1.1, 1.16, 0.5, 0.45)}),
-			// "I checked my phone." / "3:06 AM."
-			phone('a_10_phone', 'narrator_025_checked_phone', ({f}) => <LockScreen time="3:06" glow={Math.min(1, f / 5)} />),
-			// "Then I heard a door opening. Followed by another. And another." - she sits up, listening
-			shot('a_11_sits_up', 'narrator_027_door_opening', 'bedroom', {
-				chars: ['sarah'],
-				quality: 'high',
-				blink: true,
-				mood: MOOD.bedroom,
-				prompt: 'Sarah sits up in bed in the dark bedroom, the duvet around her waist, turning her head toward the half-open bedroom door, listening, frightened. Orange streetlight stripes on the wall.',
-				move: push(1.04, 1.1, 0.5, 0.45),
-			}, {cam: {z: 1.5, cx: 620, cy: 560}, kids: <Person who="sarah" x={600} y={820} h={420} facing="right" />}),
-			// "I got out of bed and walked toward my front door."
-			shot('a_12_to_door', 'narrator_030_got_out_of_bed', 'flat', {
-				chars: ['sarah'],
-				quality: 'medium',
-				mood: MOOD.flat,
-				prompt: 'Wide shot of the dark living room at night: Sarah, barefoot, walks slowly away from us toward the front door at the back of the room, one hand reaching out in the dark; the thin yellow-green line of corridor light under the door.',
-				move: push(1.02, 1.12, 0.48, 0.5),
-			}, {kids: <Person who="sarah" x={1000} y={900} h={520} facing="back" pose="reach" />}),
-			// "When I looked through the peephole, I saw my elderly neighbor, Mr. Harris..."
-			again('a_13_peephole', 'narrator_031_mr_harris', 'd_06_eye_peephole', {move: push(1.05, 1.12, 0.55, 0.45), blink: true}),
-			again('a_14_pov_harris', 'narrator_031_mr_harris', 'd_07_peephole_pov', {move: push(1.0, 1.25, 0.5, 0.48)}, {frac: 0.45}),
-			// "His apartment door was wide open."
-			again('a_15_harris_door', 'narrator_032_door_wide_open', 'd_10_harris_frozen', {move: push(1.0, 1.06, 0.45, 0.5)}),
-			// "Behind him stood several other residents." / "All facing the stairs."
-			again('a_16_others', 'narrator_033_several_others', 'd_07_peephole_pov', {move: {z0: 1.2, z1: 1.2, x0: 0.62, y0: 0.5, x1: 0.72, y1: 0.5}}),
-			again('a_17_facing', 'narrator_034_facing_stairs', 'd_08_still', {move: push(1.08, 1.14)}),
-			// "I whispered through the door." + SARAH: "Mr. Harris? Is everything okay?"
-			close('a_18_whisper', 'narrator_035_whispered', {
-				kind: 'talk',
-				chars: ['sarah'],
-				loc: 'flat',
-				quality: 'high',
-				talk: ['sarah_001_is_everything_okay'],
-				blink: true,
-				mood: MOOD.flat,
-				prompt: 'Close-up inside her dark flat: Sarah\'s face right against the inside of her front door, cheek near the wood, whispering through the door, frightened; the faint yellow-green light from the peephole on her face.',
-				move: push(1.03, 1.08, 0.5, 0.45),
-			}, <>
-				<rect x={1150} y={0} width={770} height={1080} fill="#3a2a1f" />
-				<Person who="sarah" x={930} y={1700} h={1600} facing="right" />
-			</>),
-			// "He slowly turned his eyes toward my apartment." / "His face went pale."
-			again('a_19_eyes', 'narrator_036_turned_eyes', 'd_10_harris_frozen', {seq: [['base', 0], ['eyes', 0.45]], move: push(1.08, 1.22, 0.45, 0.42)}),
-			again('a_20_pale', 'narrator_037_pale', 'd_10_harris_frozen', {show: 'eyes', move: push(1.25, 1.32, 0.45, 0.38)}),
-			// "Then he raised a trembling finger to his lips." / "Telling me to be quiet."
-			again('a_21_finger', 'narrator_038_finger_lips', 'd_10_harris_frozen', {seq: [['eyes', 0], ['finger', 0.35]], fx: 'tremble', move: push(1.15, 1.25, 0.45, 0.4)}),
-			again('a_22_quiet', 'narrator_039_be_quiet', 'd_10_harris_frozen', {show: 'finger', move: push(1.3, 1.42, 0.45, 0.38)}),
-		]}
-	/>
-);
+export const FLAT_PROPS = {sofa: {x: 1000, y: 905, w: 420}, table: {x: 560, y: 900, w: 280}};
+
+export const NewApartment: React.FC = () => {
+	const {f, t, at, word, talk} = useStick();
+	const t16 = at('narrator_016_moved_in');
+	const t17 = at('narrator_017_old_building');
+	const t18 = at('narrator_018_nothing_special');
+	const t19 = at('narrator_019_rent_cheap');
+	const t20 = at('narrator_020_previous_tenant');
+	const t21 = at('narrator_021_waived_deposit');
+	const t22 = at('narrator_022_lucky');
+	const t23 = at('narrator_023_no_idea');
+	const tA = at('asleep');
+	const t24 = at('narrator_024_clicking');
+	const t25 = at('narrator_025_checked_phone');
+	const t27 = at('narrator_027_door_opening');
+	const t28 = at('narrator_028_another');
+	const t29 = at('narrator_029_and_another');
+	const t30 = at('narrator_030_got_out_of_bed');
+	const t31 = at('narrator_031_mr_harris');
+	const t33 = at('narrator_033_several_others');
+	const t35 = at('narrator_035_whispered');
+	const s01 = at('sarah_001_is_everything_okay');
+	const t36 = at('narrator_036_turned_eyes');
+	const t37 = at('narrator_037_pale');
+	const t38 = at('narrator_038_finger_lips');
+	const t39 = at('narrator_039_be_quiet');
+	const sar = talk('sarah');
+	if (t >= t25 && t < t27) {
+		const lf = f - Math.round(t25 * FPS);
+		return (
+			<PhoneFrame f={lf} d={Math.round((t27 - t25) * FPS)}>
+				<LockScreen time="3:06" glow={Math.min(1, lf / 6)} />
+			</PhoneFrame>
+		);
+	}
+	const H = GEO.hall;
+	const F = GEO.flat;
+	// day: Sarah arrives with a box
+	const arrive = walk(t, t16 + 0.2, t17 + 1.5, 300, 960, 1.15);
+	const lobby = walk(t, t18, t19 - 0.2, 200, 1300, 1.6);
+	// the landlord's office
+	const officeP: Spec[] = [
+		{is: Landlord, name: 'landlord', x: 1000, y: GEO.office.floor - 20, s: 1.6, frame: f, look: [-1, 0], mouth: t >= t20 && t < t22 ? 'open' : 'smile', talk: t >= t20 && t < t22 ? Math.max(0, Math.sin(t * 10)) * 0.6 : 0, arms: t >= t21 && t < t22 ? 'handsForward' : t >= t19 + 1 && t < t20 ? 'holdOne' : 'down'},
+		{is: Sarah, name: 'sarah', x: 1480, y: GEO.office.floor + 10, s: 1.6, frame: f, look: [-1, 0], mouth: t >= t21 ? 'smile' : 'flat', brows: t >= t19 && t < t20 ? 'raised' : 'none'},
+	];
+	// first evening in the flat
+	const unpack = walk(t, t22 + 0.2, t22 + 1.6, 1500, 1250, 1.6);
+	// 3:06: out of bed (from the bedroom doorway) to the front door
+	const toDoor = walk(t, t30 + 0.2, t31 - 0.1, 200, 1540, 1.6);
+	const res = residentsPersp(f, 'stairs').map((p) => ({...p, idle: false}));
+	const peepRes = res.filter((p) => t >= t33 || p.name === 'harris');
+	// Harris in the side hallway: in front of the left door, facing the stairs; turns his eyes to Sarah's door
+	const turnEyes = t >= t36;
+	const harris: Spec = {is: Harris, name: 'harris', x: 560, y: H.floor + 30, s: 1.55, frame: f, turn: turnEyes ? 0 : 0.7, look: turnEyes ? [1, 0] : [1, 0], pale: t >= t37 ? 0.4 : 0.1, eyes: 'wide', brows: 'worried', mouth: 'flat', arms: t >= t38 ? 'fingerLips' : 'down', shiver: 0.4};
+	const sarahDoor = t >= t35;
+	const shots = [
+		shot(0, 'exterior_day', 1.0, 1.0, [960, 540]),
+		shot(t17, 'exterior_day', 1.0, 1.08, [960, 540], [960, 500]),
+		shot(t18, 'lobby_day', 1.0, 1.0, [960, 540]),
+		shot(t19, 'office_day', 1.0, 1.0, [960, 540]),
+		fshot(boxesOf(officeP), t20, 'office_day', 1.6, [1100, 560]),
+		shot(t21, 'office_day', 1.25, 1.3, [1240, 600], [1240, 600]),
+		shot(t22, 'flat_day_bare', 1.0, 1.0, [960, 540]),
+		shot(t23, 'flat_night_bare', 1.0, 1.0, [960, 540]),
+		shot(tA, 'exterior_night', 1.25, 1.4, [960, 300], [960, 260]),
+		shot(t24, 'flat_night_bare', 1.0, 1.04, [960, 540], [960, 540]),
+		shot(t27, 'hallway_night', 1.0, 1.0, [960, 540]),
+		shot(t30, 'flat_night_bare', 1.0, 1.0, [960, 540]),
+		shot(t31, 'hallway_persp_night', 1.0, 1.08, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t35, 'flat_night_bare', 2.4, 2.5, [1500, 540], [1500, 530]),
+		shot(s01 + 0.3, 'hallway_night', 1.15, 1.2, [800, 540], [820, 540]),
+		fshot(boxesOf([harris]), t36, 'hallway_night', 2.4, [560, 520]),
+		fshot(boxesOf([harris]), t38, 'hallway_night', 2.7, [560, 500]),
+	];
+	const world = (set: string) => {
+		if (set === 'exterior_day') {
+			const g = GEO.ext.ground;
+			return (
+				<g>
+					<Person is={Sarah} name="sarah" x={arrive.x} y={g} s={1.15} frame={f} {...gait(arrive)} arms="hold" mouth="smile" look={[1, -0.3]} edge />
+					<MovingBox x={arrive.x + (arrive.moving ? 8 : 0)} y={g - 150} w={88} h={64} frame={f} />
+				</g>
+			);
+		}
+		if (set === 'lobby_day') {
+			return (
+				<g>
+					<Person is={Sarah} name="sarah" x={lobby.x} y={GEO.lobby.floor} s={1.6} frame={f} {...gait(lobby)} arms="hold" mouth="smile" look={[1, 0]} edge />
+					<MovingBox x={lobby.x + (lobby.moving ? 10 : 0)} y={GEO.lobby.floor - 205} w={120} h={86} frame={f} />
+				</g>
+			);
+		}
+		if (set === 'office_day') return <Group people={officeP} />;
+		if (set === 'flat_day_bare') {
+			return (
+				<g>
+					<Prop name="table" x={FLAT_PROPS.table.x} y={FLAT_PROPS.table.y} w={FLAT_PROPS.table.w} />
+					<Prop name="sofa" x={FLAT_PROPS.sofa.x} y={FLAT_PROPS.sofa.y} w={FLAT_PROPS.sofa.w} />
+					<MovingBox x={1700} y={F.floor} w={150} h={110} frame={f} seed={3} />
+					<Person is={Sarah} name="sarah" x={unpack.x} y={F.floor} s={1.6} frame={f} {...gait(unpack)} mouth="smile" arms={unpack.moving ? 'down' : 'hipsHands'} look={[-1, 0]} />
+				</g>
+			);
+		}
+		if (set === 'exterior_night') return null;
+		if (set === 'hallway_night') {
+			if (t < t30) {
+				// door after door swings open (heard by Sarah); nobody yet
+				return (
+					<g>
+						<HallDoor r={H.doors[0]} open={ramp(t, t27 + 0.3, t27 + 1)} />
+						<HallDoor r={H.doors[2]} open={ramp(t, t28 + 0.1, t28 + 0.8)} />
+					</g>
+				);
+			}
+			return (
+				<g>
+					<HallDoor r={H.doors[0]} open={1} />
+					<HallDoor r={H.doors[2]} open={1} />
+					<HallDoor r={H.doors[1]} open={sarahDoor ? 0.18 : 0} dark="#1a2440" />
+					<Person {...harris} />
+				</g>
+			);
+		}
+		if (set === 'flat_night_bare') {
+			const props = (
+				<g>
+					<Prop name="table" x={FLAT_PROPS.table.x} y={FLAT_PROPS.table.y} w={FLAT_PROPS.table.w} />
+					<Prop name="sofa" x={FLAT_PROPS.sofa.x} y={FLAT_PROPS.sofa.y} w={FLAT_PROPS.sofa.w} />
+				</g>
+			);
+			if (t < t30) return props;
+			const atDoor = t >= t35;
+			return (
+				<g>
+					{props}
+					{atDoor ? <rect x={F.door[0] + 6} y={F.door[1] + 6} width={22} height={F.door[3] - F.door[1] - 12} fill="#d9e2a0" opacity={0.7} /> : null}
+					<Person is={Sarah} name="sarah" x={atDoor ? 1420 : toDoor.x} y={F.floor} s={1.6} frame={f} {...(atDoor ? {turn: 0.7, lean: 6} : gait(toDoor))} look={[1, -0.1]} eyes="wide" brows="worried" mouth={sar.talk > 0 ? 'open' : 'flat'} talk={sar.talk} viseme={sar.viseme} edge={toDoor.x < 300} />
+				</g>
+			);
+		}
+		// peephole
+		return <Group people={peepRes} />;
+	};
+	void word;
+	void lerp;
+	void t29;
+	void t39;
+	return <Shots shots={shots} world={(s) => world(s.set)} overlay={peepOverlay} />;
+};
+void AbsoluteFill;
