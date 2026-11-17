@@ -207,6 +207,14 @@ const QAReport: React.FC<{scene: string}> = ({scene}) => {
 		const hh = r.head - r.y0;
 		if (r.y0 < -0.3 * hh && r.head > 0) out.push(`${b.name}: head cut by the top edge`);
 		if (r.head > 1080 + 0.25 * hh && r.y0 < 1080) out.push(`${b.name}: head cut by the bottom edge`);
+		// someone lying down (wider than tall): most of them must be inside top to bottom
+		const bh = r.y1 - r.y0;
+		if (r.x1 - r.x0 > 1.3 * bh) {
+			const below = Math.max(0, r.y1 - 1080) / bh;
+			const above = Math.max(0, -r.y0) / bh;
+			if (below > 0.35 && below < 1) out.push(`${b.name}: cut by the bottom edge (${Math.round(below * 100)}%)`);
+			if (above > 0.35 && above < 1) out.push(`${b.name}: cut by the top edge (${Math.round(above * 100)}%)`);
+		}
 		const outL = Math.max(0, -r.x0);
 		const outR = Math.max(0, r.x1 - 1920);
 		const outF = Math.max(outL, outR) / w;

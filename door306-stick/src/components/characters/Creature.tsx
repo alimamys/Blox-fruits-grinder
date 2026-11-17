@@ -4,6 +4,7 @@ import React from 'react';
 import {staticFile} from 'remotion';
 import puppets from '../../data/generated/puppets.json';
 import {boilOf, wob, wobLine, type Pt} from '../../utils/rough';
+import {qaAdd, useStageCtx} from '../../stick/kit';
 
 const INK = '#141414';
 const SKIN = '#8d8a84';
@@ -35,6 +36,8 @@ export type CreatureProps = {
 	opacity?: number;
 	/** shoulders hunched, head ducked (going through a doorway) */
 	bend?: number;
+	/** register with the frame QA (off where it is hidden on purpose behind a landing or in a gap) */
+	qa?: boolean;
 };
 
 const limb = (a: Pt, b: Pt, c: Pt, sd: number, w = 11) => {
@@ -77,7 +80,9 @@ const Fingers: React.FC<{h: Pt; dir: number; curl: number; sd: number}> = ({h, d
 	</g>
 );
 
-export const Creature: React.FC<CreatureProps> = ({x, y, s = 1, frame, view = 'front', left = false, tilt = 32, phase = 0, walking = false, reach = null, grip = null, hunch = 0.3, talk = 0, opacity = 1, bend = 0}) => {
+export const Creature: React.FC<CreatureProps> = ({x, y, s = 1, frame, view = 'front', left = false, tilt = 32, phase = 0, walking = false, reach = null, grip = null, hunch = 0.3, talk = 0, opacity = 1, bend = 0, qa = true}) => {
+	const ctx = useStageCtx();
+	if (qa) qaAdd(ctx, {name: 'creature', x0: x - 75 * s, x1: x + 75 * s, y0: y - (470 - bend * 40) * s, y1: y, head: y - (330 - bend * 40) * s, overlapOk: true});
 	const sd = 1900 + boilOf(frame, 4) * 7;
 	const breath = Math.sin(frame / 24 * 2 * Math.PI / 3.4) * 2;
 	const bob = walking ? -Math.abs(Math.sin(phase)) * 8 : 0;

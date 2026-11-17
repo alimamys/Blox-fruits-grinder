@@ -1,176 +1,150 @@
-// 8. THE OFFERING - a key in the lock.
+// 8. THE OFFERING - the sofa and the table against the door; silence; a key slides into my lock; the door
+// opens against the furniture; Mr. Harris with the master key, the creature behind him. "You promised me one."
+// "She's yours." The arm reaches through the doorway. I ran.
 import React from 'react';
-import {CreatureFig, Person} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {MOOD} from './common';
-import {again, close, push, shot} from './kit';
+import {Harris, Sarah} from '../components/characters/Cast';
+import {Creature, Prop} from '../components/characters/Creature';
+import {Person} from '../stick/goat';
+import {GEO, INK, lerp, ramp, shot, Shots, useStick, walk} from '../stick/kit';
+import {FLAT_PROPS} from './NewApartment';
+import {SOFA_AT_DOOR} from './Realization';
 
-const GAP_LIGHT = 'Inside the dark flat; the yellow-green corridor light floods in through the gap of the forced-open door.';
+/** The front door opening inward (hinges on the right): hallway light in the gap, the panel swinging toward us. */
+export const FlatDoorOpen: React.FC<{open: number; children?: React.ReactNode}> = ({open, children}) => {
+	const [x0, y0, x1, y1] = GEO.flat.door;
+	const ix0 = x0 + 6;
+	const ix1 = x1 - 6;
+	const w = ix1 - ix0;
+	const gapR = ix0 + w * open;
+	const a = open * 75 * (Math.PI / 180);
+	const pw = w * Math.cos(a);
+	const grow = Math.sin(a) * 60;
+	return (
+		<g>
+			<rect x={ix0} y={y0 + 6} width={w} height={y1 - y0 - 8} fill="#cfd49a" />
+			<rect x={ix0} y={y1 - 70} width={w} height={64} fill="#4a6a46" />
+			<defs>
+				<clipPath id="flatDoorGap">
+					<rect x={ix0} y={y0 + 6} width={Math.max(0, gapR - ix0)} height={y1 - y0 - 6} />
+				</clipPath>
+			</defs>
+			<g clipPath="url(#flatDoorGap)">{children}</g>
+			<path d={`M${ix1},${y0 + 6} L${ix1 - pw},${y0 + 6 - grow * 0.6} L${ix1 - pw},${y1 + grow * 0.4} L${ix1},${y1}`} fill="#6b4a30" stroke={INK} strokeWidth={5} strokeLinejoin="round" />
+			<circle cx={ix1 - pw + 22} cy={(y0 + y1) / 2 + 20} r={10} fill="#c9a24a" stroke={INK} strokeWidth={3} />
+		</g>
+	);
+};
 
-export const Offering: React.FC = () => (
-	<Shots
-		shots={[
-			again('h_00_sofa', 'narrator_154_pushed_sofa', 'g_02_sofa', {show: 'pushed', move: push(1.06, 1.12)}),
-			// "Then the dining table."
-			shot('h_01_table', 'narrator_155_dining_table', 'flat', {
-				chars: ['sarah'],
-				quality: 'medium',
-				mood: MOOD.flat,
-				prompt: 'The dark living room: Sarah shoves the small round wooden dining table hard against the mustard sofa that blocks the front door, building a barricade; chairs knocked over.',
-				fx: 'shake',
-				move: push(1.04, 1.1),
-			}, {cam: {z: 1.4, cx: 940, cy: 560}, kids: <Person who="sarah" x={1180} y={900} h={500} facing="left" pose="reach" />}),
-			// "I pulled as hard as I could on the handle to make sure it was locked."
-			close('h_02_handle', 'narrator_156_pulled_handle', {
-				chars: ['sarah'],
-				loc: 'flat',
-				quality: 'high',
-				fx: 'tremble',
-				mood: MOOD.flat,
-				prompt: 'Close-up: Sarah\'s two hands grip the brass handle of her front door and pull with all her strength, knuckles white, the deadbolt locked above; her pale face strained at the edge of frame. Natural hands, five fingers each.',
-				move: push(1.03, 1.08),
-			}, <>
-				<rect x={500} y={0} width={1100} height={1080} fill="#3a2a1f" />
-				<circle cx={900} cy={560} r={80} fill="#f0cdb4" />
-				<circle cx={1060} cy={580} r={80} fill="#f0cdb4" />
-			</>),
-			// "Outside, the footsteps stopped." / "The entire hallway went silent." - the barricaded door; shadows break the light under it
-			shot('h_03_barricade', 'narrator_157_footsteps_stopped', 'flat', {
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.flat,
-				prompt: 'The front door from inside, barricaded: the mustard sofa and the round table shoved against it; the thin yellow-green line of corridor light shines under the door. Nobody visible.',
-				variants: [
-					{name: 'feet', prompt: 'Two dark shadows of feet now break the yellow-green line of light under the door - someone is standing right outside. Nothing else changes.'},
-					{name: 'open', prompt: 'The door has been forced open a hand\'s width: yellow-green corridor light floods through the gap, and the sofa and table have been pushed back across the floor. Nothing else changes.'},
-				],
-				seq: [
-					['base', 0],
-					['feet', 0.6],
-				],
-				move: push(1.02, 1.08, 0.5, 0.55),
-			}, {cam: {z: 1.6, cx: 920, cy: 480}}),
-			again('h_04_silent', 'narrator_158_silent', 'h_03_barricade', {show: 'feet', move: push(1.1, 1.18, 0.5, 0.6)}),
-			// "Then I heard something that made my blood run cold."
-			again('h_05_cold', 'narrator_159_blood_cold', 'c_08_dread', {move: push(1.1, 1.2, 0.5, 0.42), blink: true}),
-			// "A key." / "Sliding into my lock." - the thumb-turn of the deadbolt from inside
-			close('h_06_lock', 'narrator_160_a_key', {
-				loc: 'flat',
-				noPeople: true,
-				quality: 'medium',
-				mood: 'Darkness; a sliver of yellow-green light around the edge of the door.',
-				prompt: 'Extreme close-up of the inside of Sarah\'s front door in the dark: the brass deadbolt thumb-turn, set horizontal (locked). Nobody visible.',
-				variants: [{name: 'turned', prompt: 'The brass deadbolt thumb-turn has now rotated to vertical by itself - unlocked from outside with a key. Nothing else changes.'}],
-				move: push(1.04, 1.14),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#3a2a1f" />
-				<circle cx={960} cy={540} r={160} fill="#b8902e" />
-				<rect x={860} y={510} width={200} height={60} fill="#7a5c1e" />
-			</>),
-			again('h_07_sliding', 'narrator_161_sliding', 'h_06_lock', {move: push(1.14, 1.24)}),
-			// SARAH: "No. No, please!"
-			close('h_08_panic', 'sarah_010_no_please', {
-				kind: 'talk',
-				chars: ['sarah'],
-				loc: 'flat',
-				quality: 'high',
-				talk: ['sarah_010_no_please', 'sarah_011_stop_please', 'sarah_012_dont_do_this'],
-				mood: GAP_LIGHT,
-				prompt: 'Close-up from the waist up: Sarah in panic, leaning against her front door with EXACTLY TWO hands - both palms flat on the door - eyes wide, pleading, tears; light from the corridor striping her face. Nothing else in the foreground: no other hands, arms, feet or people anywhere in the frame.',
-				move: push(1.03, 1.08),
-			}, <Person who="sarah" x={960} y={1700} h={1500} facing="front" />),
-			// "The lock turned." / "The door began opening." / "The furniture scraped across the floor."
-			again('h_09_turned', 'narrator_162_lock_turned', 'h_06_lock', {show: 'turned', fx: 'shake', move: push(1.2, 1.24)}),
-			again('h_10_opening', 'narrator_163_door_opening', 'h_03_barricade', {seq: [['feet', 0], ['open', 0.3]], fx: 'shake', move: push(1.1, 1.14, 0.5, 0.55)}),
-			again('h_11_scrape', 'narrator_164_furniture_scraped', 'h_03_barricade', {show: 'open', fx: 'shake', move: push(1.14, 1.22, 0.5, 0.55)}),
-			// "I pushed against it with everything I had."
-			shot('h_12_push', 'narrator_165_pushed', 'flat', {
-				chars: ['sarah'],
-				quality: 'high',
-				fx: 'shake',
-				mood: GAP_LIGHT,
-				prompt: 'Sarah throws her whole body against the sofa and the door, straining, teeth gritted, bare feet slipping on the floorboards, as the door is forced open a hand\'s width against her; corridor light floods through the gap.',
-				move: push(1.04, 1.1),
-			}, {cam: {z: 1.7, cx: 900, cy: 520}, kids: <Person who="sarah" x={1060} y={880} h={540} facing="left" pose="reach" tilt={-18} />}),
-			again('h_13_stop', 'sarah_011_stop_please', 'h_08_panic', {talk: ['sarah_011_stop_please'], fx: 'shake', move: push(1.08, 1.12)}),
-			again('h_14_continued', 'narrator_166_continued_opening', 'h_03_barricade', {show: 'open', move: push(1.22, 1.36, 0.5, 0.5)}),
-			// "Through the gap, I saw Mr. Harris." / "He was holding a master key."
-			close('h_15_harris_key', 'narrator_167_saw_harris', {
-				kind: 'talk',
-				chars: ['harris'],
-				loc: 'hallway_cross',
-				quality: 'high',
-				talk: ['harris_011_shes_yours'],
-				mood: 'The yellow-green corridor light seen through the gap of a forced-open door.',
-				prompt: 'Through the hand-wide gap of the forced-open door: Mr. Harris in the corridor holding up a heavy ring of brass master keys, crying, his face wet with tears; the dark doorframe and the edge of the sofa in the foreground.',
-				variants: [{name: 'away', prompt: 'Mr. Harris now looks down and away, unable to meet our eyes, the keys hanging in his hand. Nothing else changes.'}],
-				move: push(1.03, 1.08),
-			}, <>
-				<rect x={0} y={0} width={700} height={1080} fill="#2a1d14" />
-				<rect x={1300} y={0} width={620} height={1080} fill="#2a1d14" />
-				<rect x={700} y={0} width={600} height={1080} fill="#8b8c5a" />
-				<Person who="harris" x={1000} y={1400} h={1200} facing="front" pose="reach" />
-			</>),
-			again('h_16_key', 'narrator_168_master_key', 'h_15_harris_key', {move: push(1.2, 1.3, 0.56, 0.6)}),
-			// "Behind him stood the creature." - reveal
-			close('h_17_creature', 'narrator_169_behind_him', {
-				chars: ['creature', 'harris'],
-				loc: 'hallway_cross',
-				quality: 'high',
-				mood: MOOD.hallDark,
-				prompt: 'Through the gap of the forced-open door: behind Mr. Harris, filling the corridor, the creature looms - nearly seven feet, hunched, its head bent so far sideways it almost touches its own shoulder, grey skin in the flickering light; its jaw closed for now.',
-				variants: [{name: 'jaw', prompt: 'The creature\'s jaw has slowly dropped open far too wide - a dark, hollow, toothless mouth. Nothing else changes. No blood.'}],
-				fx: 'flicker',
-				move: push(1.02, 1.1, 0.5, 0.4),
-			}, <>
-				<rect x={0} y={0} width={600} height={1080} fill="#2a1d14" />
-				<rect x={1320} y={0} width={600} height={1080} fill="#2a1d14" />
-				<rect x={600} y={0} width={720} height={1080} fill="#8b8c5a" />
-				<CreatureFig x={1000} y={1500} h={1500} />
-				<Person who="harris" x={840} y={1500} h={900} facing="front" />
-			</>),
-			again('h_18_reveal', 'creature_reveal', 'h_17_creature', {fx: 'shake', move: push(1.1, 1.14, 0.5, 0.38)}),
-			// "Its head was bent sideways..." / "Its mouth slowly opened." / "And for the first time, it spoke."
-			again('h_19_head', 'narrator_170_head_sideways', 'h_17_creature', {move: push(1.14, 1.3, 0.52, 0.3)}),
-			again('h_20_mouth', 'narrator_171_mouth_opened', 'h_17_creature', {seq: [['base', 0], ['jaw', 0.4]], move: push(1.3, 1.36, 0.52, 0.3)}),
-			again('h_21_spoke', 'narrator_172_spoke', 'h_17_creature', {show: 'jaw', move: push(1.36, 1.46, 0.52, 0.3)}),
-			// CREATURE: "You promised me one."
-			again('h_22_promised', 'creature_001_promised', 'h_17_creature', {show: 'jaw', fx: 'glitch', move: push(1.5, 1.58, 0.52, 0.3)}),
-			// "Mr. Harris began crying." / "Mr. Harris, please! Don't do this!" / "He couldn't look at me." / "She's yours."
-			again('h_23_crying', 'narrator_173_harris_crying', 'h_15_harris_key', {move: push(1.1, 1.18, 0.5, 0.4)}),
-			again('h_24_please', 'sarah_012_dont_do_this', 'h_08_panic', {talk: ['sarah_012_dont_do_this'], fx: 'shake', move: push(1.1, 1.14)}),
-			again('h_25_look_away', 'narrator_174_couldnt_look', 'h_15_harris_key', {show: 'away', move: push(1.14, 1.2, 0.5, 0.4)}),
-			again('h_26_yours', 'harris_011_shes_yours', 'h_15_harris_key', {talk: ['harris_011_shes_yours'], move: push(1.22, 1.3, 0.5, 0.38)}),
-			// "The creature bent down." / "Its impossibly long arm reached through the doorway."
-			again('h_27_bent', 'narrator_175_bent_down', 'h_17_creature', {show: 'jaw', move: push(1.1, 1.3, 0.5, 0.5)}),
-			shot('h_28_arm', 'narrator_176_arm_reached', 'flat', {
-				chars: ['creature'],
-				quality: 'high',
-				fx: 'shake',
-				mood: GAP_LIGHT,
-				prompt: 'Inside the dark flat: through the gap of the forced-open front door, the creature\'s impossibly long, thin grey arm snakes in over the barricade toward the camera, the long grey fingers spread and reaching; yellow-green light behind it.',
-				move: push(1.02, 1.16, 0.5, 0.48),
-			}, {cam: {z: 1.6, cx: 920, cy: 460}, kids: <path d="M920,300 Q1100,500 1500,760" stroke="#8d8f8a" strokeWidth={40} fill="none" />}),
-			again('h_29_reach', 'arm_reach', 'h_28_arm', {fx: 'shake', move: push(1.25, 1.4, 0.6, 0.6)}),
-			// "I screamed." (+ the scream)
-			close('h_30_scream', 'narrator_177_screamed', {
-				chars: ['sarah'],
-				loc: 'flat',
-				quality: 'high',
-				fx: 'shake',
-				mood: GAP_LIGHT,
-				prompt: 'Close-up: Sarah screaming in pure terror, mouth wide open, eyes huge, her TWO hands raised, falling backward; from the right edge of the frame only the creature\'s impossibly long, thin, bony GREY fingers reach toward her (clearly grey and inhuman, not a human hand); corridor light slashing across her face.',
-				move: push(1.04, 1.12),
-			}, <Person who="sarah" x={960} y={1700} h={1500} facing="front" pose="coverMouth" />),
-			// "And ran." - she runs for the bedroom
-			shot('h_31_run', 'narrator_178_ran', 'flat', {
-				chars: ['sarah'],
-				quality: 'medium',
-				fx: 'shake',
-				mood: MOOD.flat,
-				prompt: 'Sarah runs barefoot through the dark living room toward the short corridor to her bedroom, her hair flying, glancing back over her shoulder in terror; motion and panic.',
-				move: {z0: 1.04, z1: 1.14, x0: 0.4, y0: 0.5, x1: 0.62, y1: 0.48},
-			}, {cam: {z: 1.3, cx: 1200, cy: 520}, kids: <Person who="sarah" x={1300} y={900} h={520} facing="right" pose="reach" />}),
-		]}
-	/>
-);
+export const Offering: React.FC = () => {
+	const {f, t, at, talk} = useStick();
+	const t154 = at('narrator_154_pushed_sofa');
+	const t155 = at('narrator_155_dining_table');
+	const t156 = at('narrator_156_pulled_handle');
+	const t157 = at('narrator_157_footsteps_stopped');
+	const t159 = at('narrator_159_blood_cold');
+	const t160 = at('narrator_160_a_key');
+	const tKey = at('key_in_lock');
+	const s10 = at('sarah_010_no_please');
+	const t162 = at('narrator_162_lock_turned');
+	const t163 = at('narrator_163_door_opening');
+	const t165 = at('narrator_165_pushed');
+	const s11 = at('sarah_011_stop_please');
+	const t166 = at('narrator_166_continued_opening');
+	const t167 = at('narrator_167_saw_harris');
+	const t169 = at('narrator_169_behind_him');
+	const tCR = at('creature_reveal');
+	const t170 = at('narrator_170_head_sideways');
+	const t171 = at('narrator_171_mouth_opened');
+	const c01 = at('creature_001_promised');
+	const t173 = at('narrator_173_harris_crying');
+	const s12 = at('sarah_012_dont_do_this');
+	const t174 = at('narrator_174_couldnt_look');
+	const h11 = at('harris_011_shes_yours');
+	const t175 = at('narrator_175_bent_down');
+	const t176 = at('narrator_176_arm_reached');
+	const t177 = at('narrator_177_screamed');
+	const t178 = at('narrator_178_ran');
+	const sar = talk('sarah');
+	const har = talk('harris');
+	const cre = talk('creature');
+	const F = GEO.flat;
+	const D = F.door;
+	// the barricade: sofa then table in front of the door
+	const sofaIn = lerp(SOFA_AT_DOOR - 80, 1560, ramp(t, t154 + 0.2, t155 - 0.2));
+	const tableIn = lerp(FLAT_PROPS.table.x, 1230, ramp(t, t155 + 0.1, t156 - 0.1));
+	// the door forces them back as it opens
+	const open = Math.min(0.95, ramp(t, t163, t165) * 0.2 + ramp(t, t166, t167) * 0.75);
+	const shove = open * 330;
+	const sofaX = sofaIn - shove;
+	const tableX = tableIn - shove * 0.8;
+	const sarahX = t < t154 ? SOFA_AT_DOOR - 330 : t < t155 ? sofaIn - 250 : t < t156 ? tableIn - 200 : t < t163 ? 1340 : tableX - 150;
+	const run = walk(t, t178 + 0.1, t178 + 1.6, sarahX, 300, 1.6);
+	const pushingBack = t >= t163 && t < t167;
+	// through the gap: Mr. Harris with the master key, the creature behind him
+	const hx = 1515;
+	const crX = 1575;
+	const bendK = ramp(t, t175, t176);
+	const reach = t >= t176 ? ([(sarahX + 70 - crX) / 1.22, (700 - D[3]) / 1.22] as [number, number]) : null;
+	const shots = [
+		shot(t154, 'flat_night_bare', 1.15, 1.15, [1300, 560], [1300, 560]),
+		shot(t156, 'flat_night_bare', 2.0, 2.0, [1380, 560], [1380, 560]),
+		shot(t157, 'flat_night_bare', 2.6, 2.7, [1340, 560], [1340, 555]),
+		shot(t160, 'flat_night_bare', 5.0, 5.4, [F.lock[0] + 6, F.lock[1] + 30], [F.lock[0] + 6, F.lock[1] + 30]),
+		shot(s10 - 0.1, 'flat_night_bare', 2.6, 2.7, [1340, 560], [1340, 555]),
+		shot(t162, 'flat_night_bare', 5.0, 5.0, [F.lock[0] + 6, F.lock[1] + 30], [F.lock[0] + 6, F.lock[1] + 30]),
+		shot(t163, 'flat_night_bare', 1.25, 1.25, [1400, 560], [1400, 560], {shake: 4}),
+		shot(t167, 'flat_night_bare', 1.45, 1.5, [1300, 540], [1300, 540]),
+		shot(tCR, 'flat_night_bare', 1.6, 1.65, [1600, 520], [1600, 515]),
+		shot(t170, 'flat_night_bare', 2.6, 2.8, [1560, 340], [1560, 335]),
+		shot(t173, 'flat_night_bare', 2.4, 2.5, [hx, 470], [hx, 465]),
+		shot(s12 - 0.1, 'flat_night_bare', 2.6, 2.7, [0, 0], [0, 0], {track: () => [sarahX + 20, 555]}),
+		shot(t174, 'flat_night_bare', 2.4, 2.5, [hx, 470], [hx, 465]),
+		shot(t175, 'flat_night_bare', 1.3, 1.3, [1250, 540], [1250, 540]),
+		shot(t177, 'flat_night_bare', 2.4, 2.4, [0, 0], [0, 0], {shake: 8, track: () => [sarahX + 20, 555]}),
+		shot(t178, 'flat_night_bare', 1.0, 1.0, [960, 540]),
+	];
+	const lockCU = (t >= t160 && t < s10 - 0.1) || (t >= t162 && t < t163);
+	const world = () => {
+		const keyIn = ramp(t, tKey, tKey + 0.8);
+		const turnK = ramp(t, t162, t162 + 0.5);
+		return (
+			<g>
+				{open > 0 ? (
+					<FlatDoorOpen open={open}>
+						{t >= t169 ? (
+							<Creature x={crX} y={D[3] - 4} s={1.22} frame={f} view="front" tilt={t >= t170 ? 68 : 40} talk={cre.talk || (t >= t171 && t < c01 ? 0.5 : 0)} bend={bendK} reach={reach} />
+						) : null}
+						<Person is={Harris} name="harris" x={hx} y={D[3] + 4} s={1.42} frame={f} prop={t < t173 ? 'card' : 'none'} arms={t < t173 ? 'holdOne' : 'down'} tears={t >= t173 ? 1 : 0} look={t >= t174 ? [0.4, 1] : [-1, 0]} eyes={t >= t174 ? 'squint' : 'wide'} brows="sad" mouth={har.talk > 0 ? 'open' : 'frown'} talk={har.talk} viseme={har.viseme} overlapOk />
+					</FlatDoorOpen>
+				) : null}
+				{/* the lock from inside: the key slides in, the thumb-turn rotates */}
+				<g transform={`translate(${F.lock[0] + 6} ${F.lock[1] + 30})`}>
+					{keyIn > 0 && open === 0 ? <circle r={4 + keyIn * 2} fill="#ffe9a0" opacity={0.5 * keyIn} /> : null}
+					{open === 0 ? <rect x={-3} y={-12} width={6} height={24} rx={2} fill="#c9a24a" stroke={INK} strokeWidth={2} transform={`rotate(${turnK * 90})`} /> : null}
+				</g>
+				<Prop name="table" x={t >= t155 ? tableX : FLAT_PROPS.table.x} y={FLAT_PROPS.table.y + 40} w={FLAT_PROPS.table.w} />
+				<Prop name="sofa" x={t >= t154 ? sofaX : SOFA_AT_DOOR - 80} y={FLAT_PROPS.sofa.y + 60} w={FLAT_PROPS.sofa.w} />
+				{lockCU ? null : <Person
+					is={Sarah}
+					name="sarah"
+					x={t >= t178 ? run.x : sarahX}
+					y={F.floor + 40}
+					s={1.6}
+					frame={f}
+					{...(t >= t178 ? {pose: 'run', turn: -0.8, phase: run.phase} : pushingBack ? {turn: 0.8, lean: 20, arms: 'handsForward'} : t >= t156 && t < t157 ? {turn: 0.7, arms: 'grabRight'} : {turn: 0.5})}
+					look={[1, -0.1]}
+					eyes="wide"
+					brows="worried"
+					mouth={sar.talk > 0 ? 'scream' : t >= t177 ? 'scream' : t >= t159 ? 'o' : 'flat'}
+					talk={sar.talk}
+					viseme={sar.viseme}
+					shiver={t >= t159 ? 0.9 : 0}
+					edge={run.x < 200}
+				/>}
+			</g>
+		);
+	};
+	void s11;
+	void h11;
+	return <Shots shots={shots} world={() => world()} />;
+};

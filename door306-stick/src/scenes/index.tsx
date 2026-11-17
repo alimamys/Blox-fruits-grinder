@@ -1,5 +1,6 @@
 // Scene id (src/data/timeline.ts) -> component.
-import type React from 'react';
+import React from 'react';
+import {AbsoluteFill} from 'remotion';
 import {Creature} from './Creature';
 import {Doors} from './Doors';
 import {Footsteps} from './Footsteps';
@@ -10,7 +11,8 @@ import {Offering} from './Offering';
 import {Realization} from './Realization';
 import {Rule} from './Rule';
 import {Staircase} from './Staircase';
-import {Black} from './common';
+
+const Black: React.FC = () => <AbsoluteFill style={{background: '#000'}} />;
 
 export const SCENE_COMPONENTS: Record<string, React.FC> = {
 	doors: Doors,

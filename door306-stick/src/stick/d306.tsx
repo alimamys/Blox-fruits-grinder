@@ -2,7 +2,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {Boy, Harris, Mother, OldMan, RobeMan, RobeWoman, Sarah, Shawl, TShirt} from '../components/characters/Cast';
-import {Person} from './goat';
+import {Person, QAShape} from './goat';
 import {GEO, INK, perspS, perspX, type Shot} from './kit';
 import type {Spec} from './places';
 
@@ -28,14 +28,14 @@ export const Flicker: React.FC<{f: number; k: number}> = ({f, k}) => {
 // ---- the residents' places in the perspective hallway (feet y, side k): nobody hides anybody
 type Res = {name: string; is: React.FC<Record<string, unknown>>; y: number; k: number; child?: boolean};
 export const RES: Res[] = [
-	{name: 'oldman', is: OldMan as never, y: 690, k: 0.48},
-	{name: 'robewoman', is: RobeWoman as never, y: 730, k: 0.2},
-	{name: 'robeman', is: RobeMan as never, y: 760, k: -0.5},
-	{name: 'tshirt', is: TShirt as never, y: 780, k: 0.5},
-	{name: 'harris', is: Harris as never, y: 840, k: -0.1},
-	{name: 'mother', is: Mother as never, y: 860, k: -0.5},
-	{name: 'boy', is: Boy as never, y: 872, k: -0.4, child: true},
-	{name: 'shawl', is: Shawl as never, y: 870, k: 0.62},
+	{name: 'robeman', is: RobeMan as never, y: 680, k: -0.35},
+	{name: 'oldman', is: OldMan as never, y: 700, k: 0.65},
+	{name: 'robewoman', is: RobeWoman as never, y: 700, k: -0.65},
+	{name: 'mother', is: Mother as never, y: 720, k: 0.25},
+	{name: 'boy', is: Boy as never, y: 732, k: 0.35, child: true},
+	{name: 'tshirt', is: TShirt as never, y: 740, k: -0.75},
+	{name: 'harris', is: Harris as never, y: 800, k: 0.65},
+	{name: 'shawl', is: Shawl as never, y: 860, k: -0.65},
 ];
 /** the residents in the peephole view: facing the stairs (backs to us) or turned to face Sarah's door */
 export const residentsPersp = (frame: number, facing: 'stairs' | 'door', over: Record<string, Record<string, unknown>> = {}, omit: string[] = []): Spec[] =>
@@ -67,13 +67,17 @@ export const HallDoor: React.FC<{r: readonly [number, number, number, number]; o
 	);
 };
 
-/** Sarah on the floor, face down, head toward `dir` (being pulled by the ankle the other way). */
-export const SarahDown: React.FC<{x: number; y: number; s?: number; frame: number; dir?: 1 | -1; reach?: boolean; face?: Record<string, unknown>}> = ({x, y, s = 1.6, frame, dir = -1, reach = true, face = {}}) => {
-	// a standing figure turned 90 degrees around its middle; feet toward -dir
-	const len = 300 * s;
+/** Sarah lying on the floor, head toward `dir` (-1 = left), being pulled by the ankle the other way.
+ *  The standing figure is turned 90 degrees around the middle of its body; her back rests on y. */
+export const SarahDown: React.FC<{x: number; y: number; s?: number; frame: number; dir?: 1 | -1; reach?: boolean; face?: Record<string, unknown>; qa?: boolean}> = ({x, y, s = 1.6, frame, dir = -1, reach = true, face = {}, qa = true}) => {
+	const half = 154; // (262 + 45) / 2, body units
+	const cy = y - 48 * s;
 	return (
-		<g transform={`translate(${x} ${y - 26 * s}) rotate(${dir * 90}) translate(${len / 2} 0)`}>
-			<Person is={Sarah} name="sarah" x={0} y={0} s={s} frame={frame} arms={reach ? 'armsUp' : 'down'} eyes="wide" brows="worried" mouth="scream" overlapOk small {...face} />
+		<g>
+			{qa ? <QAShape name="sarah (lying)" x0={x - half * s} y0={cy - 52 * s} x1={x + half * s} y1={cy + 52 * s} small overlapOk /> : null}
+			<g transform={`translate(${x} ${cy}) rotate(${dir * 90}) translate(0 ${half * s})`}>
+				<Person is={Sarah} name="sarah" x={0} y={0} s={s} frame={frame} arms={reach ? 'armsUp' : 'down'} eyes="wide" brows="worried" mouth="scream" noqa {...face} />
+			</g>
 		</g>
 	);
 };

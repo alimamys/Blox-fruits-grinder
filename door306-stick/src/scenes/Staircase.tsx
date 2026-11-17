@@ -1,189 +1,186 @@
-// 9. THE STAIRCASE - dragged past every neighbour; their doors close one by one.
+// 9. THE STAIRCASE - the ice-cold grip on my ankle; pulled across the floor; dragged out into the corridor past
+// every neighbour. "I'm sorry." Down the first step. They close their doors, one by one.
 import React from 'react';
-import {AbsoluteFill, Img, staticFile} from 'remotion';
-import {CreatureFig, Person} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {Black, MOOD, prog} from './common';
-import {again, close, code, push, shot} from './kit';
+import {AbsoluteFill} from 'remotion';
+import {Boy, Harris, Mother, OldMan, RobeMan, RobeWoman, Sarah, Shawl, TShirt} from '../components/characters/Cast';
+import {Creature, Sack} from '../components/characters/Creature';
+import {Flicker, HallDoor, SarahDown} from '../stick/d306';
+import {Person, QAShape} from '../stick/goat';
+import {fshot, GEO, INK, lerp, ramp, shot, Shots, stairPt, useStick, walk} from '../stick/kit';
+import {boxesOf, Group, type Spec} from '../stick/places';
+import {FlatDoorOpen} from './Offering';
 
-const CORRIDOR = 'Night, the corridor\'s sickly yellow-green fluorescent light, one tube flickering, cold blue shadows.';
+const SK = '#8d8a84';
 
-export const Staircase: React.FC = () => (
-	<Shots
-		shots={[
-			again('i_00_almost', 'narrator_179_almost_bedroom', 'h_31_run', {fx: 'shake', move: push(1.14, 1.24, 0.62, 0.48)}),
-			// "Then something wrapped around my ankle." / "The grip was ice cold."
-			close('i_01_ankle', 'narrator_180_ankle', {
-				chars: ['creature', 'sarah'],
-				loc: 'flat',
-				quality: 'high',
-				fx: 'shake',
-				mood: MOOD.flat,
-				prompt: 'Close-up on the dark floorboards: impossibly long, thin grey fingers wrapped tight around Sarah\'s bare ankle (her grey sweatpant leg), gripping; cold, bony, terrible. No blood.',
-				move: push(1.03, 1.12),
-			}, <>
-				<rect x={0} y={700} width={1920} height={380} fill="#3a2a1f" />
-				<rect x={700} y={380} width={500} height={160} rx={60} fill="#b9bcbf" />
-				<path d="M1500,200 Q1250,420 1000,470" stroke="#8d8f8a" strokeWidth={36} fill="none" />
-			</>),
-			again('i_02_cold', 'narrator_181_ice_cold', 'i_01_ankle', {move: push(1.16, 1.26)}),
-			// "I fell so hard that the air left my lungs."
-			shot('i_03_fall', 'narrator_182_fell', 'flat', {
-				chars: ['sarah'],
-				quality: 'high',
-				fx: 'shake',
-				mood: MOOD.flat,
-				prompt: 'Low angle in the dark short corridor of her flat: Sarah has fallen flat on her front on the floorboards, winded, gasping, one arm stretched toward the bedroom door ahead, her hair over her face; something unseen holds her ankle behind her (out of frame).',
-				move: push(1.04, 1.1),
-			}, {cam: {z: 1.6, cx: 1380, cy: 600}, kids: <Person who="sarah" x={1380} y={880} h={520} facing="left" tilt={-80} />}),
-			// "I grabbed the edge of the carpet."
-			close('i_04_rug', 'narrator_183_carpet', {
-				chars: ['sarah'],
-				loc: 'flat',
-				quality: 'high',
-				mood: MOOD.flat,
-				prompt: 'Close-up: Sarah\'s hands claw at the edge of the faded rug on the dark floorboards, fingers digging in, the rug bunching as she is pulled backward. Natural hands, five fingers each.',
-				variants: [{name: 'scratch', prompt: 'Her fingernails now scrape across the bare floorboards, leaving pale scratch marks in the wood, the rug pulled out of her grip. Nothing else changes. No blood.'}],
-				move: push(1.03, 1.08),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#3a2a1f" />
-				<rect x={0} y={500} width={1920} height={200} fill="#6b4b3a" />
-				<circle cx={800} cy={600} r={80} fill="#f0cdb4" />
-				<circle cx={1100} cy={620} r={80} fill="#f0cdb4" />
-			</>),
-			// "The creature began pulling me backward." - the floor slides away
-			again('i_05_pulling', 'narrator_184_pulling', 'i_03_fall', {fx: 'shake', move: {z0: 1.12, z1: 1.12, x0: 0.42, y0: 0.5, x1: 0.62, y1: 0.5}}),
-			// "My fingernails scraped across the floor."
-			again('i_06_nails', 'narrator_185_fingernails', 'i_04_rug', {seq: [['base', 0], ['scratch', 0.3]], fx: 'tremble', move: push(1.06, 1.14)}),
-			// "I grabbed the doorframe." / hold on / harder
-			shot('i_07_doorframe', 'narrator_186_doorframe', 'flat', {
-				chars: ['sarah'],
-				quality: 'high',
-				mood: 'Corridor light floods in through the wide-open front door; the flat dark around it.',
-				prompt: 'At her wide-open front door, seen from inside the flat: Sarah lies on her stomach across the threshold, being dragged OUT into the corridor by her ankle - her FEET and legs are already out through the doorway in the corridor light, her HEAD and arms are still inside the dark flat toward us, and both hands cling to the inside edge of the doorframe; her face contorted with effort and terror.',
-				move: push(1.03, 1.1),
-			}, {cam: {z: 1.7, cx: 920, cy: 560}, kids: <Person who="sarah" x={760} y={880} h={520} facing="front" pose="reach" tilt={-70} />}),
-			again('i_08_hold', 'narrator_187_hold_on', 'i_07_doorframe', {move: push(1.12, 1.2), fx: 'tremble'}),
-			again('i_09_harder', 'narrator_188_harder', 'i_07_doorframe', {fx: 'shake', move: push(1.2, 1.14)}),
-			// "I was dragged out into the corridor." - beat: dragged out
-			shot('i_10_corridor', 'narrator_189_corridor', 'hallway_cross', {
-				chars: ['sarah', 'creature'],
-				quality: 'high',
-				fx: 'shake',
-				mood: CORRIDOR,
-				prompt: 'In the corridor: Sarah is dragged on her back across the green carpet by her ankle, arms flailing; only the creature\'s long grey arm is visible, reaching in from the left edge of frame and holding her ankle; doors around them.',
-				move: {z0: 1.06, z1: 1.06, x0: 0.6, y0: 0.55, x1: 0.42, y1: 0.55},
-			}, {cam: {z: 1.4, cx: 960, cy: 640}, kids: <Person who="sarah" x={1000} y={980} h={500} facing="front" tilt={-75} />}),
-			// "Every neighbor was watching."
-			again('i_11_watching', 'narrator_190_watching', 'd_07_peephole_pov', {show: 'turned', move: push(1.04, 1.1)}),
-			// SARAH: "HELP ME! SOMEBODY HELP ME!"
-			shot('i_12_help', 'sarah_014_help_me', 'hallway_cross', {
-				kind: 'talk',
-				chars: ['sarah'],
-				quality: 'high',
-				talk: ['sarah_014_help_me', 'sarah_015_you_can_stop'],
-				mood: CORRIDOR,
-				prompt: 'Close on Sarah lying on the corridor carpet, being dragged, reaching one hand toward the camera (toward her neighbours), screaming for help, tears on her face, hair spread on the carpet.',
-				fx: 'tremble',
-				move: push(1.03, 1.08),
-			}, {cam: {z: 2.0, cx: 960, cy: 820}, kids: <Person who="sarah" x={960} y={1060} h={560} facing="front" pose="reach" />}),
-			// "Nobody moved." / the mother / the old man
-			again('i_13_nobody', 'narrator_191_nobody_moved', 'd_07_peephole_pov', {show: 'turned', move: push(1.2, 1.24)}),
-			again('i_14_mother', 'narrator_192_mother_held', 'd_11_mother', {show: 'away', move: push(1.1, 1.18)}),
-			again('i_15_oldman', 'narrator_193_old_man_floor', 'c_05_oldman', {fx: 'tremble', move: push(1.08, 1.14)}),
-			// "I reached toward Mr. Harris." + "Please! You can stop this!"
-			again('i_16_reach', 'narrator_194_reached_harris', 'i_12_help', {move: push(1.1, 1.14)}),
-			again('i_17_stop', 'sarah_015_you_can_stop', 'i_12_help', {talk: ['sarah_015_you_can_stop'], move: push(1.14, 1.2)}),
-			// "He looked at me." / might help / "I'm sorry."
-			again('i_18_looked', 'narrator_195_looked_at_me', 'd_10_harris_frozen', {show: 'tears', move: push(1.12, 1.18, 0.45, 0.4)}),
-			again('i_19_might', 'narrator_196_might_help', 'd_10_harris_frozen', {show: 'tears', move: push(1.2, 1.4, 0.45, 0.38)}),
-			// "Then he stepped aside."
-			shot('i_20_aside', 'narrator_197_stepped_aside', 'hallway_cross', {
-				chars: ['harris'],
-				quality: 'high',
-				mood: CORRIDOR,
-				prompt: 'Mr. Harris steps aside against the wall of the corridor, eyes on the floor, crying, making way; the dark open doorway of his flat beside him.',
-				move: push(1.03, 1.1),
-			}, {cam: {z: 2.0, cx: 900, cy: 480}, kids: <Person who="harris" x={880} y={820} h={470} facing="right" />}),
-			// "The creature dragged me toward the stairs." - from the stairwell end
-			shot('i_21_to_stairs', 'narrator_198_toward_stairs', 'hallway', {
-				chars: ['creature', 'sarah'],
-				quality: 'high',
-				fx: 'flicker',
-				mood: CORRIDOR,
-				prompt: 'Down the long corridor toward the black stairwell opening at the far end: the hunched grey creature, seen from behind, drags Sarah by the ankle along the green carpet toward the stairs, the stained sack dragging behind it; Sarah\'s arms trailing.',
-				move: push(1.03, 1.12, 0.52, 0.5),
-			}, {kids: <>
-				<CreatureFig x={1000} y={760} h={360} />
-				<Person who="sarah" x={1000} y={900} h={300} facing="back" tilt={-80} />
-			</>}),
-			again('i_22_sack', 'narrator_199_sack_behind', 'f_13_sack', {show: 'bulge', grade: 1.3, move: push(1.06, 1.14)}),
-			again('i_23_moving', 'narrator_200_still_moving', 'f_13_sack', {seq: [['base', 0], ['bulge', 0.25], ['base', 0.5], ['bulge', 0.72]], grade: 1.3, move: push(1.14, 1.22)}),
-			// "I tried to grab the railing." / "But its fingers tightened around my ankle."
-			close('i_24_railing', 'narrator_201_railing', {
-				chars: ['sarah'],
-				loc: 'stairwell',
-				quality: 'high',
-				mood: MOOD.stair,
-				prompt: 'Close-up at the top of the stairs: Sarah\'s hand reaches desperately for the black metal railing posts, fingertips just brushing the metal, slipping away; flickering light.',
-				fx: 'tremble',
-				move: push(1.03, 1.1),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#1d2620" />
-				<path d="M200,300 L1800,300 M500,300 L500,1080 M1000,300 L1000,1080 M1500,300 L1500,1080" stroke="#4a514a" strokeWidth={30} />
-				<circle cx={1100} cy={520} r={80} fill="#f0cdb4" />
-			</>),
-			again('i_25_tightened', 'narrator_202_tightened', 'i_01_ankle', {fx: 'shake', move: push(1.26, 1.36)}),
-			// SARAH (crying): "Please... I don't want to die..."
-			shot('i_26_top_step', 'sarah_016_dont_want_to_die', 'stairwell', {
-				kind: 'talk',
-				chars: ['sarah'],
-				quality: 'high',
-				talk: ['sarah_016_dont_want_to_die'],
-				mood: MOOD.stair,
-				prompt: 'Close on Sarah lying on her back on the top concrete steps of the stairwell, being pulled down, crying, tears streaming, pleading, her hair spilling over the step; flickering caged light above.',
-				move: push(1.03, 1.08),
-			}, {cam: {z: 2.0, cx: 900, cy: 520}, kids: <Person who="sarah" x={900} y={760} h={520} facing="front" tilt={-70} />}),
-			// "It pulled me down the first step." / "Then another."
-			again('i_27_first', 'narrator_203_first_step', 'i_21_to_stairs', {fx: 'shake', move: push(1.5, 1.7, 0.52, 0.45)}),
-			again('i_28_another', 'narrator_204_another', 'd_13_stairwell', {grade: 1.6, fx: 'shake', move: push(1.1, 1.14, 0.45, 0.6)}),
-			// "I looked back." - from the stairs, back along the corridor: the neighbours in their doorways
-			again('i_29_back', 'narrator_205_looked_back', 'i_26_top_step', {move: push(1.12, 1.18)}),
-			shot('i_30_lookback', 'narrator_206_still_standing', 'hallway', {
-				chars: ['harris', 'mother', 'residents'],
-				quality: 'high',
-				mood: CORRIDOR,
-				prompt: 'From the top of the stairs looking back up the long corridor: the residents and Mr. Harris stand in the open doorways of their flats along both walls, all watching us in silence, expressionless; every door wide open.',
-				doors: {prompt: 'Every door along the corridor is now CLOSED and nobody is visible - the corridor is empty and silent. Nothing else changes.', start: 99, loose: true},
-				move: push(1.02, 1.06),
-			}, {kids: <>
-				<Person who="oldman" x={795} y={765} h={300} facing="front" />
-				<Person who="lilac" x={1235} y={765} h={300} facing="front" />
-				<Person who="mother" x={670} y={905} h={520} facing="front" pose="holdChild" />
-				<Person who="harris" x={1350} y={905} h={520} facing="front" />
-				<Person who="robe" x={300} y={1120} h={900} facing="front" />
-				<Person who="beard" x={1660} y={1130} h={950} facing="front" />
-			</>}),
-			again('i_31_watching', 'narrator_207_watching', 'i_30_lookback', {move: push(1.1, 1.16)}),
-			again('i_32_word', 'narrator_208_not_a_word', 'd_08_still', {move: push(1.14, 1.2)}),
-			// "Then, slowly, they began closing their doors." / "One by one." + beat - the doors close
-			again('i_33_closing', 'narrator_209_closing_doors', 'i_30_lookback', {doors: {prompt: '', start: 0.3, stagger: 0.7, swing: 0.9, close: true}, move: push(1.06, 1.14)}),
-			again('i_34_closed', 'narrator_210_one_by_one', 'i_30_lookback', {show: 'open', move: push(1.14, 1.2)}),
-			// "Until the only sounds left were my screams..." / "And the thing dragging me down the staircase." - into the dark
-			again('i_35_screams', 'narrator_211_my_screams', 'd_13_stairwell', {grade: 1.2, move: push(1.06, 1.3, 0.45, 0.65)}),
-			code('i_36_fade', 'narrator_212_dragging_down', ({f, d}) => (
-				<AbsoluteFill style={{background: '#000'}}>
-					<AbsoluteFill style={{opacity: 1 - prog(f, d * 3.2)}}>
-						<StairFade f={f} />
-					</AbsoluteFill>
-				</AbsoluteFill>
-			)),
-			code('i_37_black', 'fade_dark', () => <Black />),
-		]}
-	/>
-);
-
-/** The stairwell frame sinking into black (plain image, no art pipeline needed). */
-const StairFade: React.FC<{f: number}> = ({f}) => (
-	<Img src={staticFile('restyle/d_13_stairwell_k1.jpg')} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', transform: `scale(${1.3 + f * 0.002})`, filter: 'brightness(1.1)'}} />
-);
+export const Staircase: React.FC = () => {
+	const {f, t, at, talk, total} = useStick();
+	const t179 = at('narrator_179_almost_bedroom');
+	const t180 = at('narrator_180_ankle');
+	const t182 = at('narrator_182_fell');
+	const t183 = at('narrator_183_carpet');
+	const t184 = at('narrator_184_pulling');
+	const t185 = at('narrator_185_fingernails');
+	const t186 = at('narrator_186_doorframe');
+	const t188 = at('narrator_188_harder');
+	const t189 = at('narrator_189_corridor');
+	const t190 = at('narrator_190_watching');
+	const s14 = at('sarah_014_help_me');
+	const t191 = at('narrator_191_nobody_moved');
+	const t192 = at('narrator_192_mother_held');
+	const t193 = at('narrator_193_old_man_floor');
+	const t194 = at('narrator_194_reached_harris');
+	const h12 = at('harris_012_im_sorry');
+	const t197 = at('narrator_197_stepped_aside');
+	const t198 = at('narrator_198_toward_stairs');
+	const t199 = at('narrator_199_sack_behind');
+	const t201 = at('narrator_201_railing');
+	const t203 = at('narrator_203_first_step');
+	const t205 = at('narrator_205_looked_back');
+	const t209 = at('narrator_209_closing_doors');
+	const tDC = at('doors_close');
+	const t211 = at('narrator_211_my_screams');
+	const tFD = at('fade_dark');
+	const tSE = at('silence_end');
+	const sar = talk('sarah');
+	const har = talk('harris');
+	if (t >= tSE) return <AbsoluteFill style={{background: '#000'}} />;
+	const F = GEO.flat;
+	const H = GEO.hall;
+	// ---- the flat: run, the grip, the fall, pulled back across the floor to the door
+	const run = walk(t, t179 - 0.4, t180, 520, 360, 1.6);
+	const down = t >= t182;
+	const pull = ramp(t, t184, t186) * 520;
+	const lyX = 640 + pull; // centre of her body (head to the left)
+	const ankle: [number, number] = down ? [lyX + 240, F.floor - 30] : [run.x + 10, F.floor - 10];
+	const armFrom: [number, number] = [1560, 640];
+	// ---- the hallway: dragged from her door to the stairs past the residents
+	const dragK = ramp(t, t189, t198 + 3);
+	const cX = lerp(980, 1760, dragK) + (t >= t194 && t < t197 ? 0 : 0);
+	const gripX = cX - 190;
+	const harrisX = t < t197 ? 1690 : lerp(1690, 1540, ramp(t, t197, t197 + 1.2));
+	const residents: Spec[] = [
+		{is: RobeWoman, name: 'robewoman', x: 120, y: H.floor - 25, s: 1.3, frame: f},
+		{is: Mother, name: 'mother', x: 300, y: H.floor - 25, s: 1.3, frame: f, arms: 'hug', overlapOk: true},
+		{is: Boy, name: 'boy', x: 300, y: H.floor - 13, s: 1.3, frame: f, tears: 1, eyes: 'squint', overlapOk: true},
+		{is: RobeMan, name: 'robeman', x: 520, y: H.floor - 25, s: 1.3, frame: f},
+		{is: TShirt, name: 'tshirt', x: 1100, y: H.floor - 25, s: 1.3, frame: f},
+		{is: Shawl, name: 'shawl', x: 1265, y: H.floor - 25, s: 1.3, frame: f},
+		{is: OldMan, name: 'oldman', x: 1405, y: H.floor - 25, s: 1.3, frame: f, look: t >= t193 ? [0, 1] : [-0.4, 0.4], shiver: 1.4, eyes: t >= t193 ? 'squint' : 'dot'},
+	].map((p) => ({look: [Math.sign(cX - 200 - p.x) * 0.8, 0.4], mouth: 'flat', brows: 'sad', eyes: 'dot', ...p})) as Spec[];
+	// they go back in and close their doors, one by one
+	const closing = t >= t209;
+	const doorsClosed = (i: number) => ramp(t, t209 + 0.3 + i * 0.9, t209 + 0.9 + i * 0.9);
+	const shown = (p: Spec, i: number) => !(closing && t > t209 + 0.2 + i * 0.6);
+	const harris: Spec = {is: Harris, name: 'harris', x: harrisX, y: H.floor - 25, s: 1.3, frame: f, look: t >= t195() ? [-1, 0.5] : [0, 1], tears: 1, brows: 'sad', mouth: har.talk > 0 ? 'open' : 'frown', talk: har.talk, viseme: har.viseme, edge: harrisX > 1650};
+	function t195() {
+		return at('narrator_195_looked_at_me');
+	}
+	// ---- the stairs: going down
+	const descK = ramp(t, t203, t211 + 4);
+	const [sx, sy] = stairPt(lerp(0.97, 0.0, descK));
+	const shots = [
+		shot(t179, 'flat_night_bare', 1.0, 1.0, [960, 540]),
+		shot(t180, 'flat_night_bare', 1.35, 1.4, [760, 700], [760, 700]),
+		shot(t182, 'flat_night_bare', 1.15, 1.2, [900, 640], [900, 640], {shake: 6}),
+		shot(t185, 'flat_night_bare', 2.2, 2.3, [0, 0], [0, 0], {track: () => [lyX - 200, 900]}),
+		shot(t186, 'flat_night_bare', 1.7, 1.75, [1500, 760], [1500, 760]),
+		shot(t189, 'hallway_night', 1.0, 1.0, [960, 540]),
+		fshot(boxesOf([...residents, harris]), t190, 'hallway_night', 1.5, [700, 640]),
+		shot(s14, 'hallway_night', 1.0, 1.06, [960, 540], [880, 600]),
+		shot(t191, 'hallway_night', 1.0, 1.0, [960, 540]),
+		shot(t192, 'hallway_night', 1.45, 1.45, [560, 700], [560, 700]),
+		shot(t193, 'hallway_night', 2.2, 2.3, [1405, 620], [1405, 620]),
+		shot(t194, 'hallway_night', 1.5, 1.5, [1450, 640], [1450, 640]),
+		fshot(boxesOf([...residents, harris]), h12 - 0.15, 'hallway_night', 2.3, [harrisX, 600]),
+		shot(t197, 'hallway_night', 1.0, 1.0, [960, 540]),
+		shot(t201, 'stairwell_night', 1.0, 1.0, [960, 540], [960, 540]),
+		shot(t203, 'stairwell_night', 1.0, 1.0, [960, 540]),
+		shot(t205, 'hallway_night', 1.0, 1.0, [960, 540], [960, 540], {light: 'fluoro'}),
+		shot(t211, 'stairwell_night', 1.0, 1.0, [960, 540]),
+	];
+	const world = (set: string) => {
+		if (set === 'flat_night_bare') {
+			const lyingP = {eyes: 'wide', brows: 'worried', mouth: sar.talk > 0 ? 'scream' : 'scream', talk: sar.talk};
+			if (t >= t186) {
+				// lying at the threshold, feet already out in the hallway, her hands on the door frame - slipping
+				const slip = ramp(t, t188, t189);
+				return (
+					<g>
+						<FlatDoorOpen open={0.95} />
+						<SarahDown x={1600 + slip * 60} y={F.floor + 20} s={1.6} frame={f} dir={-1} face={lyingP} />
+					</g>
+				);
+			}
+			return (
+				<g>
+					<FlatDoorOpen open={0.95}>
+						<Creature x={1590} y={F.door[3] - 4} s={1.22} frame={f} view="front" tilt={60} bend={1} reach={t >= t180 ? [(ankle[0] - 1590) / 1.22, (ankle[1] - F.door[3]) / 1.22] : null} />
+					</FlatDoorOpen>
+					{t >= t180 ? (
+						// the arm across the floor, out of the doorway (it is longer than the room)
+						<g>
+							<path d={`M${armFrom[0]},${armFrom[1]} Q${(armFrom[0] + ankle[0]) / 2},${F.floor + 10} ${ankle[0]},${ankle[1]}`} fill="none" stroke={INK} strokeWidth={24} strokeLinecap="round" />
+							<path d={`M${armFrom[0]},${armFrom[1]} Q${(armFrom[0] + ankle[0]) / 2},${F.floor + 10} ${ankle[0]},${ankle[1]}`} fill="none" stroke={SK} strokeWidth={15} strokeLinecap="round" />
+						</g>
+					) : null}
+					{down ? (
+						<g>
+							<SarahDown x={lyX} y={F.floor + 20} s={1.6} frame={f} dir={-1} face={lyingP} />
+							{t >= t185 ? [0, 1, 2, 3].map((i) => <path key={i} d={`M${lyX - 250 - i * 6},${F.floor + 24 + i * 5} l${pull > 0 ? 60 : 0},0`} stroke="#d9cbb0" strokeWidth={2} opacity={0.7} />) : null}
+						</g>
+					) : (
+						<Person is={Sarah} name="sarah" x={run.x} y={F.floor} s={1.6} frame={f} pose={run.moving ? 'run' : 'stand'} turn={-0.8} phase={run.phase} eyes="wide" brows="worried" mouth="scream" />
+					)}
+					{t >= t180 ? <circle cx={ankle[0]} cy={ankle[1]} r={14} fill={SK} stroke={INK} strokeWidth={4} /> : null}
+					{t >= t183 && t < t184 + 1 ? <rect x={GEO.flat.rug[0] - 4} y={GEO.flat.rug[1]} width={10} height={GEO.flat.rug[3] - GEO.flat.rug[1]} fill="#5a2a2a" /> : null}
+				</g>
+			);
+		}
+		if (set === 'stairwell_night') {
+			if (t < t203) {
+				// her hand reaching for the railing at the top, the long fingers tightening on her ankle
+				return (
+					<g>
+						<Creature x={1500} y={GEO.stair.landing4 + 10} s={0.78} frame={f} view="side" left tilt={24} grip={[-160, -30]} />
+						<SarahDown x={1690} y={GEO.stair.landing4 + 14} s={0.85} frame={f} dir={1} face={{mouth: 'scream'}} />
+						<Flicker f={f} k={0.4} />
+					</g>
+				);
+			}
+			const fade = ramp(t, tFD, tSE);
+			return (
+				<g>
+					<g transform={`translate(${sx + 180} ${sy - 140}) rotate(-36)`}>
+						<SarahDown x={0} y={0} s={1.0} frame={f} dir={1} face={{mouth: 'scream'}} qa={false} />
+					</g>
+					<QAShape name="sarah (on the stairs)" x0={sx + 50} y0={sy - 290} x1={sx + 330} y1={sy - 60} small overlapOk />
+					<Creature x={sx} y={sy} s={0.95} frame={f} view="side" left walking phase={t * 5} tilt={24} grip={[-150, -60]} />
+					<Sack x={sx - 120} y={sy + 70} s={0.6} frame={f} moving={0.5} />
+					<Flicker f={f} k={0.5} />
+					<rect x={-100} y={-100} width={2200} height={1300} fill="#000" opacity={fade} />
+				</g>
+			);
+		}
+		// the hallway
+		const dragging = t < t201;
+		const visible = residents.filter((p, i) => shown(p, i));
+		return (
+			<g>
+				{H.doors.map((d, i) => (
+					<HallDoor key={i} r={d} open={i === 1 ? 1 : 1 - doorsClosed(i === 0 ? 0 : 1)} />
+				))}
+				<Group people={t < t197 ? [...visible, harris] : [...visible, harris].filter(() => true)} />
+				{dragging && t < t205 ? (
+					<g>
+						<SarahDown x={gripX - 240} y={H.floor + 52} s={1.4} frame={f} dir={-1} face={{mouth: sar.talk > 0 ? 'scream' : 'o', talk: sar.talk}} reach={t >= s14} />
+						<Creature x={cX} y={H.floor + 52} s={1.05} frame={f} view="side" walking={t < t194 || t >= t197} phase={t * 4} tilt={24} grip={[-180, -30]} />
+						{t >= t199 ? <Sack x={cX - 560} y={H.floor + 60} s={0.65} frame={f} moving={1} /> : null}
+					</g>
+				) : null}
+			</g>
+		);
+	};
+	void total;
+	void tDC;
+	return <Shots shots={shots} world={(s) => world(s.set)} />;
+};

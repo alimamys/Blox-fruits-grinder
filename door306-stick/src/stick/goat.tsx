@@ -10,7 +10,7 @@ import {clamp01, INK, lerp, qaAdd, ramp, Tint, useStageCtx} from './kit';
 type AnyP = Record<string, any>;
 
 /** Any cast member, registered for the frame QA (box from position, scale and pose), tinted for the shot's light. */
-export const Person: React.FC<AnyP & {is: React.FC<any>; name: string; edge?: boolean; overlapOk?: boolean; small?: boolean}> = ({is: C, name, edge, overlapOk, small, ...p}) => {
+export const Person: React.FC<AnyP & {is: React.FC<any>; name: string; edge?: boolean; overlapOk?: boolean; small?: boolean; noqa?: boolean}> = ({is: C, name, edge, overlapOk, small, noqa, ...p}) => {
 	const ctx = useStageCtx();
 	const s = (p.s as number) ?? 1;
 	const x = (p.x as number) ?? 0;
@@ -19,7 +19,7 @@ export const Person: React.FC<AnyP & {is: React.FC<any>; name: string; edge?: bo
 	const k = p.child ? 0.62 : 1;
 	const headR = 36 * (p.child ? 1.08 : 1) * s;
 	const top = y - (sit ? 209 : 262) * k * s - headR - 6 * s;
-	qaAdd(ctx, {name, x0: x - 52 * s * k, x1: x + 52 * s * k, y0: top, y1: y, head: top + 2 * headR + 6 * s, edge, overlapOk, small});
+	if (!noqa) qaAdd(ctx, {name, x0: x - 52 * s * k, x1: x + 52 * s * k, y0: top, y1: y, head: top + 2 * headR + 6 * s, edge, overlapOk, small});
 	return (
 		<Tint>
 			<C {...p} />

@@ -1,146 +1,177 @@
-// 6. THE CREATURE - it climbs into the light.
+// 6. THE CREATURE - the lights flicker; long fingers curl round the railing; the head rises; nearly seven feet,
+// shoulders scraping the walls, arms almost to the steps, dragging a stained sack that moves. The third floor:
+// begging, a sharp cry, silence. Then it climbs on. Toward the fourth floor. Toward me.
 import React from 'react';
-import {CreatureFig} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {BackCrowd} from './Doors';
-import {MOOD} from './common';
-import {again, close, push, shot} from './kit';
+import {Sarah} from '../components/characters/Cast';
+import {Creature as It, Sack} from '../components/characters/Creature';
+import {Flicker, HallDoor, peepOverlay, residentsPersp} from '../stick/d306';
+import {Person} from '../stick/goat';
+import {GEO, lerp, ramp, shot, Shots, stairPt, useStick} from '../stick/kit';
+import {Group} from '../stick/places';
+import {wob} from '../utils/rough';
 
-export const Creature: React.FC = () => (
-	<Shots
-		shots={[
-			again('f_00_peephole', 'narrator_101_back_to_peephole', 'd_06_eye_peephole', {move: push(1.06, 1.14, 0.55, 0.45), blink: true}),
-			// "The lights above the staircase began flickering." - through the peephole, the stair end
-			shot('f_01_stair_end', 'narrator_102_flickering', 'hallway_cross', {
-				noPeople: true,
-				quality: 'medium',
-				peephole: true,
-				fx: 'flicker',
-				mood: MOOD.hallDark,
-				prompt: 'The left end of the corridor where the stairwell opens, the black metal railing going down into darkness; the fluorescent tube above the stairs flickering, half the corridor in deep shadow. Nobody visible.',
-				move: push(1.02, 1.1, 0.45, 0.5),
-			}, {cam: {z: 1.8, cx: 560, cy: 470}}),
-			// "Then I saw something moving in the darkness."
-			again('f_02_moving', 'narrator_103_moving_darkness', 'f_01_stair_end', {fx: 'flicker', move: push(1.1, 1.22, 0.45, 0.55)}),
-			// "At first, it looked like a man's hand gripping the railing." / too long / curled
-			again('f_03_hand', 'narrator_104_mans_hand', 'd_18_fingers', {show: 'f1', fx: 'flicker', move: push(1.02, 1.12)}),
-			again('f_04_too_long', 'narrator_105_too_long', 'd_18_fingers', {show: 'f1', move: push(1.25, 1.35, 0.62, 0.42)}),
-			again('f_05_curled', 'narrator_106_curled', 'd_18_fingers', {seq: [['f1', 0], ['f2', 0.45]], move: push(1.15, 1.22, 0.6, 0.45)}),
-			again('f_06_grip', 'fingers_curl', 'd_18_fingers', {show: 'f2', fx: 'flicker', move: push(1.3, 1.4, 0.62, 0.42)}),
-			// "Then a head appeared." - rising above the top step (through the peephole)
-			close('f_07_head', 'narrator_107_head_appeared', {
-				chars: ['creature'],
-				loc: 'stairwell',
-				quality: 'high',
-				mood: MOOD.hallDark,
-				prompt: 'Close-up at the top of the dark stairwell in a burst of flickering light: beside the black metal railing, just above the edge of the top concrete step, the crown of the creature\'s grey, bony head with sparse lank dark hair is rising into view, bent forward at an impossible angle. Only the top of the head is visible.',
-				variants: [{name: 'up', prompt: 'The creature\'s head and bony grey shoulders have now risen above the top step, the head bent forward and sideways at an impossible angle, one small sunken pale eye catching the light. Nothing else changes.'}],
-				seq: [
-					['base', 0],
-					['up', 0.6],
-				],
-				fx: 'flicker',
-				grade: 1.4,
-				move: push(1.03, 1.1, 0.5, 0.55),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#1d2620" />
-				<rect x={0} y={760} width={1920} height={320} fill="#3a3f3a" />
-				<path d="M1300,300 L1300,1080 M1600,300 L1600,1080 M1100,300 L1900,300" stroke="#4a514a" strokeWidth={26} />
-				<ellipse cx={800} cy={770} rx={150} ry={70} fill="#8d8f8a" />
-			</>),
-			// "It was bent forward at an impossible angle."
-			again('f_08_bent', 'narrator_108_bent_forward', 'f_07_head', {show: 'up', grade: 1.4, move: push(1.15, 1.32, 0.45, 0.72)}),
-			// "The thing had to be nearly seven feet tall." - the full figure at the end of the corridor, beyond the frozen neighbours
-			shot('f_09_full', 'narrator_109_seven_feet', 'hallway', {
-				chars: ['creature', 'mother', 'residents'],
-				quality: 'high',
-				mood: MOOD.hallDark,
-				prompt: 'The long corridor from the window end: the residents stand frozen with their backs to us; at the far end, in the stairwell opening, the creature stands at its full height - nearly seven feet, hunched, its bent head touching the top of the opening, arms hanging to its shins, grey skin catching the flickering light, dragging the stained sack.',
-				fx: 'flicker',
-				move: push(1.02, 1.1, 0.52, 0.45),
-			}, {kids: <>
-				<CreatureFig x={1010} y={680} h={400} />
-				<BackCrowd />
-			</>}),
-			// "Its shoulders scraped against the walls as it climbed."
-			close('f_10_shoulder', 'narrator_110_shoulders_scraped', {
-				chars: ['creature'],
-				loc: 'stairwell',
-				quality: 'high',
-				mood: MOOD.stair,
-				prompt: 'Close side view in the narrow stairwell: the creature\'s bony grey shoulder and upper arm scrape along the pale-green plaster wall as it climbs, flaking the paint; its head bent sideways out of frame at the top; flickering caged light.',
-				fx: 'tremble',
-				move: {z0: 1.04, z1: 1.12, x0: 0.6, y0: 0.5, x1: 0.42, y1: 0.45},
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#3b4a40" />
-				<g opacity={0.9}>
-					<CreatureFig x={1000} y={1900} h={2000} lean={-10} />
+const INK = '#141414';
+const SK = '#8d8a84';
+
+/** A long grey hand coming up from below and curling its fingers round the railing at (x, y). */
+const RailHand: React.FC<{x: number; y: number; k: number; curl: number}> = ({x, y, k, curl}) => {
+	const from: [number, number] = [x - 120, y + 360];
+	const hx = lerp(from[0], x, k);
+	const hy = lerp(from[1], y + 10, k);
+	return (
+		<g>
+			<path d={`M${from[0] - 40},${from[1] + 300} Q${from[0]},${(from[1] + hy) / 2} ${hx},${hy}`} fill="none" stroke={INK} strokeWidth={30} strokeLinecap="round" />
+			<path d={`M${from[0] - 40},${from[1] + 300} Q${from[0]},${(from[1] + hy) / 2} ${hx},${hy}`} fill="none" stroke={SK} strokeWidth={20} strokeLinecap="round" />
+			{[-1.5, -0.5, 0.5, 1.5].map((i) => {
+				const base: [number, number] = [hx + i * 9, hy - 6];
+				const up: [number, number] = [base[0] + 14 + i * 4, base[1] - 70];
+				const over: [number, number] = [up[0] + 30 * curl, up[1] - 10 + 50 * curl];
+				const tip: [number, number] = [over[0] + 4 * curl, over[1] + 40 * curl];
+				const d = wob([base, up, over, tip], 3000 + i * 7, 0.8, false);
+				return (
+					<g key={i}>
+						<path d={d} fill="none" stroke={INK} strokeWidth={13} strokeLinecap="round" strokeLinejoin="round" />
+						<path d={d} fill="none" stroke={SK} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" />
+					</g>
+				);
+			})}
+		</g>
+	);
+};
+
+export const Creature: React.FC = () => {
+	const {f, t, at, end} = useStick();
+	const t101 = at('narrator_101_back_to_peephole');
+	const t102 = at('narrator_102_flickering');
+	const t103 = at('narrator_103_moving_darkness');
+	const t104 = at('narrator_104_mans_hand');
+	const tFC = at('narrator_106_curled');
+	const t107 = at('narrator_107_head_appeared');
+	const tHR = at('head_rises');
+	const t108 = at('narrator_108_bent_forward');
+	const t110 = at('narrator_110_shoulders_scraped');
+	const t112 = at('narrator_112_behind_it');
+	const t114 = at('narrator_114_sack_moved');
+	const t115 = at('narrator_115_covered_mouth');
+	const t116 = at('narrator_116_another_step');
+	const t118 = at('narrator_118_grey_skin');
+	const t119 = at('narrator_119_mouth_open');
+	const t121 = at('narrator_121_third_floor');
+	const t122 = at('narrator_122_begging');
+	const t123 = at('narrator_123_sharp_cry');
+	const t124 = at('narrator_124_silence');
+	const t125 = at('narrator_125_sack_scraped');
+	const t126 = at('narrator_126_continued');
+	const t127 = at('narrator_127_fourth_floor');
+	const t128 = at('narrator_128_toward_me');
+	const S = GEO.stair;
+	const L3 = S.landing3;
+	// rise from below the 3rd-floor landing, step onto it, walk to the door, then climb
+	const rise = ramp(t, t107, tHR + 1.4);
+	const onLanding = ramp(t, t108, t110 + 1);
+	const toDoor = ramp(t, t116, t118);
+	const climb = ramp(t, t126, t127 + 1);
+	let cx = lerp(620, 560, onLanding);
+	let cy = lerp(L3 + 560, L3, rise);
+	if (t >= t116) cx = lerp(560, 470, toDoor);
+	let view: 'front' | 'side' = 'side';
+	let left = t >= t116 && t < t126;
+	if (t >= t126) {
+		const [px, py] = stairPt(0.02 + climb * 0.55);
+		cx = px;
+		cy = py;
+		left = false;
+	}
+	if (t >= t118 && t < t121) view = 'front';
+	const walking = (t >= t116 && t < t118) || (t >= t126 && climb < 1);
+	const door3 = t >= t122 && t < t126 ? 0.4 : 0;
+	const reachIn = t >= t122 && t < t124;
+	const sackMoving = t >= t114 && t < t115 + 1 ? 1 : t >= t125 ? 0.6 : 0;
+	const sackX = t >= t126 ? cx - 152 : cx + (left ? 152 : -152);
+	const sackY = t >= t126 ? cy + 70 : L3;
+	const res = residentsPersp(f, 'stairs').map((p) => ({...p, idle: false, shiver: 0.6}));
+	const st = GEO.persp.stairs;
+	const shots = [
+		shot(t101, 'flat_night_bare', 2.4, 2.5, [1530, 540], [1530, 530]),
+		shot(t102, 'hallway_persp_night', 1.0, 1.05, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t103, 'hallway_persp_night', 1.8, 2.0, [950, 520], [950, 515], {tag: 'peep'}),
+		shot(t104, 'stairwell_night', 2.2, 2.4, [620, 760], [620, 740]),
+		shot(t107, 'stairwell_night', 1.0, 1.0, [960, 540]),
+		shot(t110, 'stairwell_night', 1.4, 1.45, [560, 640], [560, 640]),
+		shot(t112, 'stairwell_night', 1.5, 1.5, [700, 760], [700, 760]),
+		shot(t115, 'flat_night_bare', 2.6, 2.7, [1450, 540], [1450, 535]),
+		shot(t116, 'stairwell_night', 1.15, 1.15, [700, 620], [700, 620]),
+		shot(t118, 'stairwell_night', 3.2, 3.6, [470, 470], [470, 470]),
+		shot(t121, 'stairwell_night', 1.4, 1.4, [450, 640], [450, 640]),
+		shot(t123, 'stairwell_night', 1.4, 1.4, [450, 640], [450, 640], {shake: 10}),
+		shot(t124, 'stairwell_night', 1.0, 1.0, [960, 540]),
+		shot(t127, 'hallway_persp_night', 1.3, 1.9, [950, 540], [950, 520], {tag: 'peep'}),
+		shot(t128, 'flat_night_bare', 2.8, 3.0, [1450, 530], [1450, 525]),
+	];
+	const world = (set: string) => {
+		if (set === 'flat_night_bare') {
+			return <Person is={Sarah} name="sarah" x={1500} y={GEO.flat.floor} s={1.6} frame={f} turn={0.7} lean={6} look={[1, -0.1]} eyes="wide" brows="worried" mouth="o" arms={t >= t115 ? 'fingerLips' : 'down'} shiver={0.8} pale={0.2} />;
+		}
+		if (set === 'hallway_persp_night') {
+			const head = t >= t127 ? ramp(t, t127, t128) : t >= t103 ? 0.15 : 0;
+			return (
+				<g>
+					<defs>
+						<clipPath id="stairsClip6">
+							<rect x={st[0]} y={st[1] - 250} width={st[2] - st[0]} height={st[3] - st[1] + 250} />
+						</clipPath>
+					</defs>
+					{head > 0 ? (
+						<g clipPath="url(#stairsClip6)">
+							<It x={(st[0] + st[2]) / 2} y={st[3] + lerp(330, 10, head)} s={0.55} frame={f} view="front" tilt={40} qa={false} />
+						</g>
+					) : null}
+					<Group people={res} />
+					<Flicker f={f} k={t >= t102 ? 0.55 : 0} />
 				</g>
-			</>),
-			// "Its arms hung so low that its fingers almost touched the steps."
-			shot('f_11_arms', 'narrator_111_arms_low', 'stairwell', {
-				chars: ['creature'],
-				quality: 'high',
-				mood: MOOD.stair,
-				prompt: 'Low angle on the concrete steps: the creature\'s impossibly long, thin grey arms hang straight down past its knees, the long fingertips nearly brushing the steps as it climbs; its body above out of frame in shadow; flickering light.',
-				fx: 'flicker',
-				move: {z0: 1.03, z1: 1.1, x0: 0.5, y0: 0.6, x1: 0.5, y1: 0.45},
-			}, {cam: {z: 2.0, cx: 700, cy: 700}, kids: <CreatureFig x={700} y={1500} h={1300} />}),
-			// "And behind it..." / "It was dragging a large, stained sack." / "Something inside the sack moved."
-			again('f_12_behind', 'narrator_112_behind_it', 'f_09_full', {fx: 'flicker', move: push(1.3, 1.5, 0.52, 0.45)}),
-			shot('f_13_sack', 'narrator_113_sack', 'stairwell', {
-				chars: ['creature'],
-				quality: 'medium',
-				dark: true,
-				grade: 1.3,
-				mood: MOOD.stair,
-				prompt: 'On the concrete steps in the flickering dark: a long grey bony hand drags a large, coarse, grimy, darkly stained burlap sack up the steps by its rope-tied neck; only the hand and the sack are in frame.',
-				variants: [{name: 'bulge', prompt: 'Something INSIDE the stained burlap sack has moved: the sack bulges and twists on one side, as if pushed from within. Nothing else changes.'}],
-				move: push(1.04, 1.1, 0.5, 0.55),
-			}, {cam: {z: 2.2, cx: 760, cy: 760}}),
-			again('f_14_moved', 'narrator_114_sack_moved', 'f_13_sack', {grade: 1.3, seq: [['base', 0], ['bulge', 0.3], ['base', 0.55], ['bulge', 0.75]], move: push(1.12, 1.2)}),
-			// "I covered my mouth."
-			again('f_15_cover', 'narrator_115_covered_mouth', 'd_17_sarah_afraid', {move: push(1.12, 1.2, 0.5, 0.4), blink: true}),
-			// "The creature climbed another step." / "Then another."
-			again('f_16_step', 'narrator_116_another_step', 'f_10_shoulder', {fx: 'shake', move: push(1.1, 1.14, 0.5, 0.45)}),
-			again('f_17_step', 'narrator_117_then_another', 'f_09_full', {fx: 'shake', move: push(1.5, 1.7, 0.52, 0.42)}),
-			// "Its skin looked grey and stretched tightly over its bones." / "Its mouth hung open." / "Far too wide for a human face."
-			close('f_18_face', 'narrator_118_grey_skin', {
-				chars: ['creature'],
-				loc: 'stairwell',
-				quality: 'high',
-				mood: MOOD.hallDark,
-				prompt: 'EXTREME CLOSE-UP of the creature\'s head only, filling the frame, in profile in the flickering dark: its head bent forward and to one side, grey waxy skin stretched tight over the skull and the bones of its jaw and neck, a small sunken pale eye, sparse lank dark hair; its jaw closed for now. Frightening, not gory.',
-				variants: [{name: 'jaw', prompt: 'The creature\'s jaw has dropped open FAR too wide - a dark, hollow, toothless mouth hanging down past where any human jaw could go. Nothing else changes. No blood.'}],
-				move: push(1.03, 1.1),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#1d2620" />
-				<ellipse cx={960} cy={540} rx={520} ry={640} fill="#8d8f8a" transform="rotate(-40 960 540)" />
-			</>),
-			again('f_19_mouth', 'narrator_119_mouth_open', 'f_18_face', {seq: [['base', 0], ['jaw', 0.35]], fx: 'flicker', move: push(1.1, 1.16)}),
-			again('f_20_wide', 'narrator_120_too_wide', 'f_18_face', {show: 'jaw', move: push(1.18, 1.32, 0.52, 0.58)}),
-			// "It stopped at the third-floor landing." - from above, through the railings
-			shot('f_21_landing', 'narrator_121_third_floor', 'stairwell', {
-				chars: ['creature'],
-				quality: 'high',
-				dark: true,
-				grade: 1.3,
-				mood: MOOD.stair,
-				prompt: 'Looking straight down through the gap between the stair railings to the third-floor landing below: the hunched grey creature has stopped on the landing in front of a half-open apartment door with warm light behind it, the stained sack at its feet; seen from above, small and terrible.',
-				move: push(1.04, 1.12, 0.5, 0.55),
-			}, {cam: {z: 1.3, cx: 880, cy: 620}, kids: <CreatureFig x={880} y={760} h={220} />}),
-			// "A man began begging." + "Please! I have children!"
-			again('f_22_begging', 'narrator_122_begging', 'f_21_landing', {grade: 1.3, move: push(1.14, 1.3, 0.5, 0.58)}),
-			// "There was a sharp cry." / "Then silence."
-			again('f_23_cry', 'narrator_123_sharp_cry', 'd_17_sarah_afraid', {fx: 'shake', move: push(1.16, 1.22, 0.5, 0.42)}),
-			again('f_24_silence', 'narrator_124_silence', 'b_12_below', {show: 'closed', grade: 1.0, move: push(1.1, 1.12, 0.5, 0.55)}),
-			// "The sack scraped across the concrete again."
-			again('f_25_sack', 'narrator_125_sack_scraped', 'f_13_sack', {show: 'bulge', grade: 1.3, move: push(1.1, 1.18)}),
-			// "The creature continued climbing." - beat: climb
-			again('f_26_climb', 'narrator_126_continued', 'f_11_arms', {fx: 'shake', move: push(1.08, 1.16, 0.5, 0.45)}),
-			// "Toward the fourth floor." / "Toward me."
-			again('f_27_fourth', 'narrator_127_fourth_floor', 'f_09_full', {fx: 'flicker', move: push(1.7, 2.0, 0.52, 0.42)}),
-			again('f_28_me', 'narrator_128_toward_me', 'd_14_eye_wide', {show: 'wide', move: push(1.1, 1.2)}),
-		]}
-	/>
-);
+			);
+		}
+		// the stairwell
+		if (t < t107) {
+			const curl = ramp(t, tFC, tFC + 1.2);
+			return (
+				<g>
+					<RailHand x={612} y={772} k={ramp(t, t104, t104 + 1.6)} curl={curl} />
+					<Flicker f={f} k={0.5} />
+				</g>
+			);
+		}
+		return (
+			<g>
+				<HallDoor r={S.door3} open={door3} dark="#1d1a14" />
+				<defs>
+					<clipPath id="landingClip">
+						<rect x={0} y={0} width={1920} height={L3 + 8} />
+					</clipPath>
+				</defs>
+				{t >= t112 ? <Sack x={sackX} y={sackY} s={0.75} frame={f} moving={sackMoving} /> : null}
+				<g clipPath={t < t108 + 0.6 ? 'url(#landingClip)' : undefined}>
+					<It
+						x={cx}
+						y={cy}
+						s={0.95}
+						frame={f}
+						view={view}
+						left={left}
+						walking={walking}
+						phase={t * 5}
+						tilt={view === 'front' ? 50 : 22}
+						hunch={0.7}
+						talk={t >= t119 && t < t121 ? 0.7 : 0}
+						qa={!(t < t108 + 0.6)}
+						reach={reachIn ? [170, -330] : null}
+						grip={t >= t112 && !reachIn ? [-160, -40] : null}
+					/>
+				</g>
+				<Flicker f={f} k={t >= t123 && t < t124 ? 1 : 0.4} />
+			</g>
+		);
+	};
+	void end;
+	return <Shots shots={shots} world={(s) => world(s.set)} overlay={peepOverlay} />;
+};

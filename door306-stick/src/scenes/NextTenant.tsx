@@ -1,152 +1,169 @@
-// 10. THE NEXT TENANT - a bright morning; the notebook; the advert; "a very quiet building".
+// 10. THE NEXT TENANT - a bright, ordinary morning. Neighbours say good morning; Mr. Harris with his coffee.
+// The landlord finds her phone, takes her name off the mailbox, crosses it out in the notebook, posts the ad.
+// "It's a very quiet building." Then 3:05:58... 3:06. Click. Click. Every door.
 import React from 'react';
+import {AbsoluteFill} from 'remotion';
+import {Boy, Harris, Landlord, Mother, RobeWoman, Shawl, TShirt} from '../components/characters/Cast';
+import {Prop} from '../components/characters/Creature';
 import {AdScreen, Clock, NamesPage, NewPage, TheEnd} from '../components/ui/Paper';
-import {Person} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {Black, MOOD} from './common';
-import {again, close, code, push, shot} from './kit';
+import {FPS} from '../data/timeline';
+import {HallDoor} from '../stick/d306';
+import {Person} from '../stick/goat';
+import {GEO, gait, INK, ramp, shot, Shots, useStick, walk} from '../stick/kit';
+import {Group, type Spec} from '../stick/places';
+import {FLAT_PROPS} from './NewApartment';
+import {FlatDoorOpen} from './Offering';
 
-export const NextTenant: React.FC = () => (
-	<Shots
-		shots={[
-			// the following morning
-			shot('j_01_morning', 'morning_ext', 'exterior', {
-				noPeople: true,
-				quality: 'medium',
-				mood: MOOD.morning,
-				prompt: 'MORNING (not night): the old red-brick apartment building in bright, clean morning sunshine, a blue sky, birds on the bare branches, sunlight glinting in the windows. Peaceful and ordinary. Nobody on the street.',
-				move: push(1.0, 1.08, 0.5, 0.48),
-			}),
-			// children leave for school
-			shot('j_02_kids', 'morning_kids', 'exterior', {
-				quality: 'medium',
-				mood: MOOD.morning,
-				prompt: 'MORNING sunshine at the entrance of the brick building: two cheerful school children with backpacks hurry down the three front steps toward the street, one waving back at the door. Bright and ordinary.',
-				move: push(1.03, 1.08),
-			}, {cam: {z: 3.0, cx: 990, cy: 930}, kids: <>
-				<Person who="beard" x={940} y={1060} h={90} facing="front" />
-				<Person who="blanket" x={1040} y={1070} h={85} facing="front" />
-			</>}),
-			// neighbours greet each other
-			shot('j_03_greet', 'morning_greet', 'lobby', {
-				chars: ['residents'],
-				quality: 'medium',
-				mood: MOOD.morning,
-				prompt: 'Morning light in the small lobby: the bearded man (white T-shirt, now dressed for work) and the curly-haired woman pass each other by the mailboxes and nod good morning with polite, tired smiles, as if nothing happened.',
-				move: push(1.03, 1.08),
-			}, {cam: {z: 1.3, cx: 900, cy: 600}, kids: <>
-				<Person who="beard" x={700} y={1000} h={560} facing="right" />
-				<Person who="blanket" x={1100} y={1000} h={520} facing="left" />
-			</>}),
-			// Mr. Harris sits beside his window, drinking coffee
-			close('j_04_coffee', 'harris_coffee', {
-				chars: ['harris'],
-				quality: 'high',
-				blink: true,
-				mood: MOOD.morning,
-				prompt: 'Mr. Harris sits in an armchair beside his sunny window in his own small flat, holding a cup of coffee in both hands, looking out at the bright morning, calm, his face empty. Warm sunlight, plants on the sill.',
-				move: push(1.03, 1.08),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#d8c9a4" />
-				<rect x={1100} y={120} width={700} height={700} fill="#f3ecd2" />
-				<Person who="harris" x={760} y={1000} h={760} facing="right" />
-			</>),
-			// the landlord enters Sarah's empty apartment
-			shot('j_05_enters', 'landlord_enters', 'flat', {
-				chars: ['landlord'],
-				quality: 'medium',
-				mood: 'Morning: daylight through the blinds of Sarah\'s flat; dust in the air; the room still and empty.',
-				prompt: 'DAYTIME in Sarah\'s flat: the landlord steps in through the front door, which stands open; the mustard sofa and the round table have been shoved back from the door at odd angles, a chair on its side, the rug rucked up. Nobody else.',
-				move: push(1.02, 1.08),
-			}, {kids: <Person who="landlord" x={920} y={720} h={560} facing="front" />}),
-			// he finds her phone lying near the door; the screen is cracked
-			close('j_06_phone', 'phone_found', {
-				loc: 'flat',
-				noPeople: true,
-				quality: 'medium',
-				mood: 'Morning daylight across the floorboards.',
-				prompt: 'Close-up on the floorboards near the front door in daylight: Sarah\'s phone lies face up, its screen cracked in a spider-web pattern and dark. Nothing else. No blood.',
-				move: push(1.04, 1.12),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#8a6a4a" />
-				<rect x={800} y={380} width={320} height={560} rx={36} fill="#111" transform="rotate(-12 960 660)" />
-			</>),
-			// he picks it up, switches it off, and places it in a drawer
-			close('j_07_drawer', 'phone_drawer', {
-				chars: ['landlord'],
-				loc: 'flat',
-				quality: 'medium',
-				mood: 'Morning daylight.',
-				prompt: 'Close-up: the landlord\'s hand, gold wedding ring visible, lays the dark cracked phone into an open wooden drawer full of other old phones and keys, about to slide it shut. Natural hand, five fingers.',
-				move: push(1.03, 1.1),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#6b4b30" />
-				<rect x={400} y={500} width={1100} height={500} fill="#3a2414" />
-				<circle cx={1100} cy={420} r={90} fill="#efc3a4" />
-			</>),
-			// then he removes Sarah's name from the mailbox
-			close('j_08_mailbox', 'mailbox', {
-				chars: ['landlord'],
-				loc: 'lobby',
-				quality: 'medium',
-				mood: 'Morning light in the lobby.',
-				prompt: 'Close-up at the wall of old brass mailboxes in the lobby: the landlord\'s fingers slide a small white name card out of the holder on one mailbox door; the card is blank on the side we see. His face, at the edge of frame, is calm and expressionless - not smiling. Natural hand.',
-				move: push(1.04, 1.1),
-			}, <>
-				<rect x={0} y={0} width={1920} height={1080} fill="#7a6232" />
-				<rect x={760} y={420} width={400} height={120} fill="#f0ece0" />
-				<circle cx={1200} cy={480} r={80} fill="#efc3a4" />
-			</>),
-			// back in his office, he opens an old notebook
-			shot('j_09_office', 'notebook', 'office', {
-				chars: ['landlord'],
-				quality: 'medium',
-				mood: MOOD.office,
-				prompt: 'The landlord sits at his desk in his office in warm morning light and opens an old leather-bound notebook, his face calm, neutral and businesslike - no smile, tired guarded eyes; the laptop and the beige desk phone beside him.',
-				move: push(1.02, 1.08),
-			}, {cam: {z: 1.4, cx: 1100, cy: 640}, kids: <Person who="landlord" x={1050} y={1000} h={560} facing="front" />}),
-			// dozens of names, every one crossed out (Sarah's is the last)
-			code('j_10_names', 'names_crossed', ({f, d}) => <NamesPage f={f} d={d} strike={Math.min(1, Math.max(0, (f - d * 0.35) / (d * 0.35)))} />),
-			// the new page
-			code('j_11_new_page', 'new_page', ({f, d}) => <NewPage f={f} d={d} />),
-			// the new advertisement
-			code('j_12_ad', 'laptop_ad', ({f, d}) => <AdScreen f={f} d={d} />),
-			// his phone rings - the call
-			shot('j_13_call', 'phone_rings', 'office', {
-				kind: 'talk',
-				chars: ['landlord'],
-				quality: 'high',
-				talk: ['landlord_001_of_course', 'landlord_002_lovely_place', 'landlord_003_very_friendly', 'landlord_004_not_at_all', 'landlord_005_quiet_building'],
-				mood: MOOD.office,
-				prompt: 'Medium close-up: the landlord at his desk holds the receiver of the old beige desk phone to his ear, listening with a calm, polite, neutral expression - mouth closed, no smile, tired guarded eyes; the open notebook in front of him.',
-				variants: [
-					{name: 'smile', prompt: 'A faint, thin, closed-mouth smile appears at the corners of his mouth; his eyes stay calm and guarded. Nothing else changes.'},
-					{name: 'wide', prompt: 'His thin smile has widened slightly - a small, knowing, closed-mouth smile - while his eyes stay cold and tired. Not a grin, nothing supernatural. Nothing else changes.'},
-				],
-				move: push(1.02, 1.06),
-			}, {cam: {z: 2.0, cx: 1050, cy: 560}, kids: <Person who="landlord" x={1050} y={1000} h={600} facing="front" pose="fingerLips" />}),
-			again('j_14_caller', 'caller_001_still_available', 'j_13_call', {move: push(1.06, 1.1)}),
-			again('j_15_l1', 'landlord_001_of_course', 'j_13_call', {talk: ['landlord_001_of_course'], move: push(1.1, 1.12)}),
-			again('j_16_c2', 'caller_002_too_good', 'j_13_call', {move: push(1.12, 1.16)}),
-			again('j_17_smiles', 'landlord_smiles', 'j_13_call', {seq: [['base', 0], ['wide', 0.45]], move: push(1.16, 1.18)}),
-			again('j_18_l2', 'landlord_002_lovely_place', 'j_13_call', {talk: ['landlord_002_lovely_place'], move: push(1.12, 1.16)}),
-			again('j_19_c3', 'caller_003_neighbors', 'j_13_call', {move: push(1.16, 1.18)}),
-			code('j_20_glance', 'glance_notebook', ({f, d}) => <NamesPage f={f + 40} d={d + 40} />),
-			again('j_21_l3', 'landlord_003_very_friendly', 'j_13_call', {talk: ['landlord_003_very_friendly'], move: push(1.16, 1.22)}),
-			again('j_22_c4', 'caller_004_noisy', 'j_13_call', {move: push(1.2, 1.24)}),
-			again('j_23_widens', 'smile_widens', 'j_13_call', {show: 'wide', move: push(1.24, 1.36, 0.5, 0.42)}),
-			again('j_24_l4', 'landlord_004_not_at_all', 'j_13_call', {show: 'wide', move: push(1.32, 1.36, 0.5, 0.42)}),
-			again('j_25_pause', 'brief_pause', 'j_13_call', {show: 'wide', move: push(1.36, 1.4, 0.5, 0.42)}),
-			again('j_26_quiet', 'landlord_005_quiet_building', 'j_13_call', {talk: ['landlord_005_quiet_building'], move: push(1.4, 1.55, 0.5, 0.4)}),
-			// cut to black; the clock; CLICK; one door, another, then dozens
-			code('j_27_black', 'cut_black_2', () => <Black />),
-			code('j_28_58', 'clock_58', ({f}) => <Clock time="3:05:58" f={f} />),
-			code('j_29_59', 'clock_59', ({f}) => <Clock time="3:05:59" f={f} />),
-			code('j_30_00', 'clock_00', ({f}) => <Clock time="3:06:00" f={f} />),
-			again('j_31_click1', 'click_1', 'd_04_cross_doors', {doors: {prompt: '', start: 0.05, stagger: 9, swing: 0.5}, move: push(1.04, 1.06)}),
-			again('j_32_click2', 'click_2', 'd_04_cross_doors', {doors: {prompt: '', start: -1, stagger: 0.95, swing: 0.5}, move: push(1.06, 1.08)}),
-			again('j_33_all', 'doors_all', 'd_01_corridor_doors', {doors: {prompt: '', start: 0.03, stagger: 0.05, swing: 0.4}, fx: 'flicker', move: push(1.02, 1.12, 0.52, 0.47)}),
-			code('j_34_end', 'the_end', ({f, d}) => <TheEnd f={f} d={d} />),
-		]}
-	/>
-);
+export const NextTenant: React.FC = () => {
+	const {f, t, at, talk, total} = useStick();
+	const m = (id: string) => at(id);
+	const tKids = m('morning_kids');
+	const tGreet = m('morning_greet');
+	const tCoffee = m('harris_coffee');
+	const tEnter = m('landlord_enters');
+	const tPhone = m('phone_found');
+	const tDrawer = m('phone_drawer');
+	const tMail = m('mailbox');
+	const tNote = m('notebook');
+	const tNames = m('names_crossed');
+	const tNew = m('new_page');
+	const tAd = m('laptop_ad');
+	const tRing = m('phone_rings');
+	const tGlance = m('glance_notebook');
+	const tL3 = m('landlord_003_very_friendly');
+	const tWiden = m('smile_widens');
+	const tCB = m('cut_black_2');
+	const t58 = m('clock_58');
+	const t59 = m('clock_59');
+	const t00 = m('clock_00');
+	const tC1 = m('click_1');
+	const tC2 = m('click_2');
+	const tAll = m('doors_all');
+	const tEnd = m('the_end');
+	const lan = talk('landlord');
+	const ins = (a: number, b: number) => [f - Math.round(a * FPS), Math.round((b - a) * FPS)] as const;
+	// full-screen paper and screens
+	if (t >= tNames && t < tNew) {
+		const [lf, d] = ins(tNames, tNew);
+		return <NamesPage f={lf} d={d} strike={Math.min(1, Math.max(0, (lf - d * 0.35) / (d * 0.35)))} />;
+	}
+	if (t >= tNew && t < tAd) {
+		const [lf, d] = ins(tNew, tAd);
+		return <NewPage f={lf} d={d} />;
+	}
+	if (t >= tAd && t < tRing) {
+		const [lf, d] = ins(tAd, tRing);
+		return <AdScreen f={lf} d={d} />;
+	}
+	if (t >= tGlance && t < tL3) {
+		const [lf, d] = ins(tGlance, tL3);
+		return <NamesPage f={lf + 40} d={d + 40} />;
+	}
+	if (t >= tCB && t < t58) return <AbsoluteFill style={{background: '#000'}} />;
+	if (t >= t58 && t < tC1) return <Clock time={t < t59 ? '3:05:58' : t < t00 ? '3:05:59' : '3:06:00'} f={f} />;
+	if (t >= tEnd) {
+		const [lf, d] = ins(tEnd, total);
+		return <TheEnd f={lf} d={d} />;
+	}
+	const HD = GEO.hallDay;
+	const kids = walk(t, tKids + 0.1, tGreet - 0.2, -100, 1200, 1.5);
+	const momW = walk(t, tKids + 0.4, tGreet - 0.1, -260, 1040, 1.5);
+	const llW = walk(t, tEnter + 0.4, tPhone, 1600, 1100, 1.6);
+	const lobbyW = walk(t, tMail, tMail + 1.6, 1500, 1000, 1.6);
+	const cardOut = ramp(t, tMail + 1.8, tNote - 0.3);
+	const shots = [
+		shot(0, 'exterior_day', 1.0, 1.04, [960, 540], [960, 520]),
+		shot(tKids, 'hallway_day', 1.0, 1.0, [960, 540]),
+		shot(tGreet, 'hallway_day', 1.4, 1.45, [1150, 600], [1150, 600]),
+		shot(tCoffee, 'hallway_day', 1.8, 1.85, [400, 580], [400, 575]),
+		shot(tEnter, 'flat_day_bare', 1.0, 1.0, [960, 540]),
+		shot(tPhone, 'flat_day_bare', 1.9, 2.0, [1060, 640], [1060, 640]),
+		shot(tMail, 'lobby_day', 1.0, 1.0, [960, 540]),
+		shot(tMail + 1.8, 'lobby_day', 2.3, 2.4, [860, 480], [860, 480]),
+		shot(tNote, 'office_day', 1.25, 1.3, [835, 560], [835, 560]),
+		shot(tRing, 'office_day', 1.6, 1.65, [835, 500], [835, 495]),
+		shot(tL3, 'office_day', 1.9, 1.95, [835, 470], [835, 465]),
+		shot(tWiden, 'office_day', 2.5, 2.6, [835, 430], [835, 425]),
+		shot(tC1, 'hallway_night', 1.0, 1.0, [960, 540]),
+	];
+	const world = (set: string) => {
+		if (set === 'exterior_day') return null;
+		if (set === 'hallway_day') {
+			const greetP: Spec[] = [
+				{is: TShirt, name: 'tshirt', x: 980, y: HD.floor + 30, s: 1.5, frame: f, arms: 'wave', mouth: 'smile', look: [1, 0], turn: 0.4},
+				{is: Shawl, name: 'shawl', x: 1330, y: HD.floor + 30, s: 1.5, frame: f, arms: t > tGreet + 0.6 ? 'wave' : 'down', mouth: 'smile', look: [-1, 0], turn: -0.4},
+				{is: RobeWoman, name: 'robewoman', x: 1520, y: HD.floor + 30, s: 1.5, frame: f, mouth: 'smile', look: [-1, 0]},
+			];
+			if (t >= tCoffee) {
+				return (
+					<g>
+						<Person is={Harris} name="harris" x={360} y={HD.floor + 30} s={1.6} frame={f} arms="holdOne" look={[1, 0]} brows="sad" mouth="flat" />
+						<g transform={`translate(${360 + 30} ${HD.floor + 30 - 1.6 * 150})`}>
+							<rect x={-14} y={-26} width={28} height={30} rx={4} fill="#eae4d6" stroke={INK} strokeWidth={4} />
+							<path d="M14,-18 q12,0 12,10 q0,10 -12,10" fill="none" stroke={INK} strokeWidth={4} />
+							{[0, 1].map((i) => (
+								<path key={i} d={`M${-6 + i * 10},${-34 - ((f * 1.2 + i * 12) % 26)} q6,-8 0,-16`} fill="none" stroke="#fff" strokeOpacity={0.5} strokeWidth={3} />
+							))}
+						</g>
+					</g>
+				);
+			}
+			if (t >= tGreet) return <Group people={greetP} />;
+			return (
+				<g>
+					<Person is={Mother} name="mother" x={momW.x} y={HD.floor + 30} s={1.5} frame={f} {...gait(momW)} mouth="smile" edge={momW.x < 100} />
+					<Person is={Boy} name="boy" x={kids.x} y={HD.floor + 40} s={1.5} frame={f} {...(kids.moving ? {pose: 'run', turn: 0.8, phase: kids.phase} : {})} mouth="laugh" edge={kids.x < 100} />
+				</g>
+			);
+		}
+		if (set === 'flat_day_bare') {
+			const has = t < tDrawer;
+			return (
+				<g>
+					<FlatDoorOpen open={0.6} />
+					<Prop name="table" x={FLAT_PROPS.table.x} y={FLAT_PROPS.table.y} w={FLAT_PROPS.table.w} />
+					<Prop name="sofa" x={FLAT_PROPS.sofa.x} y={FLAT_PROPS.sofa.y} w={FLAT_PROPS.sofa.w} />
+					{t < tPhone + 0.8 ? <rect x={1010} y={GEO.flat.floor - 8} width={46} height={22} rx={4} fill="#1d1d22" stroke={INK} strokeWidth={3} transform={`rotate(-12 1033 ${GEO.flat.floor})`} /> : null}
+					<Person is={Landlord} name="landlord" x={llW.x} y={GEO.flat.floor} s={1.6} frame={f} {...gait(llW)} look={[0, 1]} lean={t >= tPhone && t < tPhone + 1 ? 16 : 0} mouth="flat" prop={t >= tPhone + 0.8 && has ? 'phone' : 'none'} propGlow="#2a3550" arms={t >= tPhone + 0.8 && has ? 'holdOne' : 'down'} />
+				</g>
+			);
+		}
+		if (set === 'lobby_day') {
+			return (
+				<g>
+					<Person is={Landlord} name="landlord" x={lobbyW.x} y={GEO.lobby.floor} s={1.6} frame={f} {...gait(lobbyW)} arms={t >= tMail + 1.8 ? {l: [10, 0], r: [150, 20]} : 'down'} look={[-1, -0.5]} mouth="flat" />
+					<rect x={865 - cardOut * 40} y={410} width={56} height={16} fill="#f2efe6" stroke={INK} strokeWidth={2} opacity={1} transform={`rotate(${-cardOut * 20} 893 418)`} />
+				</g>
+			);
+		}
+		if (set === 'office_day') {
+			const O = GEO.office;
+			const phone = t >= tRing;
+			return (
+				<g>
+					<defs>
+						<clipPath id="behindDesk">
+							<rect x={0} y={0} width={1920} height={O.desk[1] + 6} />
+						</clipPath>
+					</defs>
+					<g clipPath="url(#behindDesk)">
+						<Person is={Landlord} name="landlord" x={835} y={O.desk[1] + 140} s={1.6} frame={f} pose="sit" look={phone ? [0.3, 0] : [0, 1]} arms={phone ? 'phoneEar' : 'lap'} prop={phone ? 'handset' : 'none'} mouth={lan.talk > 0 ? 'open' : t >= tWiden ? 'grin' : phone ? 'smile' : 'flat'} talk={lan.talk} viseme={lan.viseme} />
+					</g>
+					<Prop name="notebook" x={1010} y={O.desk[1] + 8} w={110} />
+				</g>
+			);
+		}
+		// 3:06 again: one door, another, then all of them; the neighbours step out
+		const o1 = ramp(t, tC1, tC1 + 0.6);
+		const o2 = ramp(t, tC2, tC2 + 0.6);
+		const o3 = ramp(t, tAll, tAll + 0.6);
+		return (
+			<g>
+				<HallDoor r={GEO.hall.doors[0]} open={o1} />
+				<HallDoor r={GEO.hall.doors[2]} open={o2} />
+				<HallDoor r={GEO.hall.doors[1]} open={o3} />
+			</g>
+		);
+	};
+	return <Shots shots={shots} world={(s) => world(s.set)} />;
+};

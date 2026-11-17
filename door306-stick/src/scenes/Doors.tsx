@@ -86,7 +86,7 @@ export const Doors: React.FC = () => {
 		shot(t11, 'stairwell_night', 1.0, 1.1, [960, 540], [900, 560]),
 		shot(t14, 'hallway_persp_night', 1.3, 2.4, [950, 560], [950, 540], {tag: 'peep'}),
 		shot(t15, 'flat_night_bare', 3.0, 3.2, [1530, 520], [1530, 515]),
-		shot(tG, 'stairwell_night', 2.6, 2.9, [1180, 300], [1180, 290]),
+		shot(tG, 'stairwell_night', 2.4, 2.6, [1190, 240], [1190, 230]),
 	];
 	const world = (set: string) => {
 		if (set === 'exterior_night') return null;
@@ -116,7 +116,7 @@ export const Doors: React.FC = () => {
 			if (t >= tG) {
 				return (
 					<g>
-						<Creature x={1150} y={GEO.stair.landing4 + 30} s={1.25} frame={f} view="front" tilt={48} />
+						<Creature x={1190} y={525} s={1.0} frame={f} view="front" tilt={48} />
 						<Flicker f={f} k={1} />
 					</g>
 				);
@@ -142,7 +142,7 @@ export const Doors: React.FC = () => {
 							</clipPath>
 						</defs>
 						<g clipPath="url(#stairsClip)">
-							<Creature x={(st[0] + st[2]) / 2} y={st[3] + lerp(330, 40, headK)} s={0.52} frame={f} view="front" tilt={40} />
+							<Creature x={(st[0] + st[2]) / 2} y={st[3] + lerp(330, 40, headK)} s={0.52} frame={f} view="front" tilt={40} qa={false} />
 						</g>
 					</g>
 				) : null}

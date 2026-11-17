@@ -3,7 +3,7 @@ import re, sys
 from collections import defaultdict
 rows = defaultdict(list)
 for l in open('logs/qa.txt'):
-    m = re.match(r'(\S+) f=(\d+) (\w+): (.*)', l.strip())
+    m = re.match(r'(\S+) f=(\d+) (.+?): (.*)', l.strip())
     if not m: continue
     sc, f, name, issue = m.groups()
     kind = re.sub(r'\s*\(\d+%\)|\(\d+ px\)', '', issue)

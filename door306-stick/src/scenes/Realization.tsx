@@ -1,69 +1,127 @@
-// 7. THE REALIZATION - they are facing her door.
+// 7. THE REALIZATION - the sofa toward the door; one person from every floor - who from mine? Through the
+// peephole: they have all turned to face my door. The landlord, the cheap rent. One message.
 import React from 'react';
-import {MessageScreen} from '../components/ui/Phone';
-import {Person} from '../layout/Person';
-import {Shots} from '../utils/scene';
-import {MOOD} from './common';
-import {again, phone, push, shot} from './kit';
+import {Landlord, Sarah} from '../components/characters/Cast';
+import {Prop} from '../components/characters/Creature';
+import {MessageScreen, PhoneFrame} from '../components/ui/Phone';
+import {FPS} from '../data/timeline';
+import {peepOverlay, residentsPersp} from '../stick/d306';
+import {Person} from '../stick/goat';
+import {fshot, GEO, lerp, ramp, shot, Shots, useStick, walk} from '../stick/kit';
+import {boxesOf, Group, type Spec} from '../stick/places';
+import {FLAT_PROPS} from './NewApartment';
 
-export const Realization: React.FC = () => (
-	<Shots
-		shots={[
-			again('g_00_back', 'narrator_129_backed_away', 'e_16_step_back', {move: push(1.06, 1.12)}),
-			again('g_01_heart', 'narrator_130_heart_pounding', 'c_08_dread', {fx: 'pulse', move: {z0: 1.12, z1: 1.2, x0: 0.5, y0: 0.42}, blink: true}),
-			// "I started dragging my sofa toward the entrance."
-			shot('g_02_sofa', 'narrator_131_sofa', 'flat', {
-				chars: ['sarah'],
-				quality: 'medium',
-				mood: MOOD.flat,
-				prompt: 'The dark living room: Sarah, bent low and straining, walks backward toward the front door at the back of the room, pulling the old mustard-yellow sofa after her across the floorboards TOWARD the door; the rug bunching up under it.',
-				variants: [{name: 'pushed', prompt: 'The mustard sofa is now shoved right up against the front door, blocking it; Sarah stands beside it, out of breath. Nothing else changes.'}],
-				seq: [
-					['base', 0],
-					['pushed', 0.62],
-				],
-				move: push(1.02, 1.08),
-			}, {cam: {z: 1.3, cx: 760, cy: 560}, kids: <Person who="sarah" x={880} y={860} h={470} facing="left" pose="reach" />}),
-			// "Then a thought crossed my mind." / every floor / "Who was it supposed to take from mine?"
-			again('g_03_thought', 'narrator_132_thought', 'c_08_dread', {move: push(1.04, 1.1, 0.5, 0.42)}),
-			again('g_04_floors', 'narrator_133_every_floor', 'd_09_facing_stairs', {move: push(1.0, 1.08)}),
-			again('g_05_mine', 'narrator_134_from_mine', 'c_08_dread', {move: push(1.2, 1.34, 0.5, 0.4), blink: true}),
-			// "I looked through the peephole again." / "Something had changed."
-			again('g_06_peep', 'narrator_135_peephole_again', 'd_06_eye_peephole', {move: push(1.1, 1.16, 0.55, 0.45)}),
-			again('g_07_changed', 'narrator_136_changed', 'd_07_peephole_pov', {move: push(1.0, 1.04)}),
-			// "My neighbors weren't facing the staircase anymore." / "They were facing my apartment."
-			again('g_08_turn', 'narrator_137_not_facing', 'd_07_peephole_pov', {seq: [['base', 0], ['turned', 0.5]], move: push(1.04, 1.08)}),
-			again('g_09_facing', 'narrator_138_facing_mine', 'd_07_peephole_pov', {show: 'turned', move: push(1.08, 1.2)}),
-			again('g_10_every', 'narrator_139_every_one', 'd_07_peephole_pov', {show: 'turned', move: {z0: 1.35, z1: 1.35, x0: 0.3, y0: 0.5, x1: 0.7, y1: 0.5}}),
-			// "Mr. Harris stood in the middle of the hallway with tears streaming down his cheeks."
-			again('g_11_tears', 'narrator_140_tears', 'd_10_harris_frozen', {show: 'tears', move: push(1.05, 1.22, 0.45, 0.4)}),
-			// "The woman with the child wouldn't look at me."
-			again('g_12_away', 'narrator_141_wouldnt_look', 'd_11_mother', {show: 'away', move: push(1.06, 1.12)}),
-			// "I suddenly remembered the landlord." / cheap rent / waived deposit / how quickly
-			again('g_13_landlord', 'narrator_142_landlord', 'a_04_keys', {move: push(1.3, 1.4, 0.36, 0.38), grade: 0.85}),
-			again('g_14_rent', 'narrator_143_cheap_rent', 'a_02_day_wide', {move: push(1.04, 1.1), grade: 0.85}),
-			again('g_15_deposit', 'narrator_144_waived', 'a_04_keys', {move: push(1.6, 1.7, 0.5, 0.55), grade: 0.85}),
-			again('g_16_quickly', 'narrator_145_how_quickly', 'a_01_moving_in', {move: push(1.1, 1.3, 0.62, 0.4), grade: 0.85}),
-			// "I grabbed my phone." / "There was one message." / "From my landlord." + the message
-			again('g_17_phone', 'narrator_146_grabbed_phone', 'c_13_call', {move: push(1.06, 1.12), blink: true}),
-			phone('g_18_message', 'narrator_147_one_message', ({f}) => (
-				<MessageScreen from="Landlord" text="I'm sorry, Sarah. We all have families." t={(f - 30) / 10} />
-			)),
-			// "I stared at those words." - her face in the phone's light
-			shot('g_19_stare', 'narrator_149_stared', 'flat', {
-				chars: ['sarah'],
-				quality: 'high',
-				blink: true,
-				mood: 'Darkness; only the cold white light of her phone screen on her face from below.',
-				prompt: 'Close-up: Sarah stares down at her phone in the dark, its cold white light on her face from below, her eyes wet, her mouth slightly open in disbelief; betrayed and terrified.',
-				move: push(1.03, 1.1, 0.5, 0.42),
-			}, {cam: {z: 2.4, cx: 760, cy: 400}, kids: <Person who="sarah" x={760} y={860} h={620} facing="front" />}),
-			again('g_20_sense', 'narrator_150_sense', 'g_19_stare', {move: push(1.1, 1.18, 0.5, 0.4), blink: true}),
-			// "The creature didn't randomly choose someone." / "The residents chose."
-			again('g_21_chose', 'narrator_151_not_randomly', 'd_07_peephole_pov', {show: 'turned', move: push(1.0, 1.1)}),
-			again('g_22_residents', 'narrator_152_residents_chose', 'd_07_peephole_pov', {show: 'turned', move: push(1.4, 1.5, 0.5, 0.42)}),
-			// "And they had chosen me."
-			again('g_23_me', 'narrator_153_chosen_me', 'g_19_stare', {fx: 'pulse', move: push(1.2, 1.36, 0.5, 0.4)}),
-		]}
-	/>
-);
+export const SOFA_AT_DOOR = 1330;
+
+export const Realization: React.FC = () => {
+	const {f, t, at} = useStick();
+	const t129 = at('narrator_129_backed_away');
+	const t130 = at('narrator_130_heart_pounding');
+	const t131 = at('narrator_131_sofa');
+	const tSofa = at('sofa');
+	const t132 = at('narrator_132_thought');
+	const t135 = at('narrator_135_peephole_again');
+	const t136 = at('narrator_136_changed');
+	const t137 = at('narrator_137_not_facing');
+	const t138 = at('narrator_138_facing_mine');
+	const tNT = at('neighbors_turned');
+	const t139 = at('narrator_139_every_one');
+	const t140 = at('narrator_140_tears');
+	const t141 = at('narrator_141_wouldnt_look');
+	const t142 = at('narrator_142_landlord');
+	const t146 = at('narrator_146_grabbed_phone');
+	const t147 = at('narrator_147_one_message');
+	const tMsg = at('message');
+	const t149 = at('narrator_149_stared');
+	const t151 = at('narrator_151_not_randomly');
+	const t152 = at('narrator_152_residents_chose');
+	const t153 = at('narrator_153_chosen_me');
+	if (t >= t147 && t < t149) {
+		const lf = f - Math.round(t147 * FPS);
+		return (
+			<PhoneFrame f={lf} d={Math.round((t149 - t147) * FPS)}>
+				<MessageScreen from="Landlord" text="I'm sorry, Sarah. We all have families." t={(lf - 30) / 10} />
+			</PhoneFrame>
+		);
+	}
+	const F = GEO.flat;
+	const back = walk(t, t129 + 0.2, t129 + 1.8, 1420, 1180, 1.6);
+	// the sofa: she drags it from the middle of the room toward the door (it reaches the door in scene 8)
+	const push = ramp(t, t131 + 0.3, tSofa + 1.5);
+	const sofaX = lerp(FLAT_PROPS.sofa.x, SOFA_AT_DOOR - 80, push);
+	const pushing = t >= t131 && t < t132;
+	const toPeep = walk(t, t135 - 0.1, t135 + 0.9, sofaX - 250, 1500, 1.6);
+	const sarahX = t < t131 ? back.x : t < t135 - 0.1 ? sofaX - 250 : toPeep.x;
+	const turned = t >= t136;
+	const res: Spec[] = residentsPersp(f, turned ? 'door' : 'stairs', {
+		harris: {tears: t >= t140 ? 1 : 0, brows: 'sad', mouth: 'frown', look: [0, 0]},
+		mother: {look: t >= t141 ? [-0.6, 1] : [0, 0], brows: 'sad'},
+		boy: {look: [0, 0], tears: 1},
+	}).map((p) => ({...p, idle: false, eyes: turned && p.name !== 'mother' ? 'dot' : p.eyes, look: p.look ?? [0, 0]}));
+	const harris = res.find((p) => p.name === 'harris')!;
+	const mother = res.find((p) => p.name === 'mother')!;
+	const shots = [
+		shot(t129, 'flat_night_bare', 1.2, 1.2, [1250, 580], [1250, 580]),
+		shot(t130, 'flat_night_bare', 2.8, 3.0, [1180, 520], [1180, 515], {shake: 3}),
+		shot(t131, 'flat_night_bare', 1.1, 1.1, [1100, 560], [1150, 560]),
+		shot(t132, 'flat_night_bare', 2.6, 2.7, [sarahX + 20, 520], [sarahX + 20, 515]),
+		shot(t135, 'flat_night_bare', 2.4, 2.5, [1530, 540], [1530, 530]),
+		shot(t136, 'hallway_persp_night', 1.0, 1.0, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t138, 'hallway_persp_night', 1.0, 1.15, [950, 560], [950, 560], {tag: 'peep'}),
+		fshot(boxesOf(res), t140, 'hallway_persp_night', 1.55, [harris.x - 40, 540], {tag: 'peep'}),
+		fshot(boxesOf(res), t141, 'hallway_persp_night', 1.55, [mother.x, 560], {tag: 'peep'}),
+		shot(t142, 'office_day', 1.0, 1.04, [960, 540], [1000, 540], {light: 'dawn'}),
+		shot(t146, 'flat_night_bare', 2.4, 2.5, [sarahX + 20, 540], [sarahX + 20, 535]),
+		shot(t149, 'flat_night_bare', 2.8, 3.0, [sarahX + 20, 520], [sarahX + 20, 515]),
+		shot(t152, 'hallway_persp_night', 1.0, 1.04, [950, 560], [950, 560], {tag: 'peep'}),
+		shot(t153, 'flat_night_bare', 3.0, 3.3, [sarahX + 20, 510], [sarahX + 20, 505]),
+	];
+	const world = (set: string) => {
+		if (set === 'hallway_persp_night') {
+			if (t < t136) return <Group people={residentsPersp(f, 'stairs').map((p) => ({...p, idle: false}))} />;
+			return <Group people={res} />;
+		}
+		if (set === 'office_day') {
+			// memory: the landlord smiling, sliding the keys across, the deposit waved away
+			const k = ramp(t, t142, t146);
+			return (
+				<g>
+					<Person is={Landlord} name="landlord" x={1000} y={GEO.office.floor - 20} s={1.6} frame={f} mouth="grin" look={[1, 0]} arms={k > 0.4 ? 'handsForward' : 'holdOne'} prop={k < 0.4 ? 'card' : 'none'} />
+					<Person is={Sarah} name="sarah" x={1480} y={GEO.office.floor + 10} s={1.6} frame={f} mouth="smile" look={[-1, 0]} />
+					<rect x={-100} y={-100} width={2200} height={1300} fill="#3a2a10" opacity={0.18} />
+				</g>
+			);
+		}
+		// the flat
+		return (
+			<g>
+				<Prop name="table" x={FLAT_PROPS.table.x} y={FLAT_PROPS.table.y} w={FLAT_PROPS.table.w} />
+				<Prop name="sofa" x={sofaX} y={FLAT_PROPS.sofa.y} w={FLAT_PROPS.sofa.w} tilt={pushing ? Math.sin(t * 6) * 0.8 : 0} />
+				<Person
+					is={Sarah}
+					name="sarah"
+					x={sarahX}
+					y={F.floor}
+					s={1.6}
+					frame={f}
+					{...(t < t131 && back.moving ? {pose: 'walk', turn: -0.7, phase: back.phase} : pushing ? {pose: 'walk', turn: 0.8, phase: sofaX / 40, lean: 16, arms: 'handsForward'} : toPeep.moving ? {pose: 'walk', turn: 0.8, phase: toPeep.phase} : {turn: t >= t135 && t < t146 ? 0.7 : 0, lean: t >= t135 && t < t146 ? 8 : 0})}
+					look={t >= t146 && t < t147 ? [0.2, 1] : [1, 0]}
+					eyes="wide"
+					brows={t >= t151 ? 'sad' : 'worried'}
+					mouth={t >= t153 ? 'o' : 'flat'}
+					shiver={t >= t130 && t < t131 ? 1.2 : 0.5}
+					prop={t >= t146 ? 'phone' : 'none'}
+					propGlow="#9fc3ff"
+					tears={t >= t152 ? 1 : 0}
+					edge={toPeep.moving}
+					{...(t >= t146 ? {arms: 'holdOne'} : {})}
+				/>
+			</g>
+		);
+	};
+	void t137;
+	void tNT;
+	void t139;
+	void tMsg;
+	return <Shots shots={shots} world={(s) => world(s.set)} overlay={peepOverlay} />;
+};
