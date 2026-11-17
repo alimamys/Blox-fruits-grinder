@@ -8,8 +8,8 @@ mv out/door306.mp4 out/door306_1080p_upload.mp4   # render.mjs already wrote it 
 echo "== upload copy"; ls -la out/door306_1080p_upload.mp4
 ffmpeg -hide_banner -nostats -i out/door306_1080p_upload.mp4 -vn -af ebur128=peak=true -f null - 2>&1 | sed -n '/Summary/,$p' | grep -E "I:|LRA:|Peak:"
 P=out/x264pass
-ffmpeg -v error -y -i out/door306_1080p_upload.mp4 -vf scale=1280:720:flags=lanczos -c:v libx264 -preset slow -b:v 480k -x264-params aq-mode=3 -pass 1 -passlogfile $P -an -f mp4 /dev/null
-ffmpeg -v error -y -i out/door306_1080p_upload.mp4 -vf scale=1280:720:flags=lanczos -c:v libx264 -preset slow -b:v 480k -x264-params aq-mode=3 -pass 2 -passlogfile $P -c:a aac -b:a 112k -movflags +faststart previews/door306_stick_720p.mp4
+ffmpeg -v error -y -i out/door306_1080p_upload.mp4 -vf scale=1280:720:flags=lanczos -c:v libx264 -preset slow -b:v 360k -x264-params aq-mode=3 -pass 1 -passlogfile $P -an -f mp4 /dev/null
+ffmpeg -v error -y -i out/door306_1080p_upload.mp4 -vf scale=1280:720:flags=lanczos -c:v libx264 -preset slow -b:v 360k -x264-params aq-mode=3 -pass 2 -passlogfile $P -c:a aac -b:a 96k -movflags +faststart previews/door306_stick_720p.mp4
 rm -f $P*
 echo "== preview"; ls -la previews/door306_stick_720p.mp4
 rm -f previews/check_contact_*.jpg
