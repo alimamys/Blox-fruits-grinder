@@ -1,5 +1,6 @@
 import React from 'react';
 import {Composition} from 'remotion';
+import {Thumb} from './dev/Thumbs';
 import {PuppetSheet} from './dev/PuppetSheet';
 import {PUPPET_TEST_FRAMES, PuppetTest} from './dev/PuppetTest';
 import {FPS, HEIGHT, TIMELINE, TIMELINE_FULL, WIDTH} from './data/timeline';
@@ -30,5 +31,8 @@ export const RemotionRoot: React.FC = () => (
 		/>
 		<Composition id="PuppetSheet" component={PuppetSheet} durationInFrames={48} fps={24} width={1920} height={1080} />
 		<Composition id="PuppetTest" component={PuppetTest} durationInFrames={PUPPET_TEST_FRAMES} fps={24} width={1920} height={1080} />
+		{(['A', 'B', 'C'] as const).map((v) => (
+			<Composition key={v} id={`Thumb${v}`} component={Thumb} durationInFrames={1} fps={24} width={1920} height={1080} defaultProps={{v}} />
+		))}
 	</>
 );
