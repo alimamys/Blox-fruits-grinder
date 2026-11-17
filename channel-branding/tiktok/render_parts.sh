@@ -7,7 +7,7 @@ B=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/ch
 OUT=../channel-branding/tiktok
 npx remotion bundle src/index.ts --out-dir=build/bundle_tt --log=error > /dev/null
 n=0
-for range in "0 116.5" "116.5 220.8" "220.8 344.6" "344.6 480.4" "480.4 543.0" "543.0 622.6"; do
+for range in "1.79 116.5" "116.5 220.8" "220.8 344.6" "344.6 480.4" "480.4 543.0" "543.0 622.6"; do
   n=$((n + 1))
   set -- $range
   npx remotion render build/bundle_tt TikTokPart $OUT/raw_$n.mp4 --props="{\"part\":$n,\"total\":6,\"from\":$1,\"to\":$2}" --codec=h264 --crf=16 --concurrency=4 --browser-executable=$B --log=error
