@@ -98,6 +98,10 @@ export interface StickProps {
 	glasses?: boolean;
 	brooch?: boolean;
 	stripe?: string;
+	/** an open cardigan / robe / blanket in this colour over the shirt (sleeves take this colour too) */
+	open?: string;
+	/** a V-neck sweater vest in this colour over the shirt */
+	sweater?: string;
 	/** pyjamas: stripes of this colour across the top and the legs */
 	pj?: string;
 	vest?: string;
@@ -742,7 +746,8 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 
 	const armPath = (pts: Pt[], sdo: number) => wob(pts, sd + sdo, amp * 0.5, false);
 	const lum = parseInt(palette.shirt.slice(1, 3), 16) + parseInt(palette.shirt.slice(3, 5), 16) + parseInt(palette.shirt.slice(5, 7), 16);
-	const sleeve = lum < 90 ? mixHex(palette.shirt, '#5a5f68', 0.35) : palette.shirt;
+	const sleeveBase = p.open ?? palette.shirt;
+	const sleeve = lum < 90 && !p.open ? mixHex(palette.shirt, '#5a5f68', 0.35) : sleeveBase;
 	const armEl = (arm: Pt[], i: number, far = false) => (
 		<g key={`arm${i}`}>
 			<path d={armPath(arm, 30 + i)} stroke={INK} strokeWidth={17 * k} fill="none" strokeLinecap="round" strokeLinejoin="round" />
@@ -830,8 +835,25 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 					return <image href={staticFile(part.src)} x={-bw / 2} y={top} width={bw} height={bh} preserveAspectRatio="none" transform={mirror ? 'scale(-1 1)' : undefined} />;
 				})()
 			) : (
-				<path d={bodyD} fill={palette.shirt} stroke={INK} strokeWidth={lw} strokeLinejoin="round" />
+				<path d={bodyD} fill={back && p.open ? p.open : palette.shirt} stroke={INK} strokeWidth={lw} strokeLinejoin="round" />
 			)}
+			{p.open && !back && !p.paint ? (
+				<g>
+					{(side ? [1] : [-1, 1]).map((sg) => (
+						<path
+							key={`op${sg}`}
+							d={wobPoly(side ? [[-shW, shY], [shW * 0.35, shY], [hipW * 0.3, hipY + 2], [-hipW, hipY + 2]] : [[sg * shW, shY], [sg * shW * 0.28, shY], [sg * hipW * 0.22, hipY + 2], [sg * hipW, hipY + 2]], sd + 15 + sg, 0.6)}
+							fill={p.open}
+							stroke={INK}
+							strokeWidth={lw * 0.7}
+							strokeLinejoin="round"
+						/>
+					))}
+				</g>
+			) : null}
+			{p.sweater && !back && !p.paint ? (
+				<path d={wobPoly([[-shW + 5, shY + 3], [-9, shY + 3], [0, shY + 30 * k], [9, shY + 3], [shW - 5, shY + 3], [hipW - 1, hipY], [-hipW + 1, hipY]], sd + 16, 0.6)} fill={p.sweater} stroke={INK} strokeWidth={lw * 0.65} strokeLinejoin="round" />
+			) : null}
 			{p.pj && !back && !p.paint ? (
 				<g clipPath={`url(#bc${uid})`}>
 					{Array.from({length: 12}, (_, i) => (

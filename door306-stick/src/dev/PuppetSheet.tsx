@@ -20,6 +20,8 @@ export const PuppetSheet: React.FC = () => {
 				<Creature x={1280} y={1060} s={1.4} frame={f} view="back" />
 				<Prop name="sofa" x={1600} y={1060} w={340} />
 				<Prop name="table" x={1820} y={800} w={180} />
+				<Prop name="chair" x={1660} y={800} w={80} />
+				<Prop name="notebook" x={1820} y={640} w={110} />
 			</svg>
 		</AbsoluteFill>
 	);
