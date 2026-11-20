@@ -1,15 +1,15 @@
 // Scene id (src/data/timeline.ts) -> component.
-import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import type React from 'react';
+import {End, LastSelection, Recording} from './Closet';
 import {Closer} from './Closer';
 import {ColdOpen} from './ColdOpen';
 import {Erase} from './Erase';
 import {HallwayScene} from './HallwayScene';
+import {InsideWall} from './InsideWall';
 import {NormalNight} from './NormalNight';
 import {Stranger} from './Stranger';
 import {Warning} from './Warning';
-
-const Black: React.FC = () => <AbsoluteFill style={{background: '#000'}} />;
+import {WhiteOnWhite} from './WhiteOnWhite';
 
 export const SCENE_COMPONENTS: Record<string, React.FC> = {
 	coldOpen: ColdOpen,
@@ -19,5 +19,9 @@ export const SCENE_COMPONENTS: Record<string, React.FC> = {
 	warning: Warning,
 	hallway: HallwayScene,
 	erase: Erase,
-	end: Black,
+	whiteOnWhite: WhiteOnWhite,
+	insideWall: InsideWall,
+	recording: Recording,
+	lastSelection: LastSelection,
+	end: End,
 };

@@ -33,7 +33,7 @@ export const NormalNight: React.FC = () => {
 		// "Most nights, I work until two or three in the morning."
 		shot(T('narrator_011_most_nights'), 'room_front_night', 1.6, 1.7, [920, 610], [910, 615], {tag: 'tired'}),
 		// "It's quieter then. No phone calls. No interruptions." - the mug, the silent phone on the desk
-		shot(T('narrator_011_most_nights', 0.55), 'room_front_night', 3.4, 3.5, [470, 860], [480, 860], {tag: 'desk'}),
+		shot(T('narrator_011_most_nights', 0.55), 'room_front_night', 3.4, 3.5, [430, 860], [440, 860], {tag: 'desk'}),
 		// "That night, I was finishing a short animation of an empty apartment hallway."
 		shot(T('narrator_012_finishing'), 'room_side_night', 1.7, 1.85, [840, 560], [900, 540], {tag: 'side'}),
 		// "Nothing complicated. A flickering ceiling light, a few shadows, a slow movement toward a closed bedroom door."

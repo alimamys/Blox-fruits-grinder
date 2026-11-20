@@ -51,8 +51,8 @@ export const PICTURES: Record<PicId, Spec> = {
 	canvas_pattern: {man: 'close', pattern: true, pencilCrack: true},
 	canvas_white: {man: 'close', painted: true},
 	canvas_blank: {man: 'close', painted: true},
-	canvas_fingers: {man: 'close', painted: true, fingers: true, cam: {z: 2.2, cx: 905, cy: 600}},
-	screenshot_shadow: {man: '1m', shadow: true, cam: {z: 2.1, cx: 1120, cy: 560}},
+	canvas_fingers: {man: 'close', painted: true, fingers: true, cam: {z: 2.3, cx: 1010, cy: 640}},
+	screenshot_shadow: {man: '1m', shadow: true},
 };
 
 /** her animation's warm, dim look (CSS, so it works inside any HTML screen) */
@@ -76,21 +76,27 @@ export const PictureDrawing: React.FC<{id: PicId; frame?: number}> = ({id, frame
 			{m && p.shadow ? (
 				<g>
 					{/* his shadow thrown on the right wall; where it ends, a pale man-shaped outline */}
-					<g transform={`translate(${m.x + 420} ${m.y - 40}) skewX(-14) scale(0.9 1)`} opacity={0.42}>
+					<g transform={`translate(${m.x + 170} ${m.y - 20}) skewX(-14) scale(0.9 1)`} opacity={0.42}>
 						<TallMan x={0} y={0} s={m.s * 0.92} frame={frame} look="dark" twitch={false} qa={false} />
 					</g>
-					<TallMan x={m.x + 610} y={m.y - 60} s={m.s * 0.9} frame={frame} look="ghost" twitch={false} qa={false} opacity={0.75} />
+					<TallMan x={m.x + 300} y={m.y - 30} s={m.s * 0.95} frame={frame} look="ghost" twitch={false} qa={false} opacity={0.8} />
 				</g>
 			) : null}
 			{m ? <TallMan x={m.x} y={m.y} s={m.s} stoop={m.stoop ?? 0} frame={frame} look={p.painted ? 'paint' : 'dark'} twitch={false} qa={false} /> : null}
 			{m && p.fingers ? (
 				<g>
-					{[-34, -12, 10, 30].map((dx, i) => (
-						<g key={i}>
-							<rect x={m.x + dx - 7 + 6} y={m.y - 760 + 6 - (i % 2) * 14} width={15} height={56} rx={7} fill="#000" opacity={0.18} />
-							<rect x={m.x + dx - 7} y={m.y - 760 - (i % 2) * 14} width={15} height={56} rx={7} fill="#fbfbf8" stroke="#d7d6cf" strokeWidth={1.5} />
-						</g>
-					))}
+					{/* four long white fingertips pushing sideways out of the blank shape into the dark hallway, each with a tiny shadow */}
+					{[0, 1, 2, 3].map((i) => {
+						const fx = m.x + 30 * m.s;
+						const fy = m.y - 230 * m.s + i * 22;
+						const len = [58, 72, 66, 50][i];
+						return (
+							<g key={i}>
+								<rect x={fx + 5} y={fy + 7} width={len} height={15} rx={7.5} fill="#000" opacity={0.35} />
+								<rect x={fx} y={fy} width={len} height={15} rx={7.5} fill="#fbfbf8" stroke="#cfcec7" strokeWidth={1.5} />
+							</g>
+						);
+					})}
 				</g>
 			) : null}
 		</g>

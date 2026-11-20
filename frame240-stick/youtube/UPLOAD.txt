@@ -1,0 +1,63 @@
+FRAME 240 - stick-figure version (same code-drawn style as the stick Mr. Widemouth, Goatman and 3:06)
+==========================================================================================================
+
+FILE
+out/frame240_1080p_upload.mp4   (1920x1080, 24 fps, 10:40)
+
+TITLE (same pattern as your older videos)
+Frame 240 | Animated Horror Story
+
+ALTERNATIVE TITLES (for Test & Compare)
+- There's a Frame in My Animation I Didn't Draw | Animated Horror Story
+- Every Time I Pressed Play, He Was Closer | Animated Horror Story
+
+DESCRIPTION
+------------------------------------------------------------
+There were 239 frames in my animation when I went to bed. When I opened it again, there were 240.
+In the extra frame, a man was standing in my hallway. I hadn't drawn him. And every time I pressed play, he was closer.
+
+0:00 The extra frame
+0:42 A normal night
+1:28 The stranger
+2:23 One step closer
+3:16 The warning
+4:09 The hallway
+5:19 The white brush
+6:30 White on white
+7:35 Inside the walls
+8:54 The recording
+9:55 The last selection
+
+Would you have pressed play again?
+
+This story is fiction. All characters and events are invented.
+
+Credits - story and animation: Daddy Tales (original). Voices: Fish Audio. Backgrounds painted with an image model from
+our own layouts; characters drawn and animated in code.
+Sound effects used under Creative Commons Attribution (CC BY):
+• "sh_Man_Running_Footsteps_On_Carpet.wav" by shall555 - https://freesound.org/s/140219/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: running_carpet
+• "Staircase Impulse-Response long reverb 20m away clap" by jorickhoofd - https://freesound.org/s/160138/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: boom_hit, low_horror_drone, riser_long, riser_short, stinger, sub_drop, tension_pulse, whoosh_1, whoosh_2, whoosh_3
+• "Basement Impulse-Response reverb 6m away medium-pitched clap" by jorickhoofd - https://freesound.org/s/160143/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: bass_hit, breath_exhale_f, light_flicker, phone_alert, ui_click, ui_refresh
+• "CPU Fan and HDD atmosphere" by TRNGLE - https://freesound.org/s/378070/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: computer_fan
+• "Subway speaker malfunction.wav" by jobro - https://freesound.org/s/75131/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: glitch
+• "Windscape With Metal Scrape.wav" by Benboncan - https://freesound.org/s/78430/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: riser_long
+
+#animatedhorror #scarystories #horrorstory
+------------------------------------------------------------
+
+TAGS
+animated horror story, horror animation, scary story, animator horror story, frame 240, stick figure horror, horror story animated, scary animation, creepy story, horror short, scary stories animated, analog horror
+
+THUMBNAILS (youtube/)
+- thumbnail_A_hes_closer.jpg        HE'S CLOSER.       (first choice: Mara at her desk, the man right behind her in the doorway)
+- thumbnail_B_i_didnt_draw_him.jpg  I DIDN'T DRAW HIM. (her animation, frame 240 of 240 - Test & Compare)
+- thumbnail_C_look_closer.jpg       LOOK CLOSER.       (the white outline on her wall - spare)
+
+SETTINGS
+- Audience: No, it's not made for kids
+- Category: Film & Animation   |   Language: English
+- Altered or synthetic content: answer honestly. The backgrounds are AI-painted cartoon art and the voices are
+  AI text-to-speech (not realistic footage of real people or places).
+
+PINNED COMMENT
+Would you have pressed play a fifth time?

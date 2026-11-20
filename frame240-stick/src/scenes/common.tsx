@@ -20,11 +20,12 @@ export const MC = {x: 760, y: 1040, s: 2.0};
 type MaraP = Partial<StickProps>;
 
 /** Mara in her chair behind the desk, lit by the screen; the man can stand in the doorway behind her. */
-export const AtDesk: React.FC<{f: number; m?: MaraP; glow?: number; man?: {k: number; s?: number; look?: 'dark' | 'white' | 'ghost'} | null; children?: React.ReactNode; empty?: boolean; phone?: boolean}> = ({f, m = {}, glow = 1, man = null, children, empty = false, phone = true}) => {
+export const AtDesk: React.FC<{f: number; m?: MaraP; glow?: number; man?: {k: number; s?: number; look?: 'dark' | 'white' | 'ghost'} | null; children?: React.ReactNode; empty?: boolean; phone?: boolean; wash?: number}> = ({f, m = {}, glow = 1, man = null, children, empty = false, phone = true, wash = 0}) => {
+	const drain = washCss(wash);
 	const D = GEO.front.farDoor;
 	return (
 		<g>
-			<Rain box={[118, 68, 628, 655]} frame={f} />
+			{wash < 0.6 ? <Rain box={[118, 68, 628, 655]} frame={f} opacity={0.55 * (1 - wash / 0.6)} /> : null}
 			{man ? (
 				<g opacity={man.k}>
 					<defs>
@@ -41,13 +42,24 @@ export const AtDesk: React.FC<{f: number; m?: MaraP; glow?: number; man?: {k: nu
 			{empty ? null : (
 				<g>
 					<Glow cx={MF.x} cy={MF.y - 470} r={520} color="#9fc4ff" k={0.55 * glow} />
-					<OfficeChair x={MF.x} y={MF.y} s={MF.s} frame={f} view="front" />
+					<g style={{filter: drain}}>
+						<OfficeChair x={MF.x} y={MF.y} s={MF.s} frame={f} view="front" />
+					</g>
 					<Person is={Mara} name="mara" x={MF.x} y={MF.y} s={MF.s} pose="sit" frame={f} arms={{l: [28, -64], r: [28, -64]}} light="screen" {...m} />
 				</g>
 			)}
-			<DeskFront y={DESK_Y} frame={f} glow={glow} phone={phone} />
+			<g style={{filter: drain}}>
+				<DeskFront y={DESK_Y} frame={f} glow={glow * (1 - wash)} phone={phone} />
+			</g>
 		</g>
 	);
+};
+
+/** the same colour drain as a plate's wash, as a CSS filter for code-drawn furniture */
+export const washCss = (w: number) => {
+	const d = Math.max(0, Math.min(1, w / 0.5));
+	const l = Math.max(0, Math.min(1, (w - 0.4) / 0.6));
+	return w > 0 ? `saturate(${1 - 0.95 * d}) brightness(${1 + 1.6 * d + 0.6 * l}) contrast(${1 - 0.5 * d})` : undefined;
 };
 
 /** feet height + scale for someone in the perspective hallway, k 0 (near, off the bottom) .. 1 (at the bedroom door) */
