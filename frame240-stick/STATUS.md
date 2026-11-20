@@ -16,8 +16,8 @@
 ## Numbers
 
 - **Images:** $0.12 of the $1.50 cap (6 plates, gpt-image-1-mini, medium; `logs/image_costs.jsonl`). Voices: reused, $0.
-- **Upload files** (not committed): `out/frame240_1080p_upload.mp4` (752 MB) and `out/frame240_1080p_send.mp4` (469 MB,
-  two-pass 5.6 Mbit/s, the copy sent; looks the same at 1:1): 1920x1080, 24 fps, 15,367 frames, 10:40.3.
+- **Upload files** (not committed): `out/frame240_1080p_upload.mp4` (752 MB) and `out/frame240_1080p_send.mp4` (372 MB,
+  two-pass 4.4 Mbit/s, the copy sent; looks the same at 1:1): 1920x1080, 24 fps, 15,367 frames, 10:40.3.
 - **Audio:** -15.1 LUFS integrated, LRA 6.0, peak -1.6 dBFS; the final 3 s of white are digital silence.
 - **Frame QA:** 0 findings on every 2nd frame of the whole film (`logs/qa.txt`). The first full pass had 109 findings in
   3 close-ups (Mara's head clipped by the frame edge); those shots were reframed.
