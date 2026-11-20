@@ -117,15 +117,25 @@ namespace OopsiePets
             arrival = null;
         }
 
-        bool wasPressed;
+        void Start()
+        {
+            if (InputRouter.Instance) InputRouter.Instance.PointerDown += OnAnyPress;
+        }
+
+        void OnDestroy()
+        {
+            if (InputRouter.Instance) InputRouter.Instance.PointerDown -= OnAnyPress;
+        }
+
+        // Tapping anywhere else closes the care menu. The router taps pets before raising this
+        // event, so a tap that just opened the menu is recognised and left alone.
+        void OnAnyPress(Vector2 world)
+        {
+            if (isActiveAndEnabled && menu.Visible && !menu.ShownThisFrame) menu.HideNow();
+        }
 
         void Update()
         {
-            // Tapping anywhere else closes the care menu.
-            var input = InputRouter.Instance;
-            bool pressed = input && input.IsPressed;
-            if (pressed && !wasPressed && menu.Visible && !menu.ShownThisFrame) menu.HideNow();
-            wasPressed = pressed;
 
             // A bouncing hand keeps inviting a tap on the muddy visitor.
             if (visitor && visitor.tappable && !hint.Visible && Time.frameCount % 240 == 0) hint.ShowTap(visitor.Rig.head);

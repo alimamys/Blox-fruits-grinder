@@ -118,17 +118,15 @@ namespace OopsiePets
             clubhouse.Enter(null);
             yield return fader.FadeIn();
             Busy = false;
-            // Sometimes another friend comes back muddy: "Oopsie!"
-            if (Random.value < 0.5f)
+            // A friend who still needs help always comes back muddy; after that, sometimes one does: "Oopsie!"
+            PetDefinition next = null;
+            foreach (var p in database.AvailablePets())
+                if (p != caredFor && (next == null || SaveSystem.Data.Pet(p.id).careCount < SaveSystem.Data.Pet(next.id).careCount)) next = p;
+            bool needsHelp = next != null && SaveSystem.Data.Pet(next.id).careCount == 0;
+            if (next != null && (needsHelp || Random.value < 0.5f))
             {
                 yield return new WaitForSeconds(2.5f);
-                if (Current == Screen.Clubhouse && !Busy)
-                {
-                    PetDefinition next = null;
-                    foreach (var p in database.AvailablePets())
-                        if (p != caredFor && (next == null || SaveSystem.Data.Pet(p.id).careCount < SaveSystem.Data.Pet(next.id).careCount)) next = p;
-                    if (next) clubhouse.Enter(next);
-                }
+                if (Current == Screen.Clubhouse && !Busy) clubhouse.Enter(next);
             }
         }
 
