@@ -95,6 +95,8 @@ namespace OopsiePets
                 Stage(ActivityKind.DressUp, Get(ActivityKind.DressUp));
                 var sticker = StickerBook.Award(GameFlow.Instance.database, petDef);
                 Pet.Animator.Play(PetReaction.Celebrate);
+                homeButton.gameObject.SetActive(false);
+                if (context.stars) context.stars.gameObject.SetActive(false);
                 yield return reward.Show(sticker);
             }
             Finish();
@@ -134,13 +136,13 @@ namespace OopsiePets
             }
             StopCoroutine(run);
             run = null;
-            StartCoroutine(GameFlow.Instance.ReturnToClubhouse(def, this));
+            GameFlow.Instance.StartCoroutine(GameFlow.Instance.ReturnToClubhouse(def, this)); // owned by GameFlow: this object is hidden on the way out
         }
 
         void Finish()
         {
             run = null;
-            StartCoroutine(GameFlow.Instance.ReturnToClubhouse(def, this));
+            GameFlow.Instance.StartCoroutine(GameFlow.Instance.ReturnToClubhouse(def, this)); // owned by GameFlow: this object is hidden on the way out
         }
 
         /// <summary>Called by GameFlow while the screen is faded out.</summary>
@@ -150,6 +152,8 @@ namespace OopsiePets
             Current = null;
             nextButton.gameObject.SetActive(false);
             reward.HideNow();
+            homeButton.gameObject.SetActive(true);
+            if (context.stars) context.stars.gameObject.SetActive(true);
             if (Pet) Destroy(Pet.gameObject);
             Pet = null;
             if (context.hint) context.hint.Hide();

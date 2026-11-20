@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0ce63f4163869c4b821a52d555fbab, type: 3}
+  m_Name: FaceSet
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.FaceSet
+  eyeOpen: {fileID: 21300000, guid: c65deec6e5c8ef51e922451d0e001cc1, type: 3}
+  eyeBlink: {fileID: 21300000, guid: 708b0b3d4dc12568780d5e779bf51841, type: 3}
+  eyeHappy: {fileID: 21300000, guid: eada7a2429da5045dba293d0470cb531, type: 3}
+  eyeWide: {fileID: 21300000, guid: 083a1f27d17477d8c85e0469562378f0, type: 3}
+  eyeSparkle: {fileID: 21300000, guid: 1a3fe96005313e7e0af91d79abb43038, type: 3}
+  mouthSmile: {fileID: 21300000, guid: 7248a431188d692dc8ab1de3ce0488db, type: 3}
+  mouthLaugh: {fileID: 21300000, guid: eae53b30b94476be2821f1140378c408, type: 3}
+  mouthO: {fileID: 21300000, guid: 9bff3991c832108cc83b3317d1fc2a59, type: 3}
+  mouthSneeze: {fileID: 21300000, guid: 6c084aaf3cd129e9785d02d2faf7052d, type: 3}
+  mouthTongue: {fileID: 21300000, guid: 3977c2c00df0e5201bc6bf92623c7087, type: 3}

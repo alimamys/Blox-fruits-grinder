@@ -35,7 +35,7 @@ namespace OopsiePets
         public SortingGroup sortingGroup;
 
         [Tooltip("Sorting order base for accessories inside the pet's sorting group.")]
-        public int accessoryOrder = 40;
+        public int accessoryOrder = 85;
 
         readonly Dictionary<AccessorySlot, SpriteRenderer> worn = new Dictionary<AccessorySlot, SpriteRenderer>();
         readonly Dictionary<AccessorySlot, AccessoryDefinition> wornDefs = new Dictionary<AccessorySlot, AccessoryDefinition>();
@@ -72,11 +72,11 @@ namespace OopsiePets
                 worn[acc.slot] = sr;
             }
             sr.sprite = acc.sprite;
-            sr.sortingOrder = accessoryOrder + (int)acc.slot * 2 + (acc.slot == AccessorySlot.Neck ? -30 : 0);
+            sr.sortingOrder = acc.slot == AccessorySlot.Neck ? 36 : accessoryOrder + (int)acc.slot * 2;
             float w = acc.sprite.bounds.size.x;
             float scale = w > 0.0001f ? headWidth * acc.widthOnHead / w : 1f;
             sr.transform.localScale = Vector3.one * scale;
-            sr.transform.localPosition = acc.offset;
+            sr.transform.localPosition = acc.offset * headWidth; // offsets are in head widths
             sr.transform.localRotation = Quaternion.Euler(0f, 0f, acc.rotation);
             sr.gameObject.SetActive(true);
             wornDefs[acc.slot] = acc;

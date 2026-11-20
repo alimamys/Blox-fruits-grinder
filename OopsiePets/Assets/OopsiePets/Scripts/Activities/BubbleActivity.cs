@@ -17,8 +17,9 @@ namespace OopsiePets
         [Header("Tuning")]
         public int popsToFinish = 10;
         public int maxBubbles = 9;
-        public Vector2 sizeRange = new Vector2(0.55f, 1.6f);
-        public float giantSize = 2.6f;
+        [Tooltip("Bubble diameters in world units.")]
+        public Vector2 sizeRange = new Vector2(0.9f, 1.7f);
+        public float giantSize = 3.2f;
         public Vector2 riseSpeed = new Vector2(0.7f, 1.3f);
         public float spawnEvery = 0.45f;
 
@@ -81,7 +82,7 @@ namespace OopsiePets
         Bubble Spawn(float yOffset = 0f, float size = -1f)
         {
             var b = Get();
-            if (size < 0f) size = Random.value < 0.15f ? Random.Range(1.6f, 2.0f) : Random.Range(sizeRange.x, sizeRange.y);
+            if (size < 0f) size = Random.value < 0.15f ? Random.Range(1.9f, 2.3f) : Random.Range(sizeRange.x, sizeRange.y);
             var pos = spawnLine.position + new Vector3(Random.Range(-spawnWidth, spawnWidth), yOffset, 0f);
             float speed = Random.Range(riseSpeed.x, riseSpeed.y) / Mathf.Sqrt(size);
             b.Launch(pos, size, new Vector2(Random.Range(-0.2f, 0.2f), speed), 14f, 200 + (order++ % 50));
@@ -95,10 +96,10 @@ namespace OopsiePets
             pops++;
             float pitch = Mathf.Lerp(1.35f, 0.75f, Mathf.InverseLerp(sizeRange.x, giantSize, b.Size));
             Audio?.Play(Sfx.Pop, 0.8f, pitch);
-            Fx?.Burst(b.transform.position, 6 + (int)(b.Size * 4), 2.2f + b.Size, 0.35f, 0.55f, Fx.glowDot, Fx.sparkleYellow, Fx.sparklePink);
+            Fx?.Burst(b.transform.position, 6 + (int)(b.Size * 3), 1.6f + b.Size, 0.3f, 0.55f, Fx.glowDot, Fx.sparkleYellow, Fx.sparklePink);
 
             // The pet answers: big pops make it jump, small ones sometimes make it giggle or blink.
-            if (b.Size >= 1.8f) pet.Animator.Play(Random.value < 0.5f ? PetReaction.Jump : PetReaction.Surprised);
+            if (b.Size >= 1.9f) pet.Animator.Play(Random.value < 0.5f ? PetReaction.Jump : PetReaction.Surprised);
             else if (Random.value < 0.35f)
             {
                 var pool = new[] { PetReaction.Giggle, PetReaction.HeadTilt, PetReaction.Bounce, PetReaction.Sneeze, PetReaction.EarWiggle };

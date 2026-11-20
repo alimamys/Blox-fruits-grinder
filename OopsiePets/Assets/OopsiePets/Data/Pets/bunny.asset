@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed07757a0fac81dfbf860a019e48ec3, type: 3}
+  m_Name: bunny
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.PetDefinition
+  id: bunny
+  displayName: Clover
+  portrait: {fileID: 21300000, guid: d5ca11202841ef818b0ffd470b38e927, type: 3}
+  prefab: {fileID: 7661610104505249263, guid: 522b1e25b05c6dc73aa8fc5a72f7a852, type: 3}
+  voice: 2
+  voicePitch: 1.1
+  furTint: {r: 1, g: 0.8509804, b: 0.9098039, a: 1}
+  mouthSmileOverride: {fileID: 21300000, guid: 6bd7590f6138de7c2a270165f5672306, type: 3}
+  mouthLaughOverride: {fileID: 21300000, guid: 22fc11b356e0f409ca9fd154e9ffe66b, type: 3}
+  tapReactions: 0800000000000000010000000400000002000000i
+  favoriteReaction: 8
+  accessoryReactions:
+  - accessory: {fileID: 11400000, guid: 5f2e03a00ab8874daa31dcc1b7e6d042, type: 2}
+    reaction: 8
+  - accessory: {fileID: 11400000, guid: 1409a84c3efc7d54a89de6056ee9aaad, type: 2}
+    reaction: 10
+  tailWagSpeed: 6
+  tailWagAngle: 7
+  earSwayAngle: 3.5
+  earSwaySpeed: 0.7
+  breathe: 0.025
+  sticker: {fileID: 11400000, guid: 50c55335c9831189ebdd250ed29b0981, type: 2}

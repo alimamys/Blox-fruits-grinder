@@ -35,3 +35,6 @@
 *.aab
 *.unitypackage
 crashlytics-build.properties
+
+# Local test captures
+/Screenshots/

@@ -7,6 +7,7 @@ namespace OopsiePets
     [RequireComponent(typeof(SpriteRenderer), typeof(CircleCollider2D))]
     public class Bubble : MonoBehaviour, ITappable
     {
+        /// <summary>Diameter in world units.</summary>
         public float Size { get; private set; }
         public bool Popping { get; private set; }
         public Action<Bubble> Popped;
@@ -14,7 +15,7 @@ namespace OopsiePets
         SpriteRenderer sr;
         CircleCollider2D col;
         Vector2 velocity;
-        float wobblePhase, wobbleFreq, age, life;
+        float wobblePhase, wobbleFreq, age, life, scale;
 
         void Awake()
         {
@@ -26,6 +27,7 @@ namespace OopsiePets
         {
             transform.position = pos;
             Size = size;
+            scale = size / Mathf.Max(0.01f, sr.sprite.bounds.size.x);
             velocity = vel;
             life = lifetime;
             age = 0f;
@@ -50,7 +52,7 @@ namespace OopsiePets
             Popped?.Invoke(this);
             StartCoroutine(Ease.Tween(0.12f, k =>
             {
-                transform.localScale = Vector3.one * Size * Mathf.Lerp(1f, 1.35f, k);
+                transform.localScale = Vector3.one * scale * Mathf.Lerp(1f, 1.35f, k);
                 sr.color = Palette.WithAlpha(Palette.Untinted, 1f - k);
             }, Ease.OutCubic, false));
             Invoke(nameof(Hide), 0.13f);
@@ -65,7 +67,7 @@ namespace OopsiePets
             float grow = Mathf.Min(1f, age / 0.35f);
             // Breathing wobble: bubbles squish slightly as they float.
             float w = Mathf.Sin(age * wobbleFreq * Mathf.PI * 2f + wobblePhase);
-            transform.localScale = new Vector3(Size * Ease.OutBack(grow) * (1f + w * 0.04f), Size * Ease.OutBack(grow) * (1f - w * 0.04f), 1f);
+            transform.localScale = new Vector3(scale * Ease.OutBack(grow) * (1f + w * 0.04f), scale * Ease.OutBack(grow) * (1f - w * 0.04f), 1f);
             transform.position += (Vector3)(velocity + new Vector2(Mathf.Sin(age * 1.3f + wobblePhase) * 0.35f, 0f)) * Time.deltaTime;
             if (age > life) Pop();
         }

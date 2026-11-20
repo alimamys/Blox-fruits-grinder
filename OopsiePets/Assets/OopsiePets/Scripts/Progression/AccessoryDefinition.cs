@@ -10,7 +10,7 @@ namespace OopsiePets
         public AccessorySlot slot;
         [Tooltip("Width of the accessory relative to the pet's head width for this slot.")]
         public float widthOnHead = 0.6f;
-        [Tooltip("Extra local offset (rig units) from the slot anchor.")]
+        [Tooltip("Offset from the slot anchor, in head widths (so it fits every pet).")]
         public Vector2 offset;
         public float rotation;
         [Tooltip("How the pet reacts when it puts this on (pets may override).")]

@@ -21,6 +21,9 @@ namespace OopsiePets
 
         PetView pet;
         float shownAt;
+        int shownFrame = -1;
+        public bool Visible => pet != null;
+        public bool ShownThisFrame => shownFrame == Time.frameCount;
         public Action<PetView, ActivityKind[]> Chosen;
 
         void Awake()
@@ -37,6 +40,7 @@ namespace OopsiePets
         {
             pet = p;
             shownAt = Time.unscaledTime;
+            shownFrame = Time.frameCount;
             gameObject.SetActive(true);
             Follow();
             StopAllCoroutines();

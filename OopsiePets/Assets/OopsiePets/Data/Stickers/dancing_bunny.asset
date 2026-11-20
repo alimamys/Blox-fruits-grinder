@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90077d9413f807177810c46d6ef603ce, type: 3}
+  m_Name: dancing_bunny
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.StickerDefinition
+  id: dancing_bunny
+  sprite: {fileID: 21300000, guid: 288485d4045d79d578eed4e6c92bd5e8, type: 3}
+  pet: {fileID: 11400000, guid: 982597604a97def05a43ff9723ff54e1, type: 2}

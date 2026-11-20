@@ -23,7 +23,7 @@ namespace OopsiePets
         public Vector2Int mudOnBody = new Vector2Int(3, 5);
         public float spongeRadius = 1.05f;
         [Tooltip("How much mud one world-unit of sponge movement wipes (0..1 alpha per pass).")]
-        public float scrubStrength = 0.55f;
+        public float scrubStrength = 0.42f;
         public float cleanEnough = 0.9f;
         public float hintAfterIdle = 5f;
         public Vector2 spongeFingerOffset = new Vector2(0f, 0.35f);
@@ -86,13 +86,13 @@ namespace OopsiePets
             int head = Random.Range(mudOnHead.x, mudOnHead.y + 1);
             int body = Random.Range(mudOnBody.x, mudOnBody.y + 1);
             AddMud(pet.Rig.headRenderer, pet.Rig.headDecor, head, 0.05f, 60);
-            AddMud(pet.Rig.bodyRenderer, pet.Rig.bodyDecor, body, 0.1f, 20);
+            AddMud(pet.Rig.bodyRenderer, pet.Rig.bodyDecor, body, 0.18f, 20);
             foreach (var s in spots) total += s.Initial;
         }
 
         void AddMud(SpriteRenderer part, Transform parent, int n, float yBias, int order)
         {
-            var pts = PetDecor.SpreadPoints(part, n, 0.22f, 0.34f, 0.3f, yBias);
+            var pts = PetDecor.SpreadPoints(part, n, 0.24f, 0.34f, 0.26f, yBias);
             for (int i = 0; i < n; i++)
             {
                 var go = new GameObject("Mud");
@@ -100,7 +100,7 @@ namespace OopsiePets
                 go.transform.localPosition = pts[i];
                 float partWidth = part.sprite.bounds.size.x;
                 var sprite = mudSprites[Random.Range(0, mudSprites.Length)];
-                float s = partWidth * Random.Range(0.22f, 0.34f) / sprite.bounds.size.x;
+                float s = partWidth * Random.Range(0.28f, 0.4f) / sprite.bounds.size.x;
                 go.transform.localScale = new Vector3(s * (Random.value < 0.5f ? -1f : 1f), s, 1f);
                 go.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(-35f, 35f));
                 var spot = go.AddComponent<MudSpot>();

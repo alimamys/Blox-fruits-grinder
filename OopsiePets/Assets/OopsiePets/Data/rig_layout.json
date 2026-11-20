@@ -1,24 +1,237 @@
 {
- "puppy": {"folder": "Puppy", "mouth": "mouth_smile",
-  "parts": {
-   "tail":      {"file": "puppy_tail", "x": 150, "y": 70, "scale": 1.05, "pivot": [0.15, 0.2], "order": 1},
-   "body":      {"file": "puppy_body", "x": 0, "y": 0, "scale": 1.15, "pivot": [0.5, 0.0], "order": 2},
-   "head":      {"file": "puppy_head", "x": 0, "y": 505, "scale": 0.92, "pivot": [0.5, 0.5], "order": 3},
-   "ear_left":  {"file": "puppy_ear_left", "x": -225, "y": 690, "scale": 1.35, "pivot": [0.62, 0.93], "order": 4},
-   "ear_right": {"file": "puppy_ear_right", "x": 225, "y": 690, "scale": 1.35, "pivot": [0.38, 0.93], "order": 4}},
-  "face": {"eye_dx": 112, "eye_y": -28, "eye_scale": 0.98, "mouth_y": -116, "mouth_scale": 0.7}},
- "kitten": {"folder": "Kitten", "mouth": "mouth_smile",
-  "parts": {
-   "tail": {"file": "kitten_tail", "x": 120, "y": 40, "scale": 1.05, "pivot": [0.15, 0.1], "order": 1},
-   "body": {"file": "kitten_body", "x": 0, "y": 0, "scale": 1.1, "pivot": [0.5, 0.0], "order": 2},
-   "head": {"file": "kitten_head", "x": 0, "y": 500, "scale": 1.3, "pivot": [0.5, 0.5], "order": 3}},
-  "face": {"eye_dx": 100, "eye_y": -18, "eye_scale": 0.92, "mouth_y": -96, "mouth_scale": 0.62}},
- "bunny": {"folder": "Bunny", "mouth": "mouth_bunny",
-  "parts": {
-   "ear_left":  {"file": "bunny_ear_left", "x": -85, "y": 600, "scale": 1.2, "pivot": [0.5, 0.05], "order": 0, "rot": 12},
-   "ear_right": {"file": "bunny_ear_right", "x": 85, "y": 600, "scale": 1.2, "pivot": [0.5, 0.05], "order": 0, "rot": -12},
-   "tail": {"file": "bunny_tail", "x": 185, "y": 60, "scale": 1.0, "pivot": [0.2, 0.3], "order": 1},
-   "body": {"file": "bunny_body", "x": 0, "y": 0, "scale": 1.1, "pivot": [0.5, 0.0], "order": 2},
-   "head": {"file": "bunny_head", "x": 0, "y": 440, "scale": 1.35, "pivot": [0.5, 0.5], "order": 3}},
-  "face": {"eye_dx": 98, "eye_y": 12, "eye_scale": 0.88, "mouth_y": -60, "mouth_scale": 0.85}}
+ "pets": [
+  {
+   "id": "puppy",
+   "folder": "Puppy",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "puppy_tail",
+     "x": 150,
+     "y": 70,
+     "scale": 1.05,
+     "pivotX": 0.15,
+     "pivotY": 0.2,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "puppy_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.15,
+     "pivotX": 0.5,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "puppy_head",
+     "x": 0,
+     "y": 505,
+     "scale": 0.92,
+     "pivotX": 0.5,
+     "pivotY": 0.5,
+     "order": 3,
+     "rot": 0
+    },
+    {
+     "name": "ear_left",
+     "file": "puppy_ear_left",
+     "x": -225,
+     "y": 690,
+     "scale": 1.35,
+     "pivotX": 0.62,
+     "pivotY": 0.93,
+     "order": 4,
+     "rot": 0
+    },
+    {
+     "name": "ear_right",
+     "file": "puppy_ear_right",
+     "x": 225,
+     "y": 690,
+     "scale": 1.35,
+     "pivotX": 0.38,
+     "pivotY": 0.93,
+     "order": 4,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 112,
+   "eyeY": -28,
+   "eyeScale": 0.98,
+   "mouthY": -116,
+   "mouthScale": 0.7,
+   "hat": [
+    0,
+    175
+   ],
+   "eyes": [
+    0,
+    -28
+   ],
+   "side": [
+    150,
+    140
+   ],
+   "neck": [
+    0,
+    -218
+   ],
+   "headWidth": 470,
+   "furTint": "FFF8EE"
+  },
+  {
+   "id": "kitten",
+   "folder": "Kitten",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "kitten_tail",
+     "x": 120,
+     "y": 40,
+     "scale": 1.05,
+     "pivotX": 0.15,
+     "pivotY": 0.1,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "kitten_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.1,
+     "pivotX": 0.5,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "kitten_head",
+     "x": 0,
+     "y": 500,
+     "scale": 1.3,
+     "pivotX": 0.5,
+     "pivotY": 0.5,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 100,
+   "eyeY": -18,
+   "eyeScale": 0.92,
+   "mouthY": -96,
+   "mouthScale": 0.62,
+   "hat": [
+    0,
+    130
+   ],
+   "eyes": [
+    0,
+    -18
+   ],
+   "side": [
+    140,
+    110
+   ],
+   "neck": [
+    0,
+    -195
+   ],
+   "headWidth": 420,
+   "furTint": "E3D2F0"
+  },
+  {
+   "id": "bunny",
+   "folder": "Bunny",
+   "mouth": "mouth_bunny",
+   "parts": [
+    {
+     "name": "ear_left",
+     "file": "bunny_ear_left",
+     "x": -85,
+     "y": 600,
+     "scale": 1.2,
+     "pivotX": 0.5,
+     "pivotY": 0.05,
+     "order": 0,
+     "rot": 12
+    },
+    {
+     "name": "ear_right",
+     "file": "bunny_ear_right",
+     "x": 85,
+     "y": 600,
+     "scale": 1.2,
+     "pivotX": 0.5,
+     "pivotY": 0.05,
+     "order": 0,
+     "rot": -12
+    },
+    {
+     "name": "tail",
+     "file": "bunny_tail",
+     "x": 185,
+     "y": 60,
+     "scale": 1.0,
+     "pivotX": 0.2,
+     "pivotY": 0.3,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "bunny_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.1,
+     "pivotX": 0.5,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "bunny_head",
+     "x": 0,
+     "y": 440,
+     "scale": 1.35,
+     "pivotX": 0.5,
+     "pivotY": 0.5,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 98,
+   "eyeY": 12,
+   "eyeScale": 0.88,
+   "mouthY": -60,
+   "mouthScale": 0.85,
+   "hat": [
+    0,
+    150
+   ],
+   "eyes": [
+    0,
+    12
+   ],
+   "side": [
+    135,
+    120
+   ],
+   "neck": [
+    0,
+    -185
+   ],
+   "headWidth": 430,
+   "furTint": "FFD9E8"
+  }
+ ]
 }

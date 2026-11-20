@@ -13,11 +13,10 @@ namespace OopsiePets
     {
         public Transform[] bedSpots;
         public Transform doorSpot;
-        public Transform arrivalSpot;
         public CareMenu menu;
         public FingerHint hint;
         public Sprite[] mudSprites;
-        public float petScale = 0.42f;
+        public float petScale = 0.46f;
 
         readonly List<PetView> pets = new List<PetView>();
         PetView visitor;
@@ -91,12 +90,12 @@ namespace OopsiePets
                 go.transform.localPosition = PetDecor.RandomPointOn(part, 0.32f, 0.28f);
                 var sr = go.AddComponent<SpriteRenderer>();
                 sr.sprite = mudSprites[Random.Range(0, mudSprites.Length)];
-                float s = part.sprite.bounds.size.x * Random.Range(0.22f, 0.3f) / sr.sprite.bounds.size.x;
+                float s = part.sprite.bounds.size.x * Random.Range(0.3f, 0.38f) / sr.sprite.bounds.size.x;
                 go.transform.localScale = Vector3.one * s;
                 go.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(-30f, 30f));
                 sr.sortingOrder = i < 2 ? 60 + i : 20 + i;
             }
-            Vector3 from = doorSpot.position, to = arrivalSpot.position;
+            Vector3 from = doorSpot.position, to = bed.position;
             p.transform.position = from;
             yield return new WaitForSeconds(0.6f);
             // Hop hop hop into the room.
@@ -111,14 +110,23 @@ namespace OopsiePets
             yield return new WaitForSeconds(1.0f);
             p.Animator.Play(PetReaction.Sneeze);
             yield return new WaitForSeconds(1.2f);
+            p.transform.SetParent(bed, true);
             p.Animator.SetMood(PetExpression.Surprised);
             p.tappable = true;
             hint.ShowTap(p.Rig.head);
             arrival = null;
         }
 
+        bool wasPressed;
+
         void Update()
         {
+            // Tapping anywhere else closes the care menu.
+            var input = InputRouter.Instance;
+            bool pressed = input && input.IsPressed;
+            if (pressed && !wasPressed && menu.Visible && !menu.ShownThisFrame) menu.HideNow();
+            wasPressed = pressed;
+
             // A bouncing hand keeps inviting a tap on the muddy visitor.
             if (visitor && visitor.tappable && !hint.Visible && Time.frameCount % 240 == 0) hint.ShowTap(visitor.Rig.head);
         }
