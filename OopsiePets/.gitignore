@@ -38,3 +38,6 @@ crashlytics-build.properties
 
 # Local test captures
 /Screenshots/
+
+# Android native build temp (CMake)
+/.utmp/
