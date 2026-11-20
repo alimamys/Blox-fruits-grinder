@@ -1,10 +1,11 @@
 #!/bin/sh
-# After `node scripts/render.mjs`: verify the master (already loudness-mastered and fast-start), name it the upload copy, a 720p preview under 50 MB, loudness numbers and contact sheets every 4 s.
+# After `node scripts/render.mjs`: verify the master (already loudness-mastered), re-encode it as the upload copy, a 720p preview under 50 MB, loudness numbers and contact sheets every 4 s.
 set -e
 cd "$(dirname "$0")/.."
 echo "== master"
 ffprobe -v error -select_streams v:0 -count_packets -show_entries stream=nb_read_packets,width,height,r_frame_rate -show_entries format=duration -of compact out/frame240.mp4
-mv out/frame240.mp4 out/frame240_1080p_upload.mp4   # render.mjs already wrote it with +faststart
+# re-encode the video (CRF 20, slow) so the upload copy is ~40% of the render's size; the mastered audio is copied as is
+ffmpeg -v error -y -i out/frame240.mp4 -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p -profile:v high -c:a copy -movflags +faststart out/frame240_1080p_upload.mp4 && rm out/frame240.mp4
 echo "== upload copy"; ls -la out/frame240_1080p_upload.mp4
 ffmpeg -hide_banner -nostats -i out/frame240_1080p_upload.mp4 -vn -af ebur128=peak=true -f null - 2>&1 | sed -n '/Summary/,$p' | grep -E "I:|LRA:|Peak:"
 P=out/x264pass
