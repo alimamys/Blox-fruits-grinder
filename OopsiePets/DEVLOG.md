@@ -75,6 +75,17 @@ and `AgentScripts/MouseTest.cs` (Input System mouse events through the UI input 
 - Animation is code-driven on layered sprites (no Animator controllers / 2D bones); limbs are part
   of the body sprite, so there is no separate wave-with-paw animation (dance/wiggle instead).
 
+## Android
+- Build profile: `Assets/Settings/Build Profiles/Android.asset`. Command line (project closed):
+  `unity build --profile "Assets/Settings/Build Profiles/Android.asset" -o Builds/Android/OopsiePets.apk`
+- Settings: IL2CPP, ARM64, min SDK 26 / target SDK 36 (Unity defaults), portrait only,
+  id `com.oopsiepets.game`, version 0.1.0 (1). The APK is signed with the debug key (test only).
+- Before publishing: change the package id, create an upload keystore (Project Settings > Player >
+  Publishing Settings), build an AAB, and complete Google Play Families / Data safety forms
+  (the game collects no data and has no ads, accounts or network use).
+- Cloud container only: Gradle needs the session proxy, set in `~/.gradle/gradle.properties`
+  (systemProp.https.proxyHost/Port + trustStore). Not needed on a normal computer.
+
 ## Running the Editor headless (cloud container notes)
 - `Xvfb :99 -screen 0 1920x1200x24 &` then `AgentScripts/start_editor.sh` (clicks Unity's
   "running as root" warning).
