@@ -2,7 +2,8 @@ FRAME 240 - stick-figure version (same code-drawn style as the stick Mr. Widemou
 ==========================================================================================================
 
 FILE
-out/frame240_1080p_upload.mp4   (1920x1080, 24 fps, 10:40)
+out/frame240_1080p_send.mp4     (1920x1080, 24 fps, 10:40, 469 MB - the copy sent to you; looks the same)
+out/frame240_1080p_upload.mp4   (same film at a higher bitrate, 752 MB, kept on the build machine)
 
 TITLE (same pattern as your older videos)
 Frame 240 | Animated Horror Story
