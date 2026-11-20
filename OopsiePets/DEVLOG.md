@@ -66,7 +66,17 @@ and `AgentScripts/MouseTest.cs` (Input System mouse events through the UI input 
 - Save corruption: corrupt main → backup used; both corrupt → defaults, no crash.
 - Zero console errors in Play mode (the 2 FMOD errors are the container having no audio device).
 
+Web build (WebGL, `Oopsie Pets/Build/Web (WebGL)`, 24 MB, gzip with decompression fallback)
+tested in headless Chromium with real browser mouse events: loads in ~2 s, clicking the muddy
+puppy opens the wash, dragging the sponge cleans all mud (3 stars, next button), no page errors.
+
+Android APK (`Builds/Android/OopsiePets.apk`, 38 MB) built and inspected with aapt/apksigner:
+`com.oopsiepets.game` 0.1.0 (1), min SDK 26, target SDK 36, arm64-v8a, debug-signed.
+
 ## Not verified / known gaps
+- The APK has not been installed on a phone. Unity adds the INTERNET permission automatically;
+  the game never uses the network, so consider removing it (manifest override) before a
+  Google Play Families submission.
 - Sound was not heard (no audio device in the cloud container); playback calls run without errors.
 - Real touch on a phone and a physical mouse were not tested (headless display).
 - Performance on a real Android phone not measured (the container renders in software, ~10 fps).
