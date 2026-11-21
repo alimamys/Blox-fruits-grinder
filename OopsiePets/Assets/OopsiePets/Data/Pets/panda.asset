@@ -33,7 +33,7 @@ MonoBehaviour:
   breathe: 0.025
   quirks: 16
   toy: 3
-  toyIcon: {fileID: 21300000, guid: 41606c4eb5a230bab95ce6df66e24d5e, type: 3}
+  toyIcon: {fileID: 21300000, guid: 8ff0c9d6e93de25ebab5b976296fada1, type: 3}
   sticker: {fileID: 11400000, guid: 406acc381999b73c48889d24730eb5c3, type: 2}
   startsUnlocked: 0
   unlockOrder: 1

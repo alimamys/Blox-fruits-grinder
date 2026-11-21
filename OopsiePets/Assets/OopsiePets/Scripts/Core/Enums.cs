@@ -8,11 +8,11 @@ namespace OopsiePets
 
     public enum AccessorySlot { Hat = 0, Eyes = 1, Neck = 2, HeadSide = 3 }
 
-    public enum PetExpression { Neutral, Happy, Laugh, Surprised, Sneeze, Excited, Sleepy, Tongue }
+    public enum PetExpression { Neutral, Happy, Laugh, Surprised, Sneeze, Excited, Sleepy, Tongue, Yawn }
 
     public enum PetReaction
     {
-        Bounce, Giggle, Surprised, HeadTilt, Jump, Celebrate, Sneeze, Shake, EarWiggle, Purr, Wiggle, Pose, Roll
+        Bounce, Giggle, Surprised, HeadTilt, Jump, Celebrate, Sneeze, Shake, EarWiggle, Purr, Wiggle, Pose, Roll, Yawn
     }
 
     // Append only: the order is the index of each voice's synthesized clips.

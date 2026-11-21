@@ -31,6 +31,7 @@ public static class PlayTest
             sb.Append($" activity={f.care.Current.Kind} progress={f.care.Current.Progress:0.00} complete={f.care.Current.IsComplete} next={f.care.nextButton.gameObject.activeInHierarchy}");
         if (f.Current == GameFlow.Screen.Clubhouse)
             sb.Append($" pets=[{string.Join(",", f.clubhouse.Pets.Select(p => p.Definition.id + (p.tappable ? "" : "(arriving)")))}] visitor={(f.clubhouse.Visitor ? f.clubhouse.Visitor.Definition.id : "none")}");
+        if (f.Current == GameFlow.Screen.Clubhouse) sb.Append($" bored={(f.clubhouse.Bored ? f.clubhouse.Bored.Definition.id : "none")}");
         var next = f.database.NextFriend();
         sb.Append($" hearts={SaveSystem.Data.giftHearts} next={(next ? next.id : "none")} giftReady={FriendGiftRules.Ready(f.database)} unlocked=[{string.Join(",", f.database.UnlockedPets().Select(p => p.id))}]");
         sb.Append($" stickers=[{string.Join(",", SaveSystem.Data.stickers)}] frame={Time.frameCount}");

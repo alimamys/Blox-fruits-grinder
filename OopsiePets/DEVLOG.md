@@ -69,6 +69,18 @@ Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or sto
 - Art (batch 5, `jobs_batch5.json`): garden background, frisbee, yarn, rubber duck, carrot, carrot
   patch, mud puddle, trampoline, rainbow hoop, rope swing (split into stretchable ropes + seat).
 
+## Clean pets, "wants to play" (added 2026-11-21)
+- Pets never arrive muddy on their own any more (not on first launch, not after visits, not new
+  friends): mud only comes from playing in the garden. The one exception is a pet whose play was cut
+  short with the home button: it comes home muddy and asks for its bath.
+- One pet at a time **wants to play** (`Core/WantsToPlay`): a thought bubble with its own toy floats
+  above its head and it yawns every few seconds (new `Yawn` reaction and expression). Tapping it goes
+  straight to the garden (full visit); other pets still open the care menu. A friend that just came
+  out of the gift box wants to play first; otherwise the pet that has played least (not the one just
+  cared for). The hand hint points at it 2.5 s after entering the clubhouse and when idle.
+- Thought bubble drawn in code (`ArtSource/tools/make_thought_bubble.py`); the panda's icon is a
+  drawn swing (branch, thick ropes, seat) because the swing seat alone did not read at that size.
+
 ## Architecture (Assets/OopsiePets/Scripts)
 - `Core/GameFlow` — one scene, three screens (clubhouse, care, album) with fades; loads the save.
 - `Core/InputRouter` — full-screen UI catcher behind the buttons; forgiving taps (nearest
@@ -153,6 +165,15 @@ Play mode (`pt.sh PlayOutside` taps where the hint points; the yarn gets rolled 
 - Console: 0 errors.
 Web build (10.4 MB data, Brotli) in headless Chromium with real clicks: kitten's menu shows the yarn,
 the garden opens, five taps play it through (muddy, 3 stars, next button); no page errors.
+
+## Verified (2026-11-21, wants-to-play update)
+- Fresh save: 3 clean pets, no visitor, one pet with the bubble (bunny), hand hint after 2.5 s.
+- Tapping that pet opens the garden directly; after the full visit: no muddy visitor (checked 9 s
+  later), the bubble moved to another pet (puppy), heart earned.
+- Gift box opened → panda joins, wants to play (swing bubble, hand hint); every other pet clean.
+- Bubble placement checked with 4, 5 and 7 pets; yawn captured (eyes shut, mouth open). 0 errors.
+- Web build in headless Chromium: the page finds the pet with the bubble from the screenshot, one
+  click opens that pet's garden; no page errors.
 
 ## Not verified / known gaps
 - The APK has not been installed on a phone. Unity adds the INTERNET permission automatically;

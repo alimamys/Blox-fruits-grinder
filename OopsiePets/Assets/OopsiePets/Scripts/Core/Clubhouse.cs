@@ -5,8 +5,10 @@ using UnityEngine;
 namespace OopsiePets
 {
     /// <summary>
-    /// The cozy home screen. Every pet lounges on its bed with its outfit on and reacts when tapped; tapping
-    /// opens the care menu. Now and then a pet comes back muddy ("Oopsie!") and asks for a bath.
+    /// The cozy home screen. Every pet lounges on its bed, clean, with its outfit on, and reacts when tapped;
+    /// tapping opens the care menu. One pet at a time is bored and wants to go out and play: a thought
+    /// bubble shows its toy and it yawns; tapping it goes straight to the garden. (Pets only get muddy by
+    /// playing; one that left the garden early comes home muddy and asks for a bath.)
     /// The room makes space as friends join: beds are laid out for 3 to 7 pets, and the surprise gift box
     /// sits where the next friend will live.
     /// </summary>
@@ -17,11 +19,14 @@ namespace OopsiePets
         public FingerHint hint;
         public FriendGift gift;
         public Sprite bedSprite;
+        [Tooltip("Thought bubble for the pet that wants to play (its toy is drawn inside).")]
+        public Sprite thoughtBubble;
         public Sprite[] mudSprites;
 
         readonly List<PetView> pets = new List<PetView>();
         readonly List<GameObject> props = new List<GameObject>();
         PetView visitor;
+        WantsToPlay bored;
         Coroutine arrival, reveal, welcome;
         Layout layout;
 
@@ -59,6 +64,8 @@ namespace OopsiePets
 
         public IEnumerable<PetView> Pets => pets;
         public PetView Visitor => visitor;
+        /// <summary>The pet showing the "let's go play!" bubble.</summary>
+        public PetView Bored => bored ? bored.Pet : null;
         public bool Revealing => reveal != null;
         public float PetScale => layout.petScale;
 
@@ -108,12 +115,45 @@ namespace OopsiePets
                 var v = pets.Find(p => p.Definition == arrive);
                 if (v != null) arrival = StartCoroutine(Arrive(v));
             }
+
+            // One pet wants to go out and play: a new friend first, otherwise whoever has played least.
+            var b = PickBored(welcomed, arrive);
+            if (b && thoughtBubble) bored = WantsToPlay.Attach(b, thoughtBubble, 6.2f * layout.petScale);
+
             if (welcomed != null)
             {
                 var w = pets.Find(p => p.Definition == welcomed);
                 if (w != null) welcome = StartCoroutine(Welcome(w));
             }
             else if (arrive == null && gift && gift.Ready) welcome = StartCoroutine(PointAtGift());
+            else if (arrive == null && bored) welcome = StartCoroutine(PointAtBored(2.5f));
+        }
+
+        PetView PickBored(PetDefinition welcomed, PetDefinition muddy)
+        {
+            if (welcomed != null)
+            {
+                var w = pets.Find(p => p.Definition == welcomed);
+                if (w) return w;
+            }
+            var last = GameFlow.Instance.LastCared;
+            PetView best = null;
+            int bestCount = int.MaxValue;
+            foreach (var p in pets)
+            {
+                if (p.Definition == muddy) continue;
+                if (p.Definition == last && pets.Count > 2) continue; // someone else's turn
+                int c = SaveSystem.Data.Pet(p.Definition.id).careCount;
+                if (c < bestCount || (c == bestCount && Random.value < 0.4f)) { best = p; bestCount = c; }
+            }
+            return best;
+        }
+
+        IEnumerator PointAtBored(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (bored && bored.Pet && !hint.Visible && !menu.Visible && Time.time - lastPress >= delay - 0.1f) hint.ShowTap(bored.Pet.Rig.head);
+            welcome = null;
         }
 
         void MakeBed(Vector2 spot, float scale)
@@ -144,6 +184,7 @@ namespace OopsiePets
             props.Clear();
             if (gift) gift.Hide();
             visitor = null;
+            bored = null; // destroyed with its pet
         }
 
         void OnPetTapped(PetView p)
@@ -154,6 +195,14 @@ namespace OopsiePets
             {
                 // The muddy visitor goes straight to the bath.
                 GameFlow.Instance.StartCare(p.Definition, CareSession.CleanUp);
+                return;
+            }
+            if (bored && p == bored.Pet)
+            {
+                // The bored pet can't wait: straight out to the garden with its toy.
+                bored.Pop();
+                bored = null;
+                GameFlow.Instance.StartCare(p.Definition, CareSession.FullCare);
                 return;
             }
             menu.Show(p);
@@ -263,7 +312,7 @@ namespace OopsiePets
             p.Animator.Play(PetReaction.Celebrate);
             FxSpawner.Instance?.Hearts(p.Rig.head.position, 4);
             yield return new WaitForSeconds(1.6f);
-            if (p && !hint.Visible) hint.ShowTap(p.Rig.head);
+            if (p && !hint.Visible) hint.ShowTap(p.Rig.head); // the new friend wants to go play
             welcome = null;
         }
 
@@ -299,12 +348,11 @@ namespace OopsiePets
                 if (visitor && visitor.tappable) { hint.ShowTap(visitor.Rig.head); return; }
                 if (!visitor && gift && gift.isActiveAndEnabled && gift.Ready) { hint.ShowTap(gift.lid.transform); return; }
             }
-            // Nothing waiting? After a quiet moment, point at a pet: tapping it opens "let's play outside".
-            if (!visitor && arrival == null && welcome == null && (!gift || !gift.Ready) && pets.Count > 0
-                && Time.time - lastPress > idleInvite)
+            // Nothing waiting? After a quiet moment, point at the pet that wants to play.
+            if (!visitor && arrival == null && welcome == null && (!gift || !gift.Ready) && Time.time - lastPress > idleInvite)
             {
                 lastPress = Time.time;
-                var p = pets[Random.Range(0, pets.Count)];
+                var p = bored ? bored.Pet : pets.Count > 0 ? pets[Random.Range(0, pets.Count)] : null;
                 if (p) hint.ShowTap(p.Rig.head);
             }
         }

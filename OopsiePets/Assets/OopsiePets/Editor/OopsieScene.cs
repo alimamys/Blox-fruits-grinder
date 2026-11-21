@@ -144,6 +144,7 @@ namespace OopsiePets.EditorTools
             var door = Node("Door", clubWorld, new Vector3(7.2f, -3.2f));
             var club = clubWorld.gameObject.AddComponent<Clubhouse>();
             club.bedSprite = S("Objects/pet_bed");
+            club.thoughtBubble = S("UI/thought_bubble");
             club.gift = BuildGift(clubWorld);
             club.doorSpot = door;
             club.mudSprites = MudSprites();

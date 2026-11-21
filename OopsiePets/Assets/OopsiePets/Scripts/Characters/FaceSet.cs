@@ -24,6 +24,7 @@ namespace OopsiePets
         {
             PetExpression.Happy or PetExpression.Laugh or PetExpression.Sneeze or PetExpression.Sleepy => eyeHappy,
             PetExpression.Surprised => eyeWide,
+            PetExpression.Yawn => eyeBlink,
             PetExpression.Excited => eyeSparkle,
             _ => eyeOpen,
         };
@@ -35,7 +36,8 @@ namespace OopsiePets
                 case PetExpression.Laugh:
                 case PetExpression.Excited:
                     return pet != null && pet.mouthLaughOverride != null ? pet.mouthLaughOverride : mouthLaugh;
-                case PetExpression.Surprised: return mouthO;
+                case PetExpression.Surprised:
+                case PetExpression.Yawn: return mouthO;
                 case PetExpression.Sneeze: return mouthSneeze;
                 case PetExpression.Tongue: return mouthTongue;
                 default:

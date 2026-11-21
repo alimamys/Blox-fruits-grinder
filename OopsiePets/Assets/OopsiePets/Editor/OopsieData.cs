@@ -176,7 +176,7 @@ namespace OopsiePets.EditorTools
             Toy(puppy, ToyKind.Frisbee, "garden_frisbee");
             Toy(kitten, ToyKind.Yarn, "garden_yarn");
             Toy(bunny, ToyKind.Carrots, "garden_carrot");
-            Toy(panda, ToyKind.Swing, "garden_swing_seat");
+            Toy(panda, ToyKind.Swing, "garden_swing_icon");
             Toy(piglet, ToyKind.Duck, "garden_duck");
             Toy(lamb, ToyKind.Trampoline, "garden_trampoline");
             Toy(unicorn, ToyKind.Hoop, "garden_hoop");

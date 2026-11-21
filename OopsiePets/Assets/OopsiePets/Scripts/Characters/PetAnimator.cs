@@ -222,6 +222,17 @@ namespace OopsiePets
                     break;
                 }
 
+                case PetReaction.Yawn:
+                    // Bored: a big yawn (eyes shut, mouth open, head back), then a little slump and a sigh.
+                    Flash(PetExpression.Yawn, 1.1f);
+                    if (definition != null && AudioManager.Instance != null)
+                        AudioManager.Instance.PlayVoice(definition.voice, definition.voicePitch * 0.72f, VoiceKind.Happy);
+                    yield return Phase(0.45f, k => { headLift = 0.1f * Ease.OutCubic(k); headTilt = -8f * Ease.OutCubic(k); squash = -0.04f * k; });
+                    yield return Phase(0.55f, k => { headLift = 0.1f; headTilt = -8f; squash = -0.04f; });
+                    yield return Phase(0.6f, k => { headLift = Mathf.Lerp(0.1f, -0.07f, k); headTilt = Mathf.Lerp(-8f, 7f, k); squash = Mathf.Lerp(-0.04f, 0.07f, k); });
+                    yield return Phase(0.5f, k => { headLift = -0.07f * (1f - k); headTilt = 7f * (1f - k); squash = 0.07f * (1f - k); });
+                    break;
+
                 case PetReaction.Pose:
                     Flash(PetExpression.Tongue, 1.5f);
                     Voice(VoiceKind.Happy);

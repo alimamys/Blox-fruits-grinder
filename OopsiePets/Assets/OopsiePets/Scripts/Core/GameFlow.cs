@@ -5,8 +5,8 @@ using UnityEngine.UI;
 namespace OopsiePets
 {
     /// <summary>
-    /// The game's conductor: loads the save, owns the three screens (clubhouse, care activities, sticker
-    /// album) and moves between them with soft fades. One scene, no loading screens.
+    /// The game's conductor: loads the save, owns the three screens (clubhouse, care activities including the
+    /// garden, sticker album) and moves between them with soft fades. One scene, no loading screens.
     /// </summary>
     public class GameFlow : MonoBehaviour
     {
@@ -39,6 +39,8 @@ namespace OopsiePets
         public Button settingsButton;
 
         public Screen Current { get; private set; }
+        /// <summary>The pet from the last visit (so the next "wants to play" turn goes to someone else).</summary>
+        public PetDefinition LastCared { get; private set; }
         public bool Busy { get; private set; }
 
         void Awake()
@@ -59,12 +61,8 @@ namespace OopsiePets
         void Start()
         {
             Show(Screen.Clubhouse);
-            // First launch: the first pet who has never been cared for arrives muddy. A full gift box
-            // waiting to be opened comes first, though.
-            PetDefinition first = null;
-            foreach (var p in database.UnlockedPets())
-                if (SaveSystem.Data.Pet(p.id).careCount == 0) { first = p; break; }
-            clubhouse.Enter(FriendGiftRules.Ready(database) ? null : first ?? RandomPet());
+            // Everyone starts clean; one pet is bored and wants to go play (getting muddy is part of the fun).
+            clubhouse.Enter(null);
             StartCoroutine(fader.FadeIn());
         }
 
@@ -74,12 +72,6 @@ namespace OopsiePets
         }
 
         void OnApplicationQuit() => SaveSystem.Save();
-
-        PetDefinition RandomPet()
-        {
-            var list = new System.Collections.Generic.List<PetDefinition>(database.UnlockedPets());
-            return list.Count > 0 ? list[Random.Range(0, list.Count)] : null;
-        }
 
         void Show(Screen s)
         {
@@ -116,24 +108,13 @@ namespace OopsiePets
             Busy = true;
             yield return fader.FadeOut();
             var muddy = session.MuddyPet; // left the garden mid-play: comes home muddy
+            LastCared = caredFor;
             session.Cleanup();
             Show(Screen.Clubhouse);
             clubhouse.Enter(muddy);
             yield return fader.FadeIn();
             Busy = false;
-            if (muddy != null) yield break;
-            // A full gift box is the next thing to do; no muddy visitor interrupts it.
-            if (FriendGiftRules.Ready(database)) yield break;
-            // A friend who still needs help always comes back muddy; after that, sometimes one does: "Oopsie!"
-            PetDefinition next = null;
-            foreach (var p in database.UnlockedPets())
-                if (p != caredFor && (next == null || SaveSystem.Data.Pet(p.id).careCount < SaveSystem.Data.Pet(next.id).careCount)) next = p;
-            bool needsHelp = next != null && SaveSystem.Data.Pet(next.id).careCount == 0;
-            if (next != null && (needsHelp || Random.value < 0.5f))
-            {
-                yield return new WaitForSeconds(3f); // after any heart has flown into the gift box
-                if (Current == Screen.Clubhouse && !Busy && !clubhouse.Revealing) clubhouse.Enter(next);
-            }
+            // Pets stay clean at home: the next pet that wants to play shows its thought bubble.
         }
 
         public void RefreshClubhouse()
