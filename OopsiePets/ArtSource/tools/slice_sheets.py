@@ -30,6 +30,9 @@ SHEETS = {
     "Characters/Unicorn/unicorn_parts_raw.png": ("Characters/Unicorn", ["_unicorn_head_clipped", "unicorn_body", "unicorn_tail"], 10),
     "Objects/gift_box_raw.png": ("Objects", ["gift_box_base", "gift_box_lid"], 20),
     "Accessories/accessories_sheet_2_raw.png": ("Accessories", ["acc_crown", "acc_bow_tie", "acc_star_clip", "acc_beanie"], 14),
+    # Garden (batch 5): each pet's own outdoor toy
+    "Objects/garden_toys_sheet_raw.png": ("Objects", ["garden_frisbee", "garden_yarn", "garden_duck", "garden_carrot", "garden_carrot_mound", "garden_puddle"], 16),
+    "Objects/garden_play_sheet_raw.png": ("Objects", ["garden_trampoline", "garden_hoop"], 20),
 }
 
 SINGLES = {
@@ -55,6 +58,7 @@ SINGLES = {
     "Stickers/sticker_piglet_puddle_raw.png": "Stickers/sticker_piglet_puddle",
     "Stickers/sticker_lamb_cloud_raw.png": "Stickers/sticker_lamb_cloud",
     "Stickers/sticker_unicorn_rainbow_raw.png": "Stickers/sticker_unicorn_rainbow",
+    "Objects/garden_swing_raw.png": "Objects/garden_swing",
 }
 
 PAD = 6

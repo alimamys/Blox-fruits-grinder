@@ -198,6 +198,16 @@ namespace OopsiePets.EditorTools
             dress.database = db;
             dress.buttonPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(OopsieImport.Root + "/Prefabs/UI/AccessoryButton.prefab").GetComponent<AccessoryButton>();
 
+            // Garden: play outside with each pet's own toy (and get muddy)
+            var gardenStage = Node("GardenStage", careWorld, new Vector3(0f, -4.5f));
+            var outT = Node("Outdoor", activities, Vector3.zero);
+            var outdoor = outT.gameObject.AddComponent<OutdoorActivity>();
+            outdoor.background = S("Backgrounds/bg_garden");
+            outdoor.petScale = 0.5f;
+            outdoor.mudSprites = MudSprites();
+            outdoor.puddle = Spr("Puddle", outT, S("Objects/garden_puddle"), Vector3.zero, 1f, 2);
+            outdoor.toys = BuildToys(outT);
+
             var careUI = MakeScreen("CareUI");
             var home = UIKit.Button("HomeButton", careUI, S("UI/btn_home"), tl, tl, new Vector2(40, -40), 190);
             var starsRt = UIKit.Rect("Stars", careUI);
@@ -250,13 +260,16 @@ namespace OopsiePets.EditorTools
             var menuGroup = menuRoot.gameObject.AddComponent<CanvasGroup>();
             var menuPanel = UIKit.Rect("Panel", menuRoot);
             UIKit.Place(menuPanel, mid, mid, Vector2.zero, new Vector2(660, 420));
-            var full = UIKit.Button("FullCare", menuPanel, S("UI/btn_play"), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, 0), 230, pulse: true);
+            // Big "let's play" button: shows the tapped pet's own garden toy.
+            var full = UIKit.IconButton("FullCare", menuPanel, S("UI/btn_blank_yellow"), S("Objects/garden_frisbee"), new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, 0), 230, 0.17f);
+            full.GetComponent<CandyButton>().pulse = true;
+            var fullIcon = full.transform.Find("Icon").GetComponent<Image>();
             var acts = new[] { ("Wash", "btn_blank_turquoise", "Objects/sponge"), ("Bubbles", "btn_blank_blue", "Effects/bubble"), ("Brush", "btn_blank_pink", "Objects/brush"), ("Dress", "btn_blank_yellow", "Accessories/acc_bow") };
             var actBtns = new Button[4];
             for (int i = 0; i < 4; i++)
                 actBtns[i] = UIKit.IconButton(acts[i].Item1, menuPanel, S("UI/" + acts[i].Item2), S(acts[i].Item3), new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2((i - 1.5f) * 160, 0), 145, 0.2f);
             var menu = menuRoot.gameObject.AddComponent<CareMenu>();
-            menu.fullCare = full; menu.wash = actBtns[0]; menu.bubbles = actBtns[1]; menu.brush = actBtns[2]; menu.dress = actBtns[3];
+            menu.fullCare = full; menu.fullCareIcon = fullIcon; menu.wash = actBtns[0]; menu.bubbles = actBtns[1]; menu.brush = actBtns[2]; menu.dress = actBtns[3];
             menu.group = menuGroup; menu.panel = menuPanel; menu.worldCamera = cam; menu.canvasRect = canvasRect; menu.canvasCamera = cam;
             club.menu = menu;
 
@@ -294,9 +307,9 @@ namespace OopsiePets.EditorTools
 
             // ---------- Care session wiring ----------
             var session = careWorld.gameObject.AddComponent<CareSession>();
-            session.activities = new List<Activity> { wash, bubbles, brush, dress };
+            session.activities = new List<Activity> { outdoor, wash, bubbles, brush, dress };
             session.context = new ActivityContext { camera = cam, stage = tubStage, background = careBg, stars = stars, hint = hint };
-            session.tubStage = tubStage; session.cushionStage = cushionStage; session.dressStage = dressStage;
+            session.tubStage = tubStage; session.cushionStage = cushionStage; session.dressStage = dressStage; session.gardenStage = gardenStage;
             session.homeButton = home; session.nextButton = next; session.reward = reward;
             foreach (var a in session.activities) a.gameObject.SetActive(false);
 
@@ -316,6 +329,102 @@ namespace OopsiePets.EditorTools
             EditorSceneManager.SaveScene(scene, ScenePath);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
             return "scene built: " + ScenePath;
+        }
+
+        static float WidthScale(string sprite, float width) => width / Mathf.Max(0.01f, S(sprite).bounds.size.x);
+
+        /// <summary>The seven garden toys, one per <see cref="ToyKind"/> (positions are world units on the lawn).</summary>
+        static PlayToy[] BuildToys(Transform parent)
+        {
+            var toys = new PlayToy[System.Enum.GetValues(typeof(ToyKind)).Length];
+            Transform P(string n, Transform p, float x, float y) => Node(n, p, new Vector3(x, y));
+            SpriteRenderer Prop(string n, Transform p, string sprite, float x, float y, float width, int order) =>
+                Spr(n, p, S("Objects/" + sprite), new Vector3(x, y), WidthScale("Objects/" + sprite, width), order);
+
+            // Puppy: frisbee fetch
+            var fr = Node("FrisbeeToy", parent, Vector3.zero);
+            var frisbee = fr.gameObject.AddComponent<FrisbeeToy>();
+            frisbee.petStart = P("PetStart", fr, -2.2f, -4.4f);
+            frisbee.discHome = P("DiscHome", fr, 2.4f, -7.8f);
+            frisbee.disc = Prop("Disc", fr, "garden_frisbee", 2.4f, -7.8f, 1.5f, 20).transform;
+            frisbee.puddleSpot = P("PuddleSpot", fr, 1.8f, -4.2f);
+            frisbee.puddleWidth = 3.4f;
+            toys[(int)ToyKind.Frisbee] = frisbee;
+
+            // Kitten: yarn ball
+            var ya = Node("YarnToy", parent, Vector3.zero);
+            var yarn = ya.gameObject.AddComponent<YarnToy>();
+            yarn.petStart = P("PetStart", ya, -2.2f, -4.6f);
+            yarn.yarnHome = P("YarnHome", ya, 2.0f, -7.2f);
+            yarn.yarn = Prop("Yarn", ya, "garden_yarn", 2.0f, -7.2f, 1.3f, 12).transform;
+            yarn.puddleSpot = P("PuddleSpot", ya, 2.0f, -3.9f);
+            yarn.puddleWidth = 3.2f;
+            toys[(int)ToyKind.Yarn] = yarn;
+
+            // Bunny: carrot patch
+            var ca = Node("CarrotToy", parent, Vector3.zero);
+            var carrots = ca.gameObject.AddComponent<CarrotToy>();
+            carrots.petStart = P("PetStart", ca, -3.3f, -4.2f);
+            carrots.mounds = new[]
+            {
+                Prop("Carrot1", ca, "garden_carrot_mound", -0.4f, -7.4f, 1.7f, 4),
+                Prop("Carrot2", ca, "garden_carrot_mound", 1.5f, -4.3f, 1.7f, 4),
+                Prop("Carrot3", ca, "garden_carrot_mound", 3.3f, -7.0f, 1.7f, 4),
+            };
+            carrots.carrotSprite = S("Objects/garden_carrot");
+            carrots.dugSprite = S("Effects/mud_splat_04");
+            toys[(int)ToyKind.Carrots] = carrots;
+
+            // Panda: rope swing (ropes stretch up off the top of the screen)
+            var sw = Node("SwingToy", parent, Vector3.zero);
+            var swing = sw.gameObject.AddComponent<SwingToy>();
+            var pivot = P("Pivot", sw, 0.4f, 10.4f);
+            const float seatW = 0.62f, plankTop = -3.6f;
+            var seatSprite = S("Objects/garden_swing_seat");
+            float seatDrop = (1f - 0.656f) * seatSprite.bounds.size.y * seatW; // seat top to plank top
+            float ropeLen = pivot.position.y - (plankTop + seatDrop);
+            var ropes = Spr("Ropes", pivot, S("Objects/garden_swing_ropes"), Vector3.zero, 1f, 3);
+            ropes.transform.localScale = new Vector3(seatW, ropeLen / ropes.sprite.bounds.size.y, 1f);
+            Spr("Seat", pivot, seatSprite, new Vector3(0f, -ropeLen), seatW, 4);
+            swing.pivot = pivot;
+            swing.seat = P("SeatAnchor", pivot, 0f, -ropeLen - seatDrop - 0.12f);
+            swing.puddleSpot = P("PuddleSpot", sw, 2.0f, -7.6f);
+            swing.puddleWidth = 4.0f;
+            toys[(int)ToyKind.Swing] = swing;
+
+            // Piglet: rubber duck in a big mud puddle
+            var du = Node("DuckToy", parent, Vector3.zero);
+            var duck = du.gameObject.AddComponent<DuckToy>();
+            duck.petStart = P("PetStart", du, -2.8f, -4.3f);
+            duck.puddleSpot = P("PuddleSpot", du, 1.1f, -6.9f);
+            duck.puddleWidth = 5.4f;
+            duck.duck = Prop("Duck", du, "garden_duck", 2.6f, -6.6f, 1.4f, 6).transform;
+            toys[(int)ToyKind.Duck] = duck;
+
+            // Lamb: trampoline
+            var tr = Node("TrampolineToy", parent, Vector3.zero);
+            var tramp = tr.gameObject.AddComponent<TrampolineToy>();
+            var trampSprite = Prop("Trampoline", tr, "garden_trampoline", -1.3f, -7.0f, 4.0f, 5);
+            tramp.trampoline = trampSprite.transform;
+            tramp.matTop = P("MatTop", tr, -1.3f, -7.0f + trampSprite.bounds.size.y * 0.68f);
+            tramp.puddleSpot = P("PuddleSpot", tr, 3.0f, -7.6f);
+            tramp.puddleWidth = 3.2f;
+            toys[(int)ToyKind.Trampoline] = tramp;
+
+            // Unicorn: rainbow hoop
+            var ho = Node("HoopToy", parent, Vector3.zero);
+            var hoop = ho.gameObject.AddComponent<HoopToy>();
+            var hoopSprite = Prop("Hoop", ho, "garden_hoop", 0.3f, -6.7f, 4.6f, 5);
+            hoop.hoop = hoopSprite.transform;
+            hoop.hoopCenter = P("HoopCenter", ho, 0.3f, -6.7f + hoopSprite.bounds.size.y * 0.5f);
+            hoop.petStart = P("PetStart", ho, -3.5f, -6.3f);
+            hoop.runUp = P("RunUp", ho, -2.6f, -6.4f);
+            hoop.puddleSpot = P("PuddleSpot", ho, 3.4f, -6.8f);
+            hoop.puddleWidth = 3.0f;
+            toys[(int)ToyKind.Hoop] = hoop;
+
+            foreach (var t in toys) t.gameObject.SetActive(false);
+            return toys;
         }
 
         /// <summary>The friend gift box: box, lid with bow, and three heart slots above (all scaled together).</summary>

@@ -221,6 +221,36 @@ public static class PlayTest
         return sb.ToString();
     }
 
+    /// <summary>Plays the pet's garden toy like a child: taps where the hint points (the yarn gets rolled around).</summary>
+    public static async Task<string> PlayOutside(int maxTaps)
+    {
+        var act = GameFlow.Instance.care.Current as OutdoorActivity;
+        if (!act) return "not outside: " + State();
+        var sb = new StringBuilder($"toy={act.Toy.GetType().Name} ");
+        var rnd = new System.Random(5);
+        for (int i = 0; i < maxTaps && !act.IsComplete; i++)
+        {
+            for (int w = 0; w < 80 && act.Toy && act.Toy.Busy && !act.IsComplete; w++) await Frames(100);
+            if (act.IsComplete || !act.Toy) break;
+            var at = act.Toy.HintTarget ? act.Toy.HintTarget.position : Vector3.zero;
+            if (act.Toy is YarnToy) at = new Vector3(rnd.Next(-35, 36) / 10f, rnd.Next(-80, -35) / 10f);
+            await Tap(at.x, at.y);
+            await Frames(500);
+            sb.Append($"[tap{i} splats={act.Splats} p={act.Progress:0.00}]");
+        }
+        for (int k = 0; k < 60 && !act.IsComplete; k++) await Frames(100);
+        sb.Append($" complete={act.IsComplete} splats={act.Splats} | " + State());
+        return sb.ToString();
+    }
+
+    public static string MudOnPet()
+    {
+        var pet = GameFlow.Instance.care.Pet;
+        if (!pet) return "no pet";
+        var spots = pet.GetComponentsInChildren<MudSpot>();
+        return $"mud spots on pet: {spots.Length} (cleared {spots.Count(m => m.Cleared)})";
+    }
+
     public static string ResetSave()
     {
         SaveSystem.ResetProgress();

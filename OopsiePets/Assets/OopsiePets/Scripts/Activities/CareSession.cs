@@ -6,22 +6,31 @@ using UnityEngine.UI;
 namespace OopsiePets
 {
     /// <summary>
-    /// Runs a care visit for one pet: either the full adventure (wash → bubbles → brush → dress-up → sticker)
-    /// or a single favourite activity. Between activities a big "next" button appears; nothing moves on
+    /// Runs a care visit for one pet: either the full adventure (play outside with its own toy → wash →
+    /// bubbles → brush → dress-up → sticker) or a single favourite activity. A pet that is already muddy
+    /// skips the garden and goes straight to the bath. Between activities a big "next" button appears; nothing moves on
     /// by itself, so a child can keep playing as long as they like. Home is always one tap away.
     /// </summary>
     public class CareSession : MonoBehaviour
     {
-        public static readonly ActivityKind[] FullCare = { ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Brush, ActivityKind.DressUp };
+        public static readonly ActivityKind[] FullCare = { ActivityKind.Outdoor, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Brush, ActivityKind.DressUp };
+        /// <summary>For a pet that is already muddy (an "Oopsie!" visitor): straight to the bath.</summary>
+        public static readonly ActivityKind[] CleanUp = { ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Brush, ActivityKind.DressUp };
+
+        /// <summary>A full visit (earns a sticker and a gift-box heart): it includes the bath through dress-up.</summary>
+        public static bool IsFull(ActivityKind[] seq) =>
+            seq != null && seq.Length >= 4 && System.Array.IndexOf(seq, ActivityKind.Wash) >= 0 && System.Array.IndexOf(seq, ActivityKind.DressUp) >= 0;
 
         public List<Activity> activities = new List<Activity>();
         public ActivityContext context;
-        public Transform tubStage, cushionStage, dressStage;
+        public Transform tubStage, cushionStage, dressStage, gardenStage;
         public Button homeButton;
         public Button nextButton;
         public RewardPanel reward;
 
         public PetView Pet { get; private set; }
+        /// <summary>Set when the child leaves the garden with a muddy pet: it comes home muddy.</summary>
+        public PetDefinition MuddyPet { get; private set; }
         public Activity Current { get; private set; }
         public bool Running => run != null;
 
@@ -51,7 +60,8 @@ namespace OopsiePets
 
         IEnumerator Run(PetDefinition petDef, ActivityKind[] seq)
         {
-            bool full = seq.Length == FullCare.Length;
+            bool full = IsFull(seq);
+            MuddyPet = null;
             Pet = GameFlow.Instance.SpawnPet(petDef, tubStage, 0.62f, false);
             Pet.SetSortingOrder(10);
             for (int i = 0; i < seq.Length; i++)
@@ -110,10 +120,12 @@ namespace OopsiePets
             {
                 ActivityKind.Brush => cushionStage,
                 ActivityKind.DressUp => dressStage,
+                ActivityKind.Outdoor => gardenStage,
                 _ => tubStage,
             };
             Pet.transform.SetParent(spot, false);
             Pet.transform.localPosition = Vector3.zero;
+            Pet.transform.localRotation = Quaternion.identity;
             float s = act ? act.petScale : 0.62f;
             Pet.transform.localScale = Vector3.one * s;
             Pet.Rig.RemoveAll();
@@ -136,6 +148,9 @@ namespace OopsiePets
                 foreach (var a in Pet.Rig.AllWorn()) save.accessories.Add(a.id);
                 SaveSystem.Save();
             }
+            // Leaving the garden after a splash: the pet comes home muddy and asks for a bath.
+            if (Current && Current.Kind == ActivityKind.Outdoor && Pet && Pet.GetComponentInChildren<MudSpot>())
+                MuddyPet = Pet.Definition;
             StopCoroutine(run);
             run = null;
             GameFlow.Instance.StartCoroutine(GameFlow.Instance.ReturnToClubhouse(def, this)); // owned by GameFlow: this object is hidden on the way out

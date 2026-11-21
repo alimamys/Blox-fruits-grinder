@@ -4,7 +4,7 @@ namespace OopsiePets
 {
     public enum VoiceKind { Happy, Giggle, Surprised, Sneeze, Purr, Excited }
 
-    public enum Sfx { Tap, Pop, Squish, Brush, Sparkle, Whoosh, Celebrate, Sticker, Equip, Unequip, Splash }
+    public enum Sfx { Tap, Pop, Squish, Brush, Sparkle, Whoosh, Celebrate, Sticker, Equip, Unequip, Splash, Boing, Squeak }
 
     /// <summary>
     /// All game audio. Every sound is synthesized at startup (original, license-free); assign real
@@ -15,7 +15,7 @@ namespace OopsiePets
         public static AudioManager Instance { get; private set; }
 
         [Header("Optional recorded replacements (left empty = synthesized)")]
-        public AudioClip tap, pop, squish, brush, sparkle, whoosh, celebrate, sticker, equip, unequip, splash, music;
+        public AudioClip tap, pop, squish, brush, sparkle, whoosh, celebrate, sticker, equip, unequip, splash, boing, squeak, music;
 
         [Range(0f, 1f)] public float musicLevel = 0.3f;
 
@@ -47,6 +47,8 @@ namespace OopsiePets
             if (equip == null) equip = Synth.Blip("equip", 520f, 1040f, 0.16f, 0.4f);
             if (unequip == null) unequip = Synth.Blip("unequip", 700f, 420f, 0.12f, 0.3f);
             if (splash == null) splash = Synth.Splash();
+            if (boing == null) boing = Synth.Blip("boing", 180f, 620f, 0.28f, 0.5f);
+            if (squeak == null) squeak = Synth.Blip("squeak", 1500f, 2100f, 0.11f, 0.35f);
             if (music == null) music = Synth.MusicBox();
 
             int voiceCount = System.Enum.GetValues(typeof(PetVoice)).Length;
@@ -110,7 +112,7 @@ namespace OopsiePets
             {
                 Sfx.Tap => tap, Sfx.Pop => pop, Sfx.Squish => squish, Sfx.Brush => brush, Sfx.Sparkle => sparkle,
                 Sfx.Whoosh => whoosh, Sfx.Celebrate => celebrate, Sfx.Sticker => sticker, Sfx.Equip => equip,
-                Sfx.Unequip => unequip, _ => splash,
+                Sfx.Unequip => unequip, Sfx.Boing => boing, Sfx.Squeak => squeak, _ => splash,
             };
             PlayClip(clip, volume, pitch * (1f + Random.Range(-jitter, jitter)));
         }

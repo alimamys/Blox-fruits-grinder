@@ -47,6 +47,12 @@ namespace OopsiePets
         [Header("Surprises")]
         public PetQuirk quirks;
 
+        [Header("Garden")]
+        [Tooltip("This pet's own outdoor toy.")]
+        public ToyKind toy;
+        [Tooltip("Shown on the big 'let's play' button in the care menu.")]
+        public Sprite toyIcon;
+
         [Header("Progression")]
         public StickerDefinition sticker;
         [Tooltip("Lives in the clubhouse from the start. Otherwise the child earns this friend from the gift box.")]

@@ -47,6 +47,28 @@ Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or sto
 - Grown-up settings (behind the parent gate): "Let all friends in now" unlocks everyone at once.
 - Save format version 2 adds `giftHearts`; version-1 saves load unchanged (starters only, 0 hearts).
 
+## Playing outside (added 2026-11-21)
+- Problem fixed: once every pet had had its first bath, pets only came back muddy right after a
+  visit and only half the time, and never while the child waited, so progress (hearts) could stall.
+- Every full visit now starts in the **garden** (`Activities/Outdoor/OutdoorActivity`), where each pet
+  plays with its own toy (`ToyKind` on `PetDefinition`) and gets muddy; then wash → bubbles → brush →
+  dress-up → sticker + gift-box heart. A pet that is already muddy (an "Oopsie!" visitor) skips the
+  garden (`CareSession.CleanUp`). The big button in the care menu shows the pet's own toy.
+- Toys (`PlayToy` subclasses; taps are forgiving, almost anywhere on the lawn works):
+  - Puppy `FrisbeeToy`: tap to throw, the puppy fetches (from the puddle) and brings it back. 3 rounds.
+  - Kitten `YarnToy`: drag the yarn or tap to roll it; the kitten pounces each time. 4 rounds.
+  - Bunny `CarrotToy`: tap a carrot; the bunny digs (dirt flies), pulls it out and munches it. 3.
+  - Panda `SwingToy`: each tap pushes the swing higher; the 3rd push launches a roll into the puddle.
+  - Piglet `DuckToy`: tap and the rubber duck squeaks; the piglet jumps into the big puddle. 3.
+  - Lamb `TrampolineToy`: bigger bounces (a flip on the 2nd); the 3rd lands in the puddle.
+  - Unicorn `HoopToy`: trots up and leaps through the rainbow hoop into the puddle. 3.
+- The mud is made of real `MudSpot`s (`MudSpot.Splat`), so the bath that follows cleans exactly the
+  splats the child saw (topped up to the usual amount). Leaving the garden after a splash brings the
+  pet home muddy as the "Oopsie!" visitor. When the clubhouse is quiet for 9 s, the hand points at a
+  pet, so there is always a next step.
+- Art (batch 5, `jobs_batch5.json`): garden background, frisbee, yarn, rubber duck, carrot, carrot
+  patch, mud puddle, trampoline, rainbow hoop, rope swing (split into stretchable ropes + seat).
+
 ## Architecture (Assets/OopsiePets/Scripts)
 - `Core/GameFlow` — one scene, three screens (clubhouse, care, album) with fades; loads the save.
 - `Core/InputRouter` — full-screen UI catcher behind the buttons; forgiving taps (nearest
@@ -119,6 +141,19 @@ Web build: 9.5 MB data + 7.5 MB code (Brotli), loads in 2.5 s in headless Chromi
 clicks open the bath from the muddy puppy and scrubbing cleans it (3 stars); no page errors.
 Android APK: 37.7 MB, `com.oopsiepets.game` 0.1.0 (1), target SDK 36, arm64-v8a, debug-signed.
 
+## Verified (2026-11-21, garden update)
+Play mode (`pt.sh PlayOutside` taps where the hint points; the yarn gets rolled around):
+- All 7 toys played to the end from a clean pet: frisbee 9 splats, yarn 5, carrots 6, swing 5,
+  duck 6, trampoline 5, hoop 6; the pet hops to the middle of the lawn for its "Oopsie!".
+- Garden → wash: the 6 garden splats were kept and topped up to 8; the wash completed.
+- With 6 pets and the unicorn still in the box: a full visit starting outdoors gave heart 1, a muddy
+  visitor's visit gave heart 2 (progress no longer depends on random muddy visitors).
+- Home pressed mid-play after a splash: the piglet came home as the muddy visitor.
+- Quiet clubhouse: the hand hint appeared after ~10 s. Care menu shows each pet's toy icon.
+- Console: 0 errors.
+Web build (10.4 MB data, Brotli) in headless Chromium with real clicks: kitten's menu shows the yarn,
+the garden opens, five taps play it through (muddy, 3 stars, next button); no page errors.
+
 ## Not verified / known gaps
 - The APK has not been installed on a phone. Unity adds the INTERNET permission automatically;
   the game never uses the network, so consider removing it (manifest override) before a
@@ -131,6 +166,8 @@ Android APK: 37.7 MB, `com.oopsiepets.game` 0.1.0 (1), target SDK 36, arm64-v8a,
 - Friends update: the star sprinkle on the unicorn's bubble pops and the lamb's "poof" are too short
   to catch in a still capture; their code ran without errors but was not seen on screen. The new
   voices (oink, baa, squeak, trill) were not heard (no audio device).
+- Garden update: new sounds (boing, squeak) not heard; toy feel (throw distance, swing timing) only
+  tested with scripted taps and mouse clicks, not by children or on a phone.
 - Animation is code-driven on layered sprites (no Animator controllers / 2D bones); limbs are part
   of the body sprite, so there is no separate wave-with-paw animation (dance/wiggle instead).
 

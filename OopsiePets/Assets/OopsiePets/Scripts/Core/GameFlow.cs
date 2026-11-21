@@ -115,11 +115,13 @@ namespace OopsiePets
             if (Busy) yield break;
             Busy = true;
             yield return fader.FadeOut();
+            var muddy = session.MuddyPet; // left the garden mid-play: comes home muddy
             session.Cleanup();
             Show(Screen.Clubhouse);
-            clubhouse.Enter(null);
+            clubhouse.Enter(muddy);
             yield return fader.FadeIn();
             Busy = false;
+            if (muddy != null) yield break;
             // A full gift box is the next thing to do; no muddy visitor interrupts it.
             if (FriendGiftRules.Ready(database)) yield break;
             // A friend who still needs help always comes back muddy; after that, sometimes one does: "Oopsie!"

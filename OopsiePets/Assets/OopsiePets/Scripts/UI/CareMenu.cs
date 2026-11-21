@@ -5,12 +5,15 @@ using UnityEngine.UI;
 namespace OopsiePets
 {
     /// <summary>
-    /// Pops up above a tapped pet: one big "care for me" button (the full wash → bubbles → brush → dress-up
-    /// adventure) and four small activity buttons to revisit a favourite. Icons only, no text.
+    /// Pops up above a tapped pet: one big "let's play" button showing the pet's own toy (the full visit:
+    /// garden → wash → bubbles → brush → dress-up) and four small activity buttons to revisit a favourite.
+    /// Icons only, no text.
     /// </summary>
     public class CareMenu : MonoBehaviour
     {
         public Button fullCare;
+        [Tooltip("Icon on the big button; shows the tapped pet's own toy.")]
+        public Image fullCareIcon;
         public Button wash, bubbles, brush, dress;
         public CanvasGroup group;
         public RectTransform panel;
@@ -39,6 +42,7 @@ namespace OopsiePets
         public void Show(PetView p)
         {
             pet = p;
+            if (fullCareIcon && p.Definition && p.Definition.toyIcon) fullCareIcon.sprite = p.Definition.toyIcon;
             shownAt = Time.unscaledTime;
             shownFrame = Time.frameCount;
             gameObject.SetActive(true);

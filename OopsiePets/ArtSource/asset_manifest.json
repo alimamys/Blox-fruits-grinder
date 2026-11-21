@@ -590,6 +590,58 @@
       "style_prefix": "STYLE",
       "seconds": 23.2,
       "ok": true
+    },
+    "bg_garden": {
+      "id": "bg_garden",
+      "file": "Backgrounds/bg_garden_raw.png",
+      "model": "gpt-image-2",
+      "size": "1024x1536",
+      "quality": "high",
+      "background": "opaque",
+      "refs": [],
+      "prompt": "Portrait 9:16 mobile game background of a sunny pastel backyard garden where preschool children play with cute pets, viewed straight on, flat front-facing composition. Soft baby-blue sky with puffy white clouds and a small pastel rainbow in the top quarter, a white wooden picket fence across the middle distance with pastel flowers along it, round fluffy pastel-green trees and flowering bushes at the far left and far right edges. A soft, lush pastel-green lawn fills the lower 60% of the image with only a few tiny flowers and clovers near the left and right edges. IMPORTANT: keep the lawn in the middle and lower area (from 35% to 95% of the height, center 80% width) open, flat and uncluttered because pets, toys and a mud puddle will be placed there as separate game objects. Keep the top 10% calm for UI buttons. No characters, no animals, no toys, no puddles, no paths, no text.",
+      "style_prefix": "STYLE",
+      "seconds": 79.9,
+      "ok": true
+    },
+    "garden_toys_sheet": {
+      "id": "garden_toys_sheet",
+      "file": "Objects/garden_toys_sheet_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "Sprite sheet of 6 cute outdoor pet toys and garden props for a preschool game, each clearly separated with very generous empty space, arranged in 3 columns by 2 rows: 1) a pastel pink flying disc frisbee seen at a slight angle from above, with a mint ring stripe; 2) a round ball of soft lavender yarn with one loose curly strand trailing; 3) a classic soft-yellow rubber duck toy with an orange beak, side view facing left; 4) a whole orange carrot with a bright green leafy top, lying diagonally; 5) a small round mound of brown garden soil with only the green leafy top of a carrot and a little orange tip sticking out of it; 6) a wide flat oval mud puddle, chocolate brown with lighter caramel highlights and a few small splash droplets around it, seen from a low front angle (much wider than tall). Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 35.0,
+      "ok": true
+    },
+    "garden_play_sheet": {
+      "id": "garden_play_sheet",
+      "file": "Objects/garden_play_sheet_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "Sprite sheet of 2 cute backyard play pieces for a preschool pet game, side by side with very large empty space between them and a wide empty margin to every image edge: 1) LEFT: a small round backyard trampoline, front view from slightly above, pastel mint frame with soft pink edge padding, a lavender bouncy mat and four short sturdy legs; 2) RIGHT: a rainbow hoop for jumping through: a half-circle pastel rainbow arch (pink, soft yellow, mint, baby blue, lavender bands) standing on two small round white cloud-shaped feet, front view. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 34.2,
+      "ok": true
+    },
+    "garden_swing": {
+      "id": "garden_swing",
+      "file": "Objects/garden_swing_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1536",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "A cute backyard rope swing for a preschool pet game, straight front view: a soft pastel pink wooden seat plank with rounded corners hanging from two long cream-colored ropes that go straight up, parallel, all the way to the very top edge of the image, with small neat knots where the ropes meet the seat. The ropes touch the top edge of the image; the seat is in the lower third. Nothing else. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 33.4,
+      "ok": true
     }
   }
 }

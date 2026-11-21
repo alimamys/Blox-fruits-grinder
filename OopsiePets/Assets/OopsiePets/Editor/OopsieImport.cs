@@ -59,6 +59,8 @@ namespace OopsiePets.EditorTools
                 if (file.StartsWith("mouth_")) pivot = new Vector2(0.5f, 1f);
                 if (file == "gift_box_base") pivot = new Vector2(0.5f, 0f);
                 if (file == "gift_box_lid") pivot = new Vector2(0.5f, 0.12f);
+                if (file == "garden_swing_ropes" || file == "garden_swing_seat") pivot = new Vector2(0.5f, 1f);
+                if (file == "garden_trampoline" || file == "garden_hoop" || file == "garden_carrot_mound") pivot = new Vector2(0.5f, 0f);
                 if (file.StartsWith("panel_")) border = new Vector4(80, 80, 80, 80);
                 if (file.StartsWith("slider_")) border = new Vector4(30, 28, 30, 28);
                 foreach (var pet in rig.pets)

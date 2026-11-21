@@ -15,6 +15,7 @@ stored as `style_prefix` in `asset_manifest.json` (see also `Assets/OopsiePets/D
 | bg_album | gpt-image-2 | 1024x1536 high | - | `Backgrounds/bg_album_raw.png` |
 | bg_clubhouse | gpt-image-2 | 1024x1536 high | - | `Backgrounds/bg_clubhouse_raw.png` |
 | bg_dressup | gpt-image-2 | 1024x1536 high | - | `Backgrounds/bg_dressup_raw.png` |
+| bg_garden | gpt-image-2 | 1024x1536 high | - | `Backgrounds/bg_garden_raw.png` |
 | bg_washroom | gpt-image-2 | 1024x1536 high | - | `Backgrounds/bg_washroom_raw.png` |
 | brush | gpt-image-1.5 | 1024x1024 high | - | `Objects/brush_raw.png` |
 | bubble | gpt-image-1.5 | 1024x1024 high | - | `Effects/bubble_raw.png` |
@@ -23,6 +24,9 @@ stored as `style_prefix` in `asset_manifest.json` (see also `Assets/OopsiePets/D
 | clubhouse_objects | gpt-image-1.5 | 1536x1024 high | - | `Objects/clubhouse_objects_raw.png` |
 | fur_tufts | gpt-image-1.5 | 1536x1024 high | - | `Effects/fur_tufts_raw.png` |
 | fx_sheet | gpt-image-1.5 | 1536x1024 medium | - | `Effects/fx_sheet_raw.png` |
+| garden_play_sheet | gpt-image-1.5 | 1536x1024 high | - | `Objects/garden_play_sheet_raw.png` |
+| garden_swing | gpt-image-1.5 | 1024x1536 high | - | `Objects/garden_swing_raw.png` |
+| garden_toys_sheet | gpt-image-1.5 | 1536x1024 high | - | `Objects/garden_toys_sheet_raw.png` |
 | gift_box | gpt-image-1.5 | 1536x1024 high | - | `Objects/gift_box_raw.png` |
 | hand_pointer | gpt-image-1.5 | 1024x1024 medium | - | `UI/hand_pointer_raw.png` |
 | kitten_parts | gpt-image-1.5 | 1536x1024 high | kitten_reference.png | `Characters/Kitten/kitten_parts_raw.png` |
@@ -55,10 +59,10 @@ stored as `style_prefix` in `asset_manifest.json` (see also `Assets/OopsiePets/D
 ## Sprites in the Unity project (Assets/OopsiePets/Art/)
 
 - **Accessories** (10): `acc_beanie.png`, `acc_bow.png`, `acc_bow_tie.png`, `acc_collar.png`, `acc_crown.png`, `acc_flower_crown.png`, `acc_funny_glasses.png`, `acc_party_hat.png`, `acc_star_clip.png`, `acc_sunglasses.png`
-- **Backgrounds** (4): `bg_album.png`, `bg_clubhouse.png`, `bg_dressup.png`, `bg_washroom.png`
+- **Backgrounds** (5): `bg_album.png`, `bg_clubhouse.png`, `bg_dressup.png`, `bg_garden.png`, `bg_washroom.png`
 - **Characters** (44): `Bunny/bunny_body.png`, `Bunny/bunny_ear_left.png`, `Bunny/bunny_ear_right.png`, `Bunny/bunny_head.png`, `Bunny/bunny_portrait.png`, `Bunny/bunny_tail.png`, `Kitten/kitten_body.png`, `Kitten/kitten_head.png`, `Kitten/kitten_portrait.png`, `Kitten/kitten_tail.png`, `Lamb/lamb_body.png`, `Lamb/lamb_head.png`, `Lamb/lamb_portrait.png`, `Lamb/lamb_tail.png`, `Panda/panda_body.png`, `Panda/panda_head.png`, `Panda/panda_portrait.png`, `Panda/panda_tail.png`, `Piglet/piglet_body.png`, `Piglet/piglet_head.png`, `Piglet/piglet_portrait.png`, `Piglet/piglet_tail.png`, `Puppy/puppy_body.png`, `Puppy/puppy_ear_left.png`, `Puppy/puppy_ear_right.png`, `Puppy/puppy_head.png`, `Puppy/puppy_portrait.png`, `Puppy/puppy_tail.png`, `Shared/eye_blink.png`, `Shared/eye_happy.png`, `Shared/eye_open.png`, `Shared/eye_sparkle.png`, `Shared/eye_wide.png`, `Shared/mouth_bunny.png`, `Shared/mouth_bunny_laugh.png`, `Shared/mouth_laugh.png`, `Shared/mouth_o.png`, `Shared/mouth_smile.png`, `Shared/mouth_sneeze.png`, `Shared/mouth_tongue.png`, `Unicorn/unicorn_body.png`, `Unicorn/unicorn_head.png`, `Unicorn/unicorn_portrait.png`, `Unicorn/unicorn_tail.png`
 - **Effects** (19): `bubble.png`, `fur_tuft_01.png`, `fur_tuft_02.png`, `fur_tuft_03.png`, `fur_tuft_04.png`, `fur_tuft_05.png`, `fur_tuft_06.png`, `fx_foam_puff.png`, `fx_glow_dot.png`, `fx_heart.png`, `fx_sparkle_pink.png`, `fx_sparkle_yellow.png`, `fx_star.png`, `mud_splat_01.png`, `mud_splat_02.png`, `mud_splat_03.png`, `mud_splat_04.png`, `mud_splat_05.png`, `mud_splat_06.png`
-- **Objects** (8): `bathtub.png`, `brush.png`, `gift_box_base.png`, `gift_box_lid.png`, `pet_bed.png`, `sponge.png`, `toy_ball.png`, `toy_basket.png`
+- **Objects** (18): `bathtub.png`, `brush.png`, `garden_carrot.png`, `garden_carrot_mound.png`, `garden_duck.png`, `garden_frisbee.png`, `garden_hoop.png`, `garden_puddle.png`, `garden_swing_ropes.png`, `garden_swing_seat.png`, `garden_trampoline.png`, `garden_yarn.png`, `gift_box_base.png`, `gift_box_lid.png`, `pet_bed.png`, `sponge.png`, `toy_ball.png`, `toy_basket.png`
 - **Stickers** (11): `sticker_bunny_dancing.png`, `sticker_heart.png`, `sticker_kitten_sleeping.png`, `sticker_lamb_cloud.png`, `sticker_panda_bamboo.png`, `sticker_paw.png`, `sticker_piglet_puddle.png`, `sticker_puppy_happy.png`, `sticker_rainbow.png`, `sticker_star.png`, `sticker_unicorn_rainbow.png`
 - **UI** (24): `btn_album.png`, `btn_back.png`, `btn_blank_blue.png`, `btn_blank_cream.png`, `btn_blank_lavender.png`, `btn_blank_mint.png`, `btn_blank_peach.png`, `btn_blank_pink.png`, `btn_blank_turquoise.png`, `btn_blank_yellow.png`, `btn_close.png`, `btn_done.png`, `btn_home.png`, `btn_music.png`, `btn_play.png`, `btn_settings.png`, `hand_pointer.png`, `panel_cream.png`, `panel_lavender.png`, `select_ring.png`, `slider_fill.png`, `slider_track.png`, `star_icon.png`, `sunburst.png`
 
@@ -93,6 +97,9 @@ Portrait 9:16 mobile game background of a magical, cozy pet clubhouse interior f
 ### bg_dressup
 Portrait 9:16 mobile game background of an adorable pastel dress-up boutique room for pets, viewed straight on, flat front-facing composition: soft peach and cream striped wallpaper, a big oval vanity mirror with light bulbs near the top center (mirror shows only a soft sky-blue reflection, nothing inside), a small wardrobe with hats and bows on the left wall, a hat stand with ribbons on the right, garlands of tiny paper stars, light-wood floor with a round lavender rug. IMPORTANT: keep the middle area (from 30% to 75% of the height, center 60% width) open and simple because a pet will stand there as a separate game object, and keep the bottom 18% simple and calm because an accessory tray UI will sit there. No characters, no animals, no text.
 
+### bg_garden
+Portrait 9:16 mobile game background of a sunny pastel backyard garden where preschool children play with cute pets, viewed straight on, flat front-facing composition. Soft baby-blue sky with puffy white clouds and a small pastel rainbow in the top quarter, a white wooden picket fence across the middle distance with pastel flowers along it, round fluffy pastel-green trees and flowering bushes at the far left and far right edges. A soft, lush pastel-green lawn fills the lower 60% of the image with only a few tiny flowers and clovers near the left and right edges. IMPORTANT: keep the lawn in the middle and lower area (from 35% to 95% of the height, center 80% width) open, flat and uncluttered because pets, toys and a mud puddle will be placed there as separate game objects. Keep the top 10% calm for UI buttons. No characters, no animals, no toys, no puddles, no paths, no text.
+
 ### bg_washroom
 Portrait 9:16 mobile game background of a cozy pastel bathroom where children wash cute pets, viewed straight on, flat front-facing composition. Pastel turquoise and mint square wall tiles on the upper part of the wall, a soft pink and cream checkered tiled floor in the lowest quarter, a round porthole window with blue sky and fluffy clouds in the upper left, folded fluffy towels in pink and lavender on a wall shelf in the upper right, rounded pastel soap bottles and a little rubber duck on the shelf, a small hanging plant, a few decorative bubble shapes on the wall. IMPORTANT: keep the whole central area of the image (middle 60% width, from 30% to 85% of the height) plain and uncluttered, showing only simple wall tiles and floor, because a large bathtub and pet will be placed there as separate game objects. Keep the top 10% calm for UI buttons. Soft warm morning light. No characters, no animals, no bathtub, no text.
 
@@ -116,6 +123,15 @@ Sprite sheet of 6 small messy fur tufts for a pet grooming game: fluffy, wavy cr
 
 ### fx_sheet
 Sprite sheet of 6 separate soft magical effect particles for a children's game: 1) a four-pointed twinkle sparkle in soft yellow, 2) a four-pointed twinkle sparkle in white with pink glow, 3) a small puffy heart in candy pink, 4) a round soft glowing dot in cream, 5) a chubby five-pointed star in soft yellow, 6) a small puff of white soap foam. Each item separated with generous empty space, arranged in 3 columns by 2 rows. Isolated on a transparent background.
+
+### garden_play_sheet
+Sprite sheet of 2 cute backyard play pieces for a preschool pet game, side by side with very large empty space between them and a wide empty margin to every image edge: 1) LEFT: a small round backyard trampoline, front view from slightly above, pastel mint frame with soft pink edge padding, a lavender bouncy mat and four short sturdy legs; 2) RIGHT: a rainbow hoop for jumping through: a half-circle pastel rainbow arch (pink, soft yellow, mint, baby blue, lavender bands) standing on two small round white cloud-shaped feet, front view. Isolated on a transparent background.
+
+### garden_swing
+A cute backyard rope swing for a preschool pet game, straight front view: a soft pastel pink wooden seat plank with rounded corners hanging from two long cream-colored ropes that go straight up, parallel, all the way to the very top edge of the image, with small neat knots where the ropes meet the seat. The ropes touch the top edge of the image; the seat is in the lower third. Nothing else. Isolated on a transparent background.
+
+### garden_toys_sheet
+Sprite sheet of 6 cute outdoor pet toys and garden props for a preschool game, each clearly separated with very generous empty space, arranged in 3 columns by 2 rows: 1) a pastel pink flying disc frisbee seen at a slight angle from above, with a mint ring stripe; 2) a round ball of soft lavender yarn with one loose curly strand trailing; 3) a classic soft-yellow rubber duck toy with an orange beak, side view facing left; 4) a whole orange carrot with a bright green leafy top, lying diagonally; 5) a small round mound of brown garden soil with only the green leafy top of a carrot and a little orange tip sticking out of it; 6) a wide flat oval mud puddle, chocolate brown with lighter caramel highlights and a few small splash droplets around it, seen from a low front angle (much wider than tall). Isolated on a transparent background.
 
 ### gift_box
 A big cute surprise present box for a preschool pet game, drawn as TWO SEPARATE pieces side by side with very large empty space between them and a wide empty margin to every image edge: (1) LEFT: the square box base WITHOUT its lid, straight front view with a hint of the top opening, pastel pink box with cream polka dots and a mint ribbon running down the front center; (2) RIGHT: the matching lid alone, a little wider than the box, pastel pink with cream polka dots, the mint ribbon across its front and a big puffy lavender satin bow on top. Chunky, rounded, soft. Isolated on a transparent background.

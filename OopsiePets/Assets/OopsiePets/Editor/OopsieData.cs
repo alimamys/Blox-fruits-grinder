@@ -171,6 +171,16 @@ namespace OopsiePets.EditorTools
             unicorn.sticker = sUnicorn; unicorn.startsUnlocked = false; unicorn.unlockOrder = 4; unicorn.giftAccessory = royal;
             unicorn.accessoryReactions = new List<AccessoryReaction> { new AccessoryReaction { accessory = royal, reaction = PetReaction.Pose } };
 
+            // Each pet's own garden toy (and the icon on its big "let's play" button).
+            void Toy(PetDefinition p, ToyKind kind, string icon) { p.toy = kind; p.toyIcon = S("Objects/" + icon); }
+            Toy(puppy, ToyKind.Frisbee, "garden_frisbee");
+            Toy(kitten, ToyKind.Yarn, "garden_yarn");
+            Toy(bunny, ToyKind.Carrots, "garden_carrot");
+            Toy(panda, ToyKind.Swing, "garden_swing_seat");
+            Toy(piglet, ToyKind.Duck, "garden_duck");
+            Toy(lamb, ToyKind.Trampoline, "garden_trampoline");
+            Toy(unicorn, ToyKind.Hoop, "garden_hoop");
+
             sPuppy.pet = puppy; sKitten.pet = kitten; sBunny.pet = bunny;
             sPanda.pet = panda; sPiglet.pet = piglet; sLamb.pet = lamb; sUnicorn.pet = unicorn;
             foreach (var p in pets.Values) EditorUtility.SetDirty(p);

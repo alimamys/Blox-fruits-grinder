@@ -69,6 +69,7 @@ namespace OopsiePets
         public void Enter(PetDefinition arrive, PetDefinition welcomed = null)
         {
             Clear();
+            lastPress = Time.time;
             var db = GameFlow.Instance.database;
             var defs = new List<PetDefinition>(db.UnlockedPets());
             if (defs.Count > MaxPets) defs.RemoveRange(MaxPets, defs.Count - MaxPets);
@@ -152,7 +153,7 @@ namespace OopsiePets
             if (p == visitor)
             {
                 // The muddy visitor goes straight to the bath.
-                GameFlow.Instance.StartCare(p.Definition, CareSession.FullCare);
+                GameFlow.Instance.StartCare(p.Definition, CareSession.CleanUp);
                 return;
             }
             menu.Show(p);
@@ -281,15 +282,31 @@ namespace OopsiePets
         // event, so a tap that just opened the menu is recognised and left alone.
         void OnAnyPress(Vector2 world)
         {
+            lastPress = Time.time;
             if (isActiveAndEnabled && menu.Visible && !menu.ShownThisFrame) menu.HideNow();
         }
 
+        float lastPress;
+        [Tooltip("Seconds without a touch before the hand invites a tap on a pet (there is always something to do).")]
+        public float idleInvite = 9f;
+
         void Update()
         {
-            if (reveal != null || hint.Visible || Time.frameCount % 240 != 0) return;
-            // A bouncing hand keeps inviting a tap: first the muddy visitor, then a full gift box.
-            if (visitor && visitor.tappable) hint.ShowTap(visitor.Rig.head);
-            else if (!visitor && gift && gift.isActiveAndEnabled && gift.Ready && !menu.Visible) hint.ShowTap(gift.lid.transform);
+            if (reveal != null || hint.Visible || menu.Visible) return;
+            if (Time.frameCount % 240 == 0)
+            {
+                // A bouncing hand keeps inviting a tap: first the muddy visitor, then a full gift box.
+                if (visitor && visitor.tappable) { hint.ShowTap(visitor.Rig.head); return; }
+                if (!visitor && gift && gift.isActiveAndEnabled && gift.Ready) { hint.ShowTap(gift.lid.transform); return; }
+            }
+            // Nothing waiting? After a quiet moment, point at a pet: tapping it opens "let's play outside".
+            if (!visitor && arrival == null && welcome == null && (!gift || !gift.Ready) && pets.Count > 0
+                && Time.time - lastPress > idleInvite)
+            {
+                lastPress = Time.time;
+                var p = pets[Random.Range(0, pets.Count)];
+                if (p) hint.ShowTap(p.Rig.head);
+            }
         }
     }
 }

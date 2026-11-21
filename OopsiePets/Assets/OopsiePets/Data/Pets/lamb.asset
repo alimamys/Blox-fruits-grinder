@@ -32,6 +32,8 @@ MonoBehaviour:
   earSwaySpeed: 1
   breathe: 0.025
   quirks: 8
+  toy: 5
+  toyIcon: {fileID: 21300000, guid: e6266f139f7c5138d9a8ed80e323d3c4, type: 3}
   sticker: {fileID: 11400000, guid: c433c9c812f86096e830cf619b17c322, type: 2}
   startsUnlocked: 0
   unlockOrder: 3

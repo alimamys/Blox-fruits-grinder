@@ -84,10 +84,15 @@ namespace OopsiePets
         void MakeMud()
         {
             total = 0f;
-            int head = Random.Range(mudOnHead.x, mudOnHead.y + 1);
-            int body = Random.Range(mudOnBody.x, mudOnBody.y + 1);
-            AddMud(pet.Rig.headRenderer, pet.Rig.headDecor, head, 0.05f, 60);
-            AddMud(pet.Rig.bodyRenderer, pet.Rig.bodyDecor, body, 0.18f, 20);
+            // Mud the pet brought in from the garden stays put: the child scrubs off exactly what they saw.
+            foreach (var m in pet.GetComponentsInChildren<MudSpot>())
+                if (!m.Cleared) spots.Add(m);
+            int have = spots.Count;
+            int head = Mathf.Max(0, Random.Range(mudOnHead.x, mudOnHead.y + 1) - have / 2);
+            int body = Mathf.Max(0, Random.Range(mudOnBody.x, mudOnBody.y + 1) - (have - have / 2));
+            if (have + head + body < 4) body += 4 - (have + head + body);
+            if (head > 0) AddMud(pet.Rig.headRenderer, pet.Rig.headDecor, head, 0.05f, 60);
+            if (body > 0) AddMud(pet.Rig.bodyRenderer, pet.Rig.bodyDecor, body, 0.18f, 20);
             foreach (var s in spots) total += s.Initial;
         }
 
@@ -97,20 +102,7 @@ namespace OopsiePets
             for (int i = 0; i < n; i++) spots.Add(NewSpot(part, parent, pts[i], order + i));
         }
 
-        MudSpot NewSpot(SpriteRenderer part, Transform parent, Vector3 at, int order)
-        {
-            var go = new GameObject("Mud");
-            go.transform.SetParent(parent, false);
-            go.transform.localPosition = at;
-            float partWidth = part.sprite.bounds.size.x;
-            var sprite = mudSprites[Random.Range(0, mudSprites.Length)];
-            float s = partWidth * Random.Range(0.28f, 0.4f) / sprite.bounds.size.x;
-            go.transform.localScale = new Vector3(s * (Random.value < 0.5f ? -1f : 1f), s, 1f);
-            go.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(-35f, 35f));
-            var spot = go.AddComponent<MudSpot>();
-            spot.Init(sprite, order);
-            return spot;
-        }
+        MudSpot NewSpot(SpriteRenderer part, Transform parent, Vector3 at, int order) => MudSpot.Splat(mudSprites, part, parent, at, order);
 
         IEnumerator OopsieSplat()
         {

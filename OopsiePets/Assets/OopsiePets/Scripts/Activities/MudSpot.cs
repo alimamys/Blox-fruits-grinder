@@ -18,6 +18,21 @@ namespace OopsiePets
         bool dirty;
         public bool Cleared { get; private set; }
 
+        /// <summary>Sticks a new wipeable mud splat on a pet part (local point <paramref name="at"/> under <paramref name="parent"/>).</summary>
+        public static MudSpot Splat(Sprite[] sprites, SpriteRenderer part, Transform parent, Vector3 at, int order, float minSize = 0.28f, float maxSize = 0.4f)
+        {
+            var go = new GameObject("Mud");
+            go.transform.SetParent(parent, false);
+            go.transform.localPosition = at;
+            var sprite = sprites[Random.Range(0, sprites.Length)];
+            float s = part.sprite.bounds.size.x * Random.Range(minSize, maxSize) / sprite.bounds.size.x;
+            go.transform.localScale = new Vector3(s * (Random.value < 0.5f ? -1f : 1f), s, 1f);
+            go.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(-35f, 35f));
+            var spot = go.AddComponent<MudSpot>();
+            spot.Init(sprite, order);
+            return spot;
+        }
+
         public float Remaining => remainingAlpha;
         public float Initial => initialAlpha;
 
