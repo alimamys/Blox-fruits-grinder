@@ -484,6 +484,258 @@
    ],
    "headWidth": 400,
    "furTint": "FFF4F8"
+  },
+  {
+   "id": "giraffe",
+   "folder": "Giraffe",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "giraffe_tail",
+     "x": 150,
+     "y": 60,
+     "scale": 1.003,
+     "pivotX": 0.44357,
+     "pivotY": 0.03984,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "giraffe_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.003,
+     "pivotX": 0.49636,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "giraffe_head",
+     "x": -0.8,
+     "y": 538.7,
+     "scale": 1.305,
+     "pivotX": 0.48779,
+     "pivotY": 0.49886,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 107.1,
+   "eyeY": -121.2,
+   "eyeScale": 0.792,
+   "mouthY": -197.6,
+   "mouthScale": 0.573,
+   "hat": [
+    0,
+    158.1
+   ],
+   "eyes": [
+    0,
+    -121.2
+   ],
+   "side": [
+    136.9,
+    118.6
+   ],
+   "neck": [
+    0,
+    -285
+   ],
+   "headWidth": 402.7,
+   "furTint": "FEF2C6"
+  },
+  {
+   "id": "bird",
+   "folder": "Bird",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "bird_tail",
+     "x": 150,
+     "y": 60,
+     "scale": 1.312,
+     "pivotX": 0.09889,
+     "pivotY": 0.29545,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "bird_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.312,
+     "pivotX": 0.49643,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "bird_head",
+     "x": 0.5,
+     "y": 508.0,
+     "scale": 1.485,
+     "pivotX": 0.5046,
+     "pivotY": 0.49764,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 111.5,
+   "eyeY": -102.5,
+   "eyeScale": 0.822,
+   "mouthY": -179.8,
+   "mouthScale": 0.5,
+   "hat": [
+    0,
+    238.4
+   ],
+   "eyes": [
+    0,
+    -102.5
+   ],
+   "side": [
+    156.4,
+    178.8
+   ],
+   "neck": [
+    0,
+    -305
+   ],
+   "headWidth": 560,
+   "furTint": "CFE0FF"
+  },
+  {
+   "id": "cow",
+   "folder": "Cow",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "cow_tail",
+     "x": 150,
+     "y": 100,
+     "scale": 1.444,
+     "pivotX": 0.03959,
+     "pivotY": 0.19889,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "cow_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.444,
+     "pivotX": 0.5,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "cow_head",
+     "x": -1.6,
+     "y": 527.6,
+     "scale": 1.337,
+     "pivotX": 0.44799,
+     "pivotY": 0.49625,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 108.2,
+   "eyeY": -46.3,
+   "eyeScale": 0.727,
+   "mouthY": -140.9,
+   "mouthScale": 0.65,
+   "hat": [
+    0,
+    193.3
+   ],
+   "eyes": [
+    0,
+    -46.3
+   ],
+   "side": [
+    156.4,
+    145.0
+   ],
+   "neck": [
+    0,
+    -268
+   ],
+   "headWidth": 460,
+   "furTint": "FEFAF1"
+  },
+  {
+   "id": "pony",
+   "folder": "Pony",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "pony_tail",
+     "x": 135,
+     "y": 150,
+     "scale": 1.081,
+     "pivotX": 0.15,
+     "pivotY": 0.79714,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "pony_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.441,
+     "pivotX": 0.49851,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "pony_head",
+     "x": -0.7,
+     "y": 486.6,
+     "scale": 1.261,
+     "pivotX": 0.47289,
+     "pivotY": 0.49893,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 107.2,
+   "eyeY": -12.6,
+   "eyeScale": 0.813,
+   "mouthY": -146.3,
+   "mouthScale": 0.529,
+   "hat": [
+    0,
+    241.7
+   ],
+   "eyes": [
+    0,
+    -12.6
+   ],
+   "side": [
+    146.9,
+    181.3
+   ],
+   "neck": [
+    0,
+    -282
+   ],
+   "headWidth": 432.0,
+   "furTint": "FEF1C7"
   }
  ]
 }

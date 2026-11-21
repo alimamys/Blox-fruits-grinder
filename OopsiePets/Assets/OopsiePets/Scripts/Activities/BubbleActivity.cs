@@ -102,8 +102,8 @@ namespace OopsiePets
             if (pet.Definition.Has(PetQuirk.Sparkly)) Fx?.Burst(b.transform.position, 4, 2.4f, 0.4f, 0.7f, Fx.star, Fx.sparkleYellow);
             if (b.Size >= 1.9f)
             {
-                // Big pops: a jump or a gasp, and the panda tumbles head over heels.
-                var big = pet.Definition.Has(PetQuirk.Somersault) && Random.value < 0.7f ? PetReaction.Roll
+                // Big pops: a jump or a gasp (no somersaults in the tub: the panda just hops for joy).
+                var big = pet.Definition.Has(PetQuirk.Somersault) && Random.value < 0.7f ? PetReaction.Jump
                     : Random.value < 0.5f ? PetReaction.Jump : PetReaction.Surprised;
                 pet.Animator.Play(big);
             }

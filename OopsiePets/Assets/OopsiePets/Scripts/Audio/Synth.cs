@@ -143,7 +143,8 @@ namespace OopsiePets
             float baseF = voice switch
             {
                 PetVoice.Puppy => 620f, PetVoice.Kitten => 760f, PetVoice.Bunny => 900f, PetVoice.Piglet => 360f,
-                PetVoice.Lamb => 540f, PetVoice.Panda => 500f, PetVoice.Unicorn => 1000f, _ => 900f,
+                PetVoice.Lamb => 540f, PetVoice.Panda => 500f, PetVoice.Unicorn => 1000f,
+                PetVoice.Giraffe => 440f, PetVoice.Bird => 1500f, PetVoice.Cow => 300f, PetVoice.Pony => 820f, _ => 900f,
             };
             switch (kind)
             {
@@ -219,6 +220,9 @@ namespace OopsiePets
                 if (voice == PetVoice.Kitten) f *= 1f + 0.03f * Mathf.Sin(t * 50f); // a little "mew" vibrato
                 else if (voice == PetVoice.Lamb) f *= 1f + 0.025f * Mathf.Sin(2f * Mathf.PI * 9f * sec);
                 else if (voice == PetVoice.Unicorn) f *= 1f + 0.06f * Mathf.Sin(2f * Mathf.PI * 14f * sec); // whinny trill
+                else if (voice == PetVoice.Pony) f *= 1f + 0.08f * Mathf.Sin(2f * Mathf.PI * 11f * sec); // neigh flutter
+                else if (voice == PetVoice.Bird) f *= 1f + 0.12f * Mathf.Sin(2f * Mathf.PI * 28f * sec); // tweet trill
+                else if (voice == PetVoice.Cow) f *= 1f + 0.04f * Mathf.Sin(t * Mathf.PI); // "moo" swell
                 ph += 2f * Mathf.PI * f / Rate;
                 float env = Mathf.Sin(Mathf.PI * Mathf.Pow(t, voice == PetVoice.Puppy || voice == PetVoice.Piglet ? 0.6f : 1f));
                 float tone;
@@ -237,6 +241,20 @@ namespace OopsiePets
                         break;
                     case PetVoice.Unicorn: // glassy, with a high shimmer
                         tone = Mathf.Sin(ph) + 0.2f * Mathf.Sin(ph * 2f) + 0.25f * Mathf.Sin(ph * 4f);
+                        break;
+                    case PetVoice.Cow: // low and warm, a soft "mmm" hum
+                        tone = Mathf.Sin(ph) + 0.45f * Mathf.Sin(ph * 2f) + 0.2f * Mathf.Sin(ph * 3f);
+                        env = Mathf.Sin(Mathf.PI * Mathf.Pow(t, 0.8f));
+                        break;
+                    case PetVoice.Bird: // a pure, bright whistle
+                        tone = Mathf.Sin(ph) + 0.08f * Mathf.Sin(ph * 2f);
+                        break;
+                    case PetVoice.Giraffe: // gentle hum, slightly breathy
+                        tone = Mathf.Sin(ph) + 0.25f * Mathf.Sin(ph * 2f) + 0.1f * Mathf.Sin(ph * 5f);
+                        break;
+                    case PetVoice.Pony: // bright and bouncy
+                        tone = Mathf.Sin(ph) + 0.3f * Mathf.Sin(ph * 2f) + 0.15f * Mathf.Sin(ph * 3f);
+                        env *= 0.75f + 0.25f * Mathf.Sin(2f * Mathf.PI * 11f * sec);
                         break;
                     default:
                         tone = Mathf.Sin(ph) + 0.35f * Mathf.Sin(ph * 2f) + 0.12f * Mathf.Sin(ph * 3f);

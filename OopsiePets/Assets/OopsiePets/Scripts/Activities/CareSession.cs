@@ -7,7 +7,7 @@ namespace OopsiePets
 {
     /// <summary>
     /// Runs a care visit for one pet: either the full adventure (play outside with its own toy → shampoo →
-    /// wash and rinse → bubbles → dry → brush hair → brush teeth → dress-up → sticker) or a short routine
+    /// sponge → bubbles → rinse → dry → brush hair → brush teeth → dress-up → sticker) or a short routine
     /// picked from the menu (bath time, grooming, bubbles, dress-up). A pet that is already muddy skips the
     /// garden and goes straight to the bath. Between activities a big "next" button appears; nothing moves on
     /// by itself, so a child can keep playing as long as they like. Home is always one tap away.
@@ -16,21 +16,21 @@ namespace OopsiePets
     {
         public static readonly ActivityKind[] FullCare =
         {
-            ActivityKind.Outdoor, ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Dry,
-            ActivityKind.Brush, ActivityKind.Teeth, ActivityKind.DressUp,
+            ActivityKind.Outdoor, ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Rinse,
+            ActivityKind.Dry, ActivityKind.Brush, ActivityKind.Teeth, ActivityKind.DressUp,
         };
         /// <summary>For a pet that is already muddy (an "Oopsie!" visitor): straight to the bath.</summary>
         public static readonly ActivityKind[] CleanUp =
         {
-            ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Dry,
+            ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Rinse, ActivityKind.Dry,
             ActivityKind.Brush, ActivityKind.Teeth, ActivityKind.DressUp,
         };
-        /// <summary>Bath time from the menu: shampoo, wash and rinse, dry.</summary>
-        public static readonly ActivityKind[] Bath = { ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Dry };
+        /// <summary>Bath time from the menu: shampoo, sponge, bubbles, rinse, dry.</summary>
+        public static readonly ActivityKind[] Bath = { ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Rinse, ActivityKind.Dry };
         /// <summary>Grooming from the menu: brush the fur, then brush the teeth.</summary>
         public static readonly ActivityKind[] Grooming = { ActivityKind.Brush, ActivityKind.Teeth };
 
-        /// <summary>A full visit (earns a sticker and a gift-box heart): it includes the bath through dress-up.</summary>
+        /// <summary>A full visit (earns the pet's sticker): it includes the bath through dress-up.</summary>
         public static bool IsFull(ActivityKind[] seq) =>
             seq != null && seq.Length >= 4 && System.Array.IndexOf(seq, ActivityKind.Wash) >= 0 && System.Array.IndexOf(seq, ActivityKind.DressUp) >= 0;
 
@@ -67,6 +67,8 @@ namespace OopsiePets
         public void Begin(PetDefinition pet, ActivityKind[] sequence)
         {
             def = pet;
+            // A bird has a beak, not teeth: it skips tooth brushing.
+            if (pet.hasBeak) sequence = System.Array.FindAll(sequence, k => k != ActivityKind.Teeth);
             foreach (var a in activities) a.gameObject.SetActive(false);
             run = StartCoroutine(Run(pet, sequence));
         }
@@ -114,8 +116,6 @@ namespace OopsiePets
 
             if (full)
             {
-                // Every finished visit drops a heart into the friend gift box (shown back in the clubhouse).
-                FriendGiftRules.AwardHeart(GameFlow.Instance.database);
                 // Sticker reward on the dress-up stage, with the pet wearing its outfit.
                 Stage(ActivityKind.DressUp, Get(ActivityKind.DressUp));
                 var sticker = StickerBook.Award(GameFlow.Instance.database, petDef);
@@ -143,6 +143,9 @@ namespace OopsiePets
             Pet.transform.localRotation = Quaternion.identity;
             float s = act ? act.petScale : 0.62f;
             Pet.transform.localScale = Vector3.one * s;
+            // Stray taps on the pet during care must not set off its tap tricks (the panda used to roll
+            // over in the tub). Only in dress-up is tapping the pet part of the fun.
+            Pet.tappable = kind == ActivityKind.DressUp;
             Pet.Rig.RemoveAll();
             if (kind == ActivityKind.DressUp)
                 foreach (var id in SaveSystem.Data.Pet(Pet.Definition.id).accessories)

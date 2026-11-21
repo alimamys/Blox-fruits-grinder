@@ -10,17 +10,22 @@ namespace OopsiePets
         public PetDefinition Definition { get; private set; }
         public PetRig Rig { get; private set; }
         public PetAnimator Animator { get; private set; }
+        public PetCoat Coat { get; private set; }
 
         /// <summary>Raised after the pet reacts to a tap.</summary>
         public event Action<PetView> Tapped;
 
         [Tooltip("When false, taps are ignored (e.g. during a scripted moment).")]
         public bool tappable = true;
+        [Tooltip("A friend that can't be played with yet: it naps, and a tap only makes it stir.")]
+        public bool locked;
 
         void Awake()
         {
             Rig = GetComponent<PetRig>();
             Animator = GetComponent<PetAnimator>();
+            Coat = GetComponent<PetCoat>();
+            if (!Coat) Coat = gameObject.AddComponent<PetCoat>();
         }
 
         public void Init(PetDefinition def, FaceSet face)
@@ -28,6 +33,8 @@ namespace OopsiePets
             Definition = def;
             Animator.definition = def;
             Animator.face = face;
+            // A beak is part of the drawing: no mouth overlay.
+            if (def.hasBeak && Rig.mouth) Rig.mouth.enabled = false;
         }
 
         public void SetSortingOrder(int order)
@@ -39,6 +46,7 @@ namespace OopsiePets
 
         public void OnTap(Vector2 worldPos)
         {
+            if (locked) { Animator.Play(PetReaction.Wiggle); Tapped?.Invoke(this); return; }
             Animator.PlayRandomTap();
             Tapped?.Invoke(this);
         }

@@ -20,10 +20,11 @@ namespace OopsiePets
         public Sprite dropSprite;
 
         [Header("Tuning")]
-        public int drops = 10;
-        public float rubRadius = 1.2f;
+        [Tooltip("Drops to towel off (more drops and a gentler towel make drying last longer).")]
+        public int drops = 14;
+        public float rubRadius = 0.95f;
         [Tooltip("How much one world-unit of towel rubbing dries a drop.")]
-        public float rubPower = 0.45f;
+        public float rubPower = 0.28f;
         public Color wetTint = new Color(0.88f, 0.92f, 1f, 1f);
         public Vector2 towelFingerOffset = new Vector2(0f, 0.5f);
         public float hintAfterIdle = 5f;

@@ -6,8 +6,8 @@ namespace OopsiePets
 {
     /// <summary>
     /// Wash the pet: drag the big sponge over the mud. Each splat wipes away pixel by pixel where the
-    /// sponge actually touches, bubbles foam up, and the pet gets happier as it gets cleaner. Then rinse:
-    /// the shower comes out and the child sprays the shampoo suds away.
+    /// sponge actually touches, the lather foams up, and the pet gets happier as it gets cleaner. The suds
+    /// stay on for the bubbles; the rinse comes after (RinseActivity).
     /// </summary>
     public class WashActivity : Activity
     {
@@ -18,9 +18,6 @@ namespace OopsiePets
         public Transform spongeHome;
         public SpriteRenderer tubFront;
         public Sprite[] mudSprites;
-        public Transform shower;
-        public Transform showerHome;
-        public Sprite dropSprite;
         public Sprite sudsSprite;
 
         [Header("Tuning")]
@@ -29,30 +26,21 @@ namespace OopsiePets
         public float spongeRadius = 1.05f;
         [Tooltip("How much mud one world-unit of sponge movement wipes (0..1 alpha per pass).")]
         public float scrubStrength = 0.3f;
-        [Tooltip("Suds on the pet when the rinse starts (scrubbing makes it extra foamy).")]
-        public int rinseSuds = 8;
-        [Tooltip("How fast the shower washes suds away (per second under the spray).")]
-        public float rinseRate = 1.2f;
-        public Vector2 showerFingerOffset = new Vector2(0.4f, 1.5f);
+        [Tooltip("Scrubbing builds the lather up to this many clumps of suds.")]
+        public int maxSuds = 7;
         public float cleanEnough = 0.9f;
         public float hintAfterIdle = 5f;
         public Vector2 spongeFingerOffset = new Vector2(0f, 0.35f);
 
         readonly List<MudSpot> spots = new List<MudSpot>();
         readonly List<SoapSuds> suds = new List<SoapSuds>();
-        bool rinsing, rinseDone;
-        float sudsTotal, nextDrop, nextSplash;
-        Vector3 showerScale;
-
-        public bool Rinsing => rinsing;
-        float total, lastReaction, scrubTime;
+        float total, lastReaction, scrubTime, nextSuds;
         bool dragging, finishing, sneezed, extraMud;
         Vector3 spongeScale;
 
         void Awake()
         {
             spongeScale = sponge.localScale;
-            if (shower) showerScale = shower.localScale;
         }
 
         public override void Begin(PetView pet, ActivityContext ctx)
@@ -64,8 +52,6 @@ namespace OopsiePets
             if (tubFront) tubFront.gameObject.SetActive(true);
             sponge.position = spongeHome.position;
             sponge.gameObject.SetActive(true);
-            rinsing = rinseDone = false;
-            if (shower) shower.gameObject.SetActive(false);
             suds.Clear();
             foreach (var s in pet.GetComponentsInChildren<SoapSuds>()) suds.Add(s); // lather from the shampoo
             MakeMud();
@@ -82,9 +68,7 @@ namespace OopsiePets
             Input.PointerDrag -= OnDrag;
             Input.PointerUp -= OnUp;
             foreach (var s in spots) if (s) Destroy(s.gameObject);
-            foreach (var s in suds) if (s) Destroy(s.gameObject);
-            suds.Clear();
-            if (shower) shower.gameObject.SetActive(false);
+            suds.Clear(); // the lather stays on the pet for the bubbles and the rinse
             spots.Clear();
             sponge.gameObject.SetActive(false);
             if (tubFront) tubFront.gameObject.SetActive(false);
@@ -152,7 +136,6 @@ namespace OopsiePets
         {
             dragging = true;
             if (ctx.hint) ctx.hint.Hide();
-            if (rinsing) { idleTime = 0f; MoveShower(p); return; }
             if (finishing) return;
             StartCoroutine(Ease.Tween(0.12f, k => sponge.localScale = spongeScale * Mathf.Lerp(1f, 1.12f, k), Ease.OutBack, false));
             MoveSponge(p);
@@ -161,7 +144,6 @@ namespace OopsiePets
         void OnDrag(Vector2 p, Vector2 delta)
         {
             if (!dragging) return;
-            if (rinsing) { idleTime = 0f; MoveShower(p); return; }
             if (finishing) return;
             MoveSponge(p);
             Scrub(delta.magnitude);
@@ -184,14 +166,13 @@ namespace OopsiePets
             float removed = 0f;
             Vector2 at = sponge.position;
             foreach (var s in spots) removed += s.Scrub(at, spongeRadius, strength);
-            // The sponge squishes the lather down a little (the shower takes the rest).
-            foreach (var s in suds) if (s && Vector2.Distance(at, s.transform.position) < spongeRadius) s.Wash(strength * 0.4f, 0.35f);
             // A little squish, wobble and foam whenever the sponge is working on the pet.
             var bounds = pet.VisualBounds();
             bool onPet = bounds.Contains(new Vector3(at.x, at.y, bounds.center.z));
             if (onPet || removed > 0f)
             {
                 scrubTime += Time.deltaTime;
+                if (onPet) Lather(at);
                 Audio?.Play(Sfx.Squish, 0.55f);
                 sponge.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(Time.time * 25f) * 6f);
                 if (Fx && Random.value < 0.25f)
@@ -207,6 +188,26 @@ namespace OopsiePets
                 }
             }
             UpdateProgress();
+        }
+
+        // Scrubbing on the pet works the shampoo into a thick lather: a new clump of suds now and then.
+        void Lather(Vector2 at)
+        {
+            if (!sudsSprite || Time.time < nextSuds) return;
+            suds.RemoveAll(x => !x);
+            if (suds.Count >= maxSuds) return;
+            nextSuds = Time.time + 0.7f;
+            bool onHead = pet.Rig.headRenderer.bounds.Contains(new Vector3(at.x, at.y, pet.Rig.headRenderer.bounds.center.z));
+            var part = onHead ? pet.Rig.headRenderer : pet.Rig.bodyRenderer;
+            var parent = onHead ? pet.Rig.headDecor : pet.Rig.bodyDecor;
+            var b = pet.VisualBounds();
+            var near = part.bounds.ClosestPoint(new Vector3(at.x, at.y, part.bounds.center.z));
+            var world = Vector3.Lerp(near, part.bounds.center, 0.25f) + (Vector3)(Random.insideUnitCircle * 0.25f);
+            if (onHead) world = PetDecor.KeepFaceClear(pet, world);
+            var s = SoapSuds.Spawn(sudsSprite, parent, world, b.size.x * 0.18f, onHead ? 78 : 38, false);
+            suds.Add(s);
+            var sc = s.transform.localScale;
+            StartCoroutine(Ease.Tween(0.25f, k => { if (s) s.transform.localScale = sc * Ease.OutBack(k); }, null, false));
         }
 
         void UpdateProgress()
@@ -235,98 +236,10 @@ namespace OopsiePets
             foreach (var s in spots) s.ClearAll();
             dragging = false;
             yield return new WaitForSeconds(0.3f);
-            if (shower) { yield return StartRinse(); yield break; }
-            Audio?.Play(Sfx.Splash, 0.7f);
-            pet.Animator.Play(PetReaction.Shake);
-            yield return new WaitForSeconds(1.0f);
-            Fx?.Sparkles(pet.VisualBounds().center, 14, 1.8f);
-            Audio?.Play(Sfx.Sparkle, 0.8f);
-            pet.Animator.SetMood(PetExpression.Happy);
-            pet.Animator.Play(PetReaction.Celebrate);
-            Complete();
-        }
-
-        // ---------- Rinse ----------
-
-        IEnumerator StartRinse()
-        {
-            // Mud's gone, but scrubbing made the pet all foamy: time to rinse.
-            SetProgress(Mathf.Max(Progress, 0.6f));
-            pet.Animator.Play(PetReaction.Giggle);
-            var b = pet.VisualBounds();
-            suds.RemoveAll(s => !s || s.Cleared);
-            foreach (var s in suds) s.Refoam(0.9f);
-            for (int i = suds.Count; i < rinseSuds; i++)
-            {
-                bool onHead = i % 3 == 2;
-                var part = onHead ? pet.Rig.headRenderer : pet.Rig.bodyRenderer;
-                var parent = onHead ? pet.Rig.headDecor : pet.Rig.bodyDecor;
-                var local = PetDecor.RandomPointOn(part, 0.32f, 0.28f, onHead ? 0.05f : 0.2f);
-                var world = parent.TransformPoint(local);
-                suds.Add(SoapSuds.Spawn(sudsSprite, parent, world, b.size.x * 0.2f, onHead ? 78 : 38, false));
-            }
-            sudsTotal = suds.Count;
+            // Mud's all gone: the sponge goes away and the foamy pet giggles (the bubbles come next).
             yield return Ease.Tween(0.3f, k => sponge.localScale = spongeScale * (1f - k), null, false);
             sponge.gameObject.SetActive(false);
             sponge.localScale = spongeScale;
-            shower.gameObject.SetActive(true);
-            shower.localScale = showerScale;
-            var start = showerHome.position + new Vector3(3f, 0f, 0f);
-            yield return Ease.Tween(0.35f, k => shower.position = Vector3.Lerp(start, showerHome.position, Ease.OutBack(k)), null, false);
-            rinsing = true;
-            idleTime = 0f;
-            ShowRinseHint();
-        }
-
-        void ShowRinseHint()
-        {
-            if (ctx.hint && rinsing && !rinseDone) ctx.hint.ShowDrag(showerHome.position, pet.VisualBounds().center);
-        }
-
-        void MoveShower(Vector2 p) => shower.position = new Vector3(p.x + showerFingerOffset.x, p.y + showerFingerOffset.y, 0f);
-
-        void Rinse(float dt)
-        {
-            // Water falls from the spray face (lower left of the shower head).
-            var spray = shower.position + new Vector3(-0.45f, -0.5f, 0f);
-            if (Fx && Time.time >= nextDrop)
-            {
-                nextDrop = Time.time + 0.035f;
-                Fx.Emit(dropSprite, spray + new Vector3(Random.Range(-0.35f, 0.35f), 0f, 0f),
-                    new Vector2(Random.Range(-0.6f, 0.4f), Random.Range(-4.5f, -3f)), Random.Range(0.18f, 0.28f), 0.7f, Palette.Untinted, 6f);
-            }
-            if (Time.time >= nextSplash) { nextSplash = Time.time + 0.4f; Audio?.Play(Sfx.Splash, 0.35f, 1.4f); }
-            bool hit = false;
-            foreach (var s in suds)
-            {
-                if (!s || s.Cleared) continue;
-                var q = s.transform.position;
-                if (Mathf.Abs(q.x - spray.x) < 1.1f && q.y < spray.y + 0.3f && q.y > spray.y - 4.2f) { s.Wash(rinseRate * dt); hit = true; }
-            }
-            if (hit)
-            {
-                pet.Animator.SetMood(PetExpression.Happy);
-                if (Time.time - lastReaction > 2.6f) { lastReaction = Time.time; pet.Animator.Play(Random.value < 0.5f ? PetReaction.Giggle : PetReaction.EarWiggle); }
-            }
-            int left = 0;
-            foreach (var s in suds) if (s && !s.Cleared) left++;
-            SetProgress(Mathf.Max(Progress, 0.6f + 0.4f * (1f - left / Mathf.Max(1f, sudsTotal))));
-            if (left == 0 && !rinseDone) StartCoroutine(RinseFinished());
-        }
-
-        IEnumerator RinseFinished()
-        {
-            rinseDone = true;
-            dragging = false;
-            if (ctx.hint) ctx.hint.Hide();
-            var from = shower.position;
-            var away = showerHome.position + new Vector3(3f, 0f, 0f);
-            yield return Ease.Tween(0.35f, k => shower.position = Vector3.Lerp(from, away, Ease.OutCubic(k)), null, false);
-            shower.gameObject.SetActive(false);
-            rinsing = false;
-            Audio?.Play(Sfx.Splash, 0.7f);
-            pet.Animator.Play(PetReaction.Shake); // shakes the water off
-            yield return new WaitForSeconds(1.0f);
             Fx?.Sparkles(pet.VisualBounds().center, 14, 1.8f);
             Audio?.Play(Sfx.Sparkle, 0.8f);
             pet.Animator.SetMood(PetExpression.Happy);
@@ -336,18 +249,6 @@ namespace OopsiePets
 
         void Update()
         {
-            if (rinsing && !rinseDone)
-            {
-                if (dragging) Rinse(Time.deltaTime);
-                else
-                {
-                    var home = showerHome.position + Vector3.up * Mathf.Sin(Time.time * 2f) * 0.08f;
-                    shower.position = Vector3.Lerp(shower.position, home, Time.deltaTime * 6f);
-                    idleTime += Time.deltaTime;
-                    if (idleTime > hintAfterIdle && ctx.hint && !ctx.hint.Visible) { idleTime = 0f; ShowRinseHint(); }
-                }
-                return;
-            }
             if (!dragging)
             {
                 // Sponge drifts home and bobs, inviting a grab.

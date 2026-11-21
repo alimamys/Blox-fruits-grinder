@@ -19,37 +19,46 @@ def done(im, w, h):
     return im.resize((w, h), Image.LANCZOS)
 
 
-def mouth_teeth(w=400, h=280):
+def mouth_teeth(w=400, h=250):
+    """A friendly open smile: a D-shaped mouth with a soft pink inside, a neat row of six small rounded
+    baby teeth along the top, four tiny ones at the bottom, and a pink tongue. Pivot: top centre."""
     W, H = w * SS, h * SS
-    cx, cy, a, b = W / 2, H * 0.5, W * 0.45, H * 0.44
-    box = (cx - a, cy - b, cx + a, cy + b)
+    pad = 10 * SS
+    box = (pad, -H + 2 * pad, W - pad, H - pad)          # lower half of an ellipse: flat top, round bottom
     shape = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(shape).ellipse(box, fill=255)
-    inner = Image.new("RGBA", (W, H), MOUTH_IN)
+    ImageDraw.Draw(shape).pieslice(box, 0, 180, fill=255)
+    inner = Image.new("RGBA", (W, H), (214, 96, 132, 255))  # soft rose, not a dark hole
     d = ImageDraw.Draw(inner)
-    d.ellipse((cx - a * 0.42, cy + b * 0.25, cx + a * 0.42, cy + b * 1.15), fill=TONGUE)       # tongue
-    d.line([(cx, cy + b * 0.45), (cx, cy + b * 0.8)], fill=(225, 100, 150, 255), width=4 * SS)
+    cx = W / 2
+    d.ellipse((cx - W * 0.2, H * 0.42, cx + W * 0.2, H * 0.98), fill=(255, 150, 188, 255))  # tongue
+    d.line([(cx, H * 0.55), (cx, H * 0.75)], fill=(230, 110, 155, 255), width=4 * SS)
     teeth = []
-
-    def edge(x, top):
+    tw, th = W * 0.105, H * 0.24
+    gap = W * 0.012
+    total = 6 * tw + 5 * gap
+    x0 = cx - total / 2
+    for i in range(6):                                       # top row: six small rounded baby teeth
+        x = x0 + i * (tw + gap)
+        d.rounded_rectangle((x, -tw * 0.5, x + tw, th), radius=tw * 0.48, fill=WHITE, outline=(205, 186, 214, 255), width=3 * SS)
+        d.ellipse((x + tw * 0.2, th * 0.25, x + tw * 0.42, th * 0.55), fill=(255, 255, 255, 255))
+        teeth.append((x + tw / 2, th * 0.5))
+    a, b = (box[2] - box[0]) / 2, (box[3] - box[1]) / 2
+    cy0 = (box[1] + box[3]) / 2
+    bw, bh = W * 0.085, H * 0.15
+    for i in range(4):                                       # bottom row: four tiny teeth along the curve
+        x = cx + (i - 1.5) * (bw + gap * 1.5)
         k = max(0.0, 1 - ((x - cx) / a) ** 2)
-        return cy - b * math.sqrt(k) if top else cy + b * math.sqrt(k)
-
-    tw, th = W * 0.13, H * 0.2
-    for i in range(-2, 3):                                     # top row: 5 teeth
-        x = cx + i * tw * 1.08
-        y0 = edge(x, True) - 6 * SS
-        d.rounded_rectangle((x - tw / 2, y0, x + tw / 2, y0 + th + 10 * SS), radius=10 * SS, fill=WHITE, outline=INK, width=4 * SS)
-        teeth.append((x, y0 + (th + 10 * SS) * 0.62))
-    tb = H * 0.16
-    for i in range(4):                                         # bottom row: 4 teeth
-        x = cx + (i - 1.5) * tw * 1.1
-        y1 = edge(x, False) + 6 * SS
-        d.rounded_rectangle((x - tw / 2, y1 - tb - 10 * SS, x + tw / 2, y1), radius=10 * SS, fill=WHITE, outline=INK, width=4 * SS)
-        teeth.append((x, y1 - (tb + 10 * SS) * 0.6))
+        yb = cy0 + b * math.sqrt(k) - 3 * SS
+        d.rounded_rectangle((x - bw / 2, yb - bh, x + bw / 2, yb + bw * 0.5), radius=bw * 0.48, fill=WHITE, outline=(205, 186, 214, 255), width=3 * SS)
+        teeth.append((x, yb - bh * 0.45))
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     im.paste(inner, (0, 0), shape)
-    ImageDraw.Draw(im).ellipse(box, outline=INK, width=10 * SS)
+    od = ImageDraw.Draw(im)
+    od.arc(box, 0, 180, fill=INK, width=9 * SS)
+    yl = cy0
+    od.line([(box[0] + 4 * SS, yl), (box[2] - 4 * SS, yl)], fill=INK, width=9 * SS)
+    for xe in (box[0] + 4 * SS, box[2] - 4 * SS):
+        od.ellipse((xe - 4.5 * SS, yl - 4.5 * SS, xe + 4.5 * SS, yl + 4.5 * SS), fill=INK)
     out = done(im, w, h)
     centres = [(round(x / W, 3), round(1 - y / H, 3)) for x, y in teeth]
     return out, centres

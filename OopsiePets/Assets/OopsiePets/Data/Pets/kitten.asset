@@ -36,7 +36,8 @@ MonoBehaviour:
   quirks: 1
   toy: 1
   toyIcon: {fileID: 21300000, guid: 5ccca5ec8f0fd53eca20d2f15bf642ab, type: 3}
+  hasBeak: 0
   sticker: {fileID: 11400000, guid: fb45434aeb8cb051b84eb1e87c1a4cb8, type: 2}
-  startsUnlocked: 1
-  unlockOrder: 0
+  access: 0
+  unlockOrder: 1
   giftAccessory: {fileID: 0}

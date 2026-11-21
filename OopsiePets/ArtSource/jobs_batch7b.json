@@ -1,0 +1,98 @@
+[
+ {
+  "id": "giraffe_parts",
+  "out": "Characters/Giraffe/giraffe_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Giraffe/giraffe_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby giraffe character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two little knobbed horns (ossicones) and both ears attached, front view, with a BLANK face: keep the light cream muzzle with its two tiny nostrils, the orange spots and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby spotted body including its short neck, front legs together and back legs with little lavender hooves, with a smooth rounded neck top; (3) the thin TAIL with its orange tuft alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_giraffe_apple",
+  "out": "Stickers/sticker_giraffe_apple_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Giraffe/giraffe_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby giraffe character as the reference (same colors and style), happily holding a big shiny red apple with a green leaf, smiling with eyes closed in joy, a few little hearts around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ },
+ {
+  "id": "bird_parts",
+  "out": "Characters/Bird/bird_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Bird/bird_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby bluebird chick character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD: the upper round fluffy blue part of the chick with the little feather crest on top and the small yellow beak, front view, with a BLANK face: keep the yellow beak and the pink cheek blush, but absolutely NO eyes and NO eyebrows; the bottom edge of the head is a smooth rounded curve; (2) the BODY alone without head and without tail: the round chubby lower body with the cream belly, both little wings at the sides and the two orange feet, with a smooth rounded top; (3) the small fan of blue TAIL feathers alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_bird_worm",
+  "out": "Stickers/sticker_bird_worm_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Bird/bird_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby bluebird chick character as the reference (same colors and style), cheerfully waving a wing next to a tiny friendly smiling pink worm peeking out of a little mud hole, a few musical notes around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ },
+ {
+  "id": "cow_parts",
+  "out": "Characters/Cow/cow_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Cow/cow_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby cow calf character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two little cream horns and both floppy pink-lined ears attached, front view, with a BLANK face: keep the big pink muzzle with its two nostrils, the lavender spot and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby cream body with lavender spots, front legs together and back legs with lavender hooves, with a smooth rounded neck top; (3) the thin TAIL with its pink tuft alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_cow_slide",
+  "out": "Stickers/sticker_cow_slide_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Cow/cow_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby cow calf character as the reference (same colors and style), whooshing down a small pastel mint playground slide with a big happy laugh, little motion lines and stars around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ },
+ {
+  "id": "pony_parts",
+  "out": "Characters/Pony/pony_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Pony/pony_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby pony foal character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with both pointy ears and the mint-blue mane and forelock attached, front view, with a BLANK face: keep the soft pink muzzle with its two tiny nostrils and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby peach body with front legs together and back legs with lavender hooves, with a smooth rounded neck top (no mane on the body); (3) the flowing mint-blue TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_pony_puddle",
+  "out": "Stickers/sticker_pony_puddle_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Pony/pony_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby pony foal character as the reference (same colors and style), galloping joyfully through a small splashy blue puddle with water droplets flying, smiling, a few little hearts around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ }
+]

@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.PetView
   tappable: 1
+  locked: 0
 --- !u!210 &3775663575652781941
 SortingGroup:
   m_ObjectHideFlags: 0

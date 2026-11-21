@@ -30,10 +30,9 @@ public static class PlayTest
         if (f.Current == GameFlow.Screen.Care && f.care.Current)
             sb.Append($" activity={f.care.Current.Kind} progress={f.care.Current.Progress:0.00} complete={f.care.Current.IsComplete} next={f.care.nextButton.gameObject.activeInHierarchy}");
         if (f.Current == GameFlow.Screen.Clubhouse)
-            sb.Append($" pets=[{string.Join(",", f.clubhouse.Pets.Select(p => p.Definition.id + (p.tappable ? "" : "(arriving)")))}] visitor={(f.clubhouse.Visitor ? f.clubhouse.Visitor.Definition.id : "none")}");
+            sb.Append($" pets=[{string.Join(",", f.clubhouse.Pets.Select(p => p.Definition.id + (f.clubhouse.IsLocked(p) ? "(locked)" : p.tappable ? "" : "(arriving)")))}] visitor={(f.clubhouse.Visitor ? f.clubhouse.Visitor.Definition.id : "none")}");
         if (f.Current == GameFlow.Screen.Clubhouse) sb.Append($" bored={(f.clubhouse.Bored ? f.clubhouse.Bored.Definition.id : "none")}");
-        var next = f.database.NextFriend();
-        sb.Append($" hearts={SaveSystem.Data.giftHearts} next={(next ? next.id : "none")} giftReady={FriendGiftRules.Ready(f.database)} unlocked=[{string.Join(",", f.database.UnlockedPets().Select(p => p.id))}]");
+        sb.Append($" full={Entitlements.FullVersion} playable=[{string.Join(",", f.database.PlayablePets().Select(p => p.id))}]");
         sb.Append($" stickers=[{string.Join(",", SaveSystem.Data.stickers)}] frame={Time.frameCount}");
         return sb.ToString();
     }
@@ -166,32 +165,67 @@ public static class PlayTest
         ? System.IO.File.ReadAllText(Application.persistentDataPath + "/oopsiepets_save.json")
         : "no save file";
 
-    /// <summary>Taps the gift box like a finger would (on its lid).</summary>
-    public static async Task<string> TapGift()
+    /// <summary>Test switch: full version on/off (same as the parent settings button), then rebuild the room.</summary>
+    public static string SetFull(bool on)
     {
-        var g = GameFlow.Instance.clubhouse.gift;
-        if (!g || !g.isActiveAndEnabled) return "no gift box: " + State();
-        var at = g.lid.transform.position + Vector3.down * 0.1f;
-        return $"tapped gift at {at} ready={g.Ready}: " + await Tap(at.x, at.y);
+        Entitlements.SetFullVersionForTesting(on);
+        GameFlow.Instance.RefreshClubhouse();
+        return State();
     }
 
-    /// <summary>Test shortcut: sets the hearts in the gift box and rebuilds the clubhouse.</summary>
-    public static string SetHearts(int n)
+    /// <summary>Test shortcut: marks pets as completed (gives them their stickers), e.g. "puppy,kitten".</summary>
+    public static string Complete(string ids)
     {
-        SaveSystem.Data.giftHearts = n;
+        var db = GameFlow.Instance.database;
+        foreach (var id in ids.Split(','))
+        {
+            var p = db.Pet(id.Trim());
+            if (p && p.sticker && !SaveSystem.Data.stickers.Contains(p.sticker.id)) SaveSystem.Data.stickers.Add(p.sticker.id);
+        }
         SaveSystem.Save();
         GameFlow.Instance.RefreshClubhouse();
         return State();
     }
 
-    public static string UnlockAll()
+    /// <summary>Starts a visit directly (seq: full, cleanup, bath, grooming).</summary>
+    public static async Task<string> Visit(string id, string seq)
     {
-        int n = FriendGiftRules.UnlockAll(GameFlow.Instance.database);
-        GameFlow.Instance.RefreshClubhouse();
-        return $"unlocked {n}: " + State();
+        var def = GameFlow.Instance.database.Pet(id);
+        var s = seq == "bath" ? CareSession.Bath : seq == "grooming" ? CareSession.Grooming : seq == "cleanup" ? CareSession.CleanUp : CareSession.FullCare;
+        GameFlow.Instance.StartCare(def, s);
+        await Frames(2500);
+        return State();
     }
 
-    /// <summary>Where every pet and the gift box sit in the clubhouse (for layout checks).</summary>
+    public static async Task<string> Next()
+    {
+        var b = GameFlow.Instance.care.nextButton;
+        for (int w = 0; w < 60 && !b.gameObject.activeInHierarchy; w++) await Frames(100);
+        if (!b.gameObject.activeInHierarchy) return "no next button: " + State();
+        b.onClick.Invoke();
+        await Frames(1800);
+        return State();
+    }
+
+    public static string Lock(string id)
+    {
+        var c = GameFlow.Instance.clubhouse;
+        var p = c.Pets.FirstOrDefault(x => x.Definition.id == id);
+        if (!p) return "no pet " + id;
+        var (have, need) = GameFlow.Instance.database.Progress(p.Definition);
+        return $"{id}: locked={c.IsLocked(p)} playable={GameFlow.Instance.database.IsPlayable(p.Definition)} progress={have}/{need} access={p.Definition.access} worn=[{string.Join(",", p.Rig.AllWorn().Select(a => a.id))}] rainbow={p.Coat.Rainbow}";
+    }
+
+    public static string Rainbow(string id, bool on)
+    {
+        var s = SaveSystem.Data.Pet(id);
+        s.rainbow = on;
+        SaveSystem.Save();
+        GameFlow.Instance.RefreshClubhouse();
+        return Lock(id);
+    }
+
+    /// <summary>Where every pet sits in the clubhouse (for layout checks).</summary>
     public static string Layout()
     {
         var c = GameFlow.Instance.clubhouse;
@@ -201,8 +235,6 @@ public static class PlayTest
             var b = p.VisualBounds();
             sb.Append($" | {p.Definition.id} at ({p.transform.position.x:0.00},{p.transform.position.y:0.00}) size ({b.size.x:0.00}x{b.size.y:0.00}) worn=[{string.Join(",", p.Rig.AllWorn().Select(a => a.id))}]");
         }
-        var g = c.gift;
-        sb.Append(g && g.isActiveAndEnabled ? $" | gift at ({g.transform.position.x:0.00},{g.transform.position.y:0.00}) ready={g.Ready}" : " | no gift");
         return sb.ToString();
     }
 
@@ -291,9 +323,9 @@ public static class PlayTest
     /// <summary>Rinse: spray the shower back and forth over the pet until the suds are gone.</summary>
     public static async Task<string> Rinse(int maxRounds)
     {
-        var act = GameFlow.Instance.care.Current as WashActivity;
-        if (!act) return "not wash: " + State();
-        for (int w = 0; w < 30 && !act.Rinsing && !act.IsComplete; w++) await Frames(100);
+        var act = GameFlow.Instance.care.Current as RinseActivity;
+        if (!act) return "not rinse: " + State();
+        for (int w = 0; w < 40 && !act.Ready && !act.IsComplete; w++) await Frames(100);
         var pet = GameFlow.Instance.care.Pet;
         for (int r = 0; r < maxRounds && !act.IsComplete; r++)
         {

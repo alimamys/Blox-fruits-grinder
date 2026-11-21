@@ -15,6 +15,10 @@ namespace OopsiePets
             return t * t * t + 1f;
         }
 
+        public static float InQuad(float t) { t = Mathf.Clamp01(t); return t * t; }
+
+        public static float InCubic(float t) { t = Mathf.Clamp01(t); return t * t * t; }
+
         public static float InOutSine(float t) => -(Mathf.Cos(Mathf.PI * Mathf.Clamp01(t)) - 1f) / 2f;
 
         public static float OutBack(float t)

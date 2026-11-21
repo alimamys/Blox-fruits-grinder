@@ -33,8 +33,8 @@ namespace OopsiePets
         // Tooth centres in the open-mouth sprite (normalized, origin bottom-left; from make_bath_bits.py).
         static readonly Vector2[] Teeth =
         {
-            new Vector2(0.219f, 0.719f), new Vector2(0.36f, 0.793f), new Vector2(0.5f, 0.815f), new Vector2(0.64f, 0.793f), new Vector2(0.781f, 0.719f),
-            new Vector2(0.285f, 0.209f), new Vector2(0.428f, 0.162f), new Vector2(0.572f, 0.162f), new Vector2(0.715f, 0.209f),
+            new Vector2(0.207f, 0.88f), new Vector2(0.325f, 0.88f), new Vector2(0.442f, 0.88f), new Vector2(0.558f, 0.88f), new Vector2(0.675f, 0.88f), new Vector2(0.792f, 0.88f),
+            new Vector2(0.345f, 0.171f), new Vector2(0.449f, 0.125f), new Vector2(0.551f, 0.125f), new Vector2(0.655f, 0.171f),
         };
 
         class Speck { public SpriteRenderer sr; public float dirt = 1f; public Vector3 scale; }
@@ -120,7 +120,7 @@ namespace OopsiePets
                 sp.transform.localPosition = new Vector3(n.x * size.x - piv.x, n.y * size.y - piv.y, 0f);
                 sp.sprite = speckSprites[Random.Range(0, speckSprites.Length)];
                 sp.sortingOrder = 48;
-                float ss = size.x * 0.085f / Mathf.Max(0.001f, sp.sprite.bounds.size.x);
+                float ss = size.x * 0.075f / Mathf.Max(0.001f, sp.sprite.bounds.size.x);
                 sp.transform.localScale = Vector3.one * ss;
                 sp.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
                 specks.Add(new Speck { sr = sp, scale = sp.transform.localScale });

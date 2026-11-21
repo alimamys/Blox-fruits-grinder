@@ -21,9 +21,27 @@ namespace OopsiePets
         public List<StickerDefinition> stickers = new List<StickerDefinition>();
     }
 
-    /// <summary>Which packs are available. Today: free packs only; purchases are deliberately not implemented.</summary>
+    /// <summary>
+    /// What the family owns. The first three pets are free; the full version (one product) opens the rest.
+    /// IMPORTANT: in this build the full version is a TEST switch in the parent settings. No store, no
+    /// payment and no receipt check exist yet; a real purchase flow (Google Play Billing / App Store via
+    /// Unity IAP, behind the parent gate) must replace <see cref="SetFullVersionForTesting"/> once the store
+    /// accounts and the children's-privacy and families-policy review are done.
+    /// </summary>
     public static class Entitlements
     {
-        public static bool IsUnlocked(ContentPack pack) => pack != null && pack.isFree;
+        /// <summary>The store product the full version would be sold as (not live).</summary>
+        public const string FullVersionProductId = "oopsiepets.fullversion";
+
+        public static bool FullVersion => SaveSystem.Data.fullVersion;
+
+        public static bool IsUnlocked(ContentPack pack) => pack != null && (pack.isFree || FullVersion);
+
+        /// <summary>Test-only switch (no payment). Saved on the device.</summary>
+        public static void SetFullVersionForTesting(bool on)
+        {
+            SaveSystem.Data.fullVersion = on;
+            SaveSystem.Save();
+        }
     }
 }

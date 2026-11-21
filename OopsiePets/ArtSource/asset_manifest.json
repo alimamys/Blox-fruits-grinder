@@ -655,6 +655,225 @@
       "style_prefix": "STYLE",
       "seconds": 36.8,
       "ok": true
+    },
+    "giraffe_reference": {
+      "id": "giraffe_reference",
+      "file": "Characters/Giraffe/giraffe_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby giraffe named Sunny with a short chubby chibi neck, soft yellow fur (#FFF1A8) with rounded peach (#FFD6BA) spots, two small rounded horns (ossicones) with peach tips on top of the head, two small ears, a cream muzzle with two tiny nostrils, small happy smile, chubby pear-shaped body, front legs together with little lavender hooves, stubby back legs with lavender hooves, a thin tail with a peach tuft on the right side. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 26.0,
+      "ok": true
+    },
+    "bird_reference": {
+      "id": "bird_reference",
+      "file": "Characters/Bird/bird_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable round baby bluebird chick named Pip: a fluffy baby blue (#BDE0FE) round head with a small curly tuft of feathers on top and a small soft-yellow (#FFF1A8) closed beak in the middle of the face (no mouth other than the beak), a round fluffy baby blue body with a cream belly, two little wings folded at the sides, two tiny peach feet in front, short fan of tail feathers on the right side. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 24.1,
+      "ok": true
+    },
+    "cow_reference": {
+      "id": "cow_reference",
+      "file": "Characters/Cow/cow_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby cow calf named Buttercup: cream-white fur (#FFF6E5) with soft lavender (#CDB4DB) patches, a big rounded pink snout (#FFC8DD) with two nostrils, two small rounded cream horns, two floppy ears, small happy smile under the snout, chubby pear-shaped body with a lavender patch, front legs together with little lavender hooves, stubby back legs with lavender hooves, a thin tail with a pink tuft on the right side. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 25.5,
+      "ok": true
+    },
+    "pony_reference": {
+      "id": "pony_reference",
+      "file": "Characters/Pony/pony_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby pony named Pebble: soft peach coat (#FFD6BA), a fluffy mint (#B9F3D9) and turquoise (#A0E7E5) mane framing the top of the head, two small pointy ears, a soft pink muzzle with two tiny nostrils, small happy smile, chubby pear-shaped body, front legs together with little lavender hooves, stubby back legs with lavender hooves, a flowing mint and turquoise tail on the right side. No horn. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 25.6,
+      "ok": true
+    },
+    "accessories_sheet_3": {
+      "id": "accessories_sheet_3",
+      "file": "Accessories/accessories_sheet_3_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "Sprite sheet of 4 cute pet accessories for a preschool dress-up game, each drawn front-facing exactly as it would be worn by a chibi baby animal seen from the front, arranged in a single row left to right with generous empty space between them: 1) a cozy knitted scarf with mint and pink stripes wrapped as if around a neck, front view, with two short fringed ends hanging down; 2) a tiny lavender top hat with a pink ribbon band; 3) a small golden cowbell hanging from a soft pink strap, front view as a gently curved collar; 4) a hair clip with one big pastel daisy flower and a small mint leaf. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 33.4,
+      "ok": true
+    },
+    "garden_toys_sheet_2": {
+      "id": "garden_toys_sheet_2",
+      "file": "Objects/garden_toys_sheet_2_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "Sprite sheet of 3 cute garden play items for a preschool pet game, arranged in a single row left to right with very generous empty space between them and a wide empty margin to every image edge: 1) a shiny round apple in soft cherry pink-red with a little green leaf and a short stem; 2) a small playground slide in pastel colors seen from the side: a lavender ladder on the left and a mint slide curving down to the right ending close to the ground; 3) a cute friendly pink earthworm with a happy smiling face and tiny dot eyes, poking its upper half out of a small round hole of brown garden soil. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 30.0,
+      "ok": true
+    },
+    "garden_tree": {
+      "id": "garden_tree",
+      "file": "Objects/garden_tree_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1536",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "A cute round pastel garden tree for a preschool pet game, front view: a short sturdy light-brown trunk and a big fluffy rounded mint-green leafy crown with a few small pink blossoms, no fruit at all (apples will be added separately as game objects). The tree is centered, the trunk base touches the bottom of the image area with a little margin, the crown fills the upper part. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 35.1,
+      "ok": true
+    },
+    "giraffe_parts": {
+      "id": "giraffe_parts",
+      "file": "Characters/Giraffe/giraffe_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Giraffe/giraffe_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby giraffe character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two little knobbed horns (ossicones) and both ears attached, front view, with a BLANK face: keep the light cream muzzle with its two tiny nostrils, the orange spots and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby spotted body including its short neck, front legs together and back legs with little lavender hooves, with a smooth rounded neck top; (3) the thin TAIL with its orange tuft alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 33.5,
+      "ok": true
+    },
+    "sticker_giraffe_apple": {
+      "id": "sticker_giraffe_apple",
+      "file": "Stickers/sticker_giraffe_apple_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Giraffe/giraffe_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby giraffe character as the reference (same colors and style), happily holding a big shiny red apple with a green leaf, smiling with eyes closed in joy, a few little hearts around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 25.2,
+      "ok": true
+    },
+    "bird_parts": {
+      "id": "bird_parts",
+      "file": "Characters/Bird/bird_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Bird/bird_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby bluebird chick character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD: the upper round fluffy blue part of the chick with the little feather crest on top and the small yellow beak, front view, with a BLANK face: keep the yellow beak and the pink cheek blush, but absolutely NO eyes and NO eyebrows; the bottom edge of the head is a smooth rounded curve; (2) the BODY alone without head and without tail: the round chubby lower body with the cream belly, both little wings at the sides and the two orange feet, with a smooth rounded top; (3) the small fan of blue TAIL feathers alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 32.0,
+      "ok": true
+    },
+    "sticker_bird_worm": {
+      "id": "sticker_bird_worm",
+      "file": "Stickers/sticker_bird_worm_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Bird/bird_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby bluebird chick character as the reference (same colors and style), cheerfully waving a wing next to a tiny friendly smiling pink worm peeking out of a little mud hole, a few musical notes around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 26.7,
+      "ok": true
+    },
+    "cow_parts": {
+      "id": "cow_parts",
+      "file": "Characters/Cow/cow_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Cow/cow_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby cow calf character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two little cream horns and both floppy pink-lined ears attached, front view, with a BLANK face: keep the big pink muzzle with its two nostrils, the lavender spot and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby cream body with lavender spots, front legs together and back legs with lavender hooves, with a smooth rounded neck top; (3) the thin TAIL with its pink tuft alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 33.5,
+      "ok": true
+    },
+    "sticker_cow_slide": {
+      "id": "sticker_cow_slide",
+      "file": "Stickers/sticker_cow_slide_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Cow/cow_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby cow calf character as the reference (same colors and style), whooshing down a small pastel mint playground slide with a big happy laugh, little motion lines and stars around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 26.4,
+      "ok": true
+    },
+    "pony_parts": {
+      "id": "pony_parts",
+      "file": "Characters/Pony/pony_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Pony/pony_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby pony foal character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with both pointy ears and the mint-blue mane and forelock attached, front view, with a BLANK face: keep the soft pink muzzle with its two tiny nostrils and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby peach body with front legs together and back legs with lavender hooves, with a smooth rounded neck top (no mane on the body); (3) the flowing mint-blue TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 34.1,
+      "ok": true
+    },
+    "sticker_pony_puddle": {
+      "id": "sticker_pony_puddle",
+      "file": "Stickers/sticker_pony_puddle_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Pony/pony_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby pony foal character as the reference (same colors and style), galloping joyfully through a small splashy blue puddle with water droplets flying, smiling, a few little hearts around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 26.5,
+      "ok": true
     }
   }
 }

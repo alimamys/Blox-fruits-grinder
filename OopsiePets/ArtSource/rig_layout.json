@@ -430,5 +430,189 @@
    "headWidth": 400,
    "furTint": "FFF4F8"
   }
+ },
+ "giraffe": {
+  "folder": "Giraffe",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "giraffe_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.003,
+    "pivot": [
+     0.49636,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "giraffe_head",
+    "x": -0.8,
+    "y": 538.7,
+    "scale": 1.305,
+    "pivot": [
+     0.48779,
+     0.49886
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "giraffe_tail",
+    "x": 150,
+    "y": 60,
+    "scale": 1.003,
+    "pivot": [
+     0.44357,
+     0.03984
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 107.1,
+   "eye_y": -121.2,
+   "eye_scale": 0.733,
+   "mouth_y": -197.6,
+   "mouth_scale": 0.573
+  }
+ },
+ "bird": {
+  "folder": "Bird",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "bird_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.312,
+    "pivot": [
+     0.49643,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "bird_head",
+    "x": 0.5,
+    "y": 508.0,
+    "scale": 1.485,
+    "pivot": [
+     0.5046,
+     0.49764
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "bird_tail",
+    "x": 150,
+    "y": 60,
+    "scale": 1.312,
+    "pivot": [
+     0.09889,
+     0.29545
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 111.5,
+   "eye_y": -102.5,
+   "eye_scale": 0.761,
+   "mouth_y": -179.8,
+   "mouth_scale": 0.5
+  }
+ },
+ "cow": {
+  "folder": "Cow",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "cow_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.444,
+    "pivot": [
+     0.5,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "cow_head",
+    "x": -1.6,
+    "y": 527.6,
+    "scale": 1.337,
+    "pivot": [
+     0.44799,
+     0.49625
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "cow_tail",
+    "x": 150,
+    "y": 100,
+    "scale": 1.444,
+    "pivot": [
+     0.03959,
+     0.19889
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 108.2,
+   "eye_y": -46.3,
+   "eye_scale": 0.673,
+   "mouth_y": -140.9,
+   "mouth_scale": 0.65
+  }
+ },
+ "pony": {
+  "folder": "Pony",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "pony_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.441,
+    "pivot": [
+     0.49851,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "pony_head",
+    "x": -0.7,
+    "y": 486.6,
+    "scale": 1.261,
+    "pivot": [
+     0.47289,
+     0.49893
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "pony_tail",
+    "x": 135,
+    "y": 150,
+    "scale": 1.081,
+    "pivot": [
+     0.15,
+     0.79714
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 107.2,
+   "eye_y": -12.6,
+   "eye_scale": 0.753,
+   "mouth_y": -146.3,
+   "mouth_scale": 0.529
+  }
  }
 }

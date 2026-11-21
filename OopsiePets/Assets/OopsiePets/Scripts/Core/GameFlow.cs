@@ -17,6 +17,8 @@ namespace OopsiePets
         public ContentDatabase database;
         public FaceSet face;
         public Fader fader;
+        [Tooltip("Material with the OopsiePets/RainbowSprite shader, for rainbow coats.")]
+        public Material rainbowMaterial;
 
         [Header("Screens (world + UI roots)")]
         public GameObject clubhouseWorld;
@@ -48,10 +50,7 @@ namespace OopsiePets
             Instance = this;
             Application.targetFrameRate = 60;
             SaveSystem.Load();
-            // Starters always live here; other friends are earned from the gift box.
-            foreach (var p in database.AvailablePets())
-                if (p.startsUnlocked && !SaveSystem.Data.unlockedPets.Contains(p.id)) SaveSystem.Data.unlockedPets.Add(p.id);
-            SaveSystem.Save();
+            PetCoat.RainbowMaterial = rainbowMaterial;
 
             albumButton.onClick.AddListener(() => StartCoroutine(Go(Screen.Album, () => album.Refresh())));
             albumBackButton.onClick.AddListener(() => StartCoroutine(Go(Screen.Clubhouse, () => clubhouse.Enter(null))));
@@ -122,18 +121,18 @@ namespace OopsiePets
             if (Current == Screen.Clubhouse) clubhouse.Enter(null);
         }
 
-        /// <summary>After a friend jumps out of the gift box, the room fades and rearranges to give it a bed.</summary>
-        public IEnumerator RebuildClubhouse(PetDefinition welcomed)
+        /// <summary>After the grown-ups change something in the settings, the room fades and rebuilds.</summary>
+        public IEnumerator RebuildClubhouse()
         {
             if (Busy || Current != Screen.Clubhouse) yield break;
             Busy = true;
             yield return fader.FadeOut();
-            clubhouse.Enter(null, welcomed);
+            clubhouse.Enter(null);
             yield return fader.FadeIn();
             Busy = false;
         }
 
-        /// <summary>Creates a pet from its definition, wearing its saved outfit if asked.</summary>
+        /// <summary>Creates a pet from its definition, wearing its saved outfit if asked, in its coat colour.</summary>
         public PetView SpawnPet(PetDefinition def, Transform parent, float scale, bool withAccessories)
         {
             var p = Instantiate(def.prefab, parent, false);
@@ -141,8 +140,22 @@ namespace OopsiePets
             p.transform.localPosition = Vector3.zero;
             p.transform.localScale = Vector3.one * scale;
             p.Init(def, face);
+            var save = SaveSystem.Data.Pet(def.id);
+            // Each friend starts out wearing its own accessory (the unicorn its crown), once; after that the
+            // outfit is whatever the child picked.
+            if (!save.outfitSet)
+            {
+                save.outfitSet = true;
+                if (def.giftAccessory != null && !save.accessories.Contains(def.giftAccessory.id))
+                {
+                    save.accessories.RemoveAll(id => { var a = database.Accessory(id); return a != null && a.slot == def.giftAccessory.slot; });
+                    save.accessories.Add(def.giftAccessory.id);
+                }
+                SaveSystem.Save();
+            }
+            if (save.rainbow && ContentDatabase.IsCompleted(def)) p.Coat.SetRainbow(true);
             if (withAccessories)
-                foreach (var id in SaveSystem.Data.Pet(def.id).accessories)
+                foreach (var id in save.accessories)
                 {
                     var acc = database.Accessory(id);
                     if (acc) p.Rig.Wear(acc);

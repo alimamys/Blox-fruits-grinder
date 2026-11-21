@@ -9,26 +9,43 @@ namespace OopsiePets
     /// tapping opens the care menu. One pet at a time is bored and wants to go out and play: a thought
     /// bubble shows its toy and it yawns; tapping it goes straight to the garden. (Pets only get muddy by
     /// playing; one that left the garden early comes home muddy and asks for a bath.)
-    /// The room makes space as friends join: beds are laid out for 3 to 7 pets, and the surprise gift box
-    /// sits where the next friend will live.
+    /// All eleven friends always live here. Friends that can't be played with yet nap behind a padlock
+    /// (tapping one only makes it stir: there is no purchase prompt for children). Friends that are earned
+    /// by playing show little dots under the padlock, one per friend they are waiting for, which fill as
+    /// those friends get their stickers. When a padlock opens, it pops off with confetti.
     /// </summary>
     public class Clubhouse : MonoBehaviour
     {
         public Transform doorSpot;
         public CareMenu menu;
         public FingerHint hint;
-        public FriendGift gift;
         public Sprite bedSprite;
         [Tooltip("Thought bubble for the pet that wants to play (its toy is drawn inside).")]
         public Sprite thoughtBubble;
         public Sprite[] mudSprites;
 
+        [Header("Locked friends")]
+        public Sprite padlockSprite;
+        public Sprite pipOn;
+        public Sprite pipOff;
+        [Tooltip("The grown-ups' gear button: it gives a little wiggle when a child taps a friend that needs the full version.")]
+        public RectTransform settingsButton;
+        public Color lockedTint = new Color(0.86f, 0.84f, 0.92f, 1f);
+
         readonly List<PetView> pets = new List<PetView>();
         readonly List<GameObject> props = new List<GameObject>();
+        readonly Dictionary<PetView, Lock> locks = new Dictionary<PetView, Lock>();
         PetView visitor;
         WantsToPlay bored;
-        Coroutine arrival, reveal, welcome;
+        Coroutine arrival, welcome, gearWiggle;
         Layout layout;
+
+        class Lock
+        {
+            public Transform padlock;
+            public List<SpriteRenderer> pips = new List<SpriteRenderer>();
+            public Vector3 padScale;
+        }
 
         struct Layout
         {
@@ -36,18 +53,28 @@ namespace OopsiePets
             public float petScale, bedScale;
         }
 
-        // Hand-placed arrangements on the rug for each number of beds (gift box included).
+        // Hand-placed arrangements on the rug. Up to 7 pets use the roomy layouts; a full house of 11 sits in
+        // three rows (4, 4 and 3), front rows a little apart so nobody hides behind a friend.
         static Layout For(int n)
         {
             if (n <= 3) return new Layout { petScale = 0.46f, bedScale = 0.72f, spots = new[] { new Vector2(-2.75f, -3.2f), new Vector2(2.75f, -3.2f), new Vector2(0f, -6.5f) } };
-            // Front-row beds sit between and below the back-row beds, so nobody hides behind a friend.
             if (n == 4) return new Layout { petScale = 0.42f, bedScale = 0.62f, spots = new[] { new Vector2(-2.75f, -3.0f), new Vector2(2.75f, -3.0f), new Vector2(-1.55f, -6.95f), new Vector2(1.55f, -6.95f) } };
-            if (n == 5) return new Layout { petScale = 0.38f, bedScale = 0.58f, spots = new[] { new Vector2(-3.5f, -2.9f), new Vector2(0f, -2.7f), new Vector2(3.5f, -2.9f), new Vector2(-1.75f, -6.9f), new Vector2(1.75f, -6.9f) } };
-            if (n == 6) return new Layout { petScale = 0.38f, bedScale = 0.58f, spots = new[] { new Vector2(-3.5f, -2.9f), new Vector2(0f, -2.7f), new Vector2(3.5f, -2.9f), new Vector2(-3.5f, -6.9f), new Vector2(0f, -7.15f), new Vector2(3.5f, -6.9f) } };
-            return new Layout { petScale = 0.34f, bedScale = 0.5f, spots = new[] { new Vector2(-3.95f, -2.9f), new Vector2(-1.32f, -2.7f), new Vector2(1.32f, -2.7f), new Vector2(3.95f, -2.9f), new Vector2(-2.65f, -6.85f), new Vector2(0f, -7.1f), new Vector2(2.65f, -6.85f) } };
+            if (n <= 6) return new Layout { petScale = 0.38f, bedScale = 0.58f, spots = new[] { new Vector2(-3.5f, -2.9f), new Vector2(0f, -2.7f), new Vector2(3.5f, -2.9f), new Vector2(-3.5f, -6.9f), new Vector2(0f, -7.15f), new Vector2(3.5f, -6.9f) } };
+            if (n == 7) return new Layout { petScale = 0.34f, bedScale = 0.5f, spots = new[] { new Vector2(-3.95f, -2.9f), new Vector2(-1.32f, -2.7f), new Vector2(1.32f, -2.7f), new Vector2(3.95f, -2.9f), new Vector2(-2.65f, -6.85f), new Vector2(0f, -7.1f), new Vector2(2.65f, -6.85f) } };
+            var spots = new List<Vector2>();
+            float[] rows = { -1.45f, -4.6f, -7.75f };
+            int left = n;
+            for (int r = 0; r < 3 && left > 0; r++)
+            {
+                int inRow = Mathf.Min(r < 2 ? 4 : 5, left);
+                float gap = inRow >= 4 ? 2.62f : 2.75f;
+                for (int i = 0; i < inRow; i++) spots.Add(new Vector2((i - (inRow - 1) / 2f) * gap, rows[r] + (inRow >= 4 && (i == 0 || i == inRow - 1) ? -0.12f : 0f)));
+                left -= inRow;
+            }
+            return new Layout { petScale = 0.3f, bedScale = 0.44f, spots = spots.ToArray() };
         }
 
-        public const int MaxPets = 7;
+        public const int MaxPets = 13;
 
         // Pets lower on the screen are closer, so they draw in front.
         static int OrderFor(Vector2 spot) => 20 + Mathf.RoundToInt((10f - spot.y) * 2f);
@@ -55,96 +82,176 @@ namespace OopsiePets
         void Awake()
         {
             menu.Chosen = (p, seq) => GameFlow.Instance.StartCare(p.Definition, seq);
-            if (gift)
-            {
-                gift.OpenRequested += OnGiftOpen;
-                gift.BecameReady += _ => OnGiftFull();
-            }
         }
 
         public IEnumerable<PetView> Pets => pets;
         public PetView Visitor => visitor;
         /// <summary>The pet showing the "let's go play!" bubble.</summary>
         public PetView Bored => bored ? bored.Pet : null;
-        public bool Revealing => reveal != null;
         public float PetScale => layout.petScale;
+        public bool IsLocked(PetView p) => p && locks.ContainsKey(p);
+        public bool Celebrating => welcome != null;
+
+        ContentDatabase Db => GameFlow.Instance.database;
 
         /// <summary>
-        /// Rebuilds the room. If <paramref name="arrive"/> is set, that pet walks in muddy; if
-        /// <paramref name="welcomed"/> is set, that new friend celebrates in its new bed.
+        /// Rebuilds the room. If <paramref name="arrive"/> is set, that pet walks in muddy. Friends whose
+        /// padlock has just opened celebrate (the first of them is the one that wants to play).
         /// </summary>
         public void Enter(PetDefinition arrive, PetDefinition welcomed = null)
         {
             Clear();
             lastPress = Time.time;
-            var db = GameFlow.Instance.database;
-            var defs = new List<PetDefinition>(db.UnlockedPets());
+            var db = Db;
+            var defs = new List<PetDefinition>(db.AllPets());
             if (defs.Count > MaxPets) defs.RemoveRange(MaxPets, defs.Count - MaxPets);
-            var next = defs.Count < MaxPets ? db.NextFriend() : null;
-            layout = For(defs.Count + (next != null ? 1 : 0));
+            layout = For(defs.Count);
+
+            // Padlocks that open now (a friend became playable since the last visit) celebrate once.
+            var save = SaveSystem.Data;
+            save.celebrated.RemoveAll(id => { var d = db.Pet(id); return d == null || !db.IsPlayable(d); });
+            var opened = new List<PetView>();
 
             for (int i = 0; i < defs.Count; i++)
             {
+                var def = defs[i];
                 var spot = layout.spots[i];
                 MakeBed(spot, layout.bedScale);
                 var anchor = new GameObject("BedSpot" + (i + 1)).transform;
                 anchor.SetParent(transform, false);
                 anchor.position = spot;
                 props.Add(anchor.gameObject);
-                var p = GameFlow.Instance.SpawnPet(defs[i], anchor, layout.petScale, true);
+                var p = GameFlow.Instance.SpawnPet(def, anchor, layout.petScale, true);
                 p.SetSortingOrder(OrderFor(spot));
                 p.Tapped += OnPetTapped;
                 pets.Add(p);
-            }
-
-            if (gift)
-            {
-                if (next != null)
+                bool playable = db.IsPlayable(def);
+                if (!playable) LockUp(p, spot);
+                else if (def.access != PetAccess.Free && !save.celebrated.Contains(def.id))
                 {
-                    var spot = layout.spots[defs.Count];
-                    gift.Show(spot, 4.48f * layout.bedScale * 0.78f, SaveSystem.Data.giftHearts, FriendGiftRules.HeartJustEarned);
-                    var group = gift.GetComponent<UnityEngine.Rendering.SortingGroup>();
-                    if (group) group.sortingOrder = OrderFor(spot);
+                    save.celebrated.Add(def.id);
+                    LockUp(p, spot); // shown locked for a moment, then the padlock pops open
+                    opened.Add(p);
                 }
-                else gift.Hide();
             }
-            FriendGiftRules.HeartJustEarned = false;
+            SaveSystem.Save();
 
             if (arrive != null)
             {
                 var v = pets.Find(p => p.Definition == arrive);
-                if (v != null) arrival = StartCoroutine(Arrive(v));
+                if (v != null && !IsLocked(v)) arrival = StartCoroutine(Arrive(v));
             }
 
-            // A full gift box is the next thing to do, so nobody asks to play until it is opened. Otherwise
-            // one pet wants to go out and play: a new friend first, then whoever has played least.
-            bool giftFull = next != null && FriendGiftRules.Ready(db);
-            if (!giftFull)
-            {
-                var b = PickBored(welcomed, arrive);
-                if (b && thoughtBubble) bored = WantsToPlay.Attach(b, thoughtBubble, 6.2f * layout.petScale);
-            }
+            // One pet wants to go out and play: a friend that just joined first, then whoever has played least.
+            if (welcomed == null && opened.Count > 0) welcomed = opened[0].Definition;
+            var b = PickBored(welcomed, arrive, opened);
+            if (b && thoughtBubble && opened.Count == 0) bored = WantsToPlay.Attach(b, thoughtBubble, 6.2f * layout.petScale);
 
-            if (welcomed != null)
-            {
-                var w = pets.Find(p => p.Definition == welcomed);
-                if (w != null) welcome = StartCoroutine(Welcome(w));
-            }
-            else if (arrive == null && giftFull) welcome = StartCoroutine(PointAtGift());
+            if (opened.Count > 0) welcome = StartCoroutine(OpenLocks(opened));
             else if (arrive == null && bored) welcome = StartCoroutine(PointAtBored(2.5f));
         }
 
-        /// <summary>The last heart just landed: the gift box takes over as the next thing to do.</summary>
-        void OnGiftFull()
+        float PipSize => 0.98f * layout.petScale;
+
+        void LockUp(PetView p, Vector2 spot)
         {
-            if (reveal != null || arrival != null) return;
-            if (welcome != null) StopCoroutine(welcome);
-            if (bored) { Destroy(bored); bored = null; }
-            hint.Hide();
-            welcome = StartCoroutine(PointAtGift());
+            p.locked = true;
+            p.Animator.SetMood(PetExpression.Asleep);
+            foreach (var sr in p.GetComponentsInChildren<SpriteRenderer>()) sr.color *= lockedTint;
+            var l = new Lock();
+            // The padlock sits on the pet's tummy, where it is easy to see.
+            var pad = new GameObject("Padlock").AddComponent<SpriteRenderer>();
+            pad.transform.SetParent(transform, false);
+            pad.sprite = padlockSprite;
+            pad.sortingOrder = OrderFor(spot) * 10 + 400;
+            float size = 3.0f * layout.petScale;
+            float w = padlockSprite ? padlockSprite.bounds.size.x : 1f;
+            pad.transform.localScale = Vector3.one * size / Mathf.Max(0.01f, w);
+            pad.transform.position = (Vector3)spot + new Vector3(0.05f, 2.2f * layout.petScale, 0f);
+            l.padlock = pad.transform;
+            l.padScale = pad.transform.localScale;
+            props.Add(pad.gameObject);
+            // Dots for the friends it is waiting for (only meaningful with the full version).
+            var (have, need) = Db.Progress(p.Definition);
+            if (need > 0 && Entitlements.FullVersion && pipOn && pipOff)
+            {
+                int perRow = need > 6 ? 5 : need;
+                float ps = PipSize, gap = 1.12f * layout.petScale;
+                for (int i = 0; i < need; i++)
+                {
+                    int row = i / perRow, col = i % perRow;
+                    int inRow = Mathf.Min(perRow, need - row * perRow);
+                    var pip = new GameObject("Pip").AddComponent<SpriteRenderer>();
+                    pip.transform.SetParent(transform, false);
+                    pip.sprite = i < have ? pipOn : pipOff;
+                    pip.sortingOrder = pad.sortingOrder + 1;
+                    pip.transform.localScale = Vector3.one * ps / Mathf.Max(0.01f, pipOn.bounds.size.x);
+                    pip.transform.position = (Vector3)spot + new Vector3((col - (inRow - 1) / 2f) * gap, 0.62f * layout.petScale - row * gap, 0f);
+                    l.pips.Add(pip);
+                    props.Add(pip.gameObject);
+                }
+            }
+            locks[p] = l;
         }
 
-        PetView PickBored(PetDefinition welcomed, PetDefinition muddy)
+        IEnumerator OpenLocks(List<PetView> opened)
+        {
+            yield return new WaitForSeconds(0.9f);
+            var fx = FxSpawner.Instance;
+            var a = AudioManager.Instance;
+            foreach (var p in opened)
+            {
+                if (!p || !locks.TryGetValue(p, out var l)) continue;
+                // Rattle, rattle... pop! The padlock flies off and the friend wakes up to cheer.
+                for (int i = 0; i < 3; i++)
+                {
+                    a?.Play(Sfx.Tap, 0.5f, 1.1f + i * 0.15f);
+                    float dir = i % 2 == 0 ? 1f : -1f;
+                    yield return Ease.Tween(0.14f, k => l.padlock.localRotation = Quaternion.Euler(0f, 0f, Ease.Bump(k) * 14f * dir), null, false);
+                }
+                a?.Play(Sfx.Pop, 0.8f, 0.9f);
+                a?.Play(Sfx.Celebrate, 0.6f);
+                fx?.Confetti(l.padlock.position, 30);
+                fx?.Sparkles(l.padlock.position, 10, 0.8f);
+                foreach (var pip in l.pips) if (pip) pip.gameObject.SetActive(false);
+                var from = l.padlock.position;
+                var pad = l.padlock;
+                var sr = pad.GetComponent<SpriteRenderer>();
+                StartCoroutine(Ease.Tween(0.6f, k =>
+                {
+                    if (!pad) return;
+                    pad.position = from + new Vector3(1.4f * k, 2.2f * Ease.Bump(k * 0.7f), 0f);
+                    pad.localRotation = Quaternion.Euler(0f, 0f, -200f * k);
+                    sr.color = new Color(1f, 1f, 1f, 1f - k);
+                }, null, false));
+                Unlock(p);
+                p.Animator.Play(PetReaction.Celebrate);
+                fx?.Hearts(p.Rig.head.position, 4);
+                AudioManager.Instance?.PlayVoice(p.Definition.voice, p.Definition.voicePitch, VoiceKind.Excited);
+                yield return new WaitForSeconds(1.0f);
+            }
+            yield return new WaitForSeconds(0.6f);
+            // The first new friend wants to go and play right away.
+            var first = opened.Find(x => x);
+            if (first && thoughtBubble && !bored) bored = WantsToPlay.Attach(first, thoughtBubble, 6.2f * layout.petScale);
+            if (first && !hint.Visible && !menu.Visible) hint.ShowTap(first.Rig.head);
+            welcome = null;
+        }
+
+        void Unlock(PetView p)
+        {
+            if (!locks.TryGetValue(p, out var l)) return;
+            locks.Remove(p);
+            p.locked = false;
+            p.Animator.SetMood(PetExpression.Neutral);
+            foreach (var sr in p.GetComponentsInChildren<SpriteRenderer>())
+            {
+                var c = sr.color;
+                sr.color = new Color(c.r / lockedTint.r, c.g / lockedTint.g, c.b / lockedTint.b, c.a);
+            }
+        }
+
+        PetView PickBored(PetDefinition welcomed, PetDefinition muddy, List<PetView> skip)
         {
             if (welcomed != null)
             {
@@ -152,12 +259,15 @@ namespace OopsiePets
                 if (w) return w;
             }
             var last = GameFlow.Instance.LastCared;
+            int playable = 0;
+            foreach (var p in pets) if (!IsLocked(p)) playable++;
             PetView best = null;
             int bestCount = int.MaxValue;
             foreach (var p in pets)
             {
+                if (IsLocked(p) || skip.Contains(p)) continue;
                 if (p.Definition == muddy) continue;
-                if (p.Definition == last && pets.Count > 2) continue; // someone else's turn
+                if (p.Definition == last && playable > 2) continue; // someone else's turn
                 int c = SaveSystem.Data.Pet(p.Definition.id).careCount;
                 if (c < bestCount || (c == bestCount && Random.value < 0.4f)) { best = p; bestCount = c; }
             }
@@ -188,16 +298,15 @@ namespace OopsiePets
         public void Clear()
         {
             if (arrival != null) StopCoroutine(arrival);
-            if (reveal != null) StopCoroutine(reveal);
             if (welcome != null) StopCoroutine(welcome);
-            arrival = reveal = welcome = null;
+            arrival = welcome = null;
+            locks.Clear();
             menu.HideNow();
             hint.Hide();
             foreach (var p in pets) if (p) Destroy(p.gameObject);
             pets.Clear();
             foreach (var g in props) if (g) Destroy(g);
             props.Clear();
-            if (gift) gift.Hide();
             visitor = null;
             bored = null; // destroyed with its pet
         }
@@ -205,7 +314,7 @@ namespace OopsiePets
         void OnPetTapped(PetView p)
         {
             hint.Hide();
-            if (reveal != null) return;
+            if (locks.TryGetValue(p, out var l)) { StartCoroutine(Stir(p, l)); return; }
             if (p == visitor)
             {
                 // The muddy visitor goes straight to the bath.
@@ -268,69 +377,37 @@ namespace OopsiePets
             arrival = null;
         }
 
-        IEnumerator PointAtGift()
+        // A napping friend that can't be played with yet: it stirs, the padlock jiggles, and its empty dots
+        // blink (there are friends to finish first). If the full version is needed, the grown-ups' gear
+        // button gives a small wiggle; nothing on screen asks the child to buy anything.
+        IEnumerator Stir(PetView p, Lock l)
         {
-            yield return new WaitForSeconds(1.2f);
-            // The last heart may still be flying in: wait for it to land.
-            for (float t = 0f; t < 4f && gift && !gift.Ready; t += Time.deltaTime) yield return null;
-            if (gift && gift.Ready && !menu.Visible) { hint.Hide(); hint.ShowTap(gift.lid.transform); }
-            welcome = null;
-        }
-
-        void OnGiftOpen(FriendGift g)
-        {
-            if (reveal != null || arrival != null) { g.Show(g.transform.position, g.box.bounds.size.x, SaveSystem.Data.giftHearts, false); return; }
-            reveal = StartCoroutine(Reveal());
-        }
-
-        IEnumerator Reveal()
-        {
-            hint.Hide();
-            menu.HideNow();
-            yield return gift.Open();
-            var friend = FriendGiftRules.OpenGift(GameFlow.Instance.database);
-            if (friend == null) { reveal = null; yield break; }
-
-            // The new friend springs out of the box, wearing the present it brought.
-            Vector3 spot = gift.transform.position;
-            var anchor = new GameObject("NewFriend").transform;
-            anchor.SetParent(transform, false);
-            anchor.position = spot;
-            props.Add(anchor.gameObject);
-            var p = GameFlow.Instance.SpawnPet(friend, anchor, layout.petScale, true);
-            p.tappable = false;
-            p.SetSortingOrder(OrderFor(spot) + 1);
-            p.transform.localScale = Vector3.zero;
-            AudioManager.Instance?.PlayVoice(friend.voice, friend.voicePitch, VoiceKind.Excited);
-            StartCoroutine(gift.Vanish());
-            float s = layout.petScale;
-            yield return Ease.Tween(0.85f, k =>
+            AudioManager.Instance?.Play(Sfx.Tap, 0.5f, 0.8f);
+            if (!Entitlements.FullVersion && settingsButton && gearWiggle == null) gearWiggle = StartCoroutine(WiggleGear());
+            var pad = l.padlock;
+            yield return Ease.Tween(0.45f, k =>
             {
-                p.transform.localScale = Vector3.one * s * Ease.OutBack(Mathf.Clamp01(k * 1.8f));
-                p.transform.localPosition = Vector3.up * Ease.Bump(k) * 2.4f;
+                if (pad) pad.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(k * Mathf.PI * 4f) * 12f * (1f - k));
+                if (pad) pad.localScale = l.padScale * (1f + 0.15f * Ease.Bump(k));
+                foreach (var pip in l.pips)
+                    if (pip && pip.sprite == pipOff) pip.transform.localScale = Vector3.one * (PipSize / Mathf.Max(0.01f, pipOff.bounds.size.x)) * (1f + 0.5f * Ease.Bump(k));
             }, null, false);
-            p.transform.localPosition = Vector3.zero;
-            var fx = FxSpawner.Instance;
-            fx?.Confetti(p.Rig.head.position, 30);
-            fx?.Hearts(p.Rig.head.position, 6);
-            p.Animator.Play(PetReaction.Celebrate);
-            // Everyone else cheers too.
-            foreach (var other in pets) if (other) other.Animator.Play(Random.value < 0.5f ? PetReaction.Jump : PetReaction.Bounce);
-            yield return new WaitForSeconds(2.6f);
-            reveal = null;
-            // The room rearranges to give the new friend its own bed (runs on GameFlow: this rebuild clears us).
-            GameFlow.Instance.StartCoroutine(GameFlow.Instance.RebuildClubhouse(friend));
+            if (p && p.locked) p.Animator.SetMood(PetExpression.Asleep);
         }
 
-        IEnumerator Welcome(PetView p)
+        IEnumerator WiggleGear()
         {
-            yield return new WaitForSeconds(0.5f);
-            if (!p) yield break;
-            p.Animator.Play(PetReaction.Celebrate);
-            FxSpawner.Instance?.Hearts(p.Rig.head.position, 4);
-            yield return new WaitForSeconds(1.6f);
-            if (p && !hint.Visible) hint.ShowTap(p.Rig.head); // the new friend wants to go play
-            welcome = null;
+            var t = settingsButton;
+            var s0 = t.localScale;
+            yield return Ease.Tween(0.6f, k =>
+            {
+                t.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(k * Mathf.PI * 4f) * 14f * (1f - k));
+                t.localScale = s0 * (1f + 0.12f * Ease.Bump(k));
+            }, null, false);
+            t.localRotation = Quaternion.identity;
+            t.localScale = s0;
+            yield return new WaitForSeconds(1f);
+            gearWiggle = null;
         }
 
         void Start()
@@ -341,7 +418,6 @@ namespace OopsiePets
         void OnDestroy()
         {
             if (InputRouter.Instance) InputRouter.Instance.PointerDown -= OnAnyPress;
-            if (gift) gift.OpenRequested -= OnGiftOpen;
         }
 
         // Tapping anywhere else closes the care menu. The router taps pets before raising this
@@ -358,20 +434,18 @@ namespace OopsiePets
 
         void Update()
         {
-            if (reveal != null || hint.Visible || menu.Visible) return;
-            if (Time.frameCount % 240 == 0)
-            {
-                // A bouncing hand keeps inviting a tap: first the muddy visitor, then a full gift box.
-                if (visitor && visitor.tappable) { hint.ShowTap(visitor.Rig.head); return; }
-                if (!visitor && gift && gift.isActiveAndEnabled && gift.Ready) { hint.ShowTap(gift.lid.transform); return; }
-            }
-            // Nothing tapped for a while? Point at the next thing to do: a full gift box, else the pet that
-            // wants to play.
-            if (!visitor && arrival == null && welcome == null && Time.time - lastPress > idleInvite)
+            if (welcome != null || hint.Visible || menu.Visible) return;
+            if (Time.frameCount % 240 == 0 && visitor && visitor.tappable) { hint.ShowTap(visitor.Rig.head); return; }
+            // Nothing tapped for a while? Point at the pet that wants to play (or any friend to play with).
+            if (!visitor && arrival == null && Time.time - lastPress > idleInvite)
             {
                 lastPress = Time.time;
-                if (gift && gift.isActiveAndEnabled && gift.Ready) { hint.ShowTap(gift.lid.transform); return; }
-                var p = bored ? bored.Pet : pets.Count > 0 ? pets[Random.Range(0, pets.Count)] : null;
+                PetView p = bored ? bored.Pet : null;
+                if (!p)
+                {
+                    var free = pets.FindAll(x => x && !IsLocked(x));
+                    if (free.Count > 0) p = free[Random.Range(0, free.Count)];
+                }
                 if (p) hint.ShowTap(p.Rig.head);
             }
         }

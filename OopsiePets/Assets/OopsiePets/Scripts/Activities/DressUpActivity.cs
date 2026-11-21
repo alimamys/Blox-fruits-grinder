@@ -8,6 +8,8 @@ namespace OopsiePets
     /// <summary>
     /// Dress-up: tap an accessory in the tray to put it on (tap again to take it off). Each slot holds one
     /// item, so a hat replaces a hat. The pet reacts to each item. The big check button saves and finishes.
+    /// Once a pet has earned its sticker (a full visit), a rainbow button appears too: it turns the pet's
+    /// coat rainbow (and back), saved for that pet.
     /// </summary>
     public class DressUpActivity : Activity
     {
@@ -19,6 +21,9 @@ namespace OopsiePets
         public Button doneButton;
         public CanvasGroup trayGroup;
         public GridLayoutGroup grid;
+        [Tooltip("Rainbow coat toggle, shown once this pet has completed a full visit.")]
+        public Button rainbowButton;
+        public GameObject rainbowRing;
 
         readonly List<AccessoryButton> buttons = new List<AccessoryButton>();
         bool tried;
@@ -34,12 +39,48 @@ namespace OopsiePets
             StartCoroutine(Ease.Tween(0.35f, k => trayGroup.alpha = k, Ease.OutCubic));
             doneButton.onClick.RemoveListener(OnDone);
             doneButton.onClick.AddListener(OnDone);
+            if (rainbowButton)
+            {
+                bool earned = ContentDatabase.IsCompleted(pet.Definition);
+                rainbowButton.gameObject.SetActive(earned);
+                rainbowButton.onClick.RemoveListener(OnRainbow);
+                rainbowButton.onClick.AddListener(OnRainbow);
+                if (rainbowRing) rainbowRing.SetActive(pet.Coat.Rainbow);
+            }
             StartCoroutine(HintSoon());
+        }
+
+        void OnRainbow()
+        {
+            tried = true;
+            if (ctx.hint) ctx.hint.Hide();
+            bool on = !pet.Coat.Rainbow;
+            pet.Coat.SetRainbow(on);
+            SaveSystem.Data.Pet(pet.Definition.id).rainbow = on;
+            SaveSystem.Save();
+            if (rainbowRing) rainbowRing.SetActive(on);
+            var c = pet.VisualBounds().center;
+            if (on)
+            {
+                Audio?.Play(Sfx.Sparkle, 0.9f, 1.1f);
+                Audio?.Play(Sfx.Celebrate, 0.5f);
+                Fx?.Sparkles(c, 18, 1.6f);
+                Fx?.Burst(c, 14, 3f, 0.5f, 0.8f, Fx.star, Fx.sparklePink, Fx.sparkleYellow);
+                pet.Animator.Play(PetReaction.Celebrate);
+            }
+            else
+            {
+                Audio?.Play(Sfx.Unequip, 0.7f);
+                Fx?.Sparkles(c, 6, 1.2f);
+                pet.Animator.Play(PetReaction.HeadTilt);
+            }
+            SetProgress(1f);
         }
 
         public override void End()
         {
             doneButton.onClick.RemoveListener(OnDone);
+            if (rainbowButton) rainbowButton.onClick.RemoveListener(OnRainbow);
             trayGroup.gameObject.SetActive(false);
             if (ctx.stars) ctx.stars.gameObject.SetActive(true);
             base.End();
@@ -55,12 +96,14 @@ namespace OopsiePets
                 b.Bind(acc, OnAccessory);
                 buttons.Add(b);
             }
-            // One row for up to six items, otherwise two even rows; the tray grows upward to fit.
+            // One row for up to six items, two even rows up to ten, then rows of five with slightly smaller
+            // buttons; the tray grows upward to fit.
             if (grid)
             {
                 int n = buttons.Count;
-                int cols = n <= 6 ? Mathf.Max(1, n) : Mathf.CeilToInt(n / 2f);
+                int cols = n <= 6 ? Mathf.Max(1, n) : n <= 10 ? Mathf.CeilToInt(n / 2f) : 5;
                 int rows = Mathf.CeilToInt(n / (float)cols);
+                grid.cellSize = rows >= 3 ? new Vector2(140f, 140f) : new Vector2(150f, 150f);
                 grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
                 grid.constraintCount = cols;
                 var size = tray.sizeDelta;

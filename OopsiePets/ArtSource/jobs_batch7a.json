@@ -1,0 +1,77 @@
+[
+ {
+  "id": "giraffe_reference",
+  "out": "Characters/Giraffe/giraffe_reference.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Puppy/puppy_reference.png"
+  ],
+  "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby giraffe named Sunny with a short chubby chibi neck, soft yellow fur (#FFF1A8) with rounded peach (#FFD6BA) spots, two small rounded horns (ossicones) with peach tips on top of the head, two small ears, a cream muzzle with two tiny nostrils, small happy smile, chubby pear-shaped body, front legs together with little lavender hooves, stubby back legs with lavender hooves, a thin tail with a peach tuft on the right side. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow."
+ },
+ {
+  "id": "bird_reference",
+  "out": "Characters/Bird/bird_reference.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Puppy/puppy_reference.png"
+  ],
+  "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable round baby bluebird chick named Pip: a fluffy baby blue (#BDE0FE) round head with a small curly tuft of feathers on top and a small soft-yellow (#FFF1A8) closed beak in the middle of the face (no mouth other than the beak), a round fluffy baby blue body with a cream belly, two little wings folded at the sides, two tiny peach feet in front, short fan of tail feathers on the right side. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow."
+ },
+ {
+  "id": "cow_reference",
+  "out": "Characters/Cow/cow_reference.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Puppy/puppy_reference.png"
+  ],
+  "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby cow calf named Buttercup: cream-white fur (#FFF6E5) with soft lavender (#CDB4DB) patches, a big rounded pink snout (#FFC8DD) with two nostrils, two small rounded cream horns, two floppy ears, small happy smile under the snout, chubby pear-shaped body with a lavender patch, front legs together with little lavender hooves, stubby back legs with lavender hooves, a thin tail with a pink tuft on the right side. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow."
+ },
+ {
+  "id": "pony_reference",
+  "out": "Characters/Pony/pony_reference.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Puppy/puppy_reference.png"
+  ],
+  "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby pony named Pebble: soft peach coat (#FFD6BA), a fluffy mint (#B9F3D9) and turquoise (#A0E7E5) mane framing the top of the head, two small pointy ears, a soft pink muzzle with two tiny nostrils, small happy smile, chubby pear-shaped body, front legs together with little lavender hooves, stubby back legs with lavender hooves, a flowing mint and turquoise tail on the right side. No horn. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height), big glossy dark-plum oval eyes with two white highlights, rosy cheek blush. Single character centered, isolated on a fully transparent background, no ground shadow."
+ },
+ {
+  "id": "accessories_sheet_3",
+  "out": "Accessories/accessories_sheet_3_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "prompt": "Sprite sheet of 4 cute pet accessories for a preschool dress-up game, each drawn front-facing exactly as it would be worn by a chibi baby animal seen from the front, arranged in a single row left to right with generous empty space between them: 1) a cozy knitted scarf with mint and pink stripes wrapped as if around a neck, front view, with two short fringed ends hanging down; 2) a tiny lavender top hat with a pink ribbon band; 3) a small golden cowbell hanging from a soft pink strap, front view as a gently curved collar; 4) a hair clip with one big pastel daisy flower and a small mint leaf. Isolated on a transparent background."
+ },
+ {
+  "id": "garden_toys_sheet_2",
+  "out": "Objects/garden_toys_sheet_2_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "prompt": "Sprite sheet of 3 cute garden play items for a preschool pet game, arranged in a single row left to right with very generous empty space between them and a wide empty margin to every image edge: 1) a shiny round apple in soft cherry pink-red with a little green leaf and a short stem; 2) a small playground slide in pastel colors seen from the side: a lavender ladder on the left and a mint slide curving down to the right ending close to the ground; 3) a cute friendly pink earthworm with a happy smiling face and tiny dot eyes, poking its upper half out of a small round hole of brown garden soil. Isolated on a transparent background."
+ },
+ {
+  "id": "garden_tree",
+  "out": "Objects/garden_tree_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1536",
+  "quality": "high",
+  "background": "transparent",
+  "prompt": "A cute round pastel garden tree for a preschool pet game, front view: a short sturdy light-brown trunk and a big fluffy rounded mint-green leafy crown with a few small pink blossoms, no fruit at all (apples will be added separately as game objects). The tree is centered, the trunk base touches the bottom of the image area with a little margin, the crown fills the upper part. Isolated on a transparent background."
+ }
+]

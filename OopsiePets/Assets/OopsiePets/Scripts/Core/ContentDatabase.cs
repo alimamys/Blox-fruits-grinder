@@ -10,53 +10,76 @@ namespace OopsiePets
         public List<ContentPack> packs = new List<ContentPack>();
         public FaceSet defaultFace;
 
-        /// <summary>Every pet in packs the family owns (free packs today), whether or not the child has met it yet.</summary>
-        public IEnumerable<PetDefinition> AvailablePets()
+        /// <summary>Every pet in the game, in clubhouse order, whether or not it can be played with yet.</summary>
+        public IEnumerable<PetDefinition> AllPets()
         {
+            var all = new List<PetDefinition>();
             foreach (var p in packs)
-                if (Entitlements.IsUnlocked(p))
-                    foreach (var pet in p.pets) yield return pet;
+                if (p != null)
+                    foreach (var pet in p.pets) if (pet != null && !all.Contains(pet)) all.Add(pet);
+            all.Sort((a, b) => a.unlockOrder.CompareTo(b.unlockOrder));
+            return all;
         }
 
-        /// <summary>Pets living in the clubhouse: the starters plus every friend earned from the gift box.</summary>
-        public IEnumerable<PetDefinition> UnlockedPets()
+        /// <summary>Pets the child can play with right now.</summary>
+        public IEnumerable<PetDefinition> PlayablePets()
         {
-            foreach (var pet in AvailablePets())
-                if (IsUnlocked(pet)) yield return pet;
+            foreach (var pet in AllPets())
+                if (IsPlayable(pet)) yield return pet;
         }
 
-        public static bool IsUnlocked(PetDefinition pet) =>
-            pet != null && (pet.startsUnlocked || SaveSystem.Data.unlockedPets.Contains(pet.id));
+        /// <summary>A pet counts as completed once its own sticker has been earned (a full visit).</summary>
+        public static bool IsCompleted(PetDefinition pet) =>
+            pet != null && pet.sticker != null && SaveSystem.Data.stickers.Contains(pet.sticker.id);
 
-        /// <summary>The friend waiting in the gift box, or null once everyone has arrived.</summary>
-        public PetDefinition NextFriend()
+        public bool IsPlayable(PetDefinition pet)
         {
-            PetDefinition next = null;
-            foreach (var pet in AvailablePets())
-                if (!IsUnlocked(pet) && (next == null || pet.unlockOrder < next.unlockOrder)) next = pet;
-            return next;
+            if (pet == null) return false;
+            if (pet.access == PetAccess.Free) return true;
+            if (!Entitlements.FullVersion) return false;
+            var (have, need) = Progress(pet);
+            return have >= need;
+        }
+
+        /// <summary>
+        /// For friends that are earned by playing: how many of the friends they wait for are completed, out
+        /// of how many. (0 of 0 for pets that need nothing beyond the full version.)
+        /// </summary>
+        public (int have, int need) Progress(PetDefinition pet)
+        {
+            int have = 0, need = 0;
+            if (pet == null || pet.access <= PetAccess.FullVersion) return (0, 0);
+            foreach (var other in AllPets())
+            {
+                if (other == pet) continue;
+                bool counts = pet.access == PetAccess.AfterBasePets ? other.access <= PetAccess.FullVersion : other.access != PetAccess.Last;
+                if (!counts) continue;
+                need++;
+                if (IsCompleted(other)) have++;
+            }
+            return (have, need);
         }
 
         public IEnumerable<AccessoryDefinition> AvailableAccessories()
         {
             foreach (var p in packs)
-                if (Entitlements.IsUnlocked(p))
-                    foreach (var a in p.accessories) yield return a;
+                if (p != null)
+                    foreach (var a in p.accessories) if (a != null) yield return a;
         }
 
-        /// <summary>Accessories in the dress-up tray: the starters plus presents brought by friends who have arrived.</summary>
+        /// <summary>Accessories in the dress-up tray: the starters plus each playable friend's own accessory.</summary>
         public IEnumerable<AccessoryDefinition> UnlockedAccessories()
         {
             foreach (var a in AvailableAccessories())
             {
                 var bringer = BroughtBy(a);
-                if (bringer == null || IsUnlocked(bringer)) yield return a;
+                if (bringer == null || IsPlayable(bringer)) yield return a;
             }
         }
 
         public PetDefinition BroughtBy(AccessoryDefinition a)
         {
-            foreach (var pet in AvailablePets())
+            foreach (var pet in AllPets())
                 if (pet.giftAccessory == a) return pet;
             return null;
         }
@@ -69,7 +92,7 @@ namespace OopsiePets
 
         public PetDefinition Pet(string id)
         {
-            foreach (var p in AvailablePets()) if (p.id == id) return p;
+            foreach (var p in AllPets()) if (p.id == id) return p;
             return null;
         }
 
@@ -83,64 +106,6 @@ namespace OopsiePets
         {
             foreach (var s in AllStickers()) if (s.id == id) return s;
             return null;
-        }
-    }
-
-    /// <summary>
-    /// How friends are earned: every finished full care visit drops one heart into the gift box; a full box
-    /// opens to let the next friend out. No timers, no purchases, nothing can be lost.
-    /// </summary>
-    public static class FriendGiftRules
-    {
-        public const int HeartsPerFriend = 3;
-
-        /// <summary>Set when a heart was just earned, so the clubhouse can show it flying into the box.</summary>
-        public static bool HeartJustEarned;
-
-        public static bool Ready(ContentDatabase db) => db.NextFriend() != null && SaveSystem.Data.giftHearts >= HeartsPerFriend;
-
-        /// <summary>Called after a full care visit. Returns true if a heart was added.</summary>
-        public static bool AwardHeart(ContentDatabase db)
-        {
-            var d = SaveSystem.Data;
-            if (db.NextFriend() == null || d.giftHearts >= HeartsPerFriend) return false;
-            d.giftHearts++;
-            HeartJustEarned = true;
-            SaveSystem.Save();
-            return true;
-        }
-
-        /// <summary>Lets the next friend out of the box: unlocks it, puts on its present, and starts a new box.</summary>
-        public static PetDefinition OpenGift(ContentDatabase db)
-        {
-            var friend = db.NextFriend();
-            if (friend == null) return null;
-            Unlock(friend);
-            SaveSystem.Data.giftHearts = 0;
-            SaveSystem.Save();
-            return friend;
-        }
-
-        /// <summary>Grown-up shortcut from the settings: every friend arrives at once.</summary>
-        public static int UnlockAll(ContentDatabase db)
-        {
-            int n = 0;
-            for (var f = db.NextFriend(); f != null; f = db.NextFriend()) { Unlock(f); n++; }
-            SaveSystem.Data.giftHearts = 0;
-            SaveSystem.Save();
-            return n;
-        }
-
-        static void Unlock(PetDefinition friend)
-        {
-            var d = SaveSystem.Data;
-            if (!d.unlockedPets.Contains(friend.id)) d.unlockedPets.Add(friend.id);
-            if (friend.giftAccessory != null)
-            {
-                var save = d.Pet(friend.id);
-                save.accessories.RemoveAll(id => id == friend.giftAccessory.id);
-                save.accessories.Add(friend.giftAccessory.id);
-            }
         }
     }
 }

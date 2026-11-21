@@ -15,6 +15,7 @@ BOXES = {
     "Characters/Puppy/puppy_head.png": (218, 391, 346, 426),
     "Characters/Bunny/bunny_head.png": (140, 197, 198, 219),
     "Characters/Lamb/lamb_head.png": (252, 313, 313, 330),
+    "Characters/Pony/pony_head.png": (166, 346, 250, 373),
 }
 
 

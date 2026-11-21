@@ -23,7 +23,67 @@ Menu **Oopsie Pets** in the Editor (or `unity command script eval` with the same
 4. `Oopsie Pets/3. Build Scene` — rewrites `Scenes/OopsiePets_Main.unity` and the build list.
 Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or stop using the builder.
 
-## Friends to unlock (added 2026-11-21)
+## Eleven friends, free and full version, rainbow coats (added 2026-11-21)
+This replaces the gift box below (kept as history): all friends always live in the clubhouse.
+- **Who can play** (`PetAccess` on `PetDefinition`, rules in `ContentDatabase.IsPlayable/Progress`):
+  - Free: puppy, kitten, bunny.
+  - Full version: panda, piglet, lamb.
+  - Full version + every one of those six "completed" (its sticker earned by a full visit):
+    giraffe (Sunny), bird (Pip), cow (Buttercup), pony (Maple).
+  - Last of all, once the other ten are completed: Sparkle the unicorn, wearing its crown.
+- **Clubhouse** (`Core/Clubhouse`): 11 beds in rows of 4, 4, 3 (pet scale 0.3). Friends that can't be
+  played with yet nap (eyes closed, slightly faded) behind a padlock; tapping one only makes it stir
+  and the padlock jiggle. There is no purchase prompt anywhere a child can reach: in the free version
+  the grown-ups' gear button gives a small wiggle. Friends earned by playing show one dot per friend
+  they wait for (6, or 10 for the unicorn), filled in gold as those friends get their stickers.
+  When a padlock opens (full version switched on, or the last needed sticker earned) it rattles and
+  pops off with confetti the next time the room is shown, and that friend wants to play first.
+- **Full version = TEST ONLY.** `Entitlements.FullVersion` is a saved flag set by the parent settings
+  button "Unlock full version (test, no payment)" (behind the parent gate; tap again to lock).
+  "Restore purchases" only re-reads the save. No store, payment, receipt check or network code
+  exists. Before selling: add Unity IAP (Google Play Billing / App Store) for product
+  `oopsiepets.fullversion`, keep it behind the parent gate, validate purchases, and finish the
+  Google Play Families / App Store Kids and children's-privacy review. "Start over" keeps the
+  full version (it is a purchase, not progress).
+- **Starting outfits**: each friend starts out wearing its own accessory once (`PetSave.outfitSet`):
+  bow tie, star clip, beanie, scarf, top hat, cowbell, daisy clip, crown. A friend's accessory joins
+  the dress-up tray when that friend can be played with (14 items with everyone: tray of 3 rows).
+- **New garden games** (`Activities/Outdoor`): giraffe `AppleTreeToy` (stretches up to bonk apples
+  that drop into the mud puddle, then munches them), cow `MudSlideToy` (climb, slide, splash),
+  bird `WormHuntToy` (worms peek out of muddy holes; the chick gives each a gentle boop), pony
+  `PuddleGallopToy` (gallop and leap into three puddles).
+- **Bird**: `hasBeak` hides the mouth overlay and skips tooth brushing (full visit and grooming).
+- **Rainbow coat** (`Characters/PetCoat` + `Shaders/RainbowSprite.shader`): once a pet has its
+  sticker, a rainbow button appears in dress-up; it toggles soft pastel rainbow bands drifting over
+  the fur (outlines and face unchanged), saved per pet (`PetSave.rainbow`). If the shader is not
+  supported on a device, the fur parts cycle through rainbow tints instead.
+- **Bath changes from feedback**: friendly open mouth for tooth brushing (pink inside, 6 rounded top
+  baby teeth, 4 small bottom teeth, tongue); pets no longer react to stray taps during care steps
+  (the panda used to somersault in the tub) and the panda's bubble-pop somersault is now a hop;
+  rinse is its own step after the bubbles (`RinseActivity`): shampoo → sponge → bubbles → rinse →
+  dry; foam on the head stays above the eyes; drying is slower (14 drops, smaller towel reach 0.95,
+  rub power 0.28).
+- Album: 16 slots (4 per row). Save format version 3 (`fullVersion`, `celebrated`, per-pet
+  `outfitSet` and `rainbow`); older saves load (old gift hearts and unlocked friends are ignored).
+- Art: `jobs_batch7a.json` (4 references, accessories sheet 3, garden toys sheet 2, apple tree) and
+  `jobs_batch7b.json` (4 parts sheets, 4 stickers); padlock and progress dots drawn by
+  `tools/make_lock.py`. The pony's drawn mouth was inpainted (`clean_faces.py`).
+
+## Verified (2026-11-21, eleven-friends update)
+Play mode in the Editor (`pt.sh`; new helpers `SetFull`, `Complete`, `Lock`, `Visit`, `Next`):
+- Fresh save: 3 playable, 8 napping behind padlocks; unicorn shows its crown. Full version on →
+  panda, piglet and lamb padlocks pop open with confetti; panda wants to play.
+- 5 base stickers → giraffe shows 5/6; 6th sticker → giraffe, bird, cow and pony open; unicorn 6/10.
+- Giraffe full visit end to end: apple tree (4 rounds, 8 splats) → shampoo → sponge (foam stays on)
+  → bubbles → rinse → dry → brush → teeth (new mouth) → dress-up (13 items, scarf worn) → sticker.
+- Rainbow coat on the completed giraffe (captured, bands drifting). Cow slide, bird worms and pony
+  puddles each played to the end. Bird grooming ends after brushing (no teeth). Panda in the bath:
+  `tappable=false`, no roll after a tap. Foam on the puppy's head stays above the eyes.
+- Album (15 stickers in 16 slots) and settings captured. Console: 0 errors, 0 warnings.
+- Web build (12.2 MB data, Brotli) in headless Chromium: clubhouse with padlocks, locked pet tapped,
+  kitten menu opened; no page errors. Android APK 40.0 MB built.
+
+## Friends to unlock (added 2026-11-21; replaced by the section above)
 - Starters: puppy, kitten, bunny. Earned friends (free `FriendsPack`, earned by play, never bought),
   in order: Bao the panda, Rosie the piglet, Cotton the lamb, Sparkle the unicorn foal.
 - **Gift box** (`Core/FriendGift`): a present in the clubhouse with three heart slots on its front.
@@ -97,7 +157,7 @@ Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or sto
 - `AgentScripts/restart_editor.sh`: restarts the display and Editor after a container restart and
   dismisses Unity's scene-backup prompt.
 
-## Longer bath time and grooming (added 2026-11-21)
+## Longer bath time and grooming (added 2026-11-21; rinse later moved after the bubbles)
 A full visit is now: play outside → **shampoo** → wash (scrub, then **rinse**) → bubbles → **dry** →
 brush fur → **brush teeth** → dress-up → sticker + heart. The menu's bath button runs shampoo → wash
 → dry (`CareSession.Bath`) and the brush button runs fur → teeth (`CareSession.Grooming`).
@@ -219,6 +279,10 @@ the garden opens, five taps play it through (muddy, 3 stars, next button); no pa
 - Performance on a real Android phone not measured (the container renders in software, ~10 fps).
 - No AudioMixer (volumes go through a code gain layer); no sprite atlas yet.
 - Decorations: save field exists, no decoration content or UI yet. iOS not configured.
+- Eleven-friends update: the rainbow shader was seen in the Editor only; the web test did not reach a
+  completed pet, so it was not seen in a browser or on a phone (the build compiled it without
+  warnings, and there is a tint fallback). The full version is a test switch: no real purchase flow.
+  New voices (giraffe hum, bird whistle, cow moo, pony neigh) not heard (no audio device).
 - Friends update: the star sprinkle on the unicorn's bubble pops and the lamb's "poof" are too short
   to catch in a still capture; their code ran without errors but was not seen on screen. The new
   voices (oink, baa, squeak, trill) were not heard (no audio device).

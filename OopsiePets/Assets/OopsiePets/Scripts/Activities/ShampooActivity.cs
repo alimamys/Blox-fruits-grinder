@@ -110,6 +110,7 @@ namespace OopsiePets
             yield return Ease.Tween(0.15f, k => bottle.localScale = new Vector3(bottleScale.x * (1f + 0.15f * Ease.Bump(k)), bottleScale.y * (1f - 0.15f * Ease.Bump(k)), 1f), null, false);
             bool onHead = pet.Rig.headRenderer.bounds.Contains(new Vector3(at.x, at.y, pet.Rig.headRenderer.bounds.center.z));
             var parent = onHead ? pet.Rig.headDecor : pet.Rig.bodyDecor;
+            if (onHead) at = PetDecor.KeepFaceClear(pet, at); // shampoo goes on top of the head, not in the eyes
             float size = pet.VisualBounds().size.x * 0.24f;
             var blob = SoapSuds.Spawn(foamSprite, parent, at, size, onHead ? 75 + squirted : 35 + squirted, true);
             blobs.Add(blob);
@@ -152,7 +153,9 @@ namespace OopsiePets
                     for (int i = 0; i < 2; i++)
                     {
                         var off = (Vector3)(Random.insideUnitCircle.normalized * pet.VisualBounds().size.x * 0.12f);
-                        var extra = SoapSuds.Spawn(foamSprite, b.transform.parent, b.transform.position + off, pet.VisualBounds().size.x * 0.16f, 34, false);
+                        var at2 = b.transform.position + off;
+                        if (b.transform.parent == pet.Rig.headDecor) at2 = PetDecor.KeepFaceClear(pet, at2);
+                        var extra = SoapSuds.Spawn(foamSprite, b.transform.parent, at2, pet.VisualBounds().size.x * 0.16f, 34, false);
                         extra.Rub(1f);
                     }
                 }

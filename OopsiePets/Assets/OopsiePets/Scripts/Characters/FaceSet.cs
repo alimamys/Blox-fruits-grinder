@@ -24,7 +24,7 @@ namespace OopsiePets
         {
             PetExpression.Happy or PetExpression.Laugh or PetExpression.Sneeze or PetExpression.Sleepy => eyeHappy,
             PetExpression.Surprised => eyeWide,
-            PetExpression.Yawn => eyeBlink,
+            PetExpression.Yawn or PetExpression.Asleep => eyeBlink,
             PetExpression.Excited => eyeSparkle,
             _ => eyeOpen,
         };

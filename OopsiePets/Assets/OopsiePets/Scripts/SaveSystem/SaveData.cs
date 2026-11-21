@@ -7,15 +7,17 @@ namespace OopsiePets
     [Serializable]
     public class SaveData
     {
-        public const int CurrentVersion = 2;
+        public const int CurrentVersion = 3;
 
         public int version = CurrentVersion;
         public List<string> stickers = new List<string>();
         public List<string> unlockedPets = new List<string>();
         public List<PetSave> pets = new List<PetSave>();
         public List<string> decorations = new List<string>();
-        [UnityEngine.Tooltip("Hearts collected toward the next friend in the gift box (version 2+).")]
-        public int giftHearts;
+        [UnityEngine.Tooltip("Full version owned. TEST ONLY in this build: set from the parent settings, no payment (version 3+).")]
+        public bool fullVersion;
+        [UnityEngine.Tooltip("Locked friends whose padlock has already popped open (so it celebrates once).")]
+        public List<string> celebrated = new List<string>();
         public Settings settings = new Settings();
 
         [Serializable]
@@ -32,6 +34,10 @@ namespace OopsiePets
             public List<string> accessories = new List<string>();
             public List<int> completedActivities = new List<int>();
             public int careCount;
+            [UnityEngine.Tooltip("The pet's starting outfit (its own accessory) has been put on once.")]
+            public bool outfitSet;
+            [UnityEngine.Tooltip("Rainbow coat on (offered after the pet's first full visit).")]
+            public bool rainbow;
         }
 
         public PetSave Pet(string id)
@@ -47,13 +53,14 @@ namespace OopsiePets
         {
             stickers ??= new List<string>();
             unlockedPets ??= new List<string>();
+            celebrated ??= new List<string>();
             pets ??= new List<PetSave>();
             decorations ??= new List<string>();
             settings ??= new Settings();
             settings.musicVolume = Clamp01(settings.musicVolume);
             settings.soundVolume = Clamp01(settings.soundVolume);
             unlockedPets.RemoveAll(string.IsNullOrEmpty);
-            giftHearts = Math.Max(0, Math.Min(FriendGiftRules.HeartsPerFriend, giftHearts));
+            celebrated.RemoveAll(string.IsNullOrEmpty);
             pets.RemoveAll(p => p == null || string.IsNullOrEmpty(p.petId));
             foreach (var p in pets)
             {

@@ -76,8 +76,10 @@ namespace OopsiePets
         /// <summary>Parent-facing reset. Keeps volume settings.</summary>
         public static void ResetProgress()
         {
+            // Starting over erases play progress, never what the family owns (the full version).
             var settings = Data?.settings ?? new SaveData.Settings();
-            Data = new SaveData { settings = settings };
+            bool full = Data != null && Data.fullVersion;
+            Data = new SaveData { settings = settings, fullVersion = full };
             Save();
         }
     }

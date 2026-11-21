@@ -35,6 +35,13 @@ SHEETS = {
     "Objects/garden_play_sheet_raw.png": ("Objects", ["garden_trampoline", "garden_hoop"], 20),
     # Bath time and grooming (batch 6)
     "Objects/bath_items_sheet_raw.png": ("Objects", ["bath_shampoo", "bath_shower", "bath_towel", "bath_toothbrush", "bath_cup", "bath_mat"], 22),
+    # Four more friends (batch 7): their rig parts, presents and garden toys
+    "Characters/Giraffe/giraffe_parts_raw.png": ("Characters/Giraffe", ["giraffe_head", "giraffe_body", "giraffe_tail"], 10),
+    "Characters/Bird/bird_parts_raw.png": ("Characters/Bird", ["bird_head", "bird_body", "bird_tail"], 10),
+    "Characters/Cow/cow_parts_raw.png": ("Characters/Cow", ["cow_head", "cow_body", "cow_tail"], 10),
+    "Characters/Pony/pony_parts_raw.png": ("Characters/Pony", ["pony_head", "pony_body", "pony_tail"], 10),
+    "Accessories/accessories_sheet_3_raw.png": ("Accessories", ["acc_scarf", "acc_top_hat", "acc_cowbell", "acc_daisy_clip"], 14),
+    "Objects/garden_toys_sheet_2_raw.png": ("Objects", ["garden_apple", "garden_slide", "garden_worm"], 18),
 }
 
 SINGLES = {
@@ -61,6 +68,15 @@ SINGLES = {
     "Stickers/sticker_lamb_cloud_raw.png": "Stickers/sticker_lamb_cloud",
     "Stickers/sticker_unicorn_rainbow_raw.png": "Stickers/sticker_unicorn_rainbow",
     "Objects/garden_swing_raw.png": "Objects/garden_swing",
+    "Objects/garden_tree_raw.png": "Objects/garden_tree",
+    "Characters/Giraffe/giraffe_reference.png": "Characters/Giraffe/giraffe_portrait",
+    "Characters/Bird/bird_reference.png": "Characters/Bird/bird_portrait",
+    "Characters/Cow/cow_reference.png": "Characters/Cow/cow_portrait",
+    "Characters/Pony/pony_reference.png": "Characters/Pony/pony_portrait",
+    "Stickers/sticker_giraffe_apple_raw.png": "Stickers/sticker_giraffe_apple",
+    "Stickers/sticker_bird_worm_raw.png": "Stickers/sticker_bird_worm",
+    "Stickers/sticker_cow_slide_raw.png": "Stickers/sticker_cow_slide",
+    "Stickers/sticker_pony_puddle_raw.png": "Stickers/sticker_pony_puddle",
 }
 
 PAD = 6

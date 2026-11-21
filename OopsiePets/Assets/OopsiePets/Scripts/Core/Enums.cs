@@ -1,14 +1,21 @@
 namespace OopsiePets
 {
     // Values are saved (completed activities): append only.
-    public enum ActivityKind { Wash = 0, Bubbles = 1, Brush = 2, DressUp = 3, Outdoor = 4, Shampoo = 5, Dry = 6, Teeth = 7 }
+    public enum ActivityKind { Wash = 0, Bubbles = 1, Brush = 2, DressUp = 3, Outdoor = 4, Shampoo = 5, Dry = 6, Teeth = 7, Rinse = 8 }
 
     /// <summary>Each pet's own garden toy (how it plays outside and gets muddy).</summary>
-    public enum ToyKind { Frisbee, Yarn, Carrots, Swing, Duck, Trampoline, Hoop }
+    public enum ToyKind { Frisbee, Yarn, Carrots, Swing, Duck, Trampoline, Hoop, AppleTree, MudSlide, WormHunt, PuddleGallop }
+
+    /// <summary>
+    /// Who can play with a pet. Free pets are always playable; the full version (a one-time parent
+    /// purchase, test-only in this build) opens the rest. Some friends also have to be earned by
+    /// finishing a full visit (earning the sticker) with every earlier friend, and one comes last of all.
+    /// </summary>
+    public enum PetAccess { Free = 0, FullVersion = 1, AfterBasePets = 2, Last = 3 }
 
     public enum AccessorySlot { Hat = 0, Eyes = 1, Neck = 2, HeadSide = 3 }
 
-    public enum PetExpression { Neutral, Happy, Laugh, Surprised, Sneeze, Excited, Sleepy, Tongue, Yawn }
+    public enum PetExpression { Neutral, Happy, Laugh, Surprised, Sneeze, Excited, Sleepy, Tongue, Yawn, Asleep }
 
     public enum PetReaction
     {
@@ -16,7 +23,7 @@ namespace OopsiePets
     }
 
     // Append only: the order is the index of each voice's synthesized clips.
-    public enum PetVoice { Puppy, Kitten, Bunny, Piglet, Lamb, Panda, Unicorn }
+    public enum PetVoice { Puppy, Kitten, Bunny, Piglet, Lamb, Panda, Unicorn, Giraffe, Bird, Cow, Pony }
 
     /// <summary>Little signature surprises a pet brings to the activities. A pet can have several.</summary>
     [System.Flags]

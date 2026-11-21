@@ -53,13 +53,16 @@ namespace OopsiePets
         [Tooltip("Shown on the big 'let's play' button in the care menu.")]
         public Sprite toyIcon;
 
+        [Tooltip("Has a beak instead of a mouth: no mouth overlay, and it skips tooth brushing.")]
+        public bool hasBeak;
+
         [Header("Progression")]
         public StickerDefinition sticker;
-        [Tooltip("Lives in the clubhouse from the start. Otherwise the child earns this friend from the gift box.")]
-        public bool startsUnlocked = true;
-        [Tooltip("Earned friends arrive in this order (lowest first).")]
+        [Tooltip("Free, full version, earned after the first six friends, or last of all.")]
+        public PetAccess access = PetAccess.Free;
+        [Tooltip("Place in the clubhouse (lowest first).")]
         public int unlockOrder;
-        [Tooltip("A present this friend brings when it joins (also unlocks it in dress-up).")]
+        [Tooltip("This friend's own accessory: it wears it from the start, and it joins the dress-up tray once the friend can be played with.")]
         public AccessoryDefinition giftAccessory;
 
         public bool Has(PetQuirk q) => (quirks & q) != 0;
