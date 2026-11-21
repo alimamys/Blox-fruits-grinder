@@ -6,16 +6,29 @@ using UnityEngine.UI;
 namespace OopsiePets
 {
     /// <summary>
-    /// Runs a care visit for one pet: either the full adventure (play outside with its own toy → wash →
-    /// bubbles → brush → dress-up → sticker) or a single favourite activity. A pet that is already muddy
-    /// skips the garden and goes straight to the bath. Between activities a big "next" button appears; nothing moves on
+    /// Runs a care visit for one pet: either the full adventure (play outside with its own toy → shampoo →
+    /// wash and rinse → bubbles → dry → brush hair → brush teeth → dress-up → sticker) or a short routine
+    /// picked from the menu (bath time, grooming, bubbles, dress-up). A pet that is already muddy skips the
+    /// garden and goes straight to the bath. Between activities a big "next" button appears; nothing moves on
     /// by itself, so a child can keep playing as long as they like. Home is always one tap away.
     /// </summary>
     public class CareSession : MonoBehaviour
     {
-        public static readonly ActivityKind[] FullCare = { ActivityKind.Outdoor, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Brush, ActivityKind.DressUp };
+        public static readonly ActivityKind[] FullCare =
+        {
+            ActivityKind.Outdoor, ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Dry,
+            ActivityKind.Brush, ActivityKind.Teeth, ActivityKind.DressUp,
+        };
         /// <summary>For a pet that is already muddy (an "Oopsie!" visitor): straight to the bath.</summary>
-        public static readonly ActivityKind[] CleanUp = { ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Brush, ActivityKind.DressUp };
+        public static readonly ActivityKind[] CleanUp =
+        {
+            ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Bubbles, ActivityKind.Dry,
+            ActivityKind.Brush, ActivityKind.Teeth, ActivityKind.DressUp,
+        };
+        /// <summary>Bath time from the menu: shampoo, wash and rinse, dry.</summary>
+        public static readonly ActivityKind[] Bath = { ActivityKind.Shampoo, ActivityKind.Wash, ActivityKind.Dry };
+        /// <summary>Grooming from the menu: brush the fur, then brush the teeth.</summary>
+        public static readonly ActivityKind[] Grooming = { ActivityKind.Brush, ActivityKind.Teeth };
 
         /// <summary>A full visit (earns a sticker and a gift-box heart): it includes the bath through dress-up.</summary>
         public static bool IsFull(ActivityKind[] seq) =>
@@ -23,7 +36,7 @@ namespace OopsiePets
 
         public List<Activity> activities = new List<Activity>();
         public ActivityContext context;
-        public Transform tubStage, cushionStage, dressStage, gardenStage;
+        public Transform tubStage, cushionStage, dressStage, gardenStage, matStage, teethStage;
         public Button homeButton;
         public Button nextButton;
         public RewardPanel reward;
@@ -121,6 +134,8 @@ namespace OopsiePets
                 ActivityKind.Brush => cushionStage,
                 ActivityKind.DressUp => dressStage,
                 ActivityKind.Outdoor => gardenStage,
+                ActivityKind.Dry => matStage ? matStage : tubStage,
+                ActivityKind.Teeth => teethStage ? teethStage : cushionStage,
                 _ => tubStage,
             };
             Pet.transform.SetParent(spot, false);

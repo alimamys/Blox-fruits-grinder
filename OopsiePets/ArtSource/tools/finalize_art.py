@@ -9,7 +9,7 @@ from PIL import Image
 MAX = {  # longest edge in pixels, by name prefix (first match wins)
     "bg_": 1536, "bathtub": 900, "sponge": 420, "brush": 460, "bubble": 256, "hand_pointer": 300,
     "star_icon": 256, "btn_": 256, "sticker_": 420, "acc_": 400, "pet_bed": 448, "toy_": 360,
-    "mud_splat": 300, "fx_": 128, "fur_tuft": 220, "_portrait": 512, "gift_box": 512, "garden_swing": 1024, "garden_": 512, "eye_": 256, "mouth_": 256,
+    "mud_splat": 300, "fx_": 128, "fur_tuft": 220, "_portrait": 512, "gift_box": 512, "garden_swing": 1024, "garden_": 512, "bath_": 512, "eye_": 256, "mouth_": 256,
 }
 
 

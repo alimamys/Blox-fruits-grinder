@@ -161,6 +161,8 @@ namespace OopsiePets.EditorTools
             var cushionStage = Node("CushionStage", careWorld, new Vector3(0f, -4.6f));
             var cushion = Spr("Cushion", careWorld, S("Objects/pet_bed"), new Vector3(0f, -4.35f), 1.05f, 5);
             var dressStage = Node("DressStage", careWorld, new Vector3(0f, -4.0f));
+            var matStage = Node("MatStage", careWorld, new Vector3(0f, -6.2f));
+            var teethStage = Node("TeethStage", careWorld, new Vector3(0f, -9.6f));
             tub.gameObject.SetActive(false);
             cushion.gameObject.SetActive(false);
 
@@ -174,6 +176,46 @@ namespace OopsiePets.EditorTools
             wash.mudSprites = MudSprites();
             wash.spongeHome = Node("SpongeHome", washT, new Vector3(3.1f, -8.2f));
             wash.sponge = Spr("Sponge", washT, S("Objects/sponge"), new Vector3(3.1f, -8.2f), 0.58f, 200).transform;
+            // ...then rinse the suds off with the shower.
+            wash.showerHome = Node("ShowerHome", washT, new Vector3(3.4f, -7.6f));
+            wash.shower = Spr("Shower", washT, S("Objects/bath_shower"), new Vector3(3.4f, -7.6f), WidthScale("Objects/bath_shower", 1.9f), 200).transform;
+            wash.shower.gameObject.SetActive(false);
+            wash.dropSprite = S("Effects/fx_water_drop");
+            wash.sudsSprite = S("Effects/fx_foam_puff");
+
+            // Shampoo (first step of bath time)
+            var shampooT = Node("Shampoo", activities, Vector3.zero);
+            var shampoo = shampooT.gameObject.AddComponent<ShampooActivity>();
+            shampoo.background = S("Backgrounds/bg_washroom");
+            shampoo.petScale = 0.7f;
+            shampoo.tubFront = tub;
+            shampoo.foamSprite = S("Effects/fx_foam_puff");
+            shampoo.bottleHome = Node("BottleHome", shampooT, new Vector3(3.4f, -7.9f));
+            shampoo.bottle = Spr("Bottle", shampooT, S("Objects/bath_shampoo"), new Vector3(3.4f, -7.9f), WidthScale("Objects/bath_shampoo", 1.3f), 200).transform;
+
+            // Dry off on a fluffy bath mat with a towel
+            var dryT = Node("Dry", activities, Vector3.zero);
+            var dry = dryT.gameObject.AddComponent<DryActivity>();
+            dry.background = S("Backgrounds/bg_washroom");
+            dry.petScale = 0.66f;
+            dry.mat = Spr("BathMat", careWorld, S("Objects/bath_mat"), new Vector3(0f, -6.3f), WidthScale("Objects/bath_mat", 5.4f), 3);
+            dry.mat.gameObject.SetActive(false);
+            dry.towelHome = Node("TowelHome", dryT, new Vector3(3.0f, -8.4f));
+            dry.towel = Spr("Towel", dryT, S("Objects/bath_towel"), new Vector3(3.0f, -8.4f), WidthScale("Objects/bath_towel", 2.5f), 200).transform;
+            dry.dropSprite = S("Effects/fx_water_drop");
+
+            // Brush teeth (big and close up, so the teeth are easy to reach)
+            var teethT = Node("Teeth", activities, Vector3.zero);
+            var teeth = teethT.gameObject.AddComponent<TeethActivity>();
+            teeth.background = S("Backgrounds/bg_washroom");
+            teeth.petScale = 1.05f;
+            teeth.mouthSprite = S("Characters/Shared/mouth_teeth_open");
+            teeth.speckSprites = new[] { S("Effects/teeth_speck_01"), S("Effects/teeth_speck_02") };
+            teeth.brushHome = Node("BrushHome", teethT, new Vector3(3.0f, -8.5f));
+            teeth.brush = Spr("Toothbrush", teethT, S("Objects/bath_toothbrush"), new Vector3(3.0f, -8.5f), WidthScale("Objects/bath_toothbrush", 2.6f), 200).transform;
+            teeth.cupHome = Node("CupHome", teethT, new Vector3(-3.3f, -8.2f));
+            teeth.cup = Spr("Cup", teethT, S("Objects/bath_cup"), new Vector3(-3.3f, -8.2f), WidthScale("Objects/bath_cup", 1.4f), 200).transform;
+            teeth.cup.gameObject.SetActive(false);
             // Bubbles
             var bubT = Node("Bubbles", activities, Vector3.zero);
             var bubbles = bubT.gameObject.AddComponent<BubbleActivity>();
@@ -308,9 +350,10 @@ namespace OopsiePets.EditorTools
 
             // ---------- Care session wiring ----------
             var session = careWorld.gameObject.AddComponent<CareSession>();
-            session.activities = new List<Activity> { outdoor, wash, bubbles, brush, dress };
+            session.activities = new List<Activity> { outdoor, shampoo, wash, bubbles, dry, brush, teeth, dress };
             session.context = new ActivityContext { camera = cam, stage = tubStage, background = careBg, stars = stars, hint = hint };
             session.tubStage = tubStage; session.cushionStage = cushionStage; session.dressStage = dressStage; session.gardenStage = gardenStage;
+            session.matStage = matStage; session.teethStage = teethStage;
             session.homeButton = home; session.nextButton = next; session.reward = reward;
             foreach (var a in session.activities) a.gameObject.SetActive(false);
 

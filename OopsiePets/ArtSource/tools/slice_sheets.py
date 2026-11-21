@@ -33,6 +33,8 @@ SHEETS = {
     # Garden (batch 5): each pet's own outdoor toy
     "Objects/garden_toys_sheet_raw.png": ("Objects", ["garden_frisbee", "garden_yarn", "garden_duck", "garden_carrot", "garden_carrot_mound", "garden_puddle"], 16),
     "Objects/garden_play_sheet_raw.png": ("Objects", ["garden_trampoline", "garden_hoop"], 20),
+    # Bath time and grooming (batch 6)
+    "Objects/bath_items_sheet_raw.png": ("Objects", ["bath_shampoo", "bath_shower", "bath_towel", "bath_toothbrush", "bath_cup", "bath_mat"], 22),
 }
 
 SINGLES = {

@@ -32,9 +32,9 @@ namespace OopsiePets
         void Awake()
         {
             fullCare.onClick.AddListener(() => Pick(CareSession.FullCare));
-            wash.onClick.AddListener(() => Pick(new[] { ActivityKind.Wash }));
+            wash.onClick.AddListener(() => Pick(CareSession.Bath));
             bubbles.onClick.AddListener(() => Pick(new[] { ActivityKind.Bubbles }));
-            brush.onClick.AddListener(() => Pick(new[] { ActivityKind.Brush }));
+            brush.onClick.AddListener(() => Pick(CareSession.Grooming));
             dress.onClick.AddListener(() => Pick(new[] { ActivityKind.DressUp }));
             HideNow();
         }

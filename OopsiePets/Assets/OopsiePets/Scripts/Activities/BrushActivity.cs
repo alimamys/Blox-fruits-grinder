@@ -15,11 +15,11 @@ namespace OopsiePets
         public Sprite[] tuftSprites;
 
         [Header("Tuning")]
-        public Vector2Int tuftsOnHead = new Vector2Int(3, 4);
-        public Vector2Int tuftsOnBody = new Vector2Int(3, 4);
+        public Vector2Int tuftsOnHead = new Vector2Int(4, 5);
+        public Vector2Int tuftsOnBody = new Vector2Int(4, 6);
         public float brushRadius = 1.0f;
         [Tooltip("Mess removed per world unit of brushing over a tuft.")]
-        public float brushPower = 0.35f;
+        public float brushPower = 0.24f;
         public Vector2 brushFingerOffset = new Vector2(0.2f, 0.45f);
 
         readonly List<FurTuft> tufts = new List<FurTuft>();

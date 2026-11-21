@@ -255,6 +255,89 @@ public static class PlayTest
         return State();
     }
 
+    // ---------- Bath time and grooming ----------
+
+    static async Task ZigZag(Bounds b, int passes, int stepsPerPass, float yFrom = 0.2f, float yTo = 0.85f)
+    {
+        var a0 = new Vector3(b.min.x + b.size.x * 0.15f, b.min.y + b.size.y * yFrom);
+        Router.OnPointerDown(Ev(a0));
+        for (int k = 0; k < passes; k++)
+        {
+            float y = b.min.y + b.size.y * Mathf.Lerp(yFrom, yTo, (k % 6) / 5f);
+            var l = new Vector3(b.min.x + b.size.x * 0.12f, y); var r = new Vector3(b.max.x - b.size.x * 0.12f, y);
+            for (int i = 1; i <= stepsPerPass; i++) { Router.OnDrag(Ev(Vector3.Lerp(k % 2 == 0 ? l : r, k % 2 == 0 ? r : l, i / (float)stepsPerPass))); await Frames(16); }
+        }
+        Router.OnPointerUp(Ev(a0));
+    }
+
+    /// <summary>Shampoo: tap the pet five times, then rub it in until the step completes.</summary>
+    public static async Task<string> Shampoo(int maxRounds)
+    {
+        var act = GameFlow.Instance.care.Current as ShampooActivity;
+        if (!act) return "not shampoo: " + State();
+        var pet = GameFlow.Instance.care.Pet;
+        var b = pet.VisualBounds();
+        for (int i = 0; i < 5 && !act.Rubbing; i++)
+        {
+            var at = new Vector3(Mathf.Lerp(b.min.x, b.max.x, 0.3f + 0.1f * i), Mathf.Lerp(b.min.y, b.max.y, i % 2 == 0 ? 0.75f : 0.45f));
+            await Tap(at.x, at.y);
+            await Frames(500);
+        }
+        for (int r = 0; r < maxRounds && !act.IsComplete; r++) await ZigZag(pet.VisualBounds(), 6, 10);
+        await Frames(400);
+        return $"shampoo complete={act.IsComplete} | " + State();
+    }
+
+    /// <summary>Rinse: spray the shower back and forth over the pet until the suds are gone.</summary>
+    public static async Task<string> Rinse(int maxRounds)
+    {
+        var act = GameFlow.Instance.care.Current as WashActivity;
+        if (!act) return "not wash: " + State();
+        for (int w = 0; w < 30 && !act.Rinsing && !act.IsComplete; w++) await Frames(100);
+        var pet = GameFlow.Instance.care.Pet;
+        for (int r = 0; r < maxRounds && !act.IsComplete; r++)
+        {
+            var b = pet.VisualBounds();
+            var a = new Vector3(b.min.x - 0.2f, b.max.y - 1.2f);
+            Router.OnPointerDown(Ev(a));
+            for (int k = 0; k < 4; k++)
+                for (int i = 1; i <= 12; i++)
+                {
+                    float x = Mathf.Lerp(b.min.x - 0.2f, b.max.x + 0.4f, k % 2 == 0 ? i / 12f : 1f - i / 12f);
+                    Router.OnDrag(Ev(new Vector3(x, b.max.y - 1.2f - (k % 2) * 0.8f)));
+                    await Frames(30);
+                }
+            Router.OnPointerUp(Ev(a));
+        }
+        for (int w = 0; w < 30 && !act.IsComplete; w++) await Frames(100);
+        return $"rinse complete={act.IsComplete} | " + State();
+    }
+
+    /// <summary>Dry: rub the towel over the pet until every drop is gone.</summary>
+    public static async Task<string> DryOff(int maxRounds)
+    {
+        var act = GameFlow.Instance.care.Current as DryActivity;
+        if (!act) return "not dry: " + State();
+        var pet = GameFlow.Instance.care.Pet;
+        for (int r = 0; r < maxRounds && !act.IsComplete; r++) await ZigZag(pet.VisualBounds(), 6, 10, 0.1f, 0.85f);
+        for (int w = 0; w < 30 && !act.IsComplete; w++) await Frames(100);
+        return $"dry complete={act.IsComplete} | " + State();
+    }
+
+    /// <summary>Teeth: brush back and forth over the open mouth, then tap the rinse cup.</summary>
+    public static async Task<string> BrushTeeth(int maxRounds)
+    {
+        var act = GameFlow.Instance.care.Current as TeethActivity;
+        if (!act) return "not teeth: " + State();
+        for (int r = 0; r < maxRounds && !act.RinsePhase && act.MouthOpen; r++)
+            await ZigZag(act.MouthOpen.GetComponent<SpriteRenderer>().bounds, 6, 8, 0.1f, 0.9f);
+        for (int w = 0; w < 20 && !act.cup.gameObject.activeInHierarchy; w++) await Frames(100);
+        await Frames(300);
+        await Tap(act.cup.position.x, act.cup.position.y);
+        for (int w = 0; w < 50 && !act.IsComplete; w++) await Frames(100);
+        return $"teeth complete={act.IsComplete} | " + State();
+    }
+
     public static string MudOnPet()
     {
         var pet = GameFlow.Instance.care.Pet;

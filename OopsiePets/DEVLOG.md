@@ -97,6 +97,25 @@ Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or sto
 - `AgentScripts/restart_editor.sh`: restarts the display and Editor after a container restart and
   dismisses Unity's scene-backup prompt.
 
+## Longer bath time and grooming (added 2026-11-21)
+A full visit is now: play outside → **shampoo** → wash (scrub, then **rinse**) → bubbles → **dry** →
+brush fur → **brush teeth** → dress-up → sticker + heart. The menu's bath button runs shampoo → wash
+→ dry (`CareSession.Bath`) and the brush button runs fur → teeth (`CareSession.Grooming`).
+- `ShampooActivity`: tap the pet to squeeze 5 pink dollops on, then rub them in until each turns into
+  white lather (`SoapSuds`); the lather stays on for the wash.
+- `WashActivity`: more mud (4-5 on the head, 5-6 on the body) and slower scrubbing (0.3); the sponge
+  squashes the lather down; then the shower comes out and the child sprays the suds away (the suds
+  puff back up first so there is something to rinse).
+- `DryActivity`: the pet stands dripping on a fluffy bath mat, fur slightly cooler in colour; rub
+  with the towel until all 10 drops are gone; the colour comes back and it gives a fluffy shake.
+- `BrushActivity`: more tangles (4-5 head, 4-6 body) and slower brushing (0.24).
+- `TeethActivity`: the pet is shown big and opens wide (drawn mouth with 9 teeth); 6 random teeth
+  have sugar specks; brush each until it sparkles, then tap the rinse cup for a gargle and a shiny smile.
+- Art: `jobs_batch6.json` (shampoo bottle, shower head, towel, toothbrush, rinse cup, bath mat) and
+  `tools/make_bath_bits.py` (open mouth with teeth, water drop, sugar specks).
+- Verified in Play mode: a full puppy visit through every step (0 errors), the piglet's bath routine
+  from the menu, captures of each step; web build in Chromium: garden → shampoo dollops land.
+
 ## Architecture (Assets/OopsiePets/Scripts)
 - `Core/GameFlow` — one scene, three screens (clubhouse, care, album) with fades; loads the save.
 - `Core/InputRouter` — full-screen UI catcher behind the buttons; forgiving taps (nearest

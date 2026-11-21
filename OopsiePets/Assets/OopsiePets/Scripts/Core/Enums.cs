@@ -1,7 +1,7 @@
 namespace OopsiePets
 {
     // Values are saved (completed activities): append only.
-    public enum ActivityKind { Wash = 0, Bubbles = 1, Brush = 2, DressUp = 3, Outdoor = 4 }
+    public enum ActivityKind { Wash = 0, Bubbles = 1, Brush = 2, DressUp = 3, Outdoor = 4, Shampoo = 5, Dry = 6, Teeth = 7 }
 
     /// <summary>Each pet's own garden toy (how it plays outside and gets muddy).</summary>
     public enum ToyKind { Frisbee, Yarn, Carrots, Swing, Duck, Trampoline, Hoop }

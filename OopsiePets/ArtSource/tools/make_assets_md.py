@@ -15,7 +15,10 @@ stored as `style_prefix` in `asset_manifest.json` (see also `Assets/OopsiePets/D
 
 NOTES = """
 Hand-drawn in code (style-matched, not AI-generated): `Characters/Shared/eye_*`, `mouth_*`
-(`tools/make_faces.py`) and `UI/btn_blank_*`, `panel_*`, `slider_*`, `select_ring`, `sunburst` (`tools/make_ui.py`).
+(`tools/make_faces.py`); `UI/btn_blank_*`, `panel_*`, `slider_*`, `select_ring`, `sunburst` (`tools/make_ui.py`);
+`UI/thought_bubble` (`tools/make_thought_bubble.py`); `Characters/Shared/mouth_teeth_open`, `Effects/fx_water_drop`,
+`Effects/teeth_speck_*` (`tools/make_bath_bits.py`); `Objects/garden_swing_icon` (drawn ropes and branch around the
+generated seat).
 
 Processing notes:
 - Model-drawn mouths on the "blank" heads were painted out (`tools/clean_faces.py`): puppy, bunny, lamb.
