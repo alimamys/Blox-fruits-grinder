@@ -244,6 +244,17 @@ public static class PlayTest
         return sb.ToString();
     }
 
+    /// <summary>Press at one point, drag to another over a few frames and let go (a flick).</summary>
+    public static async Task<string> Flick(float x0, float y0, float x1, float y1, int steps)
+    {
+        var a = new Vector3(x0, y0); var b = new Vector3(x1, y1);
+        Router.OnPointerDown(Ev(a));
+        for (int i = 1; i <= steps; i++) { Router.OnDrag(Ev(Vector3.Lerp(a, b, i / (float)steps))); await Frames(25); }
+        Router.OnPointerUp(Ev(b));
+        await Frames(50);
+        return State();
+    }
+
     public static string MudOnPet()
     {
         var pet = GameFlow.Instance.care.Pet;

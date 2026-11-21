@@ -81,6 +81,22 @@ Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or sto
 - Thought bubble drawn in code (`ArtSource/tools/make_thought_bubble.py`); the panda's icon is a
   drawn swing (branch, thick ropes, seat) because the swing seat alone did not read at that size.
 
+## Fixes (2026-11-21, after feedback)
+- **Yarn ball** (`YarnToy`): now rolls like a ball. Tap anywhere and it rolls to that spot; hold and it
+  follows the finger; flick it and it keeps rolling, slowing down and bouncing off the lawn edges; it
+  spins by the distance travelled. A loose string trails behind it (a small rope simulation drawn
+  with two `LineRenderer`s, lavender over a plum edge, material `Data/StringUnlit.mat`).
+- **Heart stuck on screen**: the heart flying into the gift box was a loose object; if the room
+  changed during its 2-second flight (e.g. tapping the pet that wants to play), it stayed on top of
+  every screen. It now belongs to the gift box and lands instantly when interrupted. Reproduced
+  before the fix (1 stray heart), 0 after.
+- **Hand pointed at pets instead of the full gift box**: the box only counted as "ready" after the
+  last heart landed, so the pet hint started first and blocked the gift hint. A full box (by saved
+  hearts) now always comes first: no pet shows "wants to play" until it is opened, and the hand
+  points at the box (checked in captures).
+- `AgentScripts/restart_editor.sh`: restarts the display and Editor after a container restart and
+  dismisses Unity's scene-backup prompt.
+
 ## Architecture (Assets/OopsiePets/Scripts)
 - `Core/GameFlow` — one scene, three screens (clubhouse, care, album) with fades; loads the save.
 - `Core/InputRouter` — full-screen UI catcher behind the buttons; forgiving taps (nearest

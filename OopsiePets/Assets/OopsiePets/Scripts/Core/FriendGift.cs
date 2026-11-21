@@ -30,6 +30,8 @@ namespace OopsiePets
         Vector3 lidHome, visualScale = Vector3.one;
         Quaternion lidRot;
         Coroutine fill;
+        GameObject flyer;     // the heart on its way into the box
+        int flyingTo = -1;    // which slot it is heading for
 
         static readonly Color Empty = new Color(0.55f, 0.42f, 0.6f, 0.45f); // a soft plum "still to fill" heart on the box
 
@@ -45,8 +47,7 @@ namespace OopsiePets
         /// <summary>Places the box and shows its hearts. With <paramref name="animateNewest"/>, the newest heart flies in.</summary>
         public void Show(Vector3 position, float size, int heartCount, bool animateNewest)
         {
-            if (fill != null) StopCoroutine(fill);
-            fill = null;
+            FinishFlightNow();
             opening = false;
             gameObject.SetActive(true);
             transform.position = position;
@@ -70,9 +71,27 @@ namespace OopsiePets
 
         public void Hide()
         {
+            FinishFlightNow();
+            gameObject.SetActive(false);
+        }
+
+        // Leaving the room mid-flight (a tap, a screen change) must not strand the flying heart on screen:
+        // it lands at once instead.
+        void OnDisable() => FinishFlightNow();
+
+        void FinishFlightNow()
+        {
             if (fill != null) StopCoroutine(fill);
             fill = null;
-            gameObject.SetActive(false);
+            if (flyer) Destroy(flyer);
+            flyer = null;
+            if (flyingTo >= 0 && hearts != null)
+            {
+                filled = Mathf.Max(filled, flyingTo + 1);
+                ready = filled >= hearts.Length;
+                PaintHearts();
+            }
+            flyingTo = -1;
         }
 
         void FitCollider()
@@ -104,7 +123,10 @@ namespace OopsiePets
             var target = hearts[index].transform;
             var cam = Camera.main;
             // A heart drifts down from the top of the screen into its slot.
+            flyingTo = index;
             var go = new GameObject("FlyingHeart");
+            go.transform.SetParent(transform, true); // hidden and cleaned up with the box
+            flyer = go;
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sprite = hearts[index].sprite;
             sr.sortingOrder = 900;
@@ -120,6 +142,8 @@ namespace OopsiePets
                 go.transform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(k * 12f) * 15f * (1f - k));
             }, null, false);
             Destroy(go);
+            flyer = null;
+            flyingTo = -1;
             filled = Mathf.Max(filled, index + 1);
             PaintHearts();
             FxSpawner.Instance?.Sparkles(target.position, 8, 0.6f);

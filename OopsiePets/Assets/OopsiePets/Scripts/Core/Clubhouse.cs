@@ -58,7 +58,7 @@ namespace OopsiePets
             if (gift)
             {
                 gift.OpenRequested += OnGiftOpen;
-                gift.BecameReady += _ => { if (welcome == null && arrival == null && reveal == null) welcome = StartCoroutine(PointAtGift()); };
+                gift.BecameReady += _ => OnGiftFull();
             }
         }
 
@@ -116,17 +116,32 @@ namespace OopsiePets
                 if (v != null) arrival = StartCoroutine(Arrive(v));
             }
 
-            // One pet wants to go out and play: a new friend first, otherwise whoever has played least.
-            var b = PickBored(welcomed, arrive);
-            if (b && thoughtBubble) bored = WantsToPlay.Attach(b, thoughtBubble, 6.2f * layout.petScale);
+            // A full gift box is the next thing to do, so nobody asks to play until it is opened. Otherwise
+            // one pet wants to go out and play: a new friend first, then whoever has played least.
+            bool giftFull = next != null && FriendGiftRules.Ready(db);
+            if (!giftFull)
+            {
+                var b = PickBored(welcomed, arrive);
+                if (b && thoughtBubble) bored = WantsToPlay.Attach(b, thoughtBubble, 6.2f * layout.petScale);
+            }
 
             if (welcomed != null)
             {
                 var w = pets.Find(p => p.Definition == welcomed);
                 if (w != null) welcome = StartCoroutine(Welcome(w));
             }
-            else if (arrive == null && gift && gift.Ready) welcome = StartCoroutine(PointAtGift());
+            else if (arrive == null && giftFull) welcome = StartCoroutine(PointAtGift());
             else if (arrive == null && bored) welcome = StartCoroutine(PointAtBored(2.5f));
+        }
+
+        /// <summary>The last heart just landed: the gift box takes over as the next thing to do.</summary>
+        void OnGiftFull()
+        {
+            if (reveal != null || arrival != null) return;
+            if (welcome != null) StopCoroutine(welcome);
+            if (bored) { Destroy(bored); bored = null; }
+            hint.Hide();
+            welcome = StartCoroutine(PointAtGift());
         }
 
         PetView PickBored(PetDefinition welcomed, PetDefinition muddy)
@@ -256,7 +271,9 @@ namespace OopsiePets
         IEnumerator PointAtGift()
         {
             yield return new WaitForSeconds(1.2f);
-            if (gift && gift.Ready && !hint.Visible) hint.ShowTap(gift.lid.transform);
+            // The last heart may still be flying in: wait for it to land.
+            for (float t = 0f; t < 4f && gift && !gift.Ready; t += Time.deltaTime) yield return null;
+            if (gift && gift.Ready && !menu.Visible) { hint.Hide(); hint.ShowTap(gift.lid.transform); }
             welcome = null;
         }
 
@@ -348,10 +365,12 @@ namespace OopsiePets
                 if (visitor && visitor.tappable) { hint.ShowTap(visitor.Rig.head); return; }
                 if (!visitor && gift && gift.isActiveAndEnabled && gift.Ready) { hint.ShowTap(gift.lid.transform); return; }
             }
-            // Nothing waiting? After a quiet moment, point at the pet that wants to play.
-            if (!visitor && arrival == null && welcome == null && (!gift || !gift.Ready) && Time.time - lastPress > idleInvite)
+            // Nothing tapped for a while? Point at the next thing to do: a full gift box, else the pet that
+            // wants to play.
+            if (!visitor && arrival == null && welcome == null && Time.time - lastPress > idleInvite)
             {
                 lastPress = Time.time;
+                if (gift && gift.isActiveAndEnabled && gift.Ready) { hint.ShowTap(gift.lid.transform); return; }
                 var p = bored ? bored.Pet : pets.Count > 0 ? pets[Random.Range(0, pets.Count)] : null;
                 if (p) hint.ShowTap(p.Rig.head);
             }

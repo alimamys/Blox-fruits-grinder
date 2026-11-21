@@ -332,6 +332,37 @@ namespace OopsiePets.EditorTools
             return "scene built: " + ScenePath;
         }
 
+        static Material StringMaterial()
+        {
+            const string path = OopsieImport.Root + "/Data/StringUnlit.mat";
+            var m = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (m == null)
+            {
+                m = new Material(Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default")) { name = "StringUnlit" };
+                AssetDatabase.CreateAsset(m, path);
+            }
+            return m;
+        }
+
+        static LineRenderer Line(string name, Transform parent, Material mat, float width, Color color, int order)
+        {
+            var go = new GameObject(name);
+            go.transform.SetParent(parent, false);
+            var lr = go.AddComponent<LineRenderer>();
+            lr.sharedMaterial = mat;
+            lr.useWorldSpace = true;
+            lr.widthMultiplier = width;
+            lr.widthCurve = AnimationCurve.Linear(0f, 1f, 1f, 0.75f);
+            lr.numCapVertices = 6;
+            lr.numCornerVertices = 4;
+            lr.startColor = lr.endColor = color;
+            lr.sortingOrder = order;
+            lr.positionCount = 0;
+            lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            lr.receiveShadows = false;
+            return lr;
+        }
+
         static float WidthScale(string sprite, float width) => width / Mathf.Max(0.01f, S(sprite).bounds.size.x);
 
         /// <summary>The seven garden toys, one per <see cref="ToyKind"/> (positions are world units on the lawn).</summary>
@@ -360,6 +391,11 @@ namespace OopsiePets.EditorTools
             yarn.yarn = Prop("Yarn", ya, "garden_yarn", 2.0f, -7.2f, 1.3f, 12).transform;
             yarn.puddleSpot = P("PuddleSpot", ya, 2.0f, -3.9f);
             yarn.puddleWidth = 3.2f;
+            // The loose string: a lavender line with a plum edge, drawn under the ball and under the kitten.
+            var stringMat = StringMaterial();
+            yarn.strandEdge = Line("StringEdge", ya, stringMat, 0.13f, new Color(0.36f, 0.27f, 0.4f, 1f), 7);
+            yarn.strand = Line("String", ya, stringMat, 0.075f, new Color(0.8f, 0.7f, 0.88f, 1f), 8);
+            yarn.yarnRadius = yarn.yarn.GetComponent<SpriteRenderer>().bounds.extents.x * 0.85f;
             toys[(int)ToyKind.Yarn] = yarn;
 
             // Bunny: carrot patch
