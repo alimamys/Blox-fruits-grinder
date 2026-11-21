@@ -57,6 +57,8 @@ namespace OopsiePets.EditorTools
                 if (path.Contains("/Backgrounds/")) { ppu = 80f; max = 2048; }
                 if (file.StartsWith("mud_splat")) { readable = true; compress = false; max = 512; }
                 if (file.StartsWith("mouth_")) pivot = new Vector2(0.5f, 1f);
+                if (file == "gift_box_base") pivot = new Vector2(0.5f, 0f);
+                if (file == "gift_box_lid") pivot = new Vector2(0.5f, 0.12f);
                 if (file.StartsWith("panel_")) border = new Vector4(80, 80, 80, 80);
                 if (file.StartsWith("slider_")) border = new Vector4(30, 28, 30, 28);
                 foreach (var pet in rig.pets)

@@ -75,7 +75,8 @@ namespace OopsiePets
         {
             var tint = pet.Definition.furTint;
             Add(pet.Rig.headRenderer, pet.Rig.headDecor, Random.Range(tuftsOnHead.x, tuftsOnHead.y + 1), 0.15f, 70, tint);
-            Add(pet.Rig.bodyRenderer, pet.Rig.bodyDecor, Random.Range(tuftsOnBody.x, tuftsOnBody.y + 1), 0.12f, 25, tint);
+            int extra = pet.Definition.Has(PetQuirk.ExtraFluffy) ? 2 : 0; // woolly friends are extra messy
+            Add(pet.Rig.bodyRenderer, pet.Rig.bodyDecor, Random.Range(tuftsOnBody.x, tuftsOnBody.y + 1) + extra, 0.12f, 25, tint);
         }
 
         void Add(SpriteRenderer part, Transform parent, int n, float yBias, int order, Color tint)
@@ -162,6 +163,18 @@ namespace OopsiePets
             finishing = true;
             dragging = false;
             yield return new WaitForSeconds(0.25f);
+            if (pet.Definition.Has(PetQuirk.ExtraFluffy))
+            {
+                // A big fluffy "poof!": the freshly brushed wool puffs up.
+                var c = pet.VisualBounds().center;
+                for (int i = 0; i < 14; i++)
+                    Fx?.Emit(Fx.foamPuff, c + (Vector3)(Random.insideUnitCircle * 1.2f), Random.insideUnitCircle.normalized * Random.Range(1.5f, 3f),
+                        Random.Range(0.5f, 0.9f), 0.9f, Palette.Untinted, -0.5f);
+                Audio?.Play(Sfx.Whoosh, 0.6f, 0.8f);
+                var v = pet.Rig.visual;
+                var s0 = v.localScale;
+                yield return Ease.Tween(0.45f, k => v.localScale = s0 * (1f + 0.12f * Ease.Bump(k)), null, false);
+            }
             Fx?.Sparkles(pet.VisualBounds().center, 16, 2f);
             Audio?.Play(Sfx.Celebrate, 0.7f);
             pet.Animator.SetMood(PetExpression.Happy);

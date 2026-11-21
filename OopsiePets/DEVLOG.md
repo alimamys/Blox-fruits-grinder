@@ -23,6 +23,30 @@ Menu **Oopsie Pets** in the Editor (or `unity command script eval` with the same
 4. `Oopsie Pets/3. Build Scene` — rewrites `Scenes/OopsiePets_Main.unity` and the build list.
 Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or stop using the builder.
 
+## Friends to unlock (added 2026-11-21)
+- Starters: puppy, kitten, bunny. Earned friends (free `FriendsPack`, earned by play, never bought),
+  in order: Bao the panda, Rosie the piglet, Cotton the lamb, Sparkle the unicorn foal.
+- **Gift box** (`Core/FriendGift`): a present in the clubhouse with three heart slots on its front.
+  Every finished *full* care visit adds one heart (`FriendGiftRules.AwardHeart`, called by
+  `CareSession`); the heart flies into the box when the child gets home. With three hearts the box
+  wiggles and sparkles and a pointing hand invites a tap; tapping pops the lid, the next friend
+  jumps out wearing the present it brought (bow tie, star clip, beanie, crown — these then appear
+  in the dress-up tray), everyone cheers, and the room rearranges to give it a bed.
+- No timers, nothing can be lost, no reading needed. A full box takes priority over the "Oopsie!"
+  muddy visitor; a friend who has never been cared for comes back muddy like the starters do.
+- **Clubhouse layout** (`Core/Clubhouse`): beds are created at runtime from hand-placed layouts for
+  3 to 7 spots (pets + gift box), front row staggered between the back row; pets shrink a little
+  as the room fills (scale 0.46 → 0.34).
+- **Per-pet surprises** (`PetQuirk` flags on `PetDefinition`, replacing voice checks): kitten
+  sneezes a giant bubble, bubbles land on the bunny's ears, the piglet gets one more mud splat
+  mid-bath ("Oopsie!") and arrives extra muddy, the lamb has extra tufts and a fluffy "poof", the
+  panda rolls head over heels on big pops (new `Roll` reaction), the unicorn sprinkles stars on
+  every reaction and pop. New synthesized voices: oink, baa, panda squeak, unicorn trill.
+- Album: 12 slots (3 per row, 2 rows per page); friends' stickers first, so friends not met yet
+  show as soft faded shapes. Dress-up tray: one row for up to 6 items, two even rows above that.
+- Grown-up settings (behind the parent gate): "Let all friends in now" unlocks everyone at once.
+- Save format version 2 adds `giftHearts`; version-1 saves load unchanged (starters only, 0 hearts).
+
 ## Architecture (Assets/OopsiePets/Scripts)
 - `Core/GameFlow` — one scene, three screens (clubhouse, care, album) with fades; loads the save.
 - `Core/InputRouter` — full-screen UI catcher behind the buttons; forgiving taps (nearest
@@ -48,9 +72,14 @@ Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or sto
    `gpt-image-1.5` for transparent sprites, edits with the pet reference for consistency).
    Style prefix + every prompt recorded in `asset_manifest.json`. Runner: `tools/gen_images.py`
    (needs an OpenAI API key; in cloud sessions it is injected by the network proxy).
-2. `tools/slice_sheets.py` → `tools/clean_faces.py` (removes model-drawn mouths) →
-   `tools/make_faces.py` (eyes/mouths) → `tools/make_ui.py` (blank buttons, panels, sliders) →
-   `tools/rig_preview.py` + `rig_layout.json` (rig fitting) → `tools/finalize_art.py` (resize/copy).
+2. `tools/slice_sheets.py` (optional name filters, so earlier hand-cleaned sprites are not redone) →
+   `tools/clean_faces.py` (removes model-drawn mouths) → `tools/make_faces.py` (eyes/mouths) →
+   `tools/make_ui.py` (blank buttons, panels, sliders) → `tools/rig_preview.py` + `rig_layout.json`
+   (rig fitting) → `tools/finalize_art.py` (resize/copy; `--no-backgrounds` for partial runs) →
+   `tools/pad_to_4.py` (pads to multiples of 4 px for GPU compression and rescales rig pivots;
+   run it last, once per new sprite) → `tools/make_assets_md.py` (regenerates `ASSETS.md`).
+3. Batch 4 (friends): `jobs_batch4a.json` (references, gift box, accessories), `jobs_batch4b.json`
+   (parts sheets, stickers), `jobs_batch4c.json` (unicorn head redo). 42 generated images in total.
 
 ## Verified (Play mode in the Editor, 2026-11-20)
 Driven by `AgentScripts/PlayTest.cs` (pointer events into InputRouter, UI clicks via EventSystem)
@@ -66,12 +95,29 @@ and `AgentScripts/MouseTest.cs` (Input System mouse events through the UI input 
 - Save corruption: corrupt main → backup used; both corrupt → defaults, no crash.
 - Zero console errors in Play mode (the 2 FMOD errors are the container having no audio device).
 
-Web build (WebGL, `Oopsie Pets/Build/Web (WebGL)`, 24 MB, gzip with decompression fallback)
+Web build (WebGL, `Oopsie Pets/Build/Web (WebGL)`, 24 MB, gzip with decompression fallback; now Brotli, see below)
 tested in headless Chromium with real browser mouse events: loads in ~2 s, clicking the muddy
 puppy opens the wash, dragging the sponge cleans all mud (3 stars, next button), no page errors.
 
 Android APK (`Builds/Android/OopsiePets.apk`, 38 MB) built and inspected with aapt/apksigner:
 `com.oopsiepets.game` 0.1.0 (1), min SDK 26, target SDK 36, arm64-v8a, debug-signed.
+
+## Verified (2026-11-21, friends update)
+Play mode in the Editor (`AgentScripts/pt.sh` + `PlayTest.cs`, captures with `AgentScripts/cap.sh`):
+- Old version-1 save loads: 3 starters, 0 hearts, gift box shown; fresh save: same, puppy arrives muddy.
+- Full care visit → heart flies into the box; third heart → box wiggles, hand hint appears.
+- Tapping the full box → lid off, panda jumps out wearing its bow tie, room rearranges (4 → 5 spots),
+  new empty box; unlock survives a Play-mode restart.
+- Panda full visit (wash, bubbles, brush, dress-up with two-row tray, panda sticker reward).
+- Piglet wash: extra splat appears at ~55% (8 → 9 spots), stars do not drop, wash completes.
+- Lamb full visit: 8 tufts (2 extra), all brushed, completes. Unicorn full visit completes.
+- Panda `Roll`: sampled rotation 350° → 171° → 0° (one full flip around its middle).
+- All 10 accessories checked on all 7 pets (captures); layouts for 4, 5, 6 and 7 spots checked.
+- Album (12 slots, friends first) and grown-up settings ("Let all friends in now") checked.
+- Console: 0 errors after fixing the dress-up "Stars inactive" coroutine error (12 per visit before).
+Web build: 9.5 MB data + 7.5 MB code (Brotli), loads in 2.5 s in headless Chromium; real mouse
+clicks open the bath from the muddy puppy and scrubbing cleans it (3 stars); no page errors.
+Android APK: 37.7 MB, `com.oopsiepets.game` 0.1.0 (1), target SDK 36, arm64-v8a, debug-signed.
 
 ## Not verified / known gaps
 - The APK has not been installed on a phone. Unity adds the INTERNET permission automatically;
@@ -82,6 +128,9 @@ Android APK (`Builds/Android/OopsiePets.apk`, 38 MB) built and inspected with aa
 - Performance on a real Android phone not measured (the container renders in software, ~10 fps).
 - No AudioMixer (volumes go through a code gain layer); no sprite atlas yet.
 - Decorations: save field exists, no decoration content or UI yet. iOS not configured.
+- Friends update: the star sprinkle on the unicorn's bubble pops and the lamb's "poof" are too short
+  to catch in a still capture; their code ran without errors but was not seen on screen. The new
+  voices (oink, baa, squeak, trill) were not heard (no audio device).
 - Animation is code-driven on layered sprites (no Animator controllers / 2D bones); limbs are part
   of the body sprite, so there is no separate wave-with-paw animation (dance/wiggle instead).
 

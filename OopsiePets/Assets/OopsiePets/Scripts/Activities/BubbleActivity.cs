@@ -99,7 +99,14 @@ namespace OopsiePets
             Fx?.Burst(b.transform.position, 6 + (int)(b.Size * 3), 1.6f + b.Size, 0.3f, 0.55f, Fx.glowDot, Fx.sparkleYellow, Fx.sparklePink);
 
             // The pet answers: big pops make it jump, small ones sometimes make it giggle or blink.
-            if (b.Size >= 1.9f) pet.Animator.Play(Random.value < 0.5f ? PetReaction.Jump : PetReaction.Surprised);
+            if (pet.Definition.Has(PetQuirk.Sparkly)) Fx?.Burst(b.transform.position, 4, 2.4f, 0.4f, 0.7f, Fx.star, Fx.sparkleYellow);
+            if (b.Size >= 1.9f)
+            {
+                // Big pops: a jump or a gasp, and the panda tumbles head over heels.
+                var big = pet.Definition.Has(PetQuirk.Somersault) && Random.value < 0.7f ? PetReaction.Roll
+                    : Random.value < 0.5f ? PetReaction.Jump : PetReaction.Surprised;
+                pet.Animator.Play(big);
+            }
             else if (Random.value < 0.35f)
             {
                 var pool = new[] { PetReaction.Giggle, PetReaction.HeadTilt, PetReaction.Bounce, PetReaction.Sneeze, PetReaction.EarWiggle };
@@ -136,7 +143,7 @@ namespace OopsiePets
                 giantDone = true;
                 StartCoroutine(GiantBubble());
             }
-            if (!earBubblesDone && pops >= 2 && pet.Rig.earLeft && pet.Definition.voice == PetVoice.Bunny)
+            if (!earBubblesDone && pops >= 2 && pet.Rig.earLeft && pet.Rig.earRight && pet.Definition.Has(PetQuirk.EarBubbles))
             {
                 earBubblesDone = true;
                 StartCoroutine(EarBubbles());
@@ -152,7 +159,7 @@ namespace OopsiePets
 
         IEnumerator GiantBubble()
         {
-            if (pet.Definition.voice == PetVoice.Kitten)
+            if (pet.Definition.Has(PetQuirk.GiantSneezeBubble))
             {
                 pet.Animator.Play(PetReaction.Sneeze);
                 yield return new WaitForSeconds(0.6f);

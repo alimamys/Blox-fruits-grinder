@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed07757a0fac81dfbf860a019e48ec3, type: 3}
+  m_Name: panda
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.PetDefinition
+  id: panda
+  displayName: Bao
+  portrait: {fileID: 0}
+  prefab: {fileID: 3860435875139599809, guid: 37a235ad46ad08b889cbd22767db6cee, type: 3}
+  voice: 5
+  voicePitch: 1
+  furTint: {r: 1, g: 0.972549, b: 0.93333334, a: 1}
+  mouthSmileOverride: {fileID: 0}
+  mouthLaughOverride: {fileID: 0}
+  tapReactions: 0c00000000000000010000000300000006000000i
+  favoriteReaction: 12
+  accessoryReactions:
+  - accessory: {fileID: 11400000, guid: 632aae260fcc2f15ebd6f231ed59d1fb, type: 2}
+    reaction: 12
+  tailWagSpeed: 4
+  tailWagAngle: 10
+  earSwayAngle: 0
+  earSwaySpeed: 1
+  breathe: 0.025
+  quirks: 16
+  sticker: {fileID: 11400000, guid: 406acc381999b73c48889d24730eb5c3, type: 2}
+  startsUnlocked: 0
+  unlockOrder: 1
+  giftAccessory: {fileID: 11400000, guid: 231373824851ab6a9baa9b7c75d31acf, type: 2}

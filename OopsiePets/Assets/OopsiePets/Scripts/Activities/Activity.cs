@@ -54,7 +54,7 @@ namespace OopsiePets
         protected void SetProgress(float p)
         {
             Progress = Mathf.Clamp01(p);
-            if (ctx.stars) ctx.stars.Show(Progress);
+            if (ctx.stars && ctx.stars.isActiveAndEnabled) ctx.stars.Show(Progress); // dress-up hides the stars
         }
 
         protected void Complete()

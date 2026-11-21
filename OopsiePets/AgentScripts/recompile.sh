@@ -7,7 +7,7 @@ sleep 2
 for i in $(seq 1 90); do
   out=$(unity command script recompile_status --format json 2>/dev/null)
   st=$(echo "$out" | python3 -I -c "import json,sys; print(json.load(sys.stdin).get('status'))" 2>/dev/null)
-  case "$st" in completed|up_to_date) break;; esac
+  case "$st" in completed|up_to_date|idle) break;; esac
   sleep 3
 done
 echo "$out" | python3 -I -c "

@@ -46,8 +46,9 @@ namespace OopsiePets
             Instance = this;
             Application.targetFrameRate = 60;
             SaveSystem.Load();
+            // Starters always live here; other friends are earned from the gift box.
             foreach (var p in database.AvailablePets())
-                if (!SaveSystem.Data.unlockedPets.Contains(p.id)) SaveSystem.Data.unlockedPets.Add(p.id);
+                if (p.startsUnlocked && !SaveSystem.Data.unlockedPets.Contains(p.id)) SaveSystem.Data.unlockedPets.Add(p.id);
             SaveSystem.Save();
 
             albumButton.onClick.AddListener(() => StartCoroutine(Go(Screen.Album, () => album.Refresh())));
@@ -58,11 +59,12 @@ namespace OopsiePets
         void Start()
         {
             Show(Screen.Clubhouse);
-            // First launch: the first pet who has never been cared for arrives muddy.
+            // First launch: the first pet who has never been cared for arrives muddy. A full gift box
+            // waiting to be opened comes first, though.
             PetDefinition first = null;
-            foreach (var p in database.AvailablePets())
+            foreach (var p in database.UnlockedPets())
                 if (SaveSystem.Data.Pet(p.id).careCount == 0) { first = p; break; }
-            clubhouse.Enter(first ?? RandomPet());
+            clubhouse.Enter(FriendGiftRules.Ready(database) ? null : first ?? RandomPet());
             StartCoroutine(fader.FadeIn());
         }
 
@@ -75,7 +77,7 @@ namespace OopsiePets
 
         PetDefinition RandomPet()
         {
-            var list = new System.Collections.Generic.List<PetDefinition>(database.AvailablePets());
+            var list = new System.Collections.Generic.List<PetDefinition>(database.UnlockedPets());
             return list.Count > 0 ? list[Random.Range(0, list.Count)] : null;
         }
 
@@ -118,21 +120,34 @@ namespace OopsiePets
             clubhouse.Enter(null);
             yield return fader.FadeIn();
             Busy = false;
+            // A full gift box is the next thing to do; no muddy visitor interrupts it.
+            if (FriendGiftRules.Ready(database)) yield break;
             // A friend who still needs help always comes back muddy; after that, sometimes one does: "Oopsie!"
             PetDefinition next = null;
-            foreach (var p in database.AvailablePets())
+            foreach (var p in database.UnlockedPets())
                 if (p != caredFor && (next == null || SaveSystem.Data.Pet(p.id).careCount < SaveSystem.Data.Pet(next.id).careCount)) next = p;
             bool needsHelp = next != null && SaveSystem.Data.Pet(next.id).careCount == 0;
             if (next != null && (needsHelp || Random.value < 0.5f))
             {
-                yield return new WaitForSeconds(2.5f);
-                if (Current == Screen.Clubhouse && !Busy) clubhouse.Enter(next);
+                yield return new WaitForSeconds(3f); // after any heart has flown into the gift box
+                if (Current == Screen.Clubhouse && !Busy && !clubhouse.Revealing) clubhouse.Enter(next);
             }
         }
 
         public void RefreshClubhouse()
         {
             if (Current == Screen.Clubhouse) clubhouse.Enter(null);
+        }
+
+        /// <summary>After a friend jumps out of the gift box, the room fades and rearranges to give it a bed.</summary>
+        public IEnumerator RebuildClubhouse(PetDefinition welcomed)
+        {
+            if (Busy || Current != Screen.Clubhouse) yield break;
+            Busy = true;
+            yield return fader.FadeOut();
+            clubhouse.Enter(null, welcomed);
+            yield return fader.FadeIn();
+            Busy = false;
         }
 
         /// <summary>Creates a pet from its definition, wearing its saved outfit if asked.</summary>

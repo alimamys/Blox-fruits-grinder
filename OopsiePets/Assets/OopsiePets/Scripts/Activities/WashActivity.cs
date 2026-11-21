@@ -30,7 +30,7 @@ namespace OopsiePets
 
         readonly List<MudSpot> spots = new List<MudSpot>();
         float total, lastReaction, scrubTime;
-        bool dragging, finishing, sneezed;
+        bool dragging, finishing, sneezed, extraMud;
         Vector3 spongeScale;
 
         void Awake() => spongeScale = sponge.localScale;
@@ -40,6 +40,7 @@ namespace OopsiePets
             base.Begin(pet, ctx);
             finishing = false;
             sneezed = Random.value < 0.5f; // only some washes get the surprise sneeze
+            extraMud = !pet.Definition.Has(PetQuirk.MudLover);
             if (tubFront) tubFront.gameObject.SetActive(true);
             sponge.position = spongeHome.position;
             sponge.gameObject.SetActive(true);
@@ -93,20 +94,39 @@ namespace OopsiePets
         void AddMud(SpriteRenderer part, Transform parent, int n, float yBias, int order)
         {
             var pts = PetDecor.SpreadPoints(part, n, 0.24f, 0.34f, 0.26f, yBias);
-            for (int i = 0; i < n; i++)
-            {
-                var go = new GameObject("Mud");
-                go.transform.SetParent(parent, false);
-                go.transform.localPosition = pts[i];
-                float partWidth = part.sprite.bounds.size.x;
-                var sprite = mudSprites[Random.Range(0, mudSprites.Length)];
-                float s = partWidth * Random.Range(0.28f, 0.4f) / sprite.bounds.size.x;
-                go.transform.localScale = new Vector3(s * (Random.value < 0.5f ? -1f : 1f), s, 1f);
-                go.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(-35f, 35f));
-                var spot = go.AddComponent<MudSpot>();
-                spot.Init(sprite, order + i);
-                spots.Add(spot);
-            }
+            for (int i = 0; i < n; i++) spots.Add(NewSpot(part, parent, pts[i], order + i));
+        }
+
+        MudSpot NewSpot(SpriteRenderer part, Transform parent, Vector3 at, int order)
+        {
+            var go = new GameObject("Mud");
+            go.transform.SetParent(parent, false);
+            go.transform.localPosition = at;
+            float partWidth = part.sprite.bounds.size.x;
+            var sprite = mudSprites[Random.Range(0, mudSprites.Length)];
+            float s = partWidth * Random.Range(0.28f, 0.4f) / sprite.bounds.size.x;
+            go.transform.localScale = new Vector3(s * (Random.value < 0.5f ? -1f : 1f), s, 1f);
+            go.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(-35f, 35f));
+            var spot = go.AddComponent<MudSpot>();
+            spot.Init(sprite, order);
+            return spot;
+        }
+
+        IEnumerator OopsieSplat()
+        {
+            // Mud lovers can't help it: a giggle, a wiggle, and "Oopsie!" one more splat to scrub.
+            yield return new WaitForSeconds(0.3f);
+            pet.Animator.Play(PetReaction.Wiggle);
+            yield return new WaitForSeconds(0.5f);
+            var part = pet.Rig.bodyRenderer;
+            var at = PetDecor.SpreadPoints(part, 1, 0.24f, 0.34f, 0.26f, 0.22f)[0];
+            var spot = NewSpot(part, pet.Rig.bodyDecor, at, 40);
+            spots.Add(spot);
+            total += spot.Initial;
+            Audio?.Play(Sfx.Splash, 0.6f, 1.3f);
+            Fx?.Burst(spot.transform.position, 6, 2f, 0.3f, 0.5f, Fx.glowDot);
+            var s = spot.transform.localScale;
+            yield return Ease.Tween(0.3f, k => spot.transform.localScale = s * Ease.OutBack(k), null, false);
         }
 
         void OnDown(Vector2 p)
@@ -169,13 +189,19 @@ namespace OopsiePets
             if (total <= 0f) return;
             float left = 0f;
             foreach (var s in spots) left += Mathf.Max(0f, s.Remaining);
-            SetProgress(1f - left / total);
+            float measured = 1f - left / total;
+            SetProgress(Mathf.Max(Progress, measured)); // stars never go out, even after an extra splat
+            if (!extraMud && measured > 0.55f)
+            {
+                extraMud = true;
+                StartCoroutine(OopsieSplat());
+            }
             if (!sneezed && Progress > 0.45f)
             {
                 sneezed = true;
                 pet.Animator.Play(PetReaction.Sneeze); // bubbles tickle the nose
             }
-            if (!finishing && Progress >= cleanEnough) StartCoroutine(Finish());
+            if (!finishing && extraMud && measured >= cleanEnough) StartCoroutine(Finish());
         }
 
         IEnumerator Finish()

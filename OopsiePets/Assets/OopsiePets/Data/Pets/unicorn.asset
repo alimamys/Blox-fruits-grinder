@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed07757a0fac81dfbf860a019e48ec3, type: 3}
+  m_Name: unicorn
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.PetDefinition
+  id: unicorn
+  displayName: Sparkle
+  portrait: {fileID: 0}
+  prefab: {fileID: 3041132936535197894, guid: 1e02edd9924f51924b885b8b5046e0d1, type: 3}
+  voice: 6
+  voicePitch: 1
+  furTint: {r: 1, g: 0.95686275, b: 0.972549, a: 1}
+  mouthSmileOverride: {fileID: 0}
+  mouthLaughOverride: {fileID: 0}
+  tapReactions: 0b00000004000000010000000300000000000000i
+  favoriteReaction: 11
+  accessoryReactions:
+  - accessory: {fileID: 11400000, guid: dd0c4fa69e68b6388ba468c12db8a249, type: 2}
+    reaction: 11
+  tailWagSpeed: 2.2
+  tailWagAngle: 10
+  earSwayAngle: 0
+  earSwaySpeed: 1
+  breathe: 0.025
+  quirks: 32
+  sticker: {fileID: 11400000, guid: 991fe23f4125ab9dc8e9cb929ea1d5a1, type: 2}
+  startsUnlocked: 0
+  unlockOrder: 4
+  giftAccessory: {fileID: 11400000, guid: dd0c4fa69e68b6388ba468c12db8a249, type: 2}

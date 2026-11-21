@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f62abcc8594912699264c090f3d258, type: 3}
+  m_Name: FriendsPack
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.ContentPack
+  id: friends
+  displayName: Clubhouse Friends
+  isFree: 1
+  futureProductId: 
+  pets:
+  - {fileID: 11400000, guid: 1d0314cd416ca325ab93358eda44af8b, type: 2}
+  - {fileID: 11400000, guid: 108fef5ab10f272c1b29ed05e1960e8e, type: 2}
+  - {fileID: 11400000, guid: 1cb0cb21023bb23f5baa5840037f6a43, type: 2}
+  - {fileID: 11400000, guid: 593e91d6e8a00bfd49e5c64484c50c20, type: 2}
+  accessories:
+  - {fileID: 11400000, guid: 231373824851ab6a9baa9b7c75d31acf, type: 2}
+  - {fileID: 11400000, guid: 804247d65319c1091b74c57bfe389fa3, type: 2}
+  - {fileID: 11400000, guid: ee6d7888bbac0aab28d0abdc678f60e3, type: 2}
+  - {fileID: 11400000, guid: dd0c4fa69e68b6388ba468c12db8a249, type: 2}
+  stickers:
+  - {fileID: 11400000, guid: 406acc381999b73c48889d24730eb5c3, type: 2}
+  - {fileID: 11400000, guid: dc692454a09944c4e89ed71474e6d8ba, type: 2}
+  - {fileID: 11400000, guid: c433c9c812f86096e830cf619b17c322, type: 2}
+  - {fileID: 11400000, guid: 991fe23f4125ab9dc8e9cb929ea1d5a1, type: 2}

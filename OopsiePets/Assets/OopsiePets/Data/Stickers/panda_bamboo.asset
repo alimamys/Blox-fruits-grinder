@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90077d9413f807177810c46d6ef603ce, type: 3}
+  m_Name: panda_bamboo
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.StickerDefinition
+  id: panda_bamboo
+  sprite: {fileID: 21300000, guid: 483b3a29a505dac399410580a69db033, type: 3}
+  pet: {fileID: 11400000, guid: 1d0314cd416ca325ab93358eda44af8b, type: 2}

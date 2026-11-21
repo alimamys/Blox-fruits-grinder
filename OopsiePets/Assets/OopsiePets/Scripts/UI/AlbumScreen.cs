@@ -15,7 +15,11 @@ namespace OopsiePets
             foreach (var m in made) if (m) Destroy(m.gameObject);
             made.Clear();
             int i = 0;
-            foreach (var s in GameFlow.Instance.database.AllStickers())
+            // Friends' stickers first (the ones still to find show as soft shapes), then the rest.
+            var all = new List<StickerDefinition>(GameFlow.Instance.database.AllStickers());
+            var ordered = all.FindAll(s => s.pet != null);
+            ordered.AddRange(all.FindAll(s => s.pet == null));
+            foreach (var s in ordered)
             {
                 if (i >= slots.Length) break;
                 var go = new GameObject("Sticker_" + s.id);

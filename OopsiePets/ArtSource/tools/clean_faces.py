@@ -4,6 +4,7 @@ mouth overlays are the only mouth. Inpaints dark line pixels inside a box under 
 
 Usage: python3 -I clean_faces.py <sliced dir>
 """
+import os
 import sys
 import cv2
 import numpy as np
@@ -13,6 +14,7 @@ from PIL import Image
 BOXES = {
     "Characters/Puppy/puppy_head.png": (218, 391, 346, 426),
     "Characters/Bunny/bunny_head.png": (140, 197, 198, 219),
+    "Characters/Lamb/lamb_head.png": (252, 313, 313, 330),
 }
 
 
@@ -35,4 +37,5 @@ def clean(path, box):
 if __name__ == "__main__":
     root = sys.argv[1]
     for rel, box in BOXES.items():
-        print(rel, "inpainted px:", clean(f"{root}/{rel}", box))
+        if os.path.exists(f"{root}/{rel}"):  # only the heads present in this sliced batch
+            print(rel, "inpainted px:", clean(f"{root}/{rel}", box))

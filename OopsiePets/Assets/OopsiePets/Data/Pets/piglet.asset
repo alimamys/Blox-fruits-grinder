@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed07757a0fac81dfbf860a019e48ec3, type: 3}
+  m_Name: piglet
+  m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.PetDefinition
+  id: piglet
+  displayName: Rosie
+  portrait: {fileID: 0}
+  prefab: {fileID: 1305249151354080102, guid: bc8c956eb426e252d9f993114a351a75, type: 3}
+  voice: 3
+  voicePitch: 1
+  furTint: {r: 1, g: 0.8509804, b: 0.8235294, a: 1}
+  mouthSmileOverride: {fileID: 0}
+  mouthLaughOverride: {fileID: 0}
+  tapReactions: 0a00000001000000000000000200000006000000i
+  favoriteReaction: 10
+  accessoryReactions:
+  - accessory: {fileID: 11400000, guid: 660e54c171e3db82aa37fa1100dc8fd3, type: 2}
+    reaction: 11
+  tailWagSpeed: 9
+  tailWagAngle: 22
+  earSwayAngle: 0
+  earSwaySpeed: 1
+  breathe: 0.025
+  quirks: 4
+  sticker: {fileID: 11400000, guid: dc692454a09944c4e89ed71474e6d8ba, type: 2}
+  startsUnlocked: 0
+  unlockOrder: 2
+  giftAccessory: {fileID: 11400000, guid: 804247d65319c1091b74c57bfe389fa3, type: 2}

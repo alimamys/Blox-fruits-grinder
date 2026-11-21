@@ -1,0 +1,4 @@
+[
+ {"id": "unicorn_head", "out": "Characters/Unicorn/unicorn_head_raw.png", "model": "gpt-image-1.5", "size": "1024x1024", "quality": "high", "background": "transparent", "refs": ["Characters/Unicorn/unicorn_reference.png"],
+  "prompt": "Using the EXACT same baby unicorn character as the reference image (identical colors, outline weight, shading and proportions), draw ONLY its HEAD, front view, with the spiral horn, both pointy ears and the fluffy pastel rainbow mane attached (the mane stays close around the head and does not hang far down). The face must be BLANK: keep the soft pink muzzle with its two tiny nostrils and the two pink cheek blush ovals, but absolutely NO eyes, NO eyebrows and NO mouth. The head is centered and fully inside the image with a wide empty margin on every side; nothing touches the image edges. Isolated on a transparent background."}
+]

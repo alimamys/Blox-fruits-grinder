@@ -1,24 +1,434 @@
 {
- "puppy": {"folder": "Puppy", "mouth": "mouth_smile",
+ "puppy": {
+  "folder": "Puppy",
+  "mouth": "mouth_smile",
   "parts": {
-   "tail":      {"file": "puppy_tail", "x": 150, "y": 70, "scale": 1.05, "pivot": [0.15, 0.2], "order": 1},
-   "body":      {"file": "puppy_body", "x": 0, "y": 0, "scale": 1.15, "pivot": [0.5, 0.0], "order": 2},
-   "head":      {"file": "puppy_head", "x": 0, "y": 505, "scale": 0.92, "pivot": [0.5, 0.5], "order": 3},
-   "ear_left":  {"file": "puppy_ear_left", "x": -225, "y": 690, "scale": 1.35, "pivot": [0.62, 0.93], "order": 4},
-   "ear_right": {"file": "puppy_ear_right", "x": 225, "y": 690, "scale": 1.35, "pivot": [0.38, 0.93], "order": 4}},
-  "face": {"eye_dx": 112, "eye_y": -28, "eye_scale": 0.98, "mouth_y": -116, "mouth_scale": 0.7}},
- "kitten": {"folder": "Kitten", "mouth": "mouth_smile",
+   "tail": {
+    "file": "puppy_tail",
+    "x": 150,
+    "y": 70,
+    "scale": 1.05,
+    "pivot": [
+     0.14738,
+     0.19783
+    ],
+    "order": 1
+   },
+   "body": {
+    "file": "puppy_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.15,
+    "pivot": [
+     0.49868,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "puppy_head",
+    "x": 0,
+    "y": 505,
+    "scale": 0.92,
+    "pivot": [
+     0.49823,
+     0.49712
+    ],
+    "order": 3
+   },
+   "ear_left": {
+    "file": "puppy_ear_left",
+    "x": -225,
+    "y": 690,
+    "scale": 1.35,
+    "pivot": [
+     0.62,
+     0.92663
+    ],
+    "order": 4
+   },
+   "ear_right": {
+    "file": "puppy_ear_right",
+    "x": 225,
+    "y": 690,
+    "scale": 1.35,
+    "pivot": [
+     0.37525,
+     0.92663
+    ],
+    "order": 4
+   }
+  },
+  "face": {
+   "eye_dx": 112,
+   "eye_y": -28,
+   "eye_scale": 0.98,
+   "mouth_y": -116,
+   "mouth_scale": 0.7
+  }
+ },
+ "kitten": {
+  "folder": "Kitten",
+  "mouth": "mouth_smile",
   "parts": {
-   "tail": {"file": "kitten_tail", "x": 120, "y": 40, "scale": 1.05, "pivot": [0.15, 0.1], "order": 1},
-   "body": {"file": "kitten_body", "x": 0, "y": 0, "scale": 1.1, "pivot": [0.5, 0.0], "order": 2},
-   "head": {"file": "kitten_head", "x": 0, "y": 500, "scale": 1.3, "pivot": [0.5, 0.5], "order": 3}},
-  "face": {"eye_dx": 100, "eye_y": -18, "eye_scale": 0.92, "mouth_y": -96, "mouth_scale": 0.62}},
- "bunny": {"folder": "Bunny", "mouth": "mouth_bunny",
+   "tail": {
+    "file": "kitten_tail",
+    "x": 120,
+    "y": 40,
+    "scale": 1.05,
+    "pivot": [
+     0.14926,
+     0.1
+    ],
+    "order": 1
+   },
+   "body": {
+    "file": "kitten_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.1,
+    "pivot": [
+     0.49559,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "kitten_head",
+    "x": 0,
+    "y": 500,
+    "scale": 1.3,
+    "pivot": [
+     0.4988,
+     0.5
+    ],
+    "order": 3
+   }
+  },
+  "face": {
+   "eye_dx": 100,
+   "eye_y": -18,
+   "eye_scale": 0.92,
+   "mouth_y": -96,
+   "mouth_scale": 0.62
+  }
+ },
+ "bunny": {
+  "folder": "Bunny",
+  "mouth": "mouth_bunny",
   "parts": {
-   "ear_left":  {"file": "bunny_ear_left", "x": -85, "y": 600, "scale": 1.2, "pivot": [0.5, 0.05], "order": 0, "rot": 12},
-   "ear_right": {"file": "bunny_ear_right", "x": 85, "y": 600, "scale": 1.2, "pivot": [0.5, 0.05], "order": 0, "rot": -12},
-   "tail": {"file": "bunny_tail", "x": 185, "y": 60, "scale": 1.0, "pivot": [0.2, 0.3], "order": 1},
-   "body": {"file": "bunny_body", "x": 0, "y": 0, "scale": 1.1, "pivot": [0.5, 0.0], "order": 2},
-   "head": {"file": "bunny_head", "x": 0, "y": 440, "scale": 1.35, "pivot": [0.5, 0.5], "order": 3}},
-  "face": {"eye_dx": 98, "eye_y": 12, "eye_scale": 0.88, "mouth_y": -60, "mouth_scale": 0.85}}
+   "ear_left": {
+    "file": "bunny_ear_left",
+    "x": -85,
+    "y": 600,
+    "scale": 1.2,
+    "pivot": [
+     0.49405,
+     0.04982
+    ],
+    "order": 0,
+    "rot": 12
+   },
+   "ear_right": {
+    "file": "bunny_ear_right",
+    "x": 85,
+    "y": 600,
+    "scale": 1.2,
+    "pivot": [
+     0.5,
+     0.04982
+    ],
+    "order": 0,
+    "rot": -12
+   },
+   "tail": {
+    "file": "bunny_tail",
+    "x": 185,
+    "y": 60,
+    "scale": 1.0,
+    "pivot": [
+     0.1973,
+     0.29786
+    ],
+    "order": 1
+   },
+   "body": {
+    "file": "bunny_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.1,
+    "pivot": [
+     0.49632,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "bunny_head",
+    "x": 0,
+    "y": 440,
+    "scale": 1.35,
+    "pivot": [
+     0.49706,
+     0.49824
+    ],
+    "order": 3
+   }
+  },
+  "face": {
+   "eye_dx": 98,
+   "eye_y": 12,
+   "eye_scale": 0.88,
+   "mouth_y": -60,
+   "mouth_scale": 0.85
+  }
+ },
+ "panda": {
+  "folder": "Panda",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "panda_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.506,
+    "pivot": [
+     0.49853,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "panda_head",
+    "x": -0.9,
+    "y": 510.6,
+    "scale": 1.259,
+    "pivot": [
+     0.523,
+     0.49849
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "panda_tail",
+    "x": 180,
+    "y": 55,
+    "scale": 1.506,
+    "pivot": [
+     0.29444,
+     0.39167
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 107.0,
+   "eye_y": -36.4,
+   "eye_scale": 0.8,
+   "mouth_y": -101.4,
+   "mouth_scale": 0.5
+  },
+  "anchors": {
+   "hat": [
+    0,
+    150
+   ],
+   "side": [
+    145,
+    120
+   ],
+   "neck": [
+    0,
+    -198
+   ],
+   "headWidth": 430,
+   "furTint": "FFF8EE"
+  }
+ },
+ "piglet": {
+  "folder": "Piglet",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "piglet_body",
+    "x": 0,
+    "y": 0,
+    "scale": 0.98,
+    "pivot": [
+     0.49889,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "piglet_head",
+    "x": 0.5,
+    "y": 497.3,
+    "scale": 1.043,
+    "pivot": [
+     0.49857,
+     0.49752
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "piglet_tail",
+    "x": 205,
+    "y": 95,
+    "scale": 0.98,
+    "pivot": [
+     0.11909,
+     0.49569
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 124.6,
+   "eye_y": -8.6,
+   "eye_scale": 0.82,
+   "mouth_y": -117.3,
+   "mouth_scale": 0.561
+  },
+  "anchors": {
+   "hat": [
+    0,
+    168
+   ],
+   "side": [
+    150,
+    140
+   ],
+   "neck": [
+    0,
+    -198
+   ],
+   "headWidth": 440,
+   "furTint": "FFD9D2"
+  }
+ },
+ "lamb": {
+  "folder": "Lamb",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "lamb_body",
+    "x": 0,
+    "y": 0,
+    "scale": 0.997,
+    "pivot": [
+     0.49731,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "lamb_head",
+    "x": 0.4,
+    "y": 477.0,
+    "scale": 1.241,
+    "pivot": [
+     0.5034,
+     0.49629
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "lamb_tail",
+    "x": 175,
+    "y": 70,
+    "scale": 0.997,
+    "pivot": [
+     0.24507,
+     0.43945
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 93.0,
+   "eye_y": -72.0,
+   "eye_scale": 0.7,
+   "mouth_y": -139.6,
+   "mouth_scale": 0.551
+  },
+  "anchors": {
+   "hat": [
+    0,
+    185
+   ],
+   "side": [
+    120,
+    135
+   ],
+   "neck": [
+    0,
+    -228
+   ],
+   "headWidth": 400,
+   "furTint": "FFF8EE"
+  }
+ },
+ "unicorn": {
+  "folder": "Unicorn",
+  "mouth": "mouth_smile",
+  "parts": {
+   "body": {
+    "file": "unicorn_body",
+    "x": 0,
+    "y": 0,
+    "scale": 1.246,
+    "pivot": [
+     0.49709,
+     0.0
+    ],
+    "order": 2
+   },
+   "head": {
+    "file": "unicorn_head",
+    "x": -0.1,
+    "y": 548.2,
+    "scale": 0.849,
+    "pivot": [
+     0.46995,
+     0.5
+    ],
+    "order": 3
+   },
+   "tail": {
+    "file": "unicorn_tail",
+    "x": 150,
+    "y": 250,
+    "scale": 1.246,
+    "pivot": [
+     0.15,
+     0.74682
+    ],
+    "order": 1
+   }
+  },
+  "face": {
+   "eye_dx": 101.6,
+   "eye_y": -103.3,
+   "eye_scale": 0.8,
+   "mouth_y": -193.7,
+   "mouth_scale": 0.5
+  },
+  "anchors": {
+   "hat": [
+    0,
+    150
+   ],
+   "side": [
+    130,
+    115
+   ],
+   "neck": [
+    0,
+    -250
+   ],
+   "headWidth": 400,
+   "furTint": "FFF4F8"
+  }
+ }
 }

@@ -31,6 +31,8 @@ public static class PlayTest
             sb.Append($" activity={f.care.Current.Kind} progress={f.care.Current.Progress:0.00} complete={f.care.Current.IsComplete} next={f.care.nextButton.gameObject.activeInHierarchy}");
         if (f.Current == GameFlow.Screen.Clubhouse)
             sb.Append($" pets=[{string.Join(",", f.clubhouse.Pets.Select(p => p.Definition.id + (p.tappable ? "" : "(arriving)")))}] visitor={(f.clubhouse.Visitor ? f.clubhouse.Visitor.Definition.id : "none")}");
+        var next = f.database.NextFriend();
+        sb.Append($" hearts={SaveSystem.Data.giftHearts} next={(next ? next.id : "none")} giftReady={FriendGiftRules.Ready(f.database)} unlocked=[{string.Join(",", f.database.UnlockedPets().Select(p => p.id))}]");
         sb.Append($" stickers=[{string.Join(",", SaveSystem.Data.stickers)}] frame={Time.frameCount}");
         return sb.ToString();
     }
@@ -162,6 +164,62 @@ public static class PlayTest
     public static string Save() => System.IO.File.Exists(Application.persistentDataPath + "/oopsiepets_save.json")
         ? System.IO.File.ReadAllText(Application.persistentDataPath + "/oopsiepets_save.json")
         : "no save file";
+
+    /// <summary>Taps the gift box like a finger would (on its lid).</summary>
+    public static async Task<string> TapGift()
+    {
+        var g = GameFlow.Instance.clubhouse.gift;
+        if (!g || !g.isActiveAndEnabled) return "no gift box: " + State();
+        var at = g.lid.transform.position + Vector3.down * 0.1f;
+        return $"tapped gift at {at} ready={g.Ready}: " + await Tap(at.x, at.y);
+    }
+
+    /// <summary>Test shortcut: sets the hearts in the gift box and rebuilds the clubhouse.</summary>
+    public static string SetHearts(int n)
+    {
+        SaveSystem.Data.giftHearts = n;
+        SaveSystem.Save();
+        GameFlow.Instance.RefreshClubhouse();
+        return State();
+    }
+
+    public static string UnlockAll()
+    {
+        int n = FriendGiftRules.UnlockAll(GameFlow.Instance.database);
+        GameFlow.Instance.RefreshClubhouse();
+        return $"unlocked {n}: " + State();
+    }
+
+    /// <summary>Where every pet and the gift box sit in the clubhouse (for layout checks).</summary>
+    public static string Layout()
+    {
+        var c = GameFlow.Instance.clubhouse;
+        var sb = new StringBuilder($"petScale={c.PetScale:0.00}");
+        foreach (var p in c.Pets)
+        {
+            var b = p.VisualBounds();
+            sb.Append($" | {p.Definition.id} at ({p.transform.position.x:0.00},{p.transform.position.y:0.00}) size ({b.size.x:0.00}x{b.size.y:0.00}) worn=[{string.Join(",", p.Rig.AllWorn().Select(a => a.id))}]");
+        }
+        var g = c.gift;
+        sb.Append(g && g.isActiveAndEnabled ? $" | gift at ({g.transform.position.x:0.00},{g.transform.position.y:0.00}) ready={g.Ready}" : " | no gift");
+        return sb.ToString();
+    }
+
+    /// <summary>Plays a reaction on a clubhouse pet and samples its body rotation and lift while it runs.</summary>
+    public static async Task<string> ProbeReaction(string petId, string reaction)
+    {
+        var pet = GameFlow.Instance.clubhouse.Pets.FirstOrDefault(p => p.Definition.id == petId);
+        if (!pet) return "no pet " + petId;
+        pet.Animator.Play((PetReaction)System.Enum.Parse(typeof(PetReaction), reaction));
+        var sb = new StringBuilder();
+        for (int i = 0; i < 12; i++)
+        {
+            await Frames(90);
+            var v = pet.Rig.visual;
+            sb.Append($"{v.localEulerAngles.z:0}deg/{v.localPosition.y:0.00} ");
+        }
+        return sb.ToString();
+    }
 
     public static string ResetSave()
     {

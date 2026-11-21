@@ -18,6 +18,7 @@ namespace OopsiePets
         public AccessoryButton buttonPrefab;
         public Button doneButton;
         public CanvasGroup trayGroup;
+        public GridLayoutGroup grid;
 
         readonly List<AccessoryButton> buttons = new List<AccessoryButton>();
         bool tried;
@@ -48,11 +49,23 @@ namespace OopsiePets
         {
             foreach (var b in buttons) if (b) Destroy(b.gameObject);
             buttons.Clear();
-            foreach (var acc in database.AvailableAccessories())
+            foreach (var acc in database.UnlockedAccessories())
             {
                 var b = Instantiate(buttonPrefab, tray);
                 b.Bind(acc, OnAccessory);
                 buttons.Add(b);
+            }
+            // One row for up to six items, otherwise two even rows; the tray grows upward to fit.
+            if (grid)
+            {
+                int n = buttons.Count;
+                int cols = n <= 6 ? Mathf.Max(1, n) : Mathf.CeilToInt(n / 2f);
+                int rows = Mathf.CeilToInt(n / (float)cols);
+                grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = cols;
+                var size = tray.sizeDelta;
+                size.y = grid.padding.vertical + rows * grid.cellSize.y + (rows - 1) * grid.spacing.y;
+                tray.sizeDelta = size;
             }
             RefreshButtons();
         }

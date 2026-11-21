@@ -134,25 +134,17 @@ namespace OopsiePets.EditorTools
             // ---------- Clubhouse ----------
             var clubWorld = Node("ClubhouseWorld", null, Vector3.zero);
             Background("Background", clubWorld, S("Backgrounds/bg_clubhouse"), cam);
-            var bedSpots = new[] { new Vector3(-2.75f, -3.2f), new Vector3(2.75f, -3.2f), new Vector3(0f, -6.5f) };
-            var spots = new List<Transform>();
-            for (int i = 0; i < bedSpots.Length; i++)
-            {
-                var bed = Spr("Bed" + (i + 1), clubWorld, S("Objects/pet_bed"), bedSpots[i] + new Vector3(0, 0.35f, 0), 0.72f, 5);
-                var bc2 = bed.gameObject.AddComponent<BoxCollider2D>();
-                bc2.isTrigger = true;
-                bed.gameObject.AddComponent<ClubhouseToy>().kind = ClubhouseToy.Kind.Bed;
-                spots.Add(Node("BedSpot" + (i + 1), clubWorld, bedSpots[i]));
-            }
-            var basket = Spr("ToyBasket", clubWorld, S("Objects/toy_basket"), new Vector3(-3.75f, -8.1f), 0.62f, 30);
+            // Beds are laid out by the Clubhouse at runtime (3 to 7 of them, as friends join).
+            var basket = Spr("ToyBasket", clubWorld, S("Objects/toy_basket"), new Vector3(-4.05f, -8.6f), 0.55f, 30);
             basket.gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
             basket.gameObject.AddComponent<ClubhouseToy>().kind = ClubhouseToy.Kind.Basket;
-            var ball = Spr("ToyBall", clubWorld, S("Objects/toy_ball"), new Vector3(3.9f, -8.3f), 0.55f, 31);
+            var ball = Spr("ToyBall", clubWorld, S("Objects/toy_ball"), new Vector3(4.25f, -8.75f), 0.5f, 31);
             ball.gameObject.AddComponent<CircleCollider2D>().isTrigger = true;
             ball.gameObject.AddComponent<ClubhouseToy>().kind = ClubhouseToy.Kind.Ball;
             var door = Node("Door", clubWorld, new Vector3(7.2f, -3.2f));
             var club = clubWorld.gameObject.AddComponent<Clubhouse>();
-            club.bedSpots = spots.ToArray();
+            club.bedSprite = S("Objects/pet_bed");
+            club.gift = BuildGift(clubWorld);
             club.doorSpot = door;
             club.mudSprites = MudSprites();
 
@@ -222,12 +214,14 @@ namespace OopsiePets.EditorTools
             var trayRt = UIKit.Image("DressTray", careUI, S("UI/panel_lavender"), Palette.Untinted, true);
             UIKit.Place(trayRt.rectTransform, bc, bc, new Vector2(0, 24), new Vector2(1040, 220));
             var trayGroup = trayRt.gameObject.AddComponent<CanvasGroup>();
-            var row = trayRt.gameObject.AddComponent<HorizontalLayoutGroup>();
+            var row = trayRt.gameObject.AddComponent<GridLayoutGroup>();
             row.padding = new RectOffset(24, 24, 30, 30);
-            row.spacing = 16;
+            row.spacing = new Vector2(16, 16);
+            row.cellSize = new Vector2(150, 150);
             row.childAlignment = TextAnchor.MiddleCenter;
-            row.childControlWidth = row.childControlHeight = false;
-            row.childForceExpandWidth = row.childForceExpandHeight = false;
+            row.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            row.constraintCount = 6;
+            dress.grid = row;
             var done = UIKit.Button("DoneButton", trayRt.transform, S("UI/btn_done"), new Vector2(1, 1), new Vector2(1, 0), new Vector2(-10, 30), 220, pulse: true);
             done.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
             dress.tray = trayRt.rectTransform;
@@ -238,12 +232,15 @@ namespace OopsiePets.EditorTools
             // ---------- Album ----------
             var albumWorld = Node("AlbumWorld", null, Vector3.zero);
             Background("Background", albumWorld, S("Backgrounds/bg_album"), cam);
-            var slotPos = new[] { new Vector3(-2.6f, 6.2f), new Vector3(2.6f, 6.2f), new Vector3(-2.6f, 2.6f), new Vector3(2.6f, 2.6f), new Vector3(-2.6f, -2.5f), new Vector3(2.6f, -2.5f), new Vector3(0f, -6.1f) };
+            // Two album pages, three stickers per row, two rows per page (12 slots).
+            var slotPos = new List<Vector3>();
+            foreach (var y in new[] { 5.6f, 2.2f, -2.0f, -5.5f })
+                foreach (var x in new[] { -3.0f, 0f, 3.0f }) slotPos.Add(new Vector3(x, y));
             var slots = new List<Transform>();
-            for (int i = 0; i < slotPos.Length; i++) slots.Add(Node("Slot" + (i + 1), albumWorld, slotPos[i]));
+            for (int i = 0; i < slotPos.Count; i++) slots.Add(Node("Slot" + (i + 1), albumWorld, slotPos[i]));
             var album = albumWorld.gameObject.AddComponent<AlbumScreen>();
             album.slots = slots.ToArray();
-            album.stickerSize = 2.7f;
+            album.stickerSize = 2.45f;
             var albumUI = MakeScreen("AlbumUI");
             var back = UIKit.Button("BackButton", albumUI, S("UI/btn_back"), tl, tl, new Vector2(40, -40), 190);
 
@@ -321,6 +318,27 @@ namespace OopsiePets.EditorTools
             return "scene built: " + ScenePath;
         }
 
+        /// <summary>The friend gift box: box, lid with bow, and three heart slots above (all scaled together).</summary>
+        static FriendGift BuildGift(Transform parent)
+        {
+            var root = Node("FriendGift", parent, new Vector3(0f, -6.5f));
+            root.gameObject.AddComponent<SortingGroup>().sortingOrder = 40;
+            var visual = Node("Visual", root, Vector3.zero);
+            var box = Spr("Box", visual, S("Objects/gift_box_base"), Vector3.zero, 1f, 1);
+            float bh = box.sprite.bounds.size.y;
+            var lid = Spr("Lid", visual, S("Objects/gift_box_lid"), new Vector3(0f, bh * 0.84f), 1f, 2);
+            // Three heart slots across the front of the box: a progress meter that needs no words.
+            var hearts = new SpriteRenderer[FriendGiftRules.HeartsPerFriend];
+            float bw = box.sprite.bounds.size.x;
+            for (int i = 0; i < hearts.Length; i++)
+                hearts[i] = Spr("Heart" + (i + 1), visual, S("Effects/fx_heart"), new Vector3((i - 1) * bw * 0.3f, bh * 0.43f), 0.95f, 5);
+            root.gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
+            var gift = root.gameObject.AddComponent<FriendGift>();
+            gift.visual = visual; gift.box = box; gift.lid = lid; gift.hearts = hearts;
+            root.gameObject.SetActive(false);
+            return gift;
+        }
+
         static Sprite[] MudSprites() => new[] { S("Effects/mud_splat_01"), S("Effects/mud_splat_02"), S("Effects/mud_splat_03"), S("Effects/mud_splat_04"), S("Effects/mud_splat_05"), S("Effects/mud_splat_06") };
 
         static VolumeProfile PostProfile()
@@ -396,13 +414,21 @@ namespace OopsiePets.EditorTools
             resetImg.gameObject.AddComponent<CandyButton>();
             var resetLabel = UIKit.Text("Label", resetImg.transform, "Start over", 46, Palette.Ink);
             UIKit.Stretch(resetLabel.rectTransform, 16f);
+            var unlockImg = UIKit.Image("UnlockAllButton", panel.transform, S("UI/panel_lavender"), Palette.Untinted, true);
+            UIKit.Place(unlockImg.rectTransform, mid, mid, new Vector2(0, -280), new Vector2(680, 130));
+            var unlockAll = unlockImg.gameObject.AddComponent<Button>();
+            unlockAll.transition = Selectable.Transition.None;
+            unlockImg.gameObject.AddComponent<CandyButton>();
+            var unlockLabel = UIKit.Text("Label", unlockImg.transform, "Let all friends in now", 44, Palette.Ink);
+            UIKit.Stretch(unlockLabel.rectTransform, 16f);
             var note = UIKit.Text("Privacy", panel.transform,
                 "No ads. No accounts. No tracking.\nWorks offline. Progress is saved only on this device.", 36, Palette.Ink);
             note.fontStyle = FontStyles.Normal;
-            UIKit.Place(note.rectTransform, mid, mid, new Vector2(0, -330), new Vector2(760, 200));
+            UIKit.Place(note.rectTransform, mid, mid, new Vector2(0, -470), new Vector2(760, 180));
             var close = UIKit.Button("Close", panel.transform, S("UI/btn_close"), new Vector2(1, 1), mid, new Vector2(-30, -30), 130);
             var sp = root.gameObject.AddComponent<SettingsPanel>();
             sp.music = music; sp.sound = sound; sp.reset = reset; sp.resetLabel = resetLabel; sp.close = close;
+            sp.unlockAll = unlockAll; sp.unlockLabel = unlockLabel;
             return sp;
         }
     }

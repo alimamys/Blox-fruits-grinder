@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Copy processed sprites into the Unity project at mobile-friendly sizes.
 
-Usage: python3 -I finalize_art.py <sliced dir> <ArtSource dir> <Assets/OopsiePets/Art dir>
+Usage: python3 -I finalize_art.py <sliced dir> <ArtSource dir> <Assets/OopsiePets/Art dir> [--no-backgrounds]
 """
 import glob, os, shutil, sys
 from PIL import Image
@@ -9,7 +9,7 @@ from PIL import Image
 MAX = {  # longest edge in pixels, by name prefix (first match wins)
     "bg_": 1536, "bathtub": 900, "sponge": 420, "brush": 460, "bubble": 256, "hand_pointer": 300,
     "star_icon": 256, "btn_": 256, "sticker_": 420, "acc_": 400, "pet_bed": 448, "toy_": 360,
-    "mud_splat": 300, "fx_": 128, "fur_tuft": 220, "_portrait": 512, "eye_": 256, "mouth_": 256,
+    "mud_splat": 300, "fx_": 128, "fur_tuft": 220, "_portrait": 512, "gift_box": 512, "eye_": 256, "mouth_": 256,
 }
 
 
@@ -37,6 +37,9 @@ def main():
         os.makedirs(os.path.dirname(out), exist_ok=True)
         im.save(out, optimize=True)
         n += 1
+    if "--no-backgrounds" in sys.argv:
+        print("wrote", n)
+        return
     for raw, name in [("bg_clubhouse_raw", "bg_clubhouse"), ("bg_washroom_raw", "bg_washroom"),
                       ("bg_dressup_raw", "bg_dressup"), ("bg_album_raw", "bg_album")]:
         Image.open(os.path.join(src, "Backgrounds", raw + ".png")).convert("RGB").save(

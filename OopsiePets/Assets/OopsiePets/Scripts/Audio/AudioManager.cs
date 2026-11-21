@@ -49,9 +49,11 @@ namespace OopsiePets
             if (splash == null) splash = Synth.Splash();
             if (music == null) music = Synth.MusicBox();
 
-            voices = new AudioClip[3, 6];
-            for (int v = 0; v < 3; v++)
-                for (int k = 0; k < 6; k++)
+            int voiceCount = System.Enum.GetValues(typeof(PetVoice)).Length;
+            int kindCount = System.Enum.GetValues(typeof(VoiceKind)).Length;
+            voices = new AudioClip[voiceCount, kindCount];
+            for (int v = 0; v < voiceCount; v++)
+                for (int k = 0; k < kindCount; k++)
                     voices[v, k] = Synth.Voice((PetVoice)v, (VoiceKind)k);
 
             musicSource = gameObject.AddComponent<AudioSource>();

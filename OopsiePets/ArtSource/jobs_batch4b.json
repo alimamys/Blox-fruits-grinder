@@ -1,0 +1,98 @@
+[
+ {
+  "id": "panda_parts",
+  "out": "Characters/Panda/panda_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Panda/panda_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby panda character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two round lavender ears attached, front view, with a BLANK face: keep the two light lavender eye patches (empty inside, no eyes drawn in them), the tiny dark-plum nose and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby body with the cream belly, lavender arms with front paws together and lavender back feet with pink paw pads, with a smooth rounded neck top; (3) the tiny round cream TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_panda_bamboo",
+  "out": "Stickers/sticker_panda_bamboo_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Panda/panda_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby panda character as the reference (same colors and style), happily hugging a short mint-green bamboo stalk with two leaves, sitting and smiling with eyes closed in joy, a few little hearts around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ },
+ {
+  "id": "piglet_parts",
+  "out": "Characters/Piglet/piglet_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Piglet/piglet_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby piglet character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two floppy triangular ears attached, front view, with a BLANK face: keep the big candy-pink snout with its two nostrils and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby round body with the cream belly, front trotters together and stubby back feet with tiny hooves, with a smooth rounded neck top; (3) the curly corkscrew TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_piglet_puddle",
+  "out": "Stickers/sticker_piglet_puddle_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Piglet/piglet_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby piglet character as the reference (same colors and style), giggling and splashing while sitting in a small round chocolate-brown mud puddle, a few little mud droplets and sparkles flying. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ },
+ {
+  "id": "lamb_parts",
+  "out": "Characters/Lamb/lamb_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Lamb/lamb_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby lamb character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its puffy wool tuft on top and both floppy ears attached, front view, with a BLANK face: keep the smooth peach face, the tiny pink nose and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting fluffy wool body with front legs together and back legs with little lavender hooves, with a smooth rounded neck top; (3) the small fluffy wool TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_lamb_cloud",
+  "out": "Stickers/sticker_lamb_cloud_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Lamb/lamb_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby lamb character as the reference (same colors and style), bouncing happily on a soft fluffy white cloud, little stars around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ },
+ {
+  "id": "unicorn_parts",
+  "out": "Characters/Unicorn/unicorn_parts_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1536x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Unicorn/unicorn_reference.png"
+  ],
+  "prompt": "Using the EXACT same baby unicorn foal character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its spiral horn, both pointy ears and the pastel rainbow mane attached, front view, with a BLANK face: keep the soft pink muzzle with its two tiny nostrils and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby body with front legs together and back legs with little lavender hooves, with a smooth rounded neck top; (3) the flowing pastel rainbow TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background."
+ },
+ {
+  "id": "sticker_unicorn_rainbow",
+  "out": "Stickers/sticker_unicorn_rainbow_raw.png",
+  "model": "gpt-image-1.5",
+  "size": "1024x1024",
+  "quality": "high",
+  "background": "transparent",
+  "refs": [
+   "Characters/Unicorn/unicorn_reference.png"
+  ],
+  "prompt": "A cute die-cut sticker of the EXACT same baby unicorn foal character as the reference (same colors and style), leaping joyfully over a small pastel rainbow, little stars and sparkles around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background."
+ }
+]

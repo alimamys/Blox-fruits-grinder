@@ -19,7 +19,8 @@ namespace OopsiePets
         Quaternion headRot, tailRot, earLRot, earRRot;
 
         // Reaction channels (all 0 at rest)
-        float jump, squash, shakeX, rootTilt, headTilt, headLift, earBoost, tailBoost, vibrate;
+        float jump, squash, shakeX, rootTilt, headTilt, headLift, earBoost, tailBoost, vibrate, spin;
+        Vector3 spinCenter; // middle of the pet in the visual's parent space; spins turn around it
         PetExpression mood = PetExpression.Neutral;
         PetExpression? flash;
         float flashUntil;
@@ -41,6 +42,9 @@ namespace OopsiePets
             tailRot = rig.tail ? rig.tail.localRotation : Quaternion.identity;
             if (rig.earLeft) { earLPos = rig.earLeft.localPosition; earLRot = rig.earLeft.localRotation; }
             if (rig.earRight) { earRPos = rig.earRight.localPosition; earRRot = rig.earRight.localRotation; }
+            var b = rig.bodyRenderer.bounds;
+            if (rig.headRenderer) b.Encapsulate(rig.headRenderer.bounds);
+            spinCenter = transform.InverseTransformPoint(b.center) - visualPos;
             time = Random.Range(0f, 10f);
             nextBlink = Random.Range(1f, 3f);
             nextFidget = Random.Range(3f, 6f);
@@ -60,6 +64,10 @@ namespace OopsiePets
             if (reaction != null) StopCoroutine(reaction);
             ClearChannels();
             reaction = StartCoroutine(Run(r));
+            // Sparkly friends sprinkle stars whenever they react.
+            var fx = FxSpawner.Instance;
+            if (fx && definition && definition.Has(PetQuirk.Sparkly))
+                fx.Burst(HeadWorld + Vector3.up * 0.4f, 5, 2.2f, 0.4f, 0.8f, fx.star, fx.sparkleYellow, fx.sparklePink);
         }
 
         public void PlayRandomTap()
@@ -76,7 +84,7 @@ namespace OopsiePets
 
         void ClearChannels()
         {
-            jump = squash = shakeX = rootTilt = headTilt = headLift = earBoost = tailBoost = vibrate = 0f;
+            jump = squash = shakeX = rootTilt = headTilt = headLift = earBoost = tailBoost = vibrate = spin = 0f;
             flash = null;
         }
 
@@ -200,6 +208,20 @@ namespace OopsiePets
                     });
                     break;
 
+                case PetReaction.Roll:
+                {
+                    // Head over heels: crouch, spring up into a full roll, bouncy landing.
+                    float dir = Random.value < 0.5f ? 1f : -1f;
+                    Flash(PetExpression.Excited, 1.4f);
+                    Voice(VoiceKind.Excited);
+                    yield return Phase(0.12f, k => squash = 0.14f * k);
+                    yield return Phase(0.75f, k => { jump = Ease.Bump(k) * 1.3f; spin = 360f * dir * Ease.InOutSine(k); squash = -0.06f * Ease.Bump(k); earBoost = 2f; });
+                    spin = 0f;
+                    if (FxSpawner.Instance) FxSpawner.Instance.Sparkles(HeadWorld, 6, 0.8f);
+                    yield return Phase(0.22f, k => { squash = 0.12f * Ease.Bump(k); earBoost = 2f * (1f - k); });
+                    break;
+                }
+
                 case PetReaction.Pose:
                     Flash(PetExpression.Tongue, 1.5f);
                     Voice(VoiceKind.Happy);
@@ -252,8 +274,9 @@ namespace OopsiePets
             float sx = 1f + squash - breath * breathe * 0.5f;
             float sy = 1f - squash + breath * breathe;
             var vib = vibrate > 0f ? new Vector3(Random.Range(-vibrate, vibrate), Random.Range(-vibrate, vibrate), 0f) : Vector3.zero;
-            rig.visual.localPosition = visualPos + new Vector3(shakeX, jump, 0f) + vib;
-            rig.visual.localRotation = Quaternion.Euler(0f, 0f, rootTilt);
+            var spinOffset = spin != 0f ? spinCenter - Quaternion.Euler(0f, 0f, spin) * spinCenter : Vector3.zero;
+            rig.visual.localPosition = visualPos + new Vector3(shakeX, jump, 0f) + vib + spinOffset;
+            rig.visual.localRotation = Quaternion.Euler(0f, 0f, rootTilt + spin);
             rig.visual.localScale = new Vector3(visualScale.x * sx, visualScale.y * sy, visualScale.z);
 
             rig.head.localPosition = headPos + new Vector3(0f, headLift + breath * 0.03f, 0f);

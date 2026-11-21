@@ -70,6 +70,11 @@ namespace OopsiePets.EditorTools
             var collar = Acc("collar", "acc_collar", AccessorySlot.Neck, 0.6f, Vector2.zero, 0f, PetReaction.Bounce);
             var crown = Acc("flower_crown", "acc_flower_crown", AccessorySlot.Hat, 0.86f, new Vector2(0f, 0.03f), 0f, PetReaction.Giggle);
             var funny = Acc("funny_glasses", "acc_funny_glasses", AccessorySlot.Eyes, 0.9f, new Vector2(0f, 0.02f), 0f, PetReaction.Giggle);
+            // Presents the friends bring when they jump out of the gift box.
+            var royal = Acc("crown", "acc_crown", AccessorySlot.Hat, 0.5f, new Vector2(0f, 0.08f), 0f, PetReaction.Pose);
+            var bowTie = Acc("bow_tie", "acc_bow_tie", AccessorySlot.Neck, 0.42f, new Vector2(0f, 0.02f), 0f, PetReaction.Bounce);
+            var starClip = Acc("star_clip", "acc_star_clip", AccessorySlot.HeadSide, 0.34f, Vector2.zero, -12f, PetReaction.Wiggle);
+            var beanie = Acc("beanie", "acc_beanie", AccessorySlot.Hat, 0.8f, new Vector2(0f, -0.02f), 0f, PetReaction.Giggle);
 
             var sPuppy = Sticker("happy_puppy", "sticker_puppy_happy");
             var sKitten = Sticker("sleepy_kitten", "sticker_kitten_sleeping");
@@ -78,13 +83,19 @@ namespace OopsiePets.EditorTools
             var sRainbow = Sticker("rainbow", "sticker_rainbow");
             var sStar = Sticker("star", "sticker_star");
             var sHeart = Sticker("heart", "sticker_heart");
+            var sPanda = Sticker("panda_bamboo", "sticker_panda_bamboo");
+            var sPiglet = Sticker("piglet_puddle", "sticker_piglet_puddle");
+            var sLamb = Sticker("lamb_cloud", "sticker_lamb_cloud");
+            var sUnicorn = Sticker("unicorn_rainbow", "sticker_unicorn_rainbow");
 
             var pets = new Dictionary<string, PetDefinition>();
             foreach (var rp in rig.pets)
             {
                 var def = GetOrCreate<PetDefinition>($"{Data}/Pets/{rp.id}.asset");
                 def.id = rp.id;
-                def.portrait = S($"Characters/{rp.folder}/{rp.id}_portrait");
+                // Portraits stay in Art/ as references but are not shown in the game, so they are not
+                // linked here (that keeps ~6 MB of textures out of every build).
+                def.portrait = null;
                 def.prefab = BuildPetPrefab(rp, face);
                 ColorUtility.TryParseHtmlString("#" + rp.furTint, out var tint);
                 def.furTint = tint;
@@ -118,9 +129,52 @@ namespace OopsiePets.EditorTools
             bunny.sticker = sBunny;
             bunny.accessoryReactions = new List<AccessoryReaction> { new AccessoryReaction { accessory = bow, reaction = PetReaction.EarWiggle }, new AccessoryReaction { accessory = crown, reaction = PetReaction.Wiggle } };
 
+            kitten.quirks = PetQuirk.GiantSneezeBubble;
+            bunny.quirks = PetQuirk.EarBubbles;
+            puppy.quirks = PetQuirk.None;
+            foreach (var p in new[] { puppy, kitten, bunny }) { p.startsUnlocked = true; p.unlockOrder = 0; p.giftAccessory = null; }
+
+            // Friends earned from the gift box, in arrival order. Each brings a present for dress-up.
+            var panda = pets["panda"];
+            panda.displayName = "Bao"; panda.voice = PetVoice.Panda; panda.voicePitch = 1f;
+            panda.tapReactions = new List<PetReaction> { PetReaction.Roll, PetReaction.Bounce, PetReaction.Giggle, PetReaction.HeadTilt, PetReaction.Sneeze };
+            panda.favoriteReaction = PetReaction.Roll;
+            panda.tailWagSpeed = 4f; panda.tailWagAngle = 10f; panda.earSwayAngle = 0f; panda.earSwaySpeed = 1f;
+            panda.quirks = PetQuirk.Somersault;
+            panda.sticker = sPanda; panda.startsUnlocked = false; panda.unlockOrder = 1; panda.giftAccessory = bowTie;
+            panda.accessoryReactions = new List<AccessoryReaction> { new AccessoryReaction { accessory = funny, reaction = PetReaction.Roll } };
+
+            var piglet = pets["piglet"];
+            piglet.displayName = "Rosie"; piglet.voice = PetVoice.Piglet; piglet.voicePitch = 1f;
+            piglet.tapReactions = new List<PetReaction> { PetReaction.Wiggle, PetReaction.Giggle, PetReaction.Bounce, PetReaction.Surprised, PetReaction.Sneeze };
+            piglet.favoriteReaction = PetReaction.Wiggle;
+            piglet.tailWagSpeed = 9f; piglet.tailWagAngle = 22f; piglet.earSwayAngle = 0f; piglet.earSwaySpeed = 1f;
+            piglet.quirks = PetQuirk.MudLover;
+            piglet.sticker = sPiglet; piglet.startsUnlocked = false; piglet.unlockOrder = 2; piglet.giftAccessory = starClip;
+            piglet.accessoryReactions = new List<AccessoryReaction> { new AccessoryReaction { accessory = sun, reaction = PetReaction.Pose } };
+
+            var lamb = pets["lamb"];
+            lamb.displayName = "Cotton"; lamb.voice = PetVoice.Lamb; lamb.voicePitch = 1f;
+            lamb.tapReactions = new List<PetReaction> { PetReaction.Bounce, PetReaction.HeadTilt, PetReaction.Giggle, PetReaction.Jump, PetReaction.Shake };
+            lamb.favoriteReaction = PetReaction.Bounce;
+            lamb.tailWagSpeed = 6f; lamb.tailWagAngle = 9f; lamb.earSwayAngle = 0f; lamb.earSwaySpeed = 1f;
+            lamb.quirks = PetQuirk.ExtraFluffy;
+            lamb.sticker = sLamb; lamb.startsUnlocked = false; lamb.unlockOrder = 3; lamb.giftAccessory = beanie;
+            lamb.accessoryReactions = new List<AccessoryReaction> { new AccessoryReaction { accessory = crown, reaction = PetReaction.Wiggle } };
+
+            var unicorn = pets["unicorn"];
+            unicorn.displayName = "Sparkle"; unicorn.voice = PetVoice.Unicorn; unicorn.voicePitch = 1f;
+            unicorn.tapReactions = new List<PetReaction> { PetReaction.Pose, PetReaction.Jump, PetReaction.Giggle, PetReaction.HeadTilt, PetReaction.Bounce };
+            unicorn.favoriteReaction = PetReaction.Pose;
+            unicorn.tailWagSpeed = 2.2f; unicorn.tailWagAngle = 10f; unicorn.earSwayAngle = 0f; unicorn.earSwaySpeed = 1f;
+            unicorn.quirks = PetQuirk.Sparkly;
+            unicorn.sticker = sUnicorn; unicorn.startsUnlocked = false; unicorn.unlockOrder = 4; unicorn.giftAccessory = royal;
+            unicorn.accessoryReactions = new List<AccessoryReaction> { new AccessoryReaction { accessory = royal, reaction = PetReaction.Pose } };
+
             sPuppy.pet = puppy; sKitten.pet = kitten; sBunny.pet = bunny;
+            sPanda.pet = panda; sPiglet.pet = piglet; sLamb.pet = lamb; sUnicorn.pet = unicorn;
             foreach (var p in pets.Values) EditorUtility.SetDirty(p);
-            foreach (var s in new[] { sPuppy, sKitten, sBunny }) EditorUtility.SetDirty(s);
+            foreach (var s in new[] { sPuppy, sKitten, sBunny, sPanda, sPiglet, sLamb, sUnicorn }) EditorUtility.SetDirty(s);
 
             var starter = GetOrCreate<ContentPack>($"{Data}/Packs/StarterPack.asset");
             starter.id = "starter"; starter.displayName = "Starter Clubhouse"; starter.isFree = true; starter.futureProductId = "";
@@ -128,6 +182,14 @@ namespace OopsiePets.EditorTools
             starter.accessories = new List<AccessoryDefinition> { hat, bow, sun, collar, crown, funny };
             starter.stickers = new List<StickerDefinition> { sPuppy, sKitten, sBunny, sPaw, sRainbow, sStar, sHeart };
             EditorUtility.SetDirty(starter);
+
+            // Free: these friends are earned by playing (hearts in the gift box), never bought.
+            var friends = GetOrCreate<ContentPack>($"{Data}/Packs/FriendsPack.asset");
+            friends.id = "friends"; friends.displayName = "Clubhouse Friends"; friends.isFree = true; friends.futureProductId = "";
+            friends.pets = new List<PetDefinition> { panda, piglet, lamb, unicorn };
+            friends.accessories = new List<AccessoryDefinition> { bowTie, starClip, beanie, royal };
+            friends.stickers = new List<StickerDefinition> { sPanda, sPiglet, sLamb, sUnicorn };
+            EditorUtility.SetDirty(friends);
 
             // Future paid packs: empty, locked placeholders that document the content model. They are
             // never shown to children and contain no purchase code.
@@ -141,7 +203,7 @@ namespace OopsiePets.EditorTools
             }
 
             var db = GetOrCreate<ContentDatabase>($"{Data}/ContentDatabase.asset");
-            db.packs = new List<ContentPack> { starter };
+            db.packs = new List<ContentPack> { starter, friends };
             db.packs.AddRange(future);
             db.defaultFace = face;
             EditorUtility.SetDirty(db);

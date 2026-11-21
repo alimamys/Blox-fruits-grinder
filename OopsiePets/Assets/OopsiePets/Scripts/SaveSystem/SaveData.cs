@@ -7,13 +7,15 @@ namespace OopsiePets
     [Serializable]
     public class SaveData
     {
-        public const int CurrentVersion = 1;
+        public const int CurrentVersion = 2;
 
         public int version = CurrentVersion;
         public List<string> stickers = new List<string>();
         public List<string> unlockedPets = new List<string>();
         public List<PetSave> pets = new List<PetSave>();
         public List<string> decorations = new List<string>();
+        [UnityEngine.Tooltip("Hearts collected toward the next friend in the gift box (version 2+).")]
+        public int giftHearts;
         public Settings settings = new Settings();
 
         [Serializable]
@@ -50,6 +52,8 @@ namespace OopsiePets
             settings ??= new Settings();
             settings.musicVolume = Clamp01(settings.musicVolume);
             settings.soundVolume = Clamp01(settings.soundVolume);
+            unlockedPets.RemoveAll(string.IsNullOrEmpty);
+            giftHearts = Math.Max(0, Math.Min(FriendGiftRules.HeartsPerFriend, giftHearts));
             pets.RemoveAll(p => p == null || string.IsNullOrEmpty(p.petId));
             foreach (var p in pets)
             {

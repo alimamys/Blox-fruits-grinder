@@ -16,9 +16,9 @@ namespace OopsiePets.EditorTools
         [MenuItem("Oopsie Pets/Build/Web (WebGL)")]
         public static void WebGL()
         {
-            // Plays from any static host: gzip files that the page can unpack itself if the server
-            // does not send Content-Encoding headers.
-            PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
+            // Plays from any static host: Brotli files (smaller than gzip) that the page can unpack itself
+            // if the server does not send Content-Encoding headers.
+            PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Brotli;
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.dataCaching = false;
             PlayerSettings.WebGL.nameFilesAsHashes = false;

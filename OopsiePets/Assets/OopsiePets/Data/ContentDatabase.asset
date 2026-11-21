@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.ContentDatabase
   packs:
   - {fileID: 11400000, guid: 347b67bd13bd5bff382557edaf7a17db, type: 2}
+  - {fileID: 11400000, guid: e4605780a072b03b492228c411b345de, type: 2}
   - {fileID: 11400000, guid: d443dd38bbe419499a9bac9dc12814c8, type: 2}
   - {fileID: 11400000, guid: 727ea82914fb643c091c00c85e07b389, type: 2}
   - {fileID: 11400000, guid: 6c3adb4f703511911b5bd4ffe7388fbd, type: 2}

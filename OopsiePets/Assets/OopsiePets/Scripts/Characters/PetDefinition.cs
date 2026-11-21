@@ -44,8 +44,19 @@ namespace OopsiePets
         public float earSwaySpeed = 1.2f;
         public float breathe = 0.025f;
 
+        [Header("Surprises")]
+        public PetQuirk quirks;
+
         [Header("Progression")]
         public StickerDefinition sticker;
+        [Tooltip("Lives in the clubhouse from the start. Otherwise the child earns this friend from the gift box.")]
+        public bool startsUnlocked = true;
+        [Tooltip("Earned friends arrive in this order (lowest first).")]
+        public int unlockOrder;
+        [Tooltip("A present this friend brings when it joins (also unlocks it in dress-up).")]
+        public AccessoryDefinition giftAccessory;
+
+        public bool Has(PetQuirk q) => (quirks & q) != 0;
 
         public PetReaction ReactionFor(AccessoryDefinition acc)
         {

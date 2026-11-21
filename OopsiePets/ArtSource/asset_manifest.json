@@ -369,6 +369,227 @@
       "style_prefix": "STYLE",
       "seconds": 25.9,
       "ok": true
+    },
+    "panda_reference": {
+      "id": "panda_reference",
+      "file": "Characters/Panda/panda_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby panda named Bao. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height) with two small round ears on top. Pastel panda colors: fluffy cream-white fur (#FFF6E5) with soft lavender (#B9A3C9) patches instead of black: lavender round ears, lavender oval patches around the eyes, lavender arms and lavender legs. Big glossy dark-plum oval eyes with two white highlights sitting inside the light lavender eye patches, tiny dark-plum nose, small happy smile, rosy pink cheek blush. Chubby pear-shaped body with a cream belly, front paws together, stubby back feet with pink paw pads, a tiny round cream tail peeking out on the right side. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 27.1,
+      "ok": true
+    },
+    "piglet_reference": {
+      "id": "piglet_reference",
+      "file": "Characters/Piglet/piglet_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby piglet named Rosie. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height) with two soft triangular ears that flop forward at the tips, warm rosy peach-pink skin (#FFC9C2) with a cream (#FFF6E5) belly, a big round snout in deeper candy pink (#FF9FB5) with two little oval nostrils, big glossy dark-plum oval eyes with two white highlights, small happy smile under the snout, rosy cheek blush. Chubby round pear-shaped body, front trotters together, stubby back feet with tiny hooves, a curly corkscrew tail on the right side. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 29.8,
+      "ok": true
+    },
+    "lamb_reference": {
+      "id": "lamb_reference",
+      "file": "Characters/Lamb/lamb_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby lamb named Cotton. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height) with a smooth soft peach (#FFD6BA) face and a big puffy cloud-shaped tuft of curly cream-white wool (#FFF6E5) on top of the head, two small floppy peach ears sticking out sideways, big glossy dark-plum oval eyes with two white highlights, tiny pink nose, small happy smile, rosy cheek blush. Chubby round body made of fluffy bumpy cream-white wool like a cloud, with lavender-tinted wool shading, front legs together with little lavender hooves, stubby back legs with lavender hooves, a small fluffy wool tail on the right side. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 28.8,
+      "ok": true
+    },
+    "unicorn_reference": {
+      "id": "unicorn_reference",
+      "file": "Characters/Unicorn/unicorn_reference.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Puppy/puppy_reference.png"
+      ],
+      "prompt": "Create a NEW original character drawn in EXACTLY the same art style, outline weight, shading, eye style, proportions and pose as the reference puppy: an adorable baby unicorn foal named Sparkle. Full body, front view, sitting upright, perfectly symmetrical, facing the viewer. Big round head (about 55% of total height) with a small soft-yellow (#FFF1A8) spiral horn on the forehead, two small pointy ears with pink inner ears, a fluffy pastel rainbow mane (pink #FFC8DD, lavender #CDB4DB, mint #B9F3D9, baby blue #BDE0FE) framing the top of the head, cream-white coat (#FFF6E5), a soft pink muzzle with two tiny nostrils, big glossy dark-plum oval eyes with two white highlights, small happy smile, rosy cheek blush. Chubby pear-shaped body, front legs together with little lavender hooves, stubby back legs with lavender hooves, a flowing pastel rainbow tail on the right side. Single character centered, isolated on a fully transparent background, no ground shadow.",
+      "style_prefix": "STYLE",
+      "seconds": 30.7,
+      "ok": true
+    },
+    "gift_box": {
+      "id": "gift_box",
+      "file": "Objects/gift_box_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "A big cute surprise present box for a preschool pet game, drawn as TWO SEPARATE pieces side by side with very large empty space between them and a wide empty margin to every image edge: (1) LEFT: the square box base WITHOUT its lid, straight front view with a hint of the top opening, pastel pink box with cream polka dots and a mint ribbon running down the front center; (2) RIGHT: the matching lid alone, a little wider than the box, pastel pink with cream polka dots, the mint ribbon across its front and a big puffy lavender satin bow on top. Chunky, rounded, soft. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 38.7,
+      "ok": true
+    },
+    "accessories_sheet_2": {
+      "id": "accessories_sheet_2",
+      "file": "Accessories/accessories_sheet_2_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [],
+      "prompt": "Sprite sheet of 4 cute pet accessories for a preschool dress-up game, each drawn front-facing exactly as it would be worn by a chibi baby animal seen from the front, arranged in a single row left to right with generous empty space between them: 1) a small golden-yellow royal crown with five rounded points and little pastel gem dots in pink, mint and baby blue, 2) a turquoise bow tie with white polka dots, 3) a star-shaped hair clip in soft yellow with a tiny white shine, 4) a cozy knitted beanie hat in mint with a pink pom-pom on top, front view as worn on a head. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 33.5,
+      "ok": true
+    },
+    "panda_parts": {
+      "id": "panda_parts",
+      "file": "Characters/Panda/panda_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Panda/panda_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby panda character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two round lavender ears attached, front view, with a BLANK face: keep the two light lavender eye patches (empty inside, no eyes drawn in them), the tiny dark-plum nose and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby body with the cream belly, lavender arms with front paws together and lavender back feet with pink paw pads, with a smooth rounded neck top; (3) the tiny round cream TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 43.9,
+      "ok": true
+    },
+    "sticker_panda_bamboo": {
+      "id": "sticker_panda_bamboo",
+      "file": "Stickers/sticker_panda_bamboo_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Panda/panda_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby panda character as the reference (same colors and style), happily hugging a short mint-green bamboo stalk with two leaves, sitting and smiling with eyes closed in joy, a few little hearts around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 26.8,
+      "ok": true
+    },
+    "piglet_parts": {
+      "id": "piglet_parts",
+      "file": "Characters/Piglet/piglet_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Piglet/piglet_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby piglet character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its two floppy triangular ears attached, front view, with a BLANK face: keep the big candy-pink snout with its two nostrils and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby round body with the cream belly, front trotters together and stubby back feet with tiny hooves, with a smooth rounded neck top; (3) the curly corkscrew TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 41.0,
+      "ok": true
+    },
+    "sticker_piglet_puddle": {
+      "id": "sticker_piglet_puddle",
+      "file": "Stickers/sticker_piglet_puddle_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Piglet/piglet_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby piglet character as the reference (same colors and style), giggling and splashing while sitting in a small round chocolate-brown mud puddle, a few little mud droplets and sparkles flying. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 26.0,
+      "ok": true
+    },
+    "lamb_parts": {
+      "id": "lamb_parts",
+      "file": "Characters/Lamb/lamb_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Lamb/lamb_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby lamb character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its puffy wool tuft on top and both floppy ears attached, front view, with a BLANK face: keep the smooth peach face, the tiny pink nose and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting fluffy wool body with front legs together and back legs with little lavender hooves, with a smooth rounded neck top; (3) the small fluffy wool TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 32.1,
+      "ok": true
+    },
+    "sticker_lamb_cloud": {
+      "id": "sticker_lamb_cloud",
+      "file": "Stickers/sticker_lamb_cloud_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Lamb/lamb_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby lamb character as the reference (same colors and style), bouncing happily on a soft fluffy white cloud, little stars around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 30.2,
+      "ok": true
+    },
+    "unicorn_parts": {
+      "id": "unicorn_parts",
+      "file": "Characters/Unicorn/unicorn_parts_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1536x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Unicorn/unicorn_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby unicorn foal character as the reference image (identical colors, outline weight, shading and proportions), draw an animation rig parts sheet with 3 SEPARATE pieces arranged left to right, each complete and cleanly closed with its own outline, with very large empty space between them and a wide empty margin to every image edge (nothing touches the edges): (1) the HEAD with its spiral horn, both pointy ears and the pastel rainbow mane attached, front view, with a BLANK face: keep the soft pink muzzle with its two tiny nostrils and the pink cheek blush, but absolutely NO eyes, NO eyebrows and NO mouth; (2) the BODY alone without head and without tail: the sitting chubby body with front legs together and back legs with little lavender hooves, with a smooth rounded neck top; (3) the flowing pastel rainbow TAIL alone. Same scale for all pieces as in the reference. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 33.2,
+      "ok": true
+    },
+    "sticker_unicorn_rainbow": {
+      "id": "sticker_unicorn_rainbow",
+      "file": "Stickers/sticker_unicorn_rainbow_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Unicorn/unicorn_reference.png"
+      ],
+      "prompt": "A cute die-cut sticker of the EXACT same baby unicorn foal character as the reference (same colors and style), leaping joyfully over a small pastel rainbow, little stars and sparkles around. Thick white sticker border around the whole design and a soft drop shadow, glossy. Centered with margin, isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 30.1,
+      "ok": true
+    },
+    "unicorn_head": {
+      "id": "unicorn_head",
+      "file": "Characters/Unicorn/unicorn_head_raw.png",
+      "model": "gpt-image-1.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "background": "transparent",
+      "refs": [
+        "Characters/Unicorn/unicorn_reference.png"
+      ],
+      "prompt": "Using the EXACT same baby unicorn character as the reference image (identical colors, outline weight, shading and proportions), draw ONLY its HEAD, front view, with the spiral horn, both pointy ears and the fluffy pastel rainbow mane attached (the mane stays close around the head and does not hang far down). The face must be BLANK: keep the soft pink muzzle with its two tiny nostrils and the two pink cheek blush ovals, but absolutely NO eyes, NO eyebrows and NO mouth. The head is centered and fully inside the image with a wide empty margin on every side; nothing touches the image edges. Isolated on a transparent background.",
+      "style_prefix": "STYLE",
+      "seconds": 23.2,
+      "ok": true
     }
   }
 }

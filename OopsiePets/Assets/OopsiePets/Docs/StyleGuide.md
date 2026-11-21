@@ -39,6 +39,13 @@ In code, every color comes from `Scripts/Core/Palette.cs`.
   identically well.
 - **Accessory anchors:** `Hat` (top of head), `Eyes` (eye line), `Neck` (head/body seam),
   `HeadSide` (bow, upper-right of head).
+- **Cast:** starters Biscuit the puppy (cream/peach), Mochi the kitten (lavender), Clover the
+  bunny (pink). Friends earned from the gift box, each drawn from the puppy reference so the style
+  matches: Bao the panda (cream with lavender patches instead of black), Rosie the piglet (rosy
+  peach with a candy-pink snout), Cotton the lamb (peach face, cream cloud wool), Sparkle the
+  unicorn foal (cream coat, pastel rainbow mane and tail, soft-yellow horn).
+- **Ears that stay on the head:** kitten, panda, piglet, lamb and unicorn ears are part of the
+  head sprite (they tilt with the head); only puppy and bunny ears are separate animated layers.
 
 ## Animation conventions (code-driven, `PetAnimator`)
 - Idle: breathing squash-stretch on body (±2.5%, 2.2 s), head bob, blink every 2–5 s,

@@ -11,8 +11,8 @@
      "x": 150,
      "y": 70,
      "scale": 1.05,
-     "pivotX": 0.15,
-     "pivotY": 0.2,
+     "pivotX": 0.14738,
+     "pivotY": 0.19783,
      "order": 1,
      "rot": 0
     },
@@ -22,7 +22,7 @@
      "x": 0,
      "y": 0,
      "scale": 1.15,
-     "pivotX": 0.5,
+     "pivotX": 0.49868,
      "pivotY": 0.0,
      "order": 2,
      "rot": 0
@@ -33,8 +33,8 @@
      "x": 0,
      "y": 505,
      "scale": 0.92,
-     "pivotX": 0.5,
-     "pivotY": 0.5,
+     "pivotX": 0.49823,
+     "pivotY": 0.49712,
      "order": 3,
      "rot": 0
     },
@@ -45,7 +45,7 @@
      "y": 690,
      "scale": 1.35,
      "pivotX": 0.62,
-     "pivotY": 0.93,
+     "pivotY": 0.92663,
      "order": 4,
      "rot": 0
     },
@@ -55,8 +55,8 @@
      "x": 225,
      "y": 690,
      "scale": 1.35,
-     "pivotX": 0.38,
-     "pivotY": 0.93,
+     "pivotX": 0.37525,
+     "pivotY": 0.92663,
      "order": 4,
      "rot": 0
     }
@@ -96,7 +96,7 @@
      "x": 120,
      "y": 40,
      "scale": 1.05,
-     "pivotX": 0.15,
+     "pivotX": 0.14926,
      "pivotY": 0.1,
      "order": 1,
      "rot": 0
@@ -107,7 +107,7 @@
      "x": 0,
      "y": 0,
      "scale": 1.1,
-     "pivotX": 0.5,
+     "pivotX": 0.49559,
      "pivotY": 0.0,
      "order": 2,
      "rot": 0
@@ -118,7 +118,7 @@
      "x": 0,
      "y": 500,
      "scale": 1.3,
-     "pivotX": 0.5,
+     "pivotX": 0.4988,
      "pivotY": 0.5,
      "order": 3,
      "rot": 0
@@ -159,8 +159,8 @@
      "x": -85,
      "y": 600,
      "scale": 1.2,
-     "pivotX": 0.5,
-     "pivotY": 0.05,
+     "pivotX": 0.49405,
+     "pivotY": 0.04982,
      "order": 0,
      "rot": 12
     },
@@ -171,7 +171,7 @@
      "y": 600,
      "scale": 1.2,
      "pivotX": 0.5,
-     "pivotY": 0.05,
+     "pivotY": 0.04982,
      "order": 0,
      "rot": -12
     },
@@ -181,8 +181,8 @@
      "x": 185,
      "y": 60,
      "scale": 1.0,
-     "pivotX": 0.2,
-     "pivotY": 0.3,
+     "pivotX": 0.1973,
+     "pivotY": 0.29786,
      "order": 1,
      "rot": 0
     },
@@ -192,7 +192,7 @@
      "x": 0,
      "y": 0,
      "scale": 1.1,
-     "pivotX": 0.5,
+     "pivotX": 0.49632,
      "pivotY": 0.0,
      "order": 2,
      "rot": 0
@@ -203,8 +203,8 @@
      "x": 0,
      "y": 440,
      "scale": 1.35,
-     "pivotX": 0.5,
-     "pivotY": 0.5,
+     "pivotX": 0.49706,
+     "pivotY": 0.49824,
      "order": 3,
      "rot": 0
     }
@@ -232,6 +232,258 @@
    ],
    "headWidth": 430,
    "furTint": "FFD9E8"
+  },
+  {
+   "id": "panda",
+   "folder": "Panda",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "panda_tail",
+     "x": 180,
+     "y": 55,
+     "scale": 1.506,
+     "pivotX": 0.29444,
+     "pivotY": 0.39167,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "panda_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.506,
+     "pivotX": 0.49853,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "panda_head",
+     "x": -0.9,
+     "y": 510.6,
+     "scale": 1.259,
+     "pivotX": 0.523,
+     "pivotY": 0.49849,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 107.0,
+   "eyeY": -36.4,
+   "eyeScale": 0.8,
+   "mouthY": -101.4,
+   "mouthScale": 0.5,
+   "hat": [
+    0,
+    150
+   ],
+   "eyes": [
+    0,
+    -36.4
+   ],
+   "side": [
+    145,
+    120
+   ],
+   "neck": [
+    0,
+    -198
+   ],
+   "headWidth": 430,
+   "furTint": "FFF8EE"
+  },
+  {
+   "id": "piglet",
+   "folder": "Piglet",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "piglet_tail",
+     "x": 205,
+     "y": 95,
+     "scale": 0.98,
+     "pivotX": 0.11909,
+     "pivotY": 0.49569,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "piglet_body",
+     "x": 0,
+     "y": 0,
+     "scale": 0.98,
+     "pivotX": 0.49889,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "piglet_head",
+     "x": 0.5,
+     "y": 497.3,
+     "scale": 1.043,
+     "pivotX": 0.49857,
+     "pivotY": 0.49752,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 124.6,
+   "eyeY": -8.6,
+   "eyeScale": 0.82,
+   "mouthY": -117.3,
+   "mouthScale": 0.561,
+   "hat": [
+    0,
+    168
+   ],
+   "eyes": [
+    0,
+    -8.6
+   ],
+   "side": [
+    150,
+    140
+   ],
+   "neck": [
+    0,
+    -198
+   ],
+   "headWidth": 440,
+   "furTint": "FFD9D2"
+  },
+  {
+   "id": "lamb",
+   "folder": "Lamb",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "lamb_tail",
+     "x": 175,
+     "y": 70,
+     "scale": 0.997,
+     "pivotX": 0.24507,
+     "pivotY": 0.43945,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "lamb_body",
+     "x": 0,
+     "y": 0,
+     "scale": 0.997,
+     "pivotX": 0.49731,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "lamb_head",
+     "x": 0.4,
+     "y": 477.0,
+     "scale": 1.241,
+     "pivotX": 0.5034,
+     "pivotY": 0.49629,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 93.0,
+   "eyeY": -72.0,
+   "eyeScale": 0.7,
+   "mouthY": -139.6,
+   "mouthScale": 0.551,
+   "hat": [
+    0,
+    185
+   ],
+   "eyes": [
+    0,
+    -72.0
+   ],
+   "side": [
+    120,
+    135
+   ],
+   "neck": [
+    0,
+    -228
+   ],
+   "headWidth": 400,
+   "furTint": "FFF8EE"
+  },
+  {
+   "id": "unicorn",
+   "folder": "Unicorn",
+   "mouth": "mouth_smile",
+   "parts": [
+    {
+     "name": "tail",
+     "file": "unicorn_tail",
+     "x": 150,
+     "y": 250,
+     "scale": 1.246,
+     "pivotX": 0.15,
+     "pivotY": 0.74682,
+     "order": 1,
+     "rot": 0
+    },
+    {
+     "name": "body",
+     "file": "unicorn_body",
+     "x": 0,
+     "y": 0,
+     "scale": 1.246,
+     "pivotX": 0.49709,
+     "pivotY": 0.0,
+     "order": 2,
+     "rot": 0
+    },
+    {
+     "name": "head",
+     "file": "unicorn_head",
+     "x": -0.1,
+     "y": 548.2,
+     "scale": 0.849,
+     "pivotX": 0.46995,
+     "pivotY": 0.5,
+     "order": 3,
+     "rot": 0
+    }
+   ],
+   "eyeDx": 101.6,
+   "eyeY": -103.3,
+   "eyeScale": 0.8,
+   "mouthY": -193.7,
+   "mouthScale": 0.5,
+   "hat": [
+    0,
+    150
+   ],
+   "eyes": [
+    0,
+    -103.3
+   ],
+   "side": [
+    130,
+    115
+   ],
+   "neck": [
+    0,
+    -250
+   ],
+   "headWidth": 400,
+   "furTint": "FFF4F8"
   }
  ]
 }

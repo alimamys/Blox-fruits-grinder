@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Slice generated sprite sheets into separate trimmed sprites.
 
-Usage: python3 -I slice_sheets.py <ArtSource dir> <out dir>
+Usage: python3 -I slice_sheets.py <ArtSource dir> <out dir> [name filter ...]
+With filters, only sheets/singles whose source path contains one of the filters are processed
+(e.g. "Panda" "gift_box"), so earlier, hand-cleaned sprites are not regenerated.
 Each sheet is split into its alpha "islands" (nearby bits merged by dilation), ordered
 row-major, and saved under the names listed in SHEETS.
 """
@@ -21,6 +23,13 @@ SHEETS = {
     "Characters/Puppy/puppy_parts_raw.png": ("Characters/Puppy", ["_puppy_head_clipped", "puppy_body", "puppy_ear_left", "puppy_ear_right", "puppy_tail"], 6),
     "Characters/Kitten/kitten_parts_raw.png": ("Characters/Kitten", ["kitten_head", "kitten_body", "kitten_tail"], 10),
     "Characters/Bunny/bunny_parts_raw.png": ("Characters/Bunny", ["bunny_head", "bunny_body", "bunny_ear_left", "bunny_ear_right", "bunny_tail"], 8),
+    # Friends earned from the gift box (batch 4)
+    "Characters/Panda/panda_parts_raw.png": ("Characters/Panda", ["panda_head", "panda_body", "panda_tail"], 10),
+    "Characters/Piglet/piglet_parts_raw.png": ("Characters/Piglet", ["piglet_head", "piglet_body", "piglet_tail"], 10),
+    "Characters/Lamb/lamb_parts_raw.png": ("Characters/Lamb", ["lamb_head", "lamb_body", "lamb_tail"], 10),
+    "Characters/Unicorn/unicorn_parts_raw.png": ("Characters/Unicorn", ["_unicorn_head_clipped", "unicorn_body", "unicorn_tail"], 10),
+    "Objects/gift_box_raw.png": ("Objects", ["gift_box_base", "gift_box_lid"], 20),
+    "Accessories/accessories_sheet_2_raw.png": ("Accessories", ["acc_crown", "acc_bow_tie", "acc_star_clip", "acc_beanie"], 14),
 }
 
 SINGLES = {
@@ -37,6 +46,15 @@ SINGLES = {
     "Stickers/sticker_puppy_happy_raw.png": "Stickers/sticker_puppy_happy",
     "Stickers/sticker_kitten_sleeping_raw.png": "Stickers/sticker_kitten_sleeping",
     "Stickers/sticker_bunny_dancing_raw.png": "Stickers/sticker_bunny_dancing",
+    "Characters/Unicorn/unicorn_head_raw.png": "Characters/Unicorn/unicorn_head",
+    "Characters/Panda/panda_reference.png": "Characters/Panda/panda_portrait",
+    "Characters/Piglet/piglet_reference.png": "Characters/Piglet/piglet_portrait",
+    "Characters/Lamb/lamb_reference.png": "Characters/Lamb/lamb_portrait",
+    "Characters/Unicorn/unicorn_reference.png": "Characters/Unicorn/unicorn_portrait",
+    "Stickers/sticker_panda_bamboo_raw.png": "Stickers/sticker_panda_bamboo",
+    "Stickers/sticker_piglet_puddle_raw.png": "Stickers/sticker_piglet_puddle",
+    "Stickers/sticker_lamb_cloud_raw.png": "Stickers/sticker_lamb_cloud",
+    "Stickers/sticker_unicorn_rainbow_raw.png": "Stickers/sticker_unicorn_rainbow",
 }
 
 PAD = 6
@@ -94,8 +112,12 @@ def order_row_major(boxes):
 
 def main():
     src, dst = sys.argv[1], sys.argv[2]
+    only = sys.argv[3:]
+    keep = lambda rel: not only or any(f in rel for f in only)
     report = {}
     for rel, (folder, names, dilate) in SHEETS.items():
+        if not keep(rel):
+            continue
         im = clean_alpha(Image.open(os.path.join(src, rel)).convert("RGBA"))
         lab, boxes = islands(im, dilate)
         if rel.startswith("Characters/"):
@@ -114,6 +136,8 @@ def main():
             piece.save(os.path.join(dst, folder, name + ".png"))
             report[f"{folder}/{name}"] = list(piece.size)
     for rel, name in SINGLES.items():
+        if not keep(rel) or not os.path.exists(os.path.join(src, rel)):
+            continue
         im = trim(clean_alpha(Image.open(os.path.join(src, rel)).convert("RGBA")))
         os.makedirs(os.path.dirname(os.path.join(dst, name)), exist_ok=True)
         im.save(os.path.join(dst, name + ".png"))

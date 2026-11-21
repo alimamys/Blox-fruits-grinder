@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OopsiePets.PetDefinition
   id: bunny
   displayName: Clover
-  portrait: {fileID: 21300000, guid: d5ca11202841ef818b0ffd470b38e927, type: 3}
+  portrait: {fileID: 0}
   prefab: {fileID: 7661610104505249263, guid: 522b1e25b05c6dc73aa8fc5a72f7a852, type: 3}
   voice: 2
   voicePitch: 1.1
@@ -33,4 +33,8 @@ MonoBehaviour:
   earSwayAngle: 3.5
   earSwaySpeed: 0.7
   breathe: 0.025
+  quirks: 2
   sticker: {fileID: 11400000, guid: 50c55335c9831189ebdd250ed29b0981, type: 2}
+  startsUnlocked: 1
+  unlockOrder: 0
+  giftAccessory: {fileID: 0}

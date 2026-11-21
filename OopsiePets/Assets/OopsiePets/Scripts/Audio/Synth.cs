@@ -134,10 +134,17 @@ namespace OopsiePets
             return Make("splash", d);
         }
 
-        /// <summary>Little cartoon voices: a "yip" for the puppy, a "mew" for the kitten, an "eep" for the bunny.</summary>
+        /// <summary>
+        /// Little cartoon voices: a "yip" for the puppy, a "mew" for the kitten, an "eep" for the bunny, a snorty
+        /// "oink" for the piglet, a wobbly "baa" for the lamb, a soft squeak for the panda and a glassy trill for the unicorn.
+        /// </summary>
         public static AudioClip Voice(PetVoice voice, VoiceKind kind)
         {
-            float baseF = voice switch { PetVoice.Puppy => 620f, PetVoice.Kitten => 760f, _ => 900f };
+            float baseF = voice switch
+            {
+                PetVoice.Puppy => 620f, PetVoice.Kitten => 760f, PetVoice.Bunny => 900f, PetVoice.Piglet => 360f,
+                PetVoice.Lamb => 540f, PetVoice.Panda => 500f, PetVoice.Unicorn => 1000f, _ => 900f,
+            };
             switch (kind)
             {
                 case VoiceKind.Giggle:
@@ -207,11 +214,34 @@ namespace OopsiePets
             for (int i = 0; i < n && s + i < d.Length; i++)
             {
                 float t = (float)i / n;
+                float sec = (float)i / Rate;
                 float f = Mathf.Lerp(f0, f1, voice == PetVoice.Kitten ? Ease.InOutSine(t) : t);
                 if (voice == PetVoice.Kitten) f *= 1f + 0.03f * Mathf.Sin(t * 50f); // a little "mew" vibrato
+                else if (voice == PetVoice.Lamb) f *= 1f + 0.025f * Mathf.Sin(2f * Mathf.PI * 9f * sec);
+                else if (voice == PetVoice.Unicorn) f *= 1f + 0.06f * Mathf.Sin(2f * Mathf.PI * 14f * sec); // whinny trill
                 ph += 2f * Mathf.PI * f / Rate;
-                float env = Mathf.Sin(Mathf.PI * Mathf.Pow(t, voice == PetVoice.Puppy ? 0.6f : 1f));
-                float tone = Mathf.Sin(ph) + 0.35f * Mathf.Sin(ph * 2f) + 0.12f * Mathf.Sin(ph * 3f);
+                float env = Mathf.Sin(Mathf.PI * Mathf.Pow(t, voice == PetVoice.Puppy || voice == PetVoice.Piglet ? 0.6f : 1f));
+                float tone;
+                switch (voice)
+                {
+                    case PetVoice.Piglet: // snorty: squared-off wave with a fast grunt flutter
+                        tone = (float)System.Math.Tanh(3f * Mathf.Sin(ph)) * 0.75f + 0.3f * Mathf.Sin(ph * 2f);
+                        env *= 0.65f + 0.35f * Mathf.Sin(2f * Mathf.PI * 38f * sec);
+                        break;
+                    case PetVoice.Lamb: // bleat: rich tone with a wobbling volume
+                        tone = Mathf.Sin(ph) + 0.5f * Mathf.Sin(ph * 2f) + 0.25f * Mathf.Sin(ph * 3f);
+                        env *= 0.6f + 0.4f * Mathf.Sin(2f * Mathf.PI * 9f * sec);
+                        break;
+                    case PetVoice.Panda: // soft and round
+                        tone = Mathf.Sin(ph) + 0.15f * Mathf.Sin(ph * 2f);
+                        break;
+                    case PetVoice.Unicorn: // glassy, with a high shimmer
+                        tone = Mathf.Sin(ph) + 0.2f * Mathf.Sin(ph * 2f) + 0.25f * Mathf.Sin(ph * 4f);
+                        break;
+                    default:
+                        tone = Mathf.Sin(ph) + 0.35f * Mathf.Sin(ph * 2f) + 0.12f * Mathf.Sin(ph * 3f);
+                        break;
+                }
                 d[s + i] += tone * env * amp * 0.6f;
             }
         }

@@ -91,6 +91,8 @@ namespace OopsiePets
 
             if (full)
             {
+                // Every finished visit drops a heart into the friend gift box (shown back in the clubhouse).
+                FriendGiftRules.AwardHeart(GameFlow.Instance.database);
                 // Sticker reward on the dress-up stage, with the pet wearing its outfit.
                 Stage(ActivityKind.DressUp, Get(ActivityKind.DressUp));
                 var sticker = StickerBook.Award(GameFlow.Instance.database, petDef);
