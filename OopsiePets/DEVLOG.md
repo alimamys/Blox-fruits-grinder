@@ -37,6 +37,15 @@ Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or sto
 - **Cow spots** were pale lavender-grey; `tools/recolor_cow_spots.py` darkens them to a soft black
   (head, body, tail tuft check, and the cow's sticker), leaving the feet, pink ears, nose, blush and
   outline as drawn. Run once after `finalize_art.py`/`pad_to_4.py` if the cow is ever re-sliced.
+- **Whole game re-checked** (Play mode, `PlayTest.FullVisit`, fresh save, full version): all 11
+  friends played in unlock order through every step (garden game → shampoo → sponge → bubbles →
+  rinse → dry → brush → teeth, skipped by the bird → dress-up → sticker → home). Each first visit
+  showed and saved that friend's own sticker; the six base friends opened the giraffe, bird, cow and
+  pony, the tenth opened the unicorn. Repeat visits (bird ×4, cow ×1) showed heart, paw, rainbow,
+  star, then the bird's own sticker again; never another friend's. Screenshots of every friend's
+  garden, rinse, teeth, dress-up and reward compared side by side; clubhouse and album (15 stickers)
+  captured. Console: 0 errors, 0 warnings. Web build: soap step finished with real mouse input, no
+  page errors. Android APK built.
 
 ## Star locks for friends earned by playing (2026-11-22)
 So nobody thinks a friend must be bought twice: in the **full version**, the friends that are earned
