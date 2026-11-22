@@ -23,6 +23,21 @@ Menu **Oopsie Pets** in the Editor (or `unity command script eval` with the same
 4. `Oopsie Pets/3. Build Scene` — rewrites `Scenes/OopsiePets_Main.unity` and the build list.
 Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or stop using the builder.
 
+## Fixes (2026-11-22): wrong sticker after a visit, black cow spots, full re-check
+- **A friend's visit showed another friend's sticker** (the bird/"owl" showed the piglet's). Every
+  pet's sticker asset was correct; the cause was `StickerBook.Award`: after the pet's own sticker and
+  all general stickers were collected, it picked from *all* stickers at random, other friends'
+  included. Worse, "completed" (which opens star locks and the rainbow coat) meant "owns that
+  friend's sticker", so a random sticker could count a friend as done without playing it. Now a visit
+  shows the pet's own sticker the first time, then the general stickers (paw, rainbow, star, heart),
+  then its own sticker again, never another friend's; and completion is its own saved flag,
+  `PetSave.completed`, set when a full visit with that pet finishes. Save format version 4: older
+  saves count a pet as completed only if it has its own sticker, a care visit and a finished
+  dress-up (stickers are never taken away).
+- **Cow spots** were pale lavender-grey; `tools/recolor_cow_spots.py` darkens them to a soft black
+  (head, body, tail tuft check, and the cow's sticker), leaving the feet, pink ears, nose, blush and
+  outline as drawn. Run once after `finalize_art.py`/`pad_to_4.py` if the cow is ever re-sliced.
+
 ## Star locks for friends earned by playing (2026-11-22)
 So nobody thinks a friend must be bought twice: in the **full version**, the friends that are earned
 by playing (giraffe, bird, cow, pony, then the unicorn) no longer show a padlock. They wear a big star

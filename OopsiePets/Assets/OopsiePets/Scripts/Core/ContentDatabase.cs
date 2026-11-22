@@ -28,9 +28,27 @@ namespace OopsiePets
                 if (IsPlayable(pet)) yield return pet;
         }
 
-        /// <summary>A pet counts as completed once its own sticker has been earned (a full visit).</summary>
+        /// <summary>A pet counts as completed once a full visit with it has been finished.</summary>
         public static bool IsCompleted(PetDefinition pet) =>
-            pet != null && pet.sticker != null && SaveSystem.Data.stickers.Contains(pet.sticker.id);
+            pet != null && SaveSystem.Data.Pet(pet.id).completed;
+
+        /// <summary>
+        /// Saves before version 4 counted a pet as completed when its sticker was owned, but a repeat visit
+        /// could hand out another friend's sticker. Only pets that were really played through (their own
+        /// sticker, a care visit and dress-up done) count as completed; stickers are never taken away.
+        /// </summary>
+        public void MigrateCompletion(SaveData d)
+        {
+            if (d.loadedVersion >= 4) return;
+            foreach (var pet in AllPets())
+            {
+                var ps = d.Pet(pet.id);
+                if (pet.sticker != null && d.stickers.Contains(pet.sticker.id) && ps.careCount > 0
+                    && ps.completedActivities.Contains((int)ActivityKind.DressUp))
+                    ps.completed = true;
+            }
+            d.loadedVersion = SaveData.CurrentVersion;
+        }
 
         public bool IsPlayable(PetDefinition pet)
         {

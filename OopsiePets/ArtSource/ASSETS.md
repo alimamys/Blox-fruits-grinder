@@ -91,7 +91,8 @@ generated seat); `UI/lock_padlock`, `UI/lock_star_empty`, `UI/lock_star_full` (`
 Processing notes:
 - Model-drawn mouths on the "blank" heads were painted out (`tools/clean_faces.py`): puppy, bunny, lamb, pony.
 - The cow parts sheet clipped the left ear at the image edge; it was rebuilt by mirroring the right ear
-  (`tools/fix_clipped_ear.py`).
+  (`tools/fix_clipped_ear.py`). The cow's spots (parts and sticker) were drawn pale lavender-grey and
+  were darkened to black (`tools/recolor_cow_spots.py`).
 - The first unicorn parts sheet clipped the head at the image edge; the head was regenerated alone
   (`unicorn_head`) and the clipped piece discarded (`_unicorn_head_clipped`).
 - Sprites are padded to multiples of 4 px (`tools/pad_to_4.py`) so they can be GPU-compressed on the

@@ -50,6 +50,8 @@ namespace OopsiePets
             Instance = this;
             Application.targetFrameRate = 60;
             SaveSystem.Load();
+            database.MigrateCompletion(SaveSystem.Data);
+            SaveSystem.Save();
             PetCoat.RainbowMaterial = rainbowMaterial;
 
             albumButton.onClick.AddListener(() => StartCoroutine(Go(Screen.Album, () => album.Refresh())));

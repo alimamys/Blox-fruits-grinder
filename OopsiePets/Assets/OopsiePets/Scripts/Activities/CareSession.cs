@@ -116,6 +116,9 @@ namespace OopsiePets
 
             if (full)
             {
+                // This friend is now completed (it may open a star lock, and offers the rainbow coat).
+                SaveSystem.Data.Pet(petDef.id).completed = true;
+                SaveSystem.Save();
                 // Sticker reward on the dress-up stage, with the pet wearing its outfit.
                 Stage(ActivityKind.DressUp, Get(ActivityKind.DressUp));
                 var sticker = StickerBook.Award(GameFlow.Instance.database, petDef);

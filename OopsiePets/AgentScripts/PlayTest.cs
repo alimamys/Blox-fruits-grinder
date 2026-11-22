@@ -181,6 +181,7 @@ public static class PlayTest
         {
             var p = db.Pet(id.Trim());
             if (p && p.sticker && !SaveSystem.Data.stickers.Contains(p.sticker.id)) SaveSystem.Data.stickers.Add(p.sticker.id);
+            if (p) SaveSystem.Data.Pet(p.id).completed = true;
         }
         SaveSystem.Save();
         GameFlow.Instance.RefreshClubhouse();
@@ -205,6 +206,64 @@ public static class PlayTest
         b.onClick.Invoke();
         await Frames(1800);
         return State();
+    }
+
+    /// <summary>
+    /// One complete visit for a pet, the way the menu's big "play" button starts it: garden, every bath and
+    /// grooming step, dress-up, sticker, home. Screenshots go to <paramref name="shots"/> (prefix). Reports
+    /// each step and which sticker the reward showed.
+    /// </summary>
+    public static async Task<string> FullVisit(string id, string shots)
+    {
+        var f = GameFlow.Instance;
+        var def = f.database.Pet(id);
+        if (!f.database.IsPlayable(def)) return id + " is not playable: " + State();
+        var sb = new StringBuilder(id + ": ");
+        var before = new System.Collections.Generic.List<string>(SaveSystem.Data.stickers);
+        f.StartCare(def, CareSession.FullCare);
+        await Frames(2600);
+        string Kind() => f.care.Current ? f.care.Current.Kind.ToString() : "none";
+        void Shot(string name) => ScreenCapture.CaptureScreenshot($"{shots}_{id}_{name}.png");
+        for (int step = 0; step < 12 && f.Current == GameFlow.Screen.Care; step++)
+        {
+            var k = f.care.Current ? f.care.Current.Kind : (ActivityKind)(-1);
+            string r = k switch
+            {
+                ActivityKind.Outdoor => await PlayOutside(24),
+                ActivityKind.Shampoo => await Shampoo(10),
+                ActivityKind.Wash => await Scrub(12),
+                ActivityKind.Bubbles => await PopBubbles(16),
+                ActivityKind.Rinse => await Rinse(8),
+                ActivityKind.Dry => await DryOff(14),
+                ActivityKind.Brush => await BrushAll(12),
+                ActivityKind.Teeth => await BrushTeeth(10),
+                _ => "",
+            };
+            if (k == ActivityKind.Outdoor || k == ActivityKind.Teeth || k == ActivityKind.Rinse) Shot(k.ToString());
+            if (k == ActivityKind.DressUp)
+            {
+                await Frames(800);
+                Shot("DressUp");
+                var done = GameObject.Find("UI/CareUI/Safe/DressTray/DoneButton");
+                if (done) done.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+                await Frames(4500);
+                var rp = f.care.reward;
+                string shown = rp.sticker && rp.sticker.sprite ? rp.sticker.sprite.name : "none";
+                Shot("Reward");
+                sb.Append($"DressUp ok | reward sticker={shown} own={(def.sticker ? def.sticker.sprite.name : "none")} ");
+                var home = GameObject.Find("UI/Reward/HomeButton");
+                if (home) home.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+                await Frames(3500);
+                break;
+            }
+            bool ok = f.care.Current && f.care.Current.IsComplete;
+            sb.Append($"{k}{(ok ? "" : "(NOT COMPLETE)")} ");
+            if (!ok) return sb + " | stopped: " + State();
+            await Next();
+        }
+        var gained = SaveSystem.Data.stickers.Where(s => !before.Contains(s));
+        sb.Append($"| new stickers=[{string.Join(",", gained)}] completed={ContentDatabase.IsCompleted(def)} screen={f.Current}");
+        return sb.ToString();
     }
 
     public static string Lock(string id)

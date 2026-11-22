@@ -7,9 +7,11 @@ namespace OopsiePets
     [Serializable]
     public class SaveData
     {
-        public const int CurrentVersion = 3;
+        public const int CurrentVersion = 4;
 
         public int version = CurrentVersion;
+        /// <summary>The version the file had when it was loaded (before <see cref="Sanitize"/>), for migrations.</summary>
+        [NonSerialized] public int loadedVersion = CurrentVersion;
         public List<string> stickers = new List<string>();
         public List<string> unlockedPets = new List<string>();
         public List<PetSave> pets = new List<PetSave>();
@@ -38,6 +40,8 @@ namespace OopsiePets
             public bool outfitSet;
             [UnityEngine.Tooltip("Rainbow coat on (offered after the pet's first full visit).")]
             public bool rainbow;
+            [UnityEngine.Tooltip("A full visit with this pet has been finished (version 4+). Unlocks friends and the rainbow coat.")]
+            public bool completed;
         }
 
         public PetSave Pet(string id)
@@ -51,6 +55,7 @@ namespace OopsiePets
         /// <summary>Repairs anything missing after loading an older or partly broken file.</summary>
         public void Sanitize()
         {
+            loadedVersion = version;
             stickers ??= new List<string>();
             unlockedPets ??= new List<string>();
             celebrated ??= new List<string>();

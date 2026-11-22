@@ -5,9 +5,10 @@ using UnityEngine;
 namespace OopsiePets
 {
     /// <summary>
-    /// Awards stickers after a full care session. A pet's own sticker comes first; after that the child
-    /// discovers the other stickers in random order; once everything is collected any sticker can come again.
-    /// No timers, streaks or scarcity.
+    /// Awards a sticker after a full care visit. The first time, it is always the pet's own sticker. After
+    /// that the child finds the general stickers (paw, rainbow, star, heart) in random order, and once those
+    /// are collected the pet's own sticker comes again. A visit never shows another friend's sticker (that
+    /// friend's sticker belongs to finishing that friend). No timers, streaks or scarcity.
     /// </summary>
     public static class StickerBook
     {
@@ -19,10 +20,9 @@ namespace OopsiePets
                 pick = pet.sticker;
             if (pick == null)
             {
-                var all = db.AllStickers().ToList();
-                var missing = all.Where(s => !data.stickers.Contains(s.id) && (s.pet == null || s.pet == pet)).ToList();
-                var pool = missing.Count > 0 ? missing : all;
-                if (pool.Count > 0) pick = pool[Random.Range(0, pool.Count)];
+                var missing = db.AllStickers().Where(s => s != null && s.pet == null && !data.stickers.Contains(s.id)).ToList();
+                if (missing.Count > 0) pick = missing[Random.Range(0, missing.Count)];
+                else pick = pet != null ? pet.sticker : null; // everything found: this friend's own sticker again
             }
             if (pick != null && !data.stickers.Contains(pick.id)) data.stickers.Add(pick.id);
             SaveSystem.Save();
