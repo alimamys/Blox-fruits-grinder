@@ -408,6 +408,8 @@ the garden opens, five taps play it through (muddy, 3 stars, next button); no pa
   (the game collects no data and has no ads, accounts or network use).
 - Cloud container only: Gradle needs the session proxy, set in `~/.gradle/gradle.properties`
   (systemProp.https.proxyHost/Port + trustStore). Not needed on a normal computer.
+  The proxy port changes when the container restarts: `AgentScripts/sync_gradle_proxy.sh` (also run by
+  `restart_editor.sh`) rewrites it; a stale port makes Gradle fail to download the billing library.
 
 ## Running the Editor headless (cloud container notes)
 - `Xvfb :99 -screen 0 1920x1200x24 &` then `AgentScripts/start_editor.sh` (clicks Unity's

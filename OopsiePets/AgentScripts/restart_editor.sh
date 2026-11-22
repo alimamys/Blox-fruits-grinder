@@ -6,6 +6,7 @@ cd "$(dirname "$0")/.."
 export DISPLAY=:99 PATH="$HOME/.local/bin:$PATH"
 pgrep -x Xvfb >/dev/null || (Xvfb :99 -screen 0 1920x1200x24 >/dev/null 2>&1 &)
 sleep 2
+bash AgentScripts/sync_gradle_proxy.sh || true
 nohup bash AgentScripts/start_editor.sh "$PWD" >/dev/null 2>&1 &
 for i in $(seq 1 90); do
   W=$(xdotool search --onlyvisible --name 'Scene Backup Detected' 2>/dev/null | head -1)
