@@ -61,6 +61,13 @@ namespace OopsiePets
 
         void Start()
         {
+            // A purchase that arrives while the settings are closed (an approved "ask a parent" purchase, or
+            // one restored on a new phone) opens the padlocks right away.
+            if (FullVersionStore.Instance)
+                FullVersionStore.Instance.Unlocked += () =>
+                {
+                    if (!settings.IsOpen && Current == Screen.Clubhouse) StartCoroutine(RebuildClubhouse());
+                };
             Show(Screen.Clubhouse);
             // Everyone starts clean; one pet is bored and wants to go play (getting muddy is part of the fun).
             clubhouse.Enter(null);

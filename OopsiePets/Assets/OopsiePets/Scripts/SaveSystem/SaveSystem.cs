@@ -56,9 +56,11 @@ namespace OopsiePets
             }
         }
 
-        public static void Save()
+        /// <summary>Writes the save. Returns false if it could not be written (the purchase flow then
+        /// leaves the store order unconfirmed, so it is delivered again on the next launch).</summary>
+        public static bool Save()
         {
-            if (Data == null) return;
+            if (Data == null) return false;
             try
             {
                 Directory.CreateDirectory(Dir);
@@ -66,10 +68,12 @@ namespace OopsiePets
                 if (File.Exists(MainPath)) File.Copy(MainPath, BackupPath, true);
                 if (File.Exists(MainPath)) File.Delete(MainPath);
                 File.Move(TempPath, MainPath);
+                return true;
             }
             catch (Exception e)
             {
                 Debug.LogWarning($"[OopsiePets] Could not save progress: {e.Message}");
+                return false;
             }
         }
 
@@ -78,8 +82,14 @@ namespace OopsiePets
         {
             // Starting over erases play progress, never what the family owns (the full version).
             var settings = Data?.settings ?? new SaveData.Settings();
-            bool full = Data != null && Data.fullVersion;
-            Data = new SaveData { settings = settings, fullVersion = full };
+            var old = Data;
+            Data = new SaveData { settings = settings };
+            if (old != null)
+            {
+                Data.fullVersion = old.fullVersion;
+                Data.fullVersionSource = old.fullVersionSource;
+                Data.purchaseTransactions = old.purchaseTransactions ?? new System.Collections.Generic.List<string>();
+            }
             Save();
         }
     }

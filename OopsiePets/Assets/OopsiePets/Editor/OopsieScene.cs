@@ -80,6 +80,7 @@ namespace OopsiePets.EditorTools
             // ---------- Systems ----------
             var systems = Node("Systems", null, Vector3.zero);
             var flow = systems.gameObject.AddComponent<GameFlow>();
+            systems.gameObject.AddComponent<FullVersionStore>(); // the full version purchase (Unity IAP)
             flow.database = db;
             flow.face = face;
             systems.gameObject.AddComponent<AudioManager>();
@@ -660,46 +661,59 @@ namespace OopsiePets.EditorTools
             UIKit.Stretch(dim.rectTransform);
             var mid = new Vector2(0.5f, 0.5f);
             var panel = UIKit.Image("Panel", root, S("UI/panel_cream"), Palette.Untinted, true);
-            UIKit.Place(panel.rectTransform, mid, mid, Vector2.zero, new Vector2(880, 1320));
+            UIKit.Place(panel.rectTransform, mid, mid, Vector2.zero, new Vector2(880, 1400));
             var title = UIKit.Text("Title", panel.transform, "Grown-up settings", 64, Palette.Ink);
             UIKit.Place(title.rectTransform, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -60), new Vector2(760, 110));
             var musicLabel = UIKit.Text("MusicLabel", panel.transform, "Music", 52, Palette.Ink);
-            UIKit.Place(musicLabel.rectTransform, mid, mid, new Vector2(0, 430), new Vector2(700, 80));
-            var music = UIKit.Slider("Music", panel.transform, S("UI/slider_track"), S("UI/slider_fill"), S("UI/btn_blank_pink"), new Vector2(0, 345), new Vector2(640, 64));
+            UIKit.Place(musicLabel.rectTransform, mid, mid, new Vector2(0, 485), new Vector2(700, 80));
+            var music = UIKit.Slider("Music", panel.transform, S("UI/slider_track"), S("UI/slider_fill"), S("UI/btn_blank_pink"), new Vector2(0, 405), new Vector2(640, 64));
             var soundLabel = UIKit.Text("SoundLabel", panel.transform, "Sounds", 52, Palette.Ink);
-            UIKit.Place(soundLabel.rectTransform, mid, mid, new Vector2(0, 235), new Vector2(700, 80));
-            var sound = UIKit.Slider("Sound", panel.transform, S("UI/slider_track"), S("UI/slider_fill"), S("UI/btn_blank_pink"), new Vector2(0, 150), new Vector2(640, 64));
+            UIKit.Place(soundLabel.rectTransform, mid, mid, new Vector2(0, 305), new Vector2(700, 80));
+            var sound = UIKit.Slider("Sound", panel.transform, S("UI/slider_track"), S("UI/slider_fill"), S("UI/btn_blank_pink"), new Vector2(0, 225), new Vector2(640, 64));
             var resetImg = UIKit.Image("ResetButton", panel.transform, S("UI/panel_lavender"), Palette.Untinted, true);
-            UIKit.Place(resetImg.rectTransform, mid, mid, new Vector2(0, 10), new Vector2(680, 130));
+            UIKit.Place(resetImg.rectTransform, mid, mid, new Vector2(0, 95), new Vector2(680, 115));
             var reset = resetImg.gameObject.AddComponent<Button>();
             reset.transition = Selectable.Transition.None;
             resetImg.gameObject.AddComponent<CandyButton>();
             var resetLabel = UIKit.Text("Label", resetImg.transform, "Start over", 46, Palette.Ink);
             UIKit.Stretch(resetLabel.rectTransform, 16f);
-            // Full version: a TEST switch in this build (no store, no payment).
+            // Full version: the real store purchase (the web demo uses it as a clearly labelled test switch).
             var unlockImg = UIKit.Image("FullVersionButton", panel.transform, S("UI/panel_lavender"), Palette.Untinted, true);
-            UIKit.Place(unlockImg.rectTransform, mid, mid, new Vector2(0, -150), new Vector2(680, 150));
+            UIKit.Place(unlockImg.rectTransform, mid, mid, new Vector2(0, -55), new Vector2(680, 145));
             var unlockAll = unlockImg.gameObject.AddComponent<Button>();
             unlockAll.transition = Selectable.Transition.None;
             unlockImg.gameObject.AddComponent<CandyButton>();
-            var unlockLabel = UIKit.Text("Label", unlockImg.transform, "Unlock full version (test, no payment)", 40, Palette.Ink);
+            var unlockLabel = UIKit.Text("Label", unlockImg.transform, "Unlock the full version", 40, Palette.Ink);
             UIKit.Stretch(unlockLabel.rectTransform, 18f);
             var restoreImg = UIKit.Image("RestoreButton", panel.transform, S("UI/panel_lavender"), Palette.Untinted, true);
-            UIKit.Place(restoreImg.rectTransform, mid, mid, new Vector2(0, -305), new Vector2(680, 120));
+            UIKit.Place(restoreImg.rectTransform, mid, mid, new Vector2(0, -200), new Vector2(680, 105));
             var restore = restoreImg.gameObject.AddComponent<Button>();
             restore.transition = Selectable.Transition.None;
             restoreImg.gameObject.AddComponent<CandyButton>();
             var restoreLabel = UIKit.Text("Label", restoreImg.transform, "Restore purchases", 42, Palette.Ink);
             UIKit.Stretch(restoreLabel.rectTransform, 16f);
+            var storeStatus = UIKit.Text("StoreStatus", panel.transform, "", 34, Palette.Ink);
+            storeStatus.fontStyle = FontStyles.Normal;
+            UIKit.Place(storeStatus.rectTransform, mid, mid, new Vector2(0, -290), new Vector2(760, 64));
+            // Editor and development builds only (hidden otherwise): switch the full version without paying.
+            var testImg = UIKit.Image("TestSwitch", panel.transform, S("UI/panel_cream"), Palette.Untinted, true);
+            UIKit.Place(testImg.rectTransform, mid, mid, new Vector2(0, -375), new Vector2(560, 84));
+            var testUnlock = testImg.gameObject.AddComponent<Button>();
+            testUnlock.transition = Selectable.Transition.None;
+            testImg.gameObject.AddComponent<CandyButton>();
+            var testLabel = UIKit.Text("Label", testImg.transform, "Test switch: OFF (no payment)", 32, Palette.Ink);
+            testLabel.fontStyle = FontStyles.Normal;
+            UIKit.Stretch(testLabel.rectTransform, 12f);
             var note = UIKit.Text("Privacy", panel.transform,
-                "No ads. No accounts. No tracking.\nWorks offline. Progress is saved only on this device.", 36, Palette.Ink);
+                "No ads. No accounts. No tracking. Works offline. Progress is saved only on this device. Purchases are handled by Google Play or the App Store.", 32, Palette.Ink);
             note.fontStyle = FontStyles.Normal;
-            UIKit.Place(note.rectTransform, mid, mid, new Vector2(0, -490), new Vector2(760, 170));
+            UIKit.Place(note.rectTransform, mid, mid, new Vector2(0, -530), new Vector2(780, 150));
             var close = UIKit.Button("Close", panel.transform, S("UI/btn_close"), new Vector2(1, 1), mid, new Vector2(-30, -30), 130);
             var sp = root.gameObject.AddComponent<SettingsPanel>();
             sp.music = music; sp.sound = sound; sp.reset = reset; sp.resetLabel = resetLabel; sp.close = close;
             sp.unlockAll = unlockAll; sp.unlockLabel = unlockLabel;
             sp.restore = restore; sp.restoreLabel = restoreLabel;
+            sp.storeStatus = storeStatus; sp.testUnlock = testUnlock; sp.testLabel = testLabel;
             return sp;
         }
     }

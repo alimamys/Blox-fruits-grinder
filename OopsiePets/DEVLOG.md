@@ -23,6 +23,56 @@ Menu **Oopsie Pets** in the Editor (or `unity command script eval` with the same
 4. `Oopsie Pets/3. Build Scene` — rewrites `Scenes/OopsiePets_Main.unity` and the build list.
 Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or stop using the builder.
 
+## Real in-app purchase for the full version (2026-11-22)
+Unity IAP **5.5.1** (`com.unity.purchasing`, installed with the Package Manager; it brings
+`com.unity.services.core` 1.19.0 and `com.unity.services.deployment`). One product:
+`oopsiepets.fullversion`, **non-consumable**.
+- `Scripts/Store/FullVersionStore.cs` (on the Systems object): `UnityIAPServices.StoreController()`,
+  every event subscribed before `Connect()`, then `FetchProducts` (for the local price) and
+  `FetchPurchases` (a reinstall or new phone gets the full version back). Buying: `PurchaseProduct` →
+  `OnPurchasePending` → optional Google receipt check → unlock + save (`Entitlements.GrantFromStore`,
+  which records the transaction id) → only if the save succeeded, `ConfirmPurchase`. An order that
+  could not be saved stays unconfirmed and is delivered again next launch. Deferred orders ("ask a
+  parent": Google Family Link, Apple Ask to Buy) unlock nothing until approved. `RestoreTransactions`
+  for the Restore button (Apple requires one). Refunds are not revoked automatically (a kids' game
+  should never lock a paid-for friend by mistake; revoke manually if ever needed).
+- Parent settings (behind the parent gate, the only place with a price): the button shows the store's
+  local price and the state (connecting, waiting for the store, waiting for a grown-up to approve,
+  unavailable/try again, unlocked/thank you), a status line, and Restore purchases.
+- **Test switch**: only in the Editor, development builds and the web demo
+  (`Entitlements.TestUnlockAllowed`). A full version unlocked by the test switch is recorded as source
+  `test` and ignored by release builds; only a store purchase records `store`. "Start over" keeps a
+  purchase.
+- **Web demo**: no store (Unity IAP would fall back to its fake store and "sell" for free), so the
+  store code is compiled out for WebGL and the full version button stays a labelled demo switch.
+- **Privacy**: no `UnityServices.InitializeAsync()` call anywhere, so Unity IAP's telemetry (which
+  hooks into Unity Services) stays off; checked in Play mode: `UnityServices.State = Uninitialized`
+  after connecting, buying and restoring. No analytics package.
+- **Receipt validation** (optional, recommended): in the Editor open Services > In-App Purchasing >
+  Receipt Validation Obfuscator, paste the Google Play licence key (Play Console > the app >
+  Monetize > Monetization setup > Licensing), obfuscate (creates `GooglePlayTangle`), then add the
+  scripting define `OOPSIE_RECEIPT_VALIDATION` for Android (Player Settings > Other > Scripting
+  Define Symbols). Without it, purchases are trusted as Google Play reports them.
+- Checked in Play mode with Unity IAP's Fake Store: price shown ($0.01 test price), Buy → unlocked,
+  saved with source `store` and the transaction id, order confirmed, padlocks opened on closing the
+  settings; Cancel → nothing unlocked, no message; Restore → "works in the app on a phone or tablet"
+  (the Fake Store has no restore); restart → still owned. Console 0 errors / 0 warnings.
+  **Not checked**: a real Google Play or App Store purchase (needs the store setup below and a device).
+
+### To sell it for real (Google Play)
+1. Play Console: create the app with package id `com.oopsiepets.game` (or change the id in Player
+   Settings first), complete the Families / Designed for Families forms, content rating, Data safety
+   (purchases go through Google Play; the game itself collects nothing).
+2. Upload a signed AAB (release keystore, Player Settings > Publishing Settings; Build Settings >
+   Build App Bundle) to the **internal testing** track (Google only sells products for an uploaded app).
+3. Monetize > Products > In-app products: create **`oopsiepets.fullversion`**, set the price, activate.
+4. Add licence testers (Setup > License testing) and install from the internal testing link; buy with
+   a test card. Then try Restore, uninstall/reinstall (the full version should come back), and a
+   Family Link child account ("waiting for a grown-up to approve").
+5. Optional: receipt validation (above).
+6. iOS later: App Store Connect product with the same id (non-consumable), Kids category rules; the
+   code already supports the App Store and has the Restore button Apple requires.
+
 ## Fixes (2026-11-22): wrong sticker after a visit, black cow spots, full re-check
 - **A friend's visit showed another friend's sticker** (the bird/"owl" showed the piglet's). Every
   pet's sticker asset was correct; the cause was `StickerBook.Award`: after the pet's own sticker and

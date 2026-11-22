@@ -16,8 +16,12 @@ namespace OopsiePets
         public List<string> unlockedPets = new List<string>();
         public List<PetSave> pets = new List<PetSave>();
         public List<string> decorations = new List<string>();
-        [UnityEngine.Tooltip("Full version owned. TEST ONLY in this build: set from the parent settings, no payment (version 3+).")]
+        [UnityEngine.Tooltip("Full version owned (version 3+).")]
         public bool fullVersion;
+        [UnityEngine.Tooltip("How the full version was unlocked: \"store\" (a real purchase) or \"test\" (the test switch in editor, development and web demo builds).")]
+        public string fullVersionSource = "";
+        [UnityEngine.Tooltip("Store transactions already granted (so a re-delivered purchase is not granted twice).")]
+        public List<string> purchaseTransactions = new List<string>();
         [UnityEngine.Tooltip("Locked friends whose padlock has already popped open (so it celebrates once).")]
         public List<string> celebrated = new List<string>();
         public Settings settings = new Settings();
@@ -59,6 +63,10 @@ namespace OopsiePets
             stickers ??= new List<string>();
             unlockedPets ??= new List<string>();
             celebrated ??= new List<string>();
+            purchaseTransactions ??= new List<string>();
+            fullVersionSource ??= "";
+            // Only a store purchase records "store"; anything else (the old test switch) counts as a test unlock.
+            if (fullVersion && fullVersionSource != "store") fullVersionSource = "test";
             pets ??= new List<PetSave>();
             decorations ??= new List<string>();
             settings ??= new Settings();
