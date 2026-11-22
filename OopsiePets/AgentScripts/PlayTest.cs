@@ -256,6 +256,8 @@ public static class PlayTest
                 await Frames(3500);
                 break;
             }
+            // Some steps end with a little show first (the lamb's fluffy poof, a shake): give it time.
+            for (int w = 0; w < 60 && f.care.Current && !f.care.Current.IsComplete; w++) await Frames(100);
             bool ok = f.care.Current && f.care.Current.IsComplete;
             sb.Append($"{k}{(ok ? "" : "(NOT COMPLETE)")} ");
             if (!ok) return sb + " | stopped: " + State();
