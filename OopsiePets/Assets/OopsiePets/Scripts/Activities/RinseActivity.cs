@@ -138,7 +138,26 @@ namespace OopsiePets
             {
                 if (!s || s.Cleared) continue;
                 var q = s.transform.position;
-                if (Mathf.Abs(q.x - spray.x) < 1.1f && q.y < spray.y + 0.3f && q.y > spray.y - 4.2f) { s.Wash(rinseRate * dt); hit = true; }
+                if (Mathf.Abs(q.x - spray.x) < 1.2f && q.y < spray.y + 0.9f && q.y > spray.y - 4.2f) { s.Wash(rinseRate * dt); hit = true; }
+            }
+            // Spraying anywhere on the pet always helps: the nearest suds wash off (a little slower), so
+            // foam the child can't quite aim at never holds the rinse up.
+            if (!hit)
+            {
+                var b = pet.VisualBounds();
+                b.Expand(1.2f);
+                if (b.Contains(new Vector3(spray.x, spray.y - 1f, b.center.z)))
+                {
+                    SoapSuds near = null;
+                    float bestD = float.MaxValue;
+                    foreach (var s in suds)
+                    {
+                        if (!s || s.Cleared) continue;
+                        float d = Vector2.Distance(spray, s.transform.position);
+                        if (d < bestD) { bestD = d; near = s; }
+                    }
+                    if (near) { near.Wash(rinseRate * 0.6f * dt); hit = true; }
+                }
             }
             if (hit)
             {

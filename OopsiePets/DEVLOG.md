@@ -23,6 +23,22 @@ Menu **Oopsie Pets** in the Editor (or `unity command script eval` with the same
 4. `Oopsie Pets/3. Build Scene` — rewrites `Scenes/OopsiePets_Main.unity` and the build list.
 Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or stop using the builder.
 
+## Fixes (2026-11-22): soap stuck after one star, cow's ear
+- **Shampoo stuck at one star** (reproduced: progress stopped at 0.61). Dollops tapped onto the face
+  were moved to the top of the head (the "foam above the eyes" change), and dollops tapped low could
+  land behind the bathtub rim; rubbing across the middle of the pet, where the hint pointed, never
+  reached them. Now: dollops always land above the tub rim; rubbing anywhere on the pet lathers the
+  nearest unfinished dollop (a little slower than rubbing right on it); a pat counts a little too;
+  the hint drags over a dollop that still needs rubbing. The sponge, rinse and towel steps got the
+  same rule (working anywhere on the pet always makes progress), so no bath step can stall.
+  Checked: the same child-like taps and rubbing now finish the step for the puppy and giraffe (Play
+  mode) and for the kitten in the web build with real mouse taps and a drag (3 stars, next button);
+  rinsing only across the middle of the cow finishes the rinse.
+- **Cow's left ear cut off**: the image model drew the head touching the edge of the parts sheet.
+  `tools/fix_clipped_ear.py` rebuilds the ear by mirroring the right ear (only the ear band is
+  replaced, so the spots stay as drawn) and moves the head pivot to match. Run it after
+  `finalize_art.py`/`pad_to_4.py` if the cow parts are ever re-sliced.
+
 ## Eleven friends, free and full version, rainbow coats (added 2026-11-21)
 This replaces the gift box below (kept as history): all friends always live in the clubhouse.
 - **Who can play** (`PetAccess` on `PetDefinition`, rules in `ContentDatabase.IsPlayable/Progress`):

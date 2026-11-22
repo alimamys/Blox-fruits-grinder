@@ -23,7 +23,7 @@ namespace OopsiePets
         public int dollops = 5;
         [Tooltip("How much one world-unit of rubbing lathers a dollop.")]
         public float rubPower = 0.32f;
-        public float rubRadius = 1.15f;
+        public float rubRadius = 1.4f;
         public float hintAfterIdle = 5f;
 
         readonly List<SoapSuds> blobs = new List<SoapSuds>();
@@ -74,9 +74,31 @@ namespace OopsiePets
         void ShowHint()
         {
             if (!ctx.hint || IsComplete) return;
+            if (!rubbing) { ctx.hint.ShowTap(pet.Rig.head); return; }
+            // Rub over a dollop that still needs it.
+            var target = NearestUnlathered(pet.VisualBounds().center);
+            var at = target ? target.transform.position : pet.VisualBounds().center;
+            ctx.hint.ShowDrag(at + Vector3.left * 0.9f, at + Vector3.right * 0.9f);
+        }
+
+        SoapSuds NearestUnlathered(Vector3 from)
+        {
+            SoapSuds best = null;
+            float bestD = float.MaxValue;
+            foreach (var b in blobs)
+            {
+                if (!b || b.Lather >= 1f) continue;
+                float d = Vector2.Distance(from, b.transform.position);
+                if (d < bestD) { bestD = d; best = b; }
+            }
+            return best;
+        }
+
+        bool OverPet(Vector2 p)
+        {
             var b = pet.VisualBounds();
-            if (!rubbing) ctx.hint.ShowTap(pet.Rig.head);
-            else ctx.hint.ShowDrag(b.center + Vector3.left * b.extents.x * 0.6f, b.center + Vector3.right * b.extents.x * 0.6f);
+            b.Expand(1.2f);
+            return b.Contains(new Vector3(p.x, p.y, b.center.z));
         }
 
         // Taps anywhere count: the shampoo lands on the nearest part of the pet.
@@ -84,7 +106,10 @@ namespace OopsiePets
         {
             var b = pet.VisualBounds();
             float x = Mathf.Clamp(p.x, b.min.x + b.size.x * 0.22f, b.max.x - b.size.x * 0.22f);
-            float y = Mathf.Clamp(p.y, b.min.y + b.size.y * 0.3f, b.max.y - b.size.y * 0.15f);
+            float low = b.min.y + b.size.y * 0.3f;
+            // Never behind the bathtub: the child must be able to see (and rub) every dollop.
+            if (tubFront && tubFront.gameObject.activeInHierarchy) low = Mathf.Max(low, tubFront.bounds.max.y + 0.35f);
+            float y = Mathf.Clamp(p.y, Mathf.Min(low, b.max.y - b.size.y * 0.2f), b.max.y - b.size.y * 0.15f);
             return new Vector3(x, y, 0f);
         }
 
@@ -93,6 +118,17 @@ namespace OopsiePets
             idleTime = 0f;
             if (ctx.hint) ctx.hint.Hide();
             if (!rubbing && !busy && squirted < dollops) StartCoroutine(Squirt(OnPet(p)));
+            else if (rubbing && !finishing && OverPet(p))
+            {
+                // A pat counts a little too (the hand hint keeps showing the rubbing).
+                var b = NearestUnlathered(p);
+                if (b)
+                {
+                    RubBlob(b, 0.12f);
+                    Audio?.Play(Sfx.Squish, 0.45f, 1.3f);
+                    UpdateLather();
+                }
+            }
         }
 
         IEnumerator Squirt(Vector3 at)
@@ -146,19 +182,14 @@ namespace OopsiePets
                 if (!b || b.Lather >= 1f) continue;
                 if (Vector2.Distance(p, b.transform.position) > rubRadius) continue;
                 any = true;
-                if (b.Rub(moved * rubPower))
-                {
-                    // Fully lathered: it puffs up and makes a little more foam around it.
-                    Audio?.Play(Sfx.Sparkle, 0.4f, 1.3f);
-                    for (int i = 0; i < 2; i++)
-                    {
-                        var off = (Vector3)(Random.insideUnitCircle.normalized * pet.VisualBounds().size.x * 0.12f);
-                        var at2 = b.transform.position + off;
-                        if (b.transform.parent == pet.Rig.headDecor) at2 = PetDecor.KeepFaceClear(pet, at2);
-                        var extra = SoapSuds.Spawn(foamSprite, b.transform.parent, at2, pet.VisualBounds().size.x * 0.16f, 34, false);
-                        extra.Rub(1f);
-                    }
-                }
+                RubBlob(b, moved * rubPower);
+            }
+            // Rubbing anywhere on the pet always helps: if no dollop is under the finger, the nearest one
+            // still lathers (a little slower), so the step can never get stuck.
+            if (!any && OverPet(p))
+            {
+                var near = NearestUnlathered(p);
+                if (near) { RubBlob(near, moved * rubPower * 0.75f); any = true; }
             }
             if (any)
             {
@@ -172,10 +203,30 @@ namespace OopsiePets
                     pet.Animator.Play(Random.value < 0.5f ? PetReaction.Giggle : PetReaction.Wiggle);
                 }
             }
+            UpdateLather();
+        }
+
+        void RubBlob(SoapSuds b, float amount)
+        {
+            if (!b.Rub(amount)) return;
+            // Fully lathered: it puffs up and makes a little more foam around it.
+            Audio?.Play(Sfx.Sparkle, 0.4f, 1.3f);
+            for (int i = 0; i < 2; i++)
+            {
+                var off = (Vector3)(Random.insideUnitCircle.normalized * pet.VisualBounds().size.x * 0.12f);
+                var at2 = b.transform.position + off;
+                if (b.transform.parent == pet.Rig.headDecor) at2 = PetDecor.KeepFaceClear(pet, at2);
+                var extra = SoapSuds.Spawn(foamSprite, b.transform.parent, at2, pet.VisualBounds().size.x * 0.16f, 34, false);
+                extra.Rub(1f);
+            }
+        }
+
+        void UpdateLather()
+        {
             float sum = 0f;
             foreach (var b in blobs) sum += b ? b.Lather : 1f;
             float done = blobs.Count > 0 ? sum / blobs.Count : 0f;
-            SetProgress(0.35f + 0.65f * done);
+            SetProgress(Mathf.Max(Progress, 0.35f + 0.65f * done));
             if (done >= 0.999f && !finishing) StartCoroutine(Finish());
         }
 

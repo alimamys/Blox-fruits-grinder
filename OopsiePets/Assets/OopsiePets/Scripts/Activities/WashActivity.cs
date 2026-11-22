@@ -166,6 +166,25 @@ namespace OopsiePets
             float removed = 0f;
             Vector2 at = sponge.position;
             foreach (var s in spots) removed += s.Scrub(at, spongeRadius, strength);
+            // Scrubbing anywhere on the pet always helps: if no mud is under the sponge, the nearest splat
+            // still gets cleaner (a little slower), so a splat that is hard to reach never blocks the bath.
+            if (removed <= 0f)
+            {
+                var pb = pet.VisualBounds();
+                pb.Expand(1.2f);
+                if (pb.Contains(new Vector3(at.x, at.y, pb.center.z)))
+                {
+                    MudSpot near = null;
+                    float bestD = float.MaxValue;
+                    foreach (var s in spots)
+                    {
+                        if (!s || s.Cleared || s.Remaining <= 0f) continue;
+                        float d = Vector2.Distance(at, s.transform.position);
+                        if (d < bestD) { bestD = d; near = s; }
+                    }
+                    if (near) removed += near.Scrub(near.transform.position, spongeRadius, strength * 0.6f);
+                }
+            }
             // A little squish, wobble and foam whenever the sponge is working on the pet.
             var bounds = pet.VisualBounds();
             bool onPet = bounds.Contains(new Vector3(at.x, at.y, bounds.center.z));

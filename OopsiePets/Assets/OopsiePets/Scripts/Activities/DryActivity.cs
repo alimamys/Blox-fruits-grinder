@@ -101,6 +101,15 @@ namespace OopsiePets
             }
         }
 
+        void DryDrop(Drip d, float amount)
+        {
+            d.wet = Mathf.Max(0f, d.wet - amount);
+            if (d.wet > 0f) return;
+            Fx?.Emit(Fx.foamPuff, d.t.position, Vector2.up * 0.8f, 0.35f, 0.6f, Palette.Untinted, -0.2f);
+            Audio?.Play(Sfx.Pop, 0.35f, 1.6f);
+            d.t.gameObject.SetActive(false);
+        }
+
         void RestoreFur(float dryness)
         {
             foreach (var kv in fur)
@@ -148,15 +157,24 @@ namespace OopsiePets
                 if (d.wet <= 0f || !d.t) continue;
                 if (Vector2.Distance(towel.position, d.t.position) > rubRadius) continue;
                 any = true;
-                d.wet = Mathf.Max(0f, d.wet - moved * rubPower);
-                if (d.wet <= 0f)
-                {
-                    Fx?.Emit(Fx.foamPuff, d.t.position, Vector2.up * 0.8f, 0.35f, 0.6f, Palette.Untinted, -0.2f);
-                    Audio?.Play(Sfx.Pop, 0.35f, 1.6f);
-                    d.t.gameObject.SetActive(false);
-                }
+                DryDrop(d, moved * rubPower);
             }
             var b = pet.VisualBounds();
+            // Rubbing anywhere on the pet always helps: the nearest drop dries (a little slower).
+            var reach = b;
+            reach.Expand(1.2f);
+            if (!any && reach.Contains(new Vector3(p.x, p.y, b.center.z)))
+            {
+                Drip near = null;
+                float bestD = float.MaxValue;
+                foreach (var d in drips)
+                {
+                    if (d.wet <= 0f || !d.t) continue;
+                    float dist = Vector2.Distance(towel.position, d.t.position);
+                    if (dist < bestD) { bestD = dist; near = d; }
+                }
+                if (near != null) { DryDrop(near, moved * rubPower * 0.6f); any = true; }
+            }
             if (any || b.Contains(new Vector3(p.x, p.y, b.center.z)))
             {
                 Audio?.Play(Sfx.Brush, 0.45f, 0.8f);
