@@ -10,9 +10,11 @@ namespace OopsiePets
     /// bubble shows its toy and it yawns; tapping it goes straight to the garden. (Pets only get muddy by
     /// playing; one that left the garden early comes home muddy and asks for a bath.)
     /// All eleven friends always live here. Friends that can't be played with yet nap behind a padlock
-    /// (tapping one only makes it stir: there is no purchase prompt for children). Friends that are earned
-    /// by playing show little dots under the padlock, one per friend they are waiting for, which fill as
-    /// those friends get their stickers. When a padlock opens, it pops off with confetti.
+    /// (tapping one only makes it stir: there is no purchase prompt for children). In the full version,
+    /// friends that are earned by playing wear a star instead of a padlock, so nobody thinks they must be
+    /// bought again: the big star fills with gold, and a row of small stars (one per friend they are
+    /// waiting for) turns gold as those friends get their stickers. When a lock opens, it pops off with
+    /// confetti.
     /// </summary>
     public class Clubhouse : MonoBehaviour
     {
@@ -26,8 +28,9 @@ namespace OopsiePets
 
         [Header("Locked friends")]
         public Sprite padlockSprite;
-        public Sprite pipOn;
-        public Sprite pipOff;
+        [Tooltip("Full version only: the star lock for friends earned by playing (same outline, empty and gold).")]
+        public Sprite starEmpty;
+        public Sprite starFull;
         [Tooltip("The grown-ups' gear button: it gives a little wiggle when a child taps a friend that needs the full version.")]
         public RectTransform settingsButton;
         public Color lockedTint = new Color(0.86f, 0.84f, 0.92f, 1f);
@@ -42,10 +45,13 @@ namespace OopsiePets
 
         class Lock
         {
-            public Transform padlock;
+            public Transform padlock;   // the padlock, or the star for friends earned by playing
             public List<SpriteRenderer> pips = new List<SpriteRenderer>();
-            public Vector3 padScale;
+            public List<SpriteRenderer> emptyPips = new List<SpriteRenderer>();
+            public Vector3 padScale, pipScale;
         }
+
+        readonly List<Sprite> madeSprites = new List<Sprite>();
 
         struct Layout
         {
@@ -159,39 +165,76 @@ namespace OopsiePets
             p.Animator.SetMood(PetExpression.Asleep);
             foreach (var sr in p.GetComponentsInChildren<SpriteRenderer>()) sr.color *= lockedTint;
             var l = new Lock();
-            // The padlock sits on the pet's tummy, where it is easy to see.
-            var pad = new GameObject("Padlock").AddComponent<SpriteRenderer>();
+            // Full version: a friend that is earned by playing gets a star, not a padlock (nothing more to buy).
+            var (have, need) = Db.Progress(p.Definition);
+            bool earnedByPlay = Entitlements.FullVersion && need > 0 && starEmpty && starFull;
+            var sprite = earnedByPlay ? starEmpty : padlockSprite;
+            // The lock sits on the pet's tummy, where it is easy to see.
+            var pad = new GameObject(earnedByPlay ? "StarLock" : "Padlock").AddComponent<SpriteRenderer>();
             pad.transform.SetParent(transform, false);
-            pad.sprite = padlockSprite;
+            pad.sprite = sprite;
             pad.sortingOrder = OrderFor(spot) * 10 + 400;
-            float size = 3.0f * layout.petScale;
-            float w = padlockSprite ? padlockSprite.bounds.size.x : 1f;
+            float size = (earnedByPlay ? 3.3f : 3.0f) * layout.petScale;
+            float w = sprite ? sprite.bounds.size.x : 1f;
             pad.transform.localScale = Vector3.one * size / Mathf.Max(0.01f, w);
-            pad.transform.position = (Vector3)spot + new Vector3(0.05f, 2.2f * layout.petScale, 0f);
+            pad.transform.position = (Vector3)spot + new Vector3(0.05f, 2.25f * layout.petScale, 0f);
             l.padlock = pad.transform;
             l.padScale = pad.transform.localScale;
             props.Add(pad.gameObject);
-            // Dots for the friends it is waiting for (only meaningful with the full version).
-            var (have, need) = Db.Progress(p.Definition);
-            if (need > 0 && Entitlements.FullVersion && pipOn && pipOff)
+            if (earnedByPlay)
             {
+                // The big star fills with gold from the bottom, one step per friend completed.
+                if (have > 0) AddStarFill(pad, have / (float)need);
+                // Small stars underneath: gold for each friend already completed.
                 int perRow = need > 6 ? 5 : need;
-                float ps = PipSize, gap = 1.12f * layout.petScale;
+                float gap = 1.2f * layout.petScale;
                 for (int i = 0; i < need; i++)
                 {
                     int row = i / perRow, col = i % perRow;
                     int inRow = Mathf.Min(perRow, need - row * perRow);
-                    var pip = new GameObject("Pip").AddComponent<SpriteRenderer>();
+                    var pip = new GameObject("ProgressStar").AddComponent<SpriteRenderer>();
                     pip.transform.SetParent(transform, false);
-                    pip.sprite = i < have ? pipOn : pipOff;
-                    pip.sortingOrder = pad.sortingOrder + 1;
-                    pip.transform.localScale = Vector3.one * ps / Mathf.Max(0.01f, pipOn.bounds.size.x);
-                    pip.transform.position = (Vector3)spot + new Vector3((col - (inRow - 1) / 2f) * gap, 0.62f * layout.petScale - row * gap, 0f);
+                    bool done = i < have;
+                    pip.sprite = done ? starFull : starEmpty;
+                    pip.sortingOrder = pad.sortingOrder + 2;
+                    l.pipScale = Vector3.one * PipSize * 1.15f / Mathf.Max(0.01f, starFull.bounds.size.x);
+                    pip.transform.localScale = l.pipScale;
+                    pip.transform.position = (Vector3)spot + new Vector3((col - (inRow - 1) / 2f) * gap, 0.6f * layout.petScale - row * gap, 0f);
                     l.pips.Add(pip);
+                    if (!done) l.emptyPips.Add(pip);
                     props.Add(pip.gameObject);
                 }
             }
             locks[p] = l;
+        }
+
+        // Height (share of the star sprite) below which the given share of the star's AREA lies, in steps
+        // of 10% (measured from lock_star_full.png). Filling by area means 4 of 6 friends looks two-thirds
+        // gold, not nearly full (most of a star's area is in its lower half).
+        static readonly float[] StarFillHeight = { 0f, 0.176f, 0.25f, 0.328f, 0.406f, 0.469f, 0.523f, 0.574f, 0.617f, 0.695f, 0.965f };
+
+        static float FillHeight(float fill)
+        {
+            float x = Mathf.Clamp01(fill) * 10f;
+            int i = Mathf.Min(9, Mathf.FloorToInt(x));
+            return Mathf.Lerp(StarFillHeight[i], StarFillHeight[i + 1], x - i);
+        }
+
+        // Gold fill for the star lock: the bottom part of the gold star, cut to the fill level, laid over
+        // the empty star (both sprites share one outline).
+        void AddStarFill(SpriteRenderer star, float fill)
+        {
+            var r = starFull.rect;
+            float h = FillHeight(fill) * r.height;
+            if (h < 1f) return;
+            var part = Sprite.Create(starFull.texture, new Rect(r.x, r.y, r.width, h), new Vector2(0.5f, 0f), starFull.pixelsPerUnit, 0, SpriteMeshType.FullRect);
+            part.name = "StarFill";
+            madeSprites.Add(part);
+            var go = new GameObject("StarFill").AddComponent<SpriteRenderer>();
+            go.transform.SetParent(star.transform, false);
+            go.transform.localPosition = new Vector3(0f, -r.height / 2f / starFull.pixelsPerUnit, 0f);
+            go.sprite = part;
+            go.sortingOrder = star.sortingOrder + 1;
         }
 
         IEnumerator OpenLocks(List<PetView> opened)
@@ -216,13 +259,13 @@ namespace OopsiePets
                 foreach (var pip in l.pips) if (pip) pip.gameObject.SetActive(false);
                 var from = l.padlock.position;
                 var pad = l.padlock;
-                var sr = pad.GetComponent<SpriteRenderer>();
+                var srs = pad.GetComponentsInChildren<SpriteRenderer>();
                 StartCoroutine(Ease.Tween(0.6f, k =>
                 {
                     if (!pad) return;
                     pad.position = from + new Vector3(1.4f * k, 2.2f * Ease.Bump(k * 0.7f), 0f);
                     pad.localRotation = Quaternion.Euler(0f, 0f, -200f * k);
-                    sr.color = new Color(1f, 1f, 1f, 1f - k);
+                    foreach (var sr in srs) if (sr) sr.color = new Color(1f, 1f, 1f, 1f - k);
                 }, null, false));
                 Unlock(p);
                 p.Animator.Play(PetReaction.Celebrate);
@@ -301,6 +344,8 @@ namespace OopsiePets
             if (welcome != null) StopCoroutine(welcome);
             arrival = welcome = null;
             locks.Clear();
+            foreach (var sp in madeSprites) if (sp) Destroy(sp);
+            madeSprites.Clear();
             menu.HideNow();
             hint.Hide();
             foreach (var p in pets) if (p) Destroy(p.gameObject);
@@ -389,8 +434,8 @@ namespace OopsiePets
             {
                 if (pad) pad.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(k * Mathf.PI * 4f) * 12f * (1f - k));
                 if (pad) pad.localScale = l.padScale * (1f + 0.15f * Ease.Bump(k));
-                foreach (var pip in l.pips)
-                    if (pip && pip.sprite == pipOff) pip.transform.localScale = Vector3.one * (PipSize / Mathf.Max(0.01f, pipOff.bounds.size.x)) * (1f + 0.5f * Ease.Bump(k));
+                foreach (var pip in l.emptyPips)
+                    if (pip) pip.transform.localScale = l.pipScale * (1f + 0.5f * Ease.Bump(k));
             }, null, false);
             if (p && p.locked) p.Animator.SetMood(PetExpression.Asleep);
         }

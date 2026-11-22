@@ -146,8 +146,8 @@ namespace OopsiePets.EditorTools
             club.bedSprite = S("Objects/pet_bed");
             club.thoughtBubble = S("UI/thought_bubble");
             club.padlockSprite = S("UI/lock_padlock");
-            club.pipOn = S("UI/lock_pip_on");
-            club.pipOff = S("UI/lock_pip_off");
+            club.starEmpty = S("UI/lock_star_empty");
+            club.starFull = S("UI/lock_star_full");
             club.doorSpot = door;
             club.mudSprites = MudSprites();
 

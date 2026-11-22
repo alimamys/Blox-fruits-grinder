@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""Draw the padlock shown on friends that can't be played with yet, and the little progress dots under
-it (filled = an earlier friend already completed). Drawn in code, supersampled for smooth edges.
+"""Draw the padlock shown on friends that need the full version, and the star lock shown (in the full
+version) on friends that are earned by playing: an empty star and a gold star with the same outline, so
+the game can fill the big star from the bottom up and use small stars as progress marks. Drawn in
+code, supersampled for smooth edges.
 
 Usage: python3 -I make_lock.py <Assets/OopsiePets/Art>
 """
@@ -38,19 +40,31 @@ def padlock(size=256):
     return im.resize((size, size), Image.LANCZOS)
 
 
-def pip(fill, size=64):
+def star(fill, size=256, glint=False):
+    """A plump five-point star (rounded by a thick outline); the shape spans 4%..96% of the height."""
+    import math
     S = size * SS
     im = Image.new("RGBA", (S, S), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    o = 7 * SS
-    d.ellipse([o, o, S - o, S - o], fill=PLUM)
-    d.ellipse([2 * o, 2 * o, S - 2 * o, S - 2 * o], fill=fill)
+    o = 11 * SS
+    top, bottom = 0.04 * S + o / 2, 0.96 * S - o / 2
+    R = (bottom - top) / (1 + math.cos(math.radians(36)))
+    cx, cy = S / 2, top + R
+    pts = []
+    for i in range(10):
+        r = R if i % 2 == 0 else R * 0.52
+        a = math.radians(-90 + i * 36)
+        pts.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+    d.polygon(pts, fill=fill)
+    d.line(pts + [pts[0], pts[1]], fill=PLUM, width=o, joint="curve")
+    if glint:
+        d.ellipse([cx - R * 0.36, cy - R * 0.3, cx - R * 0.14, cy - R * 0.04], fill=(255, 246, 214, 255))
     return im.resize((size, size), Image.LANCZOS)
 
 
 if __name__ == "__main__":
     out = os.path.join(sys.argv[1], "UI")
     padlock().save(os.path.join(out, "lock_padlock.png"))
-    pip((255, 211, 110, 255)).save(os.path.join(out, "lock_pip_on.png"))
-    pip((236, 228, 244, 255)).save(os.path.join(out, "lock_pip_off.png"))
-    print("padlock + pips written")
+    star((238, 230, 246, 255)).save(os.path.join(out, "lock_star_empty.png"))
+    star((255, 206, 92, 255), glint=True).save(os.path.join(out, "lock_star_full.png"))
+    print("padlock + stars written")

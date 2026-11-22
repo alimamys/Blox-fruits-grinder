@@ -18,7 +18,7 @@ Hand-drawn in code (style-matched, not AI-generated): `Characters/Shared/eye_*`,
 (`tools/make_faces.py`); `UI/btn_blank_*`, `panel_*`, `slider_*`, `select_ring`, `sunburst` (`tools/make_ui.py`);
 `UI/thought_bubble` (`tools/make_thought_bubble.py`); `Characters/Shared/mouth_teeth_open`, `Effects/fx_water_drop`,
 `Effects/teeth_speck_*` (`tools/make_bath_bits.py`); `Objects/garden_swing_icon` (drawn ropes and branch around the
-generated seat); `UI/lock_padlock`, `UI/lock_pip_on`, `UI/lock_pip_off` (`tools/make_lock.py`).
+generated seat); `UI/lock_padlock`, `UI/lock_star_empty`, `UI/lock_star_full` (`tools/make_lock.py`).
 
 Processing notes:
 - Model-drawn mouths on the "blank" heads were painted out (`tools/clean_faces.py`): puppy, bunny, lamb, pony.

@@ -23,6 +23,23 @@ Menu **Oopsie Pets** in the Editor (or `unity command script eval` with the same
 4. `Oopsie Pets/3. Build Scene` — rewrites `Scenes/OopsiePets_Main.unity` and the build list.
 Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or stop using the builder.
 
+## Star locks for friends earned by playing (2026-11-22)
+So nobody thinks a friend must be bought twice: in the **full version**, the friends that are earned
+by playing (giraffe, bird, cow, pony, then the unicorn) no longer show a padlock. They wear a big star
+on the tummy that fills with gold from the bottom as the friends they wait for get their stickers, and
+a row of small stars underneath (one per friend: 6, or 10 in two rows for the unicorn) turns gold one by
+one. The fill follows the star's area (4 of 6 looks two-thirds gold). In the **free version** every
+locked friend keeps the padlock, with no stars. Tapping a star-locked friend jiggles the star and
+blinks the empty small stars; when the last friend is done the star pops off with sparkles.
+- Art: `UI/lock_star_empty`, `UI/lock_star_full` (same outline) drawn by `tools/make_lock.py`; the old
+  progress dots were removed. The gold fill is the bottom part of the gold star sprite, cut at
+  runtime (`Clubhouse.AddStarFill`, `Sprite.Create`, freed when the room is rebuilt).
+- Checked in Play mode: free version (padlocks only), full version with 4 friends done (stars 4/6 and
+  4/10, partly gold), sixth friend done (four stars pop open, unicorn now 6/10); 0 console errors.
+  Web build with real taps: passed the parent gate, switched on the test full version, padlocks on the
+  panda, piglet and lamb opened and the five play-to-earn friends showed empty stars; no page errors.
+  (The partly-filled star was seen in the Editor only; the browser test had no completed friends.)
+
 ## Fixes (2026-11-22): soap stuck after one star, cow's ear
 - **Shampoo stuck at one star** (reproduced: progress stopped at 0.61). Dollops tapped onto the face
   were moved to the top of the head (the "foam above the eyes" change), and dollops tapped low could
@@ -48,10 +65,10 @@ This replaces the gift box below (kept as history): all friends always live in t
     giraffe (Sunny), bird (Pip), cow (Buttercup), pony (Maple).
   - Last of all, once the other ten are completed: Sparkle the unicorn, wearing its crown.
 - **Clubhouse** (`Core/Clubhouse`): 11 beds in rows of 4, 4, 3 (pet scale 0.3). Friends that can't be
-  played with yet nap (eyes closed, slightly faded) behind a padlock; tapping one only makes it stir
-  and the padlock jiggle. There is no purchase prompt anywhere a child can reach: in the free version
-  the grown-ups' gear button gives a small wiggle. Friends earned by playing show one dot per friend
-  they wait for (6, or 10 for the unicorn), filled in gold as those friends get their stickers.
+  played with yet nap (eyes closed, slightly faded) behind a padlock (a star lock in the full version for
+  friends earned by playing, see above); tapping one only makes it stir and the lock jiggle. There is
+  no purchase prompt anywhere a child can reach: in the free version the grown-ups' gear button gives
+  a small wiggle. (First version: dots under the padlock; replaced by the star lock on 2026-11-22.)
   When a padlock opens (full version switched on, or the last needed sticker earned) it rattles and
   pops off with confetti the next time the room is shown, and that friend wants to play first.
 - **Full version = TEST ONLY.** `Entitlements.FullVersion` is a saved flag set by the parent settings
@@ -82,7 +99,7 @@ This replaces the gift box below (kept as history): all friends always live in t
 - Album: 16 slots (4 per row). Save format version 3 (`fullVersion`, `celebrated`, per-pet
   `outfitSet` and `rainbow`); older saves load (old gift hearts and unlocked friends are ignored).
 - Art: `jobs_batch7a.json` (4 references, accessories sheet 3, garden toys sheet 2, apple tree) and
-  `jobs_batch7b.json` (4 parts sheets, 4 stickers); padlock and progress dots drawn by
+  `jobs_batch7b.json` (4 parts sheets, 4 stickers); padlock (and later the star lock) drawn by
   `tools/make_lock.py`. The pony's drawn mouth was inpainted (`clean_faces.py`).
 
 ## Verified (2026-11-21, eleven-friends update)
