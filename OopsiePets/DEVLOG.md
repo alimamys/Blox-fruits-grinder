@@ -57,6 +57,10 @@ Unity IAP **5.5.1** (`com.unity.purchasing`, installed with the Package Manager;
   saved with source `store` and the transaction id, order confirmed, padlocks opened on closing the
   settings; Cancel → nothing unlocked, no message; Restore → "works in the app on a phone or tablet"
   (the Fake Store has no restore); restart → still owned. Console 0 errors / 0 warnings.
+  Web build (store compiled out) in Chromium with real taps through the parent gate: "Unlock full
+  version (web demo, no payment)", Restore says purchases are made in the app, no test switch, no
+  page errors. Release APK 48.1 MB (was 40 MB): manifest has `com.android.vending.BILLING` and the
+  Google Play Billing client. `OopsiePets-test.apk` is a development build with the test switch.
   **Not checked**: a real Google Play or App Store purchase (needs the store setup below and a device).
 
 ### To sell it for real (Google Play)
