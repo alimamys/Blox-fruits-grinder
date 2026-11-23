@@ -23,6 +23,22 @@ Menu **Oopsie Pets** in the Editor (or `unity command script eval` with the same
 4. `Oopsie Pets/3. Build Scene` — rewrites `Scenes/OopsiePets_Main.unity` and the build list.
 Step 3 overwrites the scene: make scene edits in `Editor/OopsieScene.cs`, or stop using the builder.
 
+## Google Play release files (2026-11-23)
+- `StoreListing/`: store icon (512), feature graphic (1024x500) and six captioned 1080x1920 phone
+  screenshots, made by `ArtSource/tools/make_store_listing.py` from the game art and Play mode
+  captures (game view set to 1080x1920).
+- Release build: Android App Bundle `Builds/Android/OopsiePets.aab`, version **1.0.0 (code 1)**,
+  signed with an **upload key** (`oopsiepets-upload.keystore`, alias `oopsiepets-upload`) that was
+  generated for the owner and handed over outside git. It is not in the repository and must not be
+  committed. To build an update: put the keystore somewhere outside the repo, set (in memory only)
+  `PlayerSettings.Android.useCustomKeystore/keystoreName/keystorePass/keyaliasName/keyaliasPass`,
+  raise `PlayerSettings.Android.bundleVersionCode` (and `bundleVersion`), set
+  `EditorUserBuildSettings.buildAppBundle = true`, build to `.aab`, then clear the keystore path again.
+  With Play App Signing, a lost upload key can be reset from Play Console (App integrity).
+- Step-by-step publishing guide (account, app, payments profile, internal test upload, the
+  `oopsiepets.fullversion` product, license testing, app content forms, store listing, 12-tester
+  closed test, production, updates and price changes) was given to the owner as a separate page.
+
 ## Real in-app purchase for the full version (2026-11-22)
 Unity IAP **5.5.1** (`com.unity.purchasing`, installed with the Package Manager; it brings
 `com.unity.services.core` 1.19.0 and `com.unity.services.deployment`). One product:

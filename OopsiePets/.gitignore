@@ -41,3 +41,7 @@ crashlytics-build.properties
 
 # Android native build temp (CMake)
 /.utmp/
+
+# Signing keys (never commit)
+*.keystore
+*.jks
