@@ -1,0 +1,64 @@
+THE RAKE - "It Visits Three Times" (stick-figure style, same code-drawn look as the stick Mr. Widemouth, Goatman, 3:06, Frame 240)
+==========================================================================================================================
+
+FILE
+out/rake_1080p_send.mp4     (1920x1080, 24 fps, 5:02 - the copy sent to you)
+out/rake_1080p_upload.mp4   (same film at a higher bitrate, kept on the build machine)
+
+TITLE (same pattern as your older videos)
+The Rake | Animated Horror Story
+
+ALTERNATIVE TITLES (for Test & Compare)
+- Something Was Sitting on My Bed at 4 AM | Animated Horror Story
+- It Visits Three Times | Animated Horror Story
+
+DESCRIPTION
+------------------------------------------------------------
+When I was nine, I woke up at four in the morning, and something was sitting on my bed.
+Then I found my grandmother's diary. "The first time, it only watches. The second time, it comes closer. The third time, it says your name."
+
+0:00 The first night
+0:55 Grandma's house
+1:42 The diary
+2:53 Dad reads it
+3:26 The third night
+4:19 Today
+
+Would you have told your dad?
+
+This story is fiction. All characters and events are invented. The Rake itself is an internet legend that was
+created anonymously on 4chan in the mid-2000s; this story, its characters and its ending are our own.
+
+Credits - story and animation: original. Voices: Fish Audio. Backgrounds painted with an image model from our own
+layouts; characters drawn and animated in code.
+Sound effects used under Creative Commons Attribution (CC BY):
+• "wooden_door_close.wav" by joedeshon - https://freesound.org/s/117415/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_close
+• "light suburban ambiance.wav" by dkaufman - https://freesound.org/s/121287/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+• "sh_Man_Running_Footsteps_On_Carpet.wav" by shall555 - https://freesound.org/s/140219/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: running_carpet
+• "Staircase Impulse-Response long reverb 20m away clap" by jorickhoofd - https://freesound.org/s/160138/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: boom_hit, low_horror_drone, riser_short, stinger, sub_drop, tension_pulse, whoosh_1, whoosh_2
+• "Basement Impulse-Response reverb 6m away medium-pitched clap" by jorickhoofd - https://freesound.org/s/160143/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: bass_hit, breath_exhale_f
+• "Pulsacions del cor.wav" by flosicalcat59 - https://freesound.org/s/238929/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: heartbeat_loop
+• "Creak_12.wav" by HerbertBoland - https://freesound.org/s/29685/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_open
+• "Car in the Distance" by FairhavenCollection - https://freesound.org/s/376994/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+• "thrush_city.mp3" by dobroide - https://freesound.org/s/4250/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+• "20080505_1306playground01.wav" by Asparagus_P - https://freesound.org/s/52882/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: morning_street
+
+#animatedhorror #scarystories #therake
+------------------------------------------------------------
+
+TAGS
+the rake, the rake creepypasta, animated horror story, horror animation, scary story, creepypasta animated, stick figure horror, 4am horror story, scary stories animated, creepy story, horror short, urban legend
+
+THUMBNAILS (youtube/)
+- thumbnail_A_its_on_my_bed.jpg   IT'S ON MY BED.   (first choice: Lily screaming, the Rake bent right over her face, 4:00 on the clock)
+- thumbnail_B_dont_wake_up.jpg    DON'T WAKE UP.    (her son asleep, the Rake on his bed - Test & Compare)
+- thumbnail_C_4am.jpg             4:00 AM           (looking down the bed, it stares at you - spare)
+
+SETTINGS
+- Audience: No, it's not made for kids
+- Category: Film & Animation   |   Language: English
+- Altered or synthetic content: answer honestly. The backgrounds are AI-painted cartoon art and the voices are
+  AI text-to-speech (not realistic footage of real people or places).
+
+PINNED COMMENT
+What would you do if your kid asked you about "the skinny man"?
