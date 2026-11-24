@@ -54,6 +54,21 @@ SETS = {
                       'a front porch, dark windows, one small upstairs window on the right; trees on both sides; a full moon in a deep blue sky. Quiet and lonely.' + EMPTY,
     'exterior_day': 'The same old two-storey wooden family house on a bright summer day, seen straight-on: a steep roof with a small round attic window, a front '
                     'porch, windows, trees on both sides, blue sky, green grass. Calm and ordinary.' + EMPTY,
+    'sonroom_night': "A nine-year-old boy's bedroom in a small modern house at four in the morning, seen straight-on from the side like a stage set: "
+                     'a single bed along the floor with the headboard on the LEFT and the footboard on the RIGHT, a dark green quilt and a white pillow, a white '
+                     'bed skirt down to a light wooden floor; a small white nightstand by the headboard with an alarm clock whose face is BLANK; a window with '
+                     'half-open white blinds above the bed showing the night; two plain space posters (no words) on the wall; a bookshelf and a closed white door '
+                     'on the RIGHT. Cold blue-green night light, deep soft shadows, very still.' + EMPTY,
+    'sonroom_day': "The same nine-year-old boy's bedroom in a small modern house in the early morning, seen straight-on from the side like a stage set: "
+                   'a single bed along the floor with the headboard on the LEFT and the footboard on the RIGHT, a dark green quilt and a white pillow, a white '
+                   'bed skirt, a light wooden floor; a small white nightstand with an alarm clock whose face is BLANK; a window with half-open white blinds above '
+                   'the bed letting in pale morning light; two plain space posters (no words); a bookshelf and a closed white door on the RIGHT. '
+                   'Soft grey-gold morning light, quiet.' + EMPTY,
+    'kitchen2_day': 'The back wall of a bright modern family kitchen on a sunny morning, seen straight-on like a stage set: a wide window in the middle, a '
+                    'light counter and plain white cabinets, a tall grey fridge on the LEFT, white wall cupboards on the RIGHT, a round wall clock with a BLANK '
+                    'face, mint-green walls. Clean, fresh, ordinary. Nothing in the foreground.' + EMPTY,
+    'newhouse_day': 'A small single-storey light-blue bungalow in a sunny warm suburb far from anywhere old, seen straight-on: a low grey roof, a white front '
+                    'door, four windows, a carport on the right, a palm tree on the left, a green lawn, blue sky with a sun. Bright, new, safe-looking.' + EMPTY,
 }
 
 

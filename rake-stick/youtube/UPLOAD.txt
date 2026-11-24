@@ -2,28 +2,32 @@ THE RAKE - "It Visits Three Times" (stick-figure style, same code-drawn look as 
 ==========================================================================================================================
 
 FILE
-out/rake_1080p_upload.mp4   (1920x1080, 24 fps, 5:02, 391 MiB - the copy sent to you; upload this one)
+out/rake_1080p_upload.mp4   (1920x1080, 24 fps, 6:45 - the copy sent to you; upload this one)
 
 TITLE (same pattern as your older videos)
 The Rake | Animated Horror Story
 
 ALTERNATIVE TITLES (for Test & Compare)
 - Something Was Sitting on My Bed at 4 AM | Animated Horror Story
-- It Visits Three Times | Animated Horror Story
+- It Never Takes the Child | Animated Horror Story
 
 DESCRIPTION
 ------------------------------------------------------------
 When I was nine, I woke up at four in the morning, and something was sitting on my bed.
-Then I found my grandmother's diary. "The first time, it only watches. The second time, it comes closer. The third time, it says your name."
+My grandmother's diary had a rule for it: "The first time, it only watches. The second time, it comes closer. The third time, it says your name."
+Twenty-five years later, eight hundred miles away, my son asked me who the skinny man at the end of his bed was.
 
 0:00 The first night
-0:55 Grandma's house
-1:42 The diary
-2:53 Dad reads it
-3:26 The third night
-4:19 Today
+0:53 Grandma's house
+1:40 The diary
+2:42 Dad reads it
+3:15 The third night
+4:03 The missing pages
+4:44 Twenty-five years later
+5:17 The third night, again
+5:56 The letter
 
-Would you have told your dad?
+If it came for your child... would you lie down in their place?
 
 This story is fiction. All characters and events are invented. The Rake itself is an internet legend that was
 created anonymously on 4chan in the mid-2000s; this story, its characters and its ending are our own.
@@ -49,9 +53,9 @@ TAGS
 the rake, the rake creepypasta, animated horror story, horror animation, scary story, creepypasta animated, stick figure horror, 4am horror story, scary stories animated, creepy story, horror short, urban legend
 
 THUMBNAILS (youtube/)
-- thumbnail_A_its_on_my_bed.jpg   IT'S ON MY BED.   (first choice: Lily screaming, the Rake bent right over her face, 4:00 on the clock)
-- thumbnail_B_dont_wake_up.jpg    DON'T WAKE UP.    (her son asleep, the Rake on his bed - Test & Compare)
-- thumbnail_C_4am.jpg             4:00 AM           (looking down the bed, it stares at you - spare)
+- thumbnail_A_its_on_my_bed.jpg       IT'S ON MY BED.    (first choice: Lily screaming, the Rake bent right over her face, 4:00 on the clock)
+- thumbnail_C_i_took_his_place.jpg    I TOOK HIS PLACE.  (Lily grown up in her son's bed, its face over hers - Test & Compare)
+- thumbnail_B_dont_wake_up.jpg        DON'T WAKE UP.     (her son asleep, the Rake on his bed - spare)
 
 SETTINGS
 - Audience: No, it's not made for kids
@@ -60,4 +64,4 @@ SETTINGS
   AI text-to-speech (not realistic footage of real people or places).
 
 PINNED COMMENT
-What would you do if your kid asked you about "the skinny man"?
+Lily thinks it might starve if, just once, nobody lay down in the child's place. Would you find out?

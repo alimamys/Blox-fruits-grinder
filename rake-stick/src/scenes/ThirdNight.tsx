@@ -1,7 +1,7 @@
 // 5. THE THIRD NIGHT - in her parents' bed; 4:00; silence; through the wall, "Danny..."; the hall; the lamp on;
 // the bed empty, the blanket raked open; they never found him.
 import React from 'react';
-import {Dad, Lily, Mom} from '../components/characters/Cast';
+import {Dad, Lily, Mom, PAL} from '../components/characters/Cast';
 import {LieInBed, SitInBed} from '../stick/bed';
 import {DoorOpen, Person} from '../stick/goat';
 import {GEO, ramp, shot, Shots, useStick, walk, type Shot} from '../stick/kit';
@@ -14,6 +14,8 @@ const M = GEO.master;
 const PILLOW_X = 312;
 const MOM_X = 215;
 const LILY_X = 430;
+/** the painted quilt of her parents' bed */
+const MASTER_QUILT = '#bc966f';
 /** the tears across her blanket, pillow end to foot */
 const TEAR_A: [number, number] = [460, 790];
 const TEAR_B: [number, number] = [1120, 800];
@@ -57,11 +59,11 @@ export const ThirdNight: React.FC = () => {
 				<g>
 					<Glow cx={1270} cy={290} r={520} color="#b9cdf2" k={0.3} />
 					<BedClock x={70} y={835} text="4:00" frame={f} />
-					<LieInBed b={M} is={Mom} px={MOM_X} s={1.3} frame={f} id="mom" blanket={false} p={{eyes: 'closed', brows: 'flat', mouth: 'flat', idle: false}} />
+					<LieInBed b={M} is={Mom} px={MOM_X} s={1.3} frame={f} id="mom" shirt={PAL.mom.shirt} skin={PAL.mom.skin} matte={MASTER_QUILT} p={{eyes: 'closed', brows: 'flat', mouth: 'flat', idle: false}} />
 					{sitting ? (
 						<SitInBed b={M} is={Lily} x={LILY_X + 70} s={1.6} child frame={f} id="lilyUp" lap={false} p={{eyes: 'wide', brows: 'worried', look: [-1, 0.2], mouth: 'o', arms: 'hugKnees'}} />
 					) : (
-						<LieInBed b={M} is={Lily} px={LILY_X} s={1.6} child frame={f} id="lily" blanket={false} p={lilyP} />
+						<LieInBed b={M} is={Lily} px={LILY_X} s={1.6} child frame={f} id="lily" shirt={PAL.lily.shirt} skin={PAL.lily.skin} matte={MASTER_QUILT} dy={14} p={lilyP} />
 					)}
 				</g>
 			);
@@ -74,7 +76,7 @@ export const ThirdNight: React.FC = () => {
 				<g>
 					<Glow cx={470} cy={330} r={420} color="#b9cdf2" k={0.35} />
 					<RoomClock f={f} text="4:00" />
-					<LieInBed b={B} is={Dad} px={PILLOW_X} s={1.2} frame={f} id="dad" p={{eyes: 'wide', brows: 'worried', look: [1, -0.7], mouth: 'o', idle: false}} />
+					<LieInBed b={B} is={Dad} px={PILLOW_X} s={1.2} frame={f} id="dad" shirt={PAL.dad.shirt} skin={PAL.dad.skin} p={{eyes: 'wide', brows: 'worried', look: [1, -0.7], mouth: 'o', idle: false}} />
 					{/* it bends down from the hips until its face is just above his */}
 					<g transform={`rotate(${-6 - 16 * lean} 640 ${B.quilt - 34})`}>
 						<Rake x={600} y={B.quilt - 34} s={1.35} frame={f} pose="side" dir={-1} qa={false} lean={0.4 + lean * 0.6} mouth={Math.max(rt.talk * 0.9, t > T('rake_001_danny') && t < end('rake_001_danny') ? 0.25 : 0)} />

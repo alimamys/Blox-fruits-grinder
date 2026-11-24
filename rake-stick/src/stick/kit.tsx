@@ -64,7 +64,7 @@ export const useStick = () => {
 };
 
 // ---------------------------------------------------------------- sets (measured on the repainted plates)
-export type SetId = 'bedroom_night' | 'bedroom_pov_night' | 'master_night' | 'kitchen_day' | 'attic_day' | 'hallway_night' | 'exterior_night' | 'exterior_day' | 'black' | 'paper';
+export type SetId = 'bedroom_night' | 'bedroom_pov_night' | 'master_night' | 'kitchen_day' | 'attic_day' | 'hallway_night' | 'exterior_night' | 'exterior_day' | 'sonroom_night' | 'sonroom_day' | 'kitchen2_day' | 'newhouse_day' | 'black' | 'paper';
 
 /** sets that have an "unfinished drawing" version for the wash (none in this film) */
 const WHITE_SETS = new Set<SetId>([]);
@@ -85,6 +85,12 @@ export const GEO = {
 	kitchen: {clock: [1390, 215] as Pt, counter: 640, fridge: [1500, 255, 1890, 1050] as const, table: 950, window: [600, 95, 1215, 590] as const},
 	attic: {window: [880, 210] as Pt, trunk: [650, 690, 1140, 940] as const, fan: [1400, 620, 1720, 940] as const, boxes: [0, 510, 380, 990] as const, floor: 985},
 	hall: {left: [0, 90, 375, 1000] as const, right: [1460, 90, 1810, 1005] as const, table: [645, 670, 1190, 1020] as const, floor: 1035},
+	// today: Sam's room in their new home 800 miles away (night and morning plates differ a little), the kitchen, the house
+	son: {x0: 150, x1: 1075, pillow: [150, 370], pillowY: 700, quilt: 705, skirtTop: 915, skirtBottom: 1010, floor: 1005, quiltCols: ['#1f4a3e', '#26574a', '#1c4338', '#23503f']} as BedGeo,
+	sonRoom: {door: [1470, 45, 1830, 925] as const, clock: [58, 790] as Pt, floor: 962},
+	sonDay: {x0: 85, x1: 1080, pillow: [105, 385], pillowY: 770, quilt: 757, skirtTop: 990, skirtBottom: 1015, floor: 1080, quiltCols: ['#3f6b48', '#477652', '#3a6343', '#42704c']} as BedGeo,
+	sonDayRoom: {door: [1440, 30, 1830, 990] as const, floor: 1000},
+	newhouse: {samWindow: [1305, 740] as Pt},
 };
 
 // ---------------------------------------------------------------- camera

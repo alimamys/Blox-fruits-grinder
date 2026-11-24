@@ -58,7 +58,20 @@ export const TitleCard: React.FC<{f: number; d: number}> = ({f, d}) => {
 
 /** grandmother's diary page, full screen: the date, then the lines appear in her handwriting as she reads them;
  *  `lines` = text so far (each with 0..1 reveal); `torn` shows the torn-out stubs of the following pages */
-export const DiaryPage: React.FC<{f: number; lines: Array<[string, number]>; torn?: boolean; z?: number}> = ({f, lines, torn = false, z = 1}) => (
+export const DiaryPage: React.FC<{
+	f: number;
+	lines: Array<[string, number]>;
+	torn?: boolean;
+	z?: number;
+	/** heading (default the 1984 date) */
+	date?: string;
+	/** a page torn OUT of the book: ragged left edge, folded small (creases) */
+	tornOut?: boolean;
+	/** ink colour + size (Lily's letter is in blue ballpoint) */
+	ink?: string;
+	size?: number;
+	rot?: number;
+}> = ({f, lines, torn = false, z = 1, date = 'June 11th, 1984', tornOut = false, ink = '#2a2a48', size = 50, rot = -2}) => (
 	<AbsoluteFill style={{background: '#1a1410', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
 		<div
 			style={{
@@ -68,18 +81,19 @@ export const DiaryPage: React.FC<{f: number; lines: Array<[string, number]>; tor
 				border: '6px solid #141414',
 				borderRadius: 10,
 				boxShadow: '0 30px 80px rgba(0,0,0,0.7)',
-				transform: `rotate(-2deg) scale(${z})`,
+				transform: `rotate(${rot}deg) scale(${z})`,
 				padding: '70px 90px',
 				position: 'relative',
 				backgroundImage: 'repeating-linear-gradient(180deg, transparent 0 63px, rgba(90,110,160,0.35) 63px 65px), linear-gradient(180deg, #f3ecd8 0%, #e6dcc0 100%)',
 				backgroundPosition: '0 112px, 0 0',
 				fontFamily: '"Patrick Hand", cursive',
-				color: '#2a2a48',
+				color: ink,
+				clipPath: tornOut ? 'polygon(3% 0, 100% 0, 100% 100%, 2% 100%, 4% 92%, 1% 84%, 4% 75%, 1.5% 66%, 4% 57%, 1% 48%, 3.5% 39%, 1% 30%, 4% 21%, 1.5% 12%, 4% 5%)' : undefined,
 			}}
 		>
-			<div style={{fontSize: 52, marginBottom: 26}}>June 11th, 1984</div>
+			<div style={{fontSize: size + 2, marginBottom: 26}}>{date}</div>
 			{lines.map(([t, k], i) => (
-				<div key={i} style={{fontSize: 50, lineHeight: '64px', clipPath: `inset(0 ${100 - k * 100}% 0 0)`}}>
+				<div key={i} style={{fontSize: size, lineHeight: `${Math.round(size * 1.28)}px`, clipPath: `inset(0 ${100 - k * 100}% 0 0)`}}>
 					{t}
 				</div>
 			))}
@@ -88,6 +102,9 @@ export const DiaryPage: React.FC<{f: number; lines: Array<[string, number]>; tor
 					<path d="M0,0 L18,40 L4,90 L22,150 L6,210 L26,280 L8,350 L24,420 L4,500 L20,580 L6,650 L26,720 L8,800 L22,880 L0,980 Z" fill="#e6dcc0" stroke="#141414" strokeWidth={3} />
 				</svg>
 			) : null}
+			{tornOut ? (
+				<div style={{position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(90deg, transparent 32.8%, rgba(0,0,0,0.16) 33.3%, transparent 34%, transparent 65.8%, rgba(0,0,0,0.16) 66.3%, transparent 67%), linear-gradient(180deg, transparent 49.3%, rgba(0,0,0,0.18) 50%, transparent 50.8%)'}} />
+			) : null}
 			<div style={{position: 'absolute', inset: 0, opacity: 0.08 + 0.02 * Math.sin(f / 7), background: '#000', pointerEvents: 'none'}} />
 		</div>
 	</AbsoluteFill>
@@ -95,3 +112,19 @@ export const DiaryPage: React.FC<{f: number; lines: Array<[string, number]>; tor
 
 /** reveal 0..1 of a line between t0 and t1 */
 export const reveal = (t: number, t0: number, t1: number) => clamp01((t - t0) / Math.max(0.1, t1 - t0));
+
+/** a page's lines revealed in sync with the voice: [line id, text, from, to] where from/to are a word of the line
+ *  ('' = the line's start/end) or a fraction 0..1 of the line */
+export type PageLine = [string, string, string | number, string | number];
+export const pageLines = (
+	spec: PageLine[],
+	t: number,
+	at: (id: string) => number,
+	end: (id: string) => number,
+	word: (id: string, w: string, fallback?: number) => number,
+): Array<[string, number]> =>
+	spec.map(([id, txt, a, b]) => {
+		const t0 = typeof a === 'number' ? at(id) + a * (end(id) - at(id)) : a ? word(id, a, 0) - 0.3 : at(id);
+		const t1 = typeof b === 'number' ? at(id) + b * (end(id) - at(id)) : b ? word(id, b, 1) + 0.35 : end(id);
+		return [txt, reveal(t, t0, t1)];
+	});

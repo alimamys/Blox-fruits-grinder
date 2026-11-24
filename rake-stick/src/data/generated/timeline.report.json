@@ -1,18 +1,18 @@
 {
- "total": 301.7916666666667,
+ "total": 404.9166666666667,
  "scenes": [
   {
    "id": "firstNight",
    "name": "The first night",
    "start": 0,
-   "duration": 55.5,
+   "duration": 53.208,
    "narrationText": "When I was nine, I woke up at four in the morning, and something was sitting on my bed. Not at the end of it, where a dog would sleep. It was halfway up the blanket, crouched over my knees. It was shaped like a man. A very thin man. No hair. No clothes. Skin the colour of candle wax. Its hands were spread on the blanket, and the fingers were far too long. Each one ended in a curved yellow claw, like the teeth of a rake. And it was looking at me. It didn't blink. It didn't breathe. It just watched. I pulled the covers over my face and counted to ten. When I looked again, it was gone.",
    "dialogueIds": []
   },
   {
    "id": "breakfast",
    "name": "Grandma's house",
-   "start": 55.5,
+   "start": 53.208,
    "duration": 47.333,
    "narrationText": "That summer, we had moved into my grandmother's old house. She'd died in the spring, and my dad couldn't bear to sell it. I got the little bedroom at the end of the hall. The room that used to be his. At breakfast, I told him. My dad stopped buttering his toast. Just for a second. Then he smiled, kissed the top of my head, and told me to stop reading scary books before bed. I didn't read scary books.",
    "dialogueIds": [
@@ -24,9 +24,9 @@
   {
    "id": "diary",
    "name": "The diary",
-   "start": 102.833,
-   "duration": 70.417,
-   "narrationText": "That weekend, Dad sent me up to the attic to find the box fan. Behind the boxes there was a little blue notebook with a broken lock. My grandmother's handwriting. Nineteen eighty-four. Most of it was boring. Church. Groceries. The weather. And then, near the end, the handwriting changed. That was the last page. The rest had been torn out. My dad's name is Daniel. When he was a boy, everyone called him Danny. And his room, the little bedroom at the end of the hall, was mine now.",
+   "start": 100.542,
+   "duration": 62.208,
+   "narrationText": "That weekend, Dad sent me up to the attic to find the box fan. Behind the boxes there was a little blue notebook with a broken lock. My grandmother's handwriting. Nineteen eighty-four. That was the last page. The rest had been torn out. My dad's name is Daniel. When he was a boy, everyone called him Danny. And his room, the little bedroom at the end of the hall, was mine now.",
    "dialogueIds": [
     "grandma_001_june",
     "grandma_002_danny",
@@ -38,7 +38,7 @@
   {
    "id": "dadReads",
    "name": "Dad reads it",
-   "start": 173.25,
+   "start": 162.75,
    "duration": 32.917,
    "narrationText": "I showed him the diary. I watched him read it twice. He didn't say \"it was a dream\" this time. He said I was sleeping with Mom tonight. And he would sleep in my room.",
    "dialogueIds": [
@@ -52,28 +52,59 @@
   {
    "id": "thirdNight",
    "name": "The third night",
-   "start": 206.167,
-   "duration": 53.167,
-   "narrationText": "I tried to stay awake. I couldn't. I woke up at four in the morning. The house was completely silent. No clock. No wind. Nothing. And then, through the wall, very softly, I heard a voice I had never heard before. Thin and dry, like paper tearing. Mom didn't wake up. I still don't know how she didn't wake up. I ran down the hall. My bedroom door was open. The lamp was on. And the bed was empty. The blanket had been torn open in three long lines, from the pillow to the end of the bed. Like something had raked it. They never found him.",
+   "start": 195.667,
+   "duration": 47.375,
+   "narrationText": "I tried to stay awake. I couldn't. I woke up at four in the morning. The house was completely silent. No clock. No wind. Nothing. And then, through the wall, very softly, I heard a voice I had never heard before. Thin and dry, like paper tearing. I ran down the hall. My bedroom door was open. The lamp was on. And the bed was empty. The blanket had been torn open in three long lines, from the pillow to the end of the bed. Like something had raked it. They never found him.",
    "dialogueIds": [
     "rake_001_danny"
    ]
   },
   {
+   "id": "pages",
+   "name": "The missing pages",
+   "start": 243.042,
+   "duration": 41.458,
+   "narrationText": "A week later, Mom gave me his wallet. Folded inside it, very small, were the pages missing from Grandma's diary. My dad tore those pages out himself, when he was nine. He knew exactly what was coming. And he lay down in my bed anyway.",
+   "dialogueIds": [
+    "grandma_006_june14",
+    "grandma_007_name",
+    "grandma_008_rule"
+   ]
+  },
+  {
    "id": "today",
-   "name": "The little bedroom",
-   "start": 259.333,
-   "duration": 39.958,
-   "narrationText": "The police said he must have walked out in the night. Mom believed them. I tried to. I'm thirty-four now. When Mom died, she left me the house. I told myself it was only a house. My son is nine. He sleeps in the little bedroom at the end of the hall. This morning, at breakfast, he asked me a question. The first time, it only watches.",
+   "name": "Twenty-five years later",
+   "start": 284.5,
+   "duration": 32.5,
+   "narrationText": "Mom and I moved eight hundred miles away. I never went back to that house. I grew up. I had a son. For twenty-five years, I told myself it was the house. Sam is nine now. This morning, at breakfast, he asked me a question. It was never the house. It was us.",
    "dialogueIds": [
     "son_001_skinny_man",
     "son_002_watches"
    ]
   },
   {
+   "id": "lastNight",
+   "name": "The third night, again",
+   "start": 317,
+   "duration": 39.25,
+   "narrationText": "Tonight is the third night. I put Sam in my bed. Then I walked down the hall, and lay down in his. At four o'clock, the blanket moved. Something climbed up from the end of the bed. Slowly. Knees. Hands. Closer. This time, I didn't hide. I looked right at it.",
+   "dialogueIds": [
+    "son_003_closer",
+    "rake_002_lily"
+   ]
+  },
+  {
+   "id": "letter",
+   "name": "The letter",
+   "start": 356.25,
+   "duration": 46.167,
+   "narrationText": "Sam. If you're reading this, it took me instead of you. I'm glad. It never wanted children. It visits them three times... and waits to see who loves them enough to lie down in their place. My grandfather did it for my dad. My dad did it for me. Someone always does. Maybe that is what keeps it alive. Maybe if, just once, nobody lay down... it would finally starve. I couldn't find out. Not with you. One day, your own child will ask you about the skinny man. And you'll have to decide.",
+   "dialogueIds": []
+  },
+  {
    "id": "end",
    "name": "Black",
-   "start": 299.292,
+   "start": 402.417,
    "duration": 2.5,
    "narrationText": "",
    "dialogueIds": []

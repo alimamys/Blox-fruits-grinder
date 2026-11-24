@@ -2,11 +2,11 @@
 // Each shows a real moment of the film.
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
-import {Lily, Son} from '../components/characters/Cast';
+import {Lily, LilyAdult, PAL, Son} from '../components/characters/Cast';
 import {RoomClock} from '../scenes/common';
 import {LieInBed} from '../stick/bed';
 import {GEO, Stage} from '../stick/kit';
-import {Glow} from '../stick/props';
+import {BedClock, Glow} from '../stick/props';
 import {Rake} from '../stick/rake';
 import {FONT, loadAllFonts} from '../utils/fonts';
 
@@ -33,7 +33,7 @@ export const Thumb: React.FC<{v: 'A' | 'B' | 'C'}> = ({v}) => {
 					<Stage set="bedroom_night" z={1.85} f={[520, 600]} t={0}>
 						<Glow cx={470} cy={330} r={420} color="#b9cdf2" k={0.45} />
 						<RoomClock f={0} text="4:00" />
-						<LieInBed b={B} is={Lily} px={312} s={1.75} child frame={0} id="thA" p={{eyes: 'wide', brows: 'raised', mouth: 'scream', look: [1, -0.6], idle: false}} />
+						<LieInBed b={B} is={Lily} px={312} s={1.75} child frame={0} shirt={PAL.lily.shirt} skin={PAL.lily.skin} id="thA" p={{eyes: 'wide', brows: 'raised', mouth: 'scream', look: [1, -0.6], idle: false}} />
 						<g transform={`rotate(-20 640 ${B.quilt - 34})`}>
 							<Rake x={600} y={B.quilt - 34} s={1.35} frame={5} pose="side" dir={-1} lean={1} mouth={0.45} qa={false} />
 						</g>
@@ -44,32 +44,37 @@ export const Thumb: React.FC<{v: 'A' | 'B' | 'C'}> = ({v}) => {
 		);
 	}
 	if (v === 'B') {
-		// DON'T WAKE UP. - her son asleep; it sits at the foot of his bed and watches
+		// DON'T WAKE UP. - Sam asleep in his new room 800 miles away; it is crouched on his bed anyway
+		const SB = GEO.son;
 		return (
 			<AbsoluteFill style={{background: '#000'}}>
 				<AbsoluteFill style={pop}>
-					<Stage set="bedroom_night" z={1.55} f={[760, 600]} t={0}>
-						<Glow cx={470} cy={330} r={420} color="#b9cdf2" k={0.4} />
-						<RoomClock f={0} text="4:00" />
-						<LieInBed b={B} is={Son} px={312} s={1.75} child frame={0} id="thB" p={{eyes: 'closed', brows: 'flat', mouth: 'flat', idle: false}} />
-						<Rake x={960} y={B.quilt - 34} s={1.45} frame={5} pose="side" dir={-1} lean={0.5} qa={false} />
+					<Stage set="sonroom_night" z={1.55} f={[700, 600]} t={0}>
+						<Glow cx={720} cy={300} r={460} color="#a9d2e6" k={0.4} />
+						<BedClock x={GEO.sonRoom.clock[0]} y={GEO.sonRoom.clock[1]} text="4:00" frame={0} />
+						<LieInBed b={SB} is={Son} px={262} s={1.75} child frame={0} shirt={PAL.son.shirt} skin={PAL.son.skin} id="thB" p={{eyes: 'closed', brows: 'flat', mouth: 'flat', idle: false}} />
+						<Rake x={900} y={SB.quilt - 30} s={1.45} frame={5} pose="side" dir={-1} lean={0.5} qa={false} />
 					</Stage>
 				</AbsoluteFill>
 				<Words x={40} y={40} rot={-3} lines={[{t: "DON'T", c: '#ffffff', size: 170}, {t: 'WAKE UP.', c: '#ff3b2f', size: 170}]} />
 			</AbsoluteFill>
 		);
 	}
-	// 4:00 AM - looking down the bed: it is crouched on the blanket, looking straight at you
+	// I TOOK HIS PLACE. - Lily grown up, lying in her son's bed at 4:00, eyes open; its face right over hers
+	const SB = GEO.son;
 	return (
 		<AbsoluteFill style={{background: '#000'}}>
 			<AbsoluteFill style={pop}>
-				<Stage set="bedroom_pov_night" z={1.9} f={[1080, 600]} t={0}>
-					<Glow cx={330} cy={300} r={500} color="#b9cdf2" k={0.35} />
-					<Rake x={1180} y={930} s={1.9} frame={5} pose="front" lean={0.6} mouth={0.35} qa={false} />
+				<Stage set="sonroom_night" z={2.3} f={[400, 600]} t={0}>
+					<Glow cx={720} cy={300} r={460} color="#a9d2e6" k={0.45} />
+					<BedClock x={GEO.sonRoom.clock[0]} y={GEO.sonRoom.clock[1]} text="4:00" frame={0} />
+					<LieInBed b={SB} is={LilyAdult} px={262} s={1.15} frame={0} shirt={PAL.lilyAdult.shirt} skin={PAL.lilyAdult.skin} id="thC" p={{eyes: 'wide', brows: 'angry', mouth: 'o', look: [1, -0.4], idle: false}} />
+					<g transform={`rotate(-24 620 ${SB.quilt - 30})`}>
+						<Rake x={580} y={SB.quilt - 30} s={1.35} frame={5} pose="side" dir={-1} lean={1} mouth={0.5} qa={false} />
+					</g>
 				</Stage>
 			</AbsoluteFill>
-			<div style={{position: 'absolute', left: 60, top: 300, transform: 'rotate(-4deg)', fontFamily: '"Share Tech Mono", monospace', fontWeight: 800, fontSize: 230, color: '#ff2a1f', WebkitTextStroke: '12px #000', paintOrder: 'stroke fill', textShadow: '0 0 40px rgba(255,40,30,0.8), 0 10px 0 rgba(0,0,0,0.6)'}}>4:00</div>
-			<Words x={80} y={560} rot={-4} lines={[{t: 'AM', c: '#ffffff', size: 150}]} />
+			<Words x={40} y={60} rot={3} align="right" lines={[{t: 'I TOOK', c: '#ffffff', size: 160}, {t: 'HIS PLACE.', c: '#ff3b2f', size: 160}]} />
 		</AbsoluteFill>
 	);
 };

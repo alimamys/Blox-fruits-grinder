@@ -1,50 +1,52 @@
-// 6. TODAY - the police; she is 34 and the house is hers; her son sleeps in the little bedroom; at breakfast:
-// "Who's the skinny man?"; the first time, it only watches - and it is at the foot of his bed.
+// 7. TODAY - Mom and Lily moved 800 miles away; she grew up, had a son, told herself it was the house.
+// Sam is nine. At breakfast: "Who's the skinny man? ... He just watches." It was never the house. It was us.
 import React from 'react';
-import {Son} from '../components/characters/Cast';
+import {PAL, Son} from '../components/characters/Cast';
 import {LieInBed} from '../stick/bed';
 import {GEO, shot, Shots, useStick, type Shot} from '../stick/kit';
-import {Glow} from '../stick/props';
+import {BedClock, Glow} from '../stick/props';
 import {Rake} from '../stick/rake';
-import {Kitchen, RoomClock} from './common';
+import {Kitchen} from './common';
 
-const B = GEO.bed;
-const PILLOW_X = 312;
+const SB = GEO.son;
+
+/** Sam asleep in his room at night (the clock on his nightstand) */
+export const SamAsleep: React.FC<{f: number; clock?: string; eyes?: 'closed' | 'wide'}> = ({f, clock = '4:00', eyes = 'closed'}) => (
+	<g>
+		<Glow cx={720} cy={300} r={460} color="#a9d2e6" k={0.3} />
+		<BedClock x={GEO.sonRoom.clock[0]} y={GEO.sonRoom.clock[1]} text={clock} frame={f} />
+		<LieInBed b={SB} is={Son} px={262} s={1.75} child frame={f} id="sam" shirt={PAL.son.shirt} skin={PAL.son.skin} p={{eyes, brows: eyes === 'wide' ? 'worried' : 'flat', mouth: eyes === 'wide' ? 'o' : 'flat', look: [1, -0.5]}} />
+	</g>
+);
 
 export const Today: React.FC = () => {
 	const {f, t, at, end, talk} = useStick();
 	const T = (id: string, k = 0) => at(id) + k * (end(id) - at(id));
-	const tLast = T('narrator_037_first_time');
 	const shots: Shot[] = [
-		// "The police said he must have walked out in the night..."
-		shot(T('narrator_033_police'), 'exterior_day', 1.0, 1.08, [960, 540], [960, 520], {light: 'grey'}),
-		// "I'm thirty-four now..."
-		shot(T('narrator_034_thirty_four'), 'kitchen_day', 1.2, 1.3, [760, 640], [700, 650], {tag: 'alone', light: 'grey'}),
-		// "My son is nine. He sleeps in the little bedroom at the end of the hall."
-		shot(T('narrator_035_son'), 'bedroom_night', 1.3, 1.45, [600, 640], [480, 660], {tag: 'son'}),
-		// "This morning, at breakfast, he asked me a question."
-		shot(T('narrator_036_question'), 'kitchen_day', 1.05, 1.1, [920, 580], [900, 590], {tag: 'two'}),
-		// SON: "Mom? Who's the skinny man?"
-		shot(T('son_001_skinny_man'), 'kitchen_day', 2.3, 2.4, [1180, 700], [1180, 700], {tag: 'two'}),
-		// SON: "The one who sits at the end of my bed..."
-		shot(T('son_002_watches'), 'kitchen_day', 2.5, 2.6, [1180, 690], [1180, 690], {tag: 'two'}),
-		// her face
-		shot(end('son_002_watches'), 'kitchen_day', 2.8, 3.0, [640, 690], [640, 690], {tag: 'two'}),
-		// "The first time, it only watches." - his room, tonight: it is at the foot of his bed
-		shot(tLast, 'bedroom_night', 1.1, 1.6, [700, 620], [760, 570], {tag: 'last'}),
+		// "Mom and I moved eight hundred miles away. I never went back to that house."
+		shot(T('narrator_041_moved'), 'newhouse_day', 1.0, 1.08, [960, 560], [960, 540]),
+		// "I grew up. I had a son. For twenty-five years, I told myself it was the house."
+		shot(T('narrator_042_grew_up'), 'kitchen2_day', 1.15, 1.22, [760, 640], [720, 650], {tag: 'alone'}),
+		// "Sam is nine now. This morning, at breakfast, he asked me a question."
+		shot(T('narrator_043_sam'), 'kitchen2_day', 1.05, 1.1, [920, 600], [900, 610], {tag: 'two'}),
+		// SAM: "Mom? Who's the skinny man?"
+		shot(T('son_001_skinny_man'), 'kitchen2_day', 2.3, 2.4, [1230, 700], [1230, 700], {tag: 'two'}),
+		// SAM: "The one who sits at the end of my bed. He doesn't do anything. He just watches."
+		shot(T('son_002_watches'), 'kitchen2_day', 2.5, 2.6, [1230, 690], [1230, 690], {tag: 'two'}),
+		// "It was never the house." - her face
+		shot(T('narrator_044_never_house'), 'kitchen2_day', 2.8, 3.0, [600, 690], [600, 690], {tag: 'two'}),
+		// "It was us." - his room, that night: at the end of his bed, it watches
+		shot(T('narrator_045_us'), 'sonroom_night', 1.15, 1.35, [700, 600], [760, 580], {tag: 'watch'}),
 	];
 	const world = (s: Shot) => {
-		if (s.set === 'bedroom_night') {
+		if (s.set === 'sonroom_night')
 			return (
 				<g>
-					<Glow cx={470} cy={330} r={420} color="#b9cdf2" k={0.35} />
-					<RoomClock f={f} text={s.tag === 'last' ? '4:00' : '9:12'} />
-					<LieInBed b={B} is={Son} px={PILLOW_X} s={1.75} child frame={f} id="son" p={{eyes: 'closed', brows: 'flat', mouth: 'flat'}} />
-					{s.tag === 'last' ? <Rake x={1010} y={B.quilt - 34} s={1.35} frame={f} pose="side" dir={-1} lean={0.15} /> : null}
+					<SamAsleep f={f} />
+					<Rake x={985} y={SB.quilt - 30} s={1.35} frame={f} pose="side" dir={-1} lean={0.15} />
 				</g>
 			);
-		}
-		if (s.set !== 'kitchen_day') return null;
+		if (s.set !== 'kitchen2_day') return null;
 		const sd = talk('son');
 		const frozen = t > T('son_001_skinny_man', 0.3);
 		if (s.tag === 'alone') return <Kitchen f={f} left="adult" right={null} l={{look: [1, 0.3], eyes: 'dot', brows: 'flat', mouth: 'flat', arms: {l: [28, -64], r: [40, -100]}}} />;

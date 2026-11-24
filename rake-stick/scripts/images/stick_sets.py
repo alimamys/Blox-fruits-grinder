@@ -162,7 +162,75 @@ def exterior_day():
     return exterior(True)
 
 
-SETS = {f.__name__: f for f in (bedroom_night, bedroom_pov_night, master_night, kitchen_day, attic_day, hallway_night, exterior_night, exterior_day)}
+# ---- the present day: Lily's home 800 miles from that house (Sam's room, the kitchen, the house)
+def sonroom(day: bool):
+    """Sam's bedroom in their new home, side stage view, laid out like the little bedroom (bed headboard left in the same
+    place, nightstand with a clock) but a different room: blinds, a bookshelf, space posters, a door on the right."""
+    wall = (150, 190, 170) if day else (40, 62, 70)
+    im = Image.new('RGB', (1920, 1080), wall)
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 880, 1920, 1080], fill=(170, 140, 110) if day else (70, 56, 46))
+    d.line([0, 880, 1920, 880], fill=INK, width=6)
+    d.rectangle([540, 140, 900, 450], fill=(200, 230, 250) if day else (16, 24, 46), outline=INK, width=8)  # window
+    for y in range(160, 450, 34):
+        d.line([548, y, 892, y], fill=(230, 230, 225) if day else (60, 66, 80), width=5)  # blinds, half open
+    for x, y in ((980, 220), (1160, 260)):
+        d.rectangle([x, y, x + 130, y + 170], fill=(60, 70, 120), outline=INK, width=4)  # posters (blank)
+    side_bed(d, 260, 1100, 600, 880, quilt=(60, 110, 80))
+    d.rectangle([90, 660, 230, 880], fill=(230, 230, 225), outline=INK, width=5)  # white nightstand
+    d.rectangle([115, 610, 205, 660], fill=(40, 40, 46), outline=INK, width=4)  # alarm clock, blank face
+    d.rectangle([1440, 230, 1720, 882], fill=(235, 235, 230), outline=INK, width=6)  # white door (closed)
+    d.ellipse([1462, 560, 1484, 582], fill=(160, 160, 160), outline=INK)
+    d.rectangle([1200, 560, 1400, 880], fill=(200, 170, 130), outline=INK, width=5)  # bookshelf
+    for y in (640, 720, 800):
+        d.line([1200, y, 1400, y], fill=INK, width=4)
+    return im
+
+
+def sonroom_night():
+    return sonroom(False)
+
+
+def sonroom_day():
+    return sonroom(True)
+
+
+def kitchen2_day():
+    """Their kitchen today, back wall in the morning: bright modern white cabinets, a big window, the fridge on the LEFT."""
+    im = Image.new('RGB', (1920, 1080), (190, 225, 215))
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 900, 1920, 1080], fill=(200, 190, 175))
+    d.line([0, 900, 1920, 900], fill=INK, width=6)
+    d.rectangle([660, 120, 1260, 470], fill=(180, 220, 245), outline=INK, width=8)  # wide window
+    d.line([960, 120, 960, 470], fill=INK, width=6)
+    d.rectangle([520, 520, 1500, 610], fill=(225, 225, 225), outline=INK, width=5)  # counter
+    d.rectangle([520, 610, 1500, 900], fill=(245, 245, 240), outline=INK, width=5)  # white cabinets
+    for x in (520, 765, 1010, 1255):
+        d.rectangle([x + 10, 630, x + 235, 880], outline=INK, width=3)
+    d.rectangle([140, 220, 420, 900], fill=(200, 205, 210), outline=INK, width=6)  # fridge, LEFT
+    d.rectangle([1560, 90, 1880, 330], fill=(245, 245, 240), outline=INK, width=5)  # wall cupboards, RIGHT
+    d.ellipse([1640, 400, 1760, 520], fill=(250, 250, 250), outline=INK, width=5)  # wall clock, blank face
+    return im
+
+
+def newhouse_day():
+    """Their house today: a small single-storey light-blue bungalow far from the old house, a carport, palm and lawn."""
+    im = Image.new('RGB', (1920, 1080), (170, 210, 240))
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 860, 1920, 1080], fill=(120, 170, 80))
+    d.rectangle([420, 470, 1440, 862], fill=(150, 190, 215), outline=INK, width=8)  # walls
+    d.polygon([(380, 480), (1480, 480), (1300, 360), (560, 360)], fill=(120, 110, 110), outline=INK)  # low roof
+    d.rectangle([860, 640, 980, 862], fill=(230, 230, 225), outline=INK, width=5)  # door
+    for x in (520, 680, 1100, 1260):
+        d.rectangle([x, 560, x + 120, 700], fill=(200, 230, 250), outline=INK, width=5)  # windows (the right one is Sam's)
+    d.rectangle([1440, 560, 1760, 862], fill=(170, 170, 170), outline=INK, width=5)  # carport
+    d.ellipse([1600, 80, 1720, 200], fill=(255, 240, 170))
+    d.rectangle([180, 420, 210, 862], fill=(120, 90, 60), outline=INK, width=4)  # palm trunk
+    d.ellipse([90, 330, 300, 470], fill=(70, 140, 60), outline=INK, width=4)
+    return im
+
+
+SETS = {f.__name__: f for f in (bedroom_night, bedroom_pov_night, master_night, kitchen_day, attic_day, hallway_night, exterior_night, exterior_day, sonroom_night, sonroom_day, kitchen2_day, newhouse_day)}
 
 if __name__ == '__main__':
     OUT.mkdir(parents=True, exist_ok=True)

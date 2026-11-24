@@ -5,6 +5,9 @@ import {Breakfast} from './Breakfast';
 import {DadReads} from './DadReads';
 import {Diary} from './Diary';
 import {FirstNight} from './FirstNight';
+import {LastNight} from './LastNight';
+import {Letter} from './Letter';
+import {Pages} from './Pages';
 import {ThirdNight} from './ThirdNight';
 import {Today} from './Today';
 
@@ -16,6 +19,9 @@ export const SCENE_COMPONENTS: Record<string, React.FC> = {
 	diary: Diary,
 	dadReads: DadReads,
 	thirdNight: ThirdNight,
+	pages: Pages,
 	today: Today,
+	lastNight: LastNight,
+	letter: Letter,
 	end: Black,
 };

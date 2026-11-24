@@ -166,19 +166,37 @@ _Quiet, close, a confession. Let "on my bed" land._
 <sub>`narrator/narrator_032_never_found.wav` · grieving · intensity 0.45 · pace 0.90 · fear 4 · fx none</sub>  
 
 
+## Scene: pages
+
+**LILY (NARRATION, 34)** — "A week later, Mom gave me his wallet. Folded inside it, very small, were the pages missing from Grandma's diary."  
+<sub>`narrator/narrator_038_wallet.wav` · grieving · intensity 0.45 · pace 1.00 · fear 3 · fx none</sub>  
+
+**GRANDMA (THE DIARY)** — "June fourteenth. Robert slept in Danny's bed last night, so it would find him instead."  
+<sub>`grandma/grandma_006_june14.wav` · grieving · intensity 0.60 · pace 0.92 · fear 0 · fx none</sub>  
+
+**GRANDMA (THE DIARY)** — "At four o'clock, I heard it say his name. My husband is gone."  
+<sub>`grandma/grandma_007_name.wav` · grieving · intensity 0.70 · pace 0.90 · fear 0 · fx none</sub>  
+
+**GRANDMA (THE DIARY)** — "Mother was right. It never takes the child. It takes whoever lies down in the child's place."  
+<sub>`grandma/grandma_008_rule.wav` · afraid · intensity 0.60 · pace 0.90 · fear 0 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "My dad tore those pages out himself, when he was nine. He knew exactly what was coming."  
+<sub>`narrator/narrator_039_knew.wav` · grieving · intensity 0.45 · pace 0.95 · fear 3 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "And he lay down in my bed anyway."  
+<sub>`narrator/narrator_040_anyway.wav` · grieving · intensity 0.45 · pace 0.88 · fear 3 · fx none</sub>  
+
+
 ## Scene: today
 
-**LILY (NARRATION, 34)** — "The police said he must have walked out in the night. Mom believed them. I tried to."  
-<sub>`narrator/narrator_033_police.wav` · serious · intensity 0.35 · pace 1.00 · fear 3 · fx none</sub>  
+**LILY (NARRATION, 34)** — "Mom and I moved eight hundred miles away. I never went back to that house."  
+<sub>`narrator/narrator_041_moved.wav` · serious · intensity 0.35 · pace 1.00 · fear 3 · fx none</sub>  
 
-**LILY (NARRATION, 34)** — "I'm thirty-four now. When Mom died, she left me the house. I told myself it was only a house."  
-<sub>`narrator/narrator_034_thirty_four.wav` · serious · intensity 0.35 · pace 1.00 · fear 3 · fx none</sub>  
+**LILY (NARRATION, 34)** — "I grew up. I had a son. For twenty-five years, I told myself it was the house."  
+<sub>`narrator/narrator_042_grew_up.wav` · serious · intensity 0.35 · pace 1.00 · fear 3 · fx none</sub>  
 
-**LILY (NARRATION, 34)** — "My son is nine. He sleeps in the little bedroom at the end of the hall."  
-<sub>`narrator/narrator_035_son.wav` · serious · intensity 0.35 · pace 0.95 · fear 3 · fx none</sub>  
-
-**LILY (NARRATION, 34)** — "This morning, at breakfast, he asked me a question."  
-<sub>`narrator/narrator_036_question.wav` · serious · intensity 0.35 · pace 1.00 · fear 3 · fx none</sub>  
+**LILY (NARRATION, 34)** — "Sam is nine now. This morning, at breakfast, he asked me a question."  
+<sub>`narrator/narrator_043_sam.wav` · serious · intensity 0.35 · pace 1.00 · fear 3 · fx none</sub>  
 
 **HER SON (9)** — "Mom? Who's the skinny man?"  
 <sub>`son/son_001_skinny_man.wav` · casual · intensity 0.40 · pace 1.00 · fear 0 · fx room</sub>  
@@ -186,5 +204,53 @@ _Quiet, close, a confession. Let "on my bed" land._
 **HER SON (9)** — "The one who sits at the end of my bed. He doesn't do anything. He just watches."  
 <sub>`son/son_002_watches.wav` · casual · intensity 0.40 · pace 1.00 · fear 0 · fx room</sub>  
 
-**LILY (NARRATION, 34)** — "The first time, it only watches."  
-<sub>`narrator/narrator_037_first_time.wav` · serious · intensity 0.35 · pace 0.85 · fear 3 · fx none</sub>  
+**LILY (NARRATION, 34)** — "It was never the house."  
+<sub>`narrator/narrator_044_never_house.wav` · serious · intensity 0.35 · pace 0.85 · fear 3 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "It was us."  
+<sub>`narrator/narrator_045_us.wav` · serious · intensity 0.35 · pace 0.80 · fear 3 · fx none</sub>  
+
+
+## Scene: lastNight
+
+**HER SON (9)** — "Mom... he came closer last night. He put his hand on my knee."  
+<sub>`son/son_003_closer.wav` · afraid · intensity 0.60 · pace 1.00 · fear 0 · fx room</sub>  
+
+**LILY (NARRATION, 34)** — "Tonight is the third night."  
+<sub>`narrator/narrator_046_third.wav` · afraid · intensity 0.55 · pace 0.88 · fear 5 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "I put Sam in my bed. Then I walked down the hall, and lay down in his."  
+<sub>`narrator/narrator_047_lay_down.wav` · afraid · intensity 0.55 · pace 0.95 · fear 5 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "At four o'clock, the blanket moved."  
+<sub>`narrator/narrator_048_blanket.wav` · afraid · intensity 0.55 · pace 0.90 · fear 5 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "Something climbed up from the end of the bed. Slowly. Knees. Hands. Closer."  
+<sub>`narrator/narrator_049_climbed.wav` · afraid · intensity 0.55 · pace 0.90 · fear 5 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "This time, I didn't hide. I looked right at it."  
+<sub>`narrator/narrator_050_looked.wav` · afraid · intensity 0.55 · pace 0.92 · fear 5 · fx none</sub>  
+
+**THE RAKE** — "Lily."  
+<sub>`rake/rake_002_lily.wav` · whispering · intensity 0.40 · pace 0.80 · fear 0 · fx door</sub>  
+
+
+## Scene: letter
+
+**LILY (NARRATION, 34)** — "Sam. If you're reading this, it took me instead of you. I'm glad."  
+<sub>`narrator/narrator_051_glad.wav` · warm · intensity 0.40 · pace 0.92 · fear 2 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "It never wanted children. It visits them three times... and waits to see who loves them enough to lie down in their place."  
+<sub>`narrator/narrator_052_never_wanted.wav` · warm · intensity 0.40 · pace 0.92 · fear 2 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "My grandfather did it for my dad. My dad did it for me. Someone always does. Maybe that is what keeps it alive."  
+<sub>`narrator/narrator_053_someone.wav` · warm · intensity 0.40 · pace 0.92 · fear 2 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "Maybe if, just once, nobody lay down... it would finally starve."  
+<sub>`narrator/narrator_054_starve.wav` · warm · intensity 0.40 · pace 0.88 · fear 2 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "I couldn't find out. Not with you."  
+<sub>`narrator/narrator_055_couldnt.wav` · warm · intensity 0.40 · pace 0.88 · fear 2 · fx none</sub>  
+
+**LILY (NARRATION, 34)** — "One day, your own child will ask you about the skinny man. And you'll have to decide."  
+<sub>`narrator/narrator_056_decide.wav` · warm · intensity 0.40 · pace 0.88 · fear 2 · fx none</sub>  

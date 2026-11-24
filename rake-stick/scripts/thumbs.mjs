@@ -10,7 +10,7 @@ import {renderStill, selectComposition} from '@remotion/renderer';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const browserExecutable = '/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell';
 const serveUrl = await bundle({entryPoint: path.join(root, 'src/index.ts'), outDir: path.join(root, 'build/thumb-bundle'), publicDir: path.join(root, 'public')});
-const names = {A: 'thumbnail_A_its_on_my_bed', B: 'thumbnail_B_dont_wake_up', C: 'thumbnail_C_4am'};
+const names = {A: 'thumbnail_A_its_on_my_bed', B: 'thumbnail_B_dont_wake_up', C: 'thumbnail_C_i_took_his_place'};
 fs.mkdirSync(path.join(root, 'youtube'), {recursive: true});
 for (const [v, name] of Object.entries(names)) {
 	const composition = await selectComposition({serveUrl, id: `Thumb${v}`, browserExecutable});

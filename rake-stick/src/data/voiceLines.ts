@@ -146,18 +146,58 @@ const THIRD_NIGHT: VoiceLine[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// 6. THE LITTLE BEDROOM - today
+// 6. THE MISSING PAGES - in his wallet: what happened in 1984, and the real rule
 // ---------------------------------------------------------------------------
-const c6 = scene('today', {emotion: 'serious', intensity: 0.35, fearLevel: 3});
-const TODAY: VoiceLine[] = [
-	c6.n('narrator_033_police', 'The police said he must have walked out in the night. Mom believed them. I tried to.', {pauseAfter: 0.5}),
-	c6.n('narrator_034_thirty_four', "I'm thirty-four now. When Mom died, she left me the house. I told myself it was only a house.", {pauseAfter: 0.5}),
-	c6.n('narrator_035_son', 'My son is nine. He sleeps in the little bedroom at the end of the hall.', {pace: 0.95, pauseAfter: 0.5}),
-	c6.n('narrator_036_question', 'This morning, at breakfast, he asked me a question.', {pauseAfter: 0.4}),
-	c6.s('son_001_skinny_man', "Mom? Who's the skinny man?", {emotion: 'casual', intensity: 0.4, pauseAfter: 0.35, fishTags: '[curious, casual]'}),
-	c6.s('son_002_watches', "The one who sits at the end of my bed. He doesn't do anything. He just watches.", {emotion: 'casual', intensity: 0.4, pauseAfter: 1.1, fishTags: '[matter-of-fact, calm]'}),
-	c6.n('narrator_037_first_time', 'The first time, it only watches.', {pace: 0.85, pauseAfter: 1.0, fishTags: '[whispering]'}),
+const c6 = scene('pages', {emotion: 'grieving', intensity: 0.45, fearLevel: 3});
+const PAGES: VoiceLine[] = [
+	c6.n('narrator_038_wallet', "A week later, Mom gave me his wallet. Folded inside it, very small, were the pages missing from Grandma's diary.", {pauseAfter: 0.5}),
+	c6.g('grandma_006_june14', "June fourteenth. Robert slept in Danny's bed last night, so it would find him instead.", {emotion: 'grieving', intensity: 0.6, pace: 0.92, pauseAfter: 0.4, fishTags: '[quiet, shaking, reading aloud]'}),
+	c6.g('grandma_007_name', 'At four o\'clock, I heard it say his name. My husband is gone.', {emotion: 'grieving', intensity: 0.7, pace: 0.9, pauseAfter: 0.6, fishTags: '[broken, crying softly]'}),
+	c6.g('grandma_008_rule', 'Mother was right. It never takes the child. It takes whoever lies down in the child\'s place.', {emotion: 'afraid', intensity: 0.6, pace: 0.9, pauseAfter: 0.8, fishTags: '[slow, hollow]'}),
+	c6.n('narrator_039_knew', 'My dad tore those pages out himself, when he was nine. He knew exactly what was coming.', {pace: 0.95, pauseAfter: 0.5}),
+	c6.n('narrator_040_anyway', 'And he lay down in my bed anyway.', {pace: 0.88, pauseAfter: 1.0, emotion: 'grieving', fishTags: '[quiet, holding back tears]'}),
 ];
 
-export const VOICE_LINES: VoiceLine[] = [...FIRST_NIGHT, ...BREAKFAST, ...DIARY, ...DAD_READS, ...THIRD_NIGHT, ...TODAY];
+// ---------------------------------------------------------------------------
+// 7. TODAY - far away from that house; Sam is nine; "Who's the skinny man?"
+// ---------------------------------------------------------------------------
+const c7 = scene('today', {emotion: 'serious', intensity: 0.35, fearLevel: 3});
+const TODAY: VoiceLine[] = [
+	c7.n('narrator_041_moved', 'Mom and I moved eight hundred miles away. I never went back to that house.', {pauseAfter: 0.4}),
+	c7.n('narrator_042_grew_up', 'I grew up. I had a son. For twenty-five years, I told myself it was the house.', {pauseAfter: 0.5}),
+	c7.n('narrator_043_sam', 'Sam is nine now. This morning, at breakfast, he asked me a question.', {pauseAfter: 0.4}),
+	c7.s('son_001_skinny_man', "Mom? Who's the skinny man?", {emotion: 'casual', intensity: 0.4, pauseAfter: 0.35, fishTags: '[curious, casual]'}),
+	c7.s('son_002_watches', "The one who sits at the end of my bed. He doesn't do anything. He just watches.", {emotion: 'casual', intensity: 0.4, pauseAfter: 1.1, fishTags: '[matter-of-fact, calm]'}),
+	c7.n('narrator_044_never_house', 'It was never the house.', {pace: 0.85, pauseAfter: 0.7, fishTags: '[quiet, horrified]'}),
+	c7.n('narrator_045_us', 'It was us.', {pace: 0.8, pauseAfter: 1.0, fishTags: '[whispering]'}),
+];
+
+// ---------------------------------------------------------------------------
+// 8. THE LAST NIGHT - the second visit; she lies down in his bed; 4:00; it climbs up to her face
+// ---------------------------------------------------------------------------
+const c8 = scene('lastNight', {emotion: 'afraid', intensity: 0.55, fearLevel: 5});
+const LAST_NIGHT: VoiceLine[] = [
+	c8.s('son_003_closer', 'Mom... he came closer last night. He put his hand on my knee.', {emotion: 'afraid', intensity: 0.6, pauseAfter: 0.8, fishTags: '[scared, small voice]'}),
+	c8.n('narrator_046_third', 'Tonight is the third night.', {pace: 0.88, pauseAfter: 0.7}),
+	c8.n('narrator_047_lay_down', 'I put Sam in my bed. Then I walked down the hall, and lay down in his.', {pace: 0.95, pauseAfter: 0.6}),
+	c8.n('narrator_048_blanket', 'At four o\'clock, the blanket moved.', {pace: 0.9, pauseAfter: 0.6, fishTags: '[whispering]'}),
+	c8.n('narrator_049_climbed', 'Something climbed up from the end of the bed. Slowly. Knees. Hands. Closer.', {pace: 0.9, pauseAfter: 0.5, fishTags: '[whispering, terrified]'}),
+	c8.n('narrator_050_looked', "This time, I didn't hide. I looked right at it.", {pace: 0.92, pauseAfter: 0.6, fishTags: '[whispering, shaking]'}),
+	c8.r('rake_002_lily', 'Lily.', {spokenText: 'Lily...', pace: 0.8, pauseBefore: 0.3, pauseAfter: 0.4, fishTags: '[whispering, raspy, drawn out]'}),
+];
+
+// ---------------------------------------------------------------------------
+// 9. THE LETTER - morning; Sam finds her bed empty and the blue notebook on the pillow
+// ---------------------------------------------------------------------------
+const c9 = scene('letter', {emotion: 'warm', intensity: 0.4, fearLevel: 2});
+const LETTER: VoiceLine[] = [
+	c9.n('narrator_051_glad', "Sam. If you're reading this, it took me instead of you. I'm glad.", {pace: 0.92, pauseAfter: 0.6, fishTags: '[soft, tender]'}),
+	c9.n('narrator_052_never_wanted', 'It never wanted children. It visits them three times... and waits to see who loves them enough to lie down in their place.', {pace: 0.92, pauseAfter: 0.6}),
+	c9.n('narrator_053_someone', 'My grandfather did it for my dad. My dad did it for me. Someone always does. Maybe that is what keeps it alive.', {pace: 0.92, pauseAfter: 0.6}),
+	c9.n('narrator_054_starve', 'Maybe if, just once, nobody lay down... it would finally starve.', {pace: 0.88, pauseAfter: 0.5, fishTags: '[slow, thoughtful]'}),
+	c9.n('narrator_055_couldnt', "I couldn't find out. Not with you.", {pace: 0.88, pauseAfter: 0.9, fishTags: '[soft, close to tears]'}),
+	c9.n('narrator_056_decide', "One day, your own child will ask you about the skinny man. And you'll have to decide.", {pace: 0.88, pauseAfter: 1.2, fishTags: '[quiet, heavy]'}),
+];
+
+export const VOICE_LINES: VoiceLine[] = [...FIRST_NIGHT, ...BREAKFAST, ...DIARY, ...DAD_READS, ...THIRD_NIGHT, ...PAGES, ...TODAY, ...LAST_NIGHT, ...LETTER];
 export const LINE_BY_ID: Record<string, VoiceLine> = Object.fromEntries(VOICE_LINES.map((l) => [l.id, l]));

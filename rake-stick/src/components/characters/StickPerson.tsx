@@ -127,6 +127,8 @@ export interface StickProps {
 	child?: boolean;
 	/** set false to switch off breathing/blinking */
 	idle?: boolean;
+	/** draw no arms (a sleeper whose arms are drawn by the bed) */
+	noArms?: boolean;
 }
 
 const INK = '#141414';
@@ -771,8 +773,8 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 	);
 	const farArm = side && walking;
 	const lapArms = (sitting && !back && (p.arms === undefined || p.arms === 'folded' || p.arms === 'lap')) || (floor && !back);
-	const backArms = back || farArm ? (farArm ? [armEl(L, 0, true)] : [armEl(L, 0), armEl(R, 1)]) : [];
-	const frontArms = back ? [] : farArm ? [armEl(R, 1)] : [armEl(L, 0), armEl(R, 1)];
+	const backArms = p.noArms ? [] : back || farArm ? (farArm ? [armEl(L, 0, true)] : [armEl(L, 0), armEl(R, 1)]) : [];
+	const frontArms = p.noArms || back ? [] : farArm ? [armEl(R, 1)] : [armEl(L, 0), armEl(R, 1)];
 
 	// ---- legs
 	const pantsShade = mixHex(palette.pants, '#000000', 0.22);

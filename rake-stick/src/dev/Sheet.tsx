@@ -9,6 +9,7 @@ import {BedClock, Diary, Glow, Table, Tears} from '../stick/props';
 import {Rake} from '../stick/rake';
 
 export const SHEET_FRAMES = 8;
+const MASTER_Q = ['#bc966f', '#b48d67', '#b48d67', '#bc966f'];
 
 export const Sheet: React.FC = () => {
 	const i = useCurrentFrame();
@@ -17,15 +18,15 @@ export const Sheet: React.FC = () => {
 	const B = GEO.bed;
 	if (i === 0)
 		return (
-			<Stage set="bedroom_night" z={1} f={[960, 540]} t={t}>
+			<Stage set="bedroom_night" z={4} f={[330, 720]} t={t}>
 				<BedClock x={GEO.room.clock[0]} y={GEO.room.clock[1] + 20} text="4:00" frame={f} />
-				<LieInBed b={B} is={Lily} px={312} s={1.75} child frame={f} id="l0" p={{eyes: 'wide', brows: 'worried'}} />
-				<Rake x={700} y={B.quilt - 34} s={1.35} frame={f} pose="side" dir={-1} />
+				<LieInBed b={B} is={Lily} px={312} s={1.75} child frame={f} id="l0" shirt={PAL.lily.shirt} skin={PAL.lily.skin} p={{eyes: 'wide', brows: 'worried'}} />
+				<Rake x={760} y={B.quilt - 34} s={1.35} frame={f} pose="side" dir={-1} />
 			</Stage>
 		);
 	if (i === 1)
 		return (
-			<Stage set="bedroom_pov_night" z={1} f={[960, 540]} t={t}>
+			<Stage set="bedroom_pov_night" z={2.4} f={[935, 860]} t={t}>
 				<Rake x={930} y={930} s={1.9} frame={f} pose="front" lean={0.3} />
 			</Stage>
 		);
@@ -53,16 +54,16 @@ export const Sheet: React.FC = () => {
 		);
 	if (i === 5)
 		return (
-			<Stage set="master_night" z={1} f={[960, 540]} t={t}>
-				<LieInBed b={GEO.master} is={Mom} px={200} s={1.75} frame={f} id="m" p={{eyes: 'closed'}} blanket={false} />
-				<LieInBed b={GEO.master} is={Lily} px={420} s={1.75} child frame={f} id="l" p={{eyes: 'wide', look: [1, 0]}} blanket={false} />
+			<Stage set="master_night" z={1.5} f={[620, 640]} t={t}>
+				<LieInBed b={GEO.master} is={Mom} px={215} s={1.3} frame={f} id="m" shirt={PAL.mom.shirt} skin={PAL.mom.skin} matte="#bc966f" p={{eyes: 'closed'}} />
+				<LieInBed b={GEO.master} is={Lily} px={430} s={1.6} child frame={f} id="l" shirt={PAL.lily.shirt} skin={PAL.lily.skin} matte="#bc966f" dy={14} p={{eyes: 'wide', look: [1, 0]}} />
 			</Stage>
 		);
 	if (i === 6)
 		return (
-			<Stage set="bedroom_night" z={2.6} f={[760, 560]} t={t}>
-				<HideInBed b={B} px={312} frame={f} id="h" />
-				<Rake x={760} y={B.quilt - 80} s={1.35} frame={f} pose="side" dir={-1} lean={0.6} mouth={0.4} />
+			<Stage set="bedroom_night" z={1.8} f={[560, 640]} t={t}>
+				<LieInBed b={B} is={Dad} px={312} s={1.2} frame={f} id="d" shirt={PAL.dad.shirt} skin={PAL.dad.skin} p={{eyes: 'wide', brows: 'worried', mouth: 'o', look: [1, -0.7]}} />
+				<Rake x={900} y={B.quilt - 34} s={1.35} frame={f} pose="side" dir={-1} lean={0.6} mouth={0.4} />
 			</Stage>
 		);
 	return (
