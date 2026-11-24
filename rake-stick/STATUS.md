@@ -10,8 +10,10 @@
   visited in their new house ("it was never the house - it was us"). On the third night Lily lies down in his bed;
   the Rake climbs up to her face and says "Lily". Her letter to Sam is the closing thought: it never wanted
   children, it waits to see who will lie down in their place - and maybe that is what keeps it alive.
-- **Drawing fixes:** sleepers show shoulders, the blanket at chest height and an arm on top (no arm stubs under the
-  chin, no floating heads); the parents' bed uses the painted quilt colour. The Rake has knuckled four-fingered hands
+- **Drawing fixes:** people in bed no longer overlap the painted beds: the bed stays as painted and only the body is
+  added on top of it (head on the pillow, shoulder, the mound the body raises in the quilt in the quilt's own colour,
+  the turned-down sheet, an arm resting on top). The parents' double bed has its own drawing (one mound over Mom and
+  Lily, sheet over the chests, quilt below). The Rake has knuckled four-fingered hands
   with hooked claws and a crawl cycle.
 - **Length:** 6:45 (two minor lines and some silent holds trimmed to stay under 7:00).
 
@@ -19,7 +21,7 @@
 
 - **Spend:** images $0.24 (12 plates, gpt-image-1-mini medium, `logs/image_costs.jsonl`), voices about $0.10 (Fish
   Audio Drama 3, 77 lines incl. retakes). About $0.34 in all, inside the $1.00 cap.
-- **Files** (not committed): `out/rake_1080p_send.mp4` (357 MB, sent) and `out/rake_1080p_upload.mp4` (497 MB):
+- **Files** (not committed): `out/rake_1080p_send.mp4` (357 MB, sent) and `out/rake_1080p_upload.mp4` (496 MB):
   1920x1080, 24 fps, 9,718 frames, 6:44.9.
 - **Audio:** -15.0 LUFS integrated, LRA 5.2, peak -2.6 dBFS; the only silence over 2 s is the final 2.5 s of black.
 - **Frame QA:** 0 findings on every 2nd frame of the whole film (`logs/qa.txt`).
