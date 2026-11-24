@@ -2,7 +2,7 @@
 // the bed empty, the blanket raked open; they never found him.
 import React from 'react';
 import {Dad, Lily, Mom, PAL} from '../components/characters/Cast';
-import {LieInBed, SitInBed} from '../stick/bed';
+import {LieInBed, ParentsBed} from '../stick/bed';
 import {DoorOpen, Person} from '../stick/goat';
 import {GEO, ramp, shot, Shots, useStick, walk, type Shot} from '../stick/kit';
 import {BedClock, Glow, Tears} from '../stick/props';
@@ -10,12 +10,7 @@ import {Rake} from '../stick/rake';
 import {RoomClock} from './common';
 
 const B = GEO.bed;
-const M = GEO.master;
 const PILLOW_X = 312;
-const MOM_X = 215;
-const LILY_X = 430;
-/** the painted quilt of her parents' bed */
-const MASTER_QUILT = '#bc966f';
 /** the tears across her blanket, pillow end to foot */
 const TEAR_A: [number, number] = [460, 790];
 const TEAR_B: [number, number] = [1120, 800];
@@ -53,18 +48,12 @@ export const ThirdNight: React.FC = () => {
 	const world = (s: Shot) => {
 		if (s.set === 'master_night') {
 			const awake = t > T('narrator_025_four') + 0.2;
-			const sitting = s.tag === 'up' && t > T('narrator_028_mom', 0.45);
 			const lilyP = {eyes: awake ? 'wide' : 'closed', brows: awake ? 'worried' : 'flat', look: t > T('narrator_027_voice') ? [1, -0.2] : [0.4, -0.8], idle: !awake, mouth: 'flat'};
 			return (
 				<g>
 					<Glow cx={1270} cy={290} r={520} color="#b9cdf2" k={0.3} />
 					<BedClock x={70} y={835} text="4:00" frame={f} />
-					<LieInBed b={M} is={Mom} px={MOM_X} s={1.3} frame={f} id="mom" shirt={PAL.mom.shirt} skin={PAL.mom.skin} matte={MASTER_QUILT} p={{eyes: 'closed', brows: 'flat', mouth: 'flat', idle: false}} />
-					{sitting ? (
-						<SitInBed b={M} is={Lily} x={LILY_X + 70} s={1.6} child frame={f} id="lilyUp" lap={false} p={{eyes: 'wide', brows: 'worried', look: [-1, 0.2], mouth: 'o', arms: 'hugKnees'}} />
-					) : (
-						<LieInBed b={M} is={Lily} px={LILY_X} s={1.6} child frame={f} id="lily" shirt={PAL.lily.shirt} skin={PAL.lily.skin} matte={MASTER_QUILT} dy={14} p={lilyP} />
-					)}
+					<ParentsBed frame={f} mom={Mom} lily={Lily} momP={{eyes: 'closed', brows: 'flat', mouth: 'flat', idle: false}} lilyP={lilyP} momShirt={PAL.mom.shirt} momSkin={PAL.mom.skin} lilyShirt={PAL.lily.shirt} lilySkin={PAL.lily.skin} />
 				</g>
 			);
 		}

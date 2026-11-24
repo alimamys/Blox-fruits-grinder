@@ -18,7 +18,7 @@ export const Sheet: React.FC = () => {
 	const B = GEO.bed;
 	if (i === 0)
 		return (
-			<Stage set="bedroom_night" z={4} f={[330, 720]} t={t}>
+			<Stage set="bedroom_night" z={1.6} f={[600, 640]} t={t}>
 				<BedClock x={GEO.room.clock[0]} y={GEO.room.clock[1] + 20} text="4:00" frame={f} />
 				<LieInBed b={B} is={Lily} px={312} s={1.75} child frame={f} id="l0" shirt={PAL.lily.shirt} skin={PAL.lily.skin} p={{eyes: 'wide', brows: 'worried'}} />
 				<Rake x={760} y={B.quilt - 34} s={1.35} frame={f} pose="side" dir={-1} />
@@ -55,8 +55,8 @@ export const Sheet: React.FC = () => {
 	if (i === 5)
 		return (
 			<Stage set="master_night" z={1.5} f={[620, 640]} t={t}>
-				<LieInBed b={GEO.master} is={Mom} px={215} s={1.3} frame={f} id="m" shirt={PAL.mom.shirt} skin={PAL.mom.skin} matte="#bc966f" p={{eyes: 'closed'}} />
-				<LieInBed b={GEO.master} is={Lily} px={430} s={1.6} child frame={f} id="l" shirt={PAL.lily.shirt} skin={PAL.lily.skin} matte="#bc966f" dy={14} p={{eyes: 'wide', look: [1, 0]}} />
+				<LieInBed b={GEO.master} is={Mom} px={215} s={1.3} frame={f} id="m" shirt={PAL.mom.shirt} skin={PAL.mom.skin} p={{eyes: 'closed'}} />
+				<LieInBed b={GEO.master} is={Lily} px={430} s={1.6} child frame={f} id="l" shirt={PAL.lily.shirt} skin={PAL.lily.skin} dy={14} p={{eyes: 'wide', look: [1, 0]}} />
 			</Stage>
 		);
 	if (i === 6)

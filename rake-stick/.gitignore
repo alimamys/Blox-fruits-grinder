@@ -16,3 +16,4 @@ node_modules
 .voice-models
 previews/scenes/*.mp4
 logs/render_full.txt
+logs/post_render.txt
