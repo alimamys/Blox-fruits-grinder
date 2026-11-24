@@ -2,8 +2,7 @@ THE RAKE - "It Visits Three Times" (stick-figure style, same code-drawn look as 
 ==========================================================================================================================
 
 FILE
-out/rake_1080p_send.mp4     (1920x1080, 24 fps, 5:02 - the copy sent to you)
-out/rake_1080p_upload.mp4   (same film at a higher bitrate, kept on the build machine)
+out/rake_1080p_upload.mp4   (1920x1080, 24 fps, 5:02, 391 MiB - the copy sent to you; upload this one)
 
 TITLE (same pattern as your older videos)
 The Rake | Animated Horror Story
