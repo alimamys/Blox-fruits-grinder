@@ -15,3 +15,4 @@ node_modules
 .venv-chatterbox
 .voice-models
 previews/scenes/*.mp4
+logs/render_full.txt
