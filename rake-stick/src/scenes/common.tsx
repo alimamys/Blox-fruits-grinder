@@ -113,8 +113,9 @@ export const DiaryPage: React.FC<{
 /** reveal 0..1 of a line between t0 and t1 */
 export const reveal = (t: number, t0: number, t1: number) => clamp01((t - t0) / Math.max(0.1, t1 - t0));
 
-/** a page's lines revealed in sync with the voice: [line id, text, from, to] where from/to are a word of the line
- *  ('' = the line's start/end) or a fraction 0..1 of the line */
+/** a page's lines written in sync with the voice, strictly ONE LINE AT A TIME: [line id, text, from, to] where
+ *  from/to are a word of the line ('' = the line's start/end) or a fraction 0..1 of the line. A line never starts
+ *  before the previous one is finished, so two lines are never being written at once. */
 export type PageLine = [string, string, string | number, string | number];
 export const pageLines = (
 	spec: PageLine[],
@@ -122,9 +123,14 @@ export const pageLines = (
 	at: (id: string) => number,
 	end: (id: string) => number,
 	word: (id: string, w: string, fallback?: number) => number,
-): Array<[string, number]> =>
-	spec.map(([id, txt, a, b]) => {
-		const t0 = typeof a === 'number' ? at(id) + a * (end(id) - at(id)) : a ? word(id, a, 0) - 0.3 : at(id);
-		const t1 = typeof b === 'number' ? at(id) + b * (end(id) - at(id)) : b ? word(id, b, 1) + 0.35 : end(id);
+): Array<[string, number]> => {
+	let prevEnd = -Infinity;
+	return spec.map(([id, txt, a, b]) => {
+		const raw0 = typeof a === 'number' ? at(id) + a * (end(id) - at(id)) : a ? word(id, a, 0) - 0.1 : at(id);
+		const raw1 = typeof b === 'number' ? at(id) + b * (end(id) - at(id)) : b ? word(id, b, 1) + 0.25 : end(id);
+		const t0 = Math.max(raw0, prevEnd);
+		const t1 = Math.max(raw1, t0 + 0.35);
+		prevEnd = t1;
 		return [txt, reveal(t, t0, t1)];
 	});
+};

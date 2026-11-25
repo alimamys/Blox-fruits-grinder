@@ -5,10 +5,10 @@ import {Lily, PAL} from '../components/characters/Cast';
 import {Person} from '../stick/goat';
 import {GEO, lerp, ramp, shot, Shots, ui, useStick, type Shot} from '../stick/kit';
 import {Diary as Notebook, Glow} from '../stick/props';
-import {DiaryPage, reveal} from './common';
+import {DiaryPage, pageLines, type PageLine} from './common';
 
 /** the page as she wrote it: [line id, text, word that starts it (or '' for the line's start), word that ends it] */
-const ENTRY: Array<[string, string, string, string]> = [
+const ENTRY: PageLine[] = [
 	['grandma_001_june', 'Something came into the house last night.', 'something', ''],
 	['grandma_002_danny', "It sat on Danny's bed and watched him sleep.", '', ''],
 	['grandma_003_mother', 'My mother told me about it when I was a girl.', '', 'girl'],
@@ -25,9 +25,7 @@ export const Diary: React.FC = () => {
 	const T = (id: string, k = 0) => at(id) + k * (end(id) - at(id));
 	const t15 = T('narrator_015_attic');
 	const t16 = T('narrator_016_notebook');
-	const w0 = (id: string, w: string) => (w ? word(id, w, 0) - 0.3 : at(id));
-	const w1 = (id: string, w: string) => (w ? word(id, w, 1) + 0.35 : end(id));
-	const lines = (): Array<[string, number]> => ENTRY.map(([id, txt, a, b]) => [txt, reveal(t, w0(id, a), w1(id, b))]);
+	const lines = () => pageLines(ENTRY, t, at, end, word);
 	const shots: Shot[] = [
 		// "That weekend, Dad sent me up to the attic to find the box fan."
 		shot(t15, 'attic_day', 1.0, 1.05, [960, 560], [940, 580], {tag: 'climb'}),

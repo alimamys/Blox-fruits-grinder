@@ -24,14 +24,16 @@ const limb = (pts: Pt[], sd: number, w: number, fill = SKIN) => (
 
 /** a bony hand at h: a narrow palm and four long fingers, each bent at a knuckle and curling down toward the surface
  *  it grips, ending in a solid hooked yellow-grey claw. a = the direction the fingers point (degrees, 90 = down). */
-const claws = (h: Pt, a: number, sd: number, spread = 16, len = 34) => {
+const claws = (h: Pt, a: number, sd: number, spread = 16, len = 34, far = false) => {
+	const skin = far ? SHADE : SKIN;
+	const claw = far ? '#a99a63' : CLAW;
 	const rad = (d: number) => (d * Math.PI) / 180;
 	// fingertips curl toward "down" (90 deg)
 	const curl = (d: number) => d + (90 - d) * 0.45;
 	const palm: Pt = [h[0] + Math.cos(rad(a)) * 6, h[1] + Math.sin(rad(a)) * 6];
 	return (
 		<g>
-			<ellipse cx={palm[0]} cy={palm[1]} rx={11} ry={7} transform={`rotate(${a} ${palm[0]} ${palm[1]})`} fill={SKIN} stroke={INK} strokeWidth={4} />
+			<ellipse cx={palm[0]} cy={palm[1]} rx={11} ry={7} transform={`rotate(${a} ${palm[0]} ${palm[1]})`} fill={skin} stroke={INK} strokeWidth={4} />
 			{[-1.5, -0.5, 0.5, 1.5].map((i, n) => {
 				const d1 = a + i * spread;
 				const L = len * (1 - Math.abs(i) * 0.12) * (1 + 0.05 * Math.sin(sd + n));
@@ -47,14 +49,14 @@ const claws = (h: Pt, a: number, sd: number, spread = 16, len = 34) => {
 				const ny = Math.cos(rad(d2));
 				const w = 3.2;
 				const c1: Pt = [tip[0] + Math.cos(rad(d2)) * cl * 0.7, tip[1] + Math.sin(rad(d2)) * cl * 0.7];
-				const claw = `M${tip[0] + nx * w},${tip[1] + ny * w} Q${c1[0] + nx * w * 0.6},${c1[1] + ny * w * 0.6} ${pt[0]},${pt[1]} Q${c1[0] - nx * w * 0.9},${c1[1] - ny * w * 0.9} ${tip[0] - nx * w},${tip[1] - ny * w} Z`;
+				const clawD = `M${tip[0] + nx * w},${tip[1] + ny * w} Q${c1[0] + nx * w * 0.6},${c1[1] + ny * w * 0.6} ${pt[0]},${pt[1]} Q${c1[0] - nx * w * 0.9},${c1[1] - ny * w * 0.9} ${tip[0] - nx * w},${tip[1] - ny * w} Z`;
 				const finger = `M${base[0]},${base[1]} L${kn[0]},${kn[1]} L${tip[0]},${tip[1]}`;
 				return (
 					<g key={n}>
 						<path d={finger} stroke={INK} strokeWidth={9} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-						<path d={finger} stroke={SKIN} strokeWidth={4.6} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-						<circle cx={kn[0]} cy={kn[1]} r={3.4} fill={SKIN} stroke={INK} strokeWidth={1.6} />
-						<path d={claw} fill={CLAW} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
+						<path d={finger} stroke={skin} strokeWidth={4.6} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+						<circle cx={kn[0]} cy={kn[1]} r={3.4} fill={skin} stroke={INK} strokeWidth={1.6} />
+						<path d={clawD} fill={claw} stroke={INK} strokeWidth={2.4} strokeLinejoin="round" />
 					</g>
 				);
 			})}
@@ -164,7 +166,9 @@ export const Rake: React.FC<{
 			<g transform={`translate(0 ${bob})`}>
 				{/* far leg + arm (darker) */}
 				{limb([[-52, -112], [-6, -150], farFoot], sd + 10, 11, SHADE)}
+				{claws(farFoot, 0, sd + 13, 14, 26, true)}
 				{limb([[34, -160], [58 - 8 * c, -96], farHand], sd + 11, 9, SHADE)}
+				{claws(farHand, 20, sd + 18, 13, 38, true)}
 				{/* spine: hips high and back, shoulders forward */}
 				<path d={wobPoly([[-70, -128], [-40, -150], [40, -182], [56, -160], [20, -126], [-50, -100]], sd + 20, 0.8)} fill={SKIN} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
 				{[0, 1, 2].map((i) => (
