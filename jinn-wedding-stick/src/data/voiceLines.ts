@@ -155,12 +155,12 @@ const OUTSIDE: VoiceLine[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// 8. THE MAJLIS AGAIN - never sang at a wedding again; the magazine; "ask whose wedding it is"
+// 8. THE MAJLIS AGAIN - never sang at a wedding again; the newspaper; "ask whose wedding it is"
 // ---------------------------------------------------------------------------
 const c8 = scene('ending', {emotion: 'serious', intensity: 0.4, fearLevel: 2});
 const ENDING: VoiceLine[] = [
 	c8.y('yadda_027_never', 'After that night, Noura never sang at a wedding again. People say she never told anyone why.', {pace: 0.92, pauseAfter: 0.45}),
-	c8.y('yadda_028_magazine', 'A crime magazine printed the story, without her name. And since then, it has been told a thousand ways.', {pauseAfter: 0.5}),
+	c8.y('yadda_028_newspaper', 'A newspaper printed the story, without her name. And since then, it has been told a thousand ways.', {pauseAfter: 0.5}),
 	c8.g('girl_003_true', 'Is it true, Yadda?', {emotion: 'uneasy', intensity: 0.5, pauseAfter: 0.5, fishTags: '[quiet, unsure]'}),
 	c8.y('yadda_029_nobody', "Nobody ever proved it happened. And nobody ever proved it didn't.", {pace: 0.9, pauseAfter: 0.7}),
 	c8.y('yadda_030_listen', 'But listen to me, habibti. If a stranger ever calls you, and offers far too much to sing at a wedding you never heard of...', {pace: 0.9, pauseAfter: 0.5, fishTags: '[low, serious, slow]'}),

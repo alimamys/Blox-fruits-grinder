@@ -1,10 +1,10 @@
-// 8. THE MAJLIS AGAIN - Noura never sang at a wedding again; the crime magazine printed it without her name; "Is it
+// 8. THE MAJLIS AGAIN - Noura never sang at a wedding again; a newspaper printed it without her name; "Is it
 // true, Yadda?" - "Nobody ever proved it happened. And nobody ever proved it didn't." - "...ask whose wedding it is."
 // The old phone in the majlis rings. They both look at it.
 import React from 'react';
 import {GEO, ramp, shot, Shots, ui, useStick, type Shot} from '../stick/kit';
 import {Dark, Glow, Rings} from '../stick/props';
-import {MAJ, MajlisPeople, MagazinePage} from './common';
+import {MAJ, MajlisPeople, NewspaperPage} from './common';
 
 export const Ending: React.FC = () => {
 	const {f, t, at, end, talk} = useStick();
@@ -13,8 +13,8 @@ export const Ending: React.FC = () => {
 	const shots: Shot[] = [
 		// "After that night, Noura never sang at a wedding again..." - back in the majlis
 		shot(T('yadda_027_never'), 'majlis_night', 1.15, 1.25, [880, 600], [760, 600], {light: 'warm'}),
-		// "A crime magazine printed the story, without her name..."
-		ui(T('yadda_028_magazine'), (fl, d) => <MagazinePage f={fl} d={d} />),
+		// "A newspaper printed the story, without her name..." - the front page of a 1997 Kuwaiti daily
+		ui(T('yadda_028_newspaper'), (fl, d) => <NewspaperPage f={fl} d={d} />),
 		// GIRL: "Is it true, Yadda?"
 		shot(T('girl_003_true'), 'majlis_night', 2.6, 2.7, [740, 560], [740, 560], {light: 'warm'}),
 		// "Nobody ever proved it happened. And nobody ever proved it didn't."

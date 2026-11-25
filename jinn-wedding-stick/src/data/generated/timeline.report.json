@@ -1,5 +1,5 @@
 {
- "total": 309.4583333333333,
+ "total": 309.125,
  "scenes": [
   {
    "id": "majlis",
@@ -105,11 +105,11 @@
    "id": "ending",
    "name": "The majlis again",
    "start": 269.833,
-   "duration": 37.125,
+   "duration": 36.792,
    "narrationText": "",
    "dialogueIds": [
     "yadda_027_never",
-    "yadda_028_magazine",
+    "yadda_028_newspaper",
     "girl_003_true",
     "yadda_029_nobody",
     "yadda_030_listen",
@@ -119,7 +119,7 @@
   {
    "id": "end",
    "name": "Black",
-   "start": 306.958,
+   "start": 306.625,
    "duration": 2.5,
    "narrationText": "",
    "dialogueIds": []

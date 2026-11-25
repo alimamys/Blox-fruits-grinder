@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-25T16:53:28.038Z",
+ "generatedAt": "2026-11-25T18:30:34.337Z",
  "files": {
   "drummer/drummer_001_feet.wav": {
    "duration": 3.012,
@@ -376,8 +376,8 @@
    "sampleRate": 24000,
    "provider": "fish"
   },
-  "yadda/yadda_028_magazine.wav": {
-   "duration": 7.259,
+  "yadda/yadda_028_newspaper.wav": {
+   "duration": 6.916,
    "channels": 1,
    "sampleRate": 24000,
    "provider": "fish"

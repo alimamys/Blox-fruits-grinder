@@ -153,8 +153,8 @@ Use it for human voice actors or as a reference when re-voicing with another pro
 **YADDA (GRANDMOTHER)** — "After that night, Noura never sang at a wedding again. People say she never told anyone why."  
 <sub>`yadda/yadda_027_never.wav` · serious · intensity 0.40 · pace 0.92 · fear 2 · fx none</sub>  
 
-**YADDA (GRANDMOTHER)** — "A crime magazine printed the story, without her name. And since then, it has been told a thousand ways."  
-<sub>`yadda/yadda_028_magazine.wav` · serious · intensity 0.40 · pace 1.00 · fear 2 · fx none</sub>  
+**YADDA (GRANDMOTHER)** — "A newspaper printed the story, without her name. And since then, it has been told a thousand ways."  
+<sub>`yadda/yadda_028_newspaper.wav` · serious · intensity 0.40 · pace 1.00 · fear 2 · fx none</sub>  
 
 **THE GIRL (7)** — "Is it true, Yadda?"  
 <sub>`girl/girl_003_true.wav` · uneasy · intensity 0.50 · pace 1.00 · fear 0 · fx room</sub>  

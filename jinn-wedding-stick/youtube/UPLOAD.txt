@@ -33,7 +33,8 @@ If a stranger offered you far too much to sing at a wedding you'd never heard of
 About the story: "The Jinn Wedding" (عرس الجن) is a Kuwaiti urban legend that has been told for decades, in many
 versions. Nobody has ever proved it happened, and nobody has ever proved it didn't. We tell it as a legend: the names,
 the place and the year are the legend's own, and the wording, the small details and the grandmother's frame story are
-ours. It is not a claim about any real person.
+ours. It is not a claim about any real person. The newspaper page in the film is our own recreation in the style
+of a 1990s Kuwaiti daily; the paper's name is invented.
 
 Credits - animation: original. Voices: Fish Audio. Backgrounds painted with an image model from our own layouts;
 characters drawn and animated in code. Wedding drums, crowd and sound effects built from Creative Commons recordings.

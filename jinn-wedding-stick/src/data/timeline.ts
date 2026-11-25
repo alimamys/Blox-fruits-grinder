@@ -212,7 +212,7 @@ export const SCENES: SceneDef[] = [
 		name: 'The majlis again',
 		steps: [
 			'yadda_027_never',
-			'yadda_028_magazine',
+			'yadda_028_newspaper',
 			'girl_003_true',
 			'yadda_029_nobody',
 			'yadda_030_listen',

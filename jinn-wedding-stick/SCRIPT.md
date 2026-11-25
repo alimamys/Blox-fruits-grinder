@@ -11,7 +11,7 @@ zooms from the majlis into Noura's night in 1997 and comes back to the majlis at
 The names, place, year and the main events are the legend's own (Noura the taqaqa and her band of women, the call
 from "the mother of the bride", the 500 dinars, the night drive, the lavish house, guests whose feet were not human,
 terrible sounds, the band too afraid to stop playing, the man at dawn who asks why they are at an abandoned house,
-Noura never singing at a wedding again, the crime magazine that printed it without her name). The wording and the
+Noura never singing at a wedding again, the story printed without her name). The wording and the
 small details are ours.
 
 Target length: under 7 minutes. English, with Gulf voices.
@@ -117,7 +117,10 @@ Only their footprints in the sand. And all around them, hundreds of small hoofpr
 
 YADDA:
 After that night, Noura never sang at a wedding again. People say she never told anyone why.
-A crime magazine printed the story, without her name. And since then, it has been told a thousand ways.
+A newspaper printed the story, without her name. And since then, it has been told a thousand ways.
+
+(The front page of a 1990s Kuwaiti daily, in Arabic, with an English translation strip. The paper's name,
+"Sawt Al-Deera", is invented.)
 
 GIRL: Is it true, Yadda?
 YADDA: Nobody ever proved it happened. And nobody ever proved it didn't.

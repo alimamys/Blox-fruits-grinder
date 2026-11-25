@@ -26,9 +26,9 @@ ever proved it didn't." The old phone rings.
   in a daraa / abaya / dishdasha (`robe`), a shayla / ghutra / veil (`headwear`), gold, hooves under a lifted hem,
   glowing eyes, a seated long dress, and the frame drum (tar), barrel drum (tabl), finjan, dallah and phone receiver).
 - **Scenes:** `src/scenes/*.tsx`, one per chapter, built with the stick kit (`src/stick/kit.tsx`): a shot list per
-  scene (`shot()` on a set, `ui()` for full-screen pages such as the title, the 1997 crime magazine and the sand at
+  scene (`shot()` on a set, `ui()` for full-screen pages such as the title, the 1997 Kuwaiti newspaper front page and the sand at
   dawn), cut on the real voice lines. The band, the guests (dance / clap in unison / freeze, hooves, eyes only in the
-  dark), the title and the magazine are in `src/scenes/common.tsx`; the car, smoke, rings, prints, horned shadows and
+  dark), the title and the newspaper page (Arabic, thuluth masthead, Hijri and Gregorian dates, halftone photo, GPL Arabic fonts in `public/fonts/arabic`) are in `src/scenes/common.tsx`; the car, smoke, rings, prints, horned shadows and
   haze in `src/stick/props.tsx`.
 - **Sound:** the wedding drums (tabl, riq and a hall of clapping women at 100 BPM), the crowd, the hooves on marble,
   the braying, laughing and singing behind the walls and the coffee are built from CC0 / CC-BY recordings by

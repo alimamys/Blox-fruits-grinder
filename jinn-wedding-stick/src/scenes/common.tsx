@@ -1,14 +1,13 @@
 // Shared set-ups of "The Jinn Wedding": the majlis (Yadda and the girl on the low sofa), Noura's band drumming on the
-// floor, the crowd of wedding guests, the title card, the crime magazine page and the sand close-up.
+// floor, the crowd of wedding guests, the title card, the 1997 newspaper front page and the sand close-up.
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {Band1, Band2, Drummer, Girl, Guest, Noura, Yadda} from '../components/characters/Cast';
 import type {ArmSpec} from '../components/characters/StickPerson';
 import {Person} from '../stick/goat';
 import {clamp01, GEO} from '../stick/kit';
 import {Smoke} from '../stick/props';
 import {FONT} from '../utils/fonts';
-import {boilOf, wobLine} from '../utils/rough';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PP = Record<string, any>;
@@ -153,40 +152,132 @@ export const TitleCard: React.FC<{f: number; d: number}> = ({f, d}) => {
 	);
 };
 
-// ---------------------------------------------------------------------------------------------------- the magazine
-/** an old 1997 crime magazine page telling the story, the singer's name never printed */
-export const MagazinePage: React.FC<{f: number; d: number}> = ({f, d}) => {
-	const z = 1 + 0.06 * (f / Math.max(1, d));
-	const sd = 6100 + boilOf(f, 4) * 7;
+// ---------------------------------------------------------------------------------------------------- the newspaper
+// An Arabic front page in the style of a 1990s Kuwaiti daily: a thuluth masthead, the issue number, Hijri and
+// Gregorian dates and the price in fils, the "ears" beside the masthead, a red kicker over a heavy headline, a halftone
+// photo, justified columns between thin rules, newsprint gone yellow. The paper ("Sawt Al-Deera") is invented, the
+// story is the legend's, the singer is not named. An English translation strip comes up for the viewer.
+const NP = {ink: '#1d1b18', red: '#9c1c17', rule: '#2a2722', paper: '#ebe4d0'};
+const Rule: React.FC<{w?: number; double?: boolean; m?: string}> = ({w = 2, double = false, m = '6px 0'}) => (
+	<div style={{borderTop: `${w}px solid ${NP.rule}`, borderBottom: double ? `1px solid ${NP.rule}` : undefined, height: double ? 4 : 0, margin: m}} />
+);
+const COL: React.CSSProperties = {fontFamily: FONT.arBody, fontSize: 25, lineHeight: '38px', textAlign: 'justify', color: NP.ink};
+export const NewspaperPage: React.FC<{f: number; d: number}> = ({f, d}) => {
+	const k = Math.min(1, f / Math.max(1, d));
+	const ease = k * k * (3 - 2 * k);
+	const z = 1.0 + 0.16 * ease;
+	const ty = 30 - 250 * ease;
+	const tIn = clamp01((f - 26) / 10);
+	const second = f > d * 0.5;
+	const tSwap = second ? clamp01((f - d * 0.5) / 8) : 1;
+	const tr = second ? '\u201cThe singer has asked us not to print her name.\u201d' : '\u201cA taqaqa and her band played a wedding until dawn... in an abandoned house!\u201d';
 	return (
-		<AbsoluteFill style={{background: '#151110', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
+		<AbsoluteFill style={{background: '#14110e', overflow: 'hidden'}}>
 			<div
+				dir="rtl"
 				style={{
-					width: 1060,
-					height: 980,
-					background: 'linear-gradient(180deg, #efe6cf 0%, #e3d6b4 100%)',
-					border: '6px solid #141414',
-					borderRadius: 6,
-					transform: `rotate(-3deg) scale(${z})`,
-					padding: '40px 56px',
-					position: 'relative',
-					boxShadow: '0 30px 80px rgba(0,0,0,0.7)',
-					color: '#1c1a18',
+					position: 'absolute',
+					left: 960 - 640,
+					top: 0,
+					width: 1280,
+					height: 1900,
+					transform: `translateY(${ty}px) scale(${z}) rotate(-1.6deg)`,
+					transformOrigin: '50% 30%',
+					background: `radial-gradient(ellipse at 50% 40%, #efe9d8 0%, ${NP.paper} 55%, #d9cba6 100%)`,
+					boxShadow: '0 30px 90px rgba(0,0,0,0.75)',
+					padding: '34px 46px',
+					boxSizing: 'border-box',
+					color: NP.ink,
 				}}
 			>
-				<div style={{fontFamily: FONT.type, fontSize: 28, letterSpacing: 6, borderBottom: '4px solid #1c1a18', paddingBottom: 8}}>CRIME &amp; MYSTERY - 1997</div>
-				<div style={{fontFamily: FONT.marker, fontSize: 70, lineHeight: '80px', marginTop: 22, color: '#8a1c18'}}>THE WEDDING IN THE HOUSE THAT ISN'T THERE</div>
-				<svg viewBox="0 0 900 300" width={900} height={300} style={{marginTop: 18, border: '4px solid #1c1a18', background: '#9a9488'}}>
-					<rect x={0} y={220} width={900} height={80} fill="#b0a68a" />
-					<path d={`M240,230 L240,90 L660,90 L660,230 Z`} fill="#3a3632" stroke="#141414" strokeWidth={5} />
-					{[290, 390, 510, 610].map((x) => (
-						<rect key={x} x={x - 22} y={120} width={44} height={50} fill="#111" />
-					))}
-					<path d={wobLine(560, 90, 640, 60, sd, 1)} stroke="#141414" strokeWidth={5} />
-				</svg>
-				<div style={{fontFamily: FONT.type, fontSize: 25, lineHeight: '36px', marginTop: 20}}>
-					A well-known wedding singer and her band say they played all night at a wedding in Sabahiya. In the morning, the house was a
-					burned-out ruin. The singer has asked us not to print her name.
+				{/* the top strip: issue, date (Hijri / Gregorian), pages and price */}
+				<div style={{display: 'flex', justifyContent: 'space-between', fontFamily: FONT.arSmall, fontSize: 22, color: NP.ink}}>
+					<span>العدد ٧٢١٤ - السنة الحادية والعشرون</span>
+					<span>السبت ٦ ذو القعدة ١٤١٧ هـ - ١٥ مارس ١٩٩٧ م</span>
+					<span>٤٨ صفحة - ١٠٠ فلس</span>
+				</div>
+				<Rule w={2} m="8px 0 4px" />
+				{/* masthead between its two ears */}
+				<div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 210}}>
+					<div style={{width: 220, border: `2px solid ${NP.rule}`, padding: '10px 12px', fontFamily: FONT.arSmall, fontSize: 21, lineHeight: '32px'}}>
+						<div style={{fontFamily: FONT.arHead, fontSize: 24, color: NP.red}}>في هذا العدد</div>
+						المحليات ص ٦<br />الاقتصاد ص ١١<br />الرياضة ص ٣٨
+					</div>
+					<div style={{textAlign: 'center', flex: 1, whiteSpace: 'nowrap'}}>
+						<div style={{fontFamily: FONT.arMast, fontSize: 124, lineHeight: '150px', color: NP.red, textShadow: '0 0 1px rgba(80,10,8,0.6)'}}>صوت الديرة</div>
+						<div style={{fontFamily: FONT.arSmall, fontSize: 24, letterSpacing: 1, marginTop: 2}}>جريدة كويتية يومية مستقلة</div>
+					</div>
+					<div style={{width: 220, border: `2px solid ${NP.rule}`, padding: '10px 12px', fontFamily: FONT.arSmall, fontSize: 21, lineHeight: '32px'}}>
+						<div style={{fontFamily: FONT.arHead, fontSize: 24, color: NP.red}}>الطقس اليوم</div>
+						صحو إلى غائم جزئياً<br />العظمى ٢٧ - الصغرى ١٤
+					</div>
+				</div>
+				<Rule w={5} double m="6px 0 14px" />
+				{/* the lead story */}
+				<div style={{fontFamily: FONT.arHead, fontSize: 40, color: NP.red, lineHeight: '50px'}}>قصة غريبة يتداولها أهالي الصباحية</div>
+				<div style={{fontFamily: FONT.arHead, fontSize: 68, lineHeight: '92px', marginTop: 4, whiteSpace: 'nowrap'}}>طقاقة وفرقتها أحيوا عرسا حتى الفجر</div>
+				<div style={{fontFamily: FONT.arHead, fontSize: 92, lineHeight: '112px'}}>... في بيت مهجور!</div>
+				<Rule w={2} m="12px 0 14px" />
+				<div style={{display: 'flex', gap: 26}}>
+					{/* right: the decks and the first columns */}
+					<div style={{width: 470}}>
+						{['رجل وجدهم عند الفجر أمام بيت محترق منذ سنوات', 'آثار حوافر صغيرة حول آثار أقدامهم في الرمل', 'المطربة طلبت عدم نشر اسمها'].map((t) => (
+							<div key={t} style={{fontFamily: FONT.arHead, fontSize: 30, lineHeight: '42px', borderBottom: `1px solid ${NP.rule}`, padding: '6px 0'}}>
+								<span style={{color: NP.red}}>■ </span>
+								{t}
+							</div>
+						))}
+						<div style={{...COL, marginTop: 12}}>
+							<b style={{fontFamily: FONT.arHead, fontWeight: 400}}>كتب المحرر المحلي:</b> روت مطربة شعبية معروفة لـ«صوت الديرة» تفاصيل ليلة غريبة عاشتها مع أعضاء فرقتها، بعد
+							أن اتصلت بها امرأة قالت إنها أم العروس، وطلبت منها إحياء حفل زفاف ابنتها في منطقة الصباحية مقابل خمسمئة دينار. وقالت إن سيارة سوداء جاءت لنقل الفرقة، وإن
+							السائق لم ينطق بكلمة واحدة طوال الطريق.
+						</div>
+					</div>
+					{/* left: the halftone photo of the ruin and its caption, more columns under it */}
+					<div style={{flex: 1, borderRight: `1px solid ${NP.rule}`, paddingRight: 24}}>
+						<div style={{position: 'relative', height: 420, overflow: 'hidden', border: `2px solid ${NP.rule}`}}>
+							<Img src={staticFile('plates/ruin_dawn.jpg')} style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 60%', filter: 'grayscale(1) contrast(1.35) brightness(1.08)'}} />
+							<div style={{position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(20,18,15,0.55) 1.1px, transparent 1.7px)', backgroundSize: '5px 5px', mixBlendMode: 'multiply'}} />
+							<div style={{position: 'absolute', inset: 0, background: 'rgba(235,228,208,0.18)', mixBlendMode: 'screen'}} />
+						</div>
+						<div style={{fontFamily: FONT.arSmall, fontSize: 21, marginTop: 6, color: '#3a3630'}}>البيت كما بدا صباح اليوم التالي (تصوير: المحرر)</div>
+						<div style={{display: 'flex', gap: 22, marginTop: 10}}>
+							<div style={{...COL, flex: 1}}>
+								وأضافت أنهم وصلوا إلى بيت كبير تشع منه الأنوار لم يسبق لها أن رأته، رغم أنها غنت في أغلب بيوت الكويت، وأن الضيوف رقصوا وصفقوا طوال الليل على إيقاع واحد ولم
+								يلمسوا الطعام.
+							</div>
+							<div style={{...COL, flex: 1, borderRight: `1px solid ${NP.rule}`, paddingRight: 20}}>
+								وعند الفجر خرجت الفرقة لتجد رجلاً يسألهم عما يفعلونه أمام بيت مهجور منذ سنوات، وحين التفتوا لم يجدوا سوى أطلال بيت محترق. وأكدت المطربة أنها لن تغني في الأعراس بعد اليوم.
+							</div>
+						</div>
+					</div>
+				</div>
+				<Rule w={3} m="18px 0 12px" />
+				{/* the rest of the front page */}
+				<div style={{display: 'flex', gap: 24}}>
+					<div style={{flex: 1}}>
+						<div style={{fontFamily: FONT.arHead, fontSize: 36, lineHeight: '46px'}}>انخفاض ملحوظ في درجات الحرارة نهاية الأسبوع</div>
+						<div style={{...COL, fontSize: 22, lineHeight: '33px'}}>توقعت إدارة الأرصاد أن تشهد البلاد انخفاضاً في درجات الحرارة مع رياح شمالية غربية نشطة مثيرة للغبار على المناطق المكشوفة.</div>
+					</div>
+					<div style={{flex: 1, borderRight: `1px solid ${NP.rule}`, paddingRight: 22}}>
+						<div style={{fontFamily: FONT.arHead, fontSize: 36, lineHeight: '46px'}}>افتتاح سوق شعبي جديد في الجهراء</div>
+						<div style={{...COL, fontSize: 22, lineHeight: '33px'}}>يضم السوق محلات للأقمشة والبخور والعطور الشرقية، ويفتح أبوابه يومياً بعد صلاة العصر.</div>
+					</div>
+					<div style={{width: 260, border: `3px double ${NP.rule}`, padding: 12, textAlign: 'center', fontFamily: FONT.arHead, fontSize: 30, lineHeight: '42px'}}>
+						للبيع
+						<div style={{fontFamily: FONT.arSmall, fontSize: 22, lineHeight: '32px'}}>سيارة صالون موديل ١٩٩٤ بحالة الوكالة</div>
+					</div>
+				</div>
+				{/* newsprint: grain, a fold, foxed edges */}
+				<Img src={staticFile('textures/grain_1.png')} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.14, mixBlendMode: 'multiply'}} />
+				<div style={{position: 'absolute', left: 0, right: 0, top: 940, height: 26, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.10) 45%, rgba(255,255,255,0.18) 55%, rgba(0,0,0,0) 100%)'}} />
+				<div style={{position: 'absolute', inset: 0, boxShadow: 'inset 0 0 120px rgba(150,110,40,0.35)'}} />
+			</div>
+			{/* translation for the viewer */}
+			<div style={{position: 'absolute', left: 120, right: 120, top: 760, display: 'flex', justifyContent: 'center', opacity: tIn * tSwap}}>
+				<div style={{background: 'rgba(10,9,8,0.82)', padding: '14px 26px', borderRadius: 6, borderLeft: '6px solid #d9b24a', maxWidth: 1300}}>
+					<div style={{fontFamily: FONT.ui, fontSize: 18, letterSpacing: 5, color: '#d9b24a', fontWeight: 700}}>TRANSLATION - KUWAIT, 15 MARCH 1997</div>
+					<div style={{fontFamily: FONT.ui, fontSize: 36, lineHeight: '46px', color: '#f4efe4', fontWeight: 600, marginTop: 4}}>{tr}</div>
 				</div>
 			</div>
 		</AbsoluteFill>
