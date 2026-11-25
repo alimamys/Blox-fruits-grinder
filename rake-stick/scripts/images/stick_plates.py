@@ -41,6 +41,13 @@ SETS = {
     'master_night': "Parents' bedroom in an old family house at night, seen straight-on from the side like a stage set: a double bed along the floor with "
                     'the headboard on the LEFT, two white pillows, a beige quilt, a bed skirt; a nightstand with a small lamp (off); a window on the right '
                     'with moonlight; a framed picture on the right-hand wall. Cold blue moonlight, deep shadows.' + EMPTY,
+    'master_night_covered': "Parents' bedroom in an old family house at night, seen straight-on from the side like a stage set: a double bed along the "
+                            'floor with the headboard on the LEFT and two white pillows; the bed is made up as if two people were asleep in it - a beige '
+                            'quilt pulled all the way up to the pillows, covering the lower edge of both pillows, rising in two long soft rounded humps '
+                            'along the bed (a large hump behind, a smaller one in front) and falling over the side to the bed skirt. Do NOT draw any '
+                            'people: no heads, no faces, no hair, no hands - the pillows are empty (the faces are added later). A nightstand with a small '
+                            'lamp (off) by the headboard; a window on the right with moonlight; a framed picture on the right-hand wall. Cold blue '
+                            'moonlight, deep shadows.' + EMPTY,
     'kitchen_day': 'The back wall of a homely old-fashioned family kitchen on a sunny summer morning, seen straight-on like a stage set: a window over the sink '
                    'with bright daylight, a counter and wooden cabinets, wall cupboards on the LEFT, a doorway to the hall on the far LEFT, a white fridge on '
                    'the RIGHT, a round wall clock with a BLANK face. Warm, cosy, ordinary. Nothing in the foreground.' + EMPTY,

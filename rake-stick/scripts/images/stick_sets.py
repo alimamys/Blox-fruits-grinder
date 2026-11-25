@@ -230,7 +230,33 @@ def newhouse_day():
     return im
 
 
-SETS = {f.__name__: f for f in (bedroom_night, bedroom_pov_night, master_night, kitchen_day, attic_day, hallway_night, exterior_night, exterior_day, sonroom_night, sonroom_day, kitchen2_day, newhouse_day)}
+def master_night_covered():
+    """Her parents' room at night, laid out like master_night, but the double bed is made up as if two people were
+    asleep in it: the quilt pulled up to the pillows, rising in two long humps (a grown-up behind, a child in front).
+    The pillows stay empty - the faces are drawn in code."""
+    im = Image.new('RGB', (1920, 1080), (50, 58, 88))
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 885, 1920, 1080], fill=(84, 62, 48))
+    d.line([0, 885, 1920, 885], fill=INK, width=6)
+    d.rectangle([1250, 150, 1580, 450], fill=(20, 28, 54), outline=INK, width=8)  # window
+    d.line([1415, 150, 1415, 450], fill=INK, width=6)
+    d.rectangle([350, 380, 380, 885], fill=(110, 80, 60), outline=INK, width=6)  # headboard
+    d.rectangle([1140, 520, 1170, 885], fill=(110, 80, 60), outline=INK, width=6)  # footboard
+    d.ellipse([390, 540, 560, 610], fill=(235, 235, 240), outline=INK, width=4)  # back pillow
+    d.ellipse([430, 566, 600, 640], fill=(235, 235, 240), outline=INK, width=4)  # front pillow
+    quilt = (140, 120, 90)
+    # the quilt pulled up over the pillows' lower edge, two long humps where the bodies lie
+    d.polygon([(470, 600), (560, 570), (760, 560), (980, 572), (1120, 590), (1140, 610), (1140, 885 - 18), (380, 885 - 18), (380, 640)], fill=quilt, outline=INK)
+    d.polygon([(500, 640), (600, 612), (800, 606), (960, 622), (1130, 640), (1130, 700), (500, 700)], fill=(150, 130, 98), outline=INK)
+    d.rectangle([380, 700, 1140, 885 - 18], fill=(130, 110, 84), outline=INK, width=4)  # quilt front, falling to the skirt
+    d.rectangle([200, 670, 350, 885], fill=(110, 80, 60), outline=INK, width=5)  # nightstand + lamp
+    d.rectangle([255, 600, 295, 670], fill=(90, 90, 96), outline=INK, width=3)
+    d.polygon([(235, 600), (315, 600), (300, 550), (250, 550)], fill=(210, 190, 140), outline=INK)
+    d.rectangle([1700, 260, 1840, 420], fill=(150, 130, 100), outline=INK, width=4)  # picture on the wall
+    return im
+
+
+SETS = {f.__name__: f for f in (master_night_covered, bedroom_night, bedroom_pov_night, master_night, kitchen_day, attic_day, hallway_night, exterior_night, exterior_day, sonroom_night, sonroom_day, kitchen2_day, newhouse_day)}
 
 if __name__ == '__main__':
     OUT.mkdir(parents=True, exist_ok=True)

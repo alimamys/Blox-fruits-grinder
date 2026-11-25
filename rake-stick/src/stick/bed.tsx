@@ -124,9 +124,8 @@ export const LieInBed: React.FC<{
 	);
 };
 
-/** Her parents' double bed with Mom (back pillow) and Lily (front pillow) asleep under one blanket: the painted bed
- *  stays as painted; one mound rises over both bodies above the painted quilt's edge - the top sheet turned down over
- *  their chests, the quilt from the waist down - with just their faces on the pillows. */
+/** Her parents' double bed (plate master_night: the quilt already painted pulled up to the pillows over two sleepers):
+ *  only the two faces are drawn, Mom's on the back pillow and Lily's on the front one, just above the quilt's edge. */
 export const ParentsBed: React.FC<{
 	frame: number;
 	mom: AnyPerson;
@@ -135,56 +134,32 @@ export const ParentsBed: React.FC<{
 	lilyP?: Record<string, unknown>;
 	light?: Light;
 }> = ({frame, mom: Mom, lily: Lily, momP = {}, lilyP = {}, light}) => {
-	const QUILT = '#c09e78';
-	const SHEET = '#cdb9a5';
-	// heads: Mom on the back pillow, Lily on the front one
-	const mR = 36 * 1.3;
-	const lR = 36 * 1.08 * 1.6;
-	const mHy = 610;
-	const lHy = 624;
-	const head = (P: AnyPerson, px: number, hy: number, s: number, child: boolean, R: number, p: Record<string, unknown>, id: string) => (
-		<g>
-			<defs>
-				<clipPath id={id}>
-					<ellipse cx={px - 0.24 * R} cy={hy - 0.01 * R} rx={(child ? 1.08 : 1.25) * R} ry={1.07 * R} />
-				</clipPath>
-			</defs>
-			<g clipPath={`url(#${id})`}>
-				<Tint light={light}>
-					<P x={px} y={hy + 262 * (child ? 0.62 : 1) * s} s={s} frame={frame} tilt={-14} arms="down" noArms {...p} />
-				</Tint>
+	const head = (P: AnyPerson, px: number, hy: number, s: number, child: boolean, p: Record<string, unknown>, id: string) => {
+		const R = 36 * (child ? 1.08 : 1) * s;
+		return (
+			<g>
+				<defs>
+					<clipPath id={id}>
+						<ellipse cx={px - 0.24 * R} cy={hy - 0.01 * R} rx={(child ? 1.08 : 1.25) * R} ry={1.07 * R} />
+					</clipPath>
+				</defs>
+				<g clipPath={`url(#${id})`}>
+					<Tint light={light}>
+						<P x={px} y={hy + 262 * (child ? 0.62 : 1) * s} s={s} frame={frame} tilt={-14} arms="down" noArms {...p} />
+					</Tint>
+				</g>
 			</g>
-		</g>
-	);
-	const contour: Array<[number, number]> = [
-		[232, 742],
-		[262, 668],
-		[300, 650],
-		[352, 664],
-		[420, 676],
-		[505, 664],
-		[600, 672],
-		[760, 688],
-		[960, 684],
-		[1100, 694],
-		[1190, 688],
-		[1248, 718],
-	];
-	const top = `M${contour[0][0]},${contour[0][1]}${smoothThrough(contour)}`;
-	const mound = `${top} L1248,722 L300,724 Z`;
-	// the turned-down sheet: the part over their chests, ending in a soft fold at x ~ 740
-	const sheetD = `M232,742${smoothThrough(contour.slice(0, 8))} C752,700 742,712 738,722 L300,724 Z`;
+		);
+	};
 	return (
 		<g>
-			{head(Mom, 215, mHy, 1.3, false, mR, momP, 'pbMom')}
-			<path d={mound} fill={QUILT} />
-			<path d={sheetD} fill={SHEET} />
-			<path d={top} fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round" />
-			<path d="M752,700 C742,712 740,716 738,722" fill="none" stroke={INK} strokeWidth={3.5} strokeLinecap="round" />
-			{head(Lily, 430, lHy, 1.6, true, lR, lilyP, 'pbLily')}
+			{head(Mom, PARENTS_BED.mom[0], PARENTS_BED.mom[1], 1.3, false, momP, 'pbMom')}
+			{head(Lily, PARENTS_BED.lily[0], PARENTS_BED.lily[1], 1.6, true, lilyP, 'pbLily')}
 		</g>
 	);
 };
+/** where the faces rest in the parents' bed (pillow-centre x, head-centre y) and its nightstand clock */
+export const PARENTS_BED = {mom: [701, 588] as [number, number], lily: [455, 620] as [number, number], clock: [205, 745] as [number, number]};
 
 /** the blanket pulled over the head: a trembling lump in the painted quilt's colour, over the pillow */
 export const HideInBed: React.FC<{b: BedGeo; px: number; light?: Light; shiver?: number; frame: number; id: string}> = ({b, px, shiver = 1, frame}) => {

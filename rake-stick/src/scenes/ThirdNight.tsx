@@ -2,7 +2,7 @@
 // the bed empty, the blanket raked open; they never found him.
 import React from 'react';
 import {Dad, Lily, Mom} from '../components/characters/Cast';
-import {LieInBed, ParentsBed} from '../stick/bed';
+import {LieInBed, PARENTS_BED, ParentsBed} from '../stick/bed';
 import {DoorOpen, Person} from '../stick/goat';
 import {GEO, ramp, shot, Shots, useStick, walk, type Shot} from '../stick/kit';
 import {BedClock, Glow, Tears} from '../stick/props';
@@ -21,20 +21,20 @@ export const ThirdNight: React.FC = () => {
 	const t29 = T('narrator_029_ran');
 	const shots: Shot[] = [
 		// "I tried to stay awake. I couldn't."
-		shot(T('narrator_024_couldnt'), 'master_night', 1.25, 1.35, [560, 600], [480, 620], {tag: 'bed'}),
+		shot(T('narrator_024_couldnt'), 'master_night', 1.25, 1.35, [760, 600], [640, 610], {tag: 'bed'}),
 		// "I woke up at four in the morning."
-		shot(T('narrator_025_four'), 'master_night', 2.8, 2.95, [440, 610], [440, 610], {tag: 'bed'}),
-		shot(at('clock_400'), 'master_night', 3.6, 3.7, [130, 860], [130, 860], {tag: 'bed'}),
+		shot(T('narrator_025_four'), 'master_night', 2.6, 2.75, [470, 615], [465, 615], {tag: 'bed'}),
+		shot(at('clock_400'), 'master_night', 3.6, 3.7, [215, 730], [215, 730], {tag: 'bed'}),
 		// "The house was completely silent. No clock. No wind. Nothing."
 		shot(T('narrator_026_silent'), 'master_night', 1.0, 1.08, [960, 540], [1000, 540], {tag: 'bed'}),
 		// her room is behind that wall
 		shot(at('silence'), 'master_night', 1.5, 1.9, [1580, 520], [1640, 520], {tag: 'bed'}),
 		// "And then, through the wall, very softly, I heard a voice..."
-		shot(T('narrator_027_voice'), 'master_night', 2.7, 2.85, [470, 610], [470, 610], {tag: 'bed'}),
+		shot(T('narrator_027_voice'), 'master_night', 2.5, 2.65, [520, 610], [510, 610], {tag: 'bed'}),
 		// RAKE: "Danny..." - on the other side of the wall
 		shot(T('rake_001_danny') - 0.3, 'bedroom_night', 1.6, 2.6, [520, 640], [440, 620], {tag: 'danny'}),
 		// "Mom didn't wake up."
-		shot(T('narrator_028_mom'), 'master_night', 1.6, 1.7, [400, 600], [400, 600], {tag: 'up'}),
+		shot(T('narrator_028_mom'), 'master_night', 1.6, 1.7, [560, 600], [560, 600], {tag: 'up'}),
 		// "I ran down the hall. My bedroom door was open. The lamp was on."
 		shot(t29, 'hallway_night', 1.0, 1.0, [960, 560], [960, 560], {tag: 'run'}),
 		// "And the bed was empty."
@@ -51,8 +51,8 @@ export const ThirdNight: React.FC = () => {
 			const lilyP = {eyes: awake ? 'wide' : 'closed', brows: awake ? 'worried' : 'flat', look: t > T('narrator_027_voice') ? [1, -0.2] : [0.4, -0.8], idle: !awake, mouth: 'flat'};
 			return (
 				<g>
-					<Glow cx={1270} cy={290} r={520} color="#b9cdf2" k={0.3} />
-					<BedClock x={70} y={835} text="4:00" frame={f} />
+					<Glow cx={1400} cy={300} r={560} color="#b9cdf2" k={0.3} />
+					<BedClock x={PARENTS_BED.clock[0]} y={PARENTS_BED.clock[1]} text="4:00" frame={f} />
 					<ParentsBed frame={f} mom={Mom} lily={Lily} momP={{eyes: 'closed', brows: 'flat', mouth: 'flat', idle: false}} lilyP={lilyP} />
 				</g>
 			);
