@@ -3,7 +3,7 @@ THE JINN WEDDING - عرس الجن (stick-figure style, same code-drawn look as 
 
 FILE
 out/jinn_1080p_send.mp4     (1920x1080, 24 fps, 5:09, 273 MB - the copy sent to you; upload this one)
-out/jinn_1080p_upload.mp4   (same film at a higher bitrate, 541 MB, kept on the build machine)
+out/jinn_1080p_upload.mp4   (same film at a higher bitrate, 542 MB, kept on the build machine)
 
 TITLE (same pattern as your older videos)
 The Jinn Wedding | Animated Horror Story
