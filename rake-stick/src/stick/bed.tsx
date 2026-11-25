@@ -51,11 +51,11 @@ const smoothThrough = (pts: Array<[number, number]>) => {
 	return d;
 };
 
-/** lying on the pillow at px (pillow centre x). The painted bed stays exactly as painted; only what a body changes is
- *  drawn on top, all of it ABOVE the painted quilt's top edge (b.quilt): the head on the pillow (the stick figure
- *  clipped to its head, no arms), the shoulder in the pyjama colour, the mound the body raises in the quilt (in the
- *  painted quilt's own colour, from where the painted quilt starts to the foot), the sheet turned over at its top,
- *  and one arm resting on it with a round hand. */
+/** lying on the pillow at px (pillow centre x). The painted bed stays exactly as painted; only the face and what the
+ *  body changes are drawn on top, all of it ABOVE the painted quilt's top edge (b.quilt): the head on the pillow (the
+ *  stick figure clipped to its head - just the face, no arms or shoulders) and the mound the body raises under the
+ *  quilt (in the painted quilt's own colour, from where the painted quilt starts to the foot), the sheet turned over
+ *  at its top. */
 export const LieInBed: React.FC<{
 	b: BedGeo;
 	is: AnyPerson;
@@ -71,16 +71,12 @@ export const LieInBed: React.FC<{
 	x1?: number;
 	/** false: only the head */
 	blanket?: boolean;
-	shirt?: string;
-	skin?: string;
-	arm?: boolean;
 	dy?: number;
-}> = ({b, is: P, px, s, child = false, light, frame, p = {}, id, wob = 0, x1, blanket = true, shirt = '#e7a9bb', skin = '#f1cfae', arm = true, dy = 0}) => {
+}> = ({b, is: P, px, s, child = false, light, frame, p = {}, id, wob = 0, x1, blanket = true, dy = 0}) => {
 	const k = child ? 0.62 : 1;
 	const R = 36 * (child ? 1.08 : 1) * s;
 	const hy = b.pillowY - 30 + dy;
 	const headUp = 262 * k * s;
-	const lw = 5.5 * s * 0.9;
 	const hcx = px - 0.24 * R;
 	const hcy = hy + 0.03 * R;
 	const ad = child ? 1 : 1.3;
@@ -104,26 +100,8 @@ export const LieInBed: React.FC<{
 	// the turned-over sheet along the top near the head
 	const f0 = contour.slice(0, 3);
 	const foldD = `M${f0[0][0]},${f0[0][1]}${smoothThrough(f0)} L${f0[2][0] + 0.04 * R},${f0[2][1] + 0.2 * R} ${smoothThrough([[f0[2][0] + 0.04 * R, f0[2][1] + 0.2 * R], [f0[1][0] + 0.08 * R, f0[1][1] + 0.22 * R], [f0[0][0] + 0.12 * R, base]]).trim()} Z`;
-	// the shoulder between the chin and the mound
-	const bodyD = `M${px + 0.25 * R},${base} C${px + 0.3 * R},${ySh + 0.25 * R} ${px + 0.5 * R},${ySh} ${xs + 0.3 * R},${ySh} L${xs + 0.3 * R},${base} Z`;
-	// the arm resting on the mound
-	const topAt = (x: number) => {
-		let best = contour[0];
-		for (const c of contour) if (Math.abs(c[0] - x) < Math.abs(best[0] - x)) best = c;
-		return best[1];
-	};
-	const aw = 0.26 * R * (child ? 1 : 0.85);
-	const sh: [number, number] = [xs + 0.05 * R, ySh + 0.3 * R];
-	const el: [number, number] = [xs + 0.95 * R * ad, topAt(xs + 0.95 * R * ad) - aw * 0.3];
-	const hd: [number, number] = [xs + 1.75 * R * ad, topAt(xs + 1.75 * R * ad) - aw * 0.4];
-	const armD = `M${sh[0]},${sh[1]} Q${sh[0] + 0.35 * R},${ySh - 0.08 * R} ${el[0]},${el[1]} L${hd[0]},${hd[1]}`;
 	return (
 		<g>
-			{blanket ? (
-				<Tint light={light}>
-					<path d={bodyD} fill={shirt} stroke={INK} strokeWidth={lw} strokeLinejoin="round" />
-				</Tint>
-			) : null}
 			<defs>
 				<clipPath id={`${id}_head`}>
 					{/* an oval round the head: hair falls onto the pillow with a soft edge, nothing shows below the chin */}
@@ -140,13 +118,6 @@ export const LieInBed: React.FC<{
 					<path d={moundD} fill={b.qcol ?? b.quiltCols[0]} />
 					<path d={topPath} fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round" />
 					{b.sheet ? <path d={foldD} fill={b.sheet} stroke={INK} strokeWidth={3.5} strokeLinejoin="round" /> : null}
-					{arm ? (
-						<Tint light={light}>
-							<path d={armD} fill="none" stroke={INK} strokeWidth={aw + lw * 2} strokeLinecap="round" strokeLinejoin="round" />
-							<path d={armD} fill="none" stroke={shirt} strokeWidth={aw} strokeLinecap="round" strokeLinejoin="round" />
-							<circle cx={hd[0] + 0.12 * R} cy={hd[1]} r={0.19 * R * (child ? 1 : 0.85)} fill={skin} stroke={INK} strokeWidth={lw * 0.8} />
-						</Tint>
-					) : null}
 				</g>
 			) : null}
 		</g>
@@ -155,19 +126,15 @@ export const LieInBed: React.FC<{
 
 /** Her parents' double bed with Mom (back pillow) and Lily (front pillow) asleep under one blanket: the painted bed
  *  stays as painted; one mound rises over both bodies above the painted quilt's edge - the top sheet turned down over
- *  their chests, the quilt from the waist down - with Mom's arm and Lily's arm resting on it. */
+ *  their chests, the quilt from the waist down - with just their faces on the pillows. */
 export const ParentsBed: React.FC<{
 	frame: number;
 	mom: AnyPerson;
 	lily: AnyPerson;
 	momP?: Record<string, unknown>;
 	lilyP?: Record<string, unknown>;
-	momShirt: string;
-	momSkin: string;
-	lilyShirt: string;
-	lilySkin: string;
 	light?: Light;
-}> = ({frame, mom: Mom, lily: Lily, momP = {}, lilyP = {}, momShirt, momSkin, lilyShirt, lilySkin, light}) => {
+}> = ({frame, mom: Mom, lily: Lily, momP = {}, lilyP = {}, light}) => {
 	const QUILT = '#c09e78';
 	const SHEET = '#cdb9a5';
 	// heads: Mom on the back pillow, Lily on the front one
@@ -207,13 +174,6 @@ export const ParentsBed: React.FC<{
 	const mound = `${top} L1248,722 L300,724 Z`;
 	// the turned-down sheet: the part over their chests, ending in a soft fold at x ~ 740
 	const sheetD = `M232,742${smoothThrough(contour.slice(0, 8))} C752,700 742,712 738,722 L300,724 Z`;
-	const arm = (pts: string, w: number, col: string, hand: [number, number], r: number) => (
-		<g>
-			<path d={pts} fill="none" stroke={INK} strokeWidth={w + 10} strokeLinecap="round" strokeLinejoin="round" />
-			<path d={pts} fill="none" stroke={col} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" />
-			<circle cx={hand[0]} cy={hand[1]} r={r} fill={momSkin === col ? lilySkin : col === momShirt ? momSkin : lilySkin} stroke={INK} strokeWidth={5} />
-		</g>
-	);
 	return (
 		<g>
 			{head(Mom, 215, mHy, 1.3, false, mR, momP, 'pbMom')}
@@ -221,9 +181,7 @@ export const ParentsBed: React.FC<{
 			<path d={sheetD} fill={SHEET} />
 			<path d={top} fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round" />
 			<path d="M752,700 C742,712 740,716 738,722" fill="none" stroke={INK} strokeWidth={3.5} strokeLinecap="round" />
-			<Tint light={light}>{arm('M296,676 Q330,654 372,660 L432,662', 12, momShirt, [446, 662], 9)}</Tint>
 			{head(Lily, 430, lHy, 1.6, true, lR, lilyP, 'pbLily')}
-			<Tint light={light}>{arm('M500,700 Q540,668 580,664 L640,664', 16, lilyShirt, [656, 664], 12)}</Tint>
 		</g>
 	);
 };

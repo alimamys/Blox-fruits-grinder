@@ -1,1 +1,1 @@
-QA: 0 findings in frames 0-9717 (every 2) - final build v2.2 (bed shoulders/arms), 2026-11-25
+QA: 0 findings in frames 0-9717 (every 2) - final build v2.3 (faces only in bed), 2026-11-25
