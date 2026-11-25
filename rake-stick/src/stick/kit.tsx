@@ -159,12 +159,12 @@ const Defs: React.FC = () => (
 		{(Object.keys(MATS) as Light[]).map((k) => (
 			<React.Fragment key={k}>
 				{MATS[k][0] ? (
-					<filter id={`pl_${k}`} colorInterpolationFilters="sRGB">
+					<filter id={`pl_${k}`} colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" x={-4000} y={-4000} width={12000} height={12000}>
 						<feColorMatrix type="matrix" values={MATS[k][0]!} />
 					</filter>
 				) : null}
 				{MATS[k][1] ? (
-					<filter id={`ch_${k}`} colorInterpolationFilters="sRGB">
+					<filter id={`ch_${k}`} colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" x={-4000} y={-4000} width={12000} height={12000}>
 						<feColorMatrix type="matrix" values={MATS[k][1]!} />
 					</filter>
 				) : null}

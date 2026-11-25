@@ -127,7 +127,7 @@ export const LieInBed: React.FC<{
 			<defs>
 				<clipPath id={`${id}_head`}>
 					{/* an oval round the head: hair falls onto the pillow with a soft edge, nothing shows below the chin */}
-					<ellipse cx={hcx} cy={hcy - 0.04 * R} rx={1.55 * R} ry={1.07 * R} />
+					<ellipse cx={hcx} cy={hcy - 0.04 * R} rx={(child ? 1.08 : 1.25) * R} ry={1.07 * R} />
 				</clipPath>
 			</defs>
 			<g clipPath={`url(#${id}_head)`}>
@@ -179,7 +179,7 @@ export const ParentsBed: React.FC<{
 		<g>
 			<defs>
 				<clipPath id={id}>
-					<ellipse cx={px - 0.24 * R} cy={hy - 0.01 * R} rx={1.55 * R} ry={1.07 * R} />
+					<ellipse cx={px - 0.24 * R} cy={hy - 0.01 * R} rx={(child ? 1.08 : 1.25) * R} ry={1.07 * R} />
 				</clipPath>
 			</defs>
 			<g clipPath={`url(#${id})`}>
@@ -204,9 +204,9 @@ export const ParentsBed: React.FC<{
 		[1248, 718],
 	];
 	const top = `M${contour[0][0]},${contour[0][1]}${smoothThrough(contour)}`;
-	const mound = `${top} L1248,722 L400,722 L372,780 L240,792 Z`;
+	const mound = `${top} L1248,722 L300,724 Z`;
 	// the turned-down sheet: the part over their chests, ending in a soft fold at x ~ 740
-	const sheetD = `M232,742${smoothThrough(contour.slice(0, 8))} C752,700 742,712 738,722 L400,722 L372,780 L240,792 Z`;
+	const sheetD = `M232,742${smoothThrough(contour.slice(0, 8))} C752,700 742,712 738,722 L300,724 Z`;
 	const arm = (pts: string, w: number, col: string, hand: [number, number], r: number) => (
 		<g>
 			<path d={pts} fill="none" stroke={INK} strokeWidth={w + 10} strokeLinecap="round" strokeLinejoin="round" />
@@ -243,12 +243,15 @@ export const HideInBed: React.FC<{b: BedGeo; px: number; light?: Light; shiver?:
 		[foot - 60, base - 40],
 		[foot - 4, base],
 	];
-	const d = `M${top[0][0]},${top[0][1]}${smoothThrough(top)} L${foot - 4},${base + 2} L${(b.qx0 ?? px + 80) + 10},${base + 2} L${px + 60},${base + 70} Z`;
+	// the front edge where the blanket drapes over the pillow: a soft curve, not a box
+	const q0 = (b.qx0 ?? px + 80) + 135;
+	const drape = `M${q0},${base + 2} C${q0 - 50},${base + 30} ${q0 - 70},${base + 68} ${q0 - 120},${base + 72} C${px - 20},${base + 78} ${b.x0 + 120},${base + 74} ${top[0][0]},${top[0][1]}`;
+	const d = `M${top[0][0]},${top[0][1]}${smoothThrough(top)} L${foot - 4},${base + 2} L${q0},${base + 2} ${drape.replace(/^M[^C]+/, '')} Z`;
 	return (
 		<g>
 			<path d={d} fill={b.qcol ?? b.quiltCols[0]} />
 			<path d={`M${top[0][0]},${top[0][1]}${smoothThrough(top)}`} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" />
-			<path d={`M${top[0][0]},${top[0][1]} L${px + 60},${base + 70}`} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
+			<path d={drape} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
 		</g>
 	);
 };
