@@ -62,6 +62,14 @@ if (missingSfx.length) {
 	warnings++;
 	console.log(`\n! missing SFX files (they will simply be silent): ${missingSfx.join(', ')}`);
 }
+// the audio layer only plays files listed in the manifest (npm run retime): a sound on disk but not listed is silent
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'src/data/generated/audioManifest.json'), 'utf8'));
+const listed = new Set(Object.keys(manifest.files ?? manifest));
+const unlisted = [...sounds].filter((s) => fs.existsSync(path.join(sfxDir, `${s}.wav`)) && !listed.has(`sfx/${s}.wav`));
+if (unlisted.length) {
+	warnings++;
+	console.log(`\n! SFX files not in the audio manifest (silent until \`npm run retime\`): ${unlisted.join(', ')}`);
+}
 const nar = TIMELINE.lines.filter((l) => !l.overlay && l.line.character === 'narrator');
 const chapters = TIMELINE.scenes.filter((s) => s.id !== 'end').map((s) => `${fmt(Math.max(0, s.start)).replace(/\.\d$/, '').padStart(5, '0')} ${s.name}`);
 console.log('\nChapters (YouTube):\n' + chapters.map((c) => '  ' + c.replace(/^0(\d:)/, '$1')).join('\n'));

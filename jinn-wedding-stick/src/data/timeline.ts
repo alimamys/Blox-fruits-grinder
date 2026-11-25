@@ -43,13 +43,13 @@ export const SCENES: SceneDef[] = [
 			b('title', 3.2, 'THE JINN WEDDING; the picture dives into the incense smoke, into 1997'),
 		],
 		tail: 0.2,
-		beds: {room: 0.12, night: 0.03},
+		beds: {room: 0.12, night: 0.1},
 		bedFade: 1.0,
-		bedAutomation: [{at: 'title', fade: 0.6, set: {room: 0, night: 0, drone: 0.1}}],
+		bedAutomation: [{at: 'title', fade: 0.6, set: {room: 0, night: 0, drone: 0.3}}],
 		sfx: [
-			{sound: 'campfire', at: 'open_black', offset: 0.2, volume: 0.12, maxDuration: 12},
-			{sound: 'coffee_pour', at: 'pour', offset: 0.1, volume: 0.45},
-			{sound: 'mug_set', at: 'pour', offset: 1.3, volume: 0.25},
+			{sound: 'campfire', at: 'open_black', offset: 0.2, volume: 0.5, maxDuration: 12},
+			{sound: 'coffee_pour', at: 'pour', offset: 0.1, volume: 0.9},
+			{sound: 'mug_set', at: 'pour', offset: 1.3, volume: 0.6},
 		],
 		overlays: [],
 	},
@@ -67,16 +67,16 @@ export const SCENES: SceneDef[] = [
 			'yadda_005_fortune',
 		],
 		tail: 0.2,
-		beds: {drums: 0.16, crowd: 0.1, drone: 0, room: 0},
+		beds: {drums: 0.7, crowd: 0.9, drone: 0, room: 0},
 		bedFade: 1.0,
 		bedAutomation: [
 			{at: 'yadda_004_phone', fade: 1.2, set: {drums: 0, crowd: 0, room: 0.1}},
-			{at: 'mother_002_dinars', fade: 0.4, set: {drone: 0.08}},
+			{at: 'mother_002_dinars', fade: 0.4, set: {drone: 0.3}},
 			{at: 'yadda_005_fortune', fade: 1.0, set: {drone: 0}},
 		],
 		sfx: [
-			{sound: 'phone_ring_old', at: 'ring', offset: 0.0, volume: 0.5, maxDuration: 1.6},
-			{sound: 'phone_pickup', at: 'ring', offset: 1.25, volume: 0.4},
+			{sound: 'phone_ring_old', at: 'ring', offset: 0.0, volume: 0.85, maxDuration: 1.6},
+			{sound: 'phone_pickup', at: 'ring', offset: 1.25, volume: 0.7},
 		],
 		overlays: [],
 	},
@@ -92,12 +92,12 @@ export const SCENES: SceneDef[] = [
 			'yadda_009_never_seen',
 		],
 		tail: 0.2,
-		beds: {car: 0.12, night: 0.08, drone: 0.03},
+		beds: {car: 0.6, night: 0.3, drone: 0.1},
 		bedFade: 1.0,
 		bedAutomation: [
-			{at: 'yadda_008_house', fade: 1.2, set: {car: 0.05, drone: 0.08}},
+			{at: 'yadda_008_house', fade: 1.2, set: {car: 0.25, drone: 0.3}},
 		],
-		sfx: [{sound: 'door_close', at: 'car', offset: 1.1, volume: 0.35}],
+		sfx: [{sound: 'door_close', at: 'car', offset: 1.1, volume: 0.8}],
 		overlays: [],
 	},
 	{
@@ -115,17 +115,17 @@ export const SCENES: SceneDef[] = [
 			b('flicker', 1.6, 'the lights flicker; hundreds of eyes shine'),
 		],
 		tail: 0.2,
-		beds: {crowd: 0.1, drone: 0.04, drums: 0},
+		beds: {crowd: 0, drone: 0.25, drums: 0},
 		bedFade: 1.2,
 		bedAutomation: [
 			{at: 'mother_003_play', fade: 0.3, set: {crowd: 0.0}},
-			{at: 'play', offset: 0.2, fade: 0.1, set: {drums: 0.3}},
-			{at: 'yadda_012_danced', fade: 0.8, set: {drums: 0.17}},
-			{at: 'yadda_014_eyes', fade: 0.8, set: {drone: 0.1}},
+			{at: 'play', offset: 0.2, fade: 0.1, set: {drums: 1.25}},
+			{at: 'yadda_012_danced', fade: 0.8, set: {drums: 0.7}},
+			{at: 'yadda_014_eyes', fade: 0.8, set: {drone: 0.4}},
 		],
 		sfx: [
-			{sound: 'door_open', at: 'doors', offset: 0.1, volume: 0.35},
-			{sound: 'light_flicker', at: 'yadda_014_eyes', offset: 4.74, volume: 0.35},
+			{sound: 'door_open', at: 'doors', offset: 0.1, volume: 0.9},
+			{sound: 'light_flicker', at: 'yadda_014_eyes', offset: 4.74, volume: 0.7},
 		],
 		overlays: [],
 	},
@@ -145,21 +145,22 @@ export const SCENES: SceneDef[] = [
 			'yadda_018_sounds',
 		],
 		tail: 0.2,
-		beds: {drums: 0.17, drone: 0.1, heart: 0},
+		beds: {drums: 0.7, drone: 0.3, heart: 0},
 		bedFade: 0.8,
 		bedAutomation: [
-			{at: 'look', fade: 0.3, set: {drums: 0.06, heart: 0.16}},
-			{at: 'hooves', fade: 0.2, set: {drums: 0.0, heart: 0.24}},
-			{at: 'girl_002_run', fade: 0.4, set: {heart: 0, drone: 0.04, room: 0.1}},
-			{at: 'drummer_002_go', fade: 0.3, set: {room: 0, drums: 0.15, drone: 0.12}},
-			{at: 'yadda_018_sounds', fade: 1.5, set: {drums: 0.12, drone: 0.16, tension: 0.06}},
+			{at: 'look', fade: 0.3, set: {drums: 0.45, heart: 0.6}},
+			{at: 'hooves', fade: 0.2, set: {drums: 0.55, heart: 0.75}},
+			{at: 'girl_002_run', fade: 0.4, set: {heart: 0, drums: 0, drone: 0.12, room: 0.12}},
+			{at: 'drummer_002_go', fade: 0.3, set: {room: 0, drums: 0.6, drone: 0.3}},
+			{at: 'yadda_018_sounds', fade: 1.5, set: {drums: 0.45, drone: 0.4, tension: 0.25}},
 		],
 		sfx: [
-			{sound: 'hooves_click', at: 'yadda_016_hooves', offset: 3.2, volume: 0.5},
-			{sound: 'hooves_click', at: 'hooves', offset: 0.1, volume: 0.6},
-			{sound: 'donkey_bray', at: 'yadda_018_sounds', fromEnd: true, offset: -7.5, volume: 0.22},
-			{sound: 'wrong_laugh', at: 'yadda_018_sounds', fromEnd: true, offset: -5.0, volume: 0.22},
-			{sound: 'wrong_singing', at: 'yadda_018_sounds', fromEnd: true, offset: -3.0, volume: 0.25},
+			{sound: 'hooves_click', at: 'yadda_016_hooves', offset: 3.7, volume: 0.9, grid: 0.3, gridOffset: -0.05},
+			{sound: 'hooves_click', at: 'yadda_016_hooves', offset: 7.7, volume: 1.0, grid: 0.3, gridOffset: -0.05},
+			{sound: 'hooves_click', at: 'hooves', offset: 0.6, volume: 0.9, grid: 0.3, gridOffset: -0.05},
+			{sound: 'donkey_bray', at: 'yadda_018_sounds', offset: 3.9, volume: 0.6},
+			{sound: 'wrong_laugh', at: 'yadda_018_sounds', offset: 5.9, volume: 0.6},
+			{sound: 'wrong_singing', at: 'yadda_018_sounds', offset: 8.6, volume: 0.6},
 		],
 		overlays: [],
 	},
@@ -175,11 +176,11 @@ export const SCENES: SceneDef[] = [
 			'yadda_022_paid',
 		],
 		tail: 0.2,
-		beds: {drums: 0.14, drone: 0.08, tension: 0.04},
+		beds: {drums: 0.45, drone: 0.3, tension: 0.2},
 		bedFade: 1.0,
 		bedAutomation: [
-			{at: 'yadda_021_silent', offset: 3.2, fade: 0.05, set: {drums: 0, tension: 0, drone: 0.03}},
-			{at: 'yadda_022_paid', fade: 1.5, set: {night: 0.06, drone: 0.02}},
+			{at: 'yadda_021_silent', offset: 3.2, fade: 0.05, set: {drums: 0, tension: 0, drone: 0.1}},
+			{at: 'yadda_022_paid', fade: 1.5, set: {night: 0.3, drone: 0.08}},
 		],
 		sfx: [],
 		overlays: [],
@@ -197,11 +198,11 @@ export const SCENES: SceneDef[] = [
 			'yadda_026_hoofprints',
 		],
 		tail: 0.3,
-		beds: {wind: 0.12, drone: 0.03},
+		beds: {wind: 0.5, drone: 0.12},
 		bedFade: 1.0,
 		bedAutomation: [
-			{at: 'turn', fade: 0.3, set: {drone: 0.14}},
-			{at: 'yadda_026_hoofprints', fade: 1.5, set: {drone: 0.08, wind: 0.08}},
+			{at: 'turn', fade: 0.3, set: {drone: 0.5}},
+			{at: 'yadda_026_hoofprints', fade: 1.5, set: {drone: 0.3, wind: 0.4}},
 		],
 		sfx: [],
 		overlays: [],
@@ -219,13 +220,13 @@ export const SCENES: SceneDef[] = [
 			b('phone', 3.0, 'the old phone in the majlis rings; they both look at it'),
 		],
 		tail: 0,
-		beds: {room: 0.11, wind: 0, drone: 0.02},
+		beds: {room: 0.12, wind: 0, drone: 0.06},
 		bedFade: 1.2,
 		bedAutomation: [
-			{at: 'yadda_030_listen', fade: 1.5, set: {drone: 0.06}},
-			{at: 'phone', fade: 0.05, set: {room: 0.04, drone: 0.1}},
+			{at: 'yadda_030_listen', fade: 1.5, set: {drone: 0.3}},
+			{at: 'phone', fade: 0.05, set: {room: 0.04, drone: 0.4}},
 		],
-		sfx: [{sound: 'phone_ring_old', at: 'phone', offset: 0.25, volume: 0.6, maxDuration: 2.6}],
+		sfx: [{sound: 'phone_ring_old', at: 'phone', offset: 0.25, volume: 0.95, maxDuration: 2.6}],
 		overlays: [],
 	},
 	{
@@ -442,8 +443,17 @@ export const buildTimeline = (mode: EditMode = 'short'): Timeline => {
 			sfx.push({sound: enter.sound, start: at, end: at + 3, volume: enter.volume ?? 0.5});
 		}
 		for (const cue of [...(def.sfx as SfxCue[]), ...(HITS[def.id] ?? [])]) {
-			const at = resolve(cue.at, cue.offset, cue.fromEnd);
+			let at = resolve(cue.at, cue.offset, cue.fromEnd);
 			if (at === null) continue;
+			if (cue.grid) {
+				// the drums bed is tiled every loopF frames (AudioLayer: file length minus its 0.5 s crossfade tail),
+				// so its beat grid restarts at each tile: snap to the grid of the tile playing at that moment
+				const len = audioDuration('sfx/drums_wedding.wav');
+				const loopF = len ? Math.round((len - 0.5) * FPS) : 0;
+				const anchor = loopF ? (Math.floor((at * FPS) / loopF) * loopF) / FPS : 0;
+				const off = cue.gridOffset ?? 0;
+				at = anchor + Math.round((at - anchor - off) / cue.grid) * cue.grid + off;
+			}
 			sfx.push({sound: cue.sound, start: Math.max(0, at), end: at + (cue.maxDuration ?? 12), volume: cue.volume ?? 1, maxDuration: cue.maxDuration});
 		}
 		for (const ov of def.overlays) {

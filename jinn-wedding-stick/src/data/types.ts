@@ -123,6 +123,10 @@ export interface SfxCue {
 	volume?: number;
 	/** Trim the sound to this many seconds (fades out over the last 0.3 s). */
 	maxDuration?: number;
+	/** Snap the start to a beat grid: start = k * grid + gridOffset (seconds of film time), e.g. hooves in time
+	 *  with the wedding drums bed (whose eighth notes fall on multiples of 0.3 s). */
+	grid?: number;
+	gridOffset?: number;
 	note?: string;
 }
 
