@@ -1,0 +1,11 @@
+# Chatterbox voice provider (free, open-source, MIT licence) - install in its own venv:
+#   python3 -m venv .venv-chatterbox
+#   .venv-chatterbox/bin/pip install -r scripts/voice/requirements-chatterbox.txt
+# The model (~3 GB) downloads once from huggingface.co on first use.
+# CPU-only machines: install the much smaller CPU build of PyTorch first:
+#   .venv-chatterbox/bin/pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+chatterbox-tts==0.1.7
+# resemble-perth (watermarker) still imports pkg_resources, removed in setuptools 81
+setuptools<81
+scipy>=1.11
+pyloudnorm>=0.1.1

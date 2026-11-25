@@ -1,0 +1,67 @@
+THE JINN WEDDING - عرس الجن (stick-figure style, same code-drawn look as the stick Mr. Widemouth, Goatman, 3:06, Frame 240, The Rake)
+=====================================================================================================================================
+
+FILE
+out/jinn_1080p_send.mp4     (1920x1080, 24 fps, 5:09, SIZE_SEND - the copy sent to you; upload this one)
+out/jinn_1080p_upload.mp4   (same film at a higher bitrate, SIZE_UPLOAD, kept on the build machine)
+
+TITLE (same pattern as your older videos)
+The Jinn Wedding | Animated Horror Story
+
+ALTERNATIVE TITLES (for Test & Compare)
+- She Sang at a Wedding for the Jinn | Kuwaiti Urban Legend
+- The Wedding in the House That Wasn't There | Animated Horror Story
+
+DESCRIPTION
+------------------------------------------------------------
+When I was a little girl, my grandmother told me a story in the majlis. I have never forgotten it.
+Sabahiya, Kuwait, 1997. Noura, the most famous taqaqa (wedding singer) in Kuwait, gets a call from "the mother of
+the bride": a wedding tomorrow night, five hundred dinars. A silent driver, a house nobody had ever seen, a hall of
+gold - and guests who clapped like one person, whose eyes shone in the dark, and whose feet were not feet.
+
+0:00 The majlis
+0:34 The call
+1:14 The drive
+1:40 The hall
+2:30 Their feet
+3:20 Until dawn
+3:53 The man at dawn
+4:29 The majlis again
+
+If a stranger offered you far too much to sing at a wedding you'd never heard of... would you ask whose wedding it is?
+
+About the story: "The Jinn Wedding" (عرس الجن) is a Kuwaiti urban legend that has been told for decades, in many
+versions. Nobody has ever proved it happened, and nobody has ever proved it didn't. We tell it as a legend: the names,
+the place and the year are the legend's own, and the wording, the small details and the grandmother's frame story are
+ours. It is not a claim about any real person.
+
+Credits - animation: original. Voices: Fish Audio. Backgrounds painted with an image model from our own layouts;
+characters drawn and animated in code. Wedding drums, crowd and sound effects built from Creative Commons recordings.
+Sound effects used under Creative Commons Attribution (CC BY):
+• "1ft dry 4 rings.flac" by billox30 - https://freesound.org/s/391978/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: phone_ring_old
+• "Pulsacions del cor.wav" by flosicalcat59 - https://freesound.org/s/238929/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: heartbeat_loop
+• "Creak_12.wav" by HerbertBoland - https://freesound.org/s/29685/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_open
+• "wooden_door_close.wav" by joedeshon - https://freesound.org/s/117415/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: door_close
+• "Staircase Impulse-Response long reverb 20m away clap" by jorickhoofd - https://freesound.org/s/160138/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: boom_hit, crowd_women, donkey_bray, drums_wedding, hooves_click, low_horror_drone, riser_short, stinger, sub_drop, tension_pulse, whoosh_1, whoosh_2, wrong_laugh, wrong_singing
+• "Basement Impulse-Response reverb 6m away medium-pitched clap" by jorickhoofd - https://freesound.org/s/160143/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: bass_hit, light_flicker
+• "'Now I'm here, all alone in the darkness' Female Vocals.m4a" by TheScarlettWitch89 - https://freesound.org/s/419326/ - CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/) - used in: wrong_singing
+
+#animatedhorror #scarystories #jinn
+------------------------------------------------------------
+
+TAGS
+the jinn wedding, jinn wedding story, عرس الجن, kuwaiti urban legend, kuwait horror story, الطقاقة نورة, jinn horror story, arab horror story, gulf horror story, khaleeji horror, animated horror story, horror animation, scary story, stick figure horror, urban legend, true scary story
+
+THUMBNAILS (youtube/)
+- thumbnail_A_look_at_their_feet.jpg       LOOK AT THEIR FEET.     (first choice: hooves under the shining dresses, Noura screaming)
+- thumbnail_B_the_jinn_wedding.jpg         THE JINN WEDDING.       (the hall in the dark: only their eyes, the veiled bride - Test & Compare)
+- thumbnail_C_the_house_wasnt_there.jpg    THE HOUSE WASN'T THERE. (Noura facing the burned ruin at dawn - spare)
+
+SETTINGS
+- Audience: No, it's not made for kids
+- Category: Film & Animation   |   Language: English
+- Altered or synthetic content: answer honestly. The backgrounds are AI-painted cartoon art and the voices are
+  AI text-to-speech (not realistic footage of real people or places).
+
+PINNED COMMENT
+Did your grandmother tell you this one? Tell us the version you heard - every family in the Gulf tells it a little differently.

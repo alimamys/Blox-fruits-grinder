@@ -1,0 +1,222 @@
+{
+ "drummer/drummer_001_feet.wav": {
+  "hash": "ff45375092566eabee49194d1b1d33c4",
+  "provider": "fish",
+  "seconds": 3.012
+ },
+ "drummer/drummer_002_go.wav": {
+  "hash": "e22f9ad7e14a5b5fb9f82a8e9b092c54",
+  "provider": "fish",
+  "seconds": 1.227
+ },
+ "girl/girl_001_scary.wav": {
+  "hash": "93d1a52aa2f82a1faccee65b3e2bc343",
+  "provider": "fish",
+  "seconds": 4.06
+ },
+ "girl/girl_002_run.wav": {
+  "hash": "a06f866a6e1b38f668f9c8ad8a2a80a7",
+  "provider": "fish",
+  "seconds": 2.155
+ },
+ "girl/girl_003_true.wav": {
+  "hash": "0aacc8f88ff0b10dcd4cd773841825c5",
+  "provider": "fish",
+  "seconds": 1.412
+ },
+ "man/man_001_empty.wav": {
+  "hash": "1fbd1768b9085ad3b0b85f139c1a7627",
+  "provider": "fish",
+  "seconds": 5.82
+ },
+ "mother/mother_001_tomorrow.wav": {
+  "hash": "cf83866509d685c73bffda7f11d378a5",
+  "provider": "fish",
+  "seconds": 6.887
+ },
+ "mother/mother_002_dinars.wav": {
+  "hash": "b75691e8b80eb2330235a28bc2b6b427",
+  "provider": "fish",
+  "seconds": 1.818
+ },
+ "mother/mother_003_play.wav": {
+  "hash": "da8985f01a7e9555e192783ec21c2571",
+  "provider": "fish",
+  "seconds": 5.769
+ },
+ "mother/mother_004_enough.wav": {
+  "hash": "d46f7f6024c62d5d6646b451f3d64b41",
+  "provider": "fish",
+  "seconds": 6.031
+ },
+ "narrator/narrator_001_once.wav": {
+  "hash": "e47f7362a6d2db79ca656654372676d7",
+  "provider": "fish",
+  "seconds": 7.993
+ },
+ "noura/noura_001_booked.wav": {
+  "hash": "b997bd6014f98272ea72bdec05604f43",
+  "provider": "fish",
+  "seconds": 3.342
+ },
+ "noura/noura_002_keep.wav": {
+  "hash": "44dae7e5e29b291b03e80b5d2fc54237",
+  "provider": "fish",
+  "seconds": 3.549
+ },
+ "yadda/yadda_001_true.wav": {
+  "hash": "eb1e46056240c07965e377e8bd1bf1d3",
+  "provider": "fish",
+  "seconds": 6.856
+ },
+ "yadda/yadda_002_sabahiya.wav": {
+  "hash": "0aceb99d93da7377ae03dea630413f82",
+  "provider": "fish",
+  "seconds": 5.919
+ },
+ "yadda/yadda_003_famous.wav": {
+  "hash": "bffd5d31e6b8ff2b93cb0bfee9d508a1",
+  "provider": "fish",
+  "seconds": 10.682
+ },
+ "yadda/yadda_004_phone.wav": {
+  "hash": "e9c5495d5a930a514cb50a241289d6e7",
+  "provider": "fish",
+  "seconds": 6.821
+ },
+ "yadda/yadda_005_fortune.wav": {
+  "hash": "0294b5b5e1bb6ebb0ea2c267ff0b6ba0",
+  "provider": "fish",
+  "seconds": 5.157
+ },
+ "yadda/yadda_006_car.wav": {
+  "hash": "1fd0a721c54fbc0bb1aa148b02160da3",
+  "provider": "fish",
+  "seconds": 4.619
+ },
+ "yadda/yadda_007_dark.wav": {
+  "hash": "dfa4892182fa712836f30f5cd7713937",
+  "provider": "fish",
+  "seconds": 5.056
+ },
+ "yadda/yadda_008_house.wav": {
+  "hash": "2a6fbd65a1352de0b03a1307f09fa2ac",
+  "provider": "fish",
+  "seconds": 5.204
+ },
+ "yadda/yadda_009_never_seen.wav": {
+  "hash": "13acbfd6873cd694b42774d7ba628172",
+  "provider": "fish",
+  "seconds": 5.318
+ },
+ "yadda/yadda_010_gold.wav": {
+  "hash": "5036f0603e8ef012dc13c8353432b4ee",
+  "provider": "fish",
+  "seconds": 13.029
+ },
+ "yadda/yadda_011_cold.wav": {
+  "hash": "39f51b6637fc5679d80f98b4ee64701b",
+  "provider": "fish",
+  "seconds": 4.778
+ },
+ "yadda/yadda_012_danced.wav": {
+  "hash": "899633046d8cd6ce112bc2c474276e36",
+  "provider": "fish",
+  "seconds": 2.713
+ },
+ "yadda/yadda_013_one_person.wav": {
+  "hash": "04ca360342d76c308df52c30a5d7b6c5",
+  "provider": "fish",
+  "seconds": 5.679
+ },
+ "yadda/yadda_014_eyes.wav": {
+  "hash": "96dd3fbf300e4edae6dd3cb8115daf17",
+  "provider": "fish",
+  "seconds": 9.475
+ },
+ "yadda/yadda_015_youngest.wav": {
+  "hash": "3b68d72643442bf28ff8f743eae3791f",
+  "provider": "fish",
+  "seconds": 4.232
+ },
+ "yadda/yadda_016_hooves.wav": {
+  "hash": "8c7e4167b19ded8bae60ef42b9dda540",
+  "provider": "fish",
+  "seconds": 11.072
+ },
+ "yadda/yadda_017_where.wav": {
+  "hash": "19042ffa47f3090fbb9cbe962e492e76",
+  "provider": "fish",
+  "seconds": 4.084
+ },
+ "yadda/yadda_018_sounds.wav": {
+  "hash": "1aca77f004beb82a5e7b9078d99d00f2",
+  "provider": "fish",
+  "seconds": 13.11
+ },
+ "yadda/yadda_019_all_night.wav": {
+  "hash": "ea2638714ffcf4e5e71fc4367db6b6d9",
+  "provider": "fish",
+  "seconds": 7.992
+ },
+ "yadda/yadda_020_veil.wav": {
+  "hash": "de0ed41ec8fba6f32805ab8aeeabc875",
+  "provider": "fish",
+  "seconds": 2.681
+ },
+ "yadda/yadda_021_silent.wav": {
+  "hash": "2d7bf1030a6f0deca8aa778e3f30a330",
+  "provider": "fish",
+  "seconds": 4.961
+ },
+ "yadda/yadda_022_paid.wav": {
+  "hash": "a8495279fac3ceabf8f110c4030988b4",
+  "provider": "fish",
+  "seconds": 7.258
+ },
+ "yadda/yadda_023_man.wav": {
+  "hash": "868a0390196a86f8b5afca782bde61b3",
+  "provider": "fish",
+  "seconds": 3.933
+ },
+ "yadda/yadda_024_turned.wav": {
+  "hash": "6305abe04c1bb4e733dc2dfaca301431",
+  "provider": "fish",
+  "seconds": 2.489
+ },
+ "yadda/yadda_025_ruin.wav": {
+  "hash": "b706557decadb913e326ad5c23acb8f8",
+  "provider": "fish",
+  "seconds": 10.757
+ },
+ "yadda/yadda_026_hoofprints.wav": {
+  "hash": "66bc3f30dc0bb525d0c0554822d86707",
+  "provider": "fish",
+  "seconds": 6.321
+ },
+ "yadda/yadda_027_never.wav": {
+  "hash": "297ad3456919cf273408696d10fdc681",
+  "provider": "fish",
+  "seconds": 6.651
+ },
+ "yadda/yadda_028_magazine.wav": {
+  "hash": "6f7705f5fd6384f47995b7b1d57fc563",
+  "provider": "fish",
+  "seconds": 7.259
+ },
+ "yadda/yadda_029_nobody.wav": {
+  "hash": "a54dc7771fcb0fbc79c0c75ba60d1694",
+  "provider": "fish",
+  "seconds": 5.159
+ },
+ "yadda/yadda_030_listen.wav": {
+  "hash": "31130d4f6abb65b5185cef9921daa7d6",
+  "provider": "fish",
+  "seconds": 8.328
+ },
+ "yadda/yadda_031_whose.wav": {
+  "hash": "39768c8fe8dfaed2c4a11a2e7cc0b44f",
+  "provider": "fish",
+  "seconds": 2.007
+ }
+}

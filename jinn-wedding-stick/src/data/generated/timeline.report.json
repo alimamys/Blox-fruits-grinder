@@ -1,0 +1,128 @@
+{
+ "total": 309.4583333333333,
+ "scenes": [
+  {
+   "id": "majlis",
+   "name": "The majlis",
+   "start": 0,
+   "duration": 34.042,
+   "narrationText": "Once, a long time ago, when I was a little girl, my grandmother told me a story. I have never forgotten it.",
+   "dialogueIds": [
+    "girl_001_scary",
+    "yadda_001_true",
+    "yadda_002_sabahiya"
+   ]
+  },
+  {
+   "id": "call",
+   "name": "The call",
+   "start": 34.042,
+   "duration": 40.292,
+   "narrationText": "",
+   "dialogueIds": [
+    "yadda_003_famous",
+    "yadda_004_phone",
+    "mother_001_tomorrow",
+    "noura_001_booked",
+    "mother_002_dinars",
+    "yadda_005_fortune"
+   ]
+  },
+  {
+   "id": "drive",
+   "name": "The drive",
+   "start": 74.333,
+   "duration": 25.708,
+   "narrationText": "",
+   "dialogueIds": [
+    "yadda_006_car",
+    "yadda_007_dark",
+    "yadda_008_house",
+    "yadda_009_never_seen"
+   ]
+  },
+  {
+   "id": "hall",
+   "name": "The hall",
+   "start": 100.042,
+   "duration": 50.042,
+   "narrationText": "",
+   "dialogueIds": [
+    "yadda_010_gold",
+    "yadda_011_cold",
+    "mother_003_play",
+    "yadda_012_danced",
+    "yadda_013_one_person",
+    "yadda_014_eyes"
+   ]
+  },
+  {
+   "id": "feet",
+   "name": "Their feet",
+   "start": 150.083,
+   "duration": 50.208,
+   "narrationText": "",
+   "dialogueIds": [
+    "yadda_015_youngest",
+    "drummer_001_feet",
+    "yadda_016_hooves",
+    "girl_002_run",
+    "yadda_017_where",
+    "drummer_002_go",
+    "noura_002_keep",
+    "yadda_018_sounds"
+   ]
+  },
+  {
+   "id": "dawn",
+   "name": "Until dawn",
+   "start": 200.292,
+   "duration": 33.333,
+   "narrationText": "",
+   "dialogueIds": [
+    "yadda_019_all_night",
+    "yadda_020_veil",
+    "yadda_021_silent",
+    "mother_004_enough",
+    "yadda_022_paid"
+   ]
+  },
+  {
+   "id": "outside",
+   "name": "The man at dawn",
+   "start": 233.625,
+   "duration": 36.208,
+   "narrationText": "",
+   "dialogueIds": [
+    "yadda_023_man",
+    "man_001_empty",
+    "yadda_024_turned",
+    "yadda_025_ruin",
+    "yadda_026_hoofprints"
+   ]
+  },
+  {
+   "id": "ending",
+   "name": "The majlis again",
+   "start": 269.833,
+   "duration": 37.125,
+   "narrationText": "",
+   "dialogueIds": [
+    "yadda_027_never",
+    "yadda_028_magazine",
+    "girl_003_true",
+    "yadda_029_nobody",
+    "yadda_030_listen",
+    "yadda_031_whose"
+   ]
+  },
+  {
+   "id": "end",
+   "name": "Black",
+   "start": 306.958,
+   "duration": 2.5,
+   "narrationText": "",
+   "dialogueIds": []
+  }
+ ]
+}

@@ -1,0 +1,269 @@
+{
+ "generatedAt": "2026-11-25T15:54:50.786Z",
+ "files": {
+  "drummer/drummer_001_feet.wav": {
+   "duration": 3.012,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "drummer/drummer_002_go.wav": {
+   "duration": 1.227,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "girl/girl_001_scary.wav": {
+   "duration": 4.06,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "girl/girl_002_run.wav": {
+   "duration": 2.156,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "girl/girl_003_true.wav": {
+   "duration": 1.412,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "man/man_001_empty.wav": {
+   "duration": 5.82,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mother/mother_001_tomorrow.wav": {
+   "duration": 6.887,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mother/mother_002_dinars.wav": {
+   "duration": 1.818,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mother/mother_003_play.wav": {
+   "duration": 5.769,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "mother/mother_004_enough.wav": {
+   "duration": 6.031,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "narrator/narrator_001_once.wav": {
+   "duration": 7.993,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "noura/noura_001_booked.wav": {
+   "duration": 3.342,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "noura/noura_002_keep.wav": {
+   "duration": 3.549,
+   "channels": 2,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_001_true.wav": {
+   "duration": 6.856,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_002_sabahiya.wav": {
+   "duration": 5.919,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_003_famous.wav": {
+   "duration": 10.682,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_004_phone.wav": {
+   "duration": 6.821,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_005_fortune.wav": {
+   "duration": 5.157,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_006_car.wav": {
+   "duration": 4.619,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_007_dark.wav": {
+   "duration": 5.056,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_008_house.wav": {
+   "duration": 5.204,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_009_never_seen.wav": {
+   "duration": 5.318,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_010_gold.wav": {
+   "duration": 13.029,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_011_cold.wav": {
+   "duration": 4.778,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_012_danced.wav": {
+   "duration": 2.713,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_013_one_person.wav": {
+   "duration": 5.679,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_014_eyes.wav": {
+   "duration": 9.475,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_015_youngest.wav": {
+   "duration": 4.232,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_016_hooves.wav": {
+   "duration": 11.072,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_017_where.wav": {
+   "duration": 4.084,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_018_sounds.wav": {
+   "duration": 13.11,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_019_all_night.wav": {
+   "duration": 7.992,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_020_veil.wav": {
+   "duration": 2.681,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_021_silent.wav": {
+   "duration": 4.961,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_022_paid.wav": {
+   "duration": 7.258,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_023_man.wav": {
+   "duration": 3.934,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_024_turned.wav": {
+   "duration": 2.489,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_025_ruin.wav": {
+   "duration": 10.757,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_026_hoofprints.wav": {
+   "duration": 6.321,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_027_never.wav": {
+   "duration": 6.651,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_028_magazine.wav": {
+   "duration": 7.259,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_029_nobody.wav": {
+   "duration": 5.159,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_030_listen.wav": {
+   "duration": 8.328,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  },
+  "yadda/yadda_031_whose.wav": {
+   "duration": 2.007,
+   "channels": 1,
+   "sampleRate": 24000,
+   "provider": "fish"
+  }
+ }
+}
