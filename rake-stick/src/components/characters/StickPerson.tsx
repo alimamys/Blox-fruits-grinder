@@ -131,6 +131,10 @@ export interface StickProps {
 	noArms?: boolean;
 	/** draw only the head with its full hair - no body, arms, legs or shadow (a sleeper whose body is under a blanket) */
 	headOnly?: boolean;
+	/** only the hair on the head itself: no ponytail or hair hanging behind the head (a sleeper on a pillow) */
+	hairCapOnly?: boolean;
+	/** with headOnly: draw ONLY the hair hanging behind the head (so a neck can be drawn between it and the face) */
+	hairBackOnly?: boolean;
 }
 
 const INK = '#141414';
@@ -775,6 +779,7 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 	);
 	const farArm = side && walking;
 	const lapArms = (sitting && !back && (p.arms === undefined || p.arms === 'folded' || p.arms === 'lap')) || (floor && !back);
+	if (p.hairCapOnly) hairBack.length = 0;
 	const backArms = p.noArms ? [] : back || farArm ? (farArm ? [armEl(L, 0, true)] : [armEl(L, 0), armEl(R, 1)]) : [];
 	const frontArms = p.noArms || back ? [] : farArm ? [armEl(R, 1)] : [armEl(L, 0), armEl(R, 1)];
 
@@ -970,6 +975,12 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 		</g>
 	);
 
+	if (p.headOnly && p.hairBackOnly)
+		return (
+			<g transform={`translate(${x},${y}) scale(${flip ? -s : s},${s})`} opacity={opacity}>
+				<g transform={`rotate(${bodyRot} 0 ${hipY})`}>{hairBack}</g>
+			</g>
+		);
 	if (p.headOnly)
 		return (
 			<g transform={`translate(${x},${y}) scale(${flip ? -s : s},${s})`} opacity={opacity}>

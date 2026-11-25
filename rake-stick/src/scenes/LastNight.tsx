@@ -70,7 +70,7 @@ export const LastNight: React.FC = () => {
 		const lilyP = {eyes: 'wide', brows: close ? 'angry' : 'worried', mouth: t > at('face') ? 'o' : 'flat', look: coming ? [1, -0.4] : [0.6, -0.8], idle: t < t48};
 		// the blanket at her feet presses down and moves
 		const press = s.tag === 'climb' && t < t49 + 0.5 ? Math.sin((t - t48) * 7) * 5 * ramp(t, t48 + 0.3, t48 + 0.8) : 0;
-		const her = <LieInBed b={SB} is={LilyAdult} px={262} s={1.15} frame={f} id="lily" skin={PAL.lilyAdult.skin} wob={press} p={lilyP} />;
+		const her = <LieInBed b={SB} is={LilyAdult} px={262} s={1.15} frame={f} id="lily" skin={PAL.lilyAdult.skin} longHair={PAL.lilyAdult.hair} shoulder={PAL.lilyAdult.shirt} wob={press} p={lilyP} />;
 		if (s.tag !== 'climb') return <g>{moon}{clock}{her}</g>;
 		// it rises at the foot of the bed, climbs on, and crawls up the length of the bed to her face
 		const rise = ramp(t, T('narrator_048_blanket', 0.55), T('narrator_049_climbed', 0.12));

@@ -68,11 +68,12 @@ const Neck: React.FC<{a: [number, number]; b: [number, number]; w: number; skin:
 	</g>
 );
 
-/** the sleeper's head on the pillow: the stick figure drawn head-only, so the head and its hair keep their usual
- *  style exactly (nothing is clipped), with no body, arms or legs */
-const PillowHead: React.FC<{is: AnyPerson; px: number; hy: number; s: number; child: boolean; frame: number; p: Record<string, unknown>; id: string; light?: Light}> = ({is: P, px, hy, s, child, frame, p, light}) => (
+/** the sleeper's head on the pillow: the stick figure drawn head-only, so the face and the hair on the head keep their
+ *  usual style. part='front' draws the face with only the hair on the head (no ponytail or hair hanging behind it);
+ *  part='back' draws only the hair hanging behind the head (for long hair kept on the pillow, under the neck). */
+const PillowHead: React.FC<{is: AnyPerson; px: number; hy: number; s: number; child: boolean; frame: number; p: Record<string, unknown>; light?: Light; part?: 'front' | 'back'}> = ({is: P, px, hy, s, child, frame, p, light, part = 'front'}) => (
 	<Tint light={light}>
-		<P x={px} y={hy + 262 * (child ? 0.62 : 1) * s} s={s} frame={frame} tilt={-14} arms="down" noArms headOnly {...p} />
+		<P x={px} y={hy + 262 * (child ? 0.62 : 1) * s} s={s} frame={frame} tilt={-14} arms="down" noArms headOnly hairCapOnly={part === 'front'} hairBackOnly={part === 'back'} {...p} />
 	</Tint>
 );
 
@@ -97,7 +98,11 @@ export const LieInBed: React.FC<{
 	/** false: only the head */
 	blanket?: boolean;
 	dy?: number;
-}> = ({b, is, px, s, child = false, light, frame, p = {}, id, wob = 0, skin = '#f1cfae', blanket = true, dy = 0}) => {
+	/** long hair: spread out on the pillow behind the head, in this colour */
+	longHair?: string;
+	/** show the top of the shoulder (in this shirt colour) between the neck and the blanket */
+	shoulder?: string;
+}> = ({b, is, px, s, child = false, light, frame, p = {}, id, wob = 0, skin = '#f1cfae', blanket = true, dy = 0, longHair, shoulder}) => {
 	const R = 36 * (child ? 1.08 : 1) * s;
 	const hy = b.pillowY - 30 + dy;
 	const hcx = px - 0.24 * R;
@@ -110,7 +115,7 @@ export const LieInBed: React.FC<{
 	const Bs = R * (child ? 1 : 1.45); // body size
 	// the neck leaves the chin and runs (lying down) toward the feet, into the blanket
 	const neckY = hy + 0.86 * R;
-	const xe = px + (child ? 0.67 : 0.8) * R; // the blanket's head end: just past the chin, so only a sliver of neck shows
+	const xe = px + (child ? 0.67 : 0.8) * R + (shoulder ? 0.16 * R : 0); // the blanket's head end: just past the chin, so only a sliver of neck shows (a little more when the shoulder shows)
 	const top0: [number, number] = [xe, neckY - 0.34 * R];
 	const foot = xR - 40;
 	const L = foot - xe;
@@ -148,12 +153,35 @@ export const LieInBed: React.FC<{
 	return (
 		<g>
 			<PillowDent cx={hcx} cy={hcy} R={R} />
+			{longHair ? (
+				<Tint light={light}>
+					{/* long hair fanned out on the pillow, above and behind the head */}
+					<path
+						d={`M${hcx - 0.9 * R},${hcy + 0.55 * R} C${hcx - 1.45 * R},${hcy + 0.1 * R} ${hcx - 1.3 * R},${hcy - 0.85 * R} ${hcx - 0.55 * R},${hcy - 1.12 * R} C${hcx + 0.1 * R},${hcy - 1.35 * R} ${hcx + 0.9 * R},${hcy - 1.2 * R} ${hcx + 1.2 * R},${hcy - 0.7 * R} C${hcx + 1.32 * R},${hcy - 0.45 * R} ${hcx + 1.2 * R},${hcy - 0.15 * R} ${hcx + 1.0 * R},${hcy} Z`}
+						fill={longHair}
+						stroke={INK}
+						strokeWidth={lw}
+						strokeLinejoin="round"
+					/>
+				</Tint>
+			) : null}
 			{blanket ? (
 				<Tint light={light}>
 					<Neck a={[px + 0.05 * R, neckY - 0.04 * R]} b={[xe + 0.25 * R, neckY - 0.02 * R]} w={0.36 * R} skin={skin} lw={lw} />
 				</Tint>
 			) : null}
-			<PillowHead is={is} px={px} hy={hy} s={s} child={child} frame={frame} p={p} id={`${id}_head`} light={light} />
+			{blanket && shoulder ? (
+				<Tint light={light}>
+					<path
+						d={`M${px + 0.3 * R},${neckY + 0.32 * R} C${px + 0.4 * R},${neckY + 0.02 * R} ${xe - 0.25 * R},${neckY - 0.12 * R} ${xe + 0.2 * R},${neckY - 0.1 * R} L${xe + 0.2 * R},${neckY + 0.4 * R} Z`}
+						fill={shoulder}
+						stroke={INK}
+						strokeWidth={lw}
+						strokeLinejoin="round"
+					/>
+				</Tint>
+			) : null}
+			<PillowHead is={is} px={px} hy={hy} s={s} child={child} frame={frame} p={p} light={light} />
 			{blanket ? (
 				<g>
 					<path d={topSurface} fill={b.topCol ?? b.quiltCols[0]} />
@@ -225,11 +253,11 @@ export const ParentsBed: React.FC<{
 			<Tint light={light}>
 				<Neck a={[mx + 0.05 * mR, my + 0.84 * mR]} b={[mx + 0.62 * mR, my + 1.18 * mR]} w={0.36 * mR} skin={momSkin} lw={6} />
 			</Tint>
-			<PillowHead is={mom} px={mx} hy={my} s={1.3} child={false} frame={frame} p={momP} id="pbMom" light={light} />
+			<PillowHead is={mom} px={mx} hy={my} s={1.3} child={false} frame={frame} p={momP} light={light} />
 			<Tint light={light}>
 				<Neck a={[lx + 0.05 * lR, ly + 0.84 * lR]} b={[lx + 0.55 * lR, ly + 1.12 * lR]} w={0.36 * lR} skin={lilySkin} lw={7} />
 			</Tint>
-			<PillowHead is={lily} px={lx} hy={ly} s={1.6} child frame={frame} p={lilyP} id="pbLily" light={light} />
+			<PillowHead is={lily} px={lx} hy={ly} s={1.6} child frame={frame} p={lilyP} light={light} />
 			{/* the sheet turned down along the quilt's top edge, over both necks */}
 			<path d={sheetD} fill={SHEET} />
 			<path d={`M${sheetTop[0][0]},${sheetTop[0][1]}${smoothThrough(sheetTop)}`} fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" />

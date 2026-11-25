@@ -1,1 +1,1 @@
-QA: 0 findings in frames 0-9717 (every 2) - final build v2.7 (coherent sleepers), 2026-11-25
+QA: 0 findings in frames 0-9717 (every 2) - final build v2.8 (hair cap only, adult neck/shoulder), 2026-11-25

@@ -68,7 +68,7 @@ export const Thumb: React.FC<{v: 'A' | 'B' | 'C'}> = ({v}) => {
 				<Stage set="sonroom_night" z={2.3} f={[400, 600]} t={0}>
 					<Glow cx={720} cy={300} r={460} color="#a9d2e6" k={0.45} />
 					<BedClock x={GEO.sonRoom.clock[0]} y={GEO.sonRoom.clock[1]} text="4:00" frame={0} />
-					<LieInBed b={SB} is={LilyAdult} px={262} s={1.15} frame={0} id="thC" skin={PAL.lilyAdult.skin} p={{eyes: 'wide', brows: 'angry', mouth: 'o', look: [1, -0.4], idle: false}} />
+					<LieInBed b={SB} is={LilyAdult} px={262} s={1.15} frame={0} id="thC" skin={PAL.lilyAdult.skin} longHair={PAL.lilyAdult.hair} shoulder={PAL.lilyAdult.shirt} p={{eyes: 'wide', brows: 'angry', mouth: 'o', look: [1, -0.4], idle: false}} />
 					<g transform={`rotate(-24 620 ${SB.quilt - 30})`}>
 						<Rake x={580} y={SB.quilt - 30} s={1.35} frame={5} pose="side" dir={-1} lean={1} mouth={0.5} qa={false} />
 					</g>
