@@ -54,8 +54,7 @@ const smoothThrough = (pts: Array<[number, number]>) => {
 /** lying on the pillow at px (pillow centre x). The painted bed stays exactly as painted; only the face and what the
  *  body changes are drawn on top, all of it ABOVE the painted quilt's top edge (b.quilt): the head on the pillow (the
  *  stick figure clipped to its head - just the face, no arms or shoulders) and the mound the body raises under the
- *  quilt (in the painted quilt's own colour, from where the painted quilt starts to the foot), the sheet turned over
- *  at its top. */
+ *  quilt (in the painted quilt's own colour, from where the painted quilt starts to the foot), */
 export const LieInBed: React.FC<{
 	b: BedGeo;
 	is: AnyPerson;
@@ -97,9 +96,6 @@ export const LieInBed: React.FC<{
 	];
 	const topPath = `M${contour[0][0]},${contour[0][1]}${smoothThrough(contour)}`;
 	const moundD = `${topPath} Z`;
-	// the turned-over sheet along the top near the head
-	const f0 = contour.slice(0, 3);
-	const foldD = `M${f0[0][0]},${f0[0][1]}${smoothThrough(f0)} L${f0[2][0] + 0.04 * R},${f0[2][1] + 0.2 * R} ${smoothThrough([[f0[2][0] + 0.04 * R, f0[2][1] + 0.2 * R], [f0[1][0] + 0.08 * R, f0[1][1] + 0.22 * R], [f0[0][0] + 0.12 * R, base]]).trim()} Z`;
 	return (
 		<g>
 			<defs>
@@ -117,7 +113,6 @@ export const LieInBed: React.FC<{
 				<g>
 					<path d={moundD} fill={b.qcol ?? b.quiltCols[0]} />
 					<path d={topPath} fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round" />
-					{b.sheet ? <path d={foldD} fill={b.sheet} stroke={INK} strokeWidth={3.5} strokeLinejoin="round" /> : null}
 				</g>
 			) : null}
 		</g>
