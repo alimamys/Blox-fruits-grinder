@@ -21,7 +21,7 @@ export const PAL = {
 /** Lily at nine (pyjamas by default; pass palette={PAL.lilyDay} in daytime) */
 export const Lily = mk({female: true, child: true, hair: 'ponytail', seed: 51, palette: PAL.lily, pj: '#f6d3dc'});
 export const Dad = mk({hair: 'short', seed: 52, palette: PAL.dad});
-export const Mom = mk({female: true, hair: 'bun', seed: 53, palette: PAL.mom});
+export const Mom = mk({female: true, hair: 'medium', seed: 53, palette: PAL.mom});
 /** Lily today, at 34 */
 export const LilyAdult = mk({female: true, hair: 'long', seed: 54, palette: PAL.lilyAdult});
 export const Son = mk({child: true, hair: 'short', seed: 55, palette: PAL.son});

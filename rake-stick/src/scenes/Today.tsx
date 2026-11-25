@@ -1,7 +1,7 @@
 // 7. TODAY - Mom and Lily moved 800 miles away; she grew up, had a son, told herself it was the house.
 // Sam is nine. At breakfast: "Who's the skinny man? ... He just watches." It was never the house. It was us.
 import React from 'react';
-import {Son} from '../components/characters/Cast';
+import {PAL, Son} from '../components/characters/Cast';
 import {LieInBed} from '../stick/bed';
 import {GEO, shot, Shots, useStick, type Shot} from '../stick/kit';
 import {BedClock, Glow} from '../stick/props';
@@ -15,7 +15,7 @@ export const SamAsleep: React.FC<{f: number; clock?: string; eyes?: 'closed' | '
 	<g>
 		<Glow cx={720} cy={300} r={460} color="#a9d2e6" k={0.3} />
 		<BedClock x={GEO.sonRoom.clock[0]} y={GEO.sonRoom.clock[1]} text={clock} frame={f} />
-		<LieInBed b={SB} is={Son} px={262} s={1.75} child frame={f} id="sam" p={{eyes, brows: eyes === 'wide' ? 'worried' : 'flat', mouth: eyes === 'wide' ? 'o' : 'flat', look: [1, -0.5]}} />
+		<LieInBed b={SB} is={Son} px={262} s={1.75} child frame={f} id="sam" skin={PAL.son.skin} p={{eyes, brows: eyes === 'wide' ? 'worried' : 'flat', mouth: eyes === 'wide' ? 'o' : 'flat', look: [1, -0.5]}} />
 	</g>
 );
 

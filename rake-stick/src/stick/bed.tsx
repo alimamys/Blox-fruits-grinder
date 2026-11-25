@@ -51,10 +51,35 @@ const smoothThrough = (pts: Array<[number, number]>) => {
 	return d;
 };
 
-/** lying on the pillow at px (pillow centre x). The painted bed stays exactly as painted; only the face and what the
- *  body changes are drawn on top, all of it ABOVE the painted quilt's top edge (b.quilt): the head on the pillow (the
- *  stick figure clipped to its head - just the face, no arms or shoulders) and the mound the body raises under the
- *  quilt (in the painted quilt's own colour, from where the painted quilt starts to the foot), */
+/** the dent a head makes in a pillow: a soft shadow under it and the pillow pushed up on both sides */
+const PillowDent: React.FC<{cx: number; cy: number; R: number}> = ({cx, cy, R}) => (
+	<g>
+		<ellipse cx={cx + 0.12 * R} cy={cy + 0.62 * R} rx={1.12 * R} ry={0.34 * R} fill="#000" opacity={0.2} />
+		<path d={`M${cx - 1.22 * R},${cy + 0.12 * R} Q${cx - 1.32 * R},${cy + 0.5 * R} ${cx - 1.02 * R},${cy + 0.78 * R}`} fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round" opacity={0.35} />
+		<path d={`M${cx + 1.08 * R},${cy + 0.05 * R} Q${cx + 1.3 * R},${cy + 0.38 * R} ${cx + 1.12 * R},${cy + 0.7 * R}`} fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round" opacity={0.35} />
+	</g>
+);
+
+/** a short neck from under the chin to where it goes under the blanket (skin colour, thick outline) */
+const Neck: React.FC<{a: [number, number]; b: [number, number]; w: number; skin: string; lw: number}> = ({a, b, w, skin, lw}) => (
+	<g>
+		<path d={`M${a[0]},${a[1]} L${b[0]},${b[1]}`} stroke={INK} strokeWidth={w + lw * 2} strokeLinecap="round" />
+		<path d={`M${a[0]},${a[1]} L${b[0]},${b[1]}`} stroke={skin} strokeWidth={w} strokeLinecap="round" />
+	</g>
+);
+
+/** the sleeper's head on the pillow: the stick figure drawn head-only, so the head and its hair keep their usual
+ *  style exactly (nothing is clipped), with no body, arms or legs */
+const PillowHead: React.FC<{is: AnyPerson; px: number; hy: number; s: number; child: boolean; frame: number; p: Record<string, unknown>; id: string; light?: Light}> = ({is: P, px, hy, s, child, frame, p, light}) => (
+	<Tint light={light}>
+		<P x={px} y={hy + 262 * (child ? 0.62 : 1) * s} s={s} frame={frame} tilt={-14} arms="down" noArms headOnly {...p} />
+	</Tint>
+);
+
+/** someone lying in one of the single beds: the head on the pillow (with the pillow dented under it), a short neck going
+ *  under the blanket, and the blanket pulled up to the shoulders - drawn over the painted quilt in the painted quilt's
+ *  own colours (top surface, front face), with the sheet turned down at the head end, the body's shape under it
+ *  (shoulder, chest, knees, feet) and soft folds. Arms, hands and legs stay under the blanket. */
 export const LieInBed: React.FC<{
 	b: BedGeo;
 	is: AnyPerson;
@@ -67,94 +92,153 @@ export const LieInBed: React.FC<{
 	id: string;
 	/** knees lift (px), for something pressing on the blanket */
 	wob?: number;
-	x1?: number;
+	/** skin colour (for the neck) */
+	skin?: string;
 	/** false: only the head */
 	blanket?: boolean;
 	dy?: number;
-}> = ({b, is: P, px, s, child = false, light, frame, p = {}, id, wob = 0, x1, blanket = true, dy = 0}) => {
-	const k = child ? 0.62 : 1;
+}> = ({b, is, px, s, child = false, light, frame, p = {}, id, wob = 0, skin = '#f1cfae', blanket = true, dy = 0}) => {
 	const R = 36 * (child ? 1.08 : 1) * s;
 	const hy = b.pillowY - 30 + dy;
-	const headUp = 262 * k * s;
 	const hcx = px - 0.24 * R;
 	const hcy = hy + 0.03 * R;
-	const ad = child ? 1 : 1.3;
-	const base = b.quilt + 3; // just over the painted quilt's top edge line
-	const xs = Math.max(b.qx0 ?? b.x0 + 200, px + 0.35 * R); // where the mound starts (the painted quilt's start)
-	const foot = x1 ?? b.qx1 ?? b.x1 - 40;
-	const ySh = base - 0.34 * R * ad; // top of the shoulder
-	const kneeX = xs + 0.45 * (foot - xs);
+	const lw = 5.5 * s * 0.85;
+	const farY = b.farY ?? b.quilt;
+	const nearY = b.nearY ?? b.quilt + 60;
+	const botY = b.botY ?? b.skirtTop;
+	const xR = b.xR ?? b.x1;
+	const Bs = R * (child ? 1 : 1.45); // body size
+	// the neck leaves the chin and runs (lying down) toward the feet, into the blanket
+	const neckY = hy + 0.86 * R;
+	const xe = px + (child ? 0.67 : 0.8) * R; // the blanket's head end: just past the chin, so only a sliver of neck shows
+	const top0: [number, number] = [xe, neckY - 0.34 * R];
+	const foot = xR - 40;
+	const L = foot - xe;
 	const contour: Array<[number, number]> = [
-		[xs - 0.05 * R, base],
-		[xs + 0.22 * R, ySh + 0.04 * R],
-		[xs + 1.0 * R * ad, ySh - 0.04 * R],
-		[xs + 2.0 * R * ad, ySh + 0.12 * R],
-		[kneeX, base - 0.55 * R * ad - wob],
-		[foot - 170, base - 0.3 * R * ad],
-		[foot - 60, base - 0.6 * R * ad],
-		[foot - 4, base],
+		top0,
+		[xe + 0.05 * L, Math.min(neckY - 0.38 * R, farY - 0.12 * Bs)], // shoulder
+		[xe + 0.15 * L, farY - 0.28 * Bs], // chest
+		[xe + 0.36 * L, farY - 0.14 * Bs], // waist
+		[xe + 0.6 * L, farY - 0.36 * Bs - wob], // knees
+		[xe + 0.8 * L, farY - 0.13 * Bs], // shins
+		[xe + 0.93 * L, farY - 0.3 * Bs], // feet
+		[xR - 8, farY + 6],
 	];
-	const topPath = `M${contour[0][0]},${contour[0][1]}${smoothThrough(contour)}`;
-	const moundD = `${topPath} Z`;
+	const topLine = `M${top0[0]},${top0[1]}${smoothThrough(contour)}`;
+	const headEdge = `L${xR},${nearY} L${xR},${botY - 16} Q${xR},${botY} ${xR - 18},${botY} L${xe - 0.1 * R},${botY} L${xe - 0.05 * R},${nearY} Z`;
+	const topSurface = `${topLine} L${xR},${nearY} L${xe - 0.05 * R},${nearY} Z`;
+	const front = `M${xe - 0.05 * R},${nearY} L${xR},${nearY} L${xR},${botY - 16} Q${xR},${botY} ${xR - 18},${botY} L${xe - 0.1 * R},${botY} Z`;
+	const outline = `${topLine} ${headEdge}`;
+	// the sheet turned down over the blanket at the head end
+	const sw = 0.42 * R * (child ? 1 : 1.25);
+	const yAt = (x: number) => {
+		let best = contour[0];
+		for (const c of contour) if (Math.abs(c[0] - x) < Math.abs(best[0] - x)) best = c;
+		return best[1];
+	};
+	const sheetD = `M${top0[0]},${top0[1]} Q${xe + sw * 0.5},${top0[1] - 0.1 * R} ${xe + sw},${Math.min(yAt(xe + sw), top0[1]) + 2} L${xe + sw - 0.06 * R},${nearY} L${xe + sw - 0.1 * R},${botY} L${xe - 0.1 * R},${botY} L${xe - 0.05 * R},${nearY} Z`;
+	// soft folds where the body lies
+	const kx = xe + 0.6 * L;
+	const folds = [
+		`M${xe + 0.2 * L},${nearY - 4} Q${xe + 0.28 * L},${farY + 18} ${xe + 0.34 * L},${farY + 8}`,
+		`M${kx - 0.08 * L},${nearY + 30} Q${kx - 0.02 * L},${nearY - 10} ${kx + 0.03 * L},${farY + 10}`,
+		`M${kx + 0.1 * L},${nearY - 6} Q${kx + 0.16 * L},${farY + 22} ${kx + 0.22 * L},${farY + 12}`,
+		`M${xe + 0.45 * L},${botY - 10} Q${xe + 0.5 * L},${nearY + 40} ${xe + 0.47 * L},${nearY + 6}`,
+	];
 	return (
 		<g>
-			<defs>
-				<clipPath id={`${id}_head`}>
-					{/* an oval round the head: hair falls onto the pillow with a soft edge, nothing shows below the chin */}
-					<ellipse cx={hcx} cy={hcy - 0.04 * R} rx={(child ? 1.08 : 1.25) * R} ry={1.07 * R} />
-				</clipPath>
-			</defs>
-			<g clipPath={`url(#${id}_head)`}>
+			<PillowDent cx={hcx} cy={hcy} R={R} />
+			{blanket ? (
 				<Tint light={light}>
-					<P x={px} y={hy + headUp} s={s} frame={frame} tilt={-14} arms="down" noArms {...p} />
+					<Neck a={[px + 0.05 * R, neckY - 0.04 * R]} b={[xe + 0.25 * R, neckY - 0.02 * R]} w={0.36 * R} skin={skin} lw={lw} />
 				</Tint>
-			</g>
+			) : null}
+			<PillowHead is={is} px={px} hy={hy} s={s} child={child} frame={frame} p={p} id={`${id}_head`} light={light} />
 			{blanket ? (
 				<g>
-					<path d={moundD} fill={b.qcol ?? b.quiltCols[0]} />
-					<path d={topPath} fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round" />
+					<path d={topSurface} fill={b.topCol ?? b.quiltCols[0]} />
+					<path d={front} fill={b.frontCol ?? b.quiltCols[2]} />
+					<path d={`M${xe - 0.05 * R},${nearY} L${xR},${nearY}`} stroke={INK} strokeWidth={3} opacity={0.55} />
+					{folds.map((d, i) => (
+						<path key={i} d={d} fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round" opacity={0.3} />
+					))}
+					<path d={sheetD} fill={b.sheet ?? '#d8d4cc'} stroke={INK} strokeWidth={3.5} strokeLinejoin="round" />
+					<path d={`M${xe + 0.25 * sw},${top0[1] + 0.25 * R} Q${xe + 0.35 * sw},${nearY - 10} ${xe + 0.3 * sw},${botY - 12}`} fill="none" stroke={INK} strokeWidth={2.5} strokeLinecap="round" opacity={0.3} />
+					<path d={outline} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" />
 				</g>
 			) : null}
 		</g>
 	);
 };
 
-/** Her parents' double bed (plate master_night: the quilt already painted pulled up to the pillows over two sleepers):
- *  only the two faces are drawn, Mom's on the back pillow and Lily's on the front one, just above the quilt's edge. */
+/** Her parents' double bed (plate master_night: the quilt painted pulled up to the pillows over the two of them): their
+ *  heads on the pillows (pillows dented), short necks going under the sheet turned down along the quilt's top edge, the
+ *  shape of Mom's body raising the quilt along the back and a soft ridge where Lily lies in front. */
 export const ParentsBed: React.FC<{
 	frame: number;
 	mom: AnyPerson;
 	lily: AnyPerson;
 	momP?: Record<string, unknown>;
 	lilyP?: Record<string, unknown>;
+	momSkin?: string;
+	lilySkin?: string;
 	light?: Light;
-}> = ({frame, mom: Mom, lily: Lily, momP = {}, lilyP = {}, light}) => {
-	const head = (P: AnyPerson, px: number, hy: number, s: number, child: boolean, p: Record<string, unknown>, id: string) => {
-		const R = 36 * (child ? 1.08 : 1) * s;
-		return (
-			<g>
-				<defs>
-					<clipPath id={id}>
-						<ellipse cx={px - 0.24 * R} cy={hy - 0.01 * R} rx={(child ? 1.08 : 1.25) * R} ry={1.07 * R} />
-					</clipPath>
-				</defs>
-				<g clipPath={`url(#${id})`}>
-					<Tint light={light}>
-						<P x={px} y={hy + 262 * (child ? 0.62 : 1) * s} s={s} frame={frame} tilt={-14} arms="down" noArms {...p} />
-					</Tint>
-				</g>
-			</g>
-		);
-	};
+}> = ({frame, mom, lily, momP = {}, lilyP = {}, momSkin = '#f0c9a6', lilySkin = '#f1cfae', light}) => {
+	const QUILT = '#a58765';
+	const SHEET = '#bda07b'; // the quilt turned over at its top edge, a shade lighter
+	const [mx, my] = PARENTS_BED.mom;
+	const [lx, ly] = PARENTS_BED.lily;
+	const mR = 36 * 1.3;
+	const lR = 36 * 1.08 * 1.6;
+	// the quilt's painted top edge near the pillows, front-left to back-right
+	const edge: Array<[number, number]> = [
+		[430, 716],
+		[520, 686],
+		[600, 663],
+		[700, 650],
+		[820, 642],
+	];
+	const sheetTop = edge.map(([x, y]) => [x, y - 7] as [number, number]);
+	const sheetBot = [...edge].reverse().map(([x, y]) => [x, y + 12] as [number, number]);
+	const sheetD = `M${sheetTop[0][0]},${sheetTop[0][1]}${smoothThrough(sheetTop)} L${sheetBot[0][0]},${sheetBot[0][1]}${smoothThrough(sheetBot)} Z`;
+	// Mom's body under the quilt along the back edge: shoulder, chest, hips, knees, feet
+	const back: Array<[number, number]> = [
+		[800, 648],
+		[880, 628],
+		[980, 630],
+		[1080, 640],
+		[1170, 624],
+		[1260, 640],
+		[1340, 646],
+		[1400, 676],
+	];
+	const backD = `M${back[0][0]},${back[0][1]}${smoothThrough(back)} L1400,690 L800,662 Z`;
 	return (
 		<g>
-			{head(Mom, PARENTS_BED.mom[0], PARENTS_BED.mom[1], 1.3, false, momP, 'pbMom')}
-			{head(Lily, PARENTS_BED.lily[0], PARENTS_BED.lily[1], 1.6, true, lilyP, 'pbLily')}
+			<PillowDent cx={mx - 0.24 * mR} cy={my} R={mR} />
+			<PillowDent cx={lx - 0.24 * lR} cy={ly} R={lR} />
+			<path d={backD} fill={QUILT} />
+			<path d={`M${back[0][0]},${back[0][1]}${smoothThrough(back)}`} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" />
+			{/* a soft ridge where Lily lies, nearer to us */}
+			<path d="M560,724 C700,706 900,700 1080,708 C1200,712 1300,724 1380,744" fill="none" stroke="#c9a983" strokeWidth={5} strokeLinecap="round" opacity={0.6} />
+			<path d="M560,732 C700,716 900,710 1080,718 C1200,722 1300,734 1380,754" fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round" opacity={0.3} />
+			<Tint light={light}>
+				<Neck a={[mx + 0.05 * mR, my + 0.84 * mR]} b={[mx + 0.62 * mR, my + 1.18 * mR]} w={0.36 * mR} skin={momSkin} lw={6} />
+			</Tint>
+			<PillowHead is={mom} px={mx} hy={my} s={1.3} child={false} frame={frame} p={momP} id="pbMom" light={light} />
+			<Tint light={light}>
+				<Neck a={[lx + 0.05 * lR, ly + 0.84 * lR]} b={[lx + 0.55 * lR, ly + 1.12 * lR]} w={0.36 * lR} skin={lilySkin} lw={7} />
+			</Tint>
+			<PillowHead is={lily} px={lx} hy={ly} s={1.6} child frame={frame} p={lilyP} id="pbLily" light={light} />
+			{/* the sheet turned down along the quilt's top edge, over both necks */}
+			<path d={sheetD} fill={SHEET} />
+			<path d={`M${sheetTop[0][0]},${sheetTop[0][1]}${smoothThrough(sheetTop)}`} fill="none" stroke={INK} strokeWidth={4.5} strokeLinecap="round" />
+			<path d={`M${sheetBot[sheetBot.length - 1][0]},${sheetBot[sheetBot.length - 1][1]}${smoothThrough([...sheetBot].reverse())}`} fill="none" stroke={INK} strokeWidth={2.5} strokeLinecap="round" opacity={0.45} />
 		</g>
 	);
 };
 /** where the faces rest in the parents' bed (pillow-centre x, head-centre y) and its nightstand clock */
-export const PARENTS_BED = {mom: [701, 588] as [number, number], lily: [455, 620] as [number, number], clock: [205, 745] as [number, number]};
+export const PARENTS_BED = {mom: [701, 585] as [number, number], lily: [455, 627] as [number, number], clock: [205, 745] as [number, number]};
 
 /** the blanket pulled over the head: a trembling lump in the painted quilt's colour, over the pillow */
 export const HideInBed: React.FC<{b: BedGeo; px: number; light?: Light; shiver?: number; frame: number; id: string}> = ({b, px, shiver = 1, frame}) => {

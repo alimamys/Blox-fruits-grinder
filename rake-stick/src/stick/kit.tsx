@@ -72,12 +72,14 @@ const WHITE_SETS = new Set<SetId>([]);
 /** a bed seen side-on (headboard left): the quilt top, the pillow, the skirt, the floor in front */
 export type BedGeo = {x0: number; x1: number; pillow: [number, number]; pillowY: number; quilt: number; skirtTop: number; skirtBottom: number; floor: number; quiltCols: string[];
 	/** the painted quilt's far top edge: where it starts by the pillow and ends at the foot, its colour, and the sheet's */
-	qx0?: number; qx1?: number; qcol?: string; sheet?: string};
+	qx0?: number; qx1?: number; qcol?: string; sheet?: string;
+	/** the painted quilt as measured: back top edge y, front edge of its top surface y, bottom of its front face y, right end x, and its colours */
+	farY?: number; nearY?: number; botY?: number; xR?: number; topCol?: string; frontCol?: string};
 
 /** measured on the painted plates (1920x1080) */
 export const GEO = {
 	// Lily's little bedroom (it was Danny's): bed left, window above it, the door and a toy chest right
-	bed: {x0: 160, x1: 1185, pillow: [180, 445], pillowY: 735, quilt: 728, skirtTop: 915, skirtBottom: 1060, floor: 900, quiltCols: ['#2f3470', '#3a3f86', '#2a2f66', '#363c7c'], qx0: 385, qx1: 1145, qcol: '#232960', sheet: '#8a98c7'} as BedGeo,
+	bed: {x0: 160, x1: 1185, pillow: [180, 445], pillowY: 735, quilt: 728, skirtTop: 915, skirtBottom: 1060, floor: 900, quiltCols: ['#2f3470', '#3a3f86', '#2a2f66', '#363c7c'], qx0: 385, qx1: 1145, qcol: '#232960', sheet: '#8a98c7', farY: 725, nearY: 790, botY: 900, xR: 1180, topCol: '#252b62', frontCol: '#1d2150'} as BedGeo,
 	room: {door: [1270, 55, 1705, 900] as const, knob: [1352, 503] as Pt, chest: [1555, 755, 1860, 985] as const, window: [190, 110, 750, 540] as const, clock: [52, 790] as Pt, stand: 1000},
 	// her parents' room: the double bed, the wall her room is behind on the right
 	master: {x0: 60, x1: 1300, pillow: [90, 500], pillowY: 640, quilt: 720, skirtTop: 900, skirtBottom: 1060, floor: 890, quiltCols: ['#c9a878', '#b8976a', '#c9a878', '#b8976a']} as BedGeo,
@@ -88,7 +90,7 @@ export const GEO = {
 	attic: {window: [880, 210] as Pt, trunk: [650, 690, 1140, 940] as const, fan: [1400, 620, 1720, 940] as const, boxes: [0, 510, 380, 990] as const, floor: 985},
 	hall: {left: [0, 90, 375, 1000] as const, right: [1460, 90, 1810, 1005] as const, table: [645, 670, 1190, 1020] as const, floor: 1035},
 	// today: Sam's room in their new home 800 miles away (night and morning plates differ a little), the kitchen, the house
-	son: {x0: 150, x1: 1075, pillow: [150, 370], pillowY: 700, quilt: 705, skirtTop: 915, skirtBottom: 1010, floor: 1005, quiltCols: ['#1f4a3e', '#26574a', '#1c4338', '#23503f'], qx0: 290, qx1: 1040, qcol: '#11424b', sheet: '#8fbcba'} as BedGeo,
+	son: {x0: 150, x1: 1075, pillow: [150, 370], pillowY: 700, quilt: 705, skirtTop: 915, skirtBottom: 1010, floor: 1005, quiltCols: ['#1f4a3e', '#26574a', '#1c4338', '#23503f'], qx0: 290, qx1: 1040, qcol: '#11424b', sheet: '#8fbcba', farY: 703, nearY: 760, botY: 905, xR: 1040, topCol: '#11434c', frontCol: '#082c35'} as BedGeo,
 	sonRoom: {door: [1470, 45, 1830, 925] as const, clock: [58, 790] as Pt, floor: 962},
 	sonDay: {x0: 85, x1: 1080, pillow: [105, 385], pillowY: 770, quilt: 757, skirtTop: 990, skirtBottom: 1015, floor: 1080, quiltCols: ['#3f6b48', '#477652', '#3a6343', '#42704c']} as BedGeo,
 	sonDayRoom: {door: [1440, 30, 1830, 990] as const, floor: 1000},

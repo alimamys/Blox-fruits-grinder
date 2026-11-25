@@ -1,6 +1,6 @@
 // 1. THE FIRST NIGHT - 4:00 a.m.; something crouched halfway up her bed; it watches; she hides; it's gone.
 import React from 'react';
-import {Lily} from '../components/characters/Cast';
+import {Lily, PAL} from '../components/characters/Cast';
 import {HideInBed, LieInBed} from '../stick/bed';
 import {GEO, ramp, shot, Shots, ui, useStick, type Shot} from '../stick/kit';
 import {Glow} from '../stick/props';
@@ -10,7 +10,7 @@ import {RoomClock, TitleCard} from './common';
 const B = GEO.bed;
 const PILLOW_X = 312;
 /** where it crouches: halfway up the blanket, over her knees */
-const ON_BED = {x: 700, y: B.quilt - 34, s: 1.35};
+const ON_BED = {x: 700, y: B.quilt - 30, s: 1.35};
 
 export const FirstNight: React.FC = () => {
 	const {f, t, at, end, word} = useStick();
@@ -76,7 +76,7 @@ export const FirstNight: React.FC = () => {
 					s={1.75}
 					child
 					frame={f}
-					id="lily"
+					id="lily" skin={PAL.lily.skin}
 					p={{eyes: awake ? 'wide' : 'closed', brows: awake ? 'worried' : 'flat', look: s.tag === 'gone' ? [1, -0.3] : [1, -0.6], idle: s.tag !== 'stare', mouth: s.tag === 'gone' ? 'o' : 'flat'}}
 				/>
 				{showRake ? <Rake {...ON_BED} frame={f} pose="side" dir={-1} opacity={s.tag === 'reveal' && t < tSomething + 0.4 ? ramp(t, tSomething, tSomething + 0.4) : 1} /> : null}

@@ -129,6 +129,8 @@ export interface StickProps {
 	idle?: boolean;
 	/** draw no arms (a sleeper whose arms are drawn by the bed) */
 	noArms?: boolean;
+	/** draw only the head with its full hair - no body, arms, legs or shadow (a sleeper whose body is under a blanket) */
+	headOnly?: boolean;
 }
 
 const INK = '#141414';
@@ -840,6 +842,8 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 		<g transform={`rotate(${bodyRot} 0 ${hipY})`}>
 			{p.paint ? null : hairBack}
 			{backArms}
+			{p.headOnly ? null : (
+				<>
 			{/* body */}
 			{p.paint ? (
 				(() => {
@@ -900,6 +904,8 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 					</text>
 				</g>
 			) : null}
+				</>
+			)}
 			{/* head */}
 			<g transform={headTransform}>
 				{p.paint ? (
@@ -964,6 +970,20 @@ export const StickPerson: React.FC<StickProps> = (p) => {
 		</g>
 	);
 
+	if (p.headOnly)
+		return (
+			<g transform={`translate(${x},${y}) scale(${flip ? -s : s},${s})`} opacity={opacity}>
+				<defs>
+					<clipPath id={`bc${uid}`}>
+						<path d={bodyD} />
+					</clipPath>
+					<clipPath id={`hc${uid}`}>
+						<path d={headD} />
+					</clipPath>
+				</defs>
+				{upper}
+			</g>
+		);
 	return (
 		<g transform={`translate(${x},${y}) scale(${flip ? -s : s},${s})`} opacity={opacity}>
 			<defs>
