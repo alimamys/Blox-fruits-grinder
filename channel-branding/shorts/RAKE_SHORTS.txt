@@ -1,0 +1,34 @@
+THE RAKE - 3 SHORTS FOR DADDY TALES (vertical 1080x1920, all under 60 s, "DADDY TALES" at the bottom)
+=======================================================================================================
+
+ORDER (at most one Short a day; never two Shorts on the same day)
+1. short_rake_1_4am.mp4  - first
+2. short_rake_2_dad.mp4  - two days later
+3. short_rake_3_son.mp4  - two days after that (it shows the ending, so it goes last)
+Time of day: as in UPLOAD_PLAN.txt (start of your viewers' darkest block, or 6 PM New York time with Schedule).
+
+FOR EACH SHORT
+- Upload as a Short on Daddy Tales. "Related video": The Rake (the long film) - a tappable link to it on the Short.
+- Audience: "No, it's not made for kids".
+- "Full story: The Rake" shows over the last 3 seconds.
+
+1  short_rake_1_4am.mp4  (49 s)  - 4 a.m., something crouched halfway up her blanket, the claws, "It just watched."
+   Title:        Something Was Sitting on My Bed at 4 AM
+   Description:  I was nine. It didn't blink. It didn't breathe. It just watched. Full story: the related video below. #horror #shorts
+   Hook on screen: "I woke up at 4 AM. / Something was on my bed."
+
+2  short_rake_2_dad.mp4  (59 s)  - "Then it'll find me." - the third night, "Danny.", the torn blanket, "They never found him."
+   Title:        My Dad Slept in My Bed So It Would Find Him
+   Description:  The third time, it says your name. Full story: the related video below. #creepypasta #shorts
+   Hook on screen: "My dad slept in my bed / so it would find him."
+
+3  short_rake_3_son.mp4  (58 s)  - "Who's the skinny man?" - she lies down in her son's bed; it climbs up and says "Lily."
+   Title:        My Son Asked Me Who the Skinny Man on His Bed Was
+   Description:  It was never the house. It was us. Full story: the related video below. #scarystories #shorts
+   Hook on screen: "My son asked me: / \"Who's the skinny man?\""
+
+TIKTOK / REELS: the same three files work as they are (vertical, under 60 s, subtitles burned in).
+Remade with: python3 make_rake_shorts.py (from rake-stick/out/rake_1080p_upload.mp4).
+
+CHECK AFTER 48 HOURS: "Viewed vs swiped away" above 70 % is good. If most people swipe in the first second,
+tell me which one and I'll re-cut it to open on a stronger frame.
