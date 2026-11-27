@@ -1,0 +1,34 @@
+THE JINN WEDDING - 3 SHORTS (vertical 1080x1920, all under 60 s)
+==================================================================
+
+ORDER (at most one Short a day; never two from this film on the same day)
+1. short_D_jinn_hooves.mp4 - the day the long video goes up (or the day after)
+2. short_F_jinn_call.mp4   - two days later
+3. short_E_jinn_ruin.mp4   - two days after that (it gives away the twist, so it goes last)
+Time of day: as in UPLOAD_PLAN.txt (start of your viewers' darkest block, or 6 PM New York time with Schedule).
+
+FOR EACH SHORT
+- Upload as a Short. "Related video": The Jinn Wedding (the long film) - this puts a tappable link to it on the Short.
+- Audience: "No, it's not made for kids".
+- They carry "PAST BEDTIME TALES" at the bottom and "Full story: The Jinn Wedding" over the last 3 seconds.
+
+D  short_D_jinn_hooves.mp4  (48 s)  - the guests' eyes shine in the dark, "Look at their feet", the hooves, "Keep playing."
+   Title:        She Sang at a Wedding. The Guests Had Hooves.
+   Description:  Kuwait, 1997. The most famous wedding singer in Kuwait looked down at the dance floor. Full story: the related video below. #jinn #horror #shorts
+   Hook on screen: "She sang at a wedding. / The guests had hooves."
+
+F  short_F_jinn_call.mp4  (44 s)  - the call ("Five hundred dinars") + the grandmother's warning and the phone ringing
+   Title:        If a Stranger Offers Too Much to Sing at a Wedding... Ask Whose Wedding It Is
+   Description:  A Kuwaiti legend my grandmother told me. Full story: the related video below. #kuwait #jinn #shorts
+   Hook on screen: "If a stranger calls you, / ask whose wedding it is."
+
+E  short_E_jinn_ruin.mp4  (57 s)  - "You were everything they said", the man in the sand, the ruin, the hoofprints
+   Title:        They Played a Wedding All Night. The House Wasn't There.
+   Description:  At dawn a man asked them why they were at a house that had been empty for years. Full story: the related video below. #scarystories #jinn #shorts
+   Hook on screen: "They played all night. / The house wasn't there."
+
+TIKTOK / REELS: the same three files work as they are (vertical, under 60 s, subtitles burned in).
+Remade with: python3 make_jinn_shorts.py (from the film's out/jinn_1080p_upload.mp4).
+
+CHECK AFTER 48 HOURS: "Viewed vs swiped away" above 70 % is good. If most people swipe in the first second,
+tell me which one and I'll re-cut it to open on a stronger frame.
